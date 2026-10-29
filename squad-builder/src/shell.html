@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Squad Builder</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono&display=swap">
+<style>/*CSS*/</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Squad Builder</h1>
+    <span class="conn"><span class="dot" id="libdot"></span><span id="libtxt">No library</span></span>
+    <span class="conn"><span class="dot" id="inbdot"></span><span id="inbtxt">No inbox</span></span>
+    <button class="btn small" id="setupbtn">Folders…</button>
+    <span class="spacer"></span>
+    <label class="squad">Squad <input type="number" id="squadn" min="1" max="10" value="1" aria-label="Models in the squad"></label>
+    <button class="btn" id="clearbtn" title="Start the squad again">New squad</button>
+    <button class="btn primary" id="sendbtn" disabled>Send to Blender</button>
+  </header>
+  <div class="main">
+    <nav class="steps" id="steps" aria-label="Steps"></nav>
+    <div class="view" id="view">
+      <div class="models" id="models"></div>
+      <div class="hint">Right-drag or left-drag to turn · wheel to zoom · hover a part to see where it goes</div>
+      <div class="status" id="status"></div>
+    </div>
+    <section class="picker" aria-label="Parts">
+      <div class="phead">
+        <div class="row"><h2 id="ptitle">Base</h2><span class="seg" id="slotseg"></span></div>
+        <div class="row">
+          <button class="btn small" id="nonebtn">Remove</button>
+          <span class="count" id="pcount" style="padding:0"></span>
+          <span class="spacer"></span>
+          <button class="btn small primary" id="nextbtn" title="Keep this pick and go to the next slot (or the same slot on the next model)">Next &#9656;</button>
+        </div>
+        <div class="filters">
+          <select id="fmaker" aria-label="Maker"></select>
+          <select id="fkit" aria-label="Kit"></select>
+          <input type="search" id="fq" placeholder="Search" aria-label="Search parts">
+        </div>
+      </div>
+      <div class="count" id="pnote"></div>
+      <div class="cards" id="cards"></div>
+    </section>
+  </div>
+</div>
+<div class="setup" id="setup" hidden>
+  <div class="box">
+    <h2>Folders</h2>
+    <p>The builder reads your Kitbash Library (its <b>_builder</b> index and preview meshes) and sends parts to Blender by writing them into <b>_builder\inbox</b>, which TIOW Inbox 1.17.1 watches. Your browser asks once for read and write access.</p>
+    <div class="rows"><button class="btn" id="picklib">Choose Kitbash Library…</button><span id="libok"></span></div>
+    <label>Where the library is, as Blender sees it
+      <input id="libpath" value="D:\Kitbash Library" spellcheck="false"></label>
+    <label>Body adaptor flat legs bring (TIOW Inbox's Adaptor number)
+      <input id="adaptorn" type="number" min="1" max="99" value="3" style="width:90px"></label>
+    <div class="rows"><span class="spacer"></span><button class="btn primary" id="setupdone">Done</button></div>
+  </div>
+</div>
+<script>/*THREE*/</script>
+<script>/*ORBIT*/</script>
+<script>/*APP*/</script>
+</body>
+</html>

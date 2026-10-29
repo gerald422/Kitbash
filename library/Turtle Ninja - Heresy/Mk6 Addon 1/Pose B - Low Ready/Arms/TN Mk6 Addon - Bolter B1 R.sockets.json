@@ -1,0 +1,106 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk6_Bolter_B_R_1",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Mk6_Bolter_B_R_1_socket_Hand R",
+   "matrix": [
+    -0.761565,
+    0.648082,
+    -0.00279,
+    15.434169,
+    0.0,
+    0.004305,
+    0.999991,
+    4.205882,
+    0.648088,
+    0.761558,
+    -0.003278,
+    5.651265,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "wrist face of the bolter-pose arm (the lettered socket), Y into the arm; the pose set bolter goes here"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "TN Mk6 Addon - Bolter B1 R_socket_Pad R",
+   "matrix": [
+    0.9211726188659668,
+    -0.05709226429462433,
+    -0.3849436640739441,
+    14.918654441833496,
+    0.35387781262397766,
+    0.5344222187995911,
+    0.7675697803497314,
+    9.639331817626953,
+    0.16190017759799957,
+    -0.8432872295379639,
+    0.5124987363815308,
+    15.603250503540039,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.8339991569519043,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     17.026254653930664,
+     6.776872158050537,
+     9.868219375610352
+    ],
+    [
+     17.345138549804688,
+     3.791903257369995,
+     14.578327178955078
+    ],
+    [
+     14.918654441833496,
+     9.639331817626953,
+     15.603250503540039
+    ]
+   ]
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   0.999217,
+   -0.039577,
+   -7.4e-05,
+   -15.226598,
+   -7.4e-05,
+   3e-06,
+   -1.0,
+   13.624128,
+   0.039577,
+   0.999217,
+   -0.0,
+   -7.593227,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+ },
+ "original": {
+  "name": "Mk6_Bolter_B_R_1",
+  "folder": "Arms",
+  "path": "Turtle Ninja - Heresy\\Mk6 Addon 1\\Pose B - Low Ready\\Arms\\Mk6_Bolter_B_R_1.stl"
+ }
+}

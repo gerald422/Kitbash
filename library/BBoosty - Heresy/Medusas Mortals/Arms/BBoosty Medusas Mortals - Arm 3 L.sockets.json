@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "part": "LArm3",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Pad L",
+   "name": "LArm3_socket_Pad L",
+   "matrix": [
+    -0.979763,
+    -0.113288,
+    0.164876,
+    -4.708541,
+    0.200015,
+    -0.540151,
+    0.817431,
+    5.521288,
+    -0.003546,
+    0.833896,
+    0.551904,
+    10.242698,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "dome",
+    "tiow_from": "Josh's 62 on the Springles heresy arm (actual.blend), moved so its inner shell centres on this arm's shoulder dome"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder L": [
+   -0.986735,
+   0.15656,
+   0.043261,
+   -6.784285,
+   -0.156533,
+   -0.987679,
+   0.004036,
+   1.63067,
+   0.043359,
+   -0.002789,
+   0.999056,
+   -8.844302,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
+  "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
+  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket"
+ },
+ "noPad": false,
+ "noHand": true,
+ "original": {
+  "name": "LArm3",
+  "folder": "Arms",
+  "path": "BBoosty - Heresy\\Medusas Mortals\\Arms\\LArm3.stl"
+ }
+}

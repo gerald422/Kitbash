@@ -1,0 +1,30 @@
+const { chromium } = require('playwright');
+(async () => {
+  const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist'] });
+  const page = await b.newPage({ viewport: { width: 1500, height: 900 } });
+  await page.goto('http://localhost:8766/Squad%20Builder.html?lib=/reallib/&libpath=D%3A%5CKitbash%20Library');
+  await page.waitForFunction(() => window.__sb && window.__sb.S.parts.length > 0, null, { timeout: 60000 });
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('Debugger.enable'); await cdp.send('Debugger.setAsyncCallStackDepth', {maxDepth: 8});
+  let paused = null;
+  cdp.on('Debugger.paused', ev => { paused = ev; });
+  await page.evaluate(() => window.__sb.goSlot('torso'));
+  await page.fill('#fq', 'MarFil Assault - Torso 3'); await page.click('.card[data-id="4eafd9971267"]'); await page.fill('#fq', '');
+  await page.evaluate(() => window.__sb.goSlot('legs'));
+  await page.fill('#fq', 'MarFil Assault - Legs 1A');
+  await page.hover('.card[data-id="32298304d830"]'); await page.waitForTimeout(300);
+  await page.click('.card[data-id="32298304d830"]');
+  console.log('clicked');
+  await page.fill('#fq', ''); console.log('cleared');
+  await new Promise(r => setTimeout(r, 3000));
+  for (let k = 0; k < 5; k++) { paused = null; await cdp.send('Debugger.pause'); for (let i = 0; i < 30 && !paused; i++) await new Promise(r => setTimeout(r, 100)); if (paused) console.log(k, paused.callFrames.slice(0, 8).map(f => (f.functionName || '(anon)') + ':' + f.location.lineNumber + ':' + f.location.columnNumber).join(' < ')); else console.log(k, 'no pause'); await cdp.send('Debugger.resume').catch(() => {}); await new Promise(r => setTimeout(r, 500)); }
+  await new Promise(r => setTimeout(r, 4000));
+  page.on('dialog', d => console.log('DIALOG', d.type(), d.message()));
+  const r = await Promise.race([cdp.send('Runtime.evaluate', {expression: '1+1', returnByValue: true}), new Promise(r => setTimeout(() => r('timeout'), 5000))]);
+  console.log('cdp eval', JSON.stringify(r));
+  const shot = await Promise.race([cdp.send('Page.captureScreenshot', {format: 'png'}), new Promise(r => setTimeout(() => r(null), 15000))]);
+  if (shot) require('fs').writeFileSync('out_real/probe3.png', Buffer.from(shot.data, 'base64')); else console.log('no shot');
+  const r2 = await Promise.race([page.evaluate(() => [window.__sb.S.slot, window.__sb.S.parts.length, document.querySelectorAll('.card').length]), new Promise(r => setTimeout(() => r('timeout'), 10000))]);
+  console.log('pw eval', JSON.stringify(r2));
+  process.exit(0);
+})();

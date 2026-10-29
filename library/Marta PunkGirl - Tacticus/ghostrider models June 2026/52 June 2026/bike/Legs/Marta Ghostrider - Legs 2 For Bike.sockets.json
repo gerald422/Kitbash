@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "legs_2_for_bike",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "legs_2_for_bike_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    12.021178,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    15.138931,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "legs_2_for_bike_socket_Hip R",
+   "matrix": [
+    -0.125541,
+    3e-05,
+    -0.992088,
+    6.6764,
+    -0.207983,
+    0.977777,
+    0.026348,
+    15.817394,
+    0.970042,
+    0.209646,
+    -0.122745,
+    6.141336,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "legs_2_for_bike_socket_Hip L",
+   "matrix": [
+    -0.25114,
+    3e-05,
+    0.967951,
+    17.60253,
+    0.202934,
+    0.977777,
+    0.052622,
+    15.966182,
+    -0.946439,
+    0.209646,
+    -0.245565,
+    5.940084,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "legs_2_for_bike_socket_Belt Front",
+   "matrix": [
+    0.999984,
+    3e-05,
+    -0.005596,
+    12.004975,
+    -0.001203,
+    0.977777,
+    -0.209642,
+    14.686283,
+    0.005465,
+    0.209646,
+    0.977762,
+    11.521578,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "legs_2_for_bike_socket_Belt Back",
+   "matrix": [
+    -0.999997,
+    3e-05,
+    -0.002642,
+    12.018462,
+    -0.000525,
+    0.977777,
+    0.209645,
+    16.94641,
+    0.00259,
+    0.209646,
+    -0.977774,
+    1.33881,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -1.0,
+   3.1e-05,
+   -0.0,
+   12.021566,
+   -6e-06,
+   -0.209646,
+   0.977777,
+   -2.610387,
+   3e-05,
+   0.977777,
+   0.209646,
+   -18.075183,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "legs_2_for_bike",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\ghostrider models June 2026\\52 June 2026\\bike\\Legs\\legs_2_for_bike.stl"
+ }
+}

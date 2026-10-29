@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "DA_legs_2",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "DA_legs_2_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    14.700294,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    10.351069,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "DA_legs_2_socket_Hip R",
+   "matrix": [
+    0.001988,
+    -1.1e-05,
+    -0.999998,
+    4.983334,
+    -0.248416,
+    0.968653,
+    -0.000505,
+    23.25408,
+    0.968652,
+    0.248416,
+    0.001923,
+    12.595974,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "DA_legs_2_socket_Hip L",
+   "matrix": [
+    0.041006,
+    -1.1e-05,
+    0.999159,
+    14.946761,
+    0.248208,
+    0.968653,
+    -0.010176,
+    23.292149,
+    -0.967839,
+    0.248416,
+    0.039724,
+    12.379799,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "DA_legs_2_socket_Belt Front",
+   "matrix": [
+    0.876717,
+    -1.1e-05,
+    -0.481006,
+    10.344382,
+    -0.11948,
+    0.968653,
+    -0.217796,
+    22.247908,
+    0.46593,
+    0.248416,
+    0.849234,
+    17.5143,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "DA_legs_2_socket_Belt Back",
+   "matrix": [
+    -0.999894,
+    -1.1e-05,
+    0.014568,
+    10.199104,
+    0.003608,
+    0.968653,
+    0.24839,
+    24.743804,
+    -0.014114,
+    0.248416,
+    -0.968551,
+    6.811874,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -1.0,
+   -1.2e-05,
+   -0.0,
+   10.020923,
+   3e-06,
+   -0.248416,
+   0.968653,
+   -6.297722,
+   -1.1e-05,
+   0.968653,
+   0.248416,
+   -26.957151,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "DA_legs_2",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\GURLS\\Hooded models\\Legs\\DA_legs_2.stl"
+ }
+}

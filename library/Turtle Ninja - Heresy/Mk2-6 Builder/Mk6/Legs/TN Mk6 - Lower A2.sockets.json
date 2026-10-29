@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "Lower A 2",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "Lower A 2_socket_Base",
+   "matrix": [
+    0.0,
+    -1.0,
+    0.0,
+    6.302432,
+    0.0,
+    0.0,
+    1.0,
+    -1e-06,
+    -1.0,
+    0.0,
+    0.0,
+    13.440305,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "Lower A 2_socket_Hip R",
+   "matrix": [
+    -0.995017,
+    -0.002753,
+    0.099671,
+    7.666867,
+    -0.009174,
+    0.997907,
+    -0.064015,
+    22.439513,
+    -0.099286,
+    -0.06461,
+    -0.992959,
+    8.645935,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Lower A 2_socket_Hip L",
+   "matrix": [
+    0.993303,
+    -0.002753,
+    0.115509,
+    7.666055,
+    -0.004734,
+    0.997907,
+    0.064496,
+    22.987034,
+    -0.115444,
+    -0.06461,
+    0.99121,
+    17.192155,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Lower A 2_socket_Belt Front",
+   "matrix": [
+    -0.012888,
+    -0.002753,
+    -0.999913,
+    1.68891,
+    0.06457,
+    0.997907,
+    -0.00358,
+    22.737932,
+    0.99783,
+    -0.06461,
+    -0.012683,
+    12.900532,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "Lower A 2_socket_Belt Back",
+   "matrix": [
+    0.039733,
+    -0.002753,
+    0.999207,
+    11.932026,
+    -0.06445,
+    0.997907,
+    0.005312,
+    22.733172,
+    -0.99713,
+    -0.06461,
+    0.039472,
+    13.042024,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "category": "Legs",
+ "fits": {
+  "Flat Waist": [
+   -0.0,
+   -0.064611,
+   -0.997911,
+   14.489674,
+   -0.999996,
+   -0.002747,
+   0.000178,
+   7.761175,
+   -0.002753,
+   0.997907,
+   -0.06461,
+   -23.143041,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "Lower A 2",
+  "folder": "Legs",
+  "path": "Turtle Ninja - Heresy\\Mk2-6 Builder\\Mk6\\Legs\\Lower A 2.stl"
+ }
+}

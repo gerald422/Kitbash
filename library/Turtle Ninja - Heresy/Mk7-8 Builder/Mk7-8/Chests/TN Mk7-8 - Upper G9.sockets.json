@@ -1,0 +1,196 @@
+{
+ "schemaVersion": 1,
+ "part": "Upper G 9",
+ "category": "Chests",
+ "fits": {},
+ "upright": [
+  -1e-06,
+  2.3e-05,
+  -1.0,
+  6.34059,
+  -0.999997,
+  -0.002336,
+  0.0,
+  7.506019,
+  -0.002336,
+  0.999997,
+  2.3e-05,
+  24.778274,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "sockets": [
+  {
+   "type": "Shoulder R",
+   "name": "Upper G 9_socket_Shoulder R",
+   "matrix": [
+    0.000151,
+    -0.999997,
+    -0.002329,
+    7.947858,
+    -0.040829,
+    -0.002333,
+    0.999163,
+    6.654774,
+    -0.999166,
+    -5.6e-05,
+    -0.040829,
+    0.006762,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "Upper G 9_socket_Shoulder L",
+   "matrix": [
+    -0.0001,
+    -0.999997,
+    -0.002328,
+    7.947611,
+    0.040456,
+    -0.00233,
+    0.999179,
+    6.654267,
+    -0.999181,
+    6e-06,
+    0.040456,
+    12.750965,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "Upper G 9_socket_Neck",
+   "matrix": [
+    0.004541,
+    0.928899,
+    -0.370306,
+    7.971747,
+    -2.9e-05,
+    0.370309,
+    0.928908,
+    7.445159,
+    0.99999,
+    -0.004207,
+    0.001709,
+    6.37545,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "head where it sits on the Mar Fil torso relative to the shoulder joints (Josh, version D)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "Upper G 9_socket_Back",
+   "matrix": [
+    8.8e-05,
+    -0.999363,
+    0.035679,
+    13.421138,
+    1.4e-05,
+    0.035679,
+    0.999363,
+    5.964922,
+    -1.0,
+    -8.7e-05,
+    1.7e-05,
+    6.407938,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: backpack mount face, matched to the Mar Fil torso back"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "Upper G 9_socket_Waist",
+   "matrix": [
+    -1e-06,
+    -0.999997,
+    -0.002336,
+    6.924152,
+    2.3e-05,
+    -0.002336,
+    0.999997,
+    4.545069,
+    -1.0,
+    0.0,
+    2.3e-05,
+    6.34069,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "on Mar Fil legs: flat bottom on top of the belt (front belt line, 24.8)"
+   }
+  },
+  {
+   "type": "Flat Waist",
+   "name": "Upper G 9_socket_Flat Waist",
+   "matrix": [
+    -1e-06,
+    -0.999997,
+    -0.002336,
+    6.93468,
+    2.3e-05,
+    -0.002336,
+    0.999997,
+    0.03778,
+    -1.0,
+    0.0,
+    2.3e-05,
+    6.340587,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat bottom: origin at its centre, Z up into the torso, Y front"
+   }
+  }
+ ],
+ "notes": {
+  "pose": "the flat pose of this torso design (Josh: one pose per torso, the flat one)"
+ },
+ "original": {
+  "name": "Upper G 9",
+  "folder": "Chests",
+  "path": "Turtle Ninja - Heresy\\Mk7-8 Builder\\Mk7-8\\Chests\\Upper G 9.stl"
+ }
+}

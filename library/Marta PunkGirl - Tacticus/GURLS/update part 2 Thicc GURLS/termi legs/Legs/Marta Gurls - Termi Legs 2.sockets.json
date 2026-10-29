@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "termi_legs_2",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "termi_legs_2_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    80.64128,
+    0.0,
+    0.0,
+    1.0,
+    10.379179,
+    0.0,
+    1.0,
+    0.0,
+    4.483829,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "termi_legs_2_socket_Hip R",
+   "matrix": [
+    0.170257,
+    -0.010716,
+    -0.985341,
+    63.471938,
+    -0.033724,
+    0.999292,
+    -0.016695,
+    35.496321,
+    0.984822,
+    0.036072,
+    0.169775,
+    -0.016829,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "termi_legs_2_socket_Hip L",
+   "matrix": [
+    -0.016137,
+    -0.010716,
+    0.999812,
+    77.414439,
+    0.035897,
+    0.999292,
+    0.011289,
+    35.65234,
+    -0.999225,
+    0.036072,
+    -0.015741,
+    -0.011036,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "termi_legs_2_socket_Belt Front",
+   "matrix": [
+    0.968521,
+    -0.010716,
+    0.248702,
+    70.634671,
+    0.019345,
+    0.999292,
+    -0.032277,
+    35.727302,
+    -0.24818,
+    0.036072,
+    0.968042,
+    6.285479,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "termi_legs_2_socket_Belt Back",
+   "matrix": [
+    -0.999942,
+    -0.010716,
+    -0.001284,
+    70.315779,
+    -0.010755,
+    0.999292,
+    0.036061,
+    36.366763,
+    0.000897,
+    0.036072,
+    -0.999349,
+    -5.006666,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -0.999943,
+   -0.010723,
+   -0.0,
+   70.67124,
+   0.000387,
+   -0.03607,
+   0.999349,
+   1.154241,
+   -0.010716,
+   0.999292,
+   0.036072,
+   -36.112119,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "termi_legs_2",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\GURLS\\update part 2 Thicc GURLS\\termi legs\\Legs\\termi_legs_2.stl"
+ }
+}

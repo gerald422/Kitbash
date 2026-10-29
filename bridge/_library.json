@@ -1,0 +1,396 @@
+{
+  "about": "Names TIOW and Blender read. Top-level Library folders are '<Creator> - <Mark or group>' (or 'Bits'). A file's part type comes from the nearest folder whose name matches a type or one of its aliases; trailing words like RawStl, Mirrored, Sergeant and Support are ignored. After changing partTypes, re-run: node apply-blender-bridge.mjs --library \"<this file>\" 'joints' says which socket each part type snaps onto when TIOW Inbox auto-snaps it: socket name, 'sided' (R/L taken from the part's name), 'fit' (snap with that fit type on the socket instead of the socket's own), 'mirrorLeft' (a right-hand part with no left fit is mirrored onto a left socket, and a '...-Mirrored' file counts as a left), 'rock' (first let it tilt up to that many degrees to sit flush), 'settle' (then slide along that socket axis until it touches, e.g. '-Z'), 'touch' (stop when that percent of its inside touches rather than at the first touch, so a knee cuff or a lug can sink in), 'sink' (then press in that far, mm), 'pushOut' (false: settle only closes a gap and never pushes the part off the model). Knee Pads and Shoulder Pads sit on exact three-point anchors (Shin, Pad), so they don't rock or settle. 'jointAliases' lists older socket names that mean the same joint. Blender reads this file directly; no need to re-run the patch for joints. 'spans' lists other sockets the part also covers: a two-handed weapon comes with both arms, so it snaps to Shoulder R and clears Shoulder L. 'mirrorSides': a part with a fit for one side only is mirrored onto the other (Mar Fil's jump-pack fins). A part's own .sockets.json can set its 'category', which wins over TIOW's type.",
+  "creators": [
+    "Mar Fil",
+    "Marta PunkGirl",
+    "Springles",
+    "Turtle Ninja",
+    "Bits"
+  ],
+  "marks": [
+    "Tacticus",
+    "Phobos",
+    "Gravis",
+    "Terminator",
+    "Scout",
+    "Heresy",
+    "Weapons",
+    "Adapters"
+  ],
+  "partTypes": {
+    "Arms": [
+      "arms",
+      "arm"
+    ],
+    "Heads": [
+      "heads",
+      "head",
+      "helmets",
+      "helmet"
+    ],
+    "Chests": [
+      "chests",
+      "chest",
+      "torsos",
+      "torso",
+      "bodies",
+      "body"
+    ],
+    "Legs": [
+      "legs",
+      "leg",
+      "predesigned legs"
+    ],
+    "Backpacks": [
+      "backpacks",
+      "backpack"
+    ],
+    "Jump Packs": [
+      "jump packs",
+      "jump pack",
+      "jumppacks",
+      "jumppack"
+    ],
+    "Shoulder Pads": [
+      "shoulder pads",
+      "shoulder pad",
+      "shoulderpads",
+      "shoulderpad",
+      "pauldrons",
+      "pauldron"
+    ],
+    "Knee Pads": [
+      "knee pads",
+      "knee pad",
+      "kneepads",
+      "kneepad",
+      "shin pads",
+      "shin pad",
+      "shinpads",
+      "shinpad",
+      "greaves",
+      "greave"
+    ],
+    "Melee": [
+      "melee",
+      "one handed melee"
+    ],
+    "Pistols": [
+      "pistols",
+      "pistol"
+    ],
+    "Heavy Weapons": [
+      "heavy weapons",
+      "heavy weapon"
+    ],
+    "Two-Handed Guns": [
+      "two handed guns",
+      "two armed guns"
+    ],
+    "Two-Handed Melee": [
+      "two handed melee",
+      "two armed melee"
+    ],
+    "Shields": [
+      "shields",
+      "shield"
+    ],
+    "Accessories": [
+      "accessories",
+      "accesories"
+    ],
+    "Bases": [
+      "bases",
+      "base",
+      "roundbase",
+      "roundbase32mm"
+    ],
+    "Mechadendrites": [
+      "mechadendrites",
+      "mechadendrite"
+    ],
+    "Servo Skulls": [
+      "servo skulls",
+      "servo skull"
+    ],
+    "Trophies": [
+      "trophies",
+      "trophy"
+    ],
+    "Seals": [
+      "seals",
+      "seal",
+      "purity seals",
+      "purityseals"
+    ],
+    "Grenades": [
+      "grenades",
+      "grenade"
+    ],
+    "Hands": [
+      "hands",
+      "hand"
+    ],
+    "Hand-less Weapons": [
+      "hand-less weapons",
+      "handless weapons"
+    ],
+    "Two-Handed Held": [
+      "two handed held"
+    ],
+    "Backpack Toppers": [
+      "backpack toppers",
+      "backpack topper"
+    ],
+    "Heavy Weapon Cables": [
+      "heavy weapon cables"
+    ],
+    "Cables": [
+      "cables",
+      "cable"
+    ],
+    "Pack Fins": [
+      "pack fins",
+      "pack fin"
+    ],
+    "Bikes": [
+      "bikes",
+      "bike"
+    ],
+    "Bike Parts": [
+      "bike parts"
+    ],
+    "Servo Arms": [
+      "servo arms",
+      "servo arm"
+    ],
+    "Adapters": [
+      "adapters",
+      "adapter",
+      "adaptors",
+      "adaptor"
+    ],
+    "Forearm Armour": [
+      "forearm armour",
+      "forearm armor",
+      "forearms",
+      "forearm",
+      "vambraces",
+      "vambrace"
+    ],
+    "Cloaks": [
+      "cloaks",
+      "cloak",
+      "capes",
+      "cape"
+    ]
+  },
+  "skipFoldersContaining": [
+    "support",
+    "_unsorted"
+  ],
+  "joints": {
+    "Arms": {
+      "socket": "Shoulder",
+      "sided": true
+    },
+    "Two-Handed Guns": {
+      "socket": "Shoulder R",
+      "spans": [
+        "Shoulder L"
+      ]
+    },
+    "Two-Handed Melee": {
+      "socket": "Shoulder R",
+      "spans": [
+        "Shoulder L"
+      ]
+    },
+    "Two-Handed Held": {
+      "socket": "Hand R"
+    },
+    "Heavy Weapons": {
+      "socket": "Shoulder R",
+      "spans": [
+        "Shoulder L"
+      ]
+    },
+    "Pistols": {
+      "socket": "Hand",
+      "sided": true
+    },
+    "Melee": {
+      "socket": "Hand",
+      "sided": true
+    },
+    "Shields": {
+      "socket": "Hand",
+      "sided": true
+    },
+    "Hands": {
+      "socket": "Hand",
+      "sided": true
+    },
+    "Hand-less Weapons": {
+      "socket": "Grip",
+      "sided": true
+    },
+    "Forearm Armour": {
+      "socket": "Forearm",
+      "sided": true,
+      "mirrorLeft": true
+    },
+    "Heads": {
+      "socket": "Neck"
+    },
+    "Backpacks": {
+      "socket": "Back"
+    },
+    "Jump Packs": {
+      "socket": "Back"
+    },
+    "Backpack Toppers": {
+      "socket": "Back Top"
+    },
+    "Heavy Weapon Cables": {
+      "socket": "Cable"
+    },
+    "Cables": {
+      "socket": "Cable"
+    },
+    "Servo Arms": {
+      "socket": "Servo Arm"
+    },
+    "Mechadendrites": {
+      "socket": "Mechadendrite"
+    },
+    "Bikes": {
+      "socket": "Bike"
+    },
+    "Bike Parts": {
+      "socket": [
+        "Bike Front",
+        "Front Wing",
+        "Front Wheel",
+        "Rear Wheel",
+        "Exhaust R",
+        "Exhaust L",
+        "Handle R",
+        "Handle L",
+        "Bike Guns"
+      ]
+    },
+    "Pack Fins": {
+      "socket": "Pack Fin",
+      "sided": true,
+      "mirrorSides": true
+    },
+    "Legs": {
+      "socket": [
+        "Waist",
+        "Flat Waist"
+      ],
+      "byFit": true,
+      "exclusive": [
+        "Waist",
+        "Flat Waist"
+      ],
+      "adaptor": {
+        "Flat Waist": "Waist"
+      }
+    },
+    "Adapters": {
+      "socket": "Waist",
+      "exclusive": [
+        "Waist",
+        "Flat Waist"
+      ]
+    },
+    "Bases": {
+      "socket": "Base"
+    },
+    "Shoulder Pads": {
+      "socket": "Pad",
+      "sided": true,
+      "mirrorLeft": true
+    },
+    "Knee Pads": {
+      "socket": "Shin",
+      "sided": true,
+      "mirrorLeft": true
+    },
+    "Accessories": {
+      "socket": [
+        "Hip R",
+        "Hip L",
+        "Belt Front",
+        "Belt Back"
+      ],
+      "rock": 8,
+      "settle": "-Z",
+      "sink": 0.1
+    },
+    "Grenades": {
+      "socket": [
+        "Hip R",
+        "Hip L",
+        "Belt Front",
+        "Belt Back"
+      ],
+      "rock": 8,
+      "settle": "-Z",
+      "sink": 0.1
+    },
+    "Seals": {
+      "socket": [
+        "Hip R",
+        "Hip L",
+        "Belt Front",
+        "Belt Back"
+      ],
+      "rock": 8,
+      "settle": "-Z",
+      "sink": 0.1
+    },
+    "Trophies": {
+      "socket": [
+        "Hip R",
+        "Hip L",
+        "Belt Front",
+        "Belt Back"
+      ],
+      "rock": 8,
+      "settle": "-Z",
+      "sink": 0.1
+    }
+  },
+  "jointAliases": {
+    "Shoulder R": [
+      "arm__Torso_r"
+    ],
+    "Hand R": [
+      "Wrist_socket_r"
+    ],
+    "Forearm R": [
+      "Wrist_Armout_r"
+    ],
+    "Shield R": [
+      "Shield_to_hand_r"
+    ],
+    "Neck": [
+      "Head"
+    ],
+    "Back": [
+      "Backpack"
+    ],
+    "Hip R": [
+      "Right Hip"
+    ],
+    "Hip L": [
+      "Left Hip"
+    ],
+    "Belt Front": [
+      "Tabard"
+    ]
+  }
+}

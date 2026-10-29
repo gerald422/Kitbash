@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "update_legs_craw_2",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "update_legs_craw_2_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    -17.235426,
+    0.0,
+    0.0,
+    1.0,
+    -0.054198,
+    0.0,
+    1.0,
+    0.0,
+    10.616181,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "update_legs_craw_2_socket_Hip R",
+   "matrix": [
+    0.008719,
+    1.7e-05,
+    -0.999962,
+    -25.195827,
+    2.3e-05,
+    1.0,
+    1.7e-05,
+    24.93042,
+    0.999962,
+    -2.3e-05,
+    0.008719,
+    10.675855,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "update_legs_craw_2_socket_Hip L",
+   "matrix": [
+    -0.001684,
+    1.7e-05,
+    0.999999,
+    -16.273063,
+    -2.3e-05,
+    1.0,
+    -1.7e-05,
+    24.789017,
+    -0.999999,
+    -2.3e-05,
+    -0.001684,
+    10.636011,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "update_legs_craw_2_socket_Belt Front",
+   "matrix": [
+    0.999933,
+    1.7e-05,
+    0.011613,
+    -20.765738,
+    -1.8e-05,
+    1.0,
+    2.3e-05,
+    24.371499,
+    -0.011613,
+    -2.3e-05,
+    0.999933,
+    15.76373,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "update_legs_craw_2_socket_Belt Back",
+   "matrix": [
+    -0.999975,
+    1.7e-05,
+    0.007136,
+    -20.680247,
+    1.7e-05,
+    1.0,
+    -2.3e-05,
+    24.346336,
+    -0.007136,
+    -2.3e-05,
+    -0.999975,
+    5.983347,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -1.0,
+   1.7e-05,
+   -0.0,
+   -20.727871,
+   0.0,
+   2.3e-05,
+   1.0,
+   -10.685028,
+   1.7e-05,
+   1.0,
+   -2.3e-05,
+   -25.678154,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "update_legs_craw_2",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\SALE files August 2025\\extra stls\\crow general\\craw legs\\Legs\\update_legs_craw_2.stl"
+ }
+}

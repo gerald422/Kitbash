@@ -1,0 +1,93 @@
+{
+ "schemaVersion": 1,
+ "part": "patternP sarge Rarm",
+ "category": "Arms",
+ "scale": 1.1,
+ "noPad": false,
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "patternP sarge Rarm_socket_Hand R",
+   "matrix": [
+    -0.077132,
+    0.916648,
+    -0.392182,
+    -321.534474,
+    -0.991408,
+    -0.112193,
+    -0.067245,
+    176.323281,
+    -0.105641,
+    0.383626,
+    0.917426,
+    1.834409,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Springles wrist cup: lip centre, Y into the arm (carried from the same pose in pattern C)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "patternP sarge Rarm_socket_Pad R",
+   "matrix": [
+    -0.006746,
+    -0.975254,
+    -0.220965,
+    -318.07278,
+    0.96332,
+    0.052935,
+    -0.263054,
+    171.751866,
+    0.268239,
+    -0.214633,
+    0.939134,
+    12.859029,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "copied",
+    "tiow_from": "Josh's 62 on patternC heavy Rarm 4 (actual.blend, 20 Oct), turned with this arm's shoulder (match 0.04 mm), clear of its armour"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   -0.028788,
+   0.999585,
+   -0.0,
+   -181.374556,
+   -0.999585,
+   -0.028788,
+   0.0,
+   -312.524578,
+   0.0,
+   0.0,
+   1.0,
+   -9.836331,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "heresy scale (Josh's working file); shoulder disc centre on Josh's HeresyArms_r point, file axes",
+  "Hand": "cup at the wrist; hands with the Springles dome wrist seat in it"
+ },
+ "original": {
+  "name": "patternP sarge Rarm",
+  "folder": "Arms",
+  "path": "Springles - Heresy\\patternP arms\\unique\\Arms\\patternP sarge Rarm.stl"
+ }
+}

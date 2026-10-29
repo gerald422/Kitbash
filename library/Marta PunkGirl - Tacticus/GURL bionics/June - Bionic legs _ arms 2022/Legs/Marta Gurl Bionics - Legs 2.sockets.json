@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "bionic_legs_2",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "bionic_legs_2_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    11.222916,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    8.307399,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "bionic_legs_2_socket_Hip R",
+   "matrix": [
+    -0.00044,
+    0.011761,
+    -0.999931,
+    7.133168,
+    -0.012175,
+    0.999857,
+    0.011766,
+    23.364518,
+    0.999926,
+    0.012179,
+    -0.000296,
+    5.876896,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "bionic_legs_2_socket_Hip L",
+   "matrix": [
+    -0.057688,
+    0.011761,
+    0.998265,
+    18.609486,
+    0.012838,
+    0.999857,
+    -0.011038,
+    22.710119,
+    -0.998252,
+    0.012179,
+    -0.05783,
+    5.608498,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "bionic_legs_2_socket_Belt Front",
+   "matrix": [
+    0.948013,
+    0.011761,
+    -0.318014,
+    11.763902,
+    -0.015023,
+    0.999857,
+    -0.007807,
+    23.153992,
+    0.317876,
+    0.012179,
+    0.948054,
+    11.683449,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "bionic_legs_2_socket_Belt Back",
+   "matrix": [
+    -0.99962,
+    0.011761,
+    0.024928,
+    12.019865,
+    0.01206,
+    0.999857,
+    0.011883,
+    23.105214,
+    -0.024785,
+    0.012179,
+    -0.999619,
+    1.246835,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -0.999931,
+   0.011762,
+   -0.0,
+   11.622893,
+   -0.000143,
+   -0.012178,
+   0.999926,
+   -5.478875,
+   0.011761,
+   0.999857,
+   0.012179,
+   -24.212424,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "bionic_legs_2",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\GURL bionics\\June - Bionic legs _ arms 2022\\Legs\\bionic_legs_2.stl"
+ }
+}

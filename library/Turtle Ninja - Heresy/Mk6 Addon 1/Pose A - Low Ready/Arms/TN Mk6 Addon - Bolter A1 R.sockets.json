@@ -1,0 +1,106 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk6_Bolter_A_R_1",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Mk6_Bolter_A_R_1_socket_Hand R",
+   "matrix": [
+    -0.63266,
+    0.757366,
+    0.16167,
+    9.949799,
+    0.0,
+    -0.20876,
+    0.977967,
+    7.20581,
+    0.77443,
+    0.618721,
+    0.132074,
+    9.112305,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "wrist face of the bolter-pose arm (the lettered socket), Y into the arm; the pose set bolter goes here"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "TN Mk6 Addon - Bolter A1 R_socket_Pad R",
+   "matrix": [
+    0.947494626045227,
+    0.04281184822320938,
+    -0.3168931007385254,
+    11.9053955078125,
+    0.14215397834777832,
+    0.8312985897064209,
+    0.5373405814170837,
+    10.429692268371582,
+    0.28643736243247986,
+    -0.5541749000549316,
+    0.7815650105476379,
+    20.13201141357422,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.9603815078735352,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     13.806389808654785,
+     10.097283363342285,
+     14.008757591247559
+    ],
+    [
+     13.558723449707031,
+     5.288224697113037,
+     17.214656829833984
+    ],
+    [
+     11.9053955078125,
+     10.429692268371582,
+     20.13201141357422
+    ]
+   ]
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   0.999217,
+   -0.03957,
+   -6.7e-05,
+   -11.896677,
+   -6.7e-05,
+   3e-06,
+   -1.0,
+   17.381777,
+   0.03957,
+   0.999217,
+   0.0,
+   -9.300697,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+ },
+ "original": {
+  "name": "Mk6_Bolter_A_R_1",
+  "folder": "Arms",
+  "path": "Turtle Ninja - Heresy\\Mk6 Addon 1\\Pose A - Low Ready\\Arms\\Mk6_Bolter_A_R_1.stl"
+ }
+}

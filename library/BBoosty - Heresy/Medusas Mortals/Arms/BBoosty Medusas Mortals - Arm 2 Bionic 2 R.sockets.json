@@ -1,0 +1,93 @@
+{
+ "schemaVersion": 1,
+ "part": "RArm2_Bionic2",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "RArm2_Bionic2_socket_Hand R",
+   "matrix": [
+    0.87126,
+    0.488577,
+    -0.046895,
+    -2.325055,
+    -0.118079,
+    0.115906,
+    -0.986217,
+    -2.175765,
+    -0.476408,
+    0.864788,
+    0.158675,
+    1.2347,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "BBoosty wrist socket: ball seat, Y into the arm, Z = torso forward (a little up)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "RArm2_Bionic2_socket_Pad R",
+   "matrix": [
+    -0.996218,
+    0.079776,
+    -0.033735,
+    3.742379,
+    -0.072367,
+    -0.552577,
+    0.83029,
+    1.07375,
+    0.047595,
+    0.829623,
+    0.556287,
+    11.760633,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "dome",
+    "tiow_from": "Josh's 62 on the Springles heresy arm (actual.blend), moved so its inner shell centres on this arm's shoulder dome"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   -0.999615,
+   -0.028245,
+   0.001017,
+   4.70751,
+   0.028245,
+   -0.999616,
+   -2.9e-05,
+   -2.325689,
+   0.001017,
+   -0.0,
+   0.999999,
+   -10.359192,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
+  "Hand": "ball socket at the wrist (r 1.23)",
+  "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome"
+ },
+ "noPad": false,
+ "original": {
+  "name": "RArm2_Bionic2",
+  "folder": "Arms",
+  "path": "BBoosty - Heresy\\Medusas Mortals\\Arms\\RArm2_Bionic2.stl"
+ }
+}

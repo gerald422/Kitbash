@@ -1,0 +1,93 @@
+{
+ "schemaVersion": 1,
+ "part": "patternC helmet hold arm",
+ "category": "Arms",
+ "scale": 1.1002,
+ "noPad": false,
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "patternC helmet hold arm_socket_Hand L",
+   "matrix": [
+    0.227979,
+    0.435541,
+    -0.870821,
+    -113.803734,
+    -0.939698,
+    0.332598,
+    -0.079663,
+    14.502429,
+    0.254937,
+    0.836471,
+    0.485102,
+    1.00257,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Springles wrist cup: lip centre, Y into the arm"
+   }
+  },
+  {
+   "type": "Pad L",
+   "name": "patternC helmet hold arm_socket_Pad L",
+   "matrix": [
+    0.072173,
+    -0.843979,
+    -0.531493,
+    -115.978475,
+    0.947241,
+    -0.108832,
+    0.301454,
+    20.414541,
+    -0.312262,
+    -0.525209,
+    0.791604,
+    13.195783,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "copied",
+    "tiow_from": "Josh's 62 on patternC heavy Rarm 4 (actual.blend, 20 Oct), turned with this arm's shoulder (match 0.05 mm), clear of its armour"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder L": [
+   0.028788,
+   0.999585,
+   0.0,
+   -16.391666,
+   -0.999585,
+   0.028788,
+   0.0,
+   -114.794113,
+   0.0,
+   -0.0,
+   1.0,
+   -10.577437,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "heresy scale (Josh's working file); shoulder disc centre on Josh's HeresyArms_r point, file axes",
+  "Hand": "cup at the wrist; hands with the Springles dome wrist seat in it"
+ },
+ "original": {
+  "name": "patternC helmet hold arm",
+  "folder": "Arms",
+  "path": "Springles - Heresy\\patternC arms\\unique\\Arms\\patternC helmet hold arm.stl"
+ }
+}

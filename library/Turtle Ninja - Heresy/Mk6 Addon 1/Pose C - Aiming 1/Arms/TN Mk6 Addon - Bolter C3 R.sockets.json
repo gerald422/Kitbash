@@ -1,0 +1,106 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk6_Bolter_C_R_3",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Mk6_Bolter_C_R_3_socket_Hand R",
+   "matrix": [
+    -0.677675,
+    0.704743,
+    0.209987,
+    13.515262,
+    0.0,
+    -0.285556,
+    0.958362,
+    5.515503,
+    0.735362,
+    0.649458,
+    0.193514,
+    7.951988,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "wrist face of the bolter-pose arm (the lettered socket), Y into the arm; the pose set bolter goes here"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "TN Mk6 Addon - Bolter C3 R_socket_Pad R",
+   "matrix": [
+    -0.8573699593544006,
+    -0.42844370007514954,
+    -0.2852240204811096,
+    16.972822189331055,
+    0.2689380645751953,
+    0.09957911819219589,
+    -0.9579960107803345,
+    2.2490768432617188,
+    0.43884971737861633,
+    -0.8980645537376404,
+    0.029848676174879074,
+    15.854569435119629,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.9897722005844116,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     19.639738082885742,
+     7.143919467926025,
+     18.065176010131836
+    ],
+    [
+     17.163524627685547,
+     7.719442367553711,
+     12.874763488769531
+    ],
+    [
+     16.972822189331055,
+     2.2490768432617188,
+     15.854569435119629
+    ]
+   ]
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   0.999447,
+   -0.03312,
+   0.002984,
+   -16.65201,
+   0.002985,
+   2e-06,
+   -0.999996,
+   16.61569,
+   0.03312,
+   0.999451,
+   0.000101,
+   -6.568265,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+ },
+ "original": {
+  "name": "Mk6_Bolter_C_R_3",
+  "folder": "Arms",
+  "path": "Turtle Ninja - Heresy\\Mk6 Addon 1\\Pose C - Aiming 1\\Arms\\Mk6_Bolter_C_R_3.stl"
+ }
+}

@@ -1,0 +1,93 @@
+{
+ "schemaVersion": 1,
+ "part": "patternS Larm melee 4",
+ "category": "Arms",
+ "scale": 1.1,
+ "noPad": false,
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "patternS Larm melee 4_socket_Hand L",
+   "matrix": [
+    0.368453,
+    0.718713,
+    -0.589655,
+    -60.543112,
+    -0.842698,
+    0.526046,
+    0.114613,
+    210.214831,
+    0.39256,
+    0.454672,
+    0.799481,
+    1.640165,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Springles wrist cup: lip centre, Y into the arm"
+   }
+  },
+  {
+   "type": "Pad L",
+   "name": "patternS Larm melee 4_socket_Pad L",
+   "matrix": [
+    -0.103049,
+    -0.972208,
+    -0.210198,
+    -57.749544,
+    0.957998,
+    -0.153858,
+    0.241975,
+    216.953051,
+    -0.267588,
+    -0.176433,
+    0.947238,
+    13.051581,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "copied",
+    "tiow_from": "Josh's 62 on patternC heavy Rarm 4 (actual.blend, 20 Oct), turned with this arm's shoulder (match 0.05 mm), clear of its armour"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder L": [
+   0.028788,
+   0.999585,
+   0.0,
+   -214.697239,
+   -0.999585,
+   0.028788,
+   0.0,
+   -63.610221,
+   0.0,
+   -0.0,
+   1.0,
+   -10.013462,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "heresy scale (Josh's working file); shoulder disc centre on Josh's HeresyArms_r point, file axes",
+  "Hand": "cup at the wrist; hands with the Springles dome wrist seat in it"
+ },
+ "original": {
+  "name": "patternS Larm melee 4",
+  "folder": "Arms",
+  "path": "Springles - Heresy\\patternS arms\\melee arms\\Arms\\patternS Larm melee 4.stl"
+ }
+}

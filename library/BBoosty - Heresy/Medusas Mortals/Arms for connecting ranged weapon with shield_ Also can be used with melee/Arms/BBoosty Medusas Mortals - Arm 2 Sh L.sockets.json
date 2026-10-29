@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "part": "LArm2_Sh",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Pad L",
+   "name": "LArm2_Sh_socket_Pad L",
+   "matrix": [
+    -0.988191,
+    0.049412,
+    -0.144873,
+    -3.329927,
+    -0.147718,
+    -0.55585,
+    0.818028,
+    6.552056,
+    -0.040106,
+    0.829801,
+    0.556611,
+    12.620663,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "dome",
+    "tiow_from": "Josh's 62 on the Springles heresy arm (actual.blend), moved so its inner shell centres on this arm's shoulder dome"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder L": [
+   -0.981493,
+   -0.191468,
+   0.006465,
+   -2.687799,
+   0.191469,
+   -0.981514,
+   -0.000531,
+   3.924897,
+   0.006447,
+   0.000717,
+   0.999979,
+   -11.471888,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
+  "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
+  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket"
+ },
+ "noPad": false,
+ "noHand": true,
+ "original": {
+  "name": "LArm2_Sh",
+  "folder": "Arms",
+  "path": "BBoosty - Heresy\\Medusas Mortals\\Arms for connecting ranged weapon with shield_ Also can be used with melee\\Arms\\LArm2_Sh.stl"
+ }
+}

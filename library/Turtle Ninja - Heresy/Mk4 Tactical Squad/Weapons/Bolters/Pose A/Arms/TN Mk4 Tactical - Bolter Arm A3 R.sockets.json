@@ -1,0 +1,106 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk4_Bolter_R_Arm_A_3",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Mk4_Bolter_R_Arm_A_3_socket_Hand R",
+   "matrix": [
+    -0.805397,
+    0.588818,
+    -0.068032,
+    12.594495,
+    -0.0,
+    0.114776,
+    0.993391,
+    4.323981,
+    0.592735,
+    0.800075,
+    -0.09244,
+    3.303389,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "wrist face of the bolter-pose arm (the lettered socket), Y into the arm; the pose set bolter goes here"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "TN Mk4 Tactical - Bolter Arm A3 R_socket_Pad R",
+   "matrix": [
+    0.9634252786636353,
+    -0.04848586022853851,
+    -0.2635544240474701,
+    13.629393577575684,
+    0.17789609730243683,
+    0.851243257522583,
+    0.49369820952415466,
+    8.170476913452148,
+    0.20041155815124512,
+    -0.5225265622138977,
+    0.8287347555160522,
+    13.256694793701172,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.914147973060608,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     14.765595436096191,
+     8.22740364074707,
+     7.744174480438232
+    ],
+    [
+     15.034549713134766,
+     3.505500555038452,
+     10.642663955688477
+    ],
+    [
+     13.629393577575684,
+     8.170476913452148,
+     13.256694793701172
+    ]
+   ]
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   0.999216,
+   -0.039587,
+   -0.000102,
+   -13.561929,
+   -0.000102,
+   3e-06,
+   -1.0,
+   10.563786,
+   0.039587,
+   0.999216,
+   -1e-06,
+   -7.196702,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+ },
+ "original": {
+  "name": "Mk4_Bolter_R_Arm_A_3",
+  "folder": "Arms",
+  "path": "Turtle Ninja - Heresy\\Mk4 Tactical Squad\\Weapons\\Bolters\\Pose A\\Arms\\Mk4_Bolter_R_Arm_A_3.stl"
+ }
+}

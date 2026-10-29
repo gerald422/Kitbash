@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "APOTH legs",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "APOTH legs_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    26.505223,
+    0.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0,
+    1.0,
+    0.0,
+    7.459367,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "APOTH legs_socket_Hip R",
+   "matrix": [
+    -0.238936,
+    0.072418,
+    -0.968331,
+    8.092377,
+    -0.113489,
+    0.988298,
+    0.101914,
+    21.677668,
+    0.964381,
+    0.134246,
+    -0.227921,
+    10.38772,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "APOTH legs_socket_Hip L",
+   "matrix": [
+    -0.368243,
+    0.072418,
+    0.926905,
+    20.879002,
+    0.151583,
+    0.988298,
+    -0.016993,
+    20.663712,
+    -0.917289,
+    0.134246,
+    -0.374911,
+    10.169602,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "APOTH legs_socket_Belt Front",
+   "matrix": [
+    0.965524,
+    0.072418,
+    0.250039,
+    15.507357,
+    -0.035723,
+    0.988298,
+    -0.14829,
+    20.219426,
+    -0.257852,
+    0.134246,
+    0.956813,
+    16.311192,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "APOTH legs_socket_Belt Back",
+   "matrix": [
+    -0.720884,
+    0.072418,
+    0.689262,
+    15.418603,
+    0.144884,
+    0.988298,
+    0.047695,
+    22.144109,
+    -0.677743,
+    0.134246,
+    -0.722941,
+    5.503201,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -0.997326,
+   0.073079,
+   -0.0,
+   14.057296,
+   -0.009811,
+   -0.133887,
+   0.990948,
+   -7.06835,
+   0.072418,
+   0.988298,
+   0.134246,
+   -24.635331,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "APOTH legs",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\Apothecary\\Legs\\APOTH legs.stl"
+ }
+}

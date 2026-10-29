@@ -1,0 +1,93 @@
+{
+ "schemaVersion": 1,
+ "part": "Rarm_TwoHandedGrip",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Rarm_TwoHandedGrip_socket_Hand R",
+   "matrix": [
+    0.305312,
+    -0.267159,
+    -0.914008,
+    -3.222143,
+    0.181013,
+    0.95862,
+    -0.219734,
+    0.702635,
+    0.93489,
+    -0.09836,
+    0.341038,
+    -0.34611,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "BBoosty wrist socket: ball seat, Y into the arm, Z = torso forward (a little up)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "Rarm_TwoHandedGrip_socket_Pad R",
+   "matrix": [
+    -0.904134,
+    -0.137843,
+    0.404348,
+    -0.321405,
+    0.411169,
+    -0.537605,
+    0.736125,
+    12.651611,
+    0.115909,
+    0.831841,
+    0.542769,
+    5.629375,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "dome",
+    "tiow_from": "Josh's 62 on the Springles heresy arm (actual.blend), moved so its inner shell centres on this arm's shoulder dome"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   -0.889195,
+   0.452343,
+   0.068905,
+   -5.921665,
+   -0.452415,
+   -0.89169,
+   0.015454,
+   8.060797,
+   0.06843,
+   -0.017432,
+   0.997504,
+   -4.259452,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
+  "Hand": "ball socket at the wrist (r 1.67)",
+  "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome"
+ },
+ "noPad": false,
+ "original": {
+  "name": "Rarm_TwoHandedGrip",
+  "folder": "Arms",
+  "path": "BBoosty - Heresy\\Praetor with Paragon Blade\\Arms\\Rarm_TwoHandedGrip.stl"
+ }
+}

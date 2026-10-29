@@ -1,0 +1,106 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk6_Bolter_B_R_2",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Mk6_Bolter_B_R_2_socket_Hand R",
+   "matrix": [
+    -0.761565,
+    0.648082,
+    -0.00279,
+    15.434169,
+    0.0,
+    0.004305,
+    0.999991,
+    4.205882,
+    0.648088,
+    0.761558,
+    -0.003278,
+    5.651265,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "wrist face of the bolter-pose arm (the lettered socket), Y into the arm; the pose set bolter goes here"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "TN Mk6 Addon - Bolter B2 R_socket_Pad R",
+   "matrix": [
+    0.8429300785064697,
+    0.4592645466327667,
+    -0.28025898337364197,
+    15.4157075881958,
+    -0.31158939003944397,
+    0.8413684368133545,
+    0.44160082936286926,
+    8.391409873962402,
+    0.4386126697063446,
+    -0.2849128842353821,
+    0.8523166179656982,
+    16.450363159179688,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.8341760635375977,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     18.35725975036621,
+     8.1968355178833,
+     10.659034729003906
+    ],
+    [
+     15.941232681274414,
+     3.7706961631774902,
+     12.157859802246094
+    ],
+    [
+     15.4157075881958,
+     8.391409873962402,
+     16.450363159179688
+    ]
+   ]
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   0.999217,
+   -0.039578,
+   -7.2e-05,
+   -15.226632,
+   -7.2e-05,
+   3e-06,
+   -1.0,
+   13.624182,
+   0.039578,
+   0.999217,
+   0.0,
+   -7.593236,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+ },
+ "original": {
+  "name": "Mk6_Bolter_B_R_2",
+  "folder": "Arms",
+  "path": "Turtle Ninja - Heresy\\Mk6 Addon 1\\Pose B - Low Ready\\Arms\\Mk6_Bolter_B_R_2.stl"
+ }
+}

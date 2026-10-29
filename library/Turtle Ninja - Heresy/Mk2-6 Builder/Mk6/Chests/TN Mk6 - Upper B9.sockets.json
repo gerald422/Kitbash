@@ -1,0 +1,196 @@
+{
+ "schemaVersion": 1,
+ "part": "Upper B 9",
+ "sockets": [
+  {
+   "type": "Shoulder R",
+   "name": "Upper B 9_socket_Shoulder R",
+   "matrix": [
+    7.2e-05,
+    -0.999997,
+    -0.002257,
+    7.640555,
+    -0.040905,
+    -0.002258,
+    0.99916,
+    6.649914,
+    -0.999163,
+    2e-05,
+    -0.040905,
+    0.00677,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "Upper B 9_socket_Shoulder L",
+   "matrix": [
+    -5e-06,
+    -0.999997,
+    -0.002256,
+    7.641019,
+    0.040539,
+    -0.002255,
+    0.999175,
+    6.650457,
+    -0.999178,
+    -8.7e-05,
+    0.040539,
+    12.75097,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "Upper B 9_socket_Neck",
+   "matrix": [
+    0.004597,
+    0.928925,
+    -0.370239,
+    7.664855,
+    5.3e-05,
+    0.370242,
+    0.928935,
+    7.440821,
+    0.999989,
+    -0.004289,
+    0.001653,
+    6.37539,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "head where it sits on the Mar Fil torso relative to the shoulder joints (Josh, version D)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "Upper B 9_socket_Back",
+   "matrix": [
+    7e-05,
+    -0.999363,
+    0.035681,
+    13.364057,
+    -0.000197,
+    0.035681,
+    0.999363,
+    6.791433,
+    -1.0,
+    -7.7e-05,
+    -0.000194,
+    6.411381,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: backpack mount face, matched to the Mar Fil torso back"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "Upper B 9_socket_Waist",
+   "matrix": [
+    -1.9e-05,
+    -0.999997,
+    -0.002261,
+    6.847076,
+    -0.000188,
+    -0.002261,
+    0.999997,
+    4.542634,
+    -1.0,
+    1.9e-05,
+    -0.000188,
+    6.29145,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "on Mar Fil legs: flat bottom on top of the belt (front belt line, 24.8)"
+   }
+  },
+  {
+   "type": "Flat Waist",
+   "name": "Upper B 9_socket_Flat Waist",
+   "matrix": [
+    -1.9e-05,
+    -0.999997,
+    -0.002261,
+    6.857265,
+    -0.000188,
+    -0.002261,
+    0.999997,
+    0.035345,
+    -1.0,
+    1.9e-05,
+    -0.000188,
+    6.292297,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat bottom: origin at its centre, Z up into the torso, Y front"
+   }
+  }
+ ],
+ "category": "Chests",
+ "fits": {},
+ "upright": [
+  -1.9e-05,
+  -0.000188,
+  -1.0,
+  6.292431,
+  -0.999997,
+  -0.002261,
+  1.9e-05,
+  7.428481,
+  -0.002261,
+  0.999997,
+  -0.000188,
+  24.781339,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "notes": {
+  "pose": "the flat pose of this torso design (Josh: one pose per torso, the flat one)"
+ },
+ "original": {
+  "name": "Upper B 9",
+  "folder": "Chests",
+  "path": "Turtle Ninja - Heresy\\Mk2-6 Builder\\Mk6\\Chests\\Upper B 9.stl"
+ }
+}

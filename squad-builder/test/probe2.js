@@ -1,0 +1,23 @@
+const { chromium } = require('playwright');
+(async () => {
+  const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist'] });
+  const page = await b.newPage({ viewport: { width: 1500, height: 900 } });
+  page.on('pageerror', e => console.log('pageerror: ' + e.message));
+  page.on('console', m => console.log('console:', m.type(), m.text().slice(0, 200)));
+  await page.goto('http://localhost:8766/Squad%20Builder.html?lib=/reallib/&libpath=D%3A%5CKitbash%20Library');
+  await page.waitForFunction(() => window.__sb && window.__sb.S.parts.length > 0, null, { timeout: 60000 });
+  const T = async (label, fn) => { const t = Date.now(); await fn(); console.log(label, Date.now() - t, 'ms'); };
+  await T('goSlot torso', () => page.evaluate(() => window.__sb.goSlot('torso')));
+  await T('fill', () => page.fill('#fq', 'MarFil Assault - Torso 3'));
+  await T('click torso', () => page.click('.card[data-id="4eafd9971267"]'));
+  await T('fill empty', () => page.fill('#fq', ''));
+  await T('trivial eval', () => page.evaluate(() => 1));
+  await T('goSlot legs', () => page.evaluate(() => window.__sb.goSlot('legs')));
+  await T('fill legs', () => page.fill('#fq', 'MarFil Assault - Legs 1A'));
+  await T('hover legs', () => page.hover('.card[data-id="32298304d830"]'));
+  await page.waitForTimeout(300);
+  await T('click legs', () => page.click('.card[data-id="32298304d830"]'));
+  await T('fill empty', () => page.fill('#fq', ''));
+  for (let i = 0; i < 5; i++) await T('trivial eval ' + i, () => page.evaluate(() => 1));
+  await b.close();
+})();

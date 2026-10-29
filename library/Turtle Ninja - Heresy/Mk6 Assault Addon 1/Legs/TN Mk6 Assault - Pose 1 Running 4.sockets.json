@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk6_Pose_1_Running_4",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "Mk6_Pose_1_Running_4_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    28.304139,
+    0.0,
+    0.0,
+    1.0,
+    1.728508,
+    0.0,
+    1.0,
+    0.0,
+    7.006343,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "Mk6_Pose_1_Running_4_socket_Hip R",
+   "matrix": [
+    -0.095712,
+    -0.01427,
+    -0.995307,
+    18.561063,
+    -0.339476,
+    0.94042,
+    0.019162,
+    22.261767,
+    0.935733,
+    0.339717,
+    -0.094854,
+    11.845545,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Mk6_Pose_1_Running_4_socket_Hip L",
+   "matrix": [
+    -0.063271,
+    -0.01427,
+    0.997894,
+    27.00411,
+    0.338221,
+    0.94042,
+    0.034893,
+    22.414752,
+    -0.938937,
+    0.339717,
+    -0.054675,
+    11.81276,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Mk6_Pose_1_Running_4_socket_Belt Front",
+   "matrix": [
+    0.998803,
+    -0.01427,
+    0.046794,
+    22.844894,
+    0.029306,
+    0.94042,
+    -0.338751,
+    20.651193,
+    -0.039172,
+    0.339717,
+    0.939712,
+    17.249828,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "Mk6_Pose_1_Running_4_socket_Belt Back",
+   "matrix": [
+    -0.999898,
+    -0.01427,
+    0.000848,
+    23.002807,
+    -0.013133,
+    0.94042,
+    0.339763,
+    23.852564,
+    -0.005646,
+    0.339717,
+    -0.940511,
+    7.761138,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -0.999885,
+   -0.015172,
+   0.0,
+   23.269829,
+   0.005154,
+   -0.339678,
+   0.940528,
+   -3.629558,
+   -0.01427,
+   0.94042,
+   0.339717,
+   -26.038917,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "Mk6_Pose_1_Running_4",
+  "folder": "Legs",
+  "path": "Turtle Ninja - Heresy\\Mk6 Assault Addon 1\\Legs\\Mk6_Pose_1_Running_4.stl"
+ }
+}

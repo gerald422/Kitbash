@@ -1,0 +1,282 @@
+{
+ "schemaVersion": 1,
+ "part": "Legs",
+ "sockets": [
+  {
+   "type": "Hip R",
+   "name": "Legs_socket_Hip R",
+   "matrix": [
+    0.07396,
+    0.000875,
+    -0.997261,
+    14.191763,
+    -0.001867,
+    0.999998,
+    0.000739,
+    4.427826,
+    0.997259,
+    0.001807,
+    0.073962,
+    25.432706,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): 1 mm under the top, Z out, Y up"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Legs_socket_Hip L",
+   "matrix": [
+    -0.431148,
+    0.000875,
+    0.902281,
+    22.416199,
+    0.002008,
+    0.999998,
+    -1.1e-05,
+    4.420265,
+    -0.902279,
+    0.001807,
+    -0.431149,
+    23.114677,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): 1 mm under the top, Z out, Y up"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Legs_socket_Belt Front",
+   "matrix": [
+    0.998937,
+    0.000875,
+    0.046093,
+    19.697405,
+    -0.000791,
+    0.999998,
+    -0.001845,
+    4.670698,
+    -0.046095,
+    0.001807,
+    0.998935,
+    30.599419,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): 1 mm under the top, Z out, Y up"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "Legs_socket_Belt Back",
+   "matrix": [
+    -0.96594,
+    0.000875,
+    -0.258765,
+    17.340973,
+    0.000378,
+    0.999998,
+    0.001972,
+    4.386607,
+    0.258767,
+    0.001807,
+    -0.965938,
+    20.576323,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): 1 mm under the top, Z out, Y up"
+   }
+  },
+  {
+   "type": "Base",
+   "name": "Legs_socket_Base",
+   "matrix": [
+    -0.963489,
+    0.267747,
+    0.000875,
+    24.054928,
+    0.000359,
+    -0.001975,
+    0.999998,
+    -20.531877,
+    0.267748,
+    0.963487,
+    0.001807,
+    19.777831,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Legs_socket_Hip L~Accessories_Book_Satchel",
+   "matrix": [
+    0.227758,
+    0.000875,
+    0.973717,
+    25.210203,
+    0.00156,
+    0.999998,
+    -0.001264,
+    3.209424,
+    -0.973717,
+    0.001807,
+    0.227756,
+    25.729671,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "where Turtle Ninja put Accessories_Book_Satchel",
+    "tiow_holds": "Accessories_Book_Satchel"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Legs_socket_Belt Front~Accessories_Bottle",
+   "matrix": [
+    0.950032,
+    0.000875,
+    -0.312153,
+    16.092506,
+    -0.001395,
+    0.999998,
+    -0.001443,
+    4.591023,
+    0.312151,
+    0.001807,
+    0.950031,
+    30.646055,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "where Turtle Ninja put Accessories_Bottle",
+    "tiow_holds": "Accessories_Bottle"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "Legs_socket_Hip R~Accessories_Scroll",
+   "matrix": [
+    0.252857,
+    0.000875,
+    -0.967503,
+    13.032825,
+    -0.00197,
+    0.999998,
+    0.00039,
+    5.02904,
+    0.967502,
+    0.001807,
+    0.252859,
+    25.464612,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "where Turtle Ninja put Accessories_Scroll",
+    "tiow_holds": "Accessories_Scroll"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Legs_socket_Belt Front~Buckle",
+   "matrix": [
+    0.964203,
+    0.000875,
+    0.265162,
+    20.069961,
+    -0.000365,
+    0.999998,
+    -0.001974,
+    5.219719,
+    -0.265163,
+    0.001807,
+    0.964202,
+    30.745899,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "where Turtle Ninja put Buckle",
+    "tiow_holds": "Buckle"
+   }
+  }
+ ],
+ "category": "Legs",
+ "fits": {
+  "Flat Waist": [
+   -0.963489,
+   0.000359,
+   0.267748,
+   11.121625,
+   0.267747,
+   -0.001975,
+   0.963487,
+   -28.097438,
+   0.000875,
+   0.999998,
+   0.001807,
+   -5.772556,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "as Turtle Ninja assembled it on the kit body"
+ },
+ "original": {
+  "name": "Legs",
+  "folder": "Legs",
+  "path": "Turtle Ninja - Heresy\\Librarian Custom\\Legs\\Legs.stl"
+ }
+}

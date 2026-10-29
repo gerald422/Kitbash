@@ -1,0 +1,93 @@
+{
+ "schemaVersion": 1,
+ "part": "RArm1_Bionic_Sh",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "RArm1_Bionic_Sh_socket_Hand R",
+   "matrix": [
+    0.529035,
+    -0.55378,
+    -0.643001,
+    1.917351,
+    0.325813,
+    0.832197,
+    -0.448658,
+    -3.336595,
+    0.783561,
+    0.027858,
+    0.62069,
+    4.90715,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "BBoosty wrist socket: ball seat, Y into the arm, Z = torso forward (a little up)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "RArm1_Bionic_Sh_socket_Pad R",
+   "matrix": [
+    -0.977297,
+    0.153416,
+    -0.145967,
+    0.632725,
+    -0.206447,
+    -0.536793,
+    0.818044,
+    6.39383,
+    0.047146,
+    0.829637,
+    0.556303,
+    11.558654,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "dome",
+    "tiow_from": "Josh's 62 on the Springles heresy arm (actual.blend), moved so its inner shell centres on this arm's shoulder dome"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   -0.98661,
+   -0.163185,
+   0.000568,
+   2.521974,
+   0.163185,
+   -0.98661,
+   -5.5e-05,
+   3.182001,
+   0.000569,
+   3.9e-05,
+   1.0,
+   -10.008146,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
+  "Hand": "ball socket at the wrist (r 1.23)",
+  "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome"
+ },
+ "noPad": false,
+ "original": {
+  "name": "RArm1_Bionic_Sh",
+  "folder": "Arms",
+  "path": "BBoosty - Heresy\\Medusas Mortals\\Arms for connecting ranged weapon with shield_ Also can be used with melee\\Arms\\RArm1_Bionic_Sh.stl"
+ }
+}

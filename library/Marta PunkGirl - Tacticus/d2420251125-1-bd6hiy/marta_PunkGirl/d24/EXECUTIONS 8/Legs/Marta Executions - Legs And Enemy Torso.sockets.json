@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "legs_and_enemy_torso",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "legs_and_enemy_torso_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    -6.03274,
+    0.0,
+    0.0,
+    1.0,
+    -4.604967,
+    0.0,
+    1.0,
+    0.0,
+    18.699652,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "legs_and_enemy_torso_socket_Hip R",
+   "matrix": [
+    0.001843,
+    -0.021513,
+    -0.999767,
+    -0.553078,
+    0.102634,
+    0.994493,
+    -0.02121,
+    19.288774,
+    0.994717,
+    -0.102571,
+    0.004041,
+    21.295519,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "legs_and_enemy_torso_socket_Hip L",
+   "matrix": [
+    0.079718,
+    -0.021513,
+    0.996585,
+    9.823629,
+    -0.100562,
+    0.994493,
+    0.029512,
+    20.06769,
+    -0.991732,
+    -0.102571,
+    0.077116,
+    21.118336,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "legs_and_enemy_torso_socket_Belt Front",
+   "matrix": [
+    0.999748,
+    -0.021513,
+    0.006396,
+    4.366205,
+    0.020743,
+    0.994493,
+    0.10273,
+    20.399106,
+    -0.008571,
+    -0.102571,
+    0.994689,
+    25.68405,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "legs_and_enemy_torso_socket_Belt Back",
+   "matrix": [
+    -0.948435,
+    -0.021513,
+    -0.31624,
+    4.580466,
+    0.012151,
+    0.994493,
+    -0.104096,
+    19.269958,
+    0.316738,
+    -0.102571,
+    -0.942951,
+    16.113799,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -0.999766,
+   -0.021627,
+   -0.0,
+   4.679796,
+   -0.002218,
+   0.102547,
+   0.994726,
+   -23.104929,
+   -0.021513,
+   0.994493,
+   -0.102571,
+   -18.302815,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "legs_and_enemy_torso",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\d2420251125-1-bd6hiy\\marta_PunkGirl\\d24\\EXECUTIONS 8\\Legs\\legs_and_enemy_torso.stl"
+ }
+}

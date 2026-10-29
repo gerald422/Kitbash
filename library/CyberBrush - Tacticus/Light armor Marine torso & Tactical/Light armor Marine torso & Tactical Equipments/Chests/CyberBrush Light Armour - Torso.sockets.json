@@ -1,0 +1,196 @@
+{
+ "schemaVersion": 1,
+ "part": "Torso",
+ "category": "Chests",
+ "upright": [
+  -1.0,
+  0.0,
+  0.0,
+  -0.0,
+  0.0,
+  -1.0,
+  0.0,
+  -7.406042,
+  0.0,
+  0.0,
+  1.0,
+  31.68131,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "sockets": [
+  {
+   "type": "Shoulder R",
+   "name": "Torso_socket_Shoulder R",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    -6.146478,
+    0.0,
+    -1.0,
+    0.0,
+    -7.609665,
+    0.0,
+    0.0,
+    1.0,
+    0.268737,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Mar Fil Shoulder R moved by the difference of the round shoulder faces (heresy arms' faces meet)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "Torso_socket_Shoulder L",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    6.146477,
+    0.0,
+    -1.0,
+    0.0,
+    -7.606219,
+    0.0,
+    0.0,
+    1.0,
+    0.267243,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Mar Fil Shoulder L moved by the difference of the round shoulder faces"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "Torso_socket_Neck",
+   "matrix": [
+    1.0,
+    -0.0042,
+    0.0017,
+    0.000917,
+    0.0046,
+    0.9298,
+    -0.3681,
+    -8.275119,
+    0.0,
+    0.3681,
+    0.9298,
+    2.531757,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Mar Fil Neck moved by the difference of the neck cups (r 3.58 here, 2.67 Mar Fil)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "Torso_socket_Back",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    -0.019851,
+    0.0,
+    -0.998,
+    -0.0627,
+    -1.707656,
+    0.0,
+    -0.0627,
+    0.998,
+    1.978339,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Mar Fil Back moved by the difference of the back plates"
+   }
+  },
+  {
+   "type": "Flat Waist",
+   "name": "Torso_socket_Flat Waist",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    0.040808,
+    0.0,
+    -1.0,
+    0.0,
+    -8.477287,
+    0.0,
+    0.0,
+    1.0,
+    -7.549001,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "the flat bottom face (r 3.98), as Turtle Ninja's flat waist"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "Torso_socket_Waist",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    0.040808,
+    0.0,
+    -1.0,
+    0.0,
+    -8.477287,
+    0.0,
+    0.0,
+    1.0,
+    -3.041001,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "4.5 above the flat waist, as Turtle Ninja's"
+   }
+  }
+ ],
+ "fits": {},
+ "notes": {
+  "pose": "CyberBrush light armour torso in its own axes (front -Y); upright turns it to face +Y, shoulder faces on the Mar Fil heresy shoulder line"
+ },
+ "original": {
+  "name": "Torso",
+  "folder": "Chests",
+  "path": "CyberBrush - Tacticus\\Light armor Marine torso & Tactical\\Light armor Marine torso & Tactical Equipments\\Chests\\Torso.stl"
+ }
+}

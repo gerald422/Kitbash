@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "Lower B 8",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "Lower B 8_socket_Base",
+   "matrix": [
+    0.0,
+    -1.0,
+    0.0,
+    9.42934,
+    0.0,
+    0.0,
+    1.0,
+    -1e-06,
+    -1.0,
+    0.0,
+    0.0,
+    14.707716,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "Lower B 8_socket_Hip R",
+   "matrix": [
+    -0.991488,
+    -0.002817,
+    0.130171,
+    9.381539,
+    -0.01198,
+    0.997499,
+    -0.069661,
+    22.1076,
+    -0.129649,
+    -0.070628,
+    -0.989041,
+    5.834848,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Lower B 8_socket_Hip L",
+   "matrix": [
+    0.996328,
+    -0.002817,
+    0.085574,
+    9.305226,
+    -0.003244,
+    0.997499,
+    0.07061,
+    22.710206,
+    -0.085558,
+    -0.070628,
+    0.993827,
+    14.376195,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Lower B 8_socket_Belt Front",
+   "matrix": [
+    -0.012892,
+    -0.002817,
+    -0.999913,
+    3.312428,
+    0.070586,
+    0.997499,
+    -0.003721,
+    22.42788,
+    0.997422,
+    -0.070628,
+    -0.012661,
+    10.076321,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "Lower B 8_socket_Belt Back",
+   "matrix": [
+    0.004137,
+    -0.002817,
+    0.999987,
+    13.570892,
+    -0.070616,
+    0.997499,
+    0.003103,
+    22.443751,
+    -0.997495,
+    -0.070628,
+    0.003928,
+    10.105985,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -0.0,
+   -0.070628,
+   -0.997503,
+   11.563524,
+   -0.999996,
+   -0.00281,
+   0.000199,
+   9.438474,
+   -0.002817,
+   0.997499,
+   -0.070628,
+   -22.954198,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "Lower B 8",
+  "folder": "Legs",
+  "path": "Turtle Ninja - Heresy\\Mk7-8 Builder\\Mk7-8\\Legs\\Lower B 8.stl"
+ }
+}

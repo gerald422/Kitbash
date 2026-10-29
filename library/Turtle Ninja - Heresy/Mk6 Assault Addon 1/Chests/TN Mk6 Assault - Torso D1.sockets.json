@@ -1,0 +1,196 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk6_Assault_Torso_D_1",
+ "category": "Chests",
+ "fits": {},
+ "upright": [
+  1.1e-05,
+  -6e-05,
+  -1.0,
+  6.622192,
+  -0.999998,
+  -0.00223,
+  -1.1e-05,
+  6.513799,
+  -0.00223,
+  0.999998,
+  -6e-05,
+  24.80255,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "sockets": [
+  {
+   "type": "Shoulder R",
+   "name": "Mk6_Assault_Torso_D_1_socket_Shoulder R",
+   "matrix": [
+    -5e-06,
+    -0.999998,
+    -0.002229,
+    6.61246,
+    -0.040468,
+    -0.002227,
+    0.999178,
+    6.571709,
+    -0.999181,
+    9.5e-05,
+    -0.040468,
+    0.455701,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "Mk6_Assault_Torso_D_1_socket_Shoulder L",
+   "matrix": [
+    0.000109,
+    -0.999998,
+    -0.00223,
+    6.613702,
+    0.040113,
+    -0.002224,
+    0.999193,
+    6.570912,
+    -0.999195,
+    -0.000198,
+    0.040113,
+    12.840598,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "Mk6_Assault_Torso_D_1_socket_Neck",
+   "matrix": [
+    0.00466,
+    0.928935,
+    -0.370213,
+    6.63717,
+    -5.4e-05,
+    0.370218,
+    0.928945,
+    7.361946,
+    0.999989,
+    -0.004309,
+    0.001776,
+    6.644753,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "head where it sits on the Mar Fil torso relative to the shoulder joints (Josh, version D)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "Mk6_Assault_Torso_D_1_socket_Back",
+   "matrix": [
+    9.9e-05,
+    -0.999362,
+    0.035723,
+    12.181634,
+    -6.8e-05,
+    0.035723,
+    0.999362,
+    7.007756,
+    -1.0,
+    -0.000102,
+    -6.5e-05,
+    6.666155,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: backpack mount face, matched to the Mar Fil torso back"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "Mk6_Assault_Torso_D_1_socket_Waist",
+   "matrix": [
+    1.1e-05,
+    -0.999998,
+    -0.00223,
+    5.932393,
+    -6e-05,
+    -0.00223,
+    0.999998,
+    4.518386,
+    -1.0,
+    -1.1e-05,
+    -6e-05,
+    6.621988,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "on Mar Fil legs: flat bottom on top of the belt (front belt line, 24.8)"
+   }
+  },
+  {
+   "type": "Flat Waist",
+   "name": "Mk6_Assault_Torso_D_1_socket_Flat Waist",
+   "matrix": [
+    1.1e-05,
+    -0.999998,
+    -0.00223,
+    5.942443,
+    -6e-05,
+    -0.00223,
+    0.999998,
+    0.011096,
+    -1.0,
+    -1.1e-05,
+    -6e-05,
+    6.622258,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat bottom: origin at its centre, Z up into the torso, Y front"
+   }
+  }
+ ],
+ "notes": {
+  "pose": "the flat pose of this torso design (Josh: one pose per torso, the flat one)"
+ },
+ "original": {
+  "name": "Mk6_Assault_Torso_D_1",
+  "folder": "Chests",
+  "path": "Turtle Ninja - Heresy\\Mk6 Assault Addon 1\\Chests\\Mk6_Assault_Torso_D_1.stl"
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "Lower C 19",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "Lower C 19_socket_Base",
+   "matrix": [
+    0.0,
+    -1.0,
+    0.0,
+    12.458295,
+    0.0,
+    0.0,
+    1.0,
+    -1e-06,
+    -1.0,
+    0.0,
+    0.0,
+    9.668601,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "Lower C 19_socket_Hip R",
+   "matrix": [
+    -0.968751,
+    -0.23096,
+    0.090436,
+    11.847376,
+    -0.229277,
+    0.972937,
+    0.028717,
+    22.994037,
+    -0.094621,
+    0.007085,
+    -0.995488,
+    6.820738,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Lower C 19_socket_Hip L",
+   "matrix": [
+    0.969352,
+    -0.23096,
+    0.083754,
+    11.773077,
+    0.230724,
+    0.972937,
+    0.012626,
+    22.90758,
+    -0.084403,
+    0.007085,
+    0.996407,
+    15.400184,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Lower C 19_socket_Belt Front",
+   "matrix": [
+    -0.190844,
+    -0.23096,
+    -0.954063,
+    6.038462,
+    -0.052441,
+    0.972937,
+    -0.225039,
+    21.678498,
+    0.980219,
+    0.007085,
+    -0.197791,
+    10.862587,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "Lower C 19_socket_Belt Back",
+   "matrix": [
+    0.033561,
+    -0.23096,
+    0.972384,
+    16.023049,
+    0.015243,
+    0.972937,
+    0.230565,
+    23.96161,
+    -0.99932,
+    0.007085,
+    0.036173,
+    11.15392,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -0.0,
+   0.007281,
+   -0.999973,
+   10.933229,
+   -0.972963,
+   -0.230954,
+   -0.001682,
+   16.849562,
+   -0.23096,
+   0.972937,
+   0.007085,
+   -21.010773,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "Lower C 19",
+  "folder": "Legs",
+  "path": "Turtle Ninja - Heresy\\Mk7-8 Builder\\Mk7-8\\Legs\\Lower C 19.stl"
+ }
+}

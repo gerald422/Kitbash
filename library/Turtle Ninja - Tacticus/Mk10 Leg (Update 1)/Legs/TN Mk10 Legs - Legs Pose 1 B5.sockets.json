@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk10_2.0_Legs_Pose_1_B_5",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "Mk10_2.0_Legs_Pose_1_B_5_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    10.338858,
+    0.0,
+    0.0,
+    1.0,
+    -2.5e-05,
+    0.0,
+    1.0,
+    0.0,
+    11.679165,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "Mk10_2.0_Legs_Pose_1_B_5_socket_Hip R",
+   "matrix": [
+    -0.192979,
+    -0.050945,
+    -0.97988,
+    6.796606,
+    -0.444591,
+    0.894793,
+    0.041037,
+    19.384591,
+    0.874699,
+    0.443565,
+    -0.195325,
+    15.298514,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Mk10_2.0_Legs_Pose_1_B_5_socket_Hip L",
+   "matrix": [
+    0.004769,
+    -0.050945,
+    0.99869,
+    16.631922,
+    0.444355,
+    0.894793,
+    0.043523,
+    20.093639,
+    -0.895838,
+    0.443565,
+    0.026905,
+    15.121676,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Mk10_2.0_Legs_Pose_1_B_5_socket_Belt Front",
+   "matrix": [
+    0.737706,
+    -0.050945,
+    0.673197,
+    12.306731,
+    0.333099,
+    0.894793,
+    -0.297305,
+    17.522132,
+    -0.587226,
+    0.443565,
+    0.677064,
+    20.172551,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "Mk10_2.0_Legs_Pose_1_B_5_socket_Belt Back",
+   "matrix": [
+    -0.99622,
+    -0.050945,
+    0.070359,
+    12.390863,
+    -0.014241,
+    0.894793,
+    0.446254,
+    21.595832,
+    -0.085691,
+    0.443565,
+    -0.892136,
+    11.482706,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "category": "Legs",
+ "fits": {
+  "Flat Waist": [
+   -0.998383,
+   -0.056843,
+   0.0,
+   13.603883,
+   0.025213,
+   -0.442848,
+   0.896242,
+   -5.248229,
+   -0.050945,
+   0.894793,
+   0.443565,
+   -25.118933,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "Mk10_2.0_Legs_Pose_1_B_5",
+  "folder": "Legs",
+  "path": "Turtle Ninja - Tacticus\\Mk10 Leg (Update 1)\\Legs\\Mk10_2.0_Legs_Pose_1_B_5.stl"
+ }
+}

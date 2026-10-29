@@ -1,0 +1,106 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk6_Bolter_B_R_3",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Mk6_Bolter_B_R_3_socket_Hand R",
+   "matrix": [
+    -0.761565,
+    0.648082,
+    -0.00279,
+    15.434169,
+    0.0,
+    0.004305,
+    0.999991,
+    4.205882,
+    0.648088,
+    0.761558,
+    -0.003278,
+    5.651265,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "wrist face of the bolter-pose arm (the lettered socket), Y into the arm; the pose set bolter goes here"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "TN Mk6 Addon - Bolter B3 R_socket_Pad R",
+   "matrix": [
+    0.843435525894165,
+    0.45877552032470703,
+    -0.27953803539276123,
+    15.420490264892578,
+    -0.3117281496524811,
+    0.8417113423347473,
+    0.4408486485481262,
+    8.390987396240234,
+    0.4375408887863159,
+    -0.2846875488758087,
+    0.8529425263404846,
+    16.451374053955078,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.834039568901062,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     18.353878021240234,
+     8.197911262512207,
+     10.659205436706543
+    ],
+    [
+     15.941067695617676,
+     3.7711496353149414,
+     12.156445503234863
+    ],
+    [
+     15.420490264892578,
+     8.390987396240234,
+     16.451374053955078
+    ]
+   ]
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   0.999216,
+   -0.03958,
+   -7.1e-05,
+   -15.226612,
+   -7.1e-05,
+   3e-06,
+   -1.0,
+   13.621741,
+   0.03958,
+   0.999216,
+   0.0,
+   -7.593712,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+ },
+ "original": {
+  "name": "Mk6_Bolter_B_R_3",
+  "folder": "Arms",
+  "path": "Turtle Ninja - Heresy\\Mk6 Addon 1\\Pose B - Low Ready\\Arms\\Mk6_Bolter_B_R_3.stl"
+ }
+}

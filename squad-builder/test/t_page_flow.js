@@ -1,0 +1,44 @@
+// Base-first picking, Next, and the hand skip for arms with a built-in weapon (real index over HTTP).
+const { chromium } = require('playwright');
+(async () => {
+  const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist'] });
+  const page = await b.newPage({ viewport: { width: 1500, height: 900 } });
+  const errs = []; page.on('pageerror', e => errs.push(e.message));
+  await page.goto('http://localhost:8766/Squad%20Builder.html?lib=/reallib/&libpath=D%3A%5CKitbash%20Library');
+  await page.waitForFunction(() => window.__sb && window.__sb.S.parts.length > 0, null, { timeout: 60000 });
+  let fails = 0; const ck = (l, c, d) => { console.log((c ? '  ok   ' : '  FAIL ') + l + (c ? '' : '  ' + JSON.stringify(d))); if (!c) fails++; };
+  const st = () => page.evaluate(() => [window.__sb.S.slot, window.__sb.S.step]);
+  ck('starts on the base step', (await st())[0] === 'base', await st());
+  const pickName = (n) => page.evaluate((n) => { const sb = window.__sb; const c = sb.candidates(sb.SLOT[sb.S.slot]).find(p => p.name === n); if (!c) return false; sb.choose(c.id); return true; }, n);
+  ck('pick the rock', await pickName('27-Rock-C'));
+  ck('a click does not move on', (await st())[0] === 'base');
+  await page.waitForTimeout(1500);
+  let L = await page.evaluate(() => window.__sb.layout(0).map(x => ({slot: x.slot, W: x.W ? Array.from(x.W.elements) : null})));
+  ck('base alone is shown', L.length === 1 && L[0].W, L);
+  await page.click('#nextbtn');
+  ck('Next goes to legs', (await st())[0] === 'legs', await st());
+  ck('pick legs 1A', await pickName('MarFil Assault - Legs 1A'));
+  await page.waitForTimeout(1500);
+  const r = await page.evaluate(() => {
+    const sb = window.__sb, L = sb.layout(0), legs = L.find(x => x.slot === 'legs'), base = L.find(x => x.slot === 'base');
+    const s = legs.as.data.sockets.find(q => q.t === 'Base');
+    const M = new THREE.Matrix4(); M.set.apply(M, s.m); const W = legs.W.clone().multiply(M);
+    const z = new THREE.Vector3().setFromMatrixColumn(W, 2).normalize(), p = new THREE.Vector3().setFromMatrixPosition(W);
+    return {legs: !!legs.W, base: !!base.W, zup: z.z, px: p.x, py: p.y};
+  });
+  await page.screenshot({path: 'out_real/flow_legs_on_base.png'});
+  ck('legs stand on the base before a torso is picked', r.legs && r.base && r.zup > 0.999 && Math.abs(r.px) < 1e-6 && Math.abs(r.py) < 1e-6, r);
+  await page.click('#nextbtn');
+  ck('Next goes to torso', (await st())[0] === 'torso', await st());
+  ck('pick torso 3', await pickName('MarFil Assault - Torso 3'));
+  await page.click('#nextbtn');
+  ck('then arms (right)', (await st())[0] === 'armR', await st());
+  ck('pick a CyberBrush arm with its weapon built in', await pickName('CyberBrush Bug Hunters - Axe Arm 3'));
+  const skip = await page.evaluate(() => { const sb = window.__sb; sb.goSlot('padR'); sb.nextSlot(); return sb.S.slot; });
+  ck('after pads, the right hand is skipped (the arm holds its axe)', skip === 'shinR', skip);
+  const send = await page.evaluate(() => window.__sb.requestsFor().map(r => r.category));
+  ck('send still goes torso first', send[0] === 'Chests', send);
+  ck('no page errors', errs.length === 0, errs);
+  console.log(fails ? 'FAILS ' + fails : 'all ok');
+  await b.close();
+})();

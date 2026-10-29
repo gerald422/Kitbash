@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "part": "he-man_Legs",
+ "category": "Legs",
+ "sockets": [
+  {
+   "type": "Base",
+   "name": "he-man_Legs_socket_Base",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    60.719221,
+    0.0,
+    0.0,
+    1.0,
+    21.27035,
+    0.0,
+    1.0,
+    0.0,
+    7.558131,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat-legs rule: under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "he-man_Legs_socket_Hip R",
+   "matrix": [
+    0.018924,
+    -7.8e-05,
+    -0.999821,
+    55.960141,
+    -0.062035,
+    0.998073,
+    -0.001252,
+    44.549092,
+    0.997895,
+    0.062048,
+    0.018883,
+    7.680196,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "he-man_Legs_socket_Hip L",
+   "matrix": [
+    0.028797,
+    -7.8e-05,
+    0.999585,
+    65.168514,
+    0.062024,
+    0.998073,
+    -0.001709,
+    44.000848,
+    -0.997659,
+    0.062048,
+    0.028746,
+    7.699049,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "he-man_Legs_socket_Belt Front",
+   "matrix": [
+    0.999308,
+    -7.8e-05,
+    -0.037205,
+    60.529039,
+    -0.002231,
+    0.998073,
+    -0.062008,
+    44.316097,
+    0.037138,
+    0.062048,
+    0.997382,
+    13.060145,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "he-man_Legs_socket_Belt Back",
+   "matrix": [
+    -0.999558,
+    -7.8e-05,
+    -0.029714,
+    60.437748,
+    -0.001921,
+    0.998073,
+    0.062018,
+    44.326262,
+    0.029652,
+    0.062048,
+    -0.997633,
+    2.869309,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
+   }
+  }
+ ],
+ "fits": {
+  "Flat Waist": [
+   -1.0,
+   -7.8e-05,
+   -0.0,
+   60.554967,
+   5e-06,
+   -0.062048,
+   0.998073,
+   -5.061578,
+   -7.8e-05,
+   0.998073,
+   0.062048,
+   -45.720053,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Flat Waist": "top face: origin at its centre, Z out of it, Y the front of the legs (TIOW Inbox 1.12)"
+ },
+ "original": {
+  "name": "he-man_Legs",
+  "folder": "Legs",
+  "path": "Marta PunkGirl - Tacticus\\07 July 2025\\character 1\\Legs\\he-man_Legs.stl"
+ }
+}

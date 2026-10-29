@@ -1,0 +1,90 @@
+{
+ "schemaVersion": 1,
+ "part": "LM_R_Arm",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "LM_R_Arm_socket_Hand R",
+   "matrix": [
+    -0.719838,
+    -0.451523,
+    -0.527219,
+    14.24893,
+    -0.579569,
+    -0.027043,
+    0.814475,
+    8.739728,
+    -0.382012,
+    0.891849,
+    -0.242222,
+    -0.280127,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "wrist rule (round wrist face at the far end)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "LM_R_Arm_socket_Pad R~kit",
+   "matrix": [
+    1.0,
+    2.2e-05,
+    0.0,
+    11.189518,
+    0.0,
+    0.0,
+    1.0,
+    8.85857,
+    2.2e-05,
+    -1.0,
+    0.0,
+    10.452659,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 2.0,
+   "props": {
+    "tiow_from": "where Turtle Ninja put the kit pauldron",
+    "tiow_holds": "LM_Pauldron_1"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   0.999212,
+   -0.039678,
+   -0.000258,
+   -7.825293,
+   -0.000258,
+   3e-06,
+   -1.0,
+   9.512585,
+   0.039678,
+   0.999213,
+   -7e-06,
+   -8.646346,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "shoulder disc rule; the kit body has its socket where this arm sits"
+ },
+ "original": {
+  "name": "LM_R_Arm",
+  "folder": "Arms",
+  "path": "Turtle Ninja - Heresy\\Legion Moritat\\Arms\\LM_R_Arm.stl"
+ }
+}

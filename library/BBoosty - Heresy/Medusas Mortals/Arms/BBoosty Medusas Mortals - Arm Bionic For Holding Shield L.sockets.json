@@ -1,0 +1,93 @@
+{
+ "schemaVersion": 1,
+ "part": "LArm_Bionic_ForHoldingShield",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "LArm_Bionic_ForHoldingShield_socket_Hand L",
+   "matrix": [
+    -0.078868,
+    -0.456461,
+    -0.886241,
+    2.204486,
+    0.298754,
+    0.837327,
+    -0.457854,
+    -5.360358,
+    0.951066,
+    -0.300879,
+    0.070331,
+    6.120179,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "BBoosty wrist socket: ball seat, Y into the arm, Z = torso forward (a little up)"
+   }
+  },
+  {
+   "type": "Pad L",
+   "name": "LArm_Bionic_ForHoldingShield_socket_Pad L",
+   "matrix": [
+    -0.984603,
+    -0.119102,
+    0.127764,
+    -2.600427,
+    0.172313,
+    -0.542582,
+    0.822116,
+    7.665877,
+    -0.028593,
+    0.831505,
+    0.554776,
+    6.365186,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "dome",
+    "tiow_from": "Josh's 62 on the Springles heresy arm (actual.blend), moved so its inner shell centres on this arm's shoulder dome"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder L": [
+   -0.991532,
+   0.128709,
+   0.018083,
+   -4.73327,
+   -0.128705,
+   -0.991697,
+   0.00143,
+   3.877987,
+   0.018116,
+   -0.000909,
+   0.999835,
+   -5.139683,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
+  "Hand": "ball socket at the wrist (r 1.23)",
+  "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome"
+ },
+ "noPad": false,
+ "original": {
+  "name": "LArm_Bionic_ForHoldingShield",
+  "folder": "Arms",
+  "path": "BBoosty - Heresy\\Medusas Mortals\\Arms\\LArm_Bionic_ForHoldingShield.stl"
+ }
+}

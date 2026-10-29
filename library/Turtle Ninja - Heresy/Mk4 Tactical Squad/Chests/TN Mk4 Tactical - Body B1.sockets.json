@@ -1,0 +1,277 @@
+{
+ "schemaVersion": 1,
+ "part": "Mk4_Body_B_1",
+ "sockets": [
+  {
+   "type": "Shoulder R",
+   "name": "Mk4_Body_B_1_socket_Shoulder R",
+   "matrix": [
+    0.998792,
+    0.033777,
+    -0.035677,
+    20.416853,
+    0.035698,
+    -3e-06,
+    0.999363,
+    30.217245,
+    0.033756,
+    -0.999429,
+    -0.001208,
+    8.390891,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "Mk4_Body_B_1_socket_Shoulder L",
+   "matrix": [
+    0.992733,
+    0.034282,
+    -0.115347,
+    8.073703,
+    0.115414,
+    1.7e-05,
+    0.993317,
+    29.275895,
+    0.034055,
+    -0.999412,
+    -0.00394,
+    7.966669,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: shoulder disc, matched to the Mar Fil torso shoulder face"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "Mk4_Body_B_1_socket_Neck",
+   "matrix": [
+    -0.996666,
+    -0.055672,
+    -0.059649,
+    14.187774,
+    -0.075999,
+    0.367382,
+    0.92696,
+    30.535125,
+    -0.029692,
+    0.928403,
+    -0.370388,
+    8.20269,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "head where it sits on the Mar Fil torso relative to the shoulder joints (Josh, version D)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "Mk4_Body_B_1_socket_Back",
+   "matrix": [
+    0.999189,
+    0.040213,
+    0.002018,
+    13.956652,
+    -1e-06,
+    -0.050095,
+    0.998744,
+    29.950482,
+    0.040263,
+    -0.997935,
+    -0.050054,
+    14.673466,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "flat torso rule: backpack mount face, matched to the Mar Fil torso back"
+   }
+  },
+  {
+   "type": "Base",
+   "name": "Mk4_Body_B_1_socket_Base",
+   "matrix": [
+    0.999193,
+    0.040175,
+    0.0,
+    16.27185,
+    0.0,
+    0.0,
+    1.0,
+    -0.377125,
+    0.040175,
+    -0.999193,
+    0.0,
+    10.111216,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "under the feet, Z up, Y front"
+   }
+  },
+  {
+   "type": "Hip R",
+   "name": "Mk4_Body_B_1_socket_Hip R",
+   "matrix": [
+    0.057353,
+    -0.075955,
+    0.99546,
+    19.309212,
+    0.001776,
+    0.997108,
+    0.075979,
+    21.725853,
+    -0.998352,
+    -0.002589,
+    0.057322,
+    7.906581,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule: 1 mm under the waist line (from the shoulders, as on the Mar Fil torso), Z out, Y up"
+   }
+  },
+  {
+   "type": "Hip L",
+   "name": "Mk4_Body_B_1_socket_Hip L",
+   "matrix": [
+    0.012695,
+    -0.075955,
+    -0.99703,
+    10.480485,
+    0.003564,
+    0.997108,
+    -0.075916,
+    21.036044,
+    0.999913,
+    -0.002589,
+    0.012929,
+    7.543045,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule: 1 mm under the waist line (from the shoulders, as on the Mar Fil torso), Z out, Y up"
+   }
+  },
+  {
+   "type": "Belt Front",
+   "name": "Mk4_Body_B_1_socket_Belt Front",
+   "matrix": [
+    -0.993935,
+    -0.075955,
+    0.079521,
+    15.113102,
+    -0.07592,
+    0.997108,
+    0.003469,
+    21.81449,
+    -0.079555,
+    -0.002589,
+    -0.996827,
+    2.703511,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule: 1 mm under the waist line (from the shoulders, as on the Mar Fil torso), Z out, Y up"
+   }
+  },
+  {
+   "type": "Belt Back",
+   "name": "Mk4_Body_B_1_socket_Belt Back",
+   "matrix": [
+    0.99693,
+    -0.075955,
+    -0.01899,
+    14.852722,
+    0.075991,
+    0.997108,
+    0.00115,
+    21.304673,
+    0.018848,
+    -0.002589,
+    0.999819,
+    12.770452,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule: 1 mm under the waist line (from the shoulders, as on the Mar Fil torso), Z out, Y up"
+   }
+  }
+ ],
+ "category": "Chests",
+ "fits": {},
+ "upright": [
+  0.996519,
+  0.076,
+  0.034249,
+  -16.73654,
+  0.034347,
+  2.1e-05,
+  -0.99941,
+  7.885925,
+  -0.075955,
+  0.997108,
+  -0.002589,
+  3.39197,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "notes": {
+  "body": "torso and legs in one piece: stands on its own Base, takes arms, head and pack like any torso"
+ },
+ "original": {
+  "name": "Mk4_Body_B_1",
+  "folder": "Chests",
+  "path": "Turtle Ninja - Heresy\\Mk4 Tactical Squad\\Chests\\Mk4_Body_B_1.stl"
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "part": "4",
+ "category": "Arms",
+ "sockets": [
+  {
+   "type": "Pad R",
+   "name": "4_socket_Pad R",
+   "matrix": [
+    -0.996128,
+    0.08097,
+    -0.033547,
+    5.032915,
+    -0.072876,
+    -0.552537,
+    0.830273,
+    13.409534,
+    0.048691,
+    0.829534,
+    0.556324,
+    18.403098,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_anchor": "dome",
+    "tiow_from": "Josh's 62 on the Springles heresy arm (actual.blend), moved so its inner shell centres on this arm's shoulder dome"
+   }
+  }
+ ],
+ "fits": {
+  "Shoulder R": [
+   -0.999599,
+   -0.028755,
+   0.002116,
+   5.915122,
+   0.028755,
+   -0.999601,
+   -6.1e-05,
+   10.111144,
+   0.002117,
+   0.0,
+   0.999998,
+   -16.569812,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder": "CyberBrush arm in the model's own axes (front -Y), round shoulder face on the heresy shoulder point (as Springles / BBoosty); exported turned like Space Bug Hunters Hammer 4 (same second round face), moved to match its upper arm (0.01 mm)",
+  "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
+  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket"
+ },
+ "noPad": false,
+ "noHand": true,
+ "original": {
+  "name": "4",
+  "folder": "Arms",
+  "path": "CyberBrush - Tacticus\\Space Bugs Hunters\\Space Bug Hunters Sword\\Arms\\4.stl"
+ }
+}

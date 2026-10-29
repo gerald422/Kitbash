@@ -1,0 +1,16 @@
+TIOW Inbox 1.14 - BBoosty + CyberBrush (installed 21 Oct by Claude)
+====================================================================
+Done for you:
+  - Blender: scripts\addons\tiow_inbox.py replaced with 1.14.0 (the old 1.6.1 copy is in old-installed-1.6.1\).
+    Restart Blender; Preferences > Add-ons should show TIOW Inbox 1.14.0.
+  - D:\new cults: 321 sidecars merged (BBoosty 169, CyberBrush 152; copy in sidecars-1.14\).
+  - D:\Kitbash Library: "BBoosty - Heresy" and "CyberBrush - Tacticus" added (316 parts, verified;
+    5 identical Chaplain/Consul copies dropped). Nothing else in the library touched; _sources.csv has their rows.
+  - TIOW-FTRP re-patched with the new part types (Forearm Armour, Cloaks).
+    Restart TIOW, then rescan (or remove and re-add) D:\Kitbash Library so the new folders get their types.
+Old versions: old-1.13\ (bridge files), library build\old\ (planner/copier).
+Adding another maker to the library later (only that maker is planned and copied):
+  python survey_new.py <Top>,<Top> ~/lib_survey_x.json
+  python plan_library.py --work ~/catalogue_x --survey ~/lib_survey_x.json --only <Top>,<Top>
+  python build_library.py "D:\Kitbash Library" --work ~/catalogue_x      (repeat until COPY DONE, then add: verify)
+  (copy partTypes.json into the --work folder first)
