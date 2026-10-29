@@ -25,7 +25,7 @@
 bl_info = {
     "name": "Kitbash Finalise",
     "author": "Josh Parkin-Kelly, Claude",
-    "version": (0, 3, 3),
+    "version": (0, 3, 2),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Finalise",
     "description": "Boolean a socketed kitbash into print pieces with push-fit pegs and ID letters",
@@ -44,6 +44,7 @@ from mathutils import Matrix, Vector
 from mathutils.bvhtree import BVHTree
 
 SOCK = "ws_type"
+BALL_JOINTS = {"Bionic Hip"}  # a ball in a cup (TIOW Inbox's bionic legs): its own piece, no peg
 TAG = "fa_build"            # on every object a build makes (value = build id)
 ROLE = "fa_role"            # host / member / peg / cavity / letter / carve / ctrl
 DEFAULT_ORDER = ("Waist, Flat Waist, Shoulder, Neck, Back, Hand, Grip, Shield, Forearm, "
@@ -229,51 +230,6 @@ def manifold_report(ob, deps):
     if bad_v and not open_e:
         bits.append(f"{bad_v} non-manifold verts")
     return ", ".join(bits)
-
-
-def toolbox_ready():
-    """3D Print Toolbox's Make Manifold is available (the extension is enabled)."""
-    try:
-        return hasattr(bpy.types, "MESH_OT_print3d_clean_non_manifold") or "print3d_clean_non_manifold" in dir(bpy.ops.mesh)
-    except Exception:
-        return False
-
-
-def make_manifold(ctx, ob):
-    """Run 3D Print Toolbox's Make Manifold on one object (a Finalise copy, never
-    your original): loose bits and interior faces removed, doubles merged, holes
-    filled, normals made consistent. Returns what is still wrong ('' = fixed)."""
-    vl = ctx.view_layer
-    active = vl.objects.active
-    chosen = [o for o in vl.objects if o.select_get()]
-    for o in chosen:
-        o.select_set(False)
-    ob.hide_set(False)
-    ob.select_set(True)
-    vl.objects.active = ob
-    area = None
-    for win in ctx.window_manager.windows:
-        for a in win.screen.areas:
-            if a.type == 'VIEW_3D':
-                area = (win, a)
-                break
-        if area:
-            break
-    try:
-        kw = {"active_object": ob, "object": ob, "selected_objects": [ob], "selected_editable_objects": [ob]}
-        if area:
-            kw.update(window=area[0], area=area[1])
-        with ctx.temp_override(**kw):
-            bpy.ops.mesh.print3d_clean_non_manifold()
-    finally:
-        if ctx.mode != 'OBJECT':
-            bpy.ops.object.mode_set(mode='OBJECT')
-        ob.select_set(False)
-        for o in chosen:
-            if o.name in vl.objects:
-                o.select_set(True)
-        vl.objects.active = active
-    return manifold_report(ob, ctx.evaluated_depsgraph_get())
 
 
 # ------------------------------------------------------------------ booleans
@@ -1363,17 +1319,6 @@ def build(ctx, root, parts, splits, exact, opts, log):
         c.matrix_world = p.matrix_world.copy()
         c["fa_src"] = p.name
         copies[p] = c
-    if opts.get("make_manifold") and exact:
-        for p in [q for q in order if q in exact]:
-            try:
-                left = make_manifold(ctx, copies[p])
-            except Exception as exc:          # a failed clean-up leaves the copy as it was
-                left = f"Make Manifold failed ({exc})"
-            if not left:
-                exact.discard(p)
-                log.append(f"{p.name}: made manifold (3D Print Toolbox) - Manifold solver")
-            else:
-                log.append(f"{p.name}: still not manifold after Make Manifold ({left}) - Exact for it")
     hidden = []
     for o in [root] + list(descendants(root)):
         if o.name in vl.objects and o.visible_get() and not o.get(TAG):
@@ -1540,9 +1485,6 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
                                 description="Some pieces print separately and plug in with pegs")
     use_exact: BoolProperty(name="Use Exact for the parts above", default=False,
                             description="Boolean the non-manifold parts (and their pieces) with the Exact solver - slower")
-    make_manifold: BoolProperty(name="Make them manifold first (3D Print Toolbox)", default=True,
-                                description="Run 3D Print Toolbox's Make Manifold on Finalise's copies of these parts "
-                                            "(your originals aren't touched); any still not manifold use Exact")
     carve: BoolProperty(name="Carve overlaps", default=True,
                         description="Cut each separate piece's shape out of the body where they overlap, so it seats back in")
     letters: BoolProperty(name="ID letter", default=True,
@@ -1576,8 +1518,10 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
             it.part = p.name
             it.depth = depth_of(p, members)
             jb = joint_base(joint_type(p))
-            it.peg = jb not in no_peg_joints()
-            it.split = jb == "Base"                 # bases print apart: the foot gets a peg into it
+            it.peg = jb not in no_peg_joints() and jb not in BALL_JOINTS
+            # bases print apart (the foot gets a peg into it); a bionic leg prints apart and
+            # plugs onto its hip plug's ball - no peg there
+            it.split = jb == "Base" or jb in BALL_JOINTS
             it.label = f"{p.name}  ({joint_type(p) or 'no socket'})"
         wm.fa_root = root.name
         return root, parts
@@ -1600,14 +1544,9 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
             box.label(text="Not manifold - the Manifold solver can't use these:", icon='ERROR')
             for b in wm.fa_bad:
                 box.label(text=f"   {b.part}: {b.info}")
-            row = box.row()
-            row.enabled = toolbox_ready()
-            row.prop(self, "make_manifold")
-            if not toolbox_ready():
-                box.label(text="Enable the 3D Print Toolbox extension to fix them here", icon='INFO')
             box.prop(self, "use_exact")
-            if not self.use_exact and not (self.make_manifold and toolbox_ready()):
-                box.label(text="Fix them (e.g. 3D Print Toolbox) or tick one of the above to carry on")
+            if not self.use_exact:
+                box.label(text="Fix them (e.g. 3D Print Toolbox) or tick Exact to carry on")
         lay.prop(self, "subassemblies")
         if self.subassemblies:
             box = lay.box()
@@ -1635,10 +1574,9 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
         parts = assembly(root)
         byname = {p.name: p for p in parts}
         bad = [byname[b.part] for b in wm.fa_bad if b.part in byname]
-        fixing = bool(bad) and self.make_manifold and toolbox_ready()
-        if bad and not self.use_exact and not fixing:
+        if bad and not self.use_exact:
             self.report({'ERROR'}, "Not manifold: " + ", ".join(p.name for p in bad)
-                        + " - fix them, or tick 'Make them manifold first' or 'Use Exact'")
+                        + " - fix them or tick 'Use Exact'")
             return {'CANCELLED'}
         splits = set()
         if self.subassemblies:
@@ -1648,7 +1586,7 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
         opts = dict(use_hops=prefs.use_hops if prefs else True, carve=self.carve and bool(splits),
                     peg_side=ctx.scene.fa_peg_side, nopeg=nopeg,
                     letters=self.letters, ident=self.ident, letter_size=ctx.scene.fa_letter_size,
-                    letter_depth=ctx.scene.fa_letter_depth, make_manifold=fixing)
+                    letter_depth=ctx.scene.fa_letter_depth)
         log = []
         try:
             col, how = build(ctx, root, parts, splits, set(bad), opts, log)

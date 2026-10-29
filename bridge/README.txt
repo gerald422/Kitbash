@@ -679,43 +679,67 @@ and each model's torso is placed where the page showed it (side by side,
 mirrored pads, flat legs bringing the body adaptor, standing on the base.
 Parts sent from TIOW itself work exactly as before.
 
-1.17.1: browsers won't let a web page write into AppData, where TIOW's inbox
-is, so the page writes its requests into the library's own _builder\inbox
-folder instead. TIOW Inbox watches that folder too: Preferences > Squad
-Builder Inbox (default D:\Kitbash Library\_builder\inbox; used only when
-that _builder folder exists, which Prepare Squad Builder.bat makes; empty =
-off). It also touches a .listening file there, so the page can show
-"Blender listening".
+Bionic legs (TIOW Inbox 1.18)
+-----------------------------
+Swap one of a model's legs for the SM Mechanical Legs kit, posed like the
+leg it replaces.
 
-Save Correction (TIOW Inbox 1.17.2)
------------------------------------
-For a part that's slightly off: move it where it should be, keep it
-selected, and in the TIOW Inbox panel press one of:
+  1. Select any part of the model. In TIOW Inbox's Bionic Leg box click
+     Bionic Leg R (or L).
+  2. The add-on:
+       - cuts that leg off just under the belt. The cut slopes down towards
+         the crotch (30 degrees, like the ribbed hip it takes away) and tips
+         forwards or back with the way the thigh swings. It never goes into
+         the belt or the codpiece; if the codpiece is in the ball's way, a
+         small scoop is taken out of its side. The cut is a live Boolean:
+         the legs get "TIOW Bionic Cut" and "TIOW Bionic Tidy" modifiers.
+         The cutters are hidden in the "Bionic Cut - <legs>" collection;
+       - glues the kit's hip plug (LINK_LEG) flat on the sloping cut, so its
+         ball points down and out, centred over the leg. The whole kit is
+         sized so the ball is as wide as the leg (both legs measured just
+         below the hip and averaged; Mar Fil legs come out at 110-120 %), so
+         its outer and inner sides line up with the leg's. Both bionic legs on
+         one model are the same size. The plug is trimmed flat just under its
+         neck and sits 0.15 mm up into the leg, so only its ball shows, coming
+         out of the cut like a stump. Where the leg just above the cut is
+         narrower than the ball, a short skirt tapers from the ball up into
+         the leg, so no flat top or step shows;
+       - hangs the kit's leg from it: the thigh's cup on the plug's ball
+         (opening up and in, round it), the shin on the knee hinge, a foot
+         on the ankle ball. The knee bends the way the old one did, and the
+         foot stands where the old foot stood (up on its toes if it was).
+         The kit's files are a left leg; a right leg gets their mirror
+         image (print it as it comes out of Finalise).
+  3. Under Belt / Thigh Top choose where the cut goes; the up and down
+     arrows move it 0.5 mm. Slope (left / right arrows) changes how steeply
+     it slopes, 10 degrees at a time (0 = flat under the belt). Kit size
+     (left / right arrows) makes the bionic leg 5 % smaller or bigger; both
+     legs follow.
+  4. To turn the leg, use the Hip, Knee and Ankle buttons to select a joint,
+     then press R to rotate it. The knee only turns on its hinge. Follow Old
+     Leg puts the pose back.
+  5. The arrows next to the foot's name swap the foot (FOOT_1 to FOOT_7).
+     The leg re-poses so the new foot stands in the same place.
+  6. Thigh plate, Knee pad and Shin plate add those armour pieces. The first
+     time, a piece has no place yet, so it is parked beside the leg. Move
+     it where it goes, then click Save Armour Places. Every bionic leg after
+     that gets it there (the other side gets the mirror image).
+  7. X takes the bionic leg off and puts the old leg back.
 
-  Fix the Part    this part is off wherever it goes (a pistol a little
-                  forward in every hand). Its fit is saved in its own
-                  .sockets.json, so it lands like this on every model.
-  Fix the Socket  everything is off on this host (every head sits low on
-                  this torso; pads dig into this torso). The socket on the
-                  torso / arm / legs it sits on moves instead, so every part
-                  lands right on it. The part stays where you put it.
+In Finalise, the bionic leg prints as its own piece (thigh, shin, foot and
+armour together) and plugs onto the ball, so it gets no peg. The kit's STLs
+come as overlapping shells. The first time one is brought into a file it is
+turned into one closed mesh (it looks the same), so Finalise can union it.
 
-  Whole Folder    the same move for every part in that folder (a kit's
-                  pistols, its arms, its torsos) - not just this file.
-  Both Sides      (on) the other side gets the mirror image: the left hand,
-                  the left pad, the left shoulder, a maker's left copy.
-
-Which to use: wrong on one host only -> Fix the Socket; wrong everywhere ->
-Fix the Part. The move is kept in the socket's own frame, so parts in the
-folder with slightly different fits each move by the same amount. Copies
-already in the scene move too. A part you corrected lands exactly there
-next time (no rocking or settling). Run Prepare Squad Builder afterwards so
-the page matches (it only redoes what changed).
-
-Bases settle onto the feet (1.17.2): a base snapped on the legs' Base socket
-rises along the socket until the lowest foot touches it (and 0.2 mm in, for
-printing). A base is only ever raised: feet already on or in a scenic base
-stay as they are.
+Notes
+  - It works on Mar Fil legs, using the shin points the add-on finds on
+    them. Other makers' legs work once you place their Shin R / Shin L
+    anchor: Anchors, then both ends of the ankle, then the front of the shin
+    under the knee. It doesn't work on Bladeguard legs with a tabard.
+  - The kit's folder is found in your library the first time (the folder
+    with LINK_LEG.stl). If yours lives elsewhere, set Bionic Legs in the
+    add-on's preferences.
+  - Mirror refuses a model with a bionic leg. Take the leg off first.
 
 Pads and belt bits (TIOW Inbox 1.6.1)
 -------------------------------------

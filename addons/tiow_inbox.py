@@ -35,14 +35,17 @@
 # part goes on its own model whatever is selected. A model's first part (its
 # torso) is placed where the builder showed it.
 #
-# 1.17.1: browsers won't let a page write into AppData, so the Squad Builder
-# writes its requests into the library's own _builder\inbox folder; this add-on
-# watches that folder as well as TIOW's (pref "Squad Builder Inbox").
+# Bionic legs (1.18): Bionic Leg R / L (TIOW panel) cuts that leg off the
+# model's legs just under the belt (a live Boolean, sloping down towards the
+# crotch like the ribbed hip), glues the bionic kit's hip plug on the cut and
+# hangs the kit's jointed leg from it, its thigh's cup round the plug's ball,
+# posed like the old leg. Turn it at its Hip, Knee and Ankle; swap the foot;
+# add armour.
 
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 2),
+    "version": (1, 18, 0),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -58,14 +61,14 @@ import sys
 import time
 
 import bpy
-from bpy.props import BoolProperty, EnumProperty, IntProperty, StringProperty
+from bpy.props import BoolProperty, EnumProperty, FloatProperty, IntProperty, StringProperty
 from mathutils import Matrix, Vector
 
 HEARTBEAT = ".listening"     # TIOW reads its age to say "sent" vs "queued"
 POLL_SECONDS = 0.5
 HEARTBEAT_SECONDS = 3.0
 
-_state = {"last": "", "beat": {}}
+_state = {"last": "", "beat": 0.0}
 
 
 def default_inbox():
@@ -81,17 +84,6 @@ def get_prefs():
 def inbox_dir(prefs):
     return bpy.path.abspath(prefs.inbox_path) if prefs.inbox_path \
         else default_inbox()
-
-
-def inbox_dirs(prefs):
-    """TIOW's inbox, then the Squad Builder's (in the library's _builder folder,
-    used only when that _builder folder exists: Prepare made it)."""
-    dirs = [inbox_dir(prefs)]
-    sb = bpy.path.abspath(prefs.builder_inbox) if getattr(prefs, "builder_inbox", "") else ""
-    if sb and os.path.isdir(os.path.dirname(os.path.normpath(sb))) \
-            and os.path.normcase(os.path.normpath(sb)) != os.path.normcase(os.path.normpath(dirs[0])):
-        dirs.append(sb)
-    return dirs
 
 
 # ---------------------------------------------------------------- import
@@ -294,10 +286,6 @@ def load_stl(path, job, prefs, collection=True, variant=None):
         if (side or {}).get("noPad"):
             # the arm's own pauldron is part of it (Springles' heresy arms): no Pad anchor
             ob["tiow_nopad"] = True
-        ex = (side or {}).get("exact")
-        if isinstance(ex, list) and ex:
-            # fits you corrected by hand (Save Correction): placed exactly, no rocking or settling
-            ob["tiow_exact"] = json.dumps([str(t) for t in ex])
         if (side or {}).get("noHand"):
             # the arm's hand is part of it, holding its weapon or grip (CyberBrush): no wrist socket
             ob["tiow_nohand"] = True
@@ -747,94 +735,6 @@ def _world_tris(ob, deps):
     return v, t.reshape(-1, 3)
 
 
-# ---------------------------------------------------------------- bases settle onto the feet
-# The legs' Base socket says where the ground is; a base whose top is lower
-# than the soles there (a recessed or textured top) would leave the model
-# floating. Heightfields on a 0.5 mm grid in the socket's frame - the legs'
-# lowest surface and the base's top, from points spread over the triangles -
-# give how far the base must rise for the lowest foot to touch it. A base is
-# only ever raised (feet already on or in a scenic base stay as they are), and
-# by BASE_SINK more, so the feet sit just into it for printing. The Squad
-# Builder page does the same sums on its preview meshes.
-BASE_CELL, BASE_STEP, BASE_LOW_BAND, BASE_SINK, BASE_MAX_RISE = 0.5, 0.25, 1000.0, 0.2, 25.0   # the whole legs: a foot up on a tall rock counts too
-
-
-def _surface_points(P):
-    """Triangles (n, 3, 3) -> points over them about BASE_STEP apart."""
-    import numpy as np
-    if not len(P):
-        return np.zeros((0, 3))
-    e = np.max(np.stack([np.linalg.norm(P[:, 1] - P[:, 0], axis=1), np.linalg.norm(P[:, 2] - P[:, 1], axis=1),
-                         np.linalg.norm(P[:, 0] - P[:, 2], axis=1)]), axis=0)
-    k = np.clip(np.ceil(e / BASE_STEP), 1, 60).astype(int)
-    out = []
-    for kk in np.unique(k):
-        sel = P[k == kk]
-        w = np.array([(i / kk, j / kk) for i in range(kk + 1) for j in range(kk + 1 - i)])
-        u, v = w[:, 0][None, :, None], w[:, 1][None, :, None]
-        out.append((sel[:, None, 0] + u * (sel[:, None, 1] - sel[:, None, 0]) + v * (sel[:, None, 2] - sel[:, None, 0])).reshape(-1, 3))
-    return np.concatenate(out)
-
-
-def _height_field(pts, lowest):
-    import numpy as np
-    c = np.floor(pts[:, :2] / BASE_CELL).astype(np.int64)
-    key = c[:, 0] * 100003 + c[:, 1]
-    order = np.argsort(key, kind="stable")
-    key, z = key[order], pts[order, 2]
-    uk, start = np.unique(key, return_index=True)
-    red = (np.minimum if lowest else np.maximum).reduceat(z, start)
-    return dict(zip(uk.tolist(), red.tolist()))
-
-
-def base_gap(legs_tris, base_tris):
-    """Both (n, 3, 3) in the Base socket's frame. How far the base must rise
-    for the lowest foot to touch it (negative: the feet are already on or in
-    it), or None when no foot is over the base."""
-    import numpy as np
-    if not len(legs_tris) or not len(base_tris):
-        return None
-    zl = legs_tris[:, :, 2].min()
-    low = legs_tris[legs_tris[:, :, 2].min(axis=1) < zl + BASE_LOW_BAND]
-    lo, hi = low[:, :, :2].reshape(-1, 2).min(axis=0) - 1.0, low[:, :, :2].reshape(-1, 2).max(axis=0) + 1.0
-    bx = base_tris[:, :, :2]
-    near = base_tris[np.all(bx.max(axis=1) >= lo, axis=1) & np.all(bx.min(axis=1) <= hi, axis=1)]
-    if not len(near):
-        return None
-    sole = _height_field(_surface_points(low), True)
-    top = _height_field(_surface_points(near), False)
-    common = sole.keys() & top.keys()
-    if not common:
-        return None
-    return float(min(sole[k] - top[k] for k in common))
-
-
-def settle_base(base, sock):
-    """Raise a base along its Base socket's Z until the lowest foot of the legs
-    holding the socket touches it (plus BASE_SINK). Returns the rise in mm."""
-    import numpy as np
-    legs = sock.parent
-    if legs is None or legs.type != 'MESH' or base.type != 'MESH':
-        return 0.0
-    deps = bpy.context.evaluated_depsgraph_get()
-    F = np.array(sock.matrix_world)
-    Fi = np.linalg.inv(F)
-    def local(ob):
-        v, t = _world_tris(ob, deps)
-        v = v @ Fi[:3, :3].T + Fi[:3, 3]
-        return v[t]
-    unit = float(base.get("tiow_unit", 1.0)) or 1.0
-    gap = base_gap(local(legs), local(base))
-    if gap is None or gap <= -BASE_SINK * unit or gap > BASE_MAX_RISE * unit:
-        return 0.0
-    rise = gap + BASE_SINK * unit
-    z = Vector(F[:3, 2]).normalized()
-    base.matrix_world = Matrix.Translation(z * rise) @ base.matrix_world
-    base["tiow_base_rise"] = rise
-    bpy.context.view_layer.update()
-    return rise
-
-
 def _touch_depth(pv, pt, others, d, back, reach, frame, touch, deps):
     """Travel (from `back` behind the part) at which `touch` percent of the
     part's inner side has met the model, or None if too little of it is
@@ -1169,20 +1069,7 @@ def place_on(part, sock, spec, tname, unit, sk, co, skip=()):
         return "", err
     if _part_key(part) in _holds(sock):
         return ", where the kit puts it", None
-    try:
-        exact = json.loads(part.get("tiow_exact", "[]"))
-    except (TypeError, ValueError):
-        exact = []
-    if (tname or sock.get("ws_type")) in exact:
-        return ", as you corrected it", None
     note = ""
-    if sock.get("ws_type") == "Base" and str(part.get("tiow_category") or "") == "Bases":
-        try:
-            rise = settle_base(part, sock)
-            if rise > 0.05:
-                note += f", raised {rise:.1f} mm to meet the feet"
-        except Exception as exc:          # never let it spoil a snap
-            print("[TIOW Inbox] base settle failed:", repr(exc))
     hosts = _model_around(sock)
     bias = _bias_of(part, tname or sock.get("ws_type"))
     turned = meet_off_hand(part, sock, tname or str(sock.get("ws_type", "")))
@@ -2730,6 +2617,8 @@ def mirror_part(part, prefs):
     sk, co = ps
     if not _is_tiow(part):
         raise ValueError(f"{part.name} didn't come from TIOW, so there's no file to mirror")
+    if part.get("tiow_bionic") or part.get("tiow_bionic_state"):
+        raise ValueError("take the bionic leg off first (Remove in the Bionic Leg box), then mirror")
     vl = bpy.context.view_layer
     whole = read_sidecar(part["tiow_src"]) or {}
     sock = co.snap_socket_of(part)
@@ -3640,333 +3529,6 @@ def save_folder_fit(part):
     return path, tname
 
 
-# ---------------------------------------------------------------- corrections
-# Every misfit lives in one of two places, and is fixed once there:
-#  - the PART's fit (this weapon sits a little forward in every hand): saved in
-#    the part's own .sockets.json, so it lands like this on every host;
-#  - the HOST's SOCKET (heads sit low on this torso, whatever the head): the
-#    socket is moved in the host's .sockets.json, so every part lands right.
-# Whole folder: the same correction for every part in that folder (one kit's
-# arms, its torsos...). Both sides: the other side gets the mirror image (a
-# left hand, a left pad, the left shoulder; a maker's left copy too).
-# The correction is the move you made, expressed in the socket's frame, so a
-# sibling with a slightly different fit moves by the same amount.
-MX4 = Matrix(((-1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0)))
-
-
-def _unscaled(M):
-    loc, rot, _s = M.decompose()
-    return Matrix.LocRotScale(loc, rot, Vector((1.0, 1.0, 1.0)))
-
-
-def _m16(m):
-    return Matrix((m[0:4], m[4:8], m[8:12], m[12:16]))
-
-
-def _flat16(M):
-    return [float(x) for row in M for x in row]
-
-
-def _scaled(M, k):
-    M = M.copy()
-    M.translation = M.translation * k
-    return M
-
-
-def _other_side(t):
-    t = str(t)
-    return t[:-2] + " L" if t.endswith(" R") else t[:-2] + " R" if t.endswith(" L") else None
-
-
-def _folder_sidecars(src):
-    """(stl path, sidecar path) for every part in the STL's folder."""
-    d = os.path.dirname(str(src))
-    out = []
-    try:
-        names = sorted(os.listdir(d))
-    except OSError:
-        return out
-    for n in names:
-        if n.lower().endswith(".stl"):
-            p = os.path.join(d, n)
-            out.append((p, os.path.splitext(p)[0] + SIDECAR))
-    return out
-
-
-def _subs(whole):
-    """The part's own entry and each variant's: [(sub, variant index or None)]."""
-    out = [(whole, None)]
-    for i, v in enumerate(whole.get("variants") or []):
-        if isinstance(v, dict) and isinstance(v.get("sidecar"), dict):
-            out.append((v["sidecar"], i))
-    return out
-
-
-def _is_this(mine, vidx, want):
-    """Is this sub the one the object in the scene was brought in as?"""
-    if not mine:
-        return False
-    if want is None:
-        return vidx is None
-    try:
-        return vidx is not None and int(want) == vidx
-    except (TypeError, ValueError):
-        return False
-
-
-def _load_whole(path):
-    try:
-        with open(path, encoding="utf-8") as f:
-            w = json.load(f)
-        return w if isinstance(w, dict) else None
-    except (OSError, ValueError):
-        return None
-
-
-def _snap_of(part):
-    """(socket, fit type name, gap) the part sits on."""
-    ps = _part_sockets()
-    if ps is None:
-        raise ValueError("Part Sockets isn't enabled")
-    sk, co = ps
-    sock = co.snap_socket_of(part)
-    if sock is None and part.parent is not None and part.parent.get("ws_type") is not None:
-        sock = part.parent
-    if sock is None or sock.get("ws_type") is None:
-        raise ValueError(f"{part.name} isn't on a socket")
-    tname = str(part.get("ws_snap_type") or sock["ws_type"])
-    gap = float(sk.ensure_type(bpy.context.scene, tname).gap)
-    return sock, tname, gap
-
-
-def _same_file(a, b):
-    try:
-        return os.path.normcase(os.path.abspath(str(a))) == os.path.normcase(os.path.abspath(str(b)))
-    except (TypeError, ValueError):
-        return False
-
-
-def correct_part(part, folder=False, both=True):
-    """Save how `part` now sits on its socket as its fit (and, with `folder`,
-    move every part in its folder the same way). Other copies in the scene
-    move too. Returns a note."""
-    src = part.get("tiow_src")
-    if not src:
-        raise ValueError(f"{part.name} didn't come from the library, so there's no sockets file to save to")
-    sock, tname, gap = _snap_of(part)
-    unit = float(part.get("tiow_unit", 1.0)) or 1.0
-    base = sock.matrix_world @ Matrix.Translation((0.0, 0.0, gap))
-    Fnew = base.inverted_safe() @ _unscaled(part.matrix_world)
-    old = part.get(f"ws_fit::{tname}")
-    E = Fnew @ _m16(list(old)).inverted_safe() if old is not None and len(old) == 16 else None
-    other = _other_side(tname) if both else None
-    EM = MX4 @ E @ MX4 if (E is not None and other) else None
-    changed, files = 0, 0
-    targets = _folder_sidecars(src) if folder else [(str(src), os.path.splitext(str(src))[0] + SIDECAR)]
-    vi = part.get("tiow_variant")
-    for stl, scp in targets:
-        whole = _load_whole(scp)
-        if whole is None:
-            whole = {"schemaVersion": 1, "part": os.path.splitext(os.path.basename(stl))[0]} if _same_file(stl, src) else None
-        if whole is None:
-            continue
-        mine = _same_file(stl, src)
-        touched = False
-        for sub, vidx in _subs(whole):
-            fits = sub.setdefault("fits", {}) if (mine or "fits" in sub) else {}
-            this_one = _is_this(mine, vidx, vi)
-            if this_one:
-                fits[tname] = _flat16(_scaled(Fnew, 1.0 / unit))
-                ex = [t for t in sub.get("exact", []) if t != tname] + [tname]
-                sub["exact"] = ex
-                touched = True
-            elif E is not None and tname in fits and isinstance(fits[tname], list) and len(fits[tname]) == 16:
-                fits[tname] = _flat16(_scaled(E @ _scaled(_m16(fits[tname]), unit), 1.0 / unit))
-                touched = True
-            if EM is not None and other in fits and isinstance(fits[other], list) and len(fits[other]) == 16:
-                fits[other] = _flat16(_scaled(EM @ _scaled(_m16(fits[other]), unit), 1.0 / unit))
-                touched = True
-        if touched:
-            _write_sidecar(scp, whole)
-            files += 1
-    # the folder's shared fits (Save Fit for Folder) move the same way
-    if E is not None:
-        fp = os.path.join(os.path.dirname(str(src)), FITS_FILE)
-        data = read_folder_fits(src)
-        hit = False
-        for t, R in ((tname, E), (other, EM)):
-            if t and R is not None and isinstance(data.get(t), (dict, list)):
-                m = _fit_matrix(data[t], unit)
-                if m is not None:
-                    if isinstance(data[t], dict):
-                        data[t]["m"] = _flat16(_scaled(R @ m, 1.0 / unit))
-                    else:
-                        data[t] = _flat16(_scaled(R @ m, 1.0 / unit))
-                    hit = True
-        if hit and folder:
-            tmp = fp + ".tmp"
-            with open(tmp, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=1)
-            os.replace(tmp, fp)
-    # copies already in the scene
-    part[f"ws_fit::{tname}"] = _flat16(Fnew)
-    part["tiow_exact"] = json.dumps(sorted(set(json.loads(part.get("tiow_exact", "[]"))) | {tname}))
-    folder_dir = os.path.normcase(os.path.dirname(os.path.abspath(str(src))))
-    ps = _part_sockets()
-    for o in list(bpy.context.view_layer.objects):
-        if o is part or o.type != 'MESH' or not o.get("tiow_src"):
-            continue
-        file_same = _same_file(o["tiow_src"], src)
-        same = file_same and o.get("tiow_variant") == vi and not o.get("tiow_mirrored")
-        if not (file_same or (folder and os.path.normcase(os.path.dirname(os.path.abspath(str(o["tiow_src"])))) == folder_dir)):
-            continue
-        try:
-            s2, t2, g2 = _snap_of(o)
-        except ValueError:
-            continue
-        have = o.get(f"ws_fit::{t2}")
-        if t2 == tname and same:
-            M = Fnew
-        elif t2 == tname and E is not None and have is not None:
-            M = E @ _m16(list(have))
-        elif t2 == other and EM is not None and have is not None:
-            M = EM @ _m16(list(have))
-        else:
-            continue
-        o[f"ws_fit::{t2}"] = _flat16(M)
-        o.matrix_world = s2.matrix_world @ Matrix.Translation((0.0, 0.0, g2)) @ M @ Matrix.Diagonal(o.matrix_world.to_scale().to_4d())
-        changed += 1
-    where = "every part in its folder" if folder else "it"
-    note = f"{tname} fit saved for {where} ({files} sockets file{'s' if files != 1 else ''})"
-    if EM is not None:
-        note += f", {other} mirrored"
-    if changed:
-        note += f", {changed} other cop{'ies' if changed != 1 else 'y'} in the scene moved"
-    return note
-
-
-def correct_socket(part, folder=False, both=True):
-    """Keep `part` where it is now and move the socket it sits on to suit, in
-    the host's sockets file (with `folder`, the same socket on every part in
-    the host's folder). Returns a note."""
-    sock, tname, gap = _snap_of(part)
-    host = sock.parent
-    if host is None or not host.get("tiow_src"):
-        raise ValueError(f"the {sock['ws_type']} socket isn't on a part from the library")
-    F = part.get(f"ws_fit::{tname}")
-    if F is None or len(F) != 16:
-        raise ValueError(f"{part.name} has no {tname} fit to keep - use Fix the Part instead")
-    F = _m16(list(F))
-    stype = str(sock["ws_type"])
-    Knew = _unscaled(part.matrix_world) @ F.inverted_safe() @ Matrix.Translation((0.0, 0.0, -gap))
-    C = sock.matrix_world.inverted_safe() @ Knew                 # the move, in the socket's own frame
-    other = _other_side(stype) if both else None
-    CM = MX4 @ C @ MX4 if other else None
-    unit = float(host.get("tiow_unit", 1.0)) or 1.0
-    hsrc = str(host["tiow_src"])
-    hvi = host.get("tiow_variant")
-    frame = _unscaled(host.matrix_world)
-    Lnew = frame.inverted_safe() @ Knew
-    targets = _folder_sidecars(hsrc) if folder else [(hsrc, os.path.splitext(hsrc)[0] + SIDECAR)]
-    files = 0
-    for stl, scp in targets:
-        mine = _same_file(stl, hsrc)
-        whole = _load_whole(scp)
-        if whole is None:
-            whole = {"schemaVersion": 1, "part": os.path.splitext(os.path.basename(stl))[0]} if mine else None
-        if whole is None:
-            continue
-        touched = False
-        for sub, vidx in _subs(whole):
-            socks = sub.setdefault("sockets", []) if mine else sub.get("sockets") or []
-            this_one = _is_this(mine, vidx, hvi)
-            found = False
-            for e in socks:
-                if not isinstance(e, dict) or not isinstance(e.get("matrix"), list) or len(e["matrix"]) != 16:
-                    continue
-                if e.get("type") == stype:
-                    if this_one:
-                        e["matrix"] = _flat16(_scaled(Lnew, 1.0 / unit))
-                    else:
-                        e["matrix"] = _flat16(_scaled(_scaled(_m16(e["matrix"]), unit) @ C, 1.0 / unit))
-                    e.setdefault("props", {})["tiow_corrected"] = 1
-                    found = touched = True
-                elif CM is not None and e.get("type") == other:
-                    e["matrix"] = _flat16(_scaled(_scaled(_m16(e["matrix"]), unit) @ CM, 1.0 / unit))
-                    e.setdefault("props", {})["tiow_corrected"] = 1
-                    touched = True
-            if this_one and not found:
-                socks.append({"type": stype, "name": sock.name, "matrix": _flat16(_scaled(Lnew, 1.0 / unit)),
-                              "display_type": "ARROWS", "display_size": float(sock.empty_display_size) / unit,
-                              "props": {"tiow_corrected": 1}})
-                touched = True
-        if touched:
-            _write_sidecar(scp, whole)
-            files += 1
-    # the scene: this socket (the part stays put), and the same sockets on copies of the host
-    keep = part.matrix_world.copy()
-    sock.matrix_world = Knew
-    part.matrix_world = keep
-    moved = 0
-    hdir = os.path.normcase(os.path.dirname(os.path.abspath(hsrc)))
-    for o in list(bpy.context.view_layer.objects):
-        if o.type != 'MESH' or not o.get("tiow_src"):
-            continue
-        if not (_same_file(o["tiow_src"], hsrc) or (folder and os.path.normcase(os.path.dirname(os.path.abspath(str(o["tiow_src"])))) == hdir)):
-            continue
-        for c in o.children:
-            t = c.get("ws_type")
-            if c is sock or t is None:
-                continue
-            if t == stype:
-                c.matrix_world = Knew if (o is host) else c.matrix_world @ C
-                moved += 1
-            elif CM is not None and t == other:
-                c.matrix_world = c.matrix_world @ CM
-                moved += 1
-    bpy.context.view_layer.update()
-    where = f"every part in {os.path.basename(os.path.dirname(hsrc))}" if folder else host.name
-    note = f"{stype} socket moved on {where} ({files} sockets file{'s' if files != 1 else ''})"
-    if CM is not None:
-        note += f", {other} mirrored"
-    if moved:
-        note += f", {moved} other socket{'s' if moved != 1 else ''} in the scene moved with their parts"
-    return note
-
-
-class TIOW_OT_save_correction(bpy.types.Operator):
-    """Save where you've moved the selected part, once, so it's right everywhere.
-    Fix the Part: this part lands like this on every model (its own fit).
-    Fix the Socket: everything lands like this on this host (the socket on the
-    torso, arm or legs it sits on moves)"""
-    bl_idname = "tiow.save_correction"
-    bl_label = "Save Correction"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    what: EnumProperty(name="Fix", default='PART', items=(
-        ('PART', "Fix the Part", "This part is off wherever it goes: save how it sits now as its own fit"),
-        ('SOCKET', "Fix the Socket", "Everything is off on this host: move the host's socket so the part sits as it is now")))
-
-    @classmethod
-    def poll(cls, ctx):
-        o = ctx.active_object
-        return ctx.mode == 'OBJECT' and o is not None and o.type == 'MESH'
-
-    def execute(self, ctx):
-        prefs = get_prefs()
-        folder = bool(prefs and prefs.correct_folder)
-        both = bool(prefs is None or prefs.correct_both)
-        try:
-            fn = correct_part if self.what == 'PART' else correct_socket
-            note = fn(ctx.active_object, folder=folder, both=both)
-        except (ValueError, OSError) as exc:
-            self.report({'ERROR'}, str(exc))
-            return {'CANCELLED'}
-        _set_status(note)
-        self.report({'INFO'}, note + ". Run Prepare Squad Builder to update the page")
-        return {'FINISHED'}
-
-
 class TIOW_OT_save_folder_fit(bpy.types.Operator):
     """Remember how the selected part sits on its socket, for every part in
     the same library folder. Place one pad by eye (it can overlap a little),
@@ -3994,9 +3556,9 @@ class TIOW_OT_save_folder_fit(bpy.types.Operator):
 
 def _beat(inbox):
     now = time.time()
-    if now - _state["beat"].get(inbox, 0.0) < HEARTBEAT_SECONDS:
+    if now - _state["beat"] < HEARTBEAT_SECONDS:
         return
-    _state["beat"][inbox] = now
+    _state["beat"] = now
     p = os.path.join(inbox, HEARTBEAT)
     try:
         with open(p, "a"):
@@ -4025,23 +3587,22 @@ def process_inbox():
     prefs = get_prefs()
     if prefs is None or not prefs.listening:
         return 0
-    jobs = []
-    for inbox in inbox_dirs(prefs):
-        try:
-            os.makedirs(inbox, exist_ok=True)
-        except OSError:
-            continue
-        _beat(inbox)
-        if bpy.context.mode != 'OBJECT':
-            # leave requests unclaimed; they import when you Tab back out
-            continue
-        try:
-            jobs += [(inbox, n) for n in sorted(os.listdir(inbox)) if n.endswith(".json")]
-        except OSError:
-            continue
+    inbox = inbox_dir(prefs)
+    try:
+        os.makedirs(inbox, exist_ok=True)
+    except OSError:
+        return 0
+    _beat(inbox)
+    if bpy.context.mode != 'OBJECT':
+        # leave requests unclaimed; they import when you Tab back out
+        return 0
+    try:
+        names = sorted(n for n in os.listdir(inbox) if n.endswith(".json"))
+    except OSError:
+        return 0
 
     done = 0
-    for inbox, name in jobs:
+    for name in names:
         src = os.path.join(inbox, name)
         claimed = f"{src}.{os.getpid()}.claimed"
         try:
@@ -4099,12 +3660,6 @@ class TIOW_AddonPrefs(bpy.types.AddonPreferences):
         name="Inbox Folder", subtype='DIR_PATH', default="",
         description="Empty uses TIOW-FTRP's own: "
                     "%LOCALAPPDATA%\\TIOW-FTRP\\local-data\\blender-inbox")
-    builder_inbox: StringProperty(
-        name="Squad Builder Inbox", subtype='DIR_PATH',
-        default="D:\\Kitbash Library\\_builder\\inbox",
-        description="Where the Squad Builder page sends parts: the inbox folder inside your "
-                    "library's _builder folder (browsers can't write into AppData). Watched "
-                    "only when that _builder folder exists. Empty = off")
     placement: EnumProperty(
         name="Place", default='BOUNDS',
         items=(('BOUNDS', "Centred on 3D Cursor",
@@ -4152,18 +3707,14 @@ class TIOW_AddonPrefs(bpy.types.AddonPreferences):
         description="When a base (or terrain) snaps onto the legs' Base socket, turn the whole "
                     "model so the base sits flat on the grid - so the pose reads as it will "
                     "stand. Only the model's root moves; the joints don't change")
-    correct_folder: BoolProperty(
-        name="Whole Folder", default=False,
-        description="Save Correction applies the same move to every part in the folder (one kit's "
-                    "arms, its torsos...), not just this file")
-    correct_both: BoolProperty(
-        name="Both Sides", default=True,
-        description="Save Correction also gives the other side the mirror image (left hand, left pad, "
-                    "left shoulder, a maker's left copy)")
     adaptor_default: IntProperty(
         name="Adaptor", default=3, min=1, max=99,
         description="Which adaptor flat legs bring (number in the folder, in order); "
                     "Next Adaptor swaps the one on the model")
+    bionic_dir: StringProperty(
+        name="Bionic Legs", subtype='DIR_PATH', default="",
+        description="Folder of the bionic leg kit (hip plug LINK_LEG, thigh LEG_HIGH, shin LEG_LOW, "
+                    "feet FOOT_1..7, armour). Empty: found in the library the first time")
 
     def draw(self, ctx):
         col = self.layout.column()
@@ -4171,7 +3722,6 @@ class TIOW_AddonPrefs(bpy.types.AddonPreferences):
         col.prop(self, "inbox_path")
         if not self.inbox_path:
             col.label(text=default_inbox(), icon='FILE_FOLDER')
-        col.prop(self, "builder_inbox")
         col.prop(self, "placement")
         col.prop(self, "by_category")
         sub = col.row()
@@ -4186,6 +3736,7 @@ class TIOW_AddonPrefs(bpy.types.AddonPreferences):
         col.prop(self, "adaptor_dir")
         col.prop(self, "adaptor_default")
         col.prop(self, "stand_on_base")
+        col.prop(self, "bionic_dir")
 
 
 class TIOW_PT_inbox(bpy.types.Panel):
@@ -4216,17 +3767,10 @@ class TIOW_PT_inbox(bpy.types.Panel):
             grid.operator("tiow.place_anchor", text=a).anchor = a
         box.operator("tiow.find_shins", icon='VIEWZOOM')
         box.operator("tiow.save_folder_fit", icon='PINNED')
-        box = self.layout.box()
-        box.label(text="Save Correction (move the part, then)")
-        row = box.row(align=True)
-        row.operator("tiow.save_correction", text="Fix the Part", icon='OBJECT_DATA').what = 'PART'
-        row.operator("tiow.save_correction", text="Fix the Socket", icon='EMPTY_ARROWS').what = 'SOCKET'
-        row = box.row(align=True)
-        row.prop(prefs, "correct_folder")
-        row.prop(prefs, "correct_both")
         row = self.layout.row(align=True)
         row.prop(prefs, "adaptor_default", text="Adaptor")
         row.operator("tiow.next_adaptor", text="Next Adaptor", icon='FILE_REFRESH')
+        draw_bionic(self.layout, ctx)
         if ctx.mode != 'OBJECT' and prefs.listening:
             col.label(text="Waiting for Object Mode", icon='INFO')
         if _state["last"]:
@@ -4317,8 +3861,1996 @@ class TIOW_OT_next_adaptor(bpy.types.Operator):
         return {'FINISHED'}
 
 
-classes = (TIOW_AddonPrefs, TIOW_OT_place_anchor, TIOW_OT_find_shins, TIOW_OT_save_folder_fit, TIOW_OT_save_correction, TIOW_OT_stand_on_base,
-           TIOW_OT_next_adaptor, TIOW_OT_mirror_part, TIOW_PT_inbox)
+# ---------------------------------------------------------------- bionic legs
+#
+# Bionic Leg R / L: cut one leg off a legs part just under the hip armour,
+# glue the kit's hip plug (a spherical cap) flat on the cut, and hang the
+# kit's jointed leg from it - thigh on the ball, shin on the knee hinge, a foot
+# on the ankle ball - posed to follow the old leg: the hip where it was cut,
+# the knee bending the same way, the foot on the old sole under the old ankle,
+# turned like the old foot (up on its toes if it was).
+#
+# Where to cut: the leg's centre line is traced up from the shin (Mar Fil's
+# shin points: ankle circles and the shin hole) by slicing square to it; the
+# thigh's slice is one round section until it runs into the hip armour /
+# crotch, where the section suddenly grows. The cut goes 0.8 mm below that.
+#
+# The cut stays live: the old thigh, shin and foot are each wrapped in a
+# convex hull (a cutter, shown as wire, in a hidden collection), one Boolean
+# modifier on the legs takes the collection away, and a Geometry Nodes step
+# drops the loose bits a cut can leave (islands lying wholly within 1.5 mm of
+# a cutter). Finalise applies both like any modifier.
+#
+# The new leg turns at three joints: the Bionic Hip socket (a ball: any turn),
+# the Knee (its hinge only) and the Ankle (a ball). Follow Old Leg puts them
+# back. The kit's parts carry their joints in their .sockets.json
+# ("bionic": role, ball / cup / knee / ankle points); the SM Mechanical Legs
+# values are built in for files without one.
+
+BIONIC_KIT = "SM Mechanical Legs"
+BIONIC_DEFAULT = {      # file stem -> joints, file coordinates (mm; up +Z, front -Y, knee hinge along X)
+    "LINK_LEG": {"role": "plug", "ball": [-50.871, -22.555, 18.684], "r": 2.689,
+                 "flat_n": [-0.645518, 0.0, 0.763845], "glue": [-51.1095, -22.555, 18.9662]},
+    "LEG_HIGH": {"role": "thigh", "cup": [-0.91, -0.163, 9.801], "r": 2.762, "knee": [0.005, -0.095, 2.168],
+                 "opening": [-0.482, 0.0, 0.876]},
+    "LEG_LOW": {"role": "shin", "knee": [0.025, -0.454, 9.227], "ankle": [0.026, -0.373, 1.345], "r": 1.343},
+    "FOOT_1": {"role": "foot", "cup": [0.0, -0.901, 3.646], "r": 1.371},
+    "FOOT_2": {"role": "foot", "cup": [0.0, 0.0, 2.91], "r": 1.371},
+    "FOOT_3": {"role": "foot", "cup": [0.042, 1.291, 3.222], "r": 1.407},
+    "FOOT_4": {"role": "foot", "cup": [-15.671, -23.49, 3.797], "r": 1.407},
+    "FOOT_5": {"role": "foot", "cup": [0.0, 0.87, 4.04], "r": 1.424},
+    "FOOT_6": {"role": "foot", "cup": [0.0, 1.47, 3.44], "r": 1.426},
+    "FOOT_7": {"role": "foot", "cup": [26.94, -15.522, 3.283], "r": 1.343},
+    "LEG_HIGH_ARMOR": {"role": "armour", "host": "thigh", "label": "Thigh plate"},
+    "KNEE": {"role": "armour", "host": "thigh", "label": "Knee pad"},
+    "LEG_LOW_ARMOR": {"role": "armour", "host": "shin", "label": "Shin plate"},
+}
+BIONIC_FOOT = "FOOT_3"          # the first foot a new leg gets (light, flat)
+BIO_CUT_BACK = 2                # trace steps (0.4 mm) the cut sits below where the section grows
+BIO_TIDY = "TIOW Bionic Tidy"
+
+
+def _bio_unit(v):
+    import numpy as np
+    v = np.asarray(v, float)
+    n = np.linalg.norm(v)
+    return v / n if n > 1e-12 else v
+
+
+def _bio_frame(o, x, y, z):
+    import numpy as np
+    M = np.eye(4)
+    M[:3, 0], M[:3, 1], M[:3, 2], M[:3, 3] = x, y, z, o
+    return M
+
+
+def _bio_basis(d):
+    import numpy as np
+    a = np.array([1.0, 0, 0]) if abs(d[0]) < 0.9 else np.array([0, 1.0, 0])
+    u = _bio_unit(np.cross(d, a))
+    return u, np.cross(d, u)
+
+
+def bio_slice(V, T, c, d, radius):
+    """Closed loops where the plane through c square to d cuts the mesh (only
+    triangles within radius of c). [(points, area, centroid, 2d points)]."""
+    import numpy as np
+    s = (V - c) @ d
+    near = np.linalg.norm(V - c, axis=1) < radius
+    st = s[T]
+    cross = near[T].all(1) & (st.min(1) < 0) & (st.max(1) > 0)
+    tri = T[cross]
+    S = st[cross]
+    if not len(tri):
+        return []
+    E = np.stack([tri[:, [0, 1]], tri[:, [1, 2]], tri[:, [2, 0]]], 1)
+    SE = np.stack([S[:, [0, 1]], S[:, [1, 2]], S[:, [2, 0]]], 1)
+    hit = (SE[:, :, 0] < 0) != (SE[:, :, 1] < 0)
+    idx = np.argsort(~hit, axis=1, kind="stable")[:, :2]                      # the two crossed edges
+    e2 = np.take_along_axis(E, idx[:, :, None].repeat(2, 2), 1)
+    s2 = np.take_along_axis(SE, idx[:, :, None].repeat(2, 2), 1)
+    t = s2[:, :, 0] / (s2[:, :, 0] - s2[:, :, 1])
+    P = V[e2[:, :, 0]] + t[:, :, None] * (V[e2[:, :, 1]] - V[e2[:, :, 0]])
+    ek = np.sort(e2, axis=2)
+    key = ek[:, :, 0].astype(np.int64) * (len(V) + 1) + ek[:, :, 1]
+    uk, inv = np.unique(key.reshape(-1), return_inverse=True)
+    inv = inv.reshape(-1, 2)
+    pos = np.zeros((len(uk), 3))
+    pos[inv.reshape(-1)] = P.reshape(-1, 3)
+    adj = [[] for _ in range(len(uk))]
+    for a, b in inv:
+        adj[a].append(b)
+        adj[b].append(a)
+    seen = np.zeros(len(uk), bool)
+    u, v = _bio_basis(d)
+    loops = []
+    for start in range(len(uk)):
+        if seen[start]:
+            continue
+        loop = [start]
+        seen[start] = True
+        prev, cur, closed = -1, start, False
+        while True:
+            nx = [x for x in adj[cur] if x != prev]
+            if not nx:
+                break
+            n = nx[0]
+            if n == start:
+                closed = True
+                break
+            if seen[n]:
+                break
+            seen[n] = True
+            loop.append(n)
+            prev, cur = cur, n
+        if not closed or len(loop) < 3:
+            continue
+        Q = pos[loop]
+        q = np.c_[(Q - c) @ u, (Q - c) @ v]
+        x, y = q[:, 0], q[:, 1]
+        x1, y1 = np.roll(x, -1), np.roll(y, -1)
+        cr = x * y1 - x1 * y
+        A = cr.sum() / 2
+        if abs(A) < 1e-9:
+            continue
+        cx = ((x + x1) * cr).sum() / (6 * A)
+        cy = ((y + y1) * cr).sum() / (6 * A)
+        loops.append((Q, abs(A), c + cx * u + cy * v, q))
+    return loops
+
+
+def _bio_inside(q, p):
+    import numpy as np
+    x, y = q[:, 0], q[:, 1]
+    x1, y1 = np.roll(x, -1), np.roll(y, -1)
+    c = ((y > p[1]) != (y1 > p[1])) & (p[0] < (x1 - x) * (p[1] - y) / (y1 - y + 1e-30) + x)
+    return c.sum() % 2 == 1
+
+
+def bio_trace(V, T, start, up0, step=0.4, radius=14.0, maxlen=30.0):
+    """The leg's centre line up from start (inside the shin): slice square to
+    the leg, the loop round the current point (the biggest that holds it), its
+    centroid is the next point; the direction follows the last ~2.4 mm."""
+    import numpy as np
+    c = np.asarray(start, float)
+    d = _bio_unit(up0)
+    out, cs, gone = [], [c.copy()], 0.0
+    while gone < maxlen:
+        ct = c + step * d
+        loops = bio_slice(V, T, ct, d, radius)
+        hold = [L for L in loops if _bio_inside(L[3], (0.0, 0.0))]
+        L = max(hold, key=lambda L: L[1]) if hold else \
+            (min(loops, key=lambda L: np.linalg.norm(L[2] - ct)) if loops else None)
+        if L is None:
+            break
+        Q, area, cen = L[0], L[1], L[2]
+        out.append(dict(c=cen, d=d.copy(), area=area, ext=float(np.linalg.norm(Q - cen, axis=1).max())))
+        c = cen
+        cs.append(cen)
+        gone += step
+        k = max(2, int(2.4 / step))
+        if len(cs) > k:
+            dd = cs[-1] - cs[-k]
+            if np.linalg.norm(dd) > 1e-6:
+                d = _bio_unit(0.6 * d + 0.4 * _bio_unit(dd))
+    return out
+
+
+def bio_plan(V, T, ea, eb, top, opening):
+    """The old leg, from Mar Fil's shin points (ankle circle ends ea / eb,
+    the shin hole's top, the hole's opening = the shin's front): its centre
+    line, where to cut (C, d: d up the thigh), the old knee and the way it
+    bends (v), all in the legs' own coordinates (mm)."""
+    import numpy as np
+    ea, eb, top, opening = (np.asarray(x, float) for x in (ea, eb, top, opening))
+    A = 0.5 * (ea + eb)
+    start = A + 0.45 * (top - A) - 1.2 * _bio_unit(opening)        # inside the shin
+    tr = bio_trace(V, T, start, top - A)
+    if len(tr) < 8:
+        return None
+    areas = np.array([s["area"] for s in tr])
+    j, jump = len(tr) - 1, None
+    for i in range(6, len(areas)):
+        med = np.median(areas[max(0, i - 8):i])
+        if areas[i] > 1.6 * med or areas[i] < 0.45 * med:
+            j, jump = max(0, i - BIO_CUT_BACK), i
+            break
+    C = tr[j]["c"]
+    d = _bio_unit(tr[j]["d"])
+    path = np.array([A] + [s["c"] for s in tr[:j + 1]])
+    ch = _bio_unit(C - A)
+    rel = path - A
+    off = rel - np.outer(rel @ ch, ch)
+    k = int(np.argmax(np.linalg.norm(off, axis=1)))
+    bend = float(np.linalg.norm(off[k]))
+    fwd = _bio_unit(opening - (opening @ ch) * ch)
+    v = _bio_unit(off[k]) if bend > 0.6 else fwd
+    if v @ fwd < -0.3:              # a knee bends forward: the shin's front wins if they disagree
+        v = fwd
+    return dict(C=C, d=d, A=A, path=path, knee=path[k], kk=k, bend=bend, v=v, ea=ea, eb=eb, top=top,
+                opening=_bio_unit(opening), ext=max(s["ext"] for s in tr[:j + 1]), jump=jump)
+
+
+def bio_skel_dist(V, plan, foot_len=6.5):
+    """Distance from the leg's centre line and a short line forward from the
+    ankle (a foot): which leg a point belongs to when the feet are close."""
+    import numpy as np
+    A = plan["A"]
+    up = _bio_unit(plan["C"] - A)
+    fwd = plan["opening"] - (plan["opening"] @ up) * up
+    toe = A + foot_len * _bio_unit(fwd) - 2.0 * up
+    pts = [toe, A] + list(plan["path"][1:])
+    best = np.full(len(V), np.inf)
+    for a, b in zip(pts[:-1], pts[1:]):
+        ax = b - a
+        L = np.linalg.norm(ax)
+        if L < 1e-6:
+            continue
+        ax = ax / L
+        t = np.clip((V - a) @ ax, 0, L)
+        best = np.minimum(best, np.linalg.norm(V - (a + np.outer(t, ax)), axis=1))
+    return best
+
+
+def _bio_rot(axis, ang):
+    import numpy as np
+    a = _bio_unit(axis)
+    K = np.array([[0, -a[2], a[1]], [a[2], 0, -a[0]], [-a[1], a[0], 0]])
+    return np.eye(3) + math.sin(ang) * K + (1 - math.cos(ang)) * K @ K
+
+
+def bio_old_foot(V, T, plan, other, up, reach=10.0, deepest=4.4, boot=3.6):
+    """The old foot (points near the ankle, below it, nearer this leg than the
+    other) and its sole: the biggest flat patch at the bottom, with the foot's
+    'down' turned about the ankle axis (a foot stepping back is up on its
+    toes). A foot unioned to a rock or base stops at a boot's depth.
+    Returns (points, sole height along the foot's up, toe, foot's up, on a base)."""
+    import numpy as np
+    A = plan["A"]
+    m = (np.linalg.norm(V - A, axis=1) < reach) & ((V - A) @ up < 0.6)
+    if other is not None:
+        m &= bio_skel_dist(V, plan) < bio_skel_dist(V, other)
+    tm = m[T].all(1)
+    tri = V[T[tm]]
+    n = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
+    ar = np.linalg.norm(n, axis=1) / 2
+    n = n / np.maximum(2 * ar, 1e-12)[:, None]
+    cen = tri.mean(1)
+    xa = _bio_unit(plan["eb"] - plan["ea"])
+
+    def score(deg):
+        u = _bio_rot(xa, math.radians(deg)) @ up
+        h = (cen - A) @ u
+        sel = (h < h.min() + 0.35) & (n @ -u > 0.94)
+        return ar[sel].sum() - 0.002 * abs(deg)
+    best = max(range(-70, 71, 3), key=score)
+    best = max(np.arange(best - 2.5, best + 2.6, 0.5), key=score)
+    uf = _bio_rot(xa, math.radians(best)) @ up
+    P = V[m]
+    sole = float(((P - A) @ uf).min())
+    based = sole < -deepest
+    if based:
+        sole = -boot
+    P = P[(P - A) @ uf >= sole - 1e-6]
+    fwd = plan["opening"] - (plan["opening"] @ uf) * uf
+    toe = _bio_unit(fwd) if np.linalg.norm(fwd) > 1e-6 else _bio_unit(np.cross(uf, xa))
+    return P, sole, toe, uf, based
+
+
+def bio_cutter_points(V, plan, foot_pts, margin=0.6):
+    """Points for the cutters' three hulls: the old thigh (the slice at the
+    cut dropped onto the cut plane so the hull's top is the cut), shin, foot."""
+    import numpy as np
+    C, d, path, kk = plan["C"], plan["d"], plan["path"], plan["kk"]
+    below = (V - C) @ d < 0
+    r = plan["ext"] + margin
+
+    def tube(seg):
+        m = np.zeros(len(V), bool)
+        for a, b in zip(seg[:-1], seg[1:]):
+            ax = b - a
+            L = np.linalg.norm(ax)
+            if L < 1e-6:
+                continue
+            ax = ax / L
+            t = np.clip((V - a) @ ax, 0, L)
+            m |= np.linalg.norm(V - (a + np.outer(t, ax)), axis=1) < r
+        return m & below
+    Pt = V[tube(path[kk:])]
+    band = Pt[(Pt - C) @ d > -0.8]
+    Pt = np.r_[Pt, band - np.outer((band - C) @ d, d)]
+    Ps = V[tube(path[:kk + 1])]
+    return [P for P in (Pt, Ps, foot_pts) if len(P) >= 8]
+
+
+def bio_belt(legs, V):
+    """The belt from the legs' belt anchors (Hip R / L, Belt Front / Back):
+    its plane's up (towards the torso), each side's hip anchor and outward
+    direction, the middle. None without both hip anchors. mm, legs' own axes."""
+    import numpy as np
+    inv = legs.matrix_world.inverted_safe()
+    u = float(legs.get("tiow_unit") or 1.0)
+    A = {str(c["ws_type"]): np.array(inv @ c.matrix_world.translation) / u for c in legs.children
+         if c.get("ws_type") in ("Hip R", "Hip L", "Belt Front", "Belt Back")}
+    if "Hip R" not in A or "Hip L" not in A:
+        return None
+    P = np.array(list(A.values()))
+    c = P.mean(0)
+    if len(P) >= 3:
+        up = np.linalg.svd(P - c)[2][2]
+    else:
+        up = np.array([0, 0, 1.0])
+    if up @ (V.mean(0) - c) > 0:               # the legs hang below the belt
+        up = -up
+    lat = A["Hip R"] - A["Hip L"]
+    lat = _bio_unit(lat - (lat @ up) * up)       # towards the right hip
+    return dict(up=up, centre=c, hip={"R": A["Hip R"], "L": A["Hip L"]}, lat={"R": lat, "L": -lat})
+
+
+BIO_BALL_OUT = 0.0      # mm the plug sits out from the middle of the cut (after it has cleared the codpiece)
+BIO_BALL_TILT = 30.0    # deg the cut slopes down towards the crotch, like the ribbed hip it takes away
+BIO_BALL_CLEAR = 3.0    # mm from the plug ball's centre the body left under the cut must keep (ball r 2.69, the cup's rim round it)
+
+
+BIO_SCALE_RANGE = (0.8, 1.4)    # the kit's size is fitted to the leg within this
+BIO_PLUG_STEP = -0.15   # kit mm along the plug's axis from its ball's centre: the step up to its narrower neck
+BIO_PLUG_TOP = 1.2      # kit mm: the plug is made a plain cap of its ball up to here (no neck, no step), well
+                        # into the leg: where the leg is narrower than the ball, the ball's own curve shows
+BIO_STUMP_OVERLAP = 0.15  # mm: the plug is trimmed flat just under that step (the neck goes) and sits this much
+                          # above the cut face, into the body so they join: the ball comes out of the cut like a
+                          # stump, with no neck or step to see
+
+
+def bio_leg_section(V, T, plan, lat, back=1.5):
+    """The old leg just below where its thigh meets the hip (back mm under
+    the trace's cut): (width across, depth front to back, the middle of its
+    outline). lat: outwards for this leg. mm, legs' own axes."""
+    import numpy as np
+    d = _bio_unit(plan["d"])
+    c = plan["C"] - back * d
+    loops = [l for l in bio_slice(V, T, c, d, 9.0) if l[1] > 1.0]
+    if not loops:
+        return None
+    P = np.asarray(min(loops, key=lambda l: np.linalg.norm(np.asarray(l[2]) - c))[0])
+    la = _bio_unit(lat - (lat @ d) * d)
+    fa = np.cross(d, la)
+    a, b = P @ la, P @ fa
+    mid = c + ((a.min() + a.max()) / 2 - c @ la) * la + ((b.min() + b.max()) / 2 - c @ fa) * fa
+    return float(np.ptp(a)), float(np.ptp(b)), mid
+
+
+def bio_plug_skirt(tree, B, n, h_trim, R, lift, N=96):
+    """Where the leg above the cut is narrower than the plug's ball, a skirt
+    from the ball's edge up to the leg's outline 'lift' higher, so no flat
+    top shows: the ball comes out of the leg like a stump. tree: a BVH of
+    the cut legs (one closed body; its own coordinates, like B). B: the
+    ball's centre, n its axis, h_trim where its top is trimmed (along n), R
+    its radius. Returns the rings as a dict (None: the leg covers the ball's
+    top all round)."""
+    import numpy as np
+    n = _bio_unit(n)
+    B = np.asarray(B, float)
+    e1 = _bio_unit(np.cross(n, [0, 1.0, 0]) if abs(n[1]) < 0.9 else np.cross(n, [1.0, 0, 0]))
+    e2 = np.cross(n, e1)
+    r_trim = math.sqrt(max(R * R - h_trim * h_trim, 0.0))
+    h_top = h_trim + lift
+    c_top = B + h_top * n
+    top = []
+    for a in np.linspace(0, 2 * math.pi, N, endpoint=False):
+        dr = math.cos(a) * e1 + math.sin(a) * e2
+        o, rb = Vector(c_top), None
+        for _ in range(8):                      # the first time the ray leaves the leg
+            hit = tree.ray_cast(o, Vector(dr), r_trim + 3.0)
+            if hit[0] is None:
+                break
+            if Vector(hit[1]).dot(Vector(dr)) > 0:
+                rb = float((np.array(hit[0]) - c_top) @ dr)
+                break
+            o = hit[0] + Vector(dr) * 1e-4
+        if rb is None:
+            rb = r_trim
+        top.append(max(0.2, min(rb - 0.05, r_trim - 0.02)))
+    if min(top) >= r_trim - 0.03:
+        return None
+    return dict(B=B.tolist(), n=n.tolist(), e1=e1.tolist(), h_trim=h_trim, R=R, h_top=h_top,
+                top=[round(x, 4) for x in top])
+
+
+def _bio_skirt_mesh(sk, s=1.0):
+    """The skirt as a closed solid (verts, faces), mm * s, legs' axes."""
+    import numpy as np
+    B, n, e1 = (np.asarray(sk[k_], float) for k_ in ("B", "n", "e1"))
+    e2 = np.cross(n, e1)
+    top = np.asarray(sk["top"], float)
+    N = len(top)
+    hb = sk["h_trim"] - 0.05
+    rb = math.sqrt(max(sk["R"] ** 2 - hb * hb, 0.0)) - 0.02
+    a = np.linspace(0, 2 * math.pi, N, endpoint=False)
+    dr = np.outer(np.cos(a), e1) + np.outer(np.sin(a), e2)
+    bot = B + hb * n + rb * dr
+    tp = B + sk["h_top"] * n + top[:, None] * dr
+    verts = np.r_[bot, tp, [B + hb * n], [B + sk["h_top"] * n]] * s
+    faces = []
+    for i in range(N):
+        j = (i + 1) % N
+        faces.append([i, j, N + j, N + i])
+        faces.append([2 * N, j, i])
+        faces.append([2 * N + 1, N + i, N + j])
+    return verts, faces
+
+
+def bio_ball_clearance(V, keep, C, d, lat, ball_drop=0.37, clear=BIO_BALL_CLEAR, most=4.0):
+    """How far (mm) the plug's glue point C must move out along lat so its
+    ball (ball_drop under the glue face) and the thigh's cup round it stay
+    clear of the body the cut leaves (V[keep]: the codpiece between the
+    legs, mostly)."""
+    import numpy as np
+    B = C - ball_drop * d
+    Q = V[keep & (((V - C) @ d) < 0.05) & (np.linalg.norm(V - B, axis=1) < clear + most + 1.0)]
+    if not len(Q):
+        return 0.0
+    for t in np.arange(0.0, most + 1e-9, 0.05):
+        if np.linalg.norm(Q - (B + t * lat), axis=1).min() >= clear:
+            return float(t)
+    return float(most)
+
+
+def bio_belt_cut(V, plan, belt, side, offset=0.0, drop=0.6, codpiece=1.6, margin=1.8, out=None, tilt=None, auto=None,
+                 swing=0.0, glue_r=2.42, ball_drop=0.37, clear=BIO_BALL_CLEAR, mid=None, stump_h=None, ball_r=2.689):
+    """The cut under the belt at this hip: a plane sloping down towards the
+    crotch by 'tilt' degrees like Mar Fil's ribbed hip, and tipped 'swing'
+    degrees forwards (-: back) with the thigh, taking everything of the leg
+    under it (and under 'drop' below the hip anchor, offset mm higher: the
+    belt is never cut) down to the top of the thigh, outside the codpiece.
+    The plug's ball (radius ball_r, its glue face ball_drop above its
+    centre) is centred over the leg (mid: the middle of the leg's outline,
+    bio_leg_section; else its centre line) and comes out of the cut face
+    stump_h along its axis from its centre (None: the glue face on the cut,
+    radius glue_r); the cut face's highest edge round it at that height;
+    then 'out' mm further out. What's left of the codpiece within 'clear' of
+    the ball is scooped out (auto["notch"]: the ball's centre). Returns (the
+    glue face's centre, the plane's normal (up and in), the hull's points,
+    a point on the cut plane)."""
+    import numpy as np
+    ub, lat, mid_b = belt["up"], belt["lat"][side], belt["centre"]
+    Pb = belt["hip"][side] - (drop - offset) * ub
+    C, d = plan["C"], plan["d"]
+    rel = V - C
+    along = rel @ d
+    radial = np.linalg.norm(rel - np.outer(along, d), axis=1)
+    region = (along > -0.6) & (((V - mid_b) @ lat) > codpiece) & (radial < plan["ext"] + margin) & (((V - Pb) @ ub) < 0)
+    out = BIO_BALL_OUT if out is None else out
+    tilt = math.radians(BIO_BALL_TILT if tilt is None else tilt)
+    lat_p = _bio_unit(lat - (lat @ ub) * ub)
+    fw = _bio_unit(np.cross(ub, lat_p))
+    if fw[1] < 0:                                       # forwards (the legs' front is +Y)
+        fw = -fw
+    sw = math.radians(max(-35.0, min(35.0, swing)))
+    n = math.cos(sw) * (math.cos(tilt) * ub - math.sin(tilt) * lat_p) + math.sin(sw) * fw   # the cut face's normal: up and in
+    # the ball on the leg's line (through the middle of its outline), as high as it goes with
+    # the glue face's highest edge still under the belt cut's height
+    m0 = C if mid is None else np.asarray(mid, float)
+    sa = float(np.linalg.norm(n - (n @ ub) * ub))
+    h = ball_drop if stump_h is None else stump_h               # the cut plane, from the ball's centre
+    rc = glue_r if stump_h is None else math.sqrt(max(ball_r * ball_r - h * h, 0.0))   # the plug's section there
+    t = ((Pb - m0) @ ub - rc * sa - h * (n @ ub)) / (d @ ub) if abs(d @ ub) > 1e-6 else 0.0
+    B0 = m0 + t * d                                  # the ball's centre
+    S = B0 + h * n                                   # on the cut plane
+    m = region & (((V - S) @ n) < 0)
+    P = V[m]
+    band = P[(P - S) @ n > -0.8]
+    band = band - np.outer((band - S) @ n, n)
+    lat_n = _bio_unit(lat_p - (lat_p @ n) * n)       # out, along the cut face
+    Cb = B0 + ball_drop * n + out * lat_n
+    S = S + out * lat_n
+    if auto is not None and stump_h is not None:
+        # the leg's surface just above the cut round the plug: the plug's collar runs from it down to the
+        # ball, so where the leg is narrower than the ball there's a taper, not a ledge
+        Bc = Cb - ball_drop * n
+        relb = V - Bc
+        ax = relb @ n
+        radb = np.linalg.norm(relb - np.outer(ax, n), axis=1)
+        upc = (V - S) @ n
+        cm = region & (upc > 0.15) & (upc < 1.0 * ball_r / 2.689) & (radb < rc + 1.0)
+        Cl = V[cm]
+        if len(Cl) > 400:
+            Cl = Cl[np.linspace(0, len(Cl) - 1, 400).astype(int)]
+        auto["collar"] = np.round(Cl, 4).tolist()
+    if auto is not None:
+        auto["out_auto"] = 0.0
+        keep = ((V - mid_b) @ lat) <= codpiece      # the codpiece stays
+        B = Cb - ball_drop * n
+        Q = V[keep & (((V - S) @ n) < 0.05)]
+        if len(Q) and np.linalg.norm(Q - B, axis=1).min() < clear - 0.02:
+            auto["notch"] = B
+    return Cb, n, np.r_[P, band], S
+
+
+def bio_generic_shins(V, T, up, sides=("R", "L")):
+    """Legs without Mar Fil's shin points or clicked anchors (Springles):
+    the feet are the clusters of the lowest points, the ankle the middle of
+    the leg 3.2 mm above the sole, the front the way the toes reach. Returns
+    ({side: (ea, eb, top, front)}, front)."""
+    import numpy as np
+    h = V @ up
+    lo = h.min()
+    S = V[h < lo + 0.6]
+    e1, e2 = _bio_basis(up)
+    q = np.c_[S @ e1, S @ e2]
+    a, b = q[np.argmin(q[:, 0])], q[np.argmax(q[:, 0])]
+    for _ in range(12):
+        lab = np.linalg.norm(q - a, axis=1) > np.linalg.norm(q - b, axis=1)
+        if lab.all() or (~lab).all():
+            break
+        a, b = q[~lab].mean(0), q[lab].mean(0)
+    groups = [S[~lab], S[lab]] if np.linalg.norm(a - b) > 4.0 and lab.any() and (~lab).any() else [S]
+    feet = []
+    for G in groups:
+        F = G.mean(0)
+        c = F + (lo + 3.2 - F @ up) * up
+        loops = bio_slice(V, T, c, up, 9.0)
+        if not loops:
+            continue
+        L = min(loops, key=lambda L: np.linalg.norm((L[2] - c) - ((L[2] - c) @ up) * up))
+        A = L[2]
+        flat = G - np.outer((G - A) @ up, up)
+        far = flat[np.argmax(np.linalg.norm(flat - A, axis=1))]
+        t = far - A
+        t = _bio_unit(t - (t @ up) * up)
+        feet.append((A, t))
+    if not feet:
+        return {}, None
+    fwd = _bio_unit(sum(t for _A, t in feet))
+    left = _bio_unit(np.cross(up, fwd))
+    out = {}
+    if len(feet) == 2:
+        (A0, _t0), (A1, _t1) = feet
+        l0, r0 = (feet[0], feet[1]) if (A0 - A1) @ left > 0 else (feet[1], feet[0])
+        pairs = {"L": l0[0], "R": r0[0]}
+    else:
+        pairs = {"?": feet[0][0]}
+    for k, A in pairs.items():
+        out[k] = (A - 2.4 * left, A + 2.4 * left, A + 6.0 * up + 1.2 * fwd, fwd)
+    return out, fwd
+
+
+def bio_find_hip_ball(V, T, up, fwd, side, other, rmin=1.8, rmax=3.4):
+    """A ball where a leg was taken off in the sculpt (Springles' 'bionic
+    joint' legs): a sphere, its lower half showing, on the empty side under
+    the waist. Returns (centre, radius) or None."""
+    import numpy as np
+    left = _bio_unit(np.cross(up, fwd))
+    s_ = left if side == "L" else -left
+    N = _vertex_normals(V, T)
+    h = V @ up
+    top = h.max()
+    mid = V[h > top - 3.0].mean(0)
+    lowest = other["C"] @ up - 2.0 if other is not None else h.min() + 0.4 * (top - h.min())
+    m = (((V - mid) @ s_) > 0.8) & (h > lowest) & (h < top - 1.0) & ((N @ up) < -0.15)
+    P = V[m]
+    if len(P) < 60:
+        return None
+    rng = np.random.default_rng(1)
+    best = (0, None)
+    for _ in range(3000):
+        smp = P[rng.choice(len(P), 4, replace=False)]
+        A_ = np.c_[2 * smp, np.ones(4)]
+        try:
+            x = np.linalg.solve(A_, (smp ** 2).sum(1))
+        except np.linalg.LinAlgError:
+            continue
+        c = x[:3]
+        r2 = x[3] + c @ c
+        if r2 <= 0:
+            continue
+        r = math.sqrt(r2)
+        if not rmin <= r <= rmax:
+            continue
+        n_in = int((np.abs(np.linalg.norm(P - c, axis=1) - r) < 0.04).sum())
+        if n_in > best[0]:
+            best = (n_in, (c, r))
+    if best[1] is None or best[0] < 120:
+        return None
+    c, r = best[1]
+    for _ in range(4):
+        inl = P[np.abs(np.linalg.norm(P - c, axis=1) - r) < 0.05]
+        A_ = np.c_[2 * inl, np.ones(len(inl))]
+        x = np.linalg.lstsq(A_, (inl ** 2).sum(1), rcond=None)[0]
+        c, r = x[:3], math.sqrt(max(x[3] + x[:3] @ x[:3], 0.0))
+    return c, r
+
+
+def _bio_mirror(p, M, n, vec=False):
+    import numpy as np
+    p = np.asarray(p, float)
+    return p - 2 * ((p if vec else p - M) @ n) * n
+
+
+BIO_CUP_MAX = 15.0      # deg the thigh's cup may lean off the ball's axis (its rim meets the belt at 28-42)
+BIO_SEAT_W = 2.0        # how hard the pose seats the cup square on the ball (against following the old knee's bend, 1.5)
+BIO_KNEE_MAX = 120.0    # deg the knee bends at most
+
+
+def _bio_rotvec(w):
+    import numpy as np
+    w = np.asarray(w, float)
+    a = np.linalg.norm(w)
+    if a < 1e-12:
+        return np.eye(3)
+    k = w / a
+    K_ = np.array([[0, -k[2], k[1]], [k[2], 0, -k[0]], [-k[1], k[0], 0]])
+    return np.eye(3) + math.sin(a) * K_ + (1 - math.cos(a)) * K_ @ K_
+
+
+def _bio_rx(a):
+    import numpy as np
+    c, s_ = math.cos(a), math.sin(a)
+    return np.array([[1.0, 0, 0], [0, c, -s_], [0, s_, c]])
+
+
+def _bio_mirrored(side):
+    """The kit's files are a left leg: the thigh's hip cup leans to the files'
+    -X, which is the inside of a left leg (towards the crotch, like Mar Fil's
+    ribbed hip). A right leg is their mirror image across X."""
+    return side == "R"
+
+
+def bio_kit_side(kit, side):
+    """The kit for this side, its joint points mirrored across the files' X
+    for the side that takes the mirror image (the meshes are, as they come in)."""
+    if not _bio_mirrored(side):
+        return kit
+    def mx(rec):
+        rec = dict(rec)
+        for k in ("ball", "glue", "cup", "knee", "ankle", "flat_n", "opening"):
+            if rec.get(k) is not None:
+                v = list(rec[k])
+                rec[k] = [-v[0]] + v[1:]
+        return rec
+    out = dict(kit)
+    for role in ("plug", "thigh", "shin"):
+        out[role] = (kit[role][0], mx(kit[role][1]))
+    out["feet"] = {k: (p, mx(r)) for k, (p, r) in kit["feet"].items()}
+    return out
+
+
+def bio_pose(plan, kit, foot, sole, toe, uf, s=1.0, ball=None, inward=None, seat=True, k=1.0):
+    """Where everything goes, in the legs' own coordinates (4x4 numpy):
+    plug, hip (socket), thigh, knee, shin, ankle, foot. Kit points are in
+    file mm, scaled by s like the meshes; kit = bio_kit_side(...) for the
+    side. plan C / d: the middle of the cut and the cut face's normal (into
+    the body). ball: the legs' own hip ball (mm) instead of the kit's plug.
+    The plug's glue face sits on the cut, its ball straight down from it. The
+    thigh's cup takes the ball (its centre on the ball's), and the leg is
+    posed so its foot lands on the old foot, its knee bends the way the old
+    one did and the cup sits as square under the ball as that allows - the
+    cup leans out from the thigh, so a leg splayed out sits it flat under
+    the belt; never more than BIO_CUP_MAX off. seat=False: the leg only
+    follows the old one (what the cut's slope is worked out from). k: the
+    kit's size (its meshes are brought in that much bigger). (inward: no
+    longer used.)"""
+    import numpy as np
+    sk = s * k
+    P_ = {n_: np.asarray(v, float) * sk for n_, v in kit["plug"][1].items() if n_ in ("ball", "glue")}
+    flat_n = _bio_unit(kit["plug"][1]["flat_n"])
+    th = {n_: np.asarray(kit["thigh"][1][n_], float) * sk for n_ in ("cup", "knee")}
+    opening = kit["thigh"][1].get("opening")
+    opening = _bio_unit(opening) if opening is not None else None
+    sh = {n_: np.asarray(kit["shin"][1][n_], float) * sk for n_ in ("knee", "ankle")}
+    cup = np.asarray(kit["feet"][foot][1]["cup"], float) * sk
+    C, d = plan["C"] * s, _bio_unit(plan["d"])
+    # foot: its sole on the old sole, toe along the old toe, its cup over the old ankle
+    fz, fy = uf, -toe
+    fx = np.cross(fy, fz)
+    Rf = np.c_[fx, fy, fz]
+    sole_pt = plan["A"] * s + sole * s * uf
+    target = sole_pt - Rf @ np.array([cup[0], cup[1], 0.0]) + Rf @ cup
+    # plug: glue face centre on the cut's middle, the ball straight down from it
+    pz = -d
+    px = _bio_unit(np.cross([0, 1.0, 0], pz)) if abs(pz[1]) < 0.9 else _bio_unit(np.cross([1.0, 0, 0], pz))
+    lz = -flat_n
+    lx = _bio_unit(np.cross([0, 1.0, 0], lz)) if abs(lz[1]) < 0.9 else _bio_unit(np.cross([1.0, 0, 0], lz))
+    plug = _bio_frame(C, px, np.cross(pz, px), pz) @ np.linalg.inv(_bio_frame(P_["glue"], lx, np.cross(lz, lx), lz))
+    P = (plug @ np.r_[P_["ball"], 1])[:3]
+    if ball is not None:
+        P = np.asarray(ball, float) * s
+    Lt_v = th["knee"] - th["cup"]
+    Ls_v = sh["ankle"] - sh["knee"]
+    Lt, Ls, ot = np.linalg.norm(Lt_v[1:]), np.linalg.norm(Ls_v[1:]), Lt_v[0]
+    X = np.array([1.0, 0, 0])
+    zt_l = _bio_unit(-np.r_[0, Lt_v[1:]])
+    zs_l = _bio_unit(-np.r_[0, Ls_v[1:]])
+    # a start: the two bones in the plane the old knee bends in
+    aim = target.copy()
+    for _ in range(4):
+        u = _bio_unit(aim - P)
+        v = _bio_unit(plan["v"] - (plan["v"] @ u) * u)
+        aim = target - ot * _bio_unit(np.cross(-u, v))
+    u = aim - P
+    D = min(max(np.linalg.norm(u), abs(Lt - Ls) + 0.02 * s), Lt + Ls - 0.02 * s)
+    u = _bio_unit(u)
+    v = _bio_unit(plan["v"] - (plan["v"] @ u) * u)
+    a = (Lt * Lt - Ls * Ls + D * D) / (2 * D)
+    h = math.sqrt(max(Lt * Lt - a * a, 0.0))
+    hinge0 = _bio_unit(np.cross(-u, v))
+    knee0 = P + a * u + h * v
+    zt_w = _bio_unit(P - knee0)
+    R0 = np.c_[hinge0, np.cross(zt_w, hinge0), zt_w] @ np.c_[X, np.cross(zt_l, X), zt_l].T
+    k0 = math.acos(max(-1.0, min(1.0, float(_bio_unit(knee0 - P) @ _bio_unit(P + D * u - knee0)))))
+    # then turned on the ball and bent at the knee to land the ankle, follow the old knee, seat the cup
+    kt_rel, ka_rel = th["knee"] - th["cup"], sh["ankle"] - sh["knee"]
+    cmax = math.radians(BIO_CUP_MAX)
+
+    def ankle_of(p):
+        R = _bio_rotvec(p[:3]) @ R0
+        return P + R @ kt_rel + R @ _bio_rx(p[3]) @ ka_rel, R
+
+    def resid(p):
+        ank, R = ankle_of(p)
+        r = list(10.0 * (ank - target) / s)       # the foot lands where the old one stood
+        r += list(1.5 * (R @ X - hinge0))
+        if opening is not None and seat:
+            op = R @ opening
+            r += list(BIO_SEAT_W * (op - d))
+            ang = math.acos(max(-1.0, min(1.0, float(op @ d))))
+            r.append(8.0 * max(0.0, ang - cmax))
+        kd = p[3]
+        r.append(3.0 * (max(0.0, -kd) + max(0.0, kd - math.radians(BIO_KNEE_MAX))))
+        return np.array(r)
+
+    p = np.array([0.0, 0.0, 0.0, k0])
+    lam = 1e-2
+    r = resid(p)
+    for _ in range(60):
+        J = np.empty((len(r), 4))
+        for i in range(4):
+            dp = np.zeros(4)
+            dp[i] = 1e-6
+            J[:, i] = (resid(p + dp) - r) / 1e-6
+        g = J.T @ r
+        H = J.T @ J
+        step = np.linalg.solve(H + lam * np.diag(np.diag(H) + 1e-9), -g)
+        r2 = resid(p + step)
+        if r2 @ r2 < r @ r:
+            p, r, lam = p + step, r2, max(lam / 3, 1e-7)
+            if np.linalg.norm(step) < 1e-7:
+                break
+        else:
+            lam *= 4
+            if lam > 1e8:
+                break
+    ank, R = ankle_of(p)
+    Rs = R @ _bio_rx(p[3])
+    thigh = np.eye(4)
+    thigh[:3, :3], thigh[:3, 3] = R, P - R @ th["cup"]
+    kt = P + R @ kt_rel
+    shin = np.eye(4)
+    shin[:3, :3], shin[:3, 3] = Rs, kt - Rs @ sh["knee"]
+    hip = thigh @ _bio_frame(th["cup"], X, np.cross(zt_l, X), zt_l)
+    kneeF = shin @ _bio_frame(sh["knee"], X, np.cross(zs_l, X), zs_l)
+    ankF = shin @ _bio_frame(sh["ankle"], X, np.cross(zs_l, X), zs_l)
+    footM = _bio_frame(ank - Rf @ cup, fx, fy, fz)
+    miss = float(np.linalg.norm(ank - target)) / s
+    cup_lean = math.degrees(math.acos(max(-1.0, min(1.0, float((R @ opening) @ d))))) if opening is not None else 0.0
+    return dict(plug=plug, hip=hip, thigh=thigh, knee=kneeF, shin=shin, ankle=ankF, foot=footM,
+                short=miss, ball=P, cup_lean=cup_lean, knee_deg=math.degrees(p[3]),
+                opening=None if opening is None else R @ opening)
+
+
+# ---- the kit's files
+
+def _bio_record(path):
+    """(stem the kit knows it by, joint data) for one STL, from its sockets
+    file's "bionic" entry or the built-in table (by the maker's own name)."""
+    side = read_sidecar(path) or {}
+    orig = side.get("original") if isinstance(side.get("original"), dict) else {}
+    stem = str(orig.get("name") or os.path.splitext(os.path.basename(path))[0])
+    rec = side.get("bionic") if isinstance(side.get("bionic"), dict) else None
+    if rec is None:
+        rec = BIONIC_DEFAULT.get(stem.upper())
+    return (stem.upper(), dict(rec)) if rec else (stem.upper(), None)
+
+
+def _bio_library_root(near):
+    p = os.path.dirname(str(near or ""))
+    for _ in range(12):
+        if not p or os.path.dirname(p) == p:
+            break
+        if os.path.isfile(os.path.join(p, LIBRARY_FILE)):
+            return p
+        p = os.path.dirname(p)
+    return None
+
+
+def bionic_folder(prefs, near=None):
+    """The bionic leg kit's folder: the preference, else found in the library
+    (a folder holding the hip plug: LINK_LEG, or a sockets file marked
+    "bionic" with role plug) and remembered."""
+    d = bpy.path.abspath(prefs.bionic_dir) if getattr(prefs, "bionic_dir", "") else ""
+    if d and os.path.isdir(d):
+        return d
+    if _state.get("bionic_dir") and os.path.isdir(_state["bionic_dir"]):
+        return _state["bionic_dir"]
+    root = _bio_library_root(near)
+    if root is None:
+        return None
+    hits = []
+    for dp, _dn, fn in os.walk(root):
+        for f in fn:
+            low = f.lower()
+            if low == "link_leg.stl":
+                hits.append(dp)
+            elif low.endswith(SIDECAR):
+                try:
+                    with open(os.path.join(dp, f), encoding="utf-8") as fh:
+                        txt = fh.read()
+                except OSError:
+                    continue
+                if '"bionic"' in txt and '"plug"' in txt:
+                    hits.append(dp)
+    if not hits:
+        return None
+    # the plug may sit in a subfolder of the kit: take the kit folder holding the thigh too
+    best = hits[0]
+    for h in (best, os.path.dirname(best)):
+        names = {f.upper() for _dp, _dn, fn in os.walk(h) for f in fn}
+        if "LEG_HIGH.STL" in names or any("THIGH" in n for n in names):
+            best = h
+            break
+    _state["bionic_dir"] = best
+    return best
+
+
+def bionic_kit(folder):
+    """{"plug": (path, data), "thigh": ..., "shin": ..., "feet": {stem: (path, data)},
+    "armour": {stem: (path, data)}} from the kit's folder (and its subfolders)."""
+    kit = {"feet": {}, "armour": {}}
+    for dp, _dn, fn in os.walk(folder):
+        for f in sorted(fn):
+            if not f.lower().endswith(".stl"):
+                continue
+            path = os.path.join(dp, f)
+            stem, rec = _bio_record(path)
+            if not rec:
+                continue
+            role = rec.get("role")
+            if role == "foot":
+                kit["feet"][stem] = (path, rec)
+            elif role == "armour":
+                kit["armour"][stem] = (path, rec)
+            elif role in ("plug", "thigh", "shin") and role not in kit:
+                kit[role] = (path, rec)
+    missing = [r for r in ("plug", "thigh", "shin") if r not in kit]
+    if missing or not kit["feet"]:
+        raise ValueError(f"the bionic leg kit in {folder} has no {', '.join(missing) or 'foot'}")
+    return kit
+
+
+# ---- on the model
+
+def _bio_tag(ob, legs, side, role):
+    ob["tiow_bionic"] = side
+    ob["tiow_bionic_role"] = role
+    ob["tiow_bionic_legs"] = legs.name
+
+
+def bio_parts(legs, side=None):
+    """{role: object} (or {side: {role: object}}) of the bionic legs on this legs part."""
+    out = {}
+    for o in _descendants(legs):
+        sd = o.get("tiow_bionic")
+        if sd and (side is None or sd == side):
+            out.setdefault(sd, {})[str(o.get("tiow_bionic_role"))] = o
+    if side is not None:
+        return out.get(side, {})
+    return out
+
+
+def bio_legs_of(ob):
+    """The legs part of the model around ob: the part carrying Shin anchors,
+    a bionic leg, or of category Legs."""
+    if ob is None:
+        return None
+    if ob.get("tiow_bionic_legs") and bpy.data.objects.get(ob["tiow_bionic_legs"]) is not None:
+        return bpy.data.objects[ob["tiow_bionic_legs"]]
+    root = _model_root(ob)
+    cands = [o for o in [root] + list(_descendants(root)) if o.type == 'MESH' and not o.get("tiow_bionic")]
+    for o in cands:
+        if o.get("tiow_bionic_state"):
+            return o
+    for o in cands:
+        if any(c.get("ws_type") in ("Shin R", "Shin L") for c in o.children):
+            return o
+    for o in cands:
+        if str(o.get("tiow_category") or "") == "Legs":
+            return o
+    return None
+
+
+def _bio_cut_collection(legs):
+    name = f"Bionic Cut - {legs.name}"[:63]
+    coll = bpy.data.collections.get(name)
+    if coll is None:
+        coll = bpy.data.collections.new(name)
+        parent = legs.users_collection[0] if legs.users_collection else bpy.context.scene.collection
+        parent.children.link(coll)
+    return coll
+
+
+def _bio_tidy_group():
+    """Geometry Nodes: drop islands of the mesh that lie wholly within 1.5 mm
+    of the cutters (bits of the old leg a cut leaves floating)."""
+    ng = bpy.data.node_groups.get(BIO_TIDY)
+    if ng is not None:
+        return ng
+    ng = bpy.data.node_groups.new(BIO_TIDY, 'GeometryNodeTree')
+    ng.interface.new_socket("Geometry", in_out='INPUT', socket_type='NodeSocketGeometry')
+    sc = ng.interface.new_socket("Cutters", in_out='INPUT', socket_type='NodeSocketCollection')
+    ng.interface.new_socket("Geometry", in_out='OUTPUT', socket_type='NodeSocketGeometry')
+    N, L = ng.nodes, ng.links
+    gi = N.new('NodeGroupInput')
+    go = N.new('NodeGroupOutput')
+    ci = N.new('GeometryNodeCollectionInfo')
+    ci.transform_space = 'RELATIVE'
+    L.new(gi.outputs[1], ci.inputs[0])
+    ci.inputs["Separate Children"].default_value = False
+    real = N.new('GeometryNodeRealizeInstances')         # the collection comes as instances
+    L.new(ci.outputs[0], real.inputs[0])
+    prox = N.new('GeometryNodeProximity')
+    L.new(real.outputs[0], prox.inputs[0])
+    L.new(N.new('GeometryNodeInputPosition').outputs[0], prox.inputs["Sample Position"])   # each point's own
+    far = N.new('FunctionNodeCompare')
+    far.data_type = 'FLOAT'
+    far.operation = 'GREATER_THAN'
+    L.new(prox.outputs["Distance"], far.inputs[0])
+    far.inputs[1].default_value = 1.5
+    isl = N.new('GeometryNodeInputMeshIsland')
+    acc = N.new('GeometryNodeAccumulateField')
+    acc.data_type = 'INT'
+    L.new(far.outputs[0], acc.inputs[0])
+    L.new(isl.outputs["Island Index"], acc.inputs[1])
+    none = N.new('FunctionNodeCompare')
+    none.data_type = 'INT'
+    none.operation = 'EQUAL'
+    L.new(acc.outputs["Total"], none.inputs[2])
+    none.inputs[3].default_value = 0
+    dg = N.new('GeometryNodeDeleteGeometry')
+    L.new(gi.outputs[0], dg.inputs[0])
+    L.new(none.outputs[0], dg.inputs[1])
+    L.new(dg.outputs[0], go.inputs[0])
+    return ng
+
+
+def _bio_modifiers(legs):
+    """The legs' cut (a Boolean taking the cutter collection away) and tidy
+    modifiers, made once per legs part; removed when no cutter is left."""
+    coll = _bio_cut_collection(legs)
+    has = bool(coll.objects)
+    bm = legs.modifiers.get("TIOW Bionic Cut")
+    tm = legs.modifiers.get("TIOW Bionic Tidy")
+    if not has:
+        for m in (bm, tm):
+            if m is not None:
+                legs.modifiers.remove(m)
+        if not coll.objects:
+            bpy.data.collections.remove(coll)
+        return
+    if bm is None:
+        bm = legs.modifiers.new("TIOW Bionic Cut", 'BOOLEAN')
+        bm.operation = 'DIFFERENCE'
+        bm.operand_type = 'COLLECTION'
+    bm.collection = coll
+    bm.solver = 'MANIFOLD' if _bio_manifold(legs) else 'EXACT'
+    if tm is None:
+        tm = legs.modifiers.new("TIOW Bionic Tidy", 'NODES')
+        tm.node_group = _bio_tidy_group()
+    ident = tm.node_group.interface.items_tree["Cutters"].identifier
+    tm[ident] = coll
+
+
+def _bio_manifold(ob):
+    """Every edge of the mesh on exactly two faces (the Manifold solver needs it)."""
+    import numpy as np
+    me = ob.data
+    if not me.edges:
+        return True
+    ei = np.empty(len(me.loops), np.int64)
+    me.loops.foreach_get("edge_index", ei)
+    return bool((np.bincount(ei, minlength=len(me.edges)) == 2).all())
+
+
+def _bio_hull(name, P, legs, coll, grow=0.15, plane=None):
+    """A cutter: the convex hull of P (legs coordinates), grown a little;
+    plane = (point, normal), or a list of them: nothing goes past it (the
+    thigh's cut stays on the cut plane, where the plug's glue face goes)."""
+    import bmesh
+    import numpy as np
+    me = bpy.data.meshes.new(name)
+    bm = bmesh.new()
+    c = P.mean(0)
+    Q = P + grow * (P - c) / np.maximum(np.linalg.norm(P - c, axis=1), 1e-9)[:, None]
+    for pl in ([] if plane is None else plane if isinstance(plane, list) else [plane]):
+        nn = np.asarray(pl[1], float) / np.linalg.norm(pl[1])
+        h = (Q - np.asarray(pl[0], float)) @ nn
+        Q = Q - np.outer(np.maximum(h, 0.0), nn)
+    vs = [bm.verts.new(p) for p in Q]
+    bmesh.ops.convex_hull(bm, input=vs)
+    loose = [v for v in bm.verts if not v.link_faces]
+    bmesh.ops.delete(bm, geom=loose, context='VERTS')
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(me)
+    bm.free()
+    ob = bpy.data.objects.new(name, me)
+    coll.objects.link(ob)
+    ob.parent = legs
+    ob.matrix_parent_inverse = Matrix.Identity(4)
+    ob.matrix_basis = Matrix.Identity(4)
+    ob.display_type = 'WIRE'
+    ob.hide_render = True
+    ob.hide_set(True)
+    return ob
+
+
+def _bio_empty(name, parent, display='SPHERE', size=1.5):
+    ob = bpy.data.objects.new(name, None)
+    coll = parent.users_collection[0] if parent.users_collection else bpy.context.scene.collection
+    coll.objects.link(ob)
+    ob.empty_display_type = display
+    ob.empty_display_size = size
+    ob.show_in_front = True
+    return ob
+
+
+def _bio_set(ob, parent, M, parent_world=None):
+    """Put ob at world matrix M under parent, its own transform = M relative
+    to the parent (so a joint's rotation channels are its own axes).
+    parent_world: where the parent is about to be (its matrix_world only
+    catches up on the next update)."""
+    ob.parent = parent
+    ob.matrix_parent_inverse = Matrix.Identity(4)
+    Pw = parent_world if parent_world is not None else parent.matrix_world
+    ob.matrix_basis = Pw.inverted_safe() @ M
+
+
+def _bio_np2m(A):
+    return Matrix([list(map(float, r)) for r in A])
+
+
+def _bio_import(path, legs, prefs, side, role, k=1.0, clip=None, collar=None, cap=None, skirt=None):
+    """A kit part, cleaned into one closed mesh (bio_clean) the first time
+    it is brought into this file, copied from that after; k times its size.
+    clip = (point, normal) in the part's own (sized, mirrored) coordinates:
+    everything past it is cut off and the cut closed. collar: points (the
+    part's own coordinates) whose convex hull is joined onto it. cap =
+    (centre, radius, axis, top): the mesh is replaced by that sphere cut
+    flat at 'top' along the axis (the plug: its ball and nothing else)."""
+    job = {"category": "Bionic Legs", "name": os.path.splitext(os.path.basename(path))[0]}
+    new, meshes, s, _made, _added = load_stl(path, job, prefs)
+    for o in new:
+        if o not in meshes:
+            bpy.data.objects.remove(o)
+    ob = meshes[0]
+    key = f"TIOW Bionic {os.path.basename(path)} {s:g}"[:63]
+    cache = bpy.data.meshes.get(key)
+    if cache is None:
+        cache = bio_clean(ob)
+        cache.name = key
+        cache = bpy.data.meshes.get(key)
+    old = ob.data
+    ob.data = cache.copy()
+    ob.data.name = ob.name
+    if old is not cache and old.users == 0:
+        bpy.data.meshes.remove(old)
+    if abs(k - 1.0) > 1e-6:
+        ob.data.transform(Matrix.Scale(k, 4))
+        ob["tiow_bionic_scale"] = k
+    if _bio_mirrored(side):                 # the kit is a left leg: a right one is its mirror image
+        ob.data.transform(Matrix.Scale(-1.0, 4, Vector((1, 0, 0))))
+        ob.data.flip_normals()
+        ob["tiow_bionic_mirrored"] = True
+    if cap is not None:
+        import bmesh
+        c_, r_, a_, top_ = cap
+        a_ = Vector(a_).normalized()
+        bm = bmesh.new()
+        bmesh.ops.create_icosphere(bm, subdivisions=5, radius=r_,
+                                   matrix=Matrix.Translation(Vector(c_)) @ a_.to_track_quat('Z', 'Y').to_matrix().to_4x4())
+        bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], plane_co=Vector(c_) + top_ * a_,
+                               plane_no=a_, clear_outer=True)
+        open_ = [e for e in bm.edges if len(e.link_faces) == 1]
+        if open_:
+            bmesh.ops.holes_fill(bm, edges=open_, sides=0)
+            bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+        bm.to_mesh(ob.data)
+        bm.free()
+        ob.data.update()
+    if clip is not None:
+        import bmesh
+        bm = bmesh.new()
+        bm.from_mesh(ob.data)
+        r = bmesh.ops.bisect_plane(bm, geom=bm.verts[:] + bm.edges[:] + bm.faces[:], plane_co=Vector(clip[0]),
+                                   plane_no=Vector(clip[1]), clear_outer=True)
+        cut = [e for e in r["geom_cut"] if isinstance(e, bmesh.types.BMEdge) and len(e.link_faces) == 1]
+        if cut:
+            bmesh.ops.holes_fill(bm, edges=cut, sides=0)
+            bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 4])
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+        bm.to_mesh(ob.data)
+        bm.free()
+        ob.data.update()
+    if collar is not None and len(collar) >= 4:
+        _bio_join_hull(ob, collar)
+    if skirt is not None:                   # (verts, faces) in the part's own coordinates
+        _bio_join_hull(ob, skirt[0], skirt[1])
+    _bio_tag(ob, legs, side, role)
+    return ob
+
+def _bio_join_hull(ob, pts, faces=None):
+    """Join the convex hull of pts (ob's own coordinates) onto ob's mesh, or
+    the solid pts + faces (a Manifold union, Exact if that fails)."""
+    import bmesh
+    me = bpy.data.meshes.new("TIOW hull")
+    bm = bmesh.new()
+    vs = [bm.verts.new(p) for p in pts]
+    if faces is None:
+        bmesh.ops.convex_hull(bm, input=vs)
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context='VERTS')
+    else:
+        for f in faces:
+            bm.faces.new([vs[i] for i in f])
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(me)
+    bm.free()
+    hull = bpy.data.objects.new("TIOW hull", me)
+    for c in ob.users_collection[:1]:
+        c.objects.link(hull)
+    hull.parent = ob                        # in ob's own coordinates, wherever ob is
+    hull.matrix_parent_inverse = Matrix.Identity(4)
+    hull.matrix_basis = Matrix.Identity(4)
+    old = ob.data
+    for solver in ('MANIFOLD', 'EXACT'):
+        mod = ob.modifiers.new("TIOW hull", 'BOOLEAN')
+        mod.operation, mod.object, mod.solver = 'UNION', hull, solver
+        bpy.context.view_layer.update()
+        new = bpy.data.meshes.new_from_object(ob.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+        ob.modifiers.remove(mod)
+        if len(new.polygons) > len(old.polygons) // 2:
+            break
+        bpy.data.meshes.remove(new)
+        new = None
+    if new is not None:
+        new.name = old.name
+        ob.data = new
+        if old.users == 0:
+            bpy.data.meshes.remove(old)
+    bpy.data.objects.remove(hull)
+    bpy.data.meshes.remove(me)
+
+
+def _bio_shells(bm):
+    seen, out = set(), []
+    for f in bm.faces:
+        if f.index in seen:
+            continue
+        st, comp = [f], []
+        seen.add(f.index)
+        while st:
+            x = st.pop()
+            comp.append(x)
+            for e in x.edges:
+                for g in e.link_faces:
+                    if g.index not in seen:
+                        seen.add(g.index)
+                        st.append(g)
+        out.append(comp)
+    return out
+
+
+def _bio_union_group():
+    """Geometry Nodes: every shell of the mesh unioned into one (Manifold)."""
+    ng = bpy.data.node_groups.get("TIOW Bionic Union")
+    if ng is not None:
+        return ng
+    ng = bpy.data.node_groups.new("TIOW Bionic Union", 'GeometryNodeTree')
+    ng.interface.new_socket("Geometry", in_out='INPUT', socket_type='NodeSocketGeometry')
+    ng.interface.new_socket("Geometry", in_out='OUTPUT', socket_type='NodeSocketGeometry')
+    N, L = ng.nodes, ng.links
+    gi, go = N.new('NodeGroupInput'), N.new('NodeGroupOutput')
+    isl = N.new('GeometryNodeInputMeshIsland')
+    sp = N.new('GeometryNodeSplitToInstances')
+    sp.domain = 'FACE'
+    L.new(gi.outputs[0], sp.inputs[0])
+    L.new(isl.outputs["Island Index"], sp.inputs["Group ID"])
+    mb = N.new('GeometryNodeMeshBoolean')
+    mb.operation = 'UNION'
+    mb.solver = 'MANIFOLD'
+    L.new(sp.outputs[0], mb.inputs["Mesh"])
+    L.new(mb.outputs[0], go.inputs[0])
+    return ng
+
+
+def bio_clean(ob):
+    """Kit STLs come as overlapping and touching shells, a few stray faces and
+    pin holes - fine for a slicer, but Finalise's booleans need one closed
+    mesh. Shells touching along an edge are split apart, stray faces and
+    flat (no volume) shells dropped, holes filled, every shell turned
+    outward, then all of them unioned (Manifold). Looks the same; volume
+    where shells overlapped is counted once."""
+    import bmesh
+    me = ob.data
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
+    seen, dup = {}, []
+    for f in bm.faces:
+        k = tuple(sorted(v.index for v in f.verts))
+        if k in seen:
+            dup.append(f)
+        else:
+            seen[k] = f
+    if dup:
+        bmesh.ops.delete(bm, geom=dup, context='FACES_ONLY')
+    many = [e for e in bm.edges if len(e.link_faces) > 2]
+    if many:
+        bmesh.ops.split_edges(bm, edges=many)
+    bm.faces.index_update()
+    drop = []
+    for comp in _bio_shells(bm):
+        if len(comp) <= 8 and any(len(e.link_faces) == 1 for f in comp for e in f.edges):
+            drop += comp
+    if drop:
+        bmesh.ops.delete(bm, geom=list(set(drop)), context='FACES')
+    edges = [e for e in bm.edges if len(e.link_faces) == 1]
+    if edges:
+        bmesh.ops.holes_fill(bm, edges=edges, sides=0)
+    edges = [e for e in bm.edges if len(e.link_faces) == 1]
+    if edges:
+        bmesh.ops.triangle_fill(bm, use_beauty=True, use_dissolve=False, edges=edges)
+    bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 3])
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context='VERTS')
+    bm.faces.index_update()
+    for comp in _bio_shells(bm):
+        bmesh.ops.recalc_face_normals(bm, faces=comp)
+    tot = abs(bm.calc_volume())
+    bm.faces.index_update()
+    drop = []
+    for comp in _bio_shells(bm):
+        bad = any(len(e.link_faces) != 2 for f in comp for e in f.edges)
+        vol = sum(f.verts[0].co.dot(f.verts[1].co.cross(f.verts[2].co)) / 6.0 for f in comp)
+        if abs(vol) < 0.01 or (bad and abs(vol) < 0.01 * tot):
+            drop += comp
+    if drop:
+        bmesh.ops.delete(bm, geom=list(set(drop)), context='FACES')
+    bm.to_mesh(me)
+    bm.free()
+    me.update()
+    m = ob.modifiers.new("TIOW union", 'NODES')
+    m.node_group = _bio_union_group()
+    dg = bpy.context.evaluated_depsgraph_get()
+    new = bpy.data.meshes.new_from_object(ob.evaluated_get(dg))
+    ob.modifiers.remove(m)
+    old = ob.data
+    ob.data = new
+    if old.users == 0:
+        bpy.data.meshes.remove(old)
+    return new
+
+
+
+def _bio_side_shin_points(legs, V, T):
+    """{side: (ea, eb, top, opening)} in mm: Mar Fil's shin points found on
+    the legs, matched to the Shin R / Shin L anchors (else by X: Mar Fil's
+    right is +X). Legs without them (other makers) use a clicked Shin anchor's
+    three points - both ends of the ankle, the front of the shin under the
+    knee - with its Z as the shin's front."""
+    import numpy as np
+    inv = legs.matrix_world.inverted_safe()
+    u = float(legs.get("tiow_unit") or 1.0)
+    anchors = {str(c["ws_type"])[-1]: c for c in legs.children if c.get("ws_type") in ("Shin R", "Shin L")}
+    found = find_shin_points(V, T)
+    out = {}
+    if len(found) == 2:
+        if len(anchors) == 2:
+            at = np.array(inv @ anchors["R"].matrix_world.translation) / u
+            r = int(np.argmin([np.linalg.norm(np.asarray(f[2]) - at) for f in found]))
+        else:
+            r = 0 if found[0][2][0] > found[1][2][0] else 1
+        out = {"R": found[r], "L": found[1 - r]}
+    for side, a in anchors.items():
+        if side in out:
+            continue
+        try:
+            pts = [np.asarray(p, float) / u for p in json.loads(a.get("tiow_points") or "[]")]
+        except ValueError:
+            pts = []
+        if len(pts) >= 3:
+            z = np.array((inv.to_3x3() @ a.matrix_world.to_3x3()) @ Vector((0, 0, 1)))
+            out[side] = (pts[0], pts[1], pts[2], z / np.linalg.norm(z))
+    return out
+
+
+def _bio_up(legs):
+    import numpy as np
+    for c in legs.children:
+        if c.get("ws_type") == "Base":
+            return _bio_unit(np.array(legs.matrix_world.inverted_safe().to_3x3() @ c.matrix_world.col[2].xyz))
+    return np.array([0, 0, 1.0])
+
+
+def bionic_build(legs, side, prefs, foot=None, cut=None, offset=None, out=None, tilt=None, scale=None):
+    """Cut the side's leg off the legs part and hang the kit's leg from a plug
+    on the cut, posed like the old leg; or, where the sculpt already has a
+    hip ball instead of that leg (Springles' 'bionic joint' legs), hang it
+    from that ball, posed like the other leg mirrored. cut: "belt" (just
+    under the belt, the default where the legs have belt anchors) or
+    "thigh" (across the top of the thigh); offset: mm higher (+) / lower.
+    scale: the kit's size (1 = as it comes); by default the other bionic
+    leg's, else what it was, else fitted so the plug's ball is as wide as the
+    legs (both legs' tops averaged). Returns a note for the status line."""
+    import numpy as np
+    folder = bionic_folder(prefs, legs.get("tiow_src"))
+    if folder is None:
+        raise ValueError("no bionic leg kit found: set its folder in the TIOW Inbox preferences "
+                         "(Bionic Legs), or put the kit (LINK_LEG.stl ...) in the library")
+    kit = bionic_kit(folder)
+    prev = json.loads(legs.get("tiow_bionic_state") or "{}").get(side) or {}
+    foot = foot or prev.get("foot")
+    if foot is None or foot not in kit["feet"]:
+        foot = BIONIC_FOOT if BIONIC_FOOT in kit["feet"] else sorted(kit["feet"])[0]
+    armour = list(prev.get("armour") or [])
+    s = float(legs.get("tiow_unit") or 1.0)
+    V, T = mesh_np(legs)
+    V = V / s
+    up = _bio_up(legs)
+    pts = _bio_side_shin_points(legs, V, T)
+    fwd = None
+    if side not in pts:
+        gen, fwd = bio_generic_shins(V, T, up)
+        for k, v in gen.items():
+            if k in ("R", "L") and k not in pts:
+                pts[k] = v
+    plans = {k: bio_plan(V, T, *pts[k]) for k in pts if k in ("R", "L")}
+    other = plans.get("L" if side == "R" else "R")
+    bionic_remove(legs, side)
+    state = dict(json.loads(legs.get("tiow_bionic_state") or "{}"))
+    if side not in plans:
+        # no leg there: a hip ball in the sculpt?
+        if fwd is None:
+            _g, fwd = bio_generic_shins(V, T, up)
+        hb = bio_find_hip_ball(V, T, up, fwd, side, other) if fwd is not None and other is not None else None
+        if hb is None:
+            raise ValueError(f"no {side} leg found: on legs other than Mar Fil's, place its Shin {side} anchor first "
+                             "(Anchors: both ends of the ankle, then the front of the shin under the knee)")
+        ball, r = hb
+        # the other leg's foot, mirrored across the middle
+        left = _bio_unit(np.cross(up, fwd))
+        M = 0.5 * (ball + other["C"])
+        foot_pts, sole, toe, uf, based = bio_old_foot(V, T, other, None, up)
+        A_m = _bio_mirror(other["A"], M, left)
+        state[side] = dict(mode="ball", ball=ball.tolist(), ball_r=r, C=ball.tolist(), d=up.tolist(), A=A_m.tolist(),
+                           v=fwd.tolist(), sole=sole, toe=_bio_mirror(toe, M, left, True).tolist(),
+                           uf=_bio_mirror(uf, M, left, True).tolist(), foot=foot, based=bool(based),
+                           armour=armour, folder=folder)
+        legs["tiow_bionic_state"] = json.dumps(state)
+        note = bionic_assemble(legs, side, prefs, kit)
+        return f"Bionic leg {side}: on the legs' own hip ball (r {r * s:.2f} mm), {note} (the other leg mirrored)"
+    plan = plans[side]
+    if plan is None:
+        raise ValueError(f"couldn't follow the {side} leg up from its shin")
+    belt = bio_belt(legs, V)
+    # each leg's top: how wide, and its middle
+    secs = {}
+    for k_, pl_ in plans.items():
+        if pl_ is None:
+            continue
+        o_ = plans.get("L" if k_ == "R" else "R")
+        if belt is not None:
+            lat_ = belt["lat"][k_]
+        elif o_ is not None:
+            lat_ = _bio_unit(pl_["C"] - o_["C"])
+        else:
+            continue
+        secs[k_] = bio_leg_section(V, T, pl_, lat_)
+    sec = secs.get(side)
+    ball_r = float(kit["plug"][1].get("r", 2.689))
+    other_st = state.get("L" if side == "R" else "R") or {}
+    auto_k = None
+    widths = [x[0] for x in secs.values() if x is not None]
+    if widths:
+        auto_k = round(min(BIO_SCALE_RANGE[1], max(BIO_SCALE_RANGE[0], float(np.mean(widths)) / (2 * ball_r))), 2)
+    if scale is not None:
+        k = float(scale)
+    elif other_st.get("mode") == "cut" and other_st.get("scale"):
+        k = float(other_st["scale"])
+    elif prev.get("scale"):
+        k = float(prev["scale"])
+    else:
+        k = auto_k or 1.0
+    k = min(BIO_SCALE_RANGE[1] + 0.2, max(0.5, k))
+    cut = cut or prev.get("cut") or ("belt" if belt is not None else "thigh")
+    if cut == "belt" and belt is None:
+        cut = "thigh"
+    offset = float(offset if offset is not None else prev.get("offset", 0.0))
+    out = float(out if out is not None else prev.get("out", BIO_BALL_OUT))
+    tilt = float(tilt if tilt is not None else prev.get("tilt", BIO_BALL_TILT))
+    foot_pts, sole, toe, uf, based = bio_old_foot(V, T, plan, other, up)
+    coll = _bio_cut_collection(legs)
+    hulls = []
+    auto = {}
+    skirt = None
+    gk = dict(glue_r=2.42 * k, ball_drop=float(np.linalg.norm(np.asarray(kit["plug"][1]["glue"]) - np.asarray(kit["plug"][1]["ball"]))) * k,
+              clear=BIO_BALL_CLEAR * k, mid=None if sec is None else sec[2], ball_r=ball_r * k,
+              stump_h=float(kit["plug"][1].get("step", BIO_PLUG_STEP)) * k - 0.03 - BIO_STUMP_OVERLAP)
+    Sp = None
+    if cut == "belt":
+        Cp, dp, hip_pts, Sp = bio_belt_cut(V, plan, belt, side, offset, out=out, tilt=tilt, auto=auto, **gk)
+        # tipped forwards or back the way the thigh swings: the leg posed like the old one on that cut
+        # (seat off), its cup's opening seen from the side
+        # (twice: tipping the cut moves the ball, which moves the thigh)
+        ub = belt["up"]
+        lat_p = _bio_unit(belt["lat"][side] - (belt["lat"][side] @ ub) * ub)
+        fw = _bio_unit(np.cross(ub, lat_p))
+        if fw[1] < 0:
+            fw = -fw
+        for _i in range(3):
+            pre = bio_pose(dict(C=Cp, d=dp, A=plan["A"], v=plan["v"]), bio_kit_side(kit, side), foot, sole, toe, uf, 1.0, seat=_i > 0, k=k)
+            op = pre.get("opening")
+            if op is None:
+                break
+            swing = math.degrees(math.atan2(op @ fw, op @ ub))
+            auto = {}
+            Cp, dp, hip_pts, Sp = bio_belt_cut(V, plan, belt, side, offset, out=out, tilt=tilt, auto=auto, swing=swing, **gk)
+            auto["swing"] = max(-35.0, min(35.0, swing))
+        hulls.append(("hip", hip_pts, (Sp * s, dp)))       # its top on the sloping cut
+        skirt = dict(B=(Cp - gk["ball_drop"] * dp).tolist(), n=np.asarray(dp).tolist(),
+                     h_trim=float(kit["plug"][1].get("step", BIO_PLUG_STEP)) * k - 0.03, R=ball_r * k, lift=0.8 * k)
+        tplan = plan
+    else:
+        tplan = dict(plan, C=plan["C"] + offset * plan["d"])
+        Cp, dp = tplan["C"], plan["d"]
+        if sec is not None:                  # over the middle of the leg
+            Cp = sec[2] + ((tplan["C"] - sec[2]) @ dp) * dp
+        Sp = Cp
+        if gk["stump_h"] is not None:        # the plug's neck into the leg: its ball comes out of the cut
+            Cp = Cp + (gk["ball_drop"] - gk["stump_h"]) * dp
+    for name, P in zip(("thigh", "shin", "foot"), bio_cutter_points(V, tplan, foot_pts)):
+        pl = None
+        if name == "thigh":
+            pl = [(tplan["C"] * s, plan["d"])] + ([(Sp * s, dp)] if cut == "belt" else [])   # never above the cut
+        hulls.append((name, P, pl))
+    if auto.get("notch") is not None:
+        # the codpiece scooped out round the ball and the thigh's cup, under the cut
+        kk = np.arange(160) + 0.5
+        ph, th_ = np.arccos(1 - 2 * kk / 160), math.pi * (1 + 5 ** 0.5) * kk
+        sph = np.c_[np.cos(th_) * np.sin(ph), np.sin(th_) * np.sin(ph), np.cos(ph)]
+        hulls.append(("notch", auto["notch"] + (BIO_BALL_CLEAR * k + 0.1) * sph, (Sp * s, dp)))
+    for i, (name, P, plane) in enumerate(hulls):
+        ob = _bio_hull(f"Bionic Cut {side} {name}", P * s, legs, coll, plane=plane)
+        _bio_tag(ob, legs, side, f"cut{i}")
+    _bio_modifiers(legs)
+    # the shin anchor of the cut leg goes, with whatever was on it
+    ps = _part_sockets()
+    for c in list(legs.children):
+        if c.get("ws_type") == f"Shin {side}":
+            on = [g for g in c.children if g.type == 'MESH']
+            if ps is not None:
+                on += [g for g in _snapped_to(c, ps[1], bpy.context.view_layer.objects) if g not in on]
+            for g in on:
+                if _is_tiow(g):
+                    _remove_part(g)
+                else:
+                    g.hide_set(True)
+            bpy.data.objects.remove(c)
+    if cut == "belt":
+        inward = -belt["lat"][side]
+    elif other is not None:
+        inward = _bio_unit(other["C"] - plan["C"])
+    else:
+        inward = None
+    state[side] = dict(mode="cut", cut=cut, offset=offset, out=out, tilt=tilt, swing=auto.get("swing", 0.0), scale=k,
+                       skirt=skirt,
+                       scale_auto=auto_k, leg_width=None if sec is None else sec[0], leg_depth=None if sec is None else sec[1],
+                       inward=None if inward is None else inward.tolist(),
+                       C=np.asarray(Cp).tolist(), d=np.asarray(dp).tolist(),
+                       A=plan["A"].tolist(), v=plan["v"].tolist(), sole=sole, toe=toe.tolist(), uf=uf.tolist(),
+                       foot=foot, based=bool(based), armour=armour, folder=folder)
+    legs["tiow_bionic_state"] = json.dumps(state)
+    note = bionic_assemble(legs, side, prefs, kit)
+    where = {"belt": "under the belt", "thigh": "across the top of the thigh"}[cut]
+    if offset:
+        where += f" ({offset:+.1f} mm)"
+    extra = ", foot on a base: cut stopped at the boot" if based else ""
+    size = f", kit at {k * 100:.0f}%" + (" (the plug as wide as the leg)" if auto_k is not None and abs(k - auto_k) < 1e-6 else "")
+    return f"Bionic leg {side}: cut {where}, plug on{size}, {note}{extra}"
+
+
+def bionic_assemble(legs, side, prefs, kit=None, keep=None):
+    """(Re)build the side's plug, joints and parts from the stored plan: the
+    pose follows the old leg. keep = {role: object} reused (re-posed)."""
+    state = json.loads(legs.get("tiow_bionic_state") or "{}")
+    st = state[side]
+    if kit is None:
+        kit = bionic_kit(st["folder"])
+    import numpy as np
+    plan = dict(C=np.array(st["C"]), d=np.array(st["d"]), A=np.array(st["A"]), v=np.array(st["v"]))
+    s = float(legs.get("tiow_unit") or 1.0)
+    ball = st.get("ball") if st.get("mode") == "ball" else None
+    k = float(st.get("scale", 1.0))
+    pose = bio_pose(plan, bio_kit_side(kit, side), st["foot"], st["sole"], np.array(st["toe"]), np.array(st["uf"]), s, ball=ball, k=k)
+    Lw = legs.matrix_world
+    W = {k: Lw @ _bio_np2m(pose[k]) for k in ("plug", "hip", "thigh", "knee", "shin", "ankle", "foot")}
+    have = bio_parts(legs, side)
+    # plug, joints and parts: made if missing, else put back
+    if ball is None:
+        clip = None
+        kp = bio_kit_side(kit, side)["plug"][1]
+        if st.get("mode") == "cut":            # trimmed just above the cut face: the ball comes out of it like a stump
+            n_ = np.asarray(kp["flat_n"], float)
+            n_ = n_ / np.linalg.norm(n_)
+            hc = (float(kp.get("step", BIO_PLUG_STEP)) * k - 0.03) * s
+            clip = (np.asarray(kp["ball"], float) * s * k + hc * n_, n_)
+        collar = None
+        if False and clip is not None and st.get("collar"):     # (a hull collar: tried, it showed between the ribs)
+            Pinv = np.linalg.inv(pose["plug"])
+            cl = (Pinv @ np.c_[np.asarray(st["collar"], float) * s, np.ones(len(st["collar"]))].T).T[:, :3]
+            e1 = _bio_unit(np.cross(n_, [0, 1.0, 0]) if abs(n_[1]) < 0.9 else np.cross(n_, [1.0, 0, 0]))
+            e2 = np.cross(n_, e1)
+            hb = hc - 0.1 * s                           # a ring on the ball just under the trimmed top
+            rr = math.sqrt(max((float(kp.get("r", 2.689)) * s * k) ** 2 - hb * hb, 0.0)) - 0.01 * s
+            a_ = np.linspace(0, 2 * math.pi, 48, endpoint=False)
+            ring = np.asarray(kp["ball"], float) * s * k + hb * n_ + rr * (np.outer(np.cos(a_), e1) + np.outer(np.sin(a_), e2))
+            collar = np.r_[cl, ring]
+        cap = None
+        if False and clip is not None:          # (its ball as a plain cap up into the leg: tried, it bulged out of the hip)
+            cap = (np.asarray(kp["ball"], float) * s * k, float(kp.get("r", 2.689)) * s * k, n_, BIO_PLUG_TOP * s * k)
+            clip = None
+        skirt = None
+        sk = st.get("skirt")
+        if clip is not None and sk:
+            # measured on the cut legs (one closed body), in their own coordinates
+            from mathutils.bvhtree import BVHTree
+            bpy.context.view_layer.update()
+            tree = BVHTree.FromObject(legs, bpy.context.evaluated_depsgraph_get())
+            sk = bio_plug_skirt(tree, np.asarray(sk["B"]) * s, sk["n"], sk["h_trim"] * s, sk["R"] * s, sk["lift"] * s)
+        if clip is not None and sk:
+            sv, sf = _bio_skirt_mesh(sk, 1.0)
+            Pinv = np.linalg.inv(pose["plug"])
+            skirt = ((Pinv @ np.c_[sv, np.ones(len(sv))].T).T[:, :3], sf)
+        plug = have.get("plug") or _bio_import(kit["plug"][0], legs, prefs, side, "plug", k, clip=clip, collar=collar, cap=cap,
+                                               skirt=skirt)
+        plug.name = f"Bionic Plug {side}"
+        _bio_set(plug, legs, W["plug"], Lw)
+        host, host_w = plug, W["plug"]
+    else:                                   # the legs' own ball is the plug
+        plug, host, host_w = None, legs, Lw
+    hip = have.get("hip")
+    if hip is None:
+        hip = _bio_empty(f"Bionic Hip {side}", host, 'SPHERE', 1.8 * s)
+        hip["ws_type"] = f"Bionic Hip {side}"
+        _bio_tag(hip, legs, side, "hip")
+        ps_ = _part_sockets()
+        if ps_:
+            ps_[0].ensure_type(bpy.context.scene, f"Bionic Hip {side}")
+    _bio_set(hip, host, W["hip"], host_w)
+    thigh = have.get("thigh") or _bio_import(kit["thigh"][0], legs, prefs, side, "thigh", k)
+    thigh.name = f"Bionic Thigh {side}"
+    _bio_set(thigh, hip, W["thigh"], W["hip"])
+    knee = have.get("knee")
+    if knee is None:
+        knee = _bio_empty(f"Bionic Knee {side}", thigh, 'CIRCLE', 2.6 * s)
+        _bio_tag(knee, legs, side, "knee")
+    _bio_set(knee, thigh, W["knee"], W["thigh"])
+    shin = have.get("shin") or _bio_import(kit["shin"][0], legs, prefs, side, "shin", k)
+    shin.name = f"Bionic Shin {side}"
+    _bio_set(shin, knee, W["shin"], W["knee"])
+    ankle = have.get("ankle")
+    if ankle is None:
+        ankle = _bio_empty(f"Bionic Ankle {side}", shin, 'SPHERE', 1.2 * s)
+        _bio_tag(ankle, legs, side, "ankle")
+    _bio_set(ankle, shin, W["ankle"], W["shin"])
+    foot = have.get("foot")
+    if foot is not None and foot.get("tiow_bionic_stem") != st["foot"]:
+        _remove_part(foot)
+        foot = None
+    if foot is None:
+        foot = _bio_import(kit["feet"][st["foot"]][0], legs, prefs, side, "foot", k)
+        foot["tiow_bionic_stem"] = st["foot"]
+    foot.name = f"Bionic Foot {side} ({st['foot']})"
+    _bio_set(foot, ankle, W["foot"], W["ankle"])
+    for o in (hip, knee, ankle):
+        o.rotation_mode = 'XYZ'
+        o.lock_location = (True, True, True)
+    knee.lock_rotation = (False, True, True)            # a hinge: it only turns about its own X
+    for o in [x for x in (plug, thigh, shin, foot) if x is not None]:   # turn the joints, not the parts
+        o.lock_location = (True, True, True)
+        o.lock_rotation = (True, True, True)
+    roles = {"thigh": (thigh, W["thigh"]), "shin": (shin, W["shin"])}
+    bionic_armour_place(legs, side, kit, roles)
+    bpy.context.view_layer.update()
+    short = pose["short"]
+    lean = f", hip cup {pose['cup_lean']:.0f} deg off the ball's axis" if pose.get("cup_lean", 0) > 12 else ""
+    if short > 0.1:
+        return f"leg posed like the old one but its foot {short:.1f} mm off the old one{lean}"
+    return f"leg posed like the old one{lean}"
+
+
+def bionic_armour_place(legs, side, kit, hosts=None):
+    """Put the armour pieces on this side's leg at their saved fits (relative
+    to the part they sit on; a right leg takes the mirror image), or park a
+    piece with no fit yet beside the leg to be placed by eye."""
+    state = json.loads(legs.get("tiow_bionic_state") or "{}")
+    want = set(state[side].get("armour") or [])
+    k = float(state[side].get("scale", 1.0))
+    have = bio_parts(legs, side)
+    for stem, (path, rec) in kit["armour"].items():
+        role = f"armour:{stem}"
+        ob = have.get(role)
+        if stem not in want:
+            if ob is not None:
+                _remove_part(ob)
+            continue
+        hrole = rec.get("host") or "thigh"
+        host, hw = (hosts or {}).get(hrole, (have.get(hrole), None))
+        if host is None:
+            continue
+        hw = hw if hw is not None else host.matrix_world
+        if ob is None:
+            prefs = get_prefs()
+            ob = _bio_import(path, legs, prefs, side, role, k)   # mirrored for a right leg
+            ob.name = f"Bionic {rec.get('label') or stem} {side}"
+        fit = rec.get("fit")
+        s = float(legs.get("tiow_unit") or 1.0)
+        if isinstance(fit, list) and len(fit) == 16:
+            F = Matrix((fit[0:4], fit[4:8], fit[8:12], fit[12:16]))
+            F.translation = F.translation * s * k
+            if _bio_mirrored(side):
+                MX = Matrix.Scale(-1.0, 4, Vector((1, 0, 0)))
+                F = MX @ F @ MX
+            ob["tiow_bionic_parked"] = False
+        else:
+            # no fit yet: beside the host, outside the leg, to be placed by eye
+            F = Matrix.Translation(Vector((-9.0 * s * k if side == "R" else 9.0 * s * k, 0.0, 4.0 * s * k)))   # +X: the leg's left
+            ob["tiow_bionic_parked"] = True
+        _bio_set(ob, host, hw @ F, hw)
+
+
+def bionic_save_armour(legs, side):
+    """Save where the armour pieces sit on this side's leg (relative to the
+    part each sits on) into the pieces' sockets files: every bionic leg after
+    gets them there (a right leg the mirror image). Returns how many."""
+    n = 0
+    have = bio_parts(legs, side)
+    s = float(legs.get("tiow_unit") or 1.0)
+    s *= float((json.loads(legs.get("tiow_bionic_state") or "{}").get(side) or {}).get("scale", 1.0))
+    for role, ob in have.items():
+        if not role.startswith("armour:"):
+            continue
+        stem = role.split(":", 1)[1]
+        src = ob.get("tiow_src")
+        _st, rec = _bio_record(src)
+        host = have.get((rec or {}).get("host") or "thigh")
+        if host is None or not src:
+            continue
+        F = host.matrix_world.inverted_safe() @ ob.matrix_world
+        if _bio_mirrored(side):
+            MX = Matrix.Scale(-1.0, 4, Vector((1, 0, 0)))
+            F = MX @ F @ MX
+        F.translation = F.translation / s
+        path = os.path.splitext(str(src))[0] + SIDECAR
+        whole = read_sidecar(src) or {"schemaVersion": 1, "part": os.path.splitext(os.path.basename(src))[0]}
+        b = dict(whole.get("bionic") or BIONIC_DEFAULT.get(stem) or {"role": "armour"})
+        b["fit"] = [x for row in F for x in row]
+        whole["bionic"] = b
+        _write_sidecar(path, whole)
+        ob["tiow_bionic_parked"] = False
+        n += 1
+    return n
+
+
+def bionic_remove(legs, side):
+    """Take the side's bionic leg off: its parts, joints and cutters go and the
+    leg is whole again (its Shin anchor comes back)."""
+    have = bio_parts(legs, side)
+    objs = list(have.values())                  # deepest first
+    objs.sort(key=lambda o: -sum(1 for _ in _ancestors(o)))
+    for o in objs:
+        if o.name not in bpy.data.objects:
+            continue
+        me = o.data if o.type == 'MESH' else None
+        bpy.data.objects.remove(o)
+        if me is not None and me.users == 0:
+            bpy.data.meshes.remove(me)
+    _bio_modifiers(legs)
+    state = json.loads(legs.get("tiow_bionic_state") or "{}")
+    if side in state:
+        del state[side]
+        if state:
+            legs["tiow_bionic_state"] = json.dumps(state)
+        else:
+            del legs["tiow_bionic_state"]
+        try:
+            auto_shin_anchors(legs)
+        except (ValueError, RuntimeError):
+            pass
+
+
+def _ancestors(o):
+    while o.parent is not None:
+        o = o.parent
+        yield o
+
+
+def bionic_joint(legs, side, which):
+    return bio_parts(legs, side).get(which)
+
+
+class TIOW_OT_bionic_leg(bpy.types.Operator):
+    """Cut this side's leg off the selected model's legs (just under the hip
+    armour), glue the bionic kit's hip plug on the cut and hang the kit's
+    leg from it, posed like the old leg. The cut is a live Boolean; turn the
+    new leg at its Hip, Knee and Ankle"""
+    bl_idname = "tiow.bionic_leg"
+    bl_label = "Bionic Leg"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+
+    @classmethod
+    def poll(cls, ctx):
+        return ctx.mode == 'OBJECT' and ctx.view_layer.objects.active is not None
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        if legs is None:
+            self.report({'WARNING'}, "No legs on the selected model")
+            return {'CANCELLED'}
+        try:
+            msg = bionic_build(legs, self.side, get_prefs(), foot=None)
+        except (ValueError, OSError, RuntimeError) as exc:
+            _set_status(f"Bionic leg: {exc}")
+            self.report({'ERROR'}, str(exc))
+            return {'CANCELLED'}
+        _set_status(msg)
+        self.report({'INFO'}, msg)
+        return {'FINISHED'}
+
+
+class TIOW_OT_bionic_cut(bpy.types.Operator):
+    """Move the bionic leg's cut: just under the belt or across the top of the
+    thigh, and a little higher or lower. The leg is re-cut and re-posed"""
+    bl_idname = "tiow.bionic_cut"
+    bl_label = "Bionic Cut"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+    where: StringProperty(default="")
+    step: FloatProperty(default=0.0)
+    slope: FloatProperty(default=0.0)
+    size: FloatProperty(default=0.0)
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        st = json.loads(legs.get("tiow_bionic_state") or "{}").get(self.side) if legs else None
+        if not st or st.get("mode") == "ball":
+            self.report({'WARNING'}, f"No cut bionic leg {self.side} on the selected model")
+            return {'CANCELLED'}
+        cut = self.where or st.get("cut")
+        off = 0.0 if self.where else float(st.get("offset", 0.0)) + self.step
+        tilt = min(60.0, max(0.0, float(st.get("tilt", BIO_BALL_TILT)) + self.slope))
+        scale = None
+        if self.size:
+            scale = round(min(BIO_SCALE_RANGE[1] + 0.2, max(0.5, float(st.get("scale", 1.0)) + self.size)), 2)
+        try:
+            msg = bionic_build(legs, self.side, get_prefs(), cut=cut, offset=off, tilt=tilt, scale=scale)
+            o_side = "L" if self.side == "R" else "R"
+            o_st = json.loads(legs.get("tiow_bionic_state") or "{}").get(o_side) or {}
+            if scale is not None and o_st.get("mode") == "cut":          # both bionic legs the same size
+                bionic_build(legs, o_side, get_prefs(), scale=scale)
+        except (ValueError, OSError, RuntimeError) as exc:
+            self.report({'ERROR'}, str(exc))
+            return {'CANCELLED'}
+        _set_status(msg)
+        return {'FINISHED'}
+
+
+class TIOW_OT_bionic_follow(bpy.types.Operator):
+    """Pose the bionic leg like the old leg again (Hip, Knee and Ankle back
+    to where they started)"""
+    bl_idname = "tiow.bionic_follow"
+    bl_label = "Follow Old Leg"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        if legs is None or self.side not in json.loads(legs.get("tiow_bionic_state") or "{}"):
+            self.report({'WARNING'}, f"No bionic leg {self.side} on the selected model")
+            return {'CANCELLED'}
+        msg = f"Bionic leg {self.side}: " + bionic_assemble(legs, self.side, get_prefs())
+        _set_status(msg)
+        return {'FINISHED'}
+
+
+class TIOW_OT_bionic_foot(bpy.types.Operator):
+    """Swap the bionic leg's foot for the next one in the kit (the leg is
+    re-posed so the new foot stands where the old one did)"""
+    bl_idname = "tiow.bionic_foot"
+    bl_label = "Next Foot"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+    step: IntProperty(default=1)
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        state = json.loads(legs.get("tiow_bionic_state") or "{}") if legs else {}
+        if self.side not in state:
+            self.report({'WARNING'}, f"No bionic leg {self.side} on the selected model")
+            return {'CANCELLED'}
+        kit = bionic_kit(state[self.side]["folder"])
+        feet = sorted(kit["feet"])
+        cur = state[self.side]["foot"]
+        i = (feet.index(cur) + self.step) % len(feet) if cur in feet else 0
+        state[self.side]["foot"] = feet[i]
+        legs["tiow_bionic_state"] = json.dumps(state)
+        msg = f"Bionic leg {self.side}: {feet[i]}, " + bionic_assemble(legs, self.side, get_prefs(), kit)
+        _set_status(msg)
+        return {'FINISHED'}
+
+
+class TIOW_OT_bionic_armour(bpy.types.Operator):
+    """Put this armour piece on the bionic leg, or take it off. A piece with
+    no saved place yet is parked beside the leg: move it where it goes and
+    press Save Armour Places"""
+    bl_idname = "tiow.bionic_armour"
+    bl_label = "Armour"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+    stem: StringProperty()
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        state = json.loads(legs.get("tiow_bionic_state") or "{}") if legs else {}
+        if self.side not in state:
+            return {'CANCELLED'}
+        arm = list(state[self.side].get("armour") or [])
+        if self.stem in arm:
+            arm.remove(self.stem)
+        else:
+            arm.append(self.stem)
+        state[self.side]["armour"] = arm
+        legs["tiow_bionic_state"] = json.dumps(state)
+        kit = bionic_kit(state[self.side]["folder"])
+        bionic_armour_place(legs, self.side, kit)
+        ob = bio_parts(legs, self.side).get(f"armour:{self.stem}")
+        if ob is not None and ob.get("tiow_bionic_parked"):
+            for o in ctx.selected_objects:
+                o.select_set(False)
+            ob.select_set(True)
+            ctx.view_layer.objects.active = ob
+            _set_status(f"{ob.name}: no place saved yet - move it onto the leg, then Save Armour Places")
+        return {'FINISHED'}
+
+
+class TIOW_OT_bionic_save_armour(bpy.types.Operator):
+    """Save where the armour sits on this bionic leg: every bionic leg after
+    gets it there (a left leg the mirror image)"""
+    bl_idname = "tiow.bionic_save_armour"
+    bl_label = "Save Armour Places"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        if legs is None:
+            return {'CANCELLED'}
+        n = bionic_save_armour(legs, self.side)
+        _set_status(f"Saved the place of {n} armour piece(s)")
+        return {'FINISHED'}
+
+
+class TIOW_OT_bionic_remove(bpy.types.Operator):
+    """Take the bionic leg off and put the old leg back"""
+    bl_idname = "tiow.bionic_remove"
+    bl_label = "Remove Bionic Leg"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        if legs is None:
+            return {'CANCELLED'}
+        bionic_remove(legs, self.side)
+        _set_status(f"Bionic leg {self.side} removed: the old leg is back")
+        return {'FINISHED'}
+
+
+class TIOW_OT_bionic_select(bpy.types.Operator):
+    """Select one of the bionic leg's joints to turn it (R to rotate: the
+    Hip and Ankle turn any way, the Knee only on its hinge)"""
+    bl_idname = "tiow.bionic_select"
+    bl_label = "Select Joint"
+    bl_options = {'REGISTER', 'UNDO'}
+    side: EnumProperty(items=(('R', "Right", ""), ('L', "Left", "")), default='R')
+    joint: StringProperty(default="hip")
+
+    def execute(self, ctx):
+        legs = bio_legs_of(ctx.view_layer.objects.active)
+        ob = bionic_joint(legs, self.side, self.joint) if legs else None
+        if ob is None:
+            return {'CANCELLED'}
+        for o in ctx.selected_objects:
+            o.select_set(False)
+        ob.hide_set(False)
+        ob.select_set(True)
+        ctx.view_layer.objects.active = ob
+        return {'FINISHED'}
+
+
+def draw_bionic(layout, ctx):
+    box = layout.box()
+    box.label(text="Bionic Leg")
+    row = box.row(align=True)
+    row.operator("tiow.bionic_leg", text="Bionic Leg R").side = 'R'
+    row.operator("tiow.bionic_leg", text="Bionic Leg L").side = 'L'
+    legs = bio_legs_of(ctx.view_layer.objects.active)
+    state = json.loads(legs.get("tiow_bionic_state") or "{}") if legs else {}
+    for side in ("R", "L"):
+        if side not in state:
+            continue
+        st = state[side]
+        col = box.column(align=True)
+        row = col.row(align=True)
+        row.label(text=f"{side}: {st.get('foot')}")
+        op = row.operator("tiow.bionic_foot", text="", icon='TRIA_LEFT')
+        op.side, op.step = side, -1
+        op = row.operator("tiow.bionic_foot", text="", icon='TRIA_RIGHT')
+        op.side, op.step = side, 1
+        row = col.row(align=True)
+        for j in ("hip", "knee", "ankle"):
+            op = row.operator("tiow.bionic_select", text=j.title())
+            op.side, op.joint = side, j
+        if st.get("mode") != "ball":
+            row = col.row(align=True)
+            for w, label in (("belt", "Under Belt"), ("thigh", "Thigh Top")):
+                op = row.operator("tiow.bionic_cut", text=label, depress=st.get("cut") == w)
+                op.side, op.where = side, w
+            op = row.operator("tiow.bionic_cut", text="", icon='TRIA_UP')
+            op.side, op.step = side, 0.5
+            op = row.operator("tiow.bionic_cut", text="", icon='TRIA_DOWN')
+            op.side, op.step = side, -0.5
+            if st.get("cut") == "belt":
+                row = col.row(align=True)
+                row.label(text=f"Slope {float(st.get('tilt', BIO_BALL_TILT)):.0f} deg")
+                op = row.operator("tiow.bionic_cut", text="", icon='TRIA_LEFT')
+                op.side, op.slope = side, -10.0
+                op = row.operator("tiow.bionic_cut", text="", icon='TRIA_RIGHT')
+                op.side, op.slope = side, 10.0
+            row = col.row(align=True)
+            row.label(text=f"Kit size {float(st.get('scale', 1.0)) * 100:.0f}%")
+            op = row.operator("tiow.bionic_cut", text="", icon='TRIA_LEFT')
+            op.side, op.size = side, -0.05
+            op = row.operator("tiow.bionic_cut", text="", icon='TRIA_RIGHT')
+            op.side, op.size = side, 0.05
+        row = col.row(align=True)
+        row.operator("tiow.bionic_follow", text="Follow Old Leg", icon='LOOP_BACK').side = side
+        row.operator("tiow.bionic_remove", text="", icon='X').side = side
+        try:
+            kit = bionic_kit(st["folder"])
+        except (ValueError, OSError):
+            continue
+        if kit["armour"]:
+            row = col.row(align=True)
+            for stem, (_p, rec) in sorted(kit["armour"].items()):
+                op = row.operator("tiow.bionic_armour", text=str(rec.get("label") or stem),
+                                  depress=stem in (st.get("armour") or []))
+                op.side, op.stem = side, stem
+            col.operator("tiow.bionic_save_armour", icon='PINNED').side = side
+
+
+classes = (TIOW_AddonPrefs, TIOW_OT_place_anchor, TIOW_OT_find_shins, TIOW_OT_save_folder_fit, TIOW_OT_stand_on_base,
+           TIOW_OT_next_adaptor, TIOW_OT_mirror_part, TIOW_OT_bionic_leg, TIOW_OT_bionic_follow, TIOW_OT_bionic_foot,
+           TIOW_OT_bionic_armour, TIOW_OT_bionic_save_armour, TIOW_OT_bionic_remove, TIOW_OT_bionic_select,
+           TIOW_OT_bionic_cut,
+           TIOW_PT_inbox)
 
 
 def register():
