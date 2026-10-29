@@ -1294,7 +1294,8 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     {key: "legs", label: "Legs", types: ["Legs"], slots: [{k: "legs"}]},
     {key: "torso", label: "Torso", types: ["Chests"], slots: [{k: "torso"}]},
     {key: "arms", label: "Arms", types: ["Arms", "Two-Handed Guns", "Two-Handed Melee", "Heavy Weapons"],
-      slots: [{k: "armR", side: "R", host: "torso", sock: "Shoulder R"}, {k: "armL", side: "L", host: "torso", sock: "Shoulder L"}]},
+      slots: [{k: "armR", side: "R", host: "torso", sock: "Shoulder R"}, {k: "armL", side: "L", host: "torso", sock: "Shoulder L"},
+              {k: "arm2", tab: "Two-handed", lab: "2H", host: "torso", sock: "Shoulder R"}]},
     {key: "head", label: "Head", types: ["Heads"], slots: [{k: "head", host: "torso", sock: "Neck"}]},
     {key: "pack", label: "Back", types: ["Backpacks", "Jump Packs"], slots: [{k: "pack", host: "torso", sock: "Back"}]},
     {key: "pads", label: "Shoulder pads", types: ["Shoulder Pads"],
@@ -1306,8 +1307,23 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
   ];
   var SLOT = {};
   STEPS.forEach(function (st, i) { st.slots.forEach(function (sl) { sl.step = i; SLOT[sl.k] = sl; }); });
-  var ORDER = ["torso", "legs", "armR", "armL", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL", "base"];   // how a model hangs together (and is sent)
-  var PICK = ["base", "legs", "torso", "armR", "armL", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL"];   // the order you pick in
+  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL", "base"];   // how a model hangs together (and is sent)
+  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL"];   // the order you pick in
+  // a two-handed piece (both arms and the weapon in one) takes both shoulders: these slots can't be filled with it
+  // TIOW Inbox finds pad and wrist spots on single arms only, so a two-handed piece takes a pad only where one was saved by hand
+  var COVERED = {padR: "no pad spot on the two-handed piece", padL: "no pad spot on the two-handed piece",
+    handR: "built into the two-handed piece", handL: "built into the two-handed piece"};
+  var COVERED_NOTE = {padR: "Two-handed pieces have no pad spots yet: Blender would leave a pad beside the model, so it isn't sent.",
+    handR: "This model's two-handed piece has its weapon built in: no hands to fill."};
+  COVERED_NOTE.padL = COVERED_NOTE.padR; COVERED_NOTE.handL = COVERED_NOTE.handR;
+  function covered(picks, k) {    // why slot k can't be filled on a model with a two-handed piece, or ""
+    if (!picks.arm2 || !COVERED[k]) return "";
+    var p = S.byId[picks.arm2.id], want = SLOT[k].sock;
+    return p && (p.sockets || []).some(function (q) { return q.t === want; }) ? "" : COVERED[k];
+  }
+  function hostKey(picks, sl) {   // the right pad hangs from the two-handed piece when there is one
+    return (sl.host === "armR" || sl.host === "armL") && picks.arm2 ? "arm2" : sl.host;
+  }
   var SPACING = 80;              // mm between models in a squad
 
   // ------------------------------------------------------------------ state
@@ -1421,8 +1437,9 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
   /* {data, v, mirror, align, name} for this part in this slot, or null if it can't go there */
   function asFor(p, sl) {
     var side = sl.side, sp = spec(p), base = {data: p, v: null, mirror: false, align: null, name: p.name};
+    if (sl.k === "arm2") return sp.spans ? base : null;           // the Two-handed tab: pieces with both arms, on Shoulder R
+    if (sp.spans) return null;                                    // ...and nowhere else
     if (!side) return base;
-    if (sp.spans) return sl.k === "armR" ? base : null;          // two-handed: on the right, covers both
     var mine = p.side || sideOfFits(p);
     // a part with no side of its own is a right-hand part (Mar Fil ship their pads that way)
     if (mine === side || (!mine && (side === "R" || p.fits[(sp.socket || "") + " " + side]))) return base;
@@ -1530,7 +1547,11 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
   /* every part of model i placed: [{slot, part, as, W, note}] - with `try` = {slot, part} tried in a slot */
   function layout(i, tryPick) {
     var picks = Object.assign({}, S.models[i] || {});
-    if (tryPick) picks[tryPick.slot] = {id: tryPick.part.id};
+    if (tryPick) {
+      picks[tryPick.slot] = {id: tryPick.part.id};
+      if (tryPick.slot === "arm2") { delete picks.armR; delete picks.armL; }        // trying a two-handed piece: it replaces both arms
+      else if (tryPick.slot === "armR" || tryPick.slot === "armL") delete picks.arm2;
+    }
     var out = [], by = {};
     var at = [-i * SPACING, 0, 0];
     ORDER.forEach(function (k) {
@@ -1570,18 +1591,18 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
         }
         if (!inst.W) inst.note = "no waist fit yet: placed by eye in Blender";
       } else {
-        var host = by[sl.host];
+        if (covered(picks, k)) { inst.note = covered(picks, k); inst.covered = true; out.push(inst); return; }
+        var hk = hostKey(picks, sl), host = by[hk];
         if (!host && k === "base") {      // picked first: the base on its own, on the grid
           inst.W = onto(T(at[0], at[1], at[2]), as, "Base") || T(at[0], at[1], at[2]); inst.free = true;
           out.push(inst); by.base = inst; return;
         }
-        if (!host) { inst.note = "needs " + (SLOT[sl.host] ? STEPS[SLOT[sl.host].step].label.toLowerCase() : sl.host); out.push(inst); return; }
-        if (host.spans && (k === "padL" || k === "handL")) { inst.note = "the two-handed part covers this arm"; out.push(inst); return; }
+        if (!host) { inst.note = "needs " + (SLOT[hk] ? STEPS[SLOT[hk].step].label.toLowerCase() : hk); out.push(inst); return; }
         var sock = sl.sock;
         if (spec(p).spans) sock = "Shoulder R";
         var hs = socketsOf(host)[sock];
         if (!hs) {
-          inst.note = host.part.anchored ? "no " + sock + " on these " + STEPS[SLOT[sl.host].step].label.toLowerCase() : "Blender finds the " + sock + " socket";
+          inst.note = host.part.anchored ? "no " + sock + " on these " + STEPS[SLOT[hk].step].label.toLowerCase() : "Blender finds the " + sock + " socket";
           out.push(inst); return;
         }
         inst.W = onto(hs, as, sock);
@@ -1594,7 +1615,6 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
       }
       out.push(inst);
       if (inst.W) by[k] = inst;
-      if (k === "armR" && inst.spans) by.armL = null;
     });
     // stand on the base, as the inbox does
     var legs = by.legs, base = by.base;
@@ -1744,16 +1764,21 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
   // ------------------------------------------------------------------ the panels
   function pickOf(i, k) { return (S.models[i] || {})[k]; }
   function renderSteps() {
-    var m = S.cur, html = "";
+    var m = S.cur, html = "", mdl = S.models[m] || {};
     STEPS.forEach(function (st, si) {
-      var lines = st.slots.map(function (sl) {
+      var slots = st.slots.filter(function (sl) {      // arms: the two-handed piece, or the right and left arms
+        return st.key !== "arms" || (mdl.arm2 ? sl.k === "arm2" : sl.k !== "arm2");
+      });
+      var lines = slots.map(function (sl) {
         var pk = pickOf(m, sl.k), p = pk && S.byId[pk.id], txt = "—", flag = false;
-        if (p) {
+        if (covered(mdl, sl.k)) txt = covered(mdl, sl.k);
+        else if (p) {
           var as = asFor(p, sl); txt = as ? as.name : p.name;
           var inst = layout(m).filter(function (x) { return x.slot === sl.k; })[0];
           if (inst && !inst.W) { flag = true; txt += " · " + inst.note; }
-        } else if (sl.k === "armL" && pickOf(m, "armR") && spec(S.byId[pickOf(m, "armR").id] || {}).spans) txt = "covered by the two-handed weapon";
-        return '<div class="s' + (flag ? " flag" : "") + '">' + (sl.side ? '<span class="lab">' + sl.side + "</span>" : "") + "<b>" + esc(txt) + "</b></div>";
+        }
+        var lab = sl.side || sl.lab;
+        return '<div class="s' + (flag ? " flag" : "") + '">' + (lab ? '<span class="lab">' + lab + "</span>" : "") + "<b>" + esc(txt) + "</b></div>";
       }).join("");
       html += '<div class="step' + (si === S.step ? " on" : "") + '" data-i="' + si + '" tabindex="0"><div class="t">' + (si + 1) + ". " + esc(st.label) + "</div>" + lines + "</div>";
     });
@@ -1770,7 +1795,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     var st = STEPS[S.step], sl = SLOT[S.slot];
     $("ptitle").textContent = st.label;
     $("slotseg").innerHTML = st.slots.length > 1 ? st.slots.map(function (x) {
-      return '<button data-s="' + x.k + '" class="' + (x.k === S.slot ? "on" : "") + '">' + (x.side === "R" ? "Right" : "Left") + "</button>";
+      return '<button data-s="' + x.k + '" class="' + (x.k === S.slot ? "on" : "") + '">' + (x.tab || (x.side === "R" ? "Right" : "Left")) + "</button>";
     }).join("") : "";
     var all = candidates(sl);
     var mk = $("fmaker").value, kt = $("fkit").value, q = $("fq").value.trim().toLowerCase();
@@ -1783,19 +1808,23 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     var list = all.filter(function (p) {
       return (!mk || p.maker === mk) && (!kt || p.kit === kt) && (!q || (p.name + " " + p.orig).toLowerCase().indexOf(q) >= 0);
     });
-    var host = sl.host && layout(S.cur).filter(function (x) { return x.slot === sl.host; })[0];
+    var mdl = S.models[S.cur] || {}, hk = hostKey(mdl, sl);
+    var host = hk && layout(S.cur).filter(function (x) { return x.slot === hk; })[0];
     var note = "";
     if (sl.k === "base") note = pickOf(S.cur, "legs") ? "" : "The legs you pick next stand on it.";
-    else if (sl.host && !pickOf(S.cur, sl.host)) note = "Pick " + STEPS[SLOT[sl.host].step].label.toLowerCase() + " first to see these in place.";
+    else if (covered(mdl, sl.k)) note = COVERED_NOTE[sl.k];
+    else if (sl.k === "arm2" && (mdl.armR || mdl.armL)) note = "A two-handed piece has both arms and its weapon: picking one replaces the arms.";
+    else if ((sl.k === "armR" || sl.k === "armL") && mdl.arm2) note = "Picking an arm replaces the two-handed piece.";
+    else if (hk && !pickOf(S.cur, hk)) note = "Pick " + STEPS[SLOT[hk].step].label.toLowerCase() + " first to see these in place.";
     else if (host && host.W && sl.sock && !socketsOf(host)[sl.sock] && !spec({type: st.types[0]}).spans)
-      note = host.part.anchored ? "These " + STEPS[SLOT[sl.host].step].label.toLowerCase() + " have no " + sl.sock + ": Blender will leave the part beside the model for you to place."
-                                : "No " + sl.sock + " saved for these " + STEPS[SLOT[sl.host].step].label.toLowerCase() + " yet: Blender will find it.";
+      note = host.part.anchored ? "These " + STEPS[SLOT[hk].step].label.toLowerCase() + " have no " + sl.sock + ": Blender will leave the part beside the model for you to place."
+                                : "No " + sl.sock + " saved for these " + STEPS[SLOT[hk].step].label.toLowerCase() + " yet: Blender will find it.";
     $("pnote").textContent = note;
     $("pcount").textContent = list.length + " of " + all.length;
     var chosen = pickOf(S.cur, S.slot);
     var html = list.slice(0, 400).map(function (p) {
       var as = asFor(p, sl);
-      var tag = as.v != null ? "maker's left copy" : as.mirror ? "mirrored" : p.type === st.types[0] ? p.kit : p.type;
+      var tag = as.v != null ? "maker's left copy" : as.mirror ? "mirrored" : sl.k === "arm2" ? p.kit + " · " + p.type.replace("Two-Handed ", "") : p.type === st.types[0] ? p.kit : p.type;
       var fitName = spec(p).spans ? "Shoulder R" : sl.sock;
       var nofit = sl.k === "legs" ? !(as.data.fits["Waist"] || as.data.fits["Flat Waist"]) : fitName ? !fitMatrix(as, fitName) : false;
       if (nofit) tag = "no fit yet";
@@ -1829,11 +1858,13 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     S.slot = k; S.step = SLOT[k].step; S.hover = null; renderAll();
   }
   function skippable(k) {       // nothing can go in this slot on the current model
-    var sl = SLOT[k];
-    if (k === "armL" && pickOf(S.cur, "armR") && spec(S.byId[pickOf(S.cur, "armR").id] || {}).spans) return true;
-    if (sl.host && sl.host !== "torso" && sl.host !== "legs" && !pickOf(S.cur, sl.host)) return true;
+    var sl = SLOT[k], mdl = S.models[S.cur] || {}, hk = hostKey(mdl, sl);
+    if (k === "arm2" && (mdl.armR || mdl.armL)) return true;               // arms picked: no two-handed piece
+    if ((k === "armR" || k === "armL") && mdl.arm2) return true;           // a two-handed piece: no single arms
+    if (covered(mdl, k)) return true;
+    if (hk && hk !== "torso" && hk !== "legs" && !mdl[hk]) return true;
     if (k === "handR" || k === "handL") {     // an arm with its weapon built in has no hand to fill
-      var arm = layout(S.cur).filter(function (x) { return x.slot === sl.host; })[0];
+      var arm = layout(S.cur).filter(function (x) { return x.slot === hk; })[0];
       if (arm && arm.W && arm.part.anchored && !socketsOf(arm)[sl.sock]) return true;
     }
     return false;
@@ -1854,7 +1885,8 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     var targets = S.same ? S.models.map(function (_m, i) { return i; }) : [S.cur];
     targets.forEach(function (i) {
       if (pick) S.models[i][k] = pick; else delete S.models[i][k];
-      if (k === "armR" && pick && spec(S.byId[pick.id]).spans) delete S.models[i].armL;
+      if (pick && k === "arm2") { delete S.models[i].armR; delete S.models[i].armL; }    // both arms or one piece, not both
+      if (pick && (k === "armR" || k === "armL")) delete S.models[i].arm2;
     });
   }
   function choose(id) {          // a click picks; Next moves on, so you can try parts in place first
@@ -1875,7 +1907,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
         if (!pk) return;
         var p = S.byId[pk.id];
         var inst = placed.filter(function (x) { return x.slot === k; })[0];
-        if (!p || !inst) return;
+        if (!p || !inst || inst.covered) return;
         var sl = SLOT[k];
         var req = {schemaVersion: 1, path: S.libPath.replace(/[\\\/]+$/, "") + "\\" + p.path, name: p.name, title: p.name,
           category: p.type, tags: [], itemId: "", sentAt: new Date().toISOString(), model: id};
@@ -1948,7 +1980,8 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
   function bind() {
     $("steps").addEventListener("click", function (e) {
       var el = e.target.closest(".step"); if (!el) return;
-      var st = STEPS[+el.getAttribute("data-i")]; goSlot(st.slots[0].k);
+      var st = STEPS[+el.getAttribute("data-i")];
+      goSlot(st.key === "arms" && (S.models[S.cur] || {}).arm2 ? "arm2" : st.slots[0].k);   // a two-handed model opens on its tab
     });
     $("slotseg").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) goSlot(b.getAttribute("data-s")); });
     $("models").addEventListener("click", function (e) {
@@ -1972,6 +2005,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     $("nonebtn").addEventListener("click", function () { setPick(S.slot, null); renderAll(); });
     $("squadn").addEventListener("change", function () {
       var n = Math.max(1, Math.min(10, +$("squadn").value || 1)); $("squadn").value = n;
+      if (n === S.models.length) return;      // the box fires again when it loses focus: re-drawing then would eat that click
       while (S.models.length < n) S.models.push(Object.assign({}, S.models[0]));
       S.models.length = n; if (S.cur >= n) S.cur = n - 1; framed = -1; renderAll();
     });
@@ -1990,7 +2024,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
 
   // ------------------------------------------------------------------ start
   initView(); bind();
-  window.__sb = {S: S, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot};
+  window.__sb = {S: S, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll};
   if (window.SB_DEMO) {                                       // the online demo: its own files, nothing sent
     S.source = "./";
     $("setupbtn").hidden = true;

@@ -68,4 +68,9 @@ Notes
     Prepare lists every such part in _builder\no_fit.txt.
   - Flat legs (Marta, Turtle Ninja) on a Mar Fil torso bring the body
     adaptor, as in Blender.
-  - Two-handed weapons go in the right arm's slot and cover both arms.
+  - Arms have three tabs: Right, Left and Two-handed. Two-handed holds the
+    pieces with both arms and the weapon in one (two-handed guns, two-handed
+    melee, heavy weapons); they go on the right shoulder and take both.
+    Picking one replaces the arms, and picking an arm replaces it. A model
+    with one skips the hands (its weapon is built in) and the pads (TIOW
+    Inbox finds pad spots on single arms only); those picks aren't sent.
