@@ -712,6 +712,11 @@ already in the scene move too. A part you corrected lands exactly there
 next time (no rocking or settling). Run Prepare Squad Builder afterwards so
 the page matches (it only redoes what changed).
 
+1.17.3: a socket you corrected is trusted as well. Belt bits on it aren't
+rocked to a new tilt any more (that undid the angle you'd set); they only
+settle in until they touch, so the bit you placed comes back where you put
+it, pushed out to just touching if it was sunk into the belt.
+
 Bases settle onto the feet (1.17.2): a base snapped on the legs' Base socket
 rises along the socket until the lowest foot touches it (and 0.2 mm in, for
 printing). A base is only ever raised: feet already on or in a scenic base

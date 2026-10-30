@@ -176,6 +176,9 @@ def part_data(d):
     for k in ("noPad", "noHand"):
         if d.get(k):
             out[k] = True
+    ex = [str(t) for t in (d.get("exact") or []) if isinstance(t, str)]
+    if ex:
+        out["exact"] = ex            # fit types corrected by hand in Blender (Save Correction): no settling
     for k in ("upright", "offHand"):
         if flat16(d.get(k)):
             out[k] = flat16(d[k])

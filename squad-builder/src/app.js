@@ -393,7 +393,7 @@
         }
         inst.W = onto(hs, as, sock);
         if (!inst.W) inst.note = "no " + sock + " fit yet: placed by eye in Blender";
-        else if (k === "base") {          // rise to meet the feet, as the inbox does
+        else if (k === "base" && (as.data.exact || []).indexOf("Base") < 0) {   // rise to meet the feet, as the inbox does (not once corrected by hand)
           var rise = baseRise(host, inst, hs);
           if (rise) { var zax = new THREE.Vector3().setFromMatrixColumn(hs, 2).normalize().multiplyScalar(rise); inst.W = T(zax.x, zax.y, zax.z).multiply(inst.W); }
         }

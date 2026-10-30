@@ -12,7 +12,7 @@ Files (keep them together)
   build_index.py               used by prepare_builder.py
 
 Getting the library ready (once, then after adding parts)
-  1. Blender 5.1 with Part Sockets and TIOW Inbox 1.17.2 enabled.
+  1. Blender 5.1 with Part Sockets and TIOW Inbox 1.17.3 enabled.
   2. Double-click Prepare Squad Builder.bat. It runs Blender in the
      background (your open Blender isn't touched) and:
        - works out the anchors some parts only get on their first import
@@ -54,7 +54,8 @@ Using it
      whole squad arrives side by side, each part on its own model, whatever
      is selected in Blender. When a base arrives the model is stood on it;
      a base whose top is lower than the feet rises until the lowest foot
-     touches it (the page shows the same).
+     touches it (the page shows the same). A base you've placed by hand and
+     saved with Fix the Part doesn't rise: it sits where you put it.
 
 Notes
   - "no fit yet" on a card: that part has no fit saved for this slot, so the

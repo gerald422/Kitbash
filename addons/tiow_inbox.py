@@ -38,11 +38,15 @@
 # 1.17.1: browsers won't let a page write into AppData, so the Squad Builder
 # writes its requests into the library's own _builder\inbox folder; this add-on
 # watches that folder as well as TIOW's (pref "Squad Builder Inbox").
+#
+# 1.17.3: a socket moved by hand (Save Correction > Fix the Socket, marked
+# tiow_corrected) is trusted as it is: belt bits on it aren't rocked to a new
+# tilt, only settled into contact, so the bit you placed lands where you put it.
 
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 2),
+    "version": (1, 17, 3),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -1188,7 +1192,8 @@ def place_on(part, sock, spec, tname, unit, sk, co, skip=()):
     turned = meet_off_hand(part, sock, tname or str(sock.get("ws_type", "")))
     if turned:
         note += turned
-    if spec and spec.get("rock"):
+    # a socket moved by hand (Fix the Socket) is already at the tilt wanted: no rocking off it
+    if spec and spec.get("rock") and not sock.get("tiow_corrected"):
         turned = rock_settle(part, hosts, sock.matrix_world, float(spec["rock"]), bias=bias.get("rock"))
         if turned > 0.5:
             note += f", tilted {turned:.0f} deg to sit flush"
@@ -3906,6 +3911,7 @@ def correct_socket(part, folder=False, both=True):
     # the scene: this socket (the part stays put), and the same sockets on copies of the host
     keep = part.matrix_world.copy()
     sock.matrix_world = Knew
+    sock["tiow_corrected"] = 1
     part.matrix_world = keep
     moved = 0
     hdir = os.path.normcase(os.path.dirname(os.path.abspath(hsrc)))
@@ -3920,9 +3926,11 @@ def correct_socket(part, folder=False, both=True):
                 continue
             if t == stype:
                 c.matrix_world = Knew if (o is host) else c.matrix_world @ C
+                c["tiow_corrected"] = 1
                 moved += 1
             elif CM is not None and t == other:
                 c.matrix_world = c.matrix_world @ CM
+                c["tiow_corrected"] = 1
                 moved += 1
     bpy.context.view_layer.update()
     where = f"every part in {os.path.basename(os.path.dirname(hsrc))}" if folder else host.name
