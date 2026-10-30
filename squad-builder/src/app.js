@@ -79,7 +79,6 @@
     var an = +localStorage.getItem("sb.adaptor"); if (an) S.adaptor = an;
   } catch (e) { /* storage blocked: keep the defaults */ }
   if (params.get("libpath")) S.libPath = params.get("libpath");
-  try { S.showHidden = localStorage.getItem("sb.showhidden") === "1"; } catch (e) { /* storage blocked */ }
 
   // ------------------------------------------------------------------ matrices (sidecars hold 4x4 row by row)
   function M4(a) { var m = new THREE.Matrix4(); m.set.apply(m, a); return m; }
@@ -237,7 +236,7 @@
     if (why) S.hide.lines = S.hide.lines.filter(function (l) { return l.trim().toLowerCase() !== p.path.toLowerCase(); });
     else S.hide.lines.push(p.path);
     readHide(S.hide.lines.join("\n"));
-    saveHide(); renderPicker(); status(why ? p.name + " is back." : p.name + " hidden (Show hidden brings it back).");
+    saveHide(); renderPicker(); status(why ? p.name + " is back." : p.name + " hidden: it's left out once Hide parts is off.");
   }
   function candidates(sl, all) {
     var st = STEPS[sl.step];
@@ -605,7 +604,7 @@
       note = host.part.anchored ? "These " + STEPS[SLOT[hk].step].label.toLowerCase() + " have no " + sl.sock + ": Blender will leave the part beside the model for you to place."
                                 : "No " + sl.sock + " saved for these " + STEPS[SLOT[hk].step].label.toLowerCase() + " yet: Blender will find it.";
     $("pnote").textContent = note;
-    $("pcount").textContent = list.length + " of " + all.length + (nhid ? " · " + nhid + (S.showHidden ? " hidden shown" : " hidden") : "");
+    $("pcount").textContent = list.length + " of " + all.length + (nhid ? " · " + nhid + " hidden" : "");
     $("showhid").checked = S.showHidden;
     var chosen = pickOf(S.cur, S.slot);
     var html = list.slice(0, 400).map(function (p) {
@@ -616,7 +615,7 @@
       if (nofit) tag = "no fit yet";
       var hid = hiddenBy(p);
       return '<div class="card' + (chosen && chosen.id === p.id ? " on" : "") + (hid ? " hid" : "") + '" tabindex="0" data-id="' + p.id + '" title="' + esc(p.path) + '">' +
-        '<button class="hide" data-hide="' + p.id + '" title="' + (hid ? (hid === "hidden" ? "Bring this part back" : esc("Hidden by " + hid + " in _hidden.txt")) : "Leave this part out of the builder (nothing is deleted)") + '">' + (hid ? "Unhide" : "Hide") + "</button>" +
+        (S.showHidden ? '<button class="hide" data-hide="' + p.id + '" title="' + (hid ? (hid === "hidden" ? "Bring this part back" : esc("Hidden by " + hid + " in _hidden.txt")) : "Leave this part out of the builder (nothing is deleted)") + '">' + (hid ? "Unhide" : "Hide") + "</button>" : "") +
         '<div class="img">' + (p.prev ? '<img alt="" data-t="' + p.id + '">' : '<span class="tag">no preview</span>') + "</div>" +
         '<div class="nm">' + esc(as.name.replace(/^[^-]+ - /, "")) + '</div><div class="tag' + (nofit ? " flag" : "") + '">' + esc(tag) + "</div></div>";
     }).join("");
@@ -781,7 +780,7 @@
       var c = e.target.closest(".card"); if (c) choose(c.getAttribute("data-id"));
     });
     $("showhid").addEventListener("change", function () {
-      S.showHidden = $("showhid").checked; try { localStorage.setItem("sb.showhidden", S.showHidden ? "1" : "0"); } catch (e) { /* storage blocked */ }
+      S.showHidden = $("showhid").checked;      // hiding mode: Hide / Unhide on the cards, hidden parts shown dimmed
       renderPicker();
     });
     $("cards").addEventListener("keydown", function (e) { if (e.key === "Enter") { var c = e.target.closest(".card"); if (c) choose(c.getAttribute("data-id")); } });

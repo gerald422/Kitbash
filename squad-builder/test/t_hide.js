@@ -1,4 +1,4 @@
-// Hidden parts: the default list (renegades: aquilas, purity seals, scrolls), Show hidden, and the Hide / Unhide button.
+// Hidden parts: the default list (renegades: aquilas, purity seals, scrolls) and the Hide parts toggle with Hide / Unhide.
 const { chromium } = require('playwright');
 const URL = process.argv[2] || 'http://localhost:8777/Squad%20Builder.html?lib=/reallib/&libpath=D%3A%5CKitbash%20Library';
 const SHOT = process.argv[3] || '';
@@ -16,13 +16,16 @@ const SHOT = process.argv[3] || '';
   let n = await names();
   ck('the scroll plate is hidden by default (word: scroll)', !n.some(x => /Scroll/.test(x)) && n.some(x => /Relic/.test(x)), n);
   ck('the count says one is hidden', /1 hidden/.test(await page.textContent('#pcount')), await page.textContent('#pcount'));
+  ck('no Hide buttons while the toggle is off', (await page.$$('#cards .hide')).length === 0, null);
   await page.check('#showhid'); await page.waitForTimeout(300);
+  ck('the toggle puts Hide / Unhide on every card', (await page.$$('#cards .hide')).length === (await page.$$('#cards .card')).length, null);
   n = await names();
   const dim = await page.$$eval('#cards .card.hid .nm', cs => cs.map(c => c.textContent));
-  ck('Show hidden brings it back, dimmed', n.some(x => /Scroll/.test(x)) && dim.length === 1 && /Scroll/.test(dim[0]), [n, dim]);
-  await page.uncheck('#showhid'); await page.waitForTimeout(200);
+  ck('hiding mode shows it, dimmed', n.some(x => /Scroll/.test(x)) && dim.length === 1 && /Scroll/.test(dim[0]), [n, dim]);
   const rid = await ev(() => window.__sb.S.parts.find(p => p.name === 'MarFil Jump Captain - Relic').id);
-  await page.hover(`.card[data-id="${rid}"]`); await page.click(`.card[data-id="${rid}"] .hide`); await page.waitForTimeout(300);
+  await page.click(`.card[data-id="${rid}"] .hide`); await page.waitForTimeout(300);
+  ck('a part just hidden stays on screen dimmed while hiding', await page.$(`.card.hid[data-id="${rid}"]`) !== null, null);
+  await page.uncheck('#showhid'); await page.waitForTimeout(200);
   n = await names();
   const lines = await ev(() => window.__sb.S.hide.lines.slice());
   ck('Hide takes the relic out and writes its library path', !n.some(x => /Relic/.test(x)) && lines.some(l => /Relic\.stl$/.test(l)), [n, lines.slice(-2)]);
