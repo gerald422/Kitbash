@@ -75,7 +75,7 @@ KITS = {
 # the part-type folder's word, for a file whose name doesn't say what it is
 TYPE_WORD = {"Arms": "Arm", "Legs": "Legs", "Heads": "Head", "Chests": "Torso", "Melee": "Melee", "Pistols": "Pistol",
              "Shoulder Pads": "Shoulder Pad", "Knee Pads": "Shin Pad", "Two-Handed Guns": "Gun", "Two-Handed Melee": "Melee",
-             "Two-Handed Held": "Gun", "Hand-less Weapons": "Weapon", "Accessories": "Accessory", "Backpacks": "Backpack",
+             "Two-Handed Held": "Gun", "Hand-less Weapons": "Weapon", "Accessories": "Accessory", "Loincloths": "Loincloth", "Backpacks": "Backpack",
              "Jump Packs": "Jump Pack", "Shields": "Shield", "Hands": "Hand", "Heavy Weapons": "Heavy Weapon",
              "Backpack Toppers": "Topper", "Heavy Weapon Cables": "Cable", "Cables": "Cable", "Servo Arms": "Servo Arm",
              "Grenades": "Grenade", "Seals": "Seal", "Bike Parts": "Bike Part", "Bikes": "Bike", "Cloaks": "Cloak",

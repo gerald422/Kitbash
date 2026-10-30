@@ -42,11 +42,15 @@
 # 1.17.3: a socket moved by hand (Save Correction > Fix the Socket, marked
 # tiow_corrected) is trusted as it is: belt bits on it aren't rocked to a new
 # tilt, only settled into contact, so the bit you placed lands where you put it.
+#
+# 1.17.4: loincloths are their own type ("Loincloths") and the only thing that
+# goes on the belt's front anchor (Belt Front); pouches, grenades and other
+# belt bits go on the hips and the back of the belt.
 
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 3),
+    "version": (1, 17, 4),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -530,7 +534,7 @@ def import_request(job, prefs):
 # Preferences) onto its Waist and stand on the adaptor's Flat Waist. A
 # Turtle Ninja torso has both; "exclusive" sockets are alternatives, so legs
 # on one replace legs on the other.
-BELT = ["Hip R", "Hip L", "Belt Front", "Belt Back"]
+BELT = ["Hip R", "Hip L", "Belt Back"]           # belt bits; the front of the belt is the loincloth's
 BIKE = ["Bike Front", "Front Wing", "Front Wheel", "Rear Wheel", "Exhaust R", "Exhaust L",
         "Handle R", "Handle L", "Bike Guns"]
 DEFAULT_JOINTS = {
@@ -566,6 +570,7 @@ DEFAULT_JOINTS = {
     "Grenades": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
     "Seals": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
     "Trophies": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
+    "Loincloths": {"socket": "Belt Front", "rock": 8, "settle": "-Z", "sink": 0.1},
 }
 # Socket names from before the library rename, so library parts also snap
 # into files set up the old way.

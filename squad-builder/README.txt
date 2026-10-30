@@ -12,7 +12,7 @@ Files (keep them together)
   build_index.py               used by prepare_builder.py
 
 Getting the library ready (once, then after adding parts)
-  1. Blender 5.1 with Part Sockets and TIOW Inbox 1.17.3 enabled.
+  1. Blender 5.1 with Part Sockets and TIOW Inbox 1.17.4 enabled.
   2. Double-click Prepare Squad Builder.bat. It runs Blender in the
      background (your open Blender isn't touched) and:
        - works out the anchors some parts only get on their first import
@@ -38,7 +38,7 @@ Using it
      Next time, one click on the page reconnects it (the browser asks).
   2. Set Squad to how many models you want.
   3. Work down the steps: Base, Legs, Torso, then arms, head, back, pads,
-     weapons and shin pads. The legs stand on the base as soon as you pick
+     weapons, shin pads, loincloth and belt. The legs stand on the base as soon as you pick
      them, so you see the pose before the torso. Hover a card to see that
      part in place (blue outline); click it to take it - it stays on that
      step so you can try others - and press Next when you're happy. Next
@@ -83,10 +83,15 @@ Notes
     slot too. In Blender the weapon turns about the right wrist so its other
     hand meets the left arm's wrist - on arms posed to hold one (Springles'
     duel melee arms, say). On other arms it stays as gripped.
-  - Belt (step 10): Right hip, Left hip, Front and Back - the anchors on
-    every pair of legs. A part shows on the tabs it has a fit for. In
-    Blender it is tilted to sit flush and settled onto the legs, so it can
-    sit a little differently from the page.
+  - Loincloth (step 10): the front of the belt is the loincloth's alone.
+    Loincloths are their own type (Marta's and CyberBrush's), in Blender
+    tilted to sit flush and settled onto the belt like belt bits. On legs
+    striding forward, the bottom of a loincloth can pass through the raised
+    thigh: a rigid cloth can't follow the knee.
+  - Belt (step 11): Right hip, Left hip and Back - the anchors on every pair
+    of legs. A part shows on the tabs it has a fit for. In Blender it is
+    tilted to sit flush and settled onto the legs, so it can sit a little
+    differently from the page.
   - Arms have three tabs: Right, Left and Two-handed. Two-handed holds the
     pieces with both arms and the weapon in one (two-handed guns, two-handed
     melee, heavy weapons); they go on the right shoulder and take both.

@@ -717,6 +717,10 @@ rocked to a new tilt any more (that undid the angle you'd set); they only
 settle in until they touch, so the bit you placed comes back where you put
 it, pushed out to just touching if it was sunk into the belt.
 
+1.17.4: loincloths are their own type (Loincloths) and the only thing that
+goes on the front of the belt (Belt Front). Pouches, grenades and other belt
+bits go on the hips and the back of the belt.
+
 Bases settle onto the feet (1.17.2): a base snapped on the legs' Base socket
 rises along the socket until the lowest foot touches it (and 0.2 mm in, for
 printing). A base is only ever raised: feet already on or in a scenic base

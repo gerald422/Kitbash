@@ -1,4 +1,4 @@
-// The Belt step: four anchors on the legs, parts listed where they have a fit, placed on the legs' anchor, sent with it.
+// The Belt step: three anchors on the legs (the front is the Loincloth step's), parts listed where they have a fit, placed on the legs' anchor, sent with it.
 const { chromium } = require('playwright');
 const URL = process.argv[2] || 'http://localhost:8777/Squad%20Builder.html?lib=/reallib/&libpath=D%3A%5CKitbash%20Library';
 const SHOT = process.argv[3] || '';
@@ -17,7 +17,7 @@ const SHOT = process.argv[3] || '';
   await ev(() => window.__sb.goSlot('torso')); await click('MarFil Assault - Torso 3');
   await ev(() => window.__sb.goSlot('hipR'));
   const tabs = await page.$$eval('#slotseg button', bs => bs.map(x => x.textContent));
-  ck('belt has four anchors', JSON.stringify(tabs) === '["Right hip","Left hip","Front","Back"]', tabs);
+  ck('belt has three anchors (the front is the loincloth\'s)', JSON.stringify(tabs) === '["Right hip","Left hip","Back"]', tabs);
   const names = (k) => ev((k) => { const sb = window.__sb; return sb.candidates(sb.SLOT[k]).map(p => p.name); }, k);
   const r = await names('hipR'), l = await names('hipL');
   ck('right hip lists the holster and pouch plates, not the left ones', r.includes('MarFil Jump Captain - Hip Plate With Holster') && r.includes('MarFil Jump Captain - Hip Plate With Pouch') && !r.includes('MarFil Jump Captain - Relic'), r);
@@ -32,7 +32,7 @@ const SHOT = process.argv[3] || '';
     return Math.max.apply(null, want.elements.map((v, i) => Math.abs(v - hp.W.elements[i])));
   });
   ck('the plate sits on the legs\' Hip R by its fit', pos < 1e-6, pos);
-  const steps = await page.$eval('.step[data-i="9"]', e => e.innerText);
+  const steps = await page.$eval('.step[data-i="10"]', e => e.innerText);
   ck('the steps list shows R and L belt lines', /Belt/.test(steps) && /Holster/.test(steps) && /Scroll/.test(steps), steps);
   const reqs = await ev(() => window.__sb.requestsFor().filter(r => r.category === 'Accessories').map(r => [r.name, r.socket]));
   ck('both go to Blender on their anchors', reqs.length === 2 && reqs.some(r => r[1] === 'Hip R') && reqs.some(r => r[1] === 'Hip L'), reqs);
