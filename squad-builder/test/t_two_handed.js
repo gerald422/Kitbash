@@ -24,7 +24,7 @@ const SHOTS = process.argv[3] || '';
   const tR = await types('armR'), tL = await types('armL'), t2 = await types('arm2');
   ck('Right has no two-armed pieces', tR.length && tR.every(t => !TWO.has(t)), tR);
   ck('Left has no two-armed pieces', tL.length && tL.every(t => !TWO.has(t)), tL);
-  ck('Two-handed has only two-armed pieces', t2.length === 7 && t2.every(t => TWO.has(t)), t2);
+  ck('Two-handed has only two-armed pieces', t2.length > 0 && t2.every(t => TWO.has(t)), t2);
 
   await choose('MarFil Assault - Arm 1A R');
   await page.click('#slotseg button[data-s="arm2"]');

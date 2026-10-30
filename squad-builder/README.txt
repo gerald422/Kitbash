@@ -68,6 +68,10 @@ Notes
     Prepare lists every such part in _builder\no_fit.txt.
   - Flat legs (Marta, Turtle Ninja) on a Mar Fil torso bring the body
     adaptor, as in Blender.
+  - Belt (step 10): Right hip, Left hip, Front and Back - the anchors on
+    every pair of legs. A part shows on the tabs it has a fit for. In
+    Blender it is tilted to sit flush and settled onto the legs, so it can
+    sit a little differently from the page.
   - Arms have three tabs: Right, Left and Two-handed. Two-handed holds the
     pieces with both arms and the weapon in one (two-handed guns, two-handed
     melee, heavy weapons); they go on the right shoulder and take both.

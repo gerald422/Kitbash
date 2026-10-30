@@ -37,12 +37,15 @@
     {key: "weapons", label: "Weapons", types: ["Pistols", "Melee", "Shields", "Hands"],
       slots: [{k: "handR", side: "R", host: "armR", sock: "Hand R"}, {k: "handL", side: "L", host: "armL", sock: "Hand L"}]},
     {key: "shins", label: "Shin pads", types: ["Knee Pads"],
-      slots: [{k: "shinR", side: "R", host: "legs", sock: "Shin R"}, {k: "shinL", side: "L", host: "legs", sock: "Shin L"}]}
+      slots: [{k: "shinR", side: "R", host: "legs", sock: "Shin R"}, {k: "shinL", side: "L", host: "legs", sock: "Shin L"}]},
+    {key: "belt", label: "Belt", types: ["Accessories", "Grenades", "Seals", "Trophies"], byFit: true,
+      slots: [{k: "hipR", tab: "Right hip", lab: "R", host: "legs", sock: "Hip R"}, {k: "hipL", tab: "Left hip", lab: "L", host: "legs", sock: "Hip L"},
+              {k: "beltF", tab: "Front", lab: "F", host: "legs", sock: "Belt Front"}, {k: "beltB", tab: "Back", lab: "B", host: "legs", sock: "Belt Back"}]}
   ];
   var SLOT = {};
   STEPS.forEach(function (st, i) { st.slots.forEach(function (sl) { sl.step = i; SLOT[sl.k] = sl; }); });
-  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL", "base"];   // how a model hangs together (and is sent)
-  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL"];   // the order you pick in
+  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL", "hipR", "hipL", "beltF", "beltB", "base"];   // how a model hangs together (and is sent)
+  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL", "hipR", "hipL", "beltF", "beltB"];   // the order you pick in
   // a two-handed piece (both arms and the weapon in one) takes both shoulders: these slots can't be filled with it
   // TIOW Inbox finds pad and wrist spots on single arms only, so a two-handed piece takes a pad only where one was saved by hand
   var COVERED = {padR: "no pad spot on the two-handed piece", padL: "no pad spot on the two-handed piece",
@@ -171,6 +174,7 @@
   /* {data, v, mirror, align, name} for this part in this slot, or null if it can't go there */
   function asFor(p, sl) {
     var side = sl.side, sp = spec(p), base = {data: p, v: null, mirror: false, align: null, name: p.name};
+    if (STEPS[sl.step].byFit) return p.fits[sl.sock] ? base : null;   // belt bits: wherever they have a fit for
     if (sl.k === "arm2") return sp.spans ? base : null;           // the Two-handed tab: pieces with both arms, on Shoulder R
     if (sp.spans) return null;                                    // ...and nowhere else
     if (!side) return base;
