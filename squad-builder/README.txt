@@ -76,6 +76,12 @@ Notes
     every part with that in its name, "type: Seals" for a whole type. It
     starts with aquilas, purity seals and scrolls; for a word or type line,
     edit _hidden.txt.
+  - Weapons held in both hands with no arms of their own (Two-Handed Held:
+    the toothed two-handed chainglaives, Springles' guns, Turtle Ninja's
+    bolter poses) are in Weapons on the right hand and take the left hand's
+    slot too. In Blender the weapon turns about the right wrist so its other
+    hand meets the left arm's wrist - on arms posed to hold one (Springles'
+    duel melee arms, say). On other arms it stays as gripped.
   - Belt (step 10): Right hip, Left hip, Front and Back - the anchors on
     every pair of legs. A part shows on the tabs it has a fit for. In
     Blender it is tilted to sit flush and settled onto the legs, so it can

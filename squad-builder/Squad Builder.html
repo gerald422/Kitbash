@@ -1283,6 +1283,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     "Two-Handed Guns": {socket: "Shoulder R", spans: ["Shoulder L"]},
     "Two-Handed Melee": {socket: "Shoulder R", spans: ["Shoulder L"]},
     "Heavy Weapons": {socket: "Shoulder R", spans: ["Shoulder L"]},
+    "Two-Handed Held": {socket: "Hand R"},     // held in both hands, no arms of its own: right hand, the other hand meets the left arm
     "Pistols": {socket: "Hand", sided: true}, "Melee": {socket: "Hand", sided: true},
     "Shields": {socket: "Hand", sided: true}, "Hands": {socket: "Hand", sided: true},
     "Heads": {socket: "Neck"}, "Backpacks": {socket: "Back"}, "Jump Packs": {socket: "Back"},
@@ -1306,7 +1307,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     {key: "pack", label: "Back", types: ["Backpacks", "Jump Packs"], slots: [{k: "pack", host: "torso", sock: "Back"}]},
     {key: "pads", label: "Shoulder pads", types: ["Shoulder Pads"],
       slots: [{k: "padR", side: "R", host: "armR", sock: "Pad R"}, {k: "padL", side: "L", host: "armL", sock: "Pad L"}]},
-    {key: "weapons", label: "Weapons", types: ["Pistols", "Melee", "Shields", "Hands"],
+    {key: "weapons", label: "Weapons", types: ["Pistols", "Melee", "Two-Handed Held", "Shields", "Hands"],
       slots: [{k: "handR", side: "R", host: "armR", sock: "Hand R"}, {k: "handL", side: "L", host: "armL", sock: "Hand L"}]},
     {key: "shins", label: "Shin pads", types: ["Knee Pads"],
       slots: [{k: "shinR", side: "R", host: "legs", sock: "Shin R"}, {k: "shinL", side: "L", host: "legs", sock: "Shin L"}]},
@@ -1324,8 +1325,10 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     handR: "built into the two-handed piece", handL: "built into the two-handed piece"};
   var COVERED_NOTE = {padR: "Two-handed pieces have no pad spots yet: Blender would leave a pad beside the model, so it isn't sent.",
     handR: "This model's two-handed piece has its weapon built in: no hands to fill."};
+  var HELD_NOTE = "The right-hand weapon is held in both hands: its other hand meets the left arm in Blender.";
   COVERED_NOTE.padL = COVERED_NOTE.padR; COVERED_NOTE.handL = COVERED_NOTE.handR;
   function covered(picks, k) {    // why slot k can't be filled on a model with a two-handed piece, or ""
+    if (k === "handL" && picks.handR && (S.byId[picks.handR.id] || {}).type === "Two-Handed Held") return "the other hand of the two-handed weapon";
     if (!picks.arm2 || !COVERED[k]) return "";
     var p = S.byId[picks.arm2.id], want = SLOT[k].sock;
     return p && (p.sockets || []).some(function (q) { return q.t === want; }) ? "" : COVERED[k];
@@ -1868,7 +1871,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     var host = hk && layout(S.cur).filter(function (x) { return x.slot === hk; })[0];
     var note = "";
     if (sl.k === "base") note = pickOf(S.cur, "legs") ? "" : "The legs you pick next stand on it.";
-    else if (covered(mdl, sl.k)) note = COVERED_NOTE[sl.k];
+    else if (covered(mdl, sl.k)) note = /two-handed weapon$/.test(covered(mdl, sl.k)) ? HELD_NOTE : COVERED_NOTE[sl.k];
     else if (sl.k === "arm2" && (mdl.armR || mdl.armL)) note = "A two-handed piece has both arms and its weapon: picking one replaces the arms.";
     else if ((sl.k === "armR" || sl.k === "armL") && mdl.arm2) note = "Picking an arm replaces the two-handed piece.";
     else if (hk && !pickOf(S.cur, hk)) note = "Pick " + STEPS[SLOT[hk].step].label.toLowerCase() + " first to see these in place.";
