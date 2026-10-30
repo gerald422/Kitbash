@@ -12,6 +12,7 @@ const SHOT = process.argv[3] || '';
   const ev = (f, a) => page.evaluate(f, a);
   const id = (n) => ev((n) => window.__sb.S.parts.find(p => p.name === n).id, n);
   const click = async (n) => { await page.click(`.card[data-id="${await id(n)}"]`); await page.waitForTimeout(500); };
+  await ev(() => { window.__sb.S.showHidden = true; });     // the scroll plate is on the default hidden list
   await ev(() => window.__sb.goSlot('legs')); await click('MarFil Assault - Legs 1A');
   await ev(() => window.__sb.goSlot('torso')); await click('MarFil Assault - Torso 3');
   await ev(() => window.__sb.goSlot('hipR'));

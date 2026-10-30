@@ -68,6 +68,13 @@ Notes
     Prepare lists every such part in _builder\no_fit.txt.
   - Flat legs (Marta, Turtle Ninja) on a Mar Fil torso bring the body
     adaptor, as in Blender.
+  - Hiding parts: each card has a Hide button (on hover). Hidden parts are
+    left out of the builder; nothing is deleted and their sidecars stay as
+    they are. The list is _hidden.txt in the library folder: one library
+    path per hidden part, "word: aquila" to hide every part with that in its
+    name, "type: Seals" for a whole type. It starts with aquilas, purity
+    seals and scrolls. Tick "Show hidden" to see them again (dimmed) and
+    Unhide one; for a word or type line, edit _hidden.txt.
   - Belt (step 10): Right hip, Left hip, Front and Back - the anchors on
     every pair of legs. A part shows on the tabs it has a fit for. In
     Blender it is tilted to sit flush and settled onto the legs, so it can

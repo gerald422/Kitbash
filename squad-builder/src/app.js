@@ -67,7 +67,8 @@
   var S = {
     index: null, parts: [], byId: {}, types: {}, source: null, libHandle: null, inbHandle: null,
     libPath: "D:\\Kitbash Library", adaptor: 3, models: [{}], cur: 0, same: true, step: 0, slot: "base",
-    hover: null, geo: {}, geoWait: {}, thumbs: {}, sentLog: []
+    hover: null, geo: {}, geoWait: {}, thumbs: {}, sentLog: [],
+    hide: {lines: [], paths: {}, words: [], types: []}, showHidden: false
   };
   var params = new URLSearchParams(location.search);
   var $ = function (id) { return document.getElementById(id); };
@@ -78,6 +79,7 @@
     var an = +localStorage.getItem("sb.adaptor"); if (an) S.adaptor = an;
   } catch (e) { /* storage blocked: keep the defaults */ }
   if (params.get("libpath")) S.libPath = params.get("libpath");
+  try { S.showHidden = localStorage.getItem("sb.showhidden") === "1"; } catch (e) { /* storage blocked */ }
 
   // ------------------------------------------------------------------ matrices (sidecars hold 4x4 row by row)
   function M4(a) { var m = new THREE.Matrix4(); m.set.apply(m, a); return m; }
@@ -119,6 +121,8 @@
       S.index = idx; S.parts = idx.parts; S.types = idx.types || {}; S.byId = {};
       if (idx.joints) Object.keys(idx.joints).forEach(function (k) { if (JOINTS[k] && idx.joints[k] && typeof idx.joints[k] === "object") Object.assign(JOINTS[k], idx.joints[k]); });
       S.parts.forEach(function (p) { S.byId[p.id] = p; norm(p); (p.variants || []).forEach(norm); });
+      return readBytes("_hidden.txt").then(function (b) { readHide(new TextDecoder().decode(b)); }, function () { readHide(""); });
+    }).then(function () {
       $("libdot").classList.add("on");
       $("libtxt").textContent = S.parts.length + " parts";
       renderAll();
@@ -193,9 +197,51 @@
     var s = Object.keys(p.fits || {}).map(function (k) { return (/ ([RL])$/.exec(k) || [])[1]; }).filter(Boolean);
     return s.length && s.every(function (x) { return x === s[0]; }) ? s[0] : null;
   }
-  function candidates(sl) {
+  // ------------------------------------------------------------------ parts you've hidden (the library's _hidden.txt)
+  // One line each: a part's library path (what the Hide button writes), "word: aquila" (any part with that in its
+  // name), "type: Seals" (a whole type), or a "#" comment. Nothing is deleted: the page just leaves these out.
+  var HIDE_HEAD = ["# Parts the Squad Builder leaves out. Nothing is deleted: take a line out to bring a part back.",
+    "# A library path hides that part (the page's Hide button writes these), \"word: <text>\" hides every part",
+    "# with that in its name, \"type: <type>\" a whole type. Renegade chapter: no aquilas, purity seals or scrolls.",
+    "word: aquila", "word: aquilla", "word: purity seal", "word: scroll", "type: Seals"];
+  function readHide(txt) {
+    var lines = txt.replace(/^\ufeff/, "").split(/\r?\n/);
+    if (!txt.trim()) lines = HIDE_HEAD.slice();
+    var h = {lines: lines, paths: {}, words: [], types: [], fresh: !txt.trim()};
+    lines.forEach(function (l) {
+      var t = l.trim(), m;
+      if (!t || t[0] === "#") return;
+      if ((m = /^word:\s*(.+)$/i.exec(t))) h.words.push(m[1].toLowerCase());
+      else if ((m = /^type:\s*(.+)$/i.exec(t))) h.types.push(m[1].toLowerCase());
+      else h.paths[t.toLowerCase()] = true;
+    });
+    S.hide = h;
+  }
+  function hiddenBy(p) {            // why a part is hidden ("" if it isn't)
+    if (S.hide.paths[p.path.toLowerCase()]) return "hidden";
+    var t = (p.name + " " + (p.orig || "")).toLowerCase(), w;
+    for (var i = 0; i < S.hide.words.length; i++) { w = S.hide.words[i]; if (t.indexOf(w) >= 0) return "word: " + w; }
+    if (S.hide.types.indexOf(String(p.type).toLowerCase()) >= 0) return "type: " + p.type;
+    return "";
+  }
+  function saveHide() {
+    var body = S.hide.lines.join("\r\n").replace(/(\r\n)*$/, "") + "\r\n";
+    if (!S.libHandle) return Promise.resolve();          // test or demo: kept for this visit
+    return S.libHandle.getFileHandle("_hidden.txt", {create: true}).then(function (fh) { return fh.createWritable(); })
+      .then(function (w) { return w.write(body).then(function () { return w.close(); }); })
+      .catch(function (e) { status("Couldn't save _hidden.txt in the library: " + e.message); });
+  }
+  function toggleHide(p) {
+    var why = hiddenBy(p);
+    if (why && why !== "hidden") { status(p.name + " is hidden by \"" + why + "\" in _hidden.txt: take that line out to bring it back."); return; }
+    if (why) S.hide.lines = S.hide.lines.filter(function (l) { return l.trim().toLowerCase() !== p.path.toLowerCase(); });
+    else S.hide.lines.push(p.path);
+    readHide(S.hide.lines.join("\n"));
+    saveHide(); renderPicker(); status(why ? p.name + " is back." : p.name + " hidden (Show hidden brings it back).");
+  }
+  function candidates(sl, all) {
     var st = STEPS[sl.step];
-    return S.parts.filter(function (p) { return st.types.indexOf(p.type) >= 0 && asFor(p, sl); });
+    return S.parts.filter(function (p) { return st.types.indexOf(p.type) >= 0 && asFor(p, sl) && (all || S.showHidden || !hiddenBy(p)); });
   }
 
   // ------------------------------------------------------------------ placing a model
@@ -535,7 +581,8 @@
     $("slotseg").innerHTML = st.slots.length > 1 ? st.slots.map(function (x) {
       return '<button data-s="' + x.k + '" class="' + (x.k === S.slot ? "on" : "") + '">' + (x.tab || (x.side === "R" ? "Right" : "Left")) + "</button>";
     }).join("") : "";
-    var all = candidates(sl);
+    var all = candidates(sl), nhid = candidates(sl, true).length - candidates(sl).length;
+    if (S.showHidden) nhid = candidates(sl, true).filter(function (p) { return hiddenBy(p); }).length;
     var mk = $("fmaker").value, kt = $("fkit").value, q = $("fq").value.trim().toLowerCase();
     var makers = uniq(all.map(function (p) { return p.maker; }));
     if (makers.indexOf(mk) < 0) mk = "";          // a maker with nothing in this step: show everything
@@ -558,7 +605,8 @@
       note = host.part.anchored ? "These " + STEPS[SLOT[hk].step].label.toLowerCase() + " have no " + sl.sock + ": Blender will leave the part beside the model for you to place."
                                 : "No " + sl.sock + " saved for these " + STEPS[SLOT[hk].step].label.toLowerCase() + " yet: Blender will find it.";
     $("pnote").textContent = note;
-    $("pcount").textContent = list.length + " of " + all.length;
+    $("pcount").textContent = list.length + " of " + all.length + (nhid ? " · " + nhid + (S.showHidden ? " hidden shown" : " hidden") : "");
+    $("showhid").checked = S.showHidden;
     var chosen = pickOf(S.cur, S.slot);
     var html = list.slice(0, 400).map(function (p) {
       var as = asFor(p, sl);
@@ -566,7 +614,9 @@
       var fitName = spec(p).spans ? "Shoulder R" : sl.sock;
       var nofit = sl.k === "legs" ? !(as.data.fits["Waist"] || as.data.fits["Flat Waist"]) : fitName ? !fitMatrix(as, fitName) : false;
       if (nofit) tag = "no fit yet";
-      return '<div class="card' + (chosen && chosen.id === p.id ? " on" : "") + '" tabindex="0" data-id="' + p.id + '" title="' + esc(p.path) + '">' +
+      var hid = hiddenBy(p);
+      return '<div class="card' + (chosen && chosen.id === p.id ? " on" : "") + (hid ? " hid" : "") + '" tabindex="0" data-id="' + p.id + '" title="' + esc(p.path) + '">' +
+        '<button class="hide" data-hide="' + p.id + '" title="' + (hid ? (hid === "hidden" ? "Bring this part back" : esc("Hidden by " + hid + " in _hidden.txt")) : "Leave this part out of the builder (nothing is deleted)") + '">' + (hid ? "Unhide" : "Hide") + "</button>" +
         '<div class="img">' + (p.prev ? '<img alt="" data-t="' + p.id + '">' : '<span class="tag">no preview</span>') + "</div>" +
         '<div class="nm">' + esc(as.name.replace(/^[^-]+ - /, "")) + '</div><div class="tag' + (nofit ? " flag" : "") + '">' + esc(tag) + "</div></div>";
     }).join("");
@@ -726,7 +776,14 @@
       var b = e.target.closest(".mtab"); if (b) { S.cur = +b.getAttribute("data-m"); renderAll(); }
     });
     $("models").addEventListener("change", function (e) { if (e.target.id === "samechk") { S.same = e.target.checked; } });
-    $("cards").addEventListener("click", function (e) { var c = e.target.closest(".card"); if (c) choose(c.getAttribute("data-id")); });
+    $("cards").addEventListener("click", function (e) {
+      var h = e.target.closest(".hide"); if (h) { e.stopPropagation(); toggleHide(S.byId[h.getAttribute("data-hide")]); return; }
+      var c = e.target.closest(".card"); if (c) choose(c.getAttribute("data-id"));
+    });
+    $("showhid").addEventListener("change", function () {
+      S.showHidden = $("showhid").checked; try { localStorage.setItem("sb.showhidden", S.showHidden ? "1" : "0"); } catch (e) { /* storage blocked */ }
+      renderPicker();
+    });
     $("cards").addEventListener("keydown", function (e) { if (e.key === "Enter") { var c = e.target.closest(".card"); if (c) choose(c.getAttribute("data-id")); } });
     $("cards").addEventListener("mouseover", function (e) {
       var c = e.target.closest(".card"); if (!c) return;
@@ -762,7 +819,7 @@
 
   // ------------------------------------------------------------------ start
   initView(); bind();
-  window.__sb = {S: S, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll};
+  window.__sb = {S: S, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
   if (window.SB_DEMO) {                                       // the online demo: its own files, nothing sent
     S.source = "./";
     $("setupbtn").hidden = true;
