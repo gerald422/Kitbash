@@ -5,7 +5,7 @@ description: Use when adding a new maker, kit or part type to Josh's Kitbash Lib
 
 # Generating sidecars for the Kitbash Library
 
-A sidecar `<part>.sockets.json` sits beside each STL in `D:\Kitbash Library`. TIOW Inbox reads it on import (sockets, fits, category). Prepare Squad Builder reads it to build the page's index. The code and every sidecar are in this repo (`library/` mirrors the library's folders). **STLs never go in the repo.** The history of every kit done so far, with measured values, is in `docs/project-notes.md`: read the section for the nearest kit before starting.
+A sidecar `<part>.sockets.json` sits beside each STL in `D:\Kitbash Library`. TIOW Inbox reads it on import (sockets, fits, category). Prepare Squad Builder reads it to build the page's index. The code and every sidecar are in this repo (`library/` mirrors the library's folders). **STLs never go in the repo.** The history of every kit done so far, with measured values, is in `docs/project-notes.md`: read the section for the nearest kit before starting. Starting in a fresh session: `docs/HANDOVER.md` (repo, PC paths, installed versions, container setup with `tools/setup_container.sh`).
 
 ## Ground rules (Josh)
 
@@ -17,6 +17,8 @@ A sidecar `<part>.sockets.json` sits beside each STL in `D:\Kitbash Library`. TI
   - Back up the sidecars you touch first, under a dated folder.
 - **Never write TIOW's `config.json`.**
 - Ask Josh for a reference placement when no convention covers a part, such as a new pauldron shape, a hip plate or a belt bit. He places one by eye in Blender; you carry it across the family.
+- Renegade chapter: no aquilas, purity seals or scrolls. New parts with them sculpted in go on `_hidden.txt` (a library path per line, `# why` above it); merge with Josh's current file, he hides parts from the page.
+- Keep usage low: stage only what a task needs, ask before copying big blends.
 
 ## Sidecar format
 
@@ -90,6 +92,17 @@ Take reference values from the existing library sidecars rather than retyping th
 **Bases**
 - The round base rule: disc centre on the rim top, Z up from the bottom face. TIOW Inbox 1.17.2 then raises a base to meet the feet automatically.
 
+**Belt, loincloths, wings (TIOW Inbox 1.17.4-1.17.5)**
+- Belt bits (Accessories, Grenades, Seals, Trophies): Hip R / Hip L / Belt Back only, rocked and settled.
+- Loincloths (type `Loincloths`): Belt Front only. Rule: the top edge's centre, at the back, on the anchor; face out along Z, top along Y; then rock and settle. A loincloth that tucks under a buckle gets Josh's own placement with Fix the Part (`exact`).
+- Wings (type `Wings`, sided) hang from a connector (type `Wing Mounts`, sided) that the wing brings: the wing's sidecar key `adaptor` is the connector's library path; the pack carries `Wing Mount R/L`, the connector `Wing R/L`. Only packs Josh chose get Wing Mounts (TN Mk6 Universal).
+- Held in both hands, no arms (`Two-Handed Held`): Hand R fit, `offHand` (the other wrist) and `pivot`.
+
+**Scale and sources**
+- A maker at another scale gets `scale` (Marta's two-armed sets 0.9; Bladecrow wings 1.3); fits and sockets are then in scaled coordinates, variants need their own `sidecar.scale`.
+- OBJ-only sources: convert to a binary STL in the OBJ's own coordinates, record the OBJ in `_sources.csv`.
+- Taking placements from Josh's blend: his meshes are usually the source files moved (origin set, rotations or scale applied). Register each mesh onto its source file first (24 axis turns + ICP, similarity if he scaled it: `kits/wings/extract.py`), then measure in the source file's coordinates; take out any scale on his model (orthonormalise Z, then Y).
+
 **Parts exported together**
 - Parts the maker exports in one assembly frame (a whole kit, a bike, a one-off character) keep that frame. Fits come from the assembly, so they land as the maker posed them.
 
@@ -125,8 +138,17 @@ Take reference values from the existing library sidecars rather than retyping th
 ## Fixing one part later
 
 Don't regenerate a whole kit for a small error. In Blender, move the part and use **Save Correction** (TIOW Inbox panel):
-- **Fix the Part** saves this part's fit everywhere.
-- **Fix the Socket** moves the host's socket.
-- **Whole Folder** and **Both Sides** are options on either.
+- **Fix the Part** saves this part's fit everywhere (and marks it `exact`: no rock, settle or base rise next time).
+- **Fix the Socket** moves the host's socket (`tiow_corrected`; since 1.17.3 belt bits on it are only settled, not rocked).
+- **Whole Folder** and **Both Sides** are options on either. Both Sides is on by default: turn it off when both sides were placed by hand.
 
-Then run Prepare, export the sidecars and commit.
+Then run Prepare (or update the index entries in place), export the sidecars and commit.
+
+When Josh sends a blend with parts moved by hand (`Desktop\query.blend`): rebuild the same model with TIOW in the container and compare each part relative to the torso (`kits/corrections/query-*/rebuild.py`), so TIOW's own rock/settle/base rise isn't taken for his moves; save the moves with TIOW's own `correct_socket` / `correct_part` (`both=False`, `folder=False`), rebuild to confirm, deliver.
+
+## Delivering
+
+- Staging copies from the PC are limited to 7 folder levels below a connected folder: tar deeper files into a connected folder and stage the archive.
+- Before replacing a file on the PC, check its md5 is still the one you worked from; back up to `D:\Kitbash Library\_backups\<task-date>\` (add-ons and page: `TIOW Blender bridge\old-<version>\`); `mkdir` new folders first; md5-check everything after `device_commit_files`.
+- Update `_builder\index.json` in place (`build_index.part_data` for changed parts; `build_index.build` on a small folder for new ones, plus their previews; compact JSON) and append `_sources.csv` rows (CRLF), so Josh needn't run Prepare.
+- A new part type also needs: TIOW's `DEFAULT_JOINTS` (and the bridge `_library.json` template), the page's `JOINTS` and a step or slot in `squad-builder/src/app.js` (`python3 build_page.py`), `library-tools/partTypes.json`, `plan_names.py`.
