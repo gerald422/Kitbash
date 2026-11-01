@@ -1,0 +1,143 @@
+{
+ "schemaVersion": 1,
+ "part": "Backpack Connector - Arm 2 Joint",
+ "category": "Wing Mounts",
+ "sockets": [
+  {
+   "type": "Wing L",
+   "name": "Wing Mount_socket_Wing L",
+   "matrix": [
+    0.397444,
+    0.917627,
+    1e-06,
+    -30.267561,
+    -0.017871,
+    0.007741,
+    -0.99981,
+    -6.810362,
+    -0.917453,
+    0.397368,
+    0.019476,
+    7.868969,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Josh's wing_l on the connector (base_jumpack.blend)"
+   }
+  }
+ ],
+ "fits": {
+  "Wing Mount L": [
+   1.0,
+   0.0,
+   -0.0,
+   30.216101,
+   -0.0,
+   1.0,
+   -1e-06,
+   6.283275,
+   0.0,
+   1e-06,
+   1.0,
+   -5.338085,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Wing Mount L": "Josh's placement on the pack's left fin socket (base_jumpack.blend, Oct 31)",
+  "type": "brought by a wing (TIOW Inbox 1.17.5), not picked on its own"
+ },
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "Bits Techmarine - Wing Mount Arm 2 Joint R",
+   "title": "Bits Techmarine - Wing Mount Arm 2 Joint R",
+   "folder": "Wing Mounts",
+   "from": "mirror, as Josh's right connector",
+   "sidecar": {
+    "category": "Wing Mounts",
+    "fits": {
+     "Wing Mount R": [
+      1.0,
+      0.0,
+      0.0,
+      -30.216097,
+      0.0,
+      -1.0,
+      0.0,
+      -6.283278,
+      0.0,
+      0.0,
+      -1.0,
+      5.338086,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": [
+     {
+      "type": "Wing R",
+      "name": "Wing Mount R_socket_Wing R",
+      "matrix": [
+       -0.738988,
+       0.673719,
+       0.0,
+       30.170698,
+       0.013122,
+       0.014394,
+       0.99981,
+       -6.810356,
+       0.673591,
+       0.738847,
+       -0.019477,
+       7.868967,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "display_type": "ARROWS",
+      "display_size": 3.0,
+      "props": {
+       "tiow_from": "Josh's wing_r on the connector"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "original": {
+  "name": "Backpack Connector - Arm 2 Joint",
+  "folder": "Backpacks and Side Connectors",
+  "path": "new cults\\Warhammer Techmarine Conversion Kit\\Warhammer Techmarine Conversion Kit @STL_Printer\\Backpack\\Backpacks and Side Connectors\\Backpack Connector - Arm 2 Joint.stl"
+ }
+}

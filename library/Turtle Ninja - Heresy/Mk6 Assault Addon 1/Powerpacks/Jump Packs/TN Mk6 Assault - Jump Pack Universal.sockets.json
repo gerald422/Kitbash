@@ -2,7 +2,170 @@
  "schemaVersion": 1,
  "part": "Mk6_Jumppack_Universal",
  "category": "Jump Packs",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Mechadendrite L",
+   "name": "Mk6_Jumppack_Universal_socket_Mechadendrite L",
+   "matrix": [
+    -0.639929,
+    0.10072,
+    0.761804,
+    16.013113,
+    7.6e-05,
+    0.991381,
+    -0.131009,
+    7.227026,
+    -0.768434,
+    -0.083778,
+    -0.634422,
+    7.094055,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Josh's Mechadendrite_l (base_jumpack.blend, the marine's pack, scale taken out)"
+   }
+  },
+  {
+   "type": "Mechadendrite R",
+   "name": "Mk6_Jumppack_Universal_socket_Mechadendrite R",
+   "matrix": [
+    -0.638616,
+    -0.101412,
+    -0.762814,
+    6.446803,
+    -7.6e-05,
+    0.991287,
+    -0.131723,
+    7.230594,
+    0.769526,
+    -0.084062,
+    -0.633059,
+    7.086639,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Josh's Mechadendrite_r (base_jumpack.blend, the marine's pack, scale taken out)"
+   }
+  },
+  {
+   "type": "Wing Mount L",
+   "name": "Mk6_Jumppack_Universal_socket_Wing Mount L",
+   "matrix": [
+    0.042344,
+    -0.077339,
+    0.996105,
+    22.570229,
+    9.9e-05,
+    0.997,
+    0.077405,
+    15.301064,
+    -0.999103,
+    -0.003179,
+    0.042224,
+    7.631803,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Josh's BackPack_fin_l.001 (base_jumpack.blend, the marine's pack, scale taken out)"
+   }
+  },
+  {
+   "type": "Wing Mount R",
+   "name": "Mk6_Jumppack_Universal_socket_Wing Mount R",
+   "matrix": [
+    0.010997,
+    0.019444,
+    0.99975,
+    -0.188632,
+    -0.000885,
+    -0.99981,
+    0.019454,
+    14.940556,
+    0.999939,
+    -0.001099,
+    -0.010978,
+    7.702372,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Josh's BackPack_fin_r.001 (base_jumpack.blend, the marine's pack, scale taken out)"
+   }
+  },
+  {
+   "type": "Back Top L",
+   "name": "Mk6_Jumppack_Universal_socket_Back Top L",
+   "matrix": [
+    -0.999852,
+    -0.017188,
+    0.0,
+    17.958197,
+    0.002967,
+    -0.172574,
+    0.984992,
+    20.263166,
+    -0.01693,
+    0.984847,
+    0.1726,
+    12.691726,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Josh's backpack_topper_l.001 (base_jumpack.blend, the marine's pack, scale taken out)"
+   }
+  },
+  {
+   "type": "Back Top",
+   "name": "Mk6_Jumppack_Universal_socket_Back Top",
+   "matrix": [
+    -1.0,
+    0.0,
+    0.0,
+    11.219509,
+    0.0,
+    -0.1726,
+    0.984992,
+    17.570471,
+    0.0,
+    0.984992,
+    0.1726,
+    9.93326,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Josh's Center_backpack_topper.001 (base_jumpack.blend, the marine's pack, scale taken out)"
+   }
+  }
+ ],
  "fits": {
   "Back": [
    -0.9999997615814209,
@@ -24,7 +187,8 @@
   ]
  },
  "notes": {
-  "Back": "mount plate (56 mm2) flat on the torso back face, centred on it, upright (Turtle Ninja pack rule)"
+  "Back": "mount plate (56 mm2) flat on the torso back face, centred on it, upright (Turtle Ninja pack rule)",
+  "Wing Mount L": "where a wing's connector goes (Josh's fin sockets on this pack; only this pack has them)"
  },
  "original": {
   "name": "Mk6_Jumppack_Universal",

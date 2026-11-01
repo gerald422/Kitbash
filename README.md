@@ -37,6 +37,6 @@ then commit. `sync_sidecars.py import library "D:\Kitbash Library"` puts a commi
 
 ## Branches
 
-- `main`: what is installed (TIOW Inbox 1.17.4, Finalise 0.3.3).
+- `main`: what is installed (TIOW Inbox 1.17.5, Finalise 0.3.3).
 - `bionic-1.18`: the bionic legs work (TIOW Inbox 1.18, Finalise 0.3.2), on hold until the plug position is settled.
-  It predates 1.17.1-1.17.4, so those changes need merging in when it resumes.
+  It predates 1.17.1-1.17.5, so those changes need merging in when it resumes.

@@ -46,11 +46,18 @@
 # 1.17.4: loincloths are their own type ("Loincloths") and the only thing that
 # goes on the belt's front anchor (Belt Front); pouches, grenades and other
 # belt bits go on the hips and the back of the belt.
+#
+# 1.17.5: blade wings (Wings) come with their connector. A wing's sockets file
+# names the connector ("adaptor", a path in the library); sent onto a pack that
+# has no Wing R / Wing L socket yet, the connector (Wing Mounts) goes on the
+# pack's Wing Mount R / L first and the wing hangs from the connector's own
+# Wing R / L socket. A request for a socket the model hasn't got yet keeps its
+# side, so a left wing arrives as the left one.
 
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 4),
+    "version": (1, 17, 5),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -412,6 +419,9 @@ def import_request(job, prefs):
                 names = [want] + list(aliases.get(want) or [])
                 focus = next((o for o in [model_root] + list(_descendants(model_root))
                               if o.get("ws_type") in names), None)
+                if focus is None and want[-2:] in (" R", " L"):
+                    # not there yet (a wing's socket comes with its connector): keep the side asked for
+                    job["_side"] = want[-1]
             focus = focus or model_root
     # one file, both sides: the variant for the side it's going on
     data = read_sidecar(path) or {}
@@ -571,6 +581,8 @@ DEFAULT_JOINTS = {
     "Seals": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
     "Trophies": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
     "Loincloths": {"socket": "Belt Front", "rock": 8, "settle": "-Z", "sink": 0.1},
+    "Wings": {"socket": "Wing", "sided": True, "adaptor": {"Wing R": "Wing Mount R", "Wing L": "Wing Mount L"}},
+    "Wing Mounts": {"socket": "Wing Mount", "sided": True},
 }
 # Socket names from before the library rename, so library parts also snap
 # into files set up the old way.
@@ -1322,9 +1334,37 @@ def adaptor_files(prefs):
     return [os.path.join(d, f) for f in sorted(names, key=key)]
 
 
+def _library_root(path):
+    """The Kitbash Library folder a part's file is in (the one holding _sources.csv), or None."""
+    d = os.path.dirname(os.path.abspath(str(path)))
+    for _ in range(12):
+        if os.path.isfile(os.path.join(d, "_sources.csv")):
+            return d
+        up = os.path.dirname(d)
+        if up == d:
+            break
+        d = up
+    return None
+
+
+def _adaptor_of(part):
+    """The connector a part brings (its sockets file's "adaptor": a path in the library), or None for the
+    body adaptor from Preferences."""
+    src = part.get("tiow_src")
+    rel = (read_sidecar(str(src)) or {}).get("adaptor") if src else None
+    root = _library_root(src) if rel else None
+    if not root:
+        return None
+    p = os.path.join(root, *str(rel).replace("/", "\\").split("\\"))
+    return p if os.path.isfile(p) else None
+
+
 def bring_adaptor(via_sock, prefs, unit, path=None):
-    """Import the chosen body adaptor and snap it onto `via_sock` (a Mar Fil
-    torso's Waist), replacing what was there. Returns (adaptor, note)."""
+    """Import an adaptor and snap it onto `via_sock`, replacing what was there:
+    the chosen body adaptor onto a Mar Fil torso's Waist, or (path given) the
+    connector a part brings - a wing's onto the pack's Wing Mount, as the
+    connector's variant for that side. Returns (adaptor, note)."""
+    named = path is not None
     files = adaptor_files(prefs)
     if path is None:
         if not files:
@@ -1332,7 +1372,19 @@ def bring_adaptor(via_sock, prefs, unit, path=None):
         i = min(max(int(prefs.adaptor_default), 1), len(files)) - 1
         path = files[i]
     job = {"path": path, "category": "Adapters", "_unit": unit}
-    new, meshes, s, made, added = load_stl(path, job, prefs)
+    variant = None
+    if named:
+        job["category"] = part_category(job) or "Adapters"
+        data = read_sidecar(path) or {}
+        want = str(via_sock.get("ws_type") or "")
+        if want not in (data.get("fits") or {}):
+            for vi, v in enumerate(part_variants(data)):
+                if isinstance(v, dict) and want in ((v.get("sidecar") or {}).get("fits") or {}):
+                    variant = (vi, v)
+                    job["_rname"] = str(v.get("name") or "")
+                    job["_folder"] = str(v.get("folder") or "")
+                    break
+    new, meshes, s, made, added = load_stl(path, job, prefs, variant=variant)
     if len(meshes) != 1:
         return None, " - the adaptor file is not one mesh"
     ad = meshes[0]
@@ -1340,7 +1392,10 @@ def bring_adaptor(via_sock, prefs, unit, path=None):
     if "snapped to" not in note:
         _remove_part(ad)
         return None, f" - adaptor not placed{note}"
-    return ad, f", adaptor {os.path.splitext(os.path.basename(path))[0]} added (Next Adaptor swaps it)"
+    nm = os.path.splitext(os.path.basename(path))[0]
+    if named:
+        return ad, f", {nm} brought onto {via_sock.get('ws_type')}"
+    return ad, f", adaptor {nm} added (Next Adaptor swaps it)"
 
 
 def auto_snap(part, job, prefs, focus):
@@ -1397,6 +1452,8 @@ def auto_snap(part, job, prefs, focus):
             if picked is not None and picked.get("ws_type") in v and \
                     (mirrors or any(f"ws_fit::{n}" in part.keys() for n in v)):
                 goes = s_
+    if spec.get("sided") and job.get("_side") in ("R", "L"):
+        goes = job["_side"]
     names = wanted_sockets(spec, goes or side, aliases)
     if spec.get("byFit"):
         # legs: the waist their fits are for (Mar Fil's plug, or flat)
@@ -1434,7 +1491,7 @@ def auto_snap(part, job, prefs, focus):
             vs = _model_socket(focus, wanted_sockets({"socket": via}, None, aliases)) if via else None
             if vs is None:
                 continue
-            ad, brought = bring_adaptor(vs, prefs, unit)
+            ad, brought = bring_adaptor(vs, prefs, unit, path=_adaptor_of(part))
             if ad is not None:
                 sock, old = choose_socket(names, ad, co, ctx.view_layer, fit_of, prefer=_part_key(part))
                 break
@@ -2566,6 +2623,8 @@ def pick_variant(job, data, focus):
         return None
     other = next(iter(sides))
     own = "R" if other == "L" else "L"
+    if job.get("_side") in ("R", "L"):
+        return sides[other] if job["_side"] == other else None
     ps = _part_sockets()
     if ps is None:
         return None

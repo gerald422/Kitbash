@@ -32,7 +32,7 @@ const SHOT = process.argv[3] || '';
     return Math.max.apply(null, want.elements.map((v, i) => Math.abs(v - hp.W.elements[i])));
   });
   ck('the plate sits on the legs\' Hip R by its fit', pos < 1e-6, pos);
-  const steps = await page.$eval('.step[data-i="10"]', e => e.innerText);
+  const steps = await page.$eval('.step[data-i="11"]', e => e.innerText);
   ck('the steps list shows R and L belt lines', /Belt/.test(steps) && /Holster/.test(steps) && /Scroll/.test(steps), steps);
   const reqs = await ev(() => window.__sb.requestsFor().filter(r => r.category === 'Accessories').map(r => [r.name, r.socket]));
   ck('both go to Blender on their anchors', reqs.length === 2 && reqs.some(r => r[1] === 'Hip R') && reqs.some(r => r[1] === 'Hip L'), reqs);

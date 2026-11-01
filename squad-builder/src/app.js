@@ -18,7 +18,10 @@
     "Legs": {socket: ["Waist", "Flat Waist"]}, "Adapters": {socket: "Waist"}, "Bases": {socket: "Base"},
     "Shoulder Pads": {socket: "Pad", sided: true, mirrorLeft: true},
     "Knee Pads": {socket: "Shin", sided: true, mirrorLeft: true},
-    "Loincloths": {socket: "Belt Front"}
+    "Loincloths": {socket: "Belt Front"},
+    // blade wings bring their connector (the wing's "adaptor") onto the pack's Wing Mount and hang from it (TIOW Inbox 1.17.5)
+    "Wings": {socket: "Wing", sided: true, adaptor: {"Wing R": "Wing Mount R", "Wing L": "Wing Mount L"}},
+    "Wing Mounts": {socket: "Wing Mount", sided: true}
   };
   var ALIAS = {"arm__Torso_r": "Shoulder R", "arm__Torso_l": "Shoulder L", "Wrist_socket_r": "Hand R",
     "Wrist_socket_l": "Hand L", "Head": "Neck", "Backpack": "Back"};
@@ -34,6 +37,8 @@
               {k: "arm2", tab: "Two-handed", lab: "2H", host: "torso", sock: "Shoulder R"}]},
     {key: "head", label: "Head", types: ["Heads"], slots: [{k: "head", host: "torso", sock: "Neck"}]},
     {key: "pack", label: "Back", types: ["Backpacks", "Jump Packs"], slots: [{k: "pack", host: "torso", sock: "Back"}]},
+    {key: "wings", label: "Wings", types: ["Wings"],
+      slots: [{k: "wingR", side: "R", host: "pack", sock: "Wing R"}, {k: "wingL", side: "L", host: "pack", sock: "Wing L"}]},
     {key: "pads", label: "Shoulder pads", types: ["Shoulder Pads"],
       slots: [{k: "padR", side: "R", host: "armR", sock: "Pad R"}, {k: "padL", side: "L", host: "armL", sock: "Pad L"}]},
     {key: "weapons", label: "Weapons", types: ["Pistols", "Melee", "Two-Handed Held", "Shields", "Hands"],
@@ -48,8 +53,8 @@
   ];
   var SLOT = {};
   STEPS.forEach(function (st, i) { st.slots.forEach(function (sl) { sl.step = i; SLOT[sl.k] = sl; }); });
-  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL", "loin", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
-  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "padR", "padL", "handR", "handL", "shinR", "shinL", "loin", "hipR", "hipL", "beltB"];   // the order you pick in
+  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "loin", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
+  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "loin", "hipR", "hipL", "beltB"];   // the order you pick in
   // a two-handed piece (both arms and the weapon in one) takes both shoulders: these slots can't be filled with it
   // TIOW Inbox finds pad and wrist spots on single arms only, so a two-handed piece takes a pad only where one was saved by hand
   var COVERED = {padR: "no pad spot on the two-handed piece", padL: "no pad spot on the two-handed piece",
@@ -276,6 +281,10 @@
     }
     return x.length - y.length;
   }
+  function connectorOf(p) {      // the part a wing brings with it (its sockets file's "adaptor": a path in the library)
+    var want = String(p.adaptor || "").toLowerCase();
+    return want ? S.parts.filter(function (q) { return q.path.toLowerCase() === want; })[0] : null;
+  }
   function adaptorPart() {      // the one TIOW Inbox brings: its Adaptor number, in folder order
     var ads = S.parts.filter(function (p) { return p.type === "Adapters"; }).sort(function (a, b) { return natural(a.path.split("\\").pop(), b.path.split("\\").pop()); });
     return ads[Math.min(Math.max(S.adaptor, 1), ads.length) - 1];
@@ -390,6 +399,18 @@
         var sock = sl.sock;
         if (spec(p).spans) sock = "Shoulder R";
         var hs = socketsOf(host)[sock];
+        var via = (spec(p).adaptor || {})[sock];
+        if (!hs && via) {               // a wing: its connector goes on the pack's Wing Mount first, the wing on the connector
+          var vs = socketsOf(host)[via], conn = connectorOf(p);
+          if (!vs || !conn) { inst.note = !vs ? "no " + via + " on this back" : "its connector isn't in the library"; out.push(inst); return; }
+          var cas = asFor(conn, sl);
+          var cw = cas && onto(vs, cas, via);
+          if (cw) {
+            var cinst = {slot: "mount" + (sl.side || ""), part: conn, as: cas, W: cw, note: "connector, brought by the wing"};
+            out.push(cinst); by[cinst.slot] = cinst;
+            hs = socketsOf(cinst)[sock];
+          }
+        }
         if (!hs) {
           inst.note = host.part.anchored ? "no " + sock + " on these " + STEPS[SLOT[hk].step].label.toLowerCase() : "Blender finds the " + sock + " socket";
           out.push(inst); return;
@@ -606,6 +627,9 @@
     else if (sl.k === "arm2" && (mdl.armR || mdl.armL)) note = "A two-handed piece has both arms and its weapon: picking one replaces the arms.";
     else if ((sl.k === "armR" || sl.k === "armL") && mdl.arm2) note = "Picking an arm replaces the two-handed piece.";
     else if (hk && !pickOf(S.cur, hk)) note = "Pick " + STEPS[SLOT[hk].step].label.toLowerCase() + " first to see these in place.";
+    else if (st.key === "wings") note = host && host.W && socketsOf(host)[JOINTS.Wings.adaptor[sl.sock]]
+      ? "Each wing brings its connector onto the pack's " + JOINTS.Wings.adaptor[sl.sock] + " and hangs from it."
+      : "This back has no " + JOINTS.Wings.adaptor[sl.sock] + ": only packs with wing mounts take wings.";
     else if (host && host.W && sl.sock && !socketsOf(host)[sl.sock] && !spec({type: st.types[0]}).spans)
       note = host.part.anchored ? "These " + STEPS[SLOT[hk].step].label.toLowerCase() + " have no " + sl.sock + ": Blender will leave the part beside the model for you to place."
                                 : "No " + sl.sock + " saved for these " + STEPS[SLOT[hk].step].label.toLowerCase() + " yet: Blender will find it.";
@@ -615,7 +639,7 @@
     var chosen = pickOf(S.cur, S.slot);
     var html = list.slice(0, 400).map(function (p) {
       var as = asFor(p, sl);
-      var tag = as.v != null ? "maker's left copy" : as.mirror ? "mirrored" : sl.k === "arm2" ? p.kit + " · " + p.type.replace("Two-Handed ", "") : p.type === st.types[0] ? p.kit : p.type;
+      var tag = as.v != null ? (as.data.mirror ? "mirrored" : "maker's left copy") : as.mirror ? "mirrored" : sl.k === "arm2" ? p.kit + " · " + p.type.replace("Two-Handed ", "") : p.type === st.types[0] ? p.kit : p.type;
       var fitName = spec(p).spans ? "Shoulder R" : sl.sock;
       var nofit = sl.k === "legs" ? !(as.data.fits["Waist"] || as.data.fits["Flat Waist"]) : fitName ? !fitMatrix(as, fitName) : false;
       if (nofit) tag = "no fit yet";
@@ -656,6 +680,10 @@
     if ((k === "armR" || k === "armL") && mdl.arm2) return true;           // a two-handed piece: no single arms
     if (covered(mdl, k)) return true;
     if (hk && hk !== "torso" && hk !== "legs" && !mdl[hk]) return true;
+    if (k === "wingR" || k === "wingL") {     // wings only on a back with a Wing Mount on that side
+      var pk = layout(S.cur).filter(function (x) { return x.slot === "pack"; })[0];
+      if (!pk || !pk.W || !socketsOf(pk)[JOINTS.Wings.adaptor[sl.sock]]) return true;
+    }
     if (k === "handR" || k === "handL") {     // an arm with its weapon built in has no hand to fill
       var arm = layout(S.cur).filter(function (x) { return x.slot === hk; })[0];
       if (arm && arm.W && arm.part.anchored && !socketsOf(arm)[sl.sock]) return true;

@@ -1,7 +1,7 @@
 // The Loincloth step: loincloths are their own type, the only thing on the belt's front anchor; the Belt step no longer
 // has a front tab and lists no loincloths. Hidden loincloths (an aquila on CyberBrush's 3) stay out.
 const { chromium } = require('playwright');
-const URL = process.argv[2] || 'http://localhost:8777/Squad%20Builder.html?lib=/qlib2/&libpath=D%3A%5CKitbash%20Library';
+const URL = process.argv[2] || 'http://localhost:8777/Squad%20Builder.html?lib=/qlib3/&libpath=D%3A%5CKitbash%20Library';
 const SHOT = process.argv[3] || '';
 (async () => {
   const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl', '--ignore-gpu-blocklist'] });
@@ -17,8 +17,8 @@ const SHOT = process.argv[3] || '';
   await ev(() => window.__sb.goSlot('legs')); await click('MarFil Assault - Legs 4B');
   await ev(() => window.__sb.goSlot('torso')); await click('TN Mk7-8 - Upper B1');
   await ev(() => window.__sb.goSlot('loin'));
-  const label = await page.$eval('.step[data-i="9"]', e => e.innerText);
-  ck('step 10 is Loincloth, before Belt', /Loincloth/.test(label), label);
+  const label = await page.$eval('.step[data-i="10"]', e => e.innerText);
+  ck('step 11 is Loincloth, before Belt', /Loincloth/.test(label), label);
   const loin = await names('loin');
   const all = await ev(() => window.__sb.S.parts.filter(p => p.type === 'Loincloths').map(p => p.name));
   ck('26 loincloths are their own type', all.length === 26, all.length);

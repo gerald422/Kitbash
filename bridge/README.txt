@@ -721,6 +721,15 @@ it, pushed out to just touching if it was sunk into the belt.
 goes on the front of the belt (Belt Front). Pouches, grenades and other belt
 bits go on the hips and the back of the belt.
 
+1.17.5: blade wings (type Wings) come with their connector. Send a wing to a
+model whose pack has a Wing Mount (the TN Mk6 Universal jump pack) and the
+connector it names in its sockets file goes on that side's Wing Mount first;
+the wing then hangs from the connector's own Wing R / Wing L socket. A second
+wing on the same side swaps the wing and keeps the connector. To move where
+wings sit on this pack, move the connector (Fix the Socket moves the pack's
+Wing Mount) or the wing on it (Fix the Socket moves the connector's Wing
+socket, Fix the Part the wing itself).
+
 Bases settle onto the feet (1.17.2): a base snapped on the legs' Base socket
 rises along the socket until the lowest foot touches it (and 0.2 mm in, for
 printing). A base is only ever raised: feet already on or in a scenic base

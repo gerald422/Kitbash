@@ -176,6 +176,8 @@ def part_data(d):
     for k in ("noPad", "noHand"):
         if d.get(k):
             out[k] = True
+    if isinstance(d.get("adaptor"), str) and d["adaptor"]:
+        out["adaptor"] = d["adaptor"]      # the connector this part brings (a wing's, onto the pack's Wing Mount)
     ex = [str(t) for t in (d.get("exact") or []) if isinstance(t, str)]
     if ex:
         out["exact"] = ex            # fit types corrected by hand in Blender (Save Correction): no settling
