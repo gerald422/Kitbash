@@ -20,6 +20,16 @@ WORK = os.path.expanduser(opt('--work', '~/catalogue'))   # where plan.json is (
 DST = args[0]
 VERIFY = len(args) > 1 and args[1] == 'verify'
 plan = json.load(open(os.path.join(WORK, 'plan.json')))
+# parts Caliper repaired in the library (caliper_swap.py): never copied over from the maker's file again
+REPAIRED = {}
+try:
+    with open(os.path.join(DST, '_repaired.csv'), newline='', encoding='utf-8-sig') as fh:
+        for row in list(csv.reader(fh))[1:]:
+            if row: REPAIRED[row[0].replace('\\', '/').lower()] = int(row[4])
+except (OSError, ValueError, IndexError):
+    pass
+def repaired(r):
+    return REPAIRED.get(r['dst'].replace('\\', '/').lower())
 log = open(os.path.join(WORK, 'verify.log' if VERIFY else 'copy.log'), 'a', buffering=1)
 
 def shash(p, size):
@@ -48,8 +58,9 @@ def paths(r):
 def check(r):
     src, dst, scd = paths(r)
     try:
-        ok = os.path.isfile(dst) and os.path.getsize(dst) == r['bytes'] and \
-            shash(dst, r['bytes']) == shash(src, r['bytes']) and \
+        rb = repaired(r)
+        ok = (os.path.isfile(dst) and os.path.getsize(dst) == rb if rb else
+              os.path.isfile(dst) and os.path.getsize(dst) == r['bytes'] and shash(dst, r['bytes']) == shash(src, r['bytes'])) and \
             json.load(open(scd, encoding='utf-8')) == sidecar(r)
     except Exception:
         ok = False
@@ -59,7 +70,7 @@ def copy(r):
     src, dst, scd = paths(r)
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     n = 0
-    if not (os.path.isfile(dst) and os.path.getsize(dst) == r['bytes']):
+    if not repaired(r) and not (os.path.isfile(dst) and os.path.getsize(dst) == r['bytes']):
         shutil.copyfile(src, dst + '.part')
         os.replace(dst + '.part', dst)
         n = r['bytes']
@@ -78,7 +89,7 @@ t0 = time.time()
 todo = plan
 if not VERIFY:
     # cheap pass first: what is already there
-    todo = [r for r in plan if not (os.path.isfile(paths(r)[1]) and os.path.getsize(paths(r)[1]) == r['bytes']
+    todo = [r for r in plan if not (os.path.isfile(paths(r)[1]) and os.path.getsize(paths(r)[1]) == (repaired(r) or r['bytes'])
                                     and os.path.isfile(paths(r)[2]))]
     log.write('start: %d of %d to copy (%.2f GB)\n' % (len(todo), len(plan), sum(r['bytes'] for r in todo) / 1e9))
     # sidecars of parts already copied are rewritten only if they differ

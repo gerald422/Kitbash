@@ -11,8 +11,8 @@ import os
 import shutil
 import sys
 
-KEEP_NAMES = {"_fits.json", "_sources.csv", "_renamed.csv", "_bases_moved.csv", "_mirror_copies.csv"}
-SKIP_DIRS = {"_builder", ".git", "__pycache__"}
+KEEP_NAMES = {"_fits.json", "_sources.csv", "_renamed.csv", "_bases_moved.csv", "_mirror_copies.csv", "_repaired.csv"}
+SKIP_DIRS = {"_builder", "_backups", ".git", "__pycache__"}
 
 
 def wanted(name):
