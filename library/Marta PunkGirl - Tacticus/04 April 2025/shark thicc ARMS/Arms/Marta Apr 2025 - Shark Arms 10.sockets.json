@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "shark_ARMS_10",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999102,
+   -0.042372,
+   7.4e-05,
+   -0.089852,
+   7.4e-05,
+   3e-06,
+   1.0,
+   -11.439329,
+   -0.042372,
+   0.999102,
+   0.0,
+   -20.629945,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (30.9 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "shark_ARMS_10_socket_Hand R",
+   "matrix": [
+    0.980242,
+    0.170598,
+    -0.100107,
+    -5.123411,
+    -0.11765,
+    0.909702,
+    0.398248,
+    9.656877,
+    0.159008,
+    -0.378602,
+    0.911799,
+    12.201247,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "shark_ARMS_10",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\04 April 2025\\shark thicc ARMS\\Arms\\shark_ARMS_10.stl"
+ }
+}

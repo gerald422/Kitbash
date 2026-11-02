@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "BA_arms_1",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999102,
+   -0.042375,
+   1.8e-05,
+   -4.525946,
+   1.8e-05,
+   3e-06,
+   1.0,
+   2.277882,
+   -0.042375,
+   0.999102,
+   -2e-06,
+   -3.304565,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (27.6 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "BA_arms_1_socket_Hand R",
+   "matrix": [
+    0.577044,
+    -0.647144,
+    -0.498222,
+    -3.04801,
+    0.589852,
+    -0.091704,
+    0.802287,
+    0.889974,
+    -0.564884,
+    -0.756833,
+    0.328802,
+    5.780558,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "BA_arms_1",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\Bits Blood Angels Pt2\\Arms\\BA_arms_1.stl"
+ }
+}

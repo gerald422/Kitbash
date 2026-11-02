@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "arm_7",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999101,
+   -0.042388,
+   8e-05,
+   10.452683,
+   7.9e-05,
+   3e-06,
+   1.0,
+   -3.33259,
+   -0.042388,
+   0.999101,
+   0.0,
+   -8.359571,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (28.2 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "arm_7_socket_Hand R",
+   "matrix": [
+    0.386115,
+    0.668545,
+    0.635581,
+    1.46919,
+    -0.644344,
+    -0.297586,
+    0.704459,
+    6.439444,
+    0.660103,
+    -0.681535,
+    0.315871,
+    8.121213,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "arm_7",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\53 July 2026\\weapons and arms\\Arms\\arm_7.stl"
+ }
+}

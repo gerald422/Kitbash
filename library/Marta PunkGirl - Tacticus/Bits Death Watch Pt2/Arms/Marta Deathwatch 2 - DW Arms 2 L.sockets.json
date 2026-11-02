@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "DW_L_arms_2",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder L": [
+   -0.999067,
+   0.042659,
+   0.006771,
+   19.511141,
+   0.006778,
+   6e-06,
+   0.999977,
+   -3.328519,
+   0.042658,
+   0.99909,
+   -0.000295,
+   -31.998224,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder L": "Marta single arm: shoulder face (24.6 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "DW_L_arms_2_socket_Hand L",
+   "matrix": [
+    0.999336,
+    -0.032,
+    0.017421,
+    23.588457,
+    -0.017437,
+    -0.000227,
+    0.999848,
+    27.829724,
+    -0.031992,
+    -0.999488,
+    -0.000785,
+    12.748257,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "DW_L_arms_2",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\Bits Death Watch Pt2\\Arms\\DW_L_arms_2.stl"
+ }
+}

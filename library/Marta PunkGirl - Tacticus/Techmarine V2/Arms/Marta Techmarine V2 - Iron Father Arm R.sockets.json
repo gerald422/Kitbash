@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "iron_father_arm_RIGHT",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999113,
+   -0.042093,
+   0.000678,
+   -17.626933,
+   0.000679,
+   3e-06,
+   1.0,
+   -4.996623,
+   -0.042092,
+   0.999114,
+   2.5e-05,
+   -7.081561,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (27.3 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "iron_father_arm_RIGHT_socket_Hand R",
+   "matrix": [
+    0.92019,
+    -0.345179,
+    -0.184665,
+    -18.446449,
+    0.295334,
+    0.302485,
+    0.906245,
+    -0.389659,
+    -0.256958,
+    -0.888456,
+    0.380287,
+    12.900461,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "iron_father_arm_RIGHT",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\Techmarine V2\\Arms\\iron_father_arm_RIGHT.stl"
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "wolf_arm_4",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder L": [
+   -0.999116,
+   0.04203,
+   -0.000295,
+   25.372291,
+   -0.000295,
+   6e-06,
+   1.0,
+   -0.942832,
+   0.04203,
+   0.999116,
+   6e-06,
+   -5.518292,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder L": "Marta single arm: shoulder face (21.0 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "wolf_arm_4_socket_Hand L",
+   "matrix": [
+    0.85287,
+    0.429087,
+    0.297484,
+    25.797668,
+    -0.386727,
+    0.136348,
+    0.912059,
+    -1.206014,
+    0.350791,
+    -0.892913,
+    0.282226,
+    7.135713,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "wolf_arm_4",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\SW Bits 10 October 2024\\10 October 2024\\wolf arms\\Arms\\wolf_arm_4.stl"
+ }
+}

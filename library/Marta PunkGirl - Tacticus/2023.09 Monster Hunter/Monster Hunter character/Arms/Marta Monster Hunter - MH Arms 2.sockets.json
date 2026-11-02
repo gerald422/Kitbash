@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "MH_arms_2",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999111,
+   -0.042141,
+   0.000707,
+   -12.897104,
+   0.000708,
+   3e-06,
+   1.0,
+   -11.067449,
+   -0.042141,
+   0.999112,
+   2.7e-05,
+   -20.607822,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (26.0 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "MH_arms_2_socket_Hand R",
+   "matrix": [
+    0.987616,
+    0.069504,
+    0.140655,
+    -16.854042,
+    -0.088624,
+    -0.492638,
+    0.86571,
+    18.413409,
+    0.129462,
+    -0.867454,
+    -0.480378,
+    19.003369,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.2), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "MH_arms_2",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\2023.09 Monster Hunter\\Monster Hunter character\\Arms\\MH_arms_2.stl"
+ }
+}

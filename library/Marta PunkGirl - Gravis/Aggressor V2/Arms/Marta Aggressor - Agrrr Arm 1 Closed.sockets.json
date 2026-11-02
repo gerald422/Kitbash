@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "agrrr_arm_1_closed",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999102,
+   -0.042368,
+   9e-05,
+   14.975682,
+   9e-05,
+   3e-06,
+   1.0,
+   -14.728781,
+   -0.042368,
+   0.999102,
+   1e-06,
+   -18.359216,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (24.0 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "agrrr_arm_1_closed_socket_Hand R",
+   "matrix": [
+    0.310169,
+    -0.670916,
+    0.673548,
+    9.02456,
+    0.679059,
+    0.652191,
+    0.336936,
+    2.028166,
+    -0.665337,
+    0.352871,
+    0.657881,
+    4.650491,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.3), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "agrrr_arm_1_closed",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Gravis\\Aggressor V2\\Arms\\agrrr_arm_1_closed.stl"
+ }
+}

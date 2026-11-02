@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "arm_1",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999251,
+   0.026396,
+   0.028293,
+   -1.085485,
+   0.028303,
+   -2e-06,
+   0.999599,
+   -2.960589,
+   0.026386,
+   0.999652,
+   -0.000745,
+   -7.967086,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (29.8 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "arm_1_socket_Hand R",
+   "matrix": [
+    0.947539,
+    0.287594,
+    0.139493,
+    -6.445492,
+    -0.250377,
+    0.396525,
+    0.883221,
+    2.524858,
+    0.198697,
+    -0.871813,
+    0.44773,
+    7.692908,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.2), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "arm_1",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\GURLS\\04.23 DA Lion Knights\\Arms\\arm_1.stl"
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "R_ARM_6_bionic",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999102,
+   -0.04238,
+   6.9e-05,
+   -1.345907,
+   6.9e-05,
+   3e-06,
+   1.0,
+   -2.168881,
+   -0.04238,
+   0.999102,
+   -0.0,
+   -7.571956,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (25.8 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "R_ARM_6_bionic_socket_Hand R",
+   "matrix": [
+    0.83439,
+    0.48795,
+    -0.256316,
+    -7.765571,
+    -0.371861,
+    0.841617,
+    0.391663,
+    -1.728514,
+    0.406832,
+    -0.231486,
+    0.883687,
+    3.27498,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "R_ARM_6_bionic",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\07 July 2025\\ARMS and WEAPONS\\Arms\\R_ARM_6_bionic.stl"
+ }
+}

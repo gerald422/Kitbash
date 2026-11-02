@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "update_craw_arm_1",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999582,
+   -0.028861,
+   -0.001628,
+   10.675905,
+   -0.001628,
+   2e-06,
+   0.999999,
+   -0.857751,
+   -0.028861,
+   0.999583,
+   -4.9e-05,
+   -11.692511,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (18.1 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "update_craw_arm_1_socket_Hand R",
+   "matrix": [
+    -0.125789,
+    0.922258,
+    -0.365536,
+    1.733367,
+    -0.703533,
+    0.176853,
+    0.688305,
+    -5.387392,
+    0.699442,
+    0.343748,
+    0.626593,
+    -1.745211,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.3), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "update_craw_arm_1",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\SALE files August 2025\\extra stls\\crow general\\craw arms\\Arms\\update_craw_arm_1.stl"
+ }
+}

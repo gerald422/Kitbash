@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "bionic-amrs-arm-1-primary",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder L": [
+   -0.999118,
+   0.04198,
+   -0.000813,
+   0.212719,
+   -0.000813,
+   6e-06,
+   1.0,
+   -2.954167,
+   0.04198,
+   0.999118,
+   2.8e-05,
+   -8.659987,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder L": "Marta single arm: shoulder face (19.5 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "bionic-amrs-arm-1-primary_socket_Hand L",
+   "matrix": [
+    0.554703,
+    -0.386883,
+    -0.736632,
+    6.263593,
+    0.577085,
+    -0.458888,
+    0.67557,
+    7.218048,
+    -0.599398,
+    -0.79984,
+    -0.031282,
+    9.612822,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "bionic-amrs-arm-1-primary",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\bionics-for-bois-and-gurls-september-23\\Arms\\bionic-amrs-arm-1-primary.stl"
+ }
+}

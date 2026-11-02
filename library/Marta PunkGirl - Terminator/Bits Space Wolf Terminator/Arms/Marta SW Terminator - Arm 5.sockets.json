@@ -1,0 +1,63 @@
+{
+ "schemaVersion": 1,
+ "part": "arm_5",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999093,
+   -0.042288,
+   0.00502,
+   41.692525,
+   0.005025,
+   3e-06,
+   0.999987,
+   23.789045,
+   -0.042288,
+   0.999105,
+   0.000209,
+   24.086274,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (34.3 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "arm_5_socket_Hand R",
+   "matrix": [
+    0.80494,
+    -0.543269,
+    -0.238599,
+    43.757441,
+    0.43452,
+    0.265876,
+    0.860524,
+    -28.454225,
+    -0.404059,
+    -0.796347,
+    0.450076,
+    -14.930368,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  }
+ ],
+ "original": {
+  "name": "arm_5",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Terminator\\Bits Space Wolf Terminator\\Arms\\arm_5.stl"
+ }
+}
