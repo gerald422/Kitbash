@@ -29,7 +29,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
+- Latest commits: `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
 
@@ -70,7 +70,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `C:\Us
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.5 `50f7c9f3` (bridge + Blender add-ons), bridge README
 `60bbaf0e`, page `54d32ecb`, page README `f7cb2f49`, `build_index.py` `72ed280c`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `e5187e45` (3,451 parts), `_sources.csv` `43974530`, `_hidden.txt` `36e23889`,
+`_builder\index.json` `e5187e45` (3,451 parts; the 613 new Marta parts need Prepare), `_sources.csv` `ccedf2d6` (4,064 rows), `_hidden.txt` `36e23889`,
 Finalise 0.3.3. Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -125,6 +125,12 @@ Finalise 0.3.3. Josh restarts Blender after an add-on change.
   got yet keeps its side.
 
 ## Open items (oldest first)
+
+- **Marta one-handed (Nov 2): Josh to run Prepare** (previews, Pad anchors, index for the 613 new parts), then
+  spot-check on the page. Left out: 15 strapped shields whose handle didn't match (Greek, Jul 2025, Deathwatch,
+  Mithraism, Ghostrider), 35 two-armed pieces, 88 unrecognised (hand-less blades, armour plates, a few arms),
+  Lion Knights shoulder shields. New parts not checked for aquilas/seals (hide from the page). Tools/results in
+  `_backups\marta-1h-2026-11-01\`; method in the notes.
 
 - Captain with Jump Pack belt plates: Josh to review; mirrored copies for the other hip; his chest plate and cape.
 - Mechadendrite tails and mechadendrites (spec in the notes; assets in `Desktop\tubes, pipes, chains\`); the TN Mk6
