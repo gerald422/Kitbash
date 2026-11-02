@@ -71,7 +71,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `C:\Us
 **Installed now (md5, first 8):** TIOW Inbox 1.17.5 `50f7c9f3` (bridge + Blender add-ons), bridge README
 `60bbaf0e`, page `54d32ecb`, page README `f7cb2f49`, `build_index.py` `72ed280c`, `prepare_builder.py` `47521b31`,
 `_builder\index.json` `e5187e45` (3,451 parts; the 613 new Marta parts need Prepare), `_sources.csv` `ccedf2d6` (4,064 rows), `_hidden.txt` `36e23889`,
-Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `256b3cbc` / `3a73d135`). Josh restarts Blender after an add-on change.
+Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
 

@@ -4,20 +4,22 @@
     blender --background --python caliper_swap.py -- <folder> [--dry] [--scan] [--no-move]
     python3 caliper_swap.py <folder> [...]  (plain Python with numpy + scipy also works)
 
-Caliper's batch writes only the files it repaired, into a 'Caliper-repaired-<id>' folder beside the originals, as
-'<batch no>-<original name>_repaired.stl'. For every such file under <folder>:
+Caliper's batch writes the files it repaired into an output folder ('Caliper-repaired-<id>' beside the originals by
+default, or a name chosen in Caliper), as '[<batch no>-]<original name>_repaired.stl'. <folder> can be the folder of
+originals (or any folder above it) or the output folder itself. For every '*_repaired.stl' found:
 
   1. find its original ('<folder>\\<original name>.stl');
   2. check it: a binary STL, no open / non-manifold edges, no flipped (doubled directed) edges, no degenerate
-     triangles; the same place - bounding box within 0.05 mm, 95% of its vertices within 0.01 mm of the original's
-     and none further than 0.25 mm (every sidecar fit and socket is in the STL's own coordinates, so a file that
+     triangles; the same place - bounding box within 0.05 mm, 95% of its vertices within 0.01 mm of the original
+     surface and none further than 0.25 mm (every sidecar fit and socket is in the STL's own coordinates, so a file that
      moved would break them); triangle count within 5%;
   3. if it passes: back up the original, then the repaired file takes the original's name and place.
 
 Backups: in the Kitbash Library (a folder above holding _sources.csv) to '_backups\\caliper-<date>\\<same path>', and
 the part is listed in '_repaired.csv' at the library root so build_library.py never copies the maker's file back
 over it; elsewhere (D:\\new cults ...) to '_caliper_backups\\<date>\\<same path>' at the top of <folder>.
-The Caliper folder is moved into the backup folder afterwards (--no-move keeps it), so a folder is never swapped twice.
+A Caliper folder whose files were all swapped is moved into the backup folder (--no-move keeps it), so it is never
+swapped twice; one with files kept back stays where it is, to look at.
 --dry: check and report only. --scan: afterwards also check every STL under <folder> and list the ones still not clean
 (Caliper skips some) in 'still_dirty.csv' in the backup folder. Every run writes 'caliper_swap_log.csv' there too.
 """
@@ -30,6 +32,8 @@ args = [a for a in argv if not a.startswith('--')]
 if not args:
     sys.exit(__doc__)
 ROOT = os.path.abspath(args[0].strip('"'))
+if glob.glob(os.path.join(ROOT, '*_repaired.stl')):      # the Caliper output folder itself was dropped: work from its parent
+    ROOT = os.path.dirname(ROOT)
 TOL_BOX, TOL_95, TOL_MAX, TOL_TRIS = 0.05, 0.01, 0.25, 0.05
 STAMP = time.strftime('%Y-%m-%d')
 
@@ -98,6 +102,41 @@ def nearest(Vref, P, g=0.005):
     return d
 
 
+def _closest_on_tris(p, A, B, C):
+    """distance from point p to each triangle (A, B, C rows): exact closest point (regions of Ericson's test)"""
+    ab, ac, ap = B - A, C - A, p - A
+    d1, d2 = (ab * ap).sum(1), (ac * ap).sum(1)
+    bp, cp = p - B, p - C
+    d3, d4, d5, d6 = (ab * bp).sum(1), (ac * bp).sum(1), (ab * cp).sum(1), (ac * cp).sum(1)
+    va, vb, vc = d3 * d6 - d5 * d4, d5 * d2 - d1 * d6, d1 * d4 - d3 * d2
+    den = va + vb + vc
+    den = np.where(np.abs(den) < 1e-30, 1e-30, den)
+    v, w = vb / den, vc / den
+    best = np.linalg.norm(A + ab * v[:, None] + ac * w[:, None] - p, axis=1)
+    best = np.where((va >= 0) & (vb >= 0) & (vc >= 0), best, np.inf)
+    for s_, e_ in ((A, B), (B, C), (C, A)):
+        se = e_ - s_; t = np.clip(((p - s_) * se).sum(1) / np.maximum((se * se).sum(1), 1e-30), 0, 1)
+        best = np.minimum(best, np.linalg.norm(s_ + se * t[:, None] - p, axis=1))
+    return best
+
+
+def surface_distance(V0, T0, P, d_vertex, tol):
+    """refine the points whose nearest original vertex is further than tol: distance to the original surface
+    (a re-triangulated flat face puts new vertices on the surface but far from any old vertex)"""
+    d = d_vertex.copy()
+    far = np.where(d > tol)[0]
+    if not len(far):
+        return d
+    A, B, C = V0[T0[:, 0]], V0[T0[:, 1]], V0[T0[:, 2]]
+    lo, hi = np.minimum(np.minimum(A, B), C), np.maximum(np.maximum(A, B), C)
+    for j in far[:20000]:
+        p = P[j]; r = d[j]
+        m = np.all((lo <= p + r) & (hi >= p - r), axis=1)
+        if m.any():
+            d[j] = min(d[j], float(_closest_on_tris(p, A[m], B[m], C[m]).min()))
+    return d
+
+
 def library_root(path):
     d = os.path.dirname(path)
     for _ in range(14):
@@ -122,8 +161,9 @@ LIB = library_root(os.path.join(ROOT, 'x'))
 BACK = os.path.join(LIB, '_backups', 'caliper-' + STAMP) if LIB else os.path.join(ROOT, '_caliper_backups', STAMP)
 ORIGIN = LIB or ROOT                                   # backup paths mirror the paths below this
 rows, swapped = [], []
-cal_dirs = sorted(d for d in glob.glob(os.path.join(ROOT, '**', 'Caliper-repaired-*'), recursive=True)
-                  if os.path.isdir(d) and '_backups' not in d and '_caliper_backups' not in d)
+# Caliper's output: any folder holding '*_repaired.stl' ('Caliper-repaired-<id>' by default, or the name chosen in Caliper)
+cal_dirs = sorted({os.path.dirname(f) for f in glob.glob(os.path.join(ROOT, '**', '*_repaired.stl'), recursive=True)
+                   if '_backups' not in f and '_caliper_backups' not in f})
 print('Caliper folders under %s: %d%s' % (ROOT, len(cal_dirs), ' (dry run)' if DRY else ''))
 for cd in cal_dirs:
     home = os.path.dirname(cd)
@@ -132,7 +172,9 @@ for cd in cal_dirs:
         name = re.sub(r'_repaired\.stl$', '.stl', os.path.basename(rep), flags=re.I)
         orig = os.path.join(home, name)
         if not os.path.isfile(orig) and re.match(r'^\d+-', name):
-            orig = os.path.join(home, name.split('-', 1)[1])       # '<batch no>-' prefix
+            orig = os.path.join(home, name.split('-', 1)[1])       # Caliper's '<batch no>-' prefix
+        if not os.path.isfile(orig) and os.path.isfile(os.path.join(cd, name)):
+            orig = os.path.join(cd, name)                          # written beside the original
         row = {'original': os.path.relpath(orig, ORIGIN), 'repaired': os.path.relpath(rep, ORIGIN)}
         if not os.path.isfile(orig):
             row['status'] = 'no original found'; rows.append(row); continue
@@ -141,7 +183,7 @@ for cd in cal_dirs:
             row['status'] = 'not a binary STL'; rows.append(row); continue
         f0, f1 = faults(T0), faults(T1)
         box = float(np.abs(np.r_[V1.min(0) - V0.min(0), V1.max(0) - V0.max(0)]).max())
-        d = nearest(V0, V1)
+        d = surface_distance(V0, T0, V1, nearest(V0, V1), TOL_95)
         p95, dmax = float(np.percentile(d, 95)), float(d.max())
         row.update(tris_before=len(T0), tris_after=len(T1), box_shift=round(box, 4), move_95=round(p95, 4), move_max=round(dmax, 4),
                    **{k + '_before': v for k, v in f0.items()}, **{k + '_after': v for k, v in f1.items()})
@@ -160,7 +202,8 @@ for cd in cal_dirs:
             shutil.copy2(orig, bk)
         shutil.copyfile(rep, orig + '.part'); os.replace(orig + '.part', orig)
         row['status'] = 'swapped'; row['md5'] = md5(orig); rows.append(row); swapped.append(row); done_here += 1
-    if not DRY and not NOMOVE:
+    n_here = len(glob.glob(os.path.join(cd, '*_repaired.stl')))
+    if not DRY and not NOMOVE and n_here and done_here == n_here:    # all taken: out of the way (kept otherwise, to look at)
         dst = os.path.join(BACK, 'caliper-output', os.path.relpath(cd, ORIGIN))
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.move(cd, dst)
@@ -184,7 +227,7 @@ if swapped and LIB and not DRY:
 dirty = []
 if SCAN:
     for f in sorted(glob.glob(os.path.join(ROOT, '**', '*.stl'), recursive=True)):
-        if '_backups' in f or '_caliper_backups' in f or 'Caliper-repaired-' in f:
+        if '_backups' in f or '_caliper_backups' in f or f.lower().endswith('_repaired.stl') or os.path.dirname(f) in cal_dirs:
             continue
         h, V, T = load(f)
         if V is None:
