@@ -138,6 +138,9 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - **Holsters on the hip plate (Nov 3): installed** - 45 holsters, pouches and grenades are Plate Accessories (plates only,
   `kits/plates/hol_*.py`); backups `_backups\holsters-2026-11-03\old\`. They only place on legs with plate spots
   (Mar Fil Assault so far): plates for other makers' legs are next (Turtle Ninja first).
+- **Turtle Ninja plates / buckle / trophies (Nov 3): rule agreed, rollout to all 465 TN legs OK'd by Josh** - fetch the legs
+  per kit (tar on the PC), `kits/plates/tn_seat.py OUT --jobs 2 --list LEGS --stl ROOT`, `tn_sheet.py` check sheet per kit for
+  Josh, then `tn_sidecars.py`, index part_data update, page `decedfdd` + README (no-spot text), deliver, md5 check.
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).
 

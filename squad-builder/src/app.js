@@ -723,7 +723,7 @@
     if (!need || (sl.host !== "legs" && sl.host !== "torso")) return "";
     var h = layout(S.cur).filter(function (x) { return x.slot === sl.host; })[0];
     if (!h || !h.W || socketsOf(h)[sl.sock]) return "";
-    return sl.host === "legs" ? "These legs have no " + need + " yet (only the Mar Fil Assault legs so far)."
+    return sl.host === "legs" ? "These legs have no " + need + " yet (the Mar Fil Assault and Turtle Ninja legs so far)."
                               : "This torso has no " + need + " (only the Old Style Space Knight MK8 torsos have them).";
   }
   function nextSlot() {

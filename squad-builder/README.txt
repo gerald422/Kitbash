@@ -96,11 +96,12 @@ Notes
     Blender adds the connector itself. Backs without wing mounts skip the
     step. The six Malal3D Bladecrow wings come at x1.3, lefts mirrored.
   - Hip plates (step 13) and Holsters (step 14): legs with plate spots (the
-    Mar Fil Assault legs so far) take a hip plate on each side, the right one
+    Mar Fil Assault and Turtle Ninja legs so far) take a hip plate on each side, the right one
     mirrored. Holsters and sheaths hang from the plate on their side (the
     right ones mirrored). Other legs skip both steps.
   - Buckle (step 15) and Tabard (step 16): the buckle sits on the sculpted
-    one and prints on its own; tabards hang from it, so they follow its turn
+    one (on Turtle Ninja legs, Mar Fil's buckle over their belt front) and
+    prints on its own; tabards hang from it, so they follow its turn
     and tilt. Legs without a buckle spot skip both.
   - Loincloth (step 17): the front of the belt is the loincloth's alone.
     Loincloths are their own type (Marta's and CyberBrush's), in Blender
