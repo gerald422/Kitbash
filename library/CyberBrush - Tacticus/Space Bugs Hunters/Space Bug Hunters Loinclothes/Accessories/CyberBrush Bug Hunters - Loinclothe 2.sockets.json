@@ -1,22 +1,40 @@
 {
  "schemaVersion": 1,
  "part": "2",
- "category": "Loincloths",
+ "category": "Tabards",
  "sockets": [],
  "fits": {
   "Belt Front": [
    1.0,
    0.0,
    0.0,
-   -0.984951,
+   -0.886456,
    0.0,
    0.0,
    1.0,
-   30.925867,
+   27.83328,
    0.0,
    -1.0,
    0.0,
-   1.590958,
+   1.431862,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "Tabard": [
+   1.0,
+   0.0,
+   0.0,
+   -0.822011,
+   0.0,
+   0.0,
+   1.0,
+   27.868526,
+   0.0,
+   -1.0,
+   0.0,
+   1.585861,
    0.0,
    0.0,
    0.0,
@@ -25,11 +43,19 @@
  },
  "notes": {
   "Belt Front": "hangs from the front of the belt: top edge on the anchor, face out; then rocks and settles onto the belt (CyberBrush: standing, face -Y)",
-  "category": "Loincloths: their own type, the only one on the belt's front anchor (Josh, Oct 30)"
+  "category": "Tabards: hang from the buckle part (TIOW Inbox 1.17.6)",
+  "Tabard": "Josh's placement under the buckle (tabard check1.blend, Nov 3), placed exactly",
+  "scale": "Josh: the CyberBrush tabards at 90% (Nov 3)",
+  "adaptor": "comes with the buckle when the legs have none yet"
  },
  "original": {
   "name": "2",
   "folder": "Accessories",
   "path": "CyberBrush - Tacticus\\Space Bugs Hunters\\Space Bug Hunters Loinclothes\\Accessories\\2.stl"
- }
+ },
+ "scale": 0.9,
+ "exact": [
+  "Tabard"
+ ],
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Buckles\\MarFil Assault - Buckle.stl"
 }

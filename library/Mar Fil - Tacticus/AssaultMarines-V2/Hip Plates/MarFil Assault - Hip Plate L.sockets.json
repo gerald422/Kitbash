@@ -1,0 +1,143 @@
+{
+ "schemaVersion": 1,
+ "part": "WaistPlate",
+ "category": "Hip Plates",
+ "sockets": [
+  {
+   "type": "Plate Hang L",
+   "name": "Plate Hang L",
+   "matrix": [
+    -0.000997,
+    -0.064122,
+    0.997942,
+    -0.366122,
+    0.981701,
+    0.189969,
+    0.013187,
+    0.105457,
+    -0.190424,
+    0.979694,
+    0.06276,
+    0.531768,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 2.0,
+   "props": {
+    "tiow_from": "Josh's holster spot on the plate (holster check 4A.blend, Nov 3)"
+   }
+  }
+ ],
+ "fits": {
+  "Plate L": [
+   -0.003896,
+   0.980666,
+   -0.195654,
+   -0.018496,
+   0.063136,
+   0.195506,
+   0.978668,
+   -0.614538,
+   0.997998,
+   -0.00854,
+   -0.062677,
+   -0.07544,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Plate L": "sits exactly where the Assault B legs have it sculpted (registered, 0.03-0.05 mm); seated on the standing legs",
+  "type": "hip plates are always on: holsters and sheaths hang from their Plate Hang socket (TIOW Inbox 1.17.6)"
+ },
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "MarFil Assault - Hip Plate R",
+   "title": "MarFil Assault - Hip Plate R",
+   "folder": "Hip Plates",
+   "from": "mirror (the plate is symmetric: its mirror image fits the right hip as exactly)",
+   "sidecar": {
+    "category": "Hip Plates",
+    "fits": {
+     "Plate R": [
+      -0.003896,
+      -0.980666,
+      0.195654,
+      0.018496,
+      -0.063136,
+      0.195506,
+      0.978668,
+      -0.614538,
+      -0.997998,
+      -0.00854,
+      -0.062677,
+      -0.07544,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": [
+     {
+      "type": "Plate Hang R",
+      "name": "Plate Hang R",
+      "matrix": [
+       -0.000997,
+       0.064122,
+       -0.997942,
+       0.366122,
+       -0.981701,
+       0.189969,
+       0.013187,
+       0.105457,
+       0.190424,
+       0.979694,
+       0.06276,
+       0.531768,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "display_type": "ARROWS",
+      "display_size": 2.0,
+      "props": {
+       "tiow_from": "mirror of the left plate's holster spot"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "original": {
+  "name": "WaistPlate",
+  "folder": "AssaultMarines-V2",
+  "path": "new cults\\All Mar All the time\\AssaultMarines-V2\\WaistPlate.stl"
+ }
+}

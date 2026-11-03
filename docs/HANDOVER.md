@@ -14,7 +14,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   (`D:\new cults\...`), `_hidden.txt` hides parts from the page (renegade chapter: no aquilas, purity seals or
   scrolls, plus Josh's own hides), `_builder\index.json` + `_builder\previews\` feed the page, `_backups\` holds a
   dated folder per change.
-- **TIOW Inbox** (Blender add-on, `addons/tiow_inbox.py`, now **1.17.5**): imports parts sent from TIOW-FTRP or the
+- **TIOW Inbox** (Blender add-on, `addons/tiow_inbox.py`, now **1.17.6**): imports parts sent from TIOW-FTRP or the
   page, rebuilds their sockets, snaps them onto the model (rock/settle for belt bits, base rise, adaptors and
   connectors), Save Correction (Fix the Part / Fix the Socket).
 - **Squad Builder** (`squad-builder/`, one offline HTML page): pick parts step by step (Base, Legs, Torso, Arms
@@ -68,9 +68,9 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `C:\Us
 | Josh's working blends | `Desktop\query.blend` (his correction file), `Desktop\Operation Marine\*.blend` (large: base_jumpack.blend 191 MB) |
 | Mechadendrite assets | `Desktop\tubes, pipes, chains\` |
 
-**Installed now (md5, first 8):** TIOW Inbox 1.17.5 `50f7c9f3` (bridge + Blender add-ons), bridge README
-`60bbaf0e`, page `54d32ecb`, page README `f7cb2f49`, `build_index.py` `72ed280c`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `e5187e45` (3,451 parts; the 613 new Marta parts need Prepare), `_sources.csv` `ccedf2d6` (4,064 rows), `_hidden.txt` `36e23889`,
+**Installed now (md5, first 8):** TIOW Inbox 1.17.6 `404ff01c` (bridge + Blender add-ons), bridge README
+`8435409a`, `_library.json` `ed3700b4`, page `8bc3b83f`, page README `7be512ad`, `build_index.py` `72ed280c`, `prepare_builder.py` `47521b31`,
+`_builder\index.json` `680d2e8f` (3,459 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `5fc15079` (4,072 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -123,14 +123,18 @@ Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` 
 - 1.17.5 `Wings` bring their connector (`Wing Mounts`): the wing's sidecar `adaptor` (library path) goes on the
   pack's `Wing Mount R/L`, the wing hangs from the connector's `Wing R/L`; a request for a socket the model hasn't
   got yet keeps its side.
+- 1.17.6 hip plates and the buckle host parts: `Hip Plates` on the legs' `Plate R/L` (right = mirror variant),
+  `Plate Accessories` (holsters/sheaths) on the plate's `Plate Hang R/L` (bring the plate), `Buckles` on `Buckle`,
+  `Tabards` on the buckle's `Tabard` (bring the buckle), `Trophies` on `Trophy R/L` first. Mar Fil Assault legs only so far.
 
 ## Open items (oldest first)
 
-- **VitalyKhan accessory anchors (Nov 2):** two-tier anchors from Josh's assembled models (captain and chaplain read:
-  `_backups\vitalykhan-*-2026-11-02\objects\`, `kits/vitalykhan/blend2stl.py` (+ `blendlist.py`, needs `pip install blender-asset-tracer zstandard`) reads Blender 5 blends without Blender); waiting for the
-  5 Vanguard; then propose the anchor set (body: belt front centre/sides, chest, torso lower back, pack ornament,
-  cloak; plates always present, with their own anchors for scabbards/holsters/grenades/pouches; pad ornaments; topper
-  ribbons; wrist ornaments on Forearm). VitalyKhan ~10% bigger than Mar Fil (to measure).
+- **Accessory anchors (Nov 3): first base delivered (1.17.6) on the Mar Fil Assault legs** - plates, buckle, sheaths,
+  CB tabards and trophies; data and scripts `kits/plates/` (`marfil_assault_plates.json` holds every placement Josh
+  checked). Next (Josh: build in parts): one or two legs per creator (Marta, TN, Springles, CyberBrush, BBoosty,
+  VitalyKhan), then roll out; fit the ~25 holsters/pouches already in the library to the plate; then chest, pack and
+  pauldron anchors (necklace, book on the torso back, pack ornaments, pad ornaments, topper ribbons, wrist ornaments).
+  Marta's loincloths left out for now (stay on Belt Front). Josh's missing-files check: later.
 
 - **Marta one-handed (Nov 2): Josh to run Prepare** (previews, Pad anchors, index for the 613 new parts), then
   spot-check on the page. Left out: 15 strapped shields whose handle didn't match (Greek, Jul 2025, Deathwatch,
