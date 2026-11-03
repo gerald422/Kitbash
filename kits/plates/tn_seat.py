@@ -4,8 +4,9 @@ coordinates (every maker's legs seated under a torso share them): each of the 16
 pose for the part (plate L, plate R = mirror image, buckle) in torso coordinates; the part's contact points (where
 it touches Assault Legs 4A) are seated on the new legs by point-to-plane ICP; best score kept (contact median +
 5 x share of the part sunk > 0.3 mm). Trophy R / L: the belt rule 45 deg either side of the way the seated buckle
-faces, at the legs' own belt height. Then the pair is levelled (Josh: R too high, L too low): both to their
-mean height and a 26 deg roll (outer face looking up, as the Assault plates), re-seated. Sockets as on the Assault legs (build_tiow.py).
+faces, at the legs' own belt height. Then each plate is re-seated with its top edge on the belt (Josh, as on every
+Assault legs), a 26 deg roll (outer face looking up; Josh: R was too high, L too low) and the top edge
+nearly level like the Assault plates (tilt -1.3 / -1.8 deg). Sockets as on the Assault legs (build_tiow.py).
 python tn_seat.py OUT_JSON LEGS_REL [LEGS_REL ...]   (library paths without .stl)"""
 import sys, os, json, numpy as np
 from scipy.spatial import cKDTree
@@ -41,20 +42,31 @@ print("contact points:", {k: len(v) for k, v in C.items()})
 # pair's mean height and the same roll - how far the plate's outer face looks up (its flare) - 26 deg, the middle of
 # the Assault plates' medians (R 29.8, L 22.3); still seated on the hips by their contact points
 c0 = (PV.min(0) + PV.max(0)) / 2; PS, PN = surf(PV, PT, 20000)
-def edge(W, side):    # plate centre and the mean normal of its outer face
+def edge(W, side):    # plate centre, the mean normal of its outer face, and its top edge's direction (front to back)
     c = tf(W, c0[None])[0]; N = PN @ W[:3, :3].T; n = N[N @ np.array([1.0 if side == "R" else -1.0, 0, 0]) > 0.3].mean(0)
-    return c, n / np.linalg.norm(n)
+    P = tf(W, PV); top = P[P[:, 2] > np.percentile(P[:, 2], 85)]; e = np.linalg.svd(top - top.mean(0))[2][0]
+    e = e if e[1] >= 0 else -e
+    return c, n / np.linalg.norm(n), e
 ROLL = 26.0
-def seat(W, S, N, tree, Cp, it=40, z=None, side=None, w=None):
+TILT = {"R": -1.3, "L": -1.8}       # the Assault plates' top edge: nearly level (median tilt per side, deg)
+# the top edge that sits against the belt (Josh: "shouldn't the top of the plate always be touching the belt?"; on
+# Assault 4A it does, 0.01 mm): plate points in the top 0.4 mm that touch 4A's belt, per side
+TOPE = {}
+for k, W4 in (("L", M16(e4["plates"]["L"]["matrix"])), ("R", M16(e4["plates"]["R"]["matrix"]) @ Sm)):
+    X = tf(W4, PS); m = (X[:, 2] > X[:, 2].max() - 0.4) & (t4.query(X)[0] < 0.3); TOPE[k] = PS[m]
+print("top-edge points touching the belt on 4A:", {k: len(v) for k, v in TOPE.items()})
+def seat(W, S, N, tree, Cp, it=40, top=None, side=None, w=None):
     for _ in range(it):
         X = tf(W, Cp); d, j = tree.query(X); k = d < 1.5
         if k.sum() < 10: break
         X, Q, Nn = X[k], S[j[k]], N[j[k]]; r = ((X - Q) * Nn).sum(1)
         J = np.hstack([np.cross(X, Nn), Nn])
-        if z is not None:                      # soft targets: plate centre height and roll (outer face elevation)
-            c, n = edge(W, side); w = w or 4 * np.sqrt(len(r))
-            J = np.vstack([J, w * np.array([c[1], -c[0], 0, 0, 0, 1.0]), w * 10 * np.array([n[1], -n[0], 0, 0, 0, 0])])
-            r = np.r_[r, w * (c[2] - z), w * 10 * (n[2] - np.sin(np.radians(ROLL)))]
+        if top is not None:                    # the top edge onto the belt, and the roll (outer face elevation)
+            Xt = tf(W, top); dt, jt = tree.query(Xt); Qt, Nt = S[jt], N[jt]; wt = 3.0
+            c, n, e = edge(W, side); w = w or 4 * np.sqrt(len(r))
+            J = np.vstack([J, wt * np.hstack([np.cross(Xt, Nt), Nt]), w * 10 * np.array([n[1], -n[0], 0, 0, 0, 0]),
+                           w * 10 * np.array([e[1], -e[0], 0, 0, 0, 0])])
+            r = np.r_[r, wt * ((Xt - Qt) * Nt).sum(1), w * 10 * (n[2] - np.sin(np.radians(ROLL))), w * 10 * (e[2] - np.sin(np.radians(TILT[side])))]
         dx = np.linalg.lstsq(J, -r, rcond=None)[0]
         a, t = dx[:3], dx[3:]; th = np.linalg.norm(a)
         R = np.eye(3) if th < 1e-12 else np.cos(th) * np.eye(3) + np.sin(th) * np.array([[0, -a[2] / th, a[1] / th], [a[2] / th, 0, -a[0] / th], [-a[1] / th, a[0] / th, 0]]) + (1 - np.cos(th)) * np.outer(a / th, a / th)
@@ -78,11 +90,12 @@ for rel in LEGS:
         spread = max(np.linalg.norm(tf(W1, C[k]) - tf(c[1], C[k]), axis=1).mean() for c in cands[:3])
         r[k] = inv(M) @ W1                                                                                       # part file -> legs file
         r["why"][k] = "contact median %.3f mm, %.1f%% sunk >0.3, next-best seats within %.2f mm" % (med, 100 * pen, spread)
-    zt = (edge(M @ r["L"], "L")[0][2] + edge(M @ r["R"], "R")[0][2]) / 2; lv = {}
+    lv = {}
     for k in "LR":
-        before = edge(M @ r[k], k); W2 = seat(M @ r[k], S, N, tree, C[k], z=zt, side=k); after = edge(W2, k); sc2 = score(W2, S, N, tree, C[k], ALL[k])
-        r[k] = inv(M) @ W2; lv[k] = (before[0][2], np.degrees(np.arcsin(before[1][2])), after[0][2], np.degrees(np.arcsin(after[1][2])), sc2[1], sc2[2])
-        r["why"][k] += "; levelled: z %.2f -> %.2f, roll %+.1f -> %+.1f deg (contact median %.3f, %.1f%% sunk)" % (lv[k][0], lv[k][2], lv[k][1], lv[k][3], lv[k][4], 100 * lv[k][5])
+        before = edge(M @ r[k], k); W2 = seat(M @ r[k], S, N, tree, C[k], top=TOPE[k], side=k); after = edge(W2, k); sc2 = score(W2, S, N, tree, C[k], ALL[k])
+        gap = tree.query(tf(W2, TOPE[k]))[0]
+        r[k] = inv(M) @ W2; lv[k] = (before[0][2], np.degrees(np.arcsin(before[1][2])), after[0][2], np.degrees(np.arcsin(after[1][2])), sc2[1], sc2[2], np.median(gap), gap.min())
+        r["why"][k] += "; top on the belt, rolled: z %.2f -> %.2f, roll %+.1f -> %+.1f deg, top edge to belt median %.2f (min %.2f), contact median %.3f, %.1f%% sunk" % (lv[k][0], lv[k][2], lv[k][1], lv[k][3], lv[k][6], lv[k][7], lv[k][4], 100 * lv[k][5])
     z = (M @ r["B"] @ ORN)[:3, 2]; az = np.arctan2(z[0], z[1])
     bf = M @ M16([s for s in sc["sockets"] if s["type"] == "Belt Front"][0]["matrix"])
     belt.BELT_Z = bf[2, 3]; belt.AXIS = np.array([0.0, 0.57, belt.BELT_Z])
