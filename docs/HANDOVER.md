@@ -47,9 +47,9 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
 
 1. Attach the repo with push access (`add_repo` gerald422/Kitbash, push) and clone to `/home/claude/kitbash`.
 2. Make sure the session is linked to Josh's PC (the remote-devices tools). A new session starts with **no folders
-   connected**: request them once with `device_request_folder_access` (`C:\Users\jpark\Desktop`, `D:\`,
-   `C:\Users\jpark\AppData\Roaming\Blender Foundation\Blender\5.1`, `C:\Users\jpark\AppData\Local\TIOW-FTRP`).
-   Then md5-check the "Installed now" list below against the PC. Stage `C:\Users\jpark\Desktop\part_sockets_6.2.0.zip`.
+   connected**: request them once with `device_request_folder_access` (`~\Desktop`, `D:\`,
+   `~\AppData\Roaming\Blender Foundation\Blender\5.1`, `~\AppData\Local\TIOW-FTRP`).
+   Then md5-check the "Installed now" list below against the PC. Stage `~\Desktop\part_sockets_6.2.0.zip`.
 3. `bash /home/claude/kitbash/tools/setup_container.sh` - venv `/home/claude/bpyenv` with bpy 5.1.2, numpy, scipy,
    pillow; Part Sockets, TIOW Inbox and Finalise in the container Blender's add-ons; the old working paths
    (`/home/claude/kits`, `/real`, `/test` ...) that the scripts import from.
@@ -57,23 +57,23 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
 
 ## Josh's PC (through the device tools)
 
-Connected folders: `C:\Users\jpark\Desktop`, `D:\` (and `D:\new cults`), `C:\Users\jpark\AppData\Roaming\Blender
-Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `C:\Users\jpark\AppData\Local\TIOW-FTRP`.
+Connected folders: `~\Desktop`, `D:\` (and `D:\new cults`), `~\AppData\Roaming\Blender
+Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\AppData\Local\TIOW-FTRP`.
 
 | What | Where |
 |---|---|
 | Library | `D:\Kitbash Library\` |
 | Maker downloads | `D:\new cults\` |
-| Bridge folder | `C:\Users\jpark\Desktop\TIOW Blender bridge\` (`tiow_inbox.py`, `README.txt`, `_library.json`, `old-<version>\`) |
+| Bridge folder | `~\Desktop\TIOW Blender bridge\` (`tiow_inbox.py`, `README.txt`, `_library.json`, `old-<version>\`) |
 | Page | `...\TIOW Blender bridge\Squad Builder\` (`Squad Builder.html`, `README.txt`, `build_index.py`, `prepare_builder.py`, `Prepare Squad Builder.bat`) |
-| Blender add-ons | `C:\Users\jpark\AppData\Roaming\Blender Foundation\Blender\5.1\scripts\addons\` (`tiow_inbox.py`, `kitbash_finalise.py`) |
+| Blender add-ons | `~\AppData\Roaming\Blender Foundation\Blender\5.1\scripts\addons\` (`tiow_inbox.py`, `kitbash_finalise.py`) |
 | Josh's working blends | `Desktop\query.blend` (his correction file), `Desktop\Operation Marine\*.blend` (large: base_jumpack.blend 191 MB) |
 | Mechadendrite assets | `Desktop\tubes, pipes, chains\` |
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `559a58b9`, page README `59b23ccc`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
 `_builder\index.json` `a67cb795` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `a04089e5` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
-Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
+Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
 
@@ -114,6 +114,8 @@ Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` 
   copying huge blends.
 - Renegade chapter: no aquilas, purity seals or scrolls (the hidden list; sculpted-in aquilas get added by path).
 - Keep usage low: Josh is on a usage budget.
+- The repo is public: nothing that identifies Josh in it (no surname, Windows username or other personal details; home
+  paths as `~\...`, which the device tools accept). The claude.ai Project and memory are private.
 
 ## TIOW Inbox versions since 1.17
 

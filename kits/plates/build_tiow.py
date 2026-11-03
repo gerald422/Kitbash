@@ -62,7 +62,7 @@ write_like(BUCKLE, {'schemaVersion': 1, 'part': 'buckle', 'category': 'Buckles',
     'fits': {'Buckle': L(inv(ORN))},
     'notes': {'Buckle': 'on the legs\' Buckle socket it sits exactly on the sculpted buckle (shape match 0.03 mm; 8A placed by Josh)',
               'type': 'Josh separated it from the Mar Fil Techmarine build file (Desktop buckle.stl, Nov 3); prints on its own'},
-    'original': {'name': 'buckle', 'folder': 'Desktop', 'path': 'C:\\Users\\jpark\\Desktop\\buckle.stl'}})
+    'original': {'name': 'buckle', 'folder': 'Desktop', 'path': '~\\Desktop\\buckle.stl'}})
 rows.append((BUCKLE, "Josh's Desktop buckle.stl (separated from the Mar Fil Techmarine build file)", 'Buckles'))
 
 # ---- the six Mar Fil pistol sheaths (one body, same file frame): on the plate's Plate Hang socket

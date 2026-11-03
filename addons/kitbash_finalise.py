@@ -24,7 +24,7 @@
 
 bl_info = {
     "name": "Kitbash Finalise",
-    "author": "Josh Parkin-Kelly, Claude",
+    "author": "gerald422, Claude",
     "version": (0, 3, 3),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Finalise",
