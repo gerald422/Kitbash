@@ -1,5 +1,5 @@
 {
- "about": "Mar Fil AssaultMarines-V2 WaistPlate on the Assault legs: plate placement (WaistPlate file -> legs file, 4x4 row-major) per side, and the holster socket on the plate (WaistPlate file coords). Nov 3 2026, Josh checked renders.",
+ "about": "Mar Fil AssaultMarines-V2 WaistPlate on the Assault legs: plate placement (WaistPlate file -> legs file, 4x4 row-major) per side, and the holster socket on the plate (WaistPlate file coords). Nov 3 2026, Josh checked renders. Belt (Nov 3): Belt Front = buckle spot (buckles only), Belt Front R/L = trophy spots; Belt Back and Hip R/L stay as in the sidecars.",
  "waistplate": "new cults/All Mar All the time/AssaultMarines-V2/WaistPlate.stl",
  "holster_socket_on_plate": {
   "matrix": [
@@ -88,6 +88,74 @@
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.037
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.984877,
+      -0.170449,
+      0.031061,
+      -0.131503,
+      -0.027236,
+      0.329364,
+      0.94381,
+      7.550433,
+      -0.171102,
+      0.928691,
+      -0.329025,
+      31.948021,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.830922,
+      -0.018722,
+      0.556074,
+      2.819152,
+      0.541877,
+      0.199545,
+      0.816426,
+      4.733664,
+      -0.126247,
+      0.97971,
+      -0.155661,
+      32.106331,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.54854,
+      -0.018722,
+      -0.835915,
+      -2.624312,
+      -0.821291,
+      0.199545,
+      0.534475,
+      5.857311,
+      0.156796,
+      0.97971,
+      -0.124834,
+      31.919197,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 2A": {
@@ -136,6 +204,74 @@
      ],
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.04
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.249353,
+      0.612432,
+      0.750167,
+      10.057472,
+      0.906445,
+      -0.125046,
+      0.403387,
+      1.952701,
+      0.340853,
+      0.780571,
+      -0.523955,
+      27.055801,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      0.523153,
+      0.449064,
+      0.724329,
+      9.728594,
+      0.851776,
+      -0.247497,
+      -0.461761,
+      -0.657563,
+      -0.028091,
+      0.858538,
+      -0.51198,
+      26.801057,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.85843,
+      0.449064,
+      0.24787,
+      6.614555,
+      0.147053,
+      -0.247497,
+      0.957664,
+      3.728742,
+      0.491399,
+      0.858538,
+      0.146423,
+      29.477296,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   },
@@ -186,6 +322,74 @@
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.04
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.876427,
+      -0.121482,
+      0.465959,
+      1.895117,
+      0.303156,
+      0.61262,
+      0.729927,
+      10.09682,
+      -0.374129,
+      0.780986,
+      -0.500089,
+      27.038503,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.147791,
+      -0.247467,
+      0.957558,
+      3.704516,
+      0.858217,
+      0.449109,
+      0.248524,
+      6.636411,
+      -0.491549,
+      0.858523,
+      0.146006,
+      29.455545,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.855199,
+      -0.247467,
+      -0.455406,
+      -0.69528,
+      -0.517728,
+      0.449109,
+      0.728189,
+      9.751214,
+      0.024324,
+      0.858523,
+      -0.512198,
+      26.798074,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 3A": {
@@ -234,6 +438,74 @@
      ],
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.057
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      0.23822,
+      0.509976,
+      0.826544,
+      7.60863,
+      0.969425,
+      -0.176455,
+      -0.170528,
+      -1.31828,
+      0.058883,
+      0.841895,
+      -0.536419,
+      25.788575,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      0.889496,
+      0.392381,
+      0.234167,
+      5.887749,
+      0.326498,
+      -0.187242,
+      -0.926466,
+      -3.174228,
+      -0.319682,
+      0.900543,
+      -0.294663,
+      25.613911,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.583301,
+      0.392381,
+      0.711194,
+      5.724953,
+      0.706359,
+      -0.187242,
+      0.68264,
+      2.297203,
+      0.401021,
+      0.900543,
+      -0.167943,
+      27.13598,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   },
@@ -284,6 +556,74 @@
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.034
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.979254,
+      -0.173361,
+      -0.104918,
+      -1.387126,
+      -0.180397,
+      0.510001,
+      0.841044,
+      7.630633,
+      -0.092296,
+      0.842523,
+      -0.530695,
+      25.786284,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.702904,
+      -0.187275,
+      0.686188,
+      2.279516,
+      0.58686,
+      0.392399,
+      0.70825,
+      5.748169,
+      -0.401897,
+      0.900528,
+      -0.165915,
+      27.152189,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.339992,
+      -0.187275,
+      -0.921593,
+      -3.19053,
+      -0.885978,
+      0.392399,
+      0.247114,
+      5.933701,
+      0.315354,
+      0.900528,
+      -0.299334,
+      25.600107,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 4A": {
@@ -332,6 +672,74 @@
      ],
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.039
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      0.3759,
+      0.571395,
+      0.729525,
+      6.923937,
+      0.866866,
+      0.061386,
+      -0.494748,
+      0.824302,
+      -0.327479,
+      0.818376,
+      -0.472247,
+      28.227249,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      0.847865,
+      0.4543,
+      0.273379,
+      3.867983,
+      0.250632,
+      0.110955,
+      -0.961703,
+      -0.650729,
+      -0.467234,
+      0.883912,
+      -0.019787,
+      29.844217,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.682094,
+      0.4543,
+      0.573026,
+      6.210113,
+      0.681551,
+      0.110955,
+      0.72331,
+      3.887798,
+      0.265019,
+      0.883912,
+      -0.38531,
+      27.775277,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   },
@@ -382,6 +790,74 @@
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.035
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.899547,
+      0.061806,
+      -0.43243,
+      -2.763024,
+      -0.32318,
+      0.57185,
+      0.754017,
+      9.280928,
+      0.293888,
+      0.818027,
+      -0.494431,
+      28.237091,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.743061,
+      0.110991,
+      0.659955,
+      0.32648,
+      0.628549,
+      0.454304,
+      0.631296,
+      8.554117,
+      -0.229753,
+      0.883905,
+      -0.407339,
+      27.745279,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.263524,
+      0.110991,
+      -0.958246,
+      -4.222591,
+      -0.84411,
+      0.454304,
+      0.284757,
+      6.194093,
+      0.466941,
+      0.883905,
+      -0.026032,
+      29.837118,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 5A": {
@@ -430,6 +906,74 @@
      ],
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.034
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.930168,
+      -0.15444,
+      -0.333071,
+      -3.2132,
+      -0.361454,
+      0.226258,
+      0.904521,
+      6.060493,
+      -0.064334,
+      0.961746,
+      -0.266281,
+      26.005196,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.564887,
+      -0.061374,
+      0.822883,
+      -0.168176,
+      0.801245,
+      0.197588,
+      0.56477,
+      4.710728,
+      -0.197254,
+      0.978362,
+      -0.062439,
+      25.870175,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.321432,
+      -0.061374,
+      -0.944942,
+      -4.981907,
+      -0.931903,
+      0.197588,
+      0.304164,
+      2.548296,
+      0.168041,
+      0.978362,
+      -0.120706,
+      26.147792,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   },
@@ -480,6 +1024,74 @@
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.038
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.975999,
+      0.084075,
+      -0.200891,
+      -0.54837,
+      -0.17018,
+      0.281138,
+      0.944458,
+      7.134835,
+      0.135883,
+      0.955977,
+      -0.260083,
+      20.307656,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "set by Josh in buckle check.blend"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.822434,
+      0.109418,
+      0.558238,
+      1.039429,
+      0.563683,
+      0.288858,
+      0.773837,
+      6.491827,
+      -0.076579,
+      0.951099,
+      -0.299244,
+      19.057699,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.247814,
+      0.109418,
+      -0.962609,
+      -4.357474,
+      -0.918703,
+      0.288858,
+      0.269345,
+      3.106716,
+      0.307528,
+      0.951099,
+      0.02894,
+      20.485097,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 7A": {
@@ -528,6 +1140,74 @@
      ],
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.042
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.91073,
+      -0.009354,
+      0.412897,
+      2.273376,
+      0.413002,
+      -0.01888,
+      0.910535,
+      5.430579,
+      -0.000722,
+      0.999778,
+      0.021058,
+      23.787151,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.541174,
+      -0.000122,
+      0.840911,
+      5.125241,
+      0.840911,
+      2.3e-05,
+      0.541174,
+      1.963792,
+      -8.5e-05,
+      1.0,
+      9.1e-05,
+      22.382055,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.98441,
+      -0.000122,
+      -0.175891,
+      -1.313259,
+      -0.175891,
+      2.3e-05,
+      0.98441,
+      3.901546,
+      -0.000116,
+      1.0,
+      -4.4e-05,
+      22.342473,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   },
@@ -578,6 +1258,74 @@
      "how": "registered onto the sculpted plate of the B twin",
      "median_mm": 0.035
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.991032,
+      -0.128432,
+      -0.036883,
+      -1.0121,
+      -0.068251,
+      0.249223,
+      0.966038,
+      8.100698,
+      -0.114878,
+      0.959892,
+      -0.255754,
+      26.903013,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "set by Josh in buckle check.blend"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.771475,
+      -0.094688,
+      0.629175,
+      3.555126,
+      0.589613,
+      0.265257,
+      0.762886,
+      5.854589,
+      -0.239129,
+      0.959517,
+      -0.14881,
+      27.443177,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.615283,
+      -0.094688,
+      -0.782599,
+      -3.094746,
+      -0.773304,
+      0.265257,
+      0.575881,
+      6.70799,
+      0.153061,
+      0.959517,
+      -0.236431,
+      27.093295,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 1": {
@@ -626,6 +1374,74 @@
      ],
      "how": "seated on the hip armour from 4A L",
      "median_mm": 0.089
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.985548,
+      0.055351,
+      -0.160096,
+      -1.008347,
+      -0.134304,
+      0.320643,
+      0.93763,
+      6.639311,
+      0.103232,
+      0.945582,
+      -0.308575,
+      21.626163,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.343744,
+      0.078434,
+      0.935782,
+      1.818055,
+      0.914066,
+      0.25634,
+      0.314282,
+      5.316166,
+      -0.215228,
+      0.963399,
+      -0.159809,
+      21.055886,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.526089,
+      0.078434,
+      -0.846805,
+      -3.400987,
+      -0.810218,
+      0.25634,
+      0.527102,
+      3.720732,
+      0.258412,
+      0.963399,
+      -0.071309,
+      22.158794,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   },
@@ -676,6 +1492,74 @@
      "how": "seated on the hip armour from 3A L",
      "median_mm": 0.06
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.999981,
+      -0.005999,
+      -0.001733,
+      -0.15116,
+      -0.002876,
+      0.196271,
+      0.980546,
+      6.503648,
+      -0.005542,
+      0.980531,
+      -0.196284,
+      19.568179,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.501299,
+      -0.005999,
+      0.865253,
+      2.278362,
+      0.847848,
+      0.196271,
+      0.492576,
+      3.858148,
+      -0.172779,
+      0.980531,
+      -0.093304,
+      19.134445,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.800267,
+      -0.005999,
+      -0.599614,
+      -3.042688,
+      -0.588904,
+      0.196271,
+      0.784009,
+      3.667554,
+      0.112984,
+      0.980531,
+      -0.160602,
+      18.790217,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 3": {
@@ -724,6 +1608,74 @@
      ],
      "how": "seated on the hip armour from 3A L",
      "median_mm": 0.083
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.993067,
+      0.097462,
+      -0.065718,
+      2.2786,
+      -0.045954,
+      0.192695,
+      0.980182,
+      6.433654,
+      0.108194,
+      0.976407,
+      -0.18688,
+      20.340804,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "set by Josh in buckle check.blend"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.6164,
+      0.107423,
+      0.780071,
+      4.358579,
+      0.787217,
+      0.060831,
+      0.613669,
+      5.464158,
+      0.01847,
+      0.992351,
+      -0.122062,
+      20.030405,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.477819,
+      0.107423,
+      -0.871865,
+      -1.351117,
+      -0.872138,
+      0.060831,
+      0.485463,
+      3.126627,
+      0.105187,
+      0.992351,
+      0.064621,
+      20.874993,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   },
@@ -774,6 +1726,74 @@
      "how": "seated on the hip armour from 8A",
      "median_mm": 0.07
     }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.965096,
+      -0.236889,
+      0.111679,
+      -0.353401,
+      0.031579,
+      0.318057,
+      0.947546,
+      6.908486,
+      -0.259984,
+      0.918,
+      -0.299475,
+      19.836849,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.878578,
+      -0.200442,
+      0.433501,
+      3.044305,
+      0.388713,
+      0.227266,
+      0.89289,
+      4.30482,
+      -0.277493,
+      0.952981,
+      -0.121757,
+      20.12966,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.477195,
+      -0.200442,
+      -0.855633,
+      -2.831294,
+      -0.872182,
+      0.227266,
+      0.433185,
+      5.268797,
+      0.107628,
+      0.952981,
+      -0.283273,
+      19.239923,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
+    }
    }
   },
   "MarFil Assault - Legs 5": {
@@ -822,6 +1842,74 @@
      ],
      "how": "seated on the hip armour from 7A",
      "median_mm": 0.111
+    }
+   },
+   "belt": {
+    "Belt Front": {
+     "matrix": [
+      -0.999407,
+      0.003038,
+      0.034294,
+      -0.018119,
+      0.03372,
+      0.287317,
+      0.957242,
+      6.683678,
+      -0.006945,
+      0.957831,
+      -0.28725,
+      21.7741,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "belt buckles only",
+     "how": "shape match to Standing 2's buckle (0.03 mm) + Josh's 0.8 mm raise on the reference"
+    },
+    "Belt Front R": {
+     "matrix": [
+      -0.521147,
+      0.000147,
+      0.853467,
+      2.769515,
+      0.834736,
+      0.208442,
+      0.509674,
+      4.324525,
+      -0.177823,
+      0.978035,
+      -0.108751,
+      21.883241,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg right of front"
+    },
+    "Belt Front L": {
+     "matrix": [
+      -0.662563,
+      0.000147,
+      -0.749007,
+      -3.006227,
+      -0.732534,
+      0.208442,
+      0.648032,
+      4.09811,
+      0.156219,
+      0.978035,
+      -0.137998,
+      21.919835,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "use": "trophies",
+     "how": "belt rule at 45 deg left of front"
     }
    }
   }
