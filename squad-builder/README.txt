@@ -38,7 +38,8 @@ Using it
      Next time, one click on the page reconnects it (the browser asks).
   2. Set Squad to how many models you want.
   3. Work down the steps: Base, Legs, Torso, then arms, head, back, wings,
-     pads, weapons, shin pads, loincloth and belt. The legs stand on the base as soon as you pick
+     pads, weapons, shin pads, hip plates, holsters, buckle, tabard,
+     loincloth and belt. The legs stand on the base as soon as you pick
      them, so you see the pose before the torso. Hover a card to see that
      part in place (blue outline); click it to take it - it stays on that
      step so you can try others - and press Next when you're happy. Next
@@ -89,13 +90,21 @@ Notes
     connector, as in base_jumpack.blend; the page shows both, and
     Blender adds the connector itself. Backs without wing mounts skip the
     step. The six Malal3D Bladecrow wings come at x1.3, lefts mirrored.
-  - Loincloth (step 11): the front of the belt is the loincloth's alone.
+  - Hip plates (step 11) and Holsters (step 12): legs with plate spots (the
+    Mar Fil Assault legs so far) take a hip plate on each side, the right one
+    mirrored. Holsters and sheaths hang from the plate on their side (the
+    right ones mirrored). Other legs skip both steps.
+  - Buckle (step 13) and Tabard (step 14): the buckle sits on the sculpted
+    one and prints on its own; tabards hang from it, so they follow its turn
+    and tilt. Legs without a buckle spot skip both.
+  - Loincloth (step 15): the front of the belt is the loincloth's alone.
     Loincloths are their own type (Marta's and CyberBrush's), in Blender
     tilted to sit flush and settled onto the belt like belt bits. On legs
     striding forward, the bottom of a loincloth can pass through the raised
     thigh: a rigid cloth can't follow the knee.
-  - Belt (step 12): Right hip, Left hip and Back - the anchors on every pair
-    of legs. A part shows on the tabs it has a fit for. In Blender it is
+  - Belt (step 16): Trophy R and Trophy L (either side of the buckle, on
+    legs that have them), then Right hip, Left hip and Back - the anchors on
+    every pair of legs. A part shows on the tabs it has a fit for. In Blender it is
     tilted to sit flush and settled onto the legs, so it can sit a little
     differently from the page.
   - Arms have three tabs: Right, Left and Two-handed. Two-handed holds the

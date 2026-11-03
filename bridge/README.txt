@@ -730,6 +730,19 @@ wings sit on this pack, move the connector (Fix the Socket moves the pack's
 Wing Mount) or the wing on it (Fix the Socket moves the connector's Wing
 socket, Fix the Part the wing itself).
 
+1.17.6: hip plates and the belt buckle are parts that others hang from (for
+now on the Mar Fil Assault legs, which have the spots). The legs have
+Plate R / Plate L, Buckle and Trophy R / Trophy L. A hip plate (type Hip
+Plates) goes on a plate spot, the right one as the mirror image of the file.
+Holsters and sheaths (type Plate Accessories) hang from the plate's
+Plate Hang socket, mirrored on the right; sent to legs with no plate there
+yet, they bring the plate. The buckle (type Buckles) sits exactly on the
+sculpted buckle; tabards (type Tabards: the CyberBrush ones at 90%) hang from
+the buckle's Tabard socket and bring the buckle if there isn't one. Trophies
+go on the trophy spots either side of the buckle first, then the hips and
+back. Tabards and trophies are placed exactly where Josh set them (no
+rocking or settling).
+
 Bases settle onto the feet (1.17.2): a base snapped on the legs' Base socket
 rises along the socket until the lowest foot touches it (and 0.2 mm in, for
 printing). A base is only ever raised: feet already on or in a scenic base
