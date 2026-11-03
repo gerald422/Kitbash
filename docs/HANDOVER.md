@@ -135,8 +135,8 @@ Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` 
 
 - **Old Style Space Knight MK8 (Nov 3): delivered** (72 collarless torsos in the Mar Fil frame with Torso 1's sockets, 5 chest
   equipment L + mirror R, 8 neck guards + the collar, Shin Pads A-C; TIOW 1.17.7, page steps). Josh hides designs he doesn't
-  want himself. Ask before deleting the temp files in `D:\Kitbash Library\_backups\mk8-torsos-2026-11-03\` (`mk8_builder.blend.gz`,
-  `delivery\`). Delivery tip: commit chunks of 14 MB, not 28 MiB (refused).
+  want himself. Temp files deleted (Josh's OK); `_backups\mk8-torsos-2026-11-03\` keeps the old index and `_sources.csv`.
+  Delivery tip: commit chunks of 14 MB, not 28 MiB (refused).
 
 - **Accessory anchors (Nov 3): first base delivered (1.17.6) on the Mar Fil Assault legs** - plates, buckle, sheaths,
   CB tabards and trophies; data and scripts `kits/plates/` (`marfil_assault_plates.json` holds every placement Josh
