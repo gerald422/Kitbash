@@ -21,7 +21,12 @@
     "Loincloths": {socket: "Belt Front"},
     // blade wings bring their connector (the wing's "adaptor") onto the pack's Wing Mount and hang from it (TIOW Inbox 1.17.5)
     "Wings": {socket: "Wing", sided: true, adaptor: {"Wing R": "Wing Mount R", "Wing L": "Wing Mount L"}},
-    "Wing Mounts": {socket: "Wing Mount", sided: true}
+    "Wing Mounts": {socket: "Wing Mount", sided: true},
+    // hip plates and the buckle are parts others hang from (TIOW Inbox 1.17.6): holsters and sheaths on the plate, tabards on the buckle
+    "Hip Plates": {socket: "Plate", sided: true},
+    "Plate Accessories": {socket: "Plate Hang", sided: true, adaptor: {"Plate Hang R": "Plate R", "Plate Hang L": "Plate L"}},
+    "Buckles": {socket: "Buckle"},
+    "Tabards": {socket: "Tabard", adaptor: {"Tabard": "Buckle"}}
   };
   var ALIAS = {"arm__Torso_r": "Shoulder R", "arm__Torso_l": "Shoulder L", "Wrist_socket_r": "Hand R",
     "Wrist_socket_l": "Hand L", "Head": "Neck", "Backpack": "Back"};
@@ -45,16 +50,26 @@
       slots: [{k: "handR", side: "R", host: "armR", sock: "Hand R"}, {k: "handL", side: "L", host: "armL", sock: "Hand L"}]},
     {key: "shins", label: "Shin pads", types: ["Knee Pads"],
       slots: [{k: "shinR", side: "R", host: "legs", sock: "Shin R"}, {k: "shinL", side: "L", host: "legs", sock: "Shin L"}]},
+    // hip plates are always on where the legs have plate spots; holsters and sheaths hang from them (Nov 3)
+    {key: "plates", label: "Hip plates", types: ["Hip Plates"], need: "plate spots",
+      slots: [{k: "plateR", side: "R", host: "legs", sock: "Plate R"}, {k: "plateL", side: "L", host: "legs", sock: "Plate L"}]},
+    {key: "holsters", label: "Holsters", types: ["Plate Accessories"],
+      slots: [{k: "holsR", side: "R", host: "plateR", sock: "Plate Hang R"}, {k: "holsL", side: "L", host: "plateL", sock: "Plate Hang L"}]},
+    // the buckle sits on the sculpted one; tabards hang from it (Nov 3)
+    {key: "buckle", label: "Buckle", types: ["Buckles"], need: "a buckle spot", slots: [{k: "buckle", host: "legs", sock: "Buckle"}]},
+    {key: "tabard", label: "Tabard", types: ["Tabards"], slots: [{k: "tabard", host: "buckle", sock: "Tabard"}]},
     // the front of the belt is the loincloth's alone (Josh, Oct 30); belt bits go on the hips and the back
     {key: "loin", label: "Loincloth", types: ["Loincloths"], slots: [{k: "loin", host: "legs", sock: "Belt Front"}]},
     {key: "belt", label: "Belt", types: ["Accessories", "Grenades", "Seals", "Trophies"], byFit: true,
-      slots: [{k: "hipR", tab: "Right hip", lab: "R", host: "legs", sock: "Hip R"}, {k: "hipL", tab: "Left hip", lab: "L", host: "legs", sock: "Hip L"},
+      slots: [{k: "trophyR", tab: "Trophy R", lab: "TR", host: "legs", sock: "Trophy R", need: "trophy spots"},
+              {k: "trophyL", tab: "Trophy L", lab: "TL", host: "legs", sock: "Trophy L", need: "trophy spots"},
+              {k: "hipR", tab: "Right hip", lab: "R", host: "legs", sock: "Hip R"}, {k: "hipL", tab: "Left hip", lab: "L", host: "legs", sock: "Hip L"},
               {k: "beltB", tab: "Back", lab: "B", host: "legs", sock: "Belt Back"}]}
   ];
   var SLOT = {};
   STEPS.forEach(function (st, i) { st.slots.forEach(function (sl) { sl.step = i; SLOT[sl.k] = sl; }); });
-  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "loin", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
-  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "loin", "hipR", "hipL", "beltB"];   // the order you pick in
+  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
+  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB"];   // the order you pick in
   // a two-handed piece (both arms and the weapon in one) takes both shoulders: these slots can't be filled with it
   // TIOW Inbox finds pad and wrist spots on single arms only, so a two-handed piece takes a pad only where one was saved by hand
   var COVERED = {padR: "no pad spot on the two-handed piece", padL: "no pad spot on the two-handed piece",
@@ -630,6 +645,9 @@
     else if (st.key === "wings") note = host && host.W && socketsOf(host)[JOINTS.Wings.adaptor[sl.sock]]
       ? "Each wing brings its connector onto the pack's " + JOINTS.Wings.adaptor[sl.sock] + " and hangs from it."
       : "This back has no " + JOINTS.Wings.adaptor[sl.sock] + ": only packs with wing mounts take wings.";
+    else if (needs(sl.k)) note = needs(sl.k);
+    else if (st.key === "holsters") note = "Each holster or sheath hangs from that side's hip plate; the right ones are mirror images.";
+    else if (st.key === "tabard") note = "Tabards hang from the buckle, so they follow its turn and tilt.";
     else if (host && host.W && sl.sock && !socketsOf(host)[sl.sock] && !spec({type: st.types[0]}).spans)
       note = host.part.anchored ? "These " + STEPS[SLOT[hk].step].label.toLowerCase() + " have no " + sl.sock + ": Blender will leave the part beside the model for you to place."
                                 : "No " + sl.sock + " saved for these " + STEPS[SLOT[hk].step].label.toLowerCase() + " yet: Blender will find it.";
@@ -680,6 +698,7 @@
     if ((k === "armR" || k === "armL") && mdl.arm2) return true;           // a two-handed piece: no single arms
     if (covered(mdl, k)) return true;
     if (hk && hk !== "torso" && hk !== "legs" && !mdl[hk]) return true;
+    if (needs(k)) return true;                // plates, buckle, trophy spots: only on legs that have them
     if (k === "wingR" || k === "wingL") {     // wings only on a back with a Wing Mount on that side
       var pk = layout(S.cur).filter(function (x) { return x.slot === "pack"; })[0];
       if (!pk || !pk.W || !socketsOf(pk)[JOINTS.Wings.adaptor[sl.sock]]) return true;
@@ -689,6 +708,12 @@
       if (arm && arm.W && arm.part.anchored && !socketsOf(arm)[sl.sock]) return true;
     }
     return false;
+  }
+  function needs(k) {           // the slot's spot is missing on these legs ("" when the legs have it, or aren't placed yet)
+    var sl = SLOT[k], need = sl.need || STEPS[sl.step].need;
+    if (!need || sl.host !== "legs") return "";
+    var lg = layout(S.cur).filter(function (x) { return x.slot === "legs"; })[0];
+    return lg && lg.W && !socketsOf(lg)[sl.sock] ? "These legs have no " + need + " yet (only the Mar Fil Assault legs so far)." : "";
   }
   function nextSlot() {
     // picking model by model: the same slot on the next model first
