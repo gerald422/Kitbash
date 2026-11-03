@@ -1,7 +1,7 @@
-# Kitbash build: handover (1 Nov 2026)
+# Kitbash build: handover (3 Nov 2026)
 
 Everything needed to pick this work up in a fresh Claude session. The full history, with every measured value and
-decision, is `docs/project-notes.md` (the same file is the Project doc `claude/part-sockets-tiow-integration.md`).
+decision, is `docs/project-notes.md` (the Project doc `claude/part-sockets-tiow-integration.md` is an older copy: from Nov 3 the repo file is the current one).
 How to make sidecars is the skill `.claude/skills/kitbash-sidecars/SKILL.md` (copy in the Project at
 `claude/skills/kitbash-sidecars/SKILL.md`).
 
@@ -29,12 +29,12 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
+- Latest commits: `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
 
       Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-      Claude-Session: https://claude.ai/code/session_016bHhLDVq9BWo6Q3ZdwuYyk
+      Claude-Session: https://claude.ai/code/session_01PSw3X7t6mtZweYW1a5LiqE
 
   (a new session uses its own session link). Push straight to `main`; no PRs so far.
 - Layout: `addons/` (TIOW Inbox, Finalise), `bridge/` (bridge README, `_library.json` template, TIOW-FTRP patch),
