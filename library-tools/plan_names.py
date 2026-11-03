@@ -15,9 +15,10 @@ import sys
 from collections import Counter, defaultdict
 
 MAKERS = {"Mar Fil": "MarFil", "Marta PunkGirl": "Marta", "Turtle Ninja": "TN", "BBoosty": "BBoosty",
-          "CyberBrush": "CyberBrush", "Springles": "Springles"}
+          "CyberBrush": "CyberBrush", "Springles": "Springles", "Old Style Space Knight": "OldStyle"}
 # "maker - range\kit folder" -> short kit name; "*" = name the kit by its first subfolder (TN's builders)
 KITS = {
+    "Old Style Space Knight - Heresy\\MK8": "MK8",
     "BBoosty - Heresy\\Chaplain": "Chaplain", "BBoosty - Heresy\\Consul": "Consul",
     "BBoosty - Heresy\\IH_Shoulderpads": "Iron Hands Pads", "BBoosty - Heresy\\IronFather": "Iron Father",
     "BBoosty - Heresy\\Medusas Mortals": "Medusas Mortals", "BBoosty - Heresy\\Praetor with Paragon Blade": "Praetor",

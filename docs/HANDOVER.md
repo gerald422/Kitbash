@@ -14,11 +14,11 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   (`D:\new cults\...`), `_hidden.txt` hides parts from the page (renegade chapter: no aquilas, purity seals or
   scrolls, plus Josh's own hides), `_builder\index.json` + `_builder\previews\` feed the page, `_backups\` holds a
   dated folder per change.
-- **TIOW Inbox** (Blender add-on, `addons/tiow_inbox.py`, now **1.17.6**): imports parts sent from TIOW-FTRP or the
+- **TIOW Inbox** (Blender add-on, `addons/tiow_inbox.py`, now **1.17.7**): imports parts sent from TIOW-FTRP or the
   page, rebuilds their sockets, snaps them onto the model (rock/settle for belt bits, base rise, adaptors and
   connectors), Save Correction (Fix the Part / Fix the Socket).
 - **Squad Builder** (`squad-builder/`, one offline HTML page): pick parts step by step (Base, Legs, Torso, Arms
-  R/L/Two-handed, Head, Back, Wings, Shoulder pads, Weapons, Shin pads, Loincloth, Belt), see them placed from the
+  R/L/Two-handed, Head, Neck guard, Chest equipment, Back, Wings, Shoulder pads, Weapons, Shin pads, Loincloth, Belt), see them placed from the
   index, send the squad to Blender through `<library>\_builder\inbox`.
 - Also: **Kitbash Finalise** (`addons/kitbash_finalise.py`, 0.3.3, booleans a model into print pieces) and
   **Part Sockets** (Josh's own add-on, 6.2.0 in the container; it is not in this repo).
@@ -70,9 +70,9 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `C:\Us
 | Josh's working blends | `Desktop\query.blend` (his correction file), `Desktop\Operation Marine\*.blend` (large: base_jumpack.blend 191 MB) |
 | Mechadendrite assets | `Desktop\tubes, pipes, chains\` |
 
-**Installed now (md5, first 8):** TIOW Inbox 1.17.6 `404ff01c` (bridge + Blender add-ons), bridge README
-`8435409a`, `_library.json` `ed3700b4`, page `8bc3b83f`, page README `7be512ad`, `build_index.py` `72ed280c`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `680d2e8f` (3,459 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `5fc15079` (4,072 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+**Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
+`5c9c1290`, `_library.json` `a317139a`, page `559a58b9`, page README `59b23ccc`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
+`_builder\index.json` `a67cb795` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `a04089e5` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -128,8 +128,15 @@ Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` 
 - 1.17.6 hip plates and the buckle host parts: `Hip Plates` on the legs' `Plate R/L` (right = mirror variant),
   `Plate Accessories` (holsters/sheaths) on the plate's `Plate Hang R/L` (bring the plate), `Buckles` on `Buckle`,
   `Tabards` on the buckle's `Tabard` (bring the buckle), `Trophies` on `Trophy R/L` first. Mar Fil Assault legs only so far.
+- 1.17.7 `Chest Equipment` on the torso's `Chest Equip R/L` (right = mirror variant), `Neck Guards` on `Neck Guard`; only
+  the Old Style Space Knight MK8 torsos have the spots. Page steps Neck guard (6), Chest equipment (7).
 
 ## Open items (oldest first)
+
+- **Old Style Space Knight MK8 (Nov 3): delivered** (72 collarless torsos in the Mar Fil frame with Torso 1's sockets, 5 chest
+  equipment L + mirror R, 8 neck guards + the collar, Shin Pads A-C; TIOW 1.17.7, page steps). Josh hides designs he doesn't
+  want himself. Ask before deleting the temp files in `D:\Kitbash Library\_backups\mk8-torsos-2026-11-03\` (`mk8_builder.blend.gz`,
+  `delivery\`). Delivery tip: commit chunks of 14 MB, not 28 MiB (refused).
 
 - **Accessory anchors (Nov 3): first base delivered (1.17.6) on the Mar Fil Assault legs** - plates, buckle, sheaths,
   CB tabards and trophies; data and scripts `kits/plates/` (`marfil_assault_plates.json` holds every placement Josh

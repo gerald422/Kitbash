@@ -32,7 +32,7 @@ except ImportError:            # the grid simplify below is used instead
 
 SIDECAR = ".sockets.json"
 MAKERS = {"Mar Fil": "MarFil", "Marta PunkGirl": "Marta", "Turtle Ninja": "TN", "BBoosty": "BBoosty",
-          "CyberBrush": "CyberBrush", "Springles": "Springles"}
+          "CyberBrush": "CyberBrush", "Springles": "Springles", "Old Style Space Knight": "OldStyle"}
 
 
 def native(rel):

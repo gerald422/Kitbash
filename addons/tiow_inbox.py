@@ -61,11 +61,16 @@
 # yet. A buckle ("Buckles") sits on the legs' Buckle; tabards hang from the
 # buckle's Tabard socket and bring the buckle. Trophies go on the trophy spots
 # either side of the buckle (Trophy R / L) before the hips and back.
+#
+# 1.17.7: torsos with chest equipment and neck guard spots (the Old Style Space
+# Knight MK8 torsos): "Chest Equipment" goes on Chest Equip R / L (the left as
+# its file, the right its mirror image), "Neck Guards" on Neck Guard. Both are
+# placed exactly as the maker's builder has them (no rock or settle).
 
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 6),
+    "version": (1, 17, 7),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -596,6 +601,8 @@ DEFAULT_JOINTS = {
                           "adaptor": {"Plate Hang R": "Plate R", "Plate Hang L": "Plate L"}},
     "Buckles": {"socket": "Buckle"},
     "Tabards": {"socket": "Tabard", "adaptor": {"Tabard": "Buckle"}},
+    "Chest Equipment": {"socket": "Chest Equip", "sided": True},
+    "Neck Guards": {"socket": "Neck Guard"},
 }
 # Socket names from before the library rename, so library parts also snap
 # into files set up the old way.

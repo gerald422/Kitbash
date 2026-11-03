@@ -26,7 +26,10 @@
     "Hip Plates": {socket: "Plate", sided: true},
     "Plate Accessories": {socket: "Plate Hang", sided: true, adaptor: {"Plate Hang R": "Plate R", "Plate Hang L": "Plate L"}},
     "Buckles": {socket: "Buckle"},
-    "Tabards": {socket: "Tabard", adaptor: {"Tabard": "Buckle"}}
+    "Tabards": {socket: "Tabard", adaptor: {"Tabard": "Buckle"}},
+    // torsos with chest equipment and neck guard spots (Old Style Space Knight MK8, TIOW Inbox 1.17.7)
+    "Chest Equipment": {socket: "Chest Equip", sided: true},
+    "Neck Guards": {socket: "Neck Guard"}
   };
   var ALIAS = {"arm__Torso_r": "Shoulder R", "arm__Torso_l": "Shoulder L", "Wrist_socket_r": "Hand R",
     "Wrist_socket_l": "Hand L", "Head": "Neck", "Backpack": "Back"};
@@ -41,6 +44,10 @@
       slots: [{k: "armR", side: "R", host: "torso", sock: "Shoulder R"}, {k: "armL", side: "L", host: "torso", sock: "Shoulder L"},
               {k: "arm2", tab: "Two-handed", lab: "2H", host: "torso", sock: "Shoulder R"}]},
     {key: "head", label: "Head", types: ["Heads"], slots: [{k: "head", host: "torso", sock: "Neck"}]},
+    // only torsos with the spots (the Old Style Space Knight MK8 torsos, Nov 3)
+    {key: "neckGuard", label: "Neck guard", types: ["Neck Guards"], need: "neck guard spot", slots: [{k: "neckG", host: "torso", sock: "Neck Guard"}]},
+    {key: "chestEq", label: "Chest equipment", types: ["Chest Equipment"], need: "chest equipment spots",
+      slots: [{k: "chestR", side: "R", host: "torso", sock: "Chest Equip R"}, {k: "chestL", side: "L", host: "torso", sock: "Chest Equip L"}]},
     {key: "pack", label: "Back", types: ["Backpacks", "Jump Packs"], slots: [{k: "pack", host: "torso", sock: "Back"}]},
     {key: "wings", label: "Wings", types: ["Wings"],
       slots: [{k: "wingR", side: "R", host: "pack", sock: "Wing R"}, {k: "wingL", side: "L", host: "pack", sock: "Wing L"}]},
@@ -68,8 +75,8 @@
   ];
   var SLOT = {};
   STEPS.forEach(function (st, i) { st.slots.forEach(function (sl) { sl.step = i; SLOT[sl.k] = sl; }); });
-  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
-  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB"];   // the order you pick in
+  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "neckG", "chestR", "chestL", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
+  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "neckG", "chestR", "chestL", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB"];   // the order you pick in
   // a two-handed piece (both arms and the weapon in one) takes both shoulders: these slots can't be filled with it
   // TIOW Inbox finds pad and wrist spots on single arms only, so a two-handed piece takes a pad only where one was saved by hand
   var COVERED = {padR: "no pad spot on the two-handed piece", padL: "no pad spot on the two-handed piece",
@@ -648,6 +655,8 @@
     else if (needs(sl.k)) note = needs(sl.k);
     else if (st.key === "holsters") note = "Each holster or sheath hangs from that side's hip plate; the right ones are mirror images.";
     else if (st.key === "tabard") note = "Tabards hang from the buckle, so they follow its turn and tilt.";
+    else if (st.key === "chestEq") note = "The right piece is the mirror image of the left one.";
+    else if (st.key === "neckGuard") note = "These torsos come without a back collar: pick a guard, or the Collar for the original look.";
     else if (host && host.W && sl.sock && !socketsOf(host)[sl.sock] && !spec({type: st.types[0]}).spans)
       note = host.part.anchored ? "These " + STEPS[SLOT[hk].step].label.toLowerCase() + " have no " + sl.sock + ": Blender will leave the part beside the model for you to place."
                                 : "No " + sl.sock + " saved for these " + STEPS[SLOT[hk].step].label.toLowerCase() + " yet: Blender will find it.";
@@ -711,9 +720,11 @@
   }
   function needs(k) {           // the slot's spot is missing on these legs ("" when the legs have it, or aren't placed yet)
     var sl = SLOT[k], need = sl.need || STEPS[sl.step].need;
-    if (!need || sl.host !== "legs") return "";
-    var lg = layout(S.cur).filter(function (x) { return x.slot === "legs"; })[0];
-    return lg && lg.W && !socketsOf(lg)[sl.sock] ? "These legs have no " + need + " yet (only the Mar Fil Assault legs so far)." : "";
+    if (!need || (sl.host !== "legs" && sl.host !== "torso")) return "";
+    var h = layout(S.cur).filter(function (x) { return x.slot === sl.host; })[0];
+    if (!h || !h.W || socketsOf(h)[sl.sock]) return "";
+    return sl.host === "legs" ? "These legs have no " + need + " yet (only the Mar Fil Assault legs so far)."
+                              : "This torso has no " + need + " (only the Old Style Space Knight MK8 torsos have them).";
   }
   function nextSlot() {
     // picking model by model: the same slot on the next model first

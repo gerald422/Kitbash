@@ -730,6 +730,15 @@ wings sit on this pack, move the connector (Fix the Socket moves the pack's
 Wing Mount) or the wing on it (Fix the Socket moves the connector's Wing
 socket, Fix the Part the wing itself).
 
+1.17.7: the Old Style Space Knight MK8 torsos (72, collarless, made in Mar
+Fil's kit frame so Mar Fil legs, arms, heads and packs fit them as they fit
+Mar Fil Torso 1) have chest equipment and neck guard spots. Chest equipment
+(type Chest Equipment) goes on Chest Equip R / L, the right one as the
+mirror image of the file; neck guards (type Neck Guards: the eight
+turtlenecks and the torsos' original back collar) go on Neck Guard. Both
+land exactly where the maker's builder has them (no rocking or settling).
+The bonus shin pads (Shin Pad A, B, C) are ordinary Knee Pads.
+
 1.17.6: hip plates and the belt buckle are parts that others hang from (for
 now on the Mar Fil Assault legs, which have the spots). The legs have
 Plate R / Plate L, Buckle and Trophy R / Trophy L. A hip plate (type Hip
