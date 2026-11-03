@@ -1,0 +1,829 @@
+{
+ "about": "Mar Fil AssaultMarines-V2 WaistPlate on the Assault legs: plate placement (WaistPlate file -> legs file, 4x4 row-major) per side, and the holster socket on the plate (WaistPlate file coords). Nov 3 2026, Josh checked renders.",
+ "waistplate": "new cults/All Mar All the time/AssaultMarines-V2/WaistPlate.stl",
+ "holster_socket_on_plate": {
+  "matrix": [
+   -0.000997,
+   -0.064122,
+   0.997942,
+   -0.366122,
+   0.981701,
+   0.189969,
+   0.013187,
+   0.105457,
+   -0.190424,
+   0.979694,
+   0.06276,
+   0.531768,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "note": "Josh's hand-set holster position on Legs 4A (holster check 4A.blend), as a socket on the plate; VitalyKhan V1 holster fit = inv_fp"
+ },
+ "vk_holster_fit": [
+  -0.229963,
+  0.973199,
+  -0.0,
+  -33.142487,
+  -0.892202,
+  -0.210824,
+  0.39941,
+  -133.799724,
+  0.388705,
+  0.09185,
+  0.916773,
+  37.30124,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "legs": {
+  "MarFil Assault - Legs 1A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.915255,
+      0.007932,
+      0.402797,
+      -4.508773,
+      0.142265,
+      -0.929031,
+      0.341558,
+      1.556027,
+      0.37692,
+      0.369916,
+      0.849172,
+      31.283061,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.036
+    },
+    "R": {
+     "matrix": [
+      0.518609,
+      0.03603,
+      -0.854252,
+      5.505874,
+      0.296447,
+      0.92956,
+      0.219177,
+      2.201343,
+      0.801975,
+      -0.366907,
+      0.471397,
+      33.11747,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.037
+    }
+   }
+  },
+  "MarFil Assault - Legs 2A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      0.119109,
+      -0.690184,
+      0.713764,
+      3.683613,
+      0.668517,
+      -0.475764,
+      -0.571606,
+      4.05436,
+      0.734097,
+      0.545247,
+      0.404732,
+      30.300246,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.04
+    },
+    "R": {
+     "matrix": [
+      0.569781,
+      0.711773,
+      0.410767,
+      6.05465,
+      -0.811931,
+      0.410355,
+      0.415183,
+      -4.378695,
+      0.126956,
+      -0.570078,
+      0.811723,
+      26.572192,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.04
+    }
+   }
+  },
+  "MarFil Assault - Legs 2A L": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.811948,
+      -0.411816,
+      0.413701,
+      -4.404957,
+      0.569801,
+      -0.713053,
+      0.408512,
+      6.089924,
+      0.126759,
+      0.567418,
+      0.813615,
+      26.576808,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.04
+    },
+    "R": {
+     "matrix": [
+      0.669261,
+      0.47475,
+      -0.571578,
+      4.026008,
+      0.119615,
+      0.690384,
+      0.713486,
+      3.719905,
+      0.733336,
+      -0.545878,
+      0.40526,
+      30.297909,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.04
+    }
+   }
+  },
+  "MarFil Assault - Legs 3A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      0.522427,
+      -0.822817,
+      0.223702,
+      3.27145,
+      0.563083,
+      0.135897,
+      -0.81515,
+      4.883097,
+      0.640319,
+      0.551819,
+      0.53431,
+      27.546096,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.034
+    },
+    "R": {
+     "matrix": [
+      0.105179,
+      0.748523,
+      0.654714,
+      1.157764,
+      -0.924933,
+      -0.168201,
+      0.340891,
+      -4.730042,
+      0.365288,
+      -0.641422,
+      0.674643,
+      26.645166,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.057
+    }
+   }
+  },
+  "MarFil Assault - Legs 3A L": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.9242,
+      0.161571,
+      0.346047,
+      -4.75812,
+      0.101168,
+      -0.770155,
+      0.629783,
+      1.169144,
+      0.368264,
+      0.617055,
+      0.695431,
+      26.660762,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.049
+    },
+    "R": {
+     "matrix": [
+      0.562763,
+      -0.134387,
+      -0.815621,
+      4.863689,
+      0.522159,
+      0.822708,
+      0.224724,
+      3.294205,
+      0.640818,
+      -0.552351,
+      0.533161,
+      27.540833,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.034
+    }
+   }
+  },
+  "MarFil Assault - Legs 4A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      0.615925,
+      -0.728701,
+      0.299385,
+      3.280654,
+      0.764524,
+      0.461175,
+      -0.450357,
+      7.435372,
+      0.190107,
+      0.506273,
+      0.841158,
+      27.506363,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.034
+    },
+    "R": {
+     "matrix": [
+      0.128681,
+      0.70154,
+      0.700916,
+      0.025953,
+      -0.617687,
+      -0.496244,
+      0.610086,
+      -1.281975,
+      0.775824,
+      -0.511453,
+      0.369475,
+      30.93632,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.039
+    }
+   }
+  },
+  "MarFil Assault - Legs 4A L": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.618183,
+      0.494489,
+      0.611008,
+      -4.837874,
+      0.129104,
+      -0.702898,
+      0.699476,
+      2.404193,
+      0.775359,
+      0.511287,
+      0.370679,
+      30.938089,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.039
+    },
+    "R": {
+     "matrix": [
+      0.764424,
+      -0.458586,
+      -0.453161,
+      3.86391,
+      0.616483,
+      0.725645,
+      0.305595,
+      5.659712,
+      0.188693,
+      -0.51297,
+      0.837411,
+      27.524484,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.035
+    }
+   }
+  },
+  "MarFil Assault - Legs 5A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.820917,
+      0.37482,
+      0.43082,
+      -5.421033,
+      -0.158831,
+      -0.874537,
+      0.458212,
+      -1.164847,
+      0.548515,
+      0.307727,
+      0.777455,
+      25.228347,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.037
+    },
+    "R": {
+     "matrix": [
+      0.599516,
+      -0.355432,
+      -0.717111,
+      3.725029,
+      0.457053,
+      0.887559,
+      -0.057811,
+      2.73019,
+      0.657026,
+      -0.293099,
+      0.694557,
+      25.725911,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.034
+    }
+   }
+  },
+  "MarFil Assault - Legs 6A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.617701,
+      0.15113,
+      0.771755,
+      -5.498243,
+      0.104399,
+      -0.956916,
+      0.270948,
+      0.947662,
+      0.779453,
+      0.247936,
+      0.57531,
+      20.144566,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.037
+    },
+    "R": {
+     "matrix": [
+      0.85323,
+      -0.067243,
+      -0.517182,
+      4.495337,
+      0.220551,
+      0.94514,
+      0.240972,
+      1.733793,
+      0.472605,
+      -0.31967,
+      0.821252,
+      19.810921,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.038
+    }
+   }
+  },
+  "MarFil Assault - Legs 7A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.768952,
+      -0.378159,
+      0.51547,
+      -4.115923,
+      0.317209,
+      -0.925726,
+      -0.205935,
+      2.254536,
+      0.55506,
+      0.005157,
+      0.831794,
+      21.48627,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.036
+    },
+    "R": {
+     "matrix": [
+      0.625378,
+      0.288208,
+      -0.725147,
+      5.126067,
+      -0.234466,
+      0.955753,
+      0.177655,
+      -1.650284,
+      0.744263,
+      0.058921,
+      0.665282,
+      21.978479,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.042
+    }
+   }
+  },
+  "MarFil Assault - Legs 8A": {
+   "folder": "Legs(JumpPack)/Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.933439,
+      0.112558,
+      0.340621,
+      -4.767818,
+      0.038365,
+      -0.912735,
+      0.406747,
+      1.981193,
+      0.356679,
+      0.392741,
+      0.847664,
+      26.829233,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.04
+    },
+    "R": {
+     "matrix": [
+      0.581379,
+      -0.070965,
+      -0.810533,
+      4.820696,
+      0.319621,
+      0.936025,
+      0.147306,
+      3.415493,
+      0.748225,
+      -0.344704,
+      0.566867,
+      28.021971,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "registered onto the sculpted plate of the B twin",
+     "median_mm": 0.035
+    }
+   }
+  },
+  "MarFil Assault - Legs 1": {
+   "folder": "Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.801559,
+      0.250351,
+      0.54298,
+      -4.463489,
+      -0.018744,
+      -0.918196,
+      0.395682,
+      -0.164591,
+      0.597622,
+      0.306985,
+      0.740681,
+      21.572811,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 3A L",
+     "median_mm": 0.091
+    },
+    "R": {
+     "matrix": [
+      0.80379,
+      -0.261033,
+      -0.534587,
+      4.638135,
+      0.497683,
+      0.787355,
+      0.363845,
+      1.578302,
+      0.325934,
+      -0.55851,
+      0.76278,
+      21.044481,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 4A L",
+     "median_mm": 0.089
+    }
+   }
+  },
+  "MarFil Assault - Legs 2": {
+   "folder": "Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.853822,
+      0.060873,
+      0.516993,
+      -4.617249,
+      0.034199,
+      -0.984434,
+      0.172393,
+      0.748824,
+      0.51944,
+      0.164873,
+      0.83845,
+      18.910188,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 3A L",
+     "median_mm": 0.095
+    },
+    "R": {
+     "matrix": [
+      0.725229,
+      -0.21938,
+      -0.652622,
+      4.927239,
+      0.31822,
+      0.947365,
+      0.035164,
+      1.953748,
+      0.610556,
+      -0.233179,
+      0.756868,
+      18.691353,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 3A L",
+     "median_mm": 0.06
+    }
+   }
+  },
+  "MarFil Assault - Legs 3": {
+   "folder": "Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.71764,
+      -0.119333,
+      0.686114,
+      -2.608821,
+      0.273009,
+      -0.954557,
+      0.119532,
+      1.52198,
+      0.640671,
+      0.273096,
+      0.717607,
+      19.843904,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 3A",
+     "median_mm": 0.089
+    },
+    "R": {
+     "matrix": [
+      0.817549,
+      -0.00606,
+      -0.575827,
+      7.136948,
+      0.15953,
+      0.963192,
+      0.216361,
+      0.717266,
+      0.553321,
+      -0.268748,
+      0.788423,
+      19.169602,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 3A L",
+     "median_mm": 0.083
+    }
+   }
+  },
+  "MarFil Assault - Legs 4": {
+   "folder": "Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.930477,
+      0.150911,
+      0.333824,
+      -4.663833,
+      -0.034004,
+      -0.942859,
+      0.331453,
+      0.166658,
+      0.364769,
+      0.297058,
+      0.88244,
+      18.413848,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 2A",
+     "median_mm": 0.116
+    },
+    "R": {
+     "matrix": [
+      0.506818,
+      -0.170951,
+      -0.844933,
+      4.493887,
+      0.428317,
+      0.900534,
+      0.074718,
+      2.554679,
+      0.748118,
+      -0.399767,
+      0.529628,
+      20.723243,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 8A",
+     "median_mm": 0.07
+    }
+   }
+  },
+  "MarFil Assault - Legs 5": {
+   "folder": "Legs",
+   "plates": {
+    "L": {
+     "matrix": [
+      -0.832757,
+      0.062278,
+      0.550125,
+      -4.683853,
+      -0.019644,
+      -0.996351,
+      0.083058,
+      1.082243,
+      0.55329,
+      0.05836,
+      0.830942,
+      21.273996,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 1A",
+     "median_mm": 0.072
+    },
+    "R": {
+     "matrix": [
+      0.832263,
+      -0.01287,
+      -0.554231,
+      4.743511,
+      0.290573,
+      0.861529,
+      0.416335,
+      0.578592,
+      0.472128,
+      -0.507545,
+      0.720759,
+      21.609238,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ],
+     "how": "seated on the hip armour from 7A",
+     "median_mm": 0.111
+    }
+   }
+  }
+ }
+}
