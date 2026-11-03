@@ -188,6 +188,26 @@
       "cloak",
       "capes",
       "cape"
+    ],
+    "Hip Plates": [
+      "hip plates",
+      "hip plate",
+      "waist plates",
+      "waist plate"
+    ],
+    "Buckles": [
+      "buckles",
+      "buckle"
+    ],
+    "Plate Accessories": [
+      "holsters",
+      "holster",
+      "sheaths",
+      "sheath"
+    ],
+    "Tabards": [
+      "tabards",
+      "tabard"
     ]
   },
   "skipFoldersContaining": [
@@ -362,6 +382,8 @@
     },
     "Trophies": {
       "socket": [
+        "Trophy R",
+        "Trophy L",
         "Hip R",
         "Hip L",
         "Belt Back"
@@ -369,6 +391,27 @@
       "rock": 8,
       "settle": "-Z",
       "sink": 0.1
+    },
+    "Hip Plates": {
+      "socket": "Plate",
+      "sided": true
+    },
+    "Plate Accessories": {
+      "socket": "Plate Hang",
+      "sided": true,
+      "adaptor": {
+        "Plate Hang R": "Plate R",
+        "Plate Hang L": "Plate L"
+      }
+    },
+    "Buckles": {
+      "socket": "Buckle"
+    },
+    "Tabards": {
+      "socket": "Tabard",
+      "adaptor": {
+        "Tabard": "Buckle"
+      }
     }
   },
   "jointAliases": {

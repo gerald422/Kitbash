@@ -53,11 +53,19 @@
 # pack's Wing Mount R / L first and the wing hangs from the connector's own
 # Wing R / L socket. A request for a socket the model hasn't got yet keeps its
 # side, so a left wing arrives as the left one.
+#
+# 1.17.6: hip plates and the belt buckle are parts that others hang from. Legs
+# with plate spots (Plate R / L) take a hip plate (the left as its file, the
+# right its mirror image); holsters and sheaths ("Plate Accessories") hang from
+# the plate's Plate Hang socket and bring their plate when the legs have none
+# yet. A buckle ("Buckles") sits on the legs' Buckle; tabards hang from the
+# buckle's Tabard socket and bring the buckle. Trophies go on the trophy spots
+# either side of the buckle (Trophy R / L) before the hips and back.
 
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 5),
+    "version": (1, 17, 6),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -579,10 +587,15 @@ DEFAULT_JOINTS = {
     "Accessories": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
     "Grenades": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
     "Seals": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
-    "Trophies": {"socket": BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
+    "Trophies": {"socket": ["Trophy R", "Trophy L"] + BELT, "rock": 8, "settle": "-Z", "sink": 0.1},
     "Loincloths": {"socket": "Belt Front", "rock": 8, "settle": "-Z", "sink": 0.1},
     "Wings": {"socket": "Wing", "sided": True, "adaptor": {"Wing R": "Wing Mount R", "Wing L": "Wing Mount L"}},
     "Wing Mounts": {"socket": "Wing Mount", "sided": True},
+    "Hip Plates": {"socket": "Plate", "sided": True},
+    "Plate Accessories": {"socket": "Plate Hang", "sided": True,
+                          "adaptor": {"Plate Hang R": "Plate R", "Plate Hang L": "Plate L"}},
+    "Buckles": {"socket": "Buckle"},
+    "Tabards": {"socket": "Tabard", "adaptor": {"Tabard": "Buckle"}},
 }
 # Socket names from before the library rename, so library parts also snap
 # into files set up the old way.
