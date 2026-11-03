@@ -133,6 +133,13 @@ Finalise 0.3.3, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` 
 
 ## Open items (oldest first)
 
+- **Holsters on the hip plate (Nov 3): built and tested, waiting for Josh's OK to install** - 45 holsters, pouches and grenades
+  as Plate Accessories (plates only), fits by `kits/plates/hol_fit.py`; deliver the 45 sidecars (`hol_sidecars.py` -> repo
+  `library/`), `_builder\index.json` and `_sources.csv` (rebuild from the PC's current files if their md5 moved from
+  a67cb795 / a04089e5). Josh reviews them in the demo below.
+- **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
+  The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).
+
 - **Old Style Space Knight MK8 (Nov 3): delivered** (72 collarless torsos in the Mar Fil frame with Torso 1's sockets, 5 chest
   equipment L + mirror R, 8 neck guards + the collar, Shin Pads A-C; TIOW 1.17.7, page steps). Josh hides designs he doesn't
   want himself. Temp files deleted (Josh's OK); `_backups\mk8-torsos-2026-11-03\` keeps the old index and `_sources.csv`.
