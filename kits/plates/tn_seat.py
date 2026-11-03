@@ -4,7 +4,8 @@ coordinates (every maker's legs seated under a torso share them): each of the 16
 pose for the part (plate L, plate R = mirror image, buckle) in torso coordinates; the part's contact points (where
 it touches Assault Legs 4A) are seated on the new legs by point-to-plane ICP; best score kept (contact median +
 5 x share of the part sunk > 0.3 mm). Trophy R / L: the belt rule 45 deg either side of the way the seated buckle
-faces, at the legs' own belt height. Sockets as on the Assault legs (build_tiow.py).
+faces, at the legs' own belt height. Then the pair is levelled (Josh: R too high, L too low): both to their
+mean height and a 26 deg roll (outer face looking up, as the Assault plates), re-seated. Sockets as on the Assault legs (build_tiow.py).
 python tn_seat.py OUT_JSON LEGS_REL [LEGS_REL ...]   (library paths without .stl)"""
 import sys, os, json, numpy as np
 from scipy.spatial import cKDTree
@@ -34,13 +35,27 @@ def contacts(V, T, W):
 C = {"L": contacts(PV, PT, M16(e4["plates"]["L"]["matrix"])), "R": contacts(PV, PT, M16(e4["plates"]["R"]["matrix"]) @ Sm),
      "B": contacts(BV, BT, M16(e4["buckle_part"]["matrix"]))}
 ALL = {"L": surf(PV, PT, 6000)[0], "R": surf(PV, PT, 6000)[0], "B": surf(BV, BT, 6000)[0]}
+rng = np.random.default_rng(0); C = {k: v[rng.choice(len(v), min(len(v), 3000), replace=False)] for k, v in C.items()}
 print("contact points:", {k: len(v) for k, v in C.items()})
-def seat(W, S, N, tree, Cp, it=40):
+# level the pair (Josh, Nov 3: "the roll is slightly out with hip r too high and hip l too low"): both plates to the
+# pair's mean height and the same roll - how far the plate's outer face looks up (its flare) - 26 deg, the middle of
+# the Assault plates' medians (R 29.8, L 22.3); still seated on the hips by their contact points
+c0 = (PV.min(0) + PV.max(0)) / 2; PS, PN = surf(PV, PT, 20000)
+def edge(W, side):    # plate centre and the mean normal of its outer face
+    c = tf(W, c0[None])[0]; N = PN @ W[:3, :3].T; n = N[N @ np.array([1.0 if side == "R" else -1.0, 0, 0]) > 0.3].mean(0)
+    return c, n / np.linalg.norm(n)
+ROLL = 26.0
+def seat(W, S, N, tree, Cp, it=40, z=None, side=None, w=None):
     for _ in range(it):
         X = tf(W, Cp); d, j = tree.query(X); k = d < 1.5
         if k.sum() < 10: break
         X, Q, Nn = X[k], S[j[k]], N[j[k]]; r = ((X - Q) * Nn).sum(1)
-        J = np.hstack([np.cross(X, Nn), Nn]); dx = np.linalg.lstsq(J, -r, rcond=None)[0]
+        J = np.hstack([np.cross(X, Nn), Nn])
+        if z is not None:                      # soft targets: plate centre height and roll (outer face elevation)
+            c, n = edge(W, side); w = w or 4 * np.sqrt(len(r))
+            J = np.vstack([J, w * np.array([c[1], -c[0], 0, 0, 0, 1.0]), w * 10 * np.array([n[1], -n[0], 0, 0, 0, 0])])
+            r = np.r_[r, w * (c[2] - z), w * 10 * (n[2] - np.sin(np.radians(ROLL)))]
+        dx = np.linalg.lstsq(J, -r, rcond=None)[0]
         a, t = dx[:3], dx[3:]; th = np.linalg.norm(a)
         R = np.eye(3) if th < 1e-12 else np.cos(th) * np.eye(3) + np.sin(th) * np.array([[0, -a[2] / th, a[1] / th], [a[2] / th, 0, -a[0] / th], [-a[1] / th, a[0] / th, 0]]) + (1 - np.cos(th)) * np.outer(a / th, a / th)
         D = np.eye(4); D[:3, :3] = R; D[:3, 3] = t; W = D @ W
@@ -63,6 +78,11 @@ for rel in LEGS:
         spread = max(np.linalg.norm(tf(W1, C[k]) - tf(c[1], C[k]), axis=1).mean() for c in cands[:3])
         r[k] = inv(M) @ W1                                                                                       # part file -> legs file
         r["why"][k] = "contact median %.3f mm, %.1f%% sunk >0.3, next-best seats within %.2f mm" % (med, 100 * pen, spread)
+    zt = (edge(M @ r["L"], "L")[0][2] + edge(M @ r["R"], "R")[0][2]) / 2; lv = {}
+    for k in "LR":
+        before = edge(M @ r[k], k); W2 = seat(M @ r[k], S, N, tree, C[k], z=zt, side=k); after = edge(W2, k); sc2 = score(W2, S, N, tree, C[k], ALL[k])
+        r[k] = inv(M) @ W2; lv[k] = (before[0][2], np.degrees(np.arcsin(before[1][2])), after[0][2], np.degrees(np.arcsin(after[1][2])), sc2[1], sc2[2])
+        r["why"][k] += "; levelled: z %.2f -> %.2f, roll %+.1f -> %+.1f deg (contact median %.3f, %.1f%% sunk)" % (lv[k][0], lv[k][2], lv[k][1], lv[k][3], lv[k][4], 100 * lv[k][5])
     z = (M @ r["B"] @ ORN)[:3, 2]; az = np.arctan2(z[0], z[1])
     bf = M @ M16([s for s in sc["sockets"] if s["type"] == "Belt Front"][0]["matrix"])
     belt.BELT_Z = bf[2, 3]; belt.AXIS = np.array([0.0, 0.57, belt.BELT_Z])
