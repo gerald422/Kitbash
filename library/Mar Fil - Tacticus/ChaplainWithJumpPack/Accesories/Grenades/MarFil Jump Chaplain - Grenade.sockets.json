@@ -3,83 +3,86 @@
  "part": "26-Grenade",
  "sockets": [],
  "fits": {
-  "Hip R": [
-   0.9880268776294028,
-   0.15428184948947513,
+  "Plate Hang L": [
+   0.988027,
+   0.154282,
    0.0,
-   4.692284366654742,
-   0.0,
-   0.0,
-   1.0,
-   -21.762583571492762,
-   0.1542818494894751,
-   -0.9880268776294028,
-   -0.0,
-   -1.811841561260172,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Hip L": [
-   0.9880268776294028,
-   0.15428184948947513,
-   0.0,
-   4.692284366654742,
+   4.765979,
    0.0,
    0.0,
    1.0,
-   -21.762583571492762,
-   0.1542818494894751,
-   -0.9880268776294028,
+   -21.598437,
+   0.154282,
+   -0.988027,
    -0.0,
-   -1.811841561260172,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Front": [
-   0.9880268776294028,
-   0.15428184948947513,
-   0.0,
-   4.692284366654742,
-   0.0,
-   0.0,
-   1.0,
-   -21.762583571492762,
-   0.1542818494894751,
-   -0.9880268776294028,
-   -0.0,
-   -1.811841561260172,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Back": [
-   0.9880268776294028,
-   0.15428184948947513,
-   0.0,
-   4.692284366654742,
-   0.0,
-   0.0,
-   1.0,
-   -21.762583571492762,
-   0.1542818494894751,
-   -0.9880268776294028,
-   -0.0,
-   -1.811841561260172,
+   0.780611,
    0.0,
    0.0,
    0.0,
    1.0
   ]
  },
- "category": "Grenades",
+ "category": "Plate Accessories",
  "original": {
   "name": "26-Grenade",
   "folder": "Grenades",
   "path": "Mar Fil - Tacticus\\ChaplainWithJumpPack\\Accesories\\Grenades\\26-Grenade.stl"
- }
+ },
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Hip Plates\\MarFil Assault - Hip Plate L.stl",
+ "notes": {
+  "type": "plate accessory (was Grenades): hangs from the hip plate (Josh, Nov 3: plates only)",
+  "Plate Hang L": "hangs from the hip plate's Plate Hang like Josh's AM-V2 sheath: belt orientation (or from its shape), centred on the hang point, top 2.1 mm above it, deepest point 0.2 mm under the plate's outer face (Nov 3)"
+ },
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "MarFil Jump Chaplain - Grenade R",
+   "title": "MarFil Jump Chaplain - Grenade R",
+   "folder": "Grenades",
+   "from": "mirror of the left placement (right hip plate)",
+   "sidecar": {
+    "category": "Plate Accessories",
+    "fits": {
+     "Plate Hang R": [
+      0.988027,
+      -0.154282,
+      0.0,
+      -4.765979,
+      0.0,
+      0.0,
+      1.0,
+      -21.598437,
+      -0.154282,
+      -0.988027,
+      0.0,
+      0.780611,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": []
+   }
+  }
+ ]
 }

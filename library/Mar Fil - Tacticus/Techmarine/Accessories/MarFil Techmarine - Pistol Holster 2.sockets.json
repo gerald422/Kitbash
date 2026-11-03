@@ -3,83 +3,86 @@
  "part": "40-PistolHolster-2",
  "sockets": [],
  "fits": {
-  "Hip R": [
-   -0.531545617277878,
-   -0.8470296669849761,
-   -0.0,
-   2.2116086447232752,
+  "Plate Hang L": [
+   -0.956913,
    0.0,
-   0.0,
-   1.0,
-   -17.718902281550978,
-   -0.8470296669849763,
-   0.5315456172778781,
-   -0.0,
-   -7.720377823499148,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Hip L": [
-   -0.531545617277878,
-   -0.8470296669849761,
-   -0.0,
-   2.2116086447232752,
-   0.0,
-   0.0,
-   1.0,
-   -17.718902281550978,
-   -0.8470296669849763,
-   0.5315456172778781,
-   -0.0,
-   -7.720377823499148,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Front": [
-   -0.531545617277878,
-   -0.8470296669849761,
-   -0.0,
-   2.2116086447232752,
-   0.0,
-   0.0,
-   1.0,
-   -17.718902281550978,
-   -0.8470296669849763,
-   0.5315456172778781,
-   -0.0,
-   -7.720377823499148,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Back": [
-   -0.531545617277878,
-   -0.8470296669849761,
-   -0.0,
-   2.2116086447232752,
-   0.0,
-   0.0,
-   1.0,
-   -17.718902281550978,
-   -0.8470296669849763,
-   0.5315456172778781,
-   -0.0,
-   -7.720377823499148,
+   0.290375,
+   -10.763154,
+   0.289694,
+   0.068445,
+   0.954669,
+   -18.380947,
+   -0.019875,
+   0.997655,
+   -0.065496,
+   -2.299937,
    0.0,
    0.0,
    0.0,
    1.0
   ]
  },
- "category": "Accessories",
+ "category": "Plate Accessories",
  "original": {
   "name": "40-PistolHolster-2",
   "folder": "Accessories",
   "path": "Mar Fil - Tacticus\\Techmarine\\Accessories\\40-PistolHolster-2.stl"
- }
+ },
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Hip Plates\\MarFil Assault - Hip Plate L.stl",
+ "notes": {
+  "type": "plate accessory (was Accessories): hangs from the hip plate (Josh, Nov 3: plates only)",
+  "Plate Hang L": "hangs from the hip plate's Plate Hang like Josh's AM-V2 sheath: belt orientation (or from its shape), centred on the hang point, top 2.1 mm above it, deepest point 0.2 mm under the plate's outer face (Nov 3)"
+ },
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "MarFil Techmarine - Pistol Holster 2 R",
+   "title": "MarFil Techmarine - Pistol Holster 2 R",
+   "folder": "Accessories",
+   "from": "mirror of the left placement (right hip plate)",
+   "sidecar": {
+    "category": "Plate Accessories",
+    "fits": {
+     "Plate Hang R": [
+      -0.956913,
+      0.0,
+      -0.290375,
+      10.763154,
+      -0.289694,
+      0.068445,
+      0.954669,
+      -18.380947,
+      0.019875,
+      0.997655,
+      -0.065496,
+      -2.299937,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": []
+   }
+  }
+ ]
 }

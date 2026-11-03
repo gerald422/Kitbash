@@ -3,83 +3,86 @@
  "part": "25-Holster",
  "sockets": [],
  "fits": {
-  "Hip R": [
-   -0.3083567528755181,
-   -0.9512707884488342,
-   -0.0,
-   -1.667040204276914,
+  "Plate Hang L": [
+   1.0,
+   0.0,
+   0.0,
+   8.258812,
    0.0,
    0.0,
    1.0,
-   -20.934251010964125,
-   -0.9512707884488343,
-   0.3083567528755181,
+   -22.870778,
    -0.0,
-   -7.101545342683169,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Hip L": [
-   -0.3083567528755181,
-   -0.9512707884488342,
+   -1.0,
    -0.0,
-   -1.667040204276914,
-   0.0,
-   0.0,
-   1.0,
-   -20.934251010964125,
-   -0.9512707884488343,
-   0.3083567528755181,
-   -0.0,
-   -7.101545342683169,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Front": [
-   -0.3083567528755181,
-   -0.9512707884488342,
-   -0.0,
-   -1.667040204276914,
-   0.0,
-   0.0,
-   1.0,
-   -20.934251010964125,
-   -0.9512707884488343,
-   0.3083567528755181,
-   -0.0,
-   -7.101545342683169,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Back": [
-   -0.3083567528755181,
-   -0.9512707884488342,
-   -0.0,
-   -1.667040204276914,
-   0.0,
-   0.0,
-   1.0,
-   -20.934251010964125,
-   -0.9512707884488343,
-   0.3083567528755181,
-   -0.0,
-   -7.101545342683169,
+   4.229989,
    0.0,
    0.0,
    0.0,
    1.0
   ]
  },
- "category": "Accessories",
+ "category": "Plate Accessories",
  "original": {
   "name": "25-Holster",
   "folder": "Accessories",
   "path": "Mar Fil - Tacticus\\ChaplainWithJumpPack\\Accessories\\25-Holster.stl"
- }
+ },
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Hip Plates\\MarFil Assault - Hip Plate L.stl",
+ "notes": {
+  "type": "plate accessory (was Accessories): hangs from the hip plate (Josh, Nov 3: plates only)",
+  "Plate Hang L": "hangs from the hip plate's Plate Hang like Josh's AM-V2 sheath: belt orientation (or from its shape), centred on the hang point, top 2.1 mm above it, deepest point 0.2 mm under the plate's outer face (Nov 3)"
+ },
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "MarFil Jump Chaplain - Holster R",
+   "title": "MarFil Jump Chaplain - Holster R",
+   "folder": "Accessories",
+   "from": "mirror of the left placement (right hip plate)",
+   "sidecar": {
+    "category": "Plate Accessories",
+    "fits": {
+     "Plate Hang R": [
+      1.0,
+      0.0,
+      0.0,
+      -8.258812,
+      0.0,
+      0.0,
+      1.0,
+      -22.870778,
+      0.0,
+      -1.0,
+      0.0,
+      4.229989,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": []
+   }
+  }
+ ]
 }

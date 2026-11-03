@@ -1,15 +1,88 @@
 {
  "schemaVersion": 1,
  "part": "MeltaBomb",
- "category": "Grenades",
+ "category": "Plate Accessories",
  "sockets": [],
- "fits": {},
+ "fits": {
+  "Plate Hang L": [
+   1.0,
+   0.0,
+   0.0,
+   -0.0,
+   0.0,
+   0.0,
+   1.0,
+   -10.307245,
+   -0.0,
+   -1.0,
+   -0.0,
+   3.702883,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
  "notes": {
-  "type": "not placed yet: imports and parks on its socket (or lands at the cursor)"
+  "type": "plate accessory (was Grenades): hangs from the hip plate (Josh, Nov 3: plates only)",
+  "Plate Hang L": "hangs from the hip plate's Plate Hang like Josh's AM-V2 sheath: belt orientation (or from its shape), centred on the hang point, top 2.1 mm above it, deepest point 0.2 mm under the plate's outer face (Nov 3)"
  },
  "original": {
   "name": "MeltaBomb",
   "folder": "Grenades",
   "path": "BBoosty - Heresy\\Medusas Mortals\\Stuff\\Grenades\\MeltaBomb.stl"
- }
+ },
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Hip Plates\\MarFil Assault - Hip Plate L.stl",
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "BBoosty Medusas Mortals - Melta Bomb R",
+   "title": "BBoosty Medusas Mortals - Melta Bomb R",
+   "folder": "Grenades",
+   "from": "mirror of the left placement (right hip plate)",
+   "sidecar": {
+    "category": "Plate Accessories",
+    "fits": {
+     "Plate Hang R": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      -10.307245,
+      0.0,
+      -1.0,
+      0.0,
+      3.702883,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": []
+   }
+  }
+ ]
 }

@@ -72,7 +72,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `559a58b9`, page README `59b23ccc`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `a67cb795` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `a04089e5` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `fc9435f5` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `4167d6cd` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -135,10 +135,9 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 ## Open items (oldest first)
 
-- **Holsters on the hip plate (Nov 3): built and tested, waiting for Josh's OK to install** - 45 holsters, pouches and grenades
-  as Plate Accessories (plates only), fits by `kits/plates/hol_fit.py`; deliver the 45 sidecars (`hol_sidecars.py` -> repo
-  `library/`), `_builder\index.json` and `_sources.csv` (rebuild from the PC's current files if their md5 moved from
-  a67cb795 / a04089e5). Josh reviews them in the demo below.
+- **Holsters on the hip plate (Nov 3): installed** - 45 holsters, pouches and grenades are Plate Accessories (plates only,
+  `kits/plates/hol_*.py`); backups `_backups\holsters-2026-11-03\old\`. They only place on legs with plate spots
+  (Mar Fil Assault so far): plates for other makers' legs are next (Turtle Ninja first).
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).
 

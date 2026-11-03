@@ -3,83 +3,86 @@
  "part": "50-Pouch-3",
  "sockets": [],
  "fits": {
-  "Hip R": [
+  "Plate Hang L": [
    -1.0,
    -0.0,
    -0.0,
-   0.01850830707893619,
+   9e-06,
    0.0,
    0.0,
    1.0,
-   -0.6795849122305105,
+   0.513806,
    0.0,
    1.0,
    0.0,
-   1.2018781401915115,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Hip L": [
-   -1.0,
-   -0.0,
-   -0.0,
-   0.01850830707893619,
-   0.0,
-   0.0,
-   1.0,
-   -0.6795849122305105,
-   0.0,
-   1.0,
-   0.0,
-   1.2018781401915115,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Front": [
-   -1.0,
-   -0.0,
-   -0.0,
-   0.01850830707893619,
-   0.0,
-   0.0,
-   1.0,
-   -0.6795849122305105,
-   0.0,
-   1.0,
-   0.0,
-   1.2018781401915115,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Back": [
-   -1.0,
-   -0.0,
-   -0.0,
-   0.01850830707893619,
-   0.0,
-   0.0,
-   1.0,
-   -0.6795849122305105,
-   0.0,
-   1.0,
-   0.0,
-   1.2018781401915115,
+   2.787753,
    0.0,
    0.0,
    0.0,
    1.0
   ]
  },
- "category": "Accessories",
+ "category": "Plate Accessories",
  "original": {
   "name": "50-Pouch-3",
   "folder": "Accessories",
   "path": "Mar Fil - Tacticus\\Outriders\\Accessories\\50-Pouch-3.stl"
- }
+ },
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Hip Plates\\MarFil Assault - Hip Plate L.stl",
+ "notes": {
+  "type": "plate accessory (was Accessories): hangs from the hip plate (Josh, Nov 3: plates only)",
+  "Plate Hang L": "hangs from the hip plate's Plate Hang like Josh's AM-V2 sheath: belt orientation (or from its shape), centred on the hang point, top 2.1 mm above it, deepest point 0.2 mm under the plate's outer face (Nov 3)"
+ },
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "MarFil Outrider - Pouch 3 R",
+   "title": "MarFil Outrider - Pouch 3 R",
+   "folder": "Accessories",
+   "from": "mirror of the left placement (right hip plate)",
+   "sidecar": {
+    "category": "Plate Accessories",
+    "fits": {
+     "Plate Hang R": [
+      -1.0,
+      0.0,
+      0.0,
+      -9e-06,
+      0.0,
+      0.0,
+      1.0,
+      0.513806,
+      0.0,
+      1.0,
+      0.0,
+      2.787753,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": []
+   }
+  }
+ ]
 }

@@ -3,83 +3,86 @@
  "part": "41-Pouch",
  "sockets": [],
  "fits": {
-  "Hip R": [
-   0.8799616668642131,
-   0.4750446977385977,
-   0.0,
-   3.3273616804907986,
+  "Plate Hang L": [
    0.0,
    0.0,
    1.0,
-   -20.221807930998686,
-   0.4750446977385977,
-   -0.8799616668642131,
+   -20.094339,
+   -1.0,
    -0.0,
-   1.8510437137695008,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Hip L": [
-   0.8799616668642131,
-   0.4750446977385977,
-   0.0,
-   3.3273616804907986,
-   0.0,
-   0.0,
-   1.0,
-   -20.221807930998686,
-   0.4750446977385977,
-   -0.8799616668642131,
    -0.0,
-   1.8510437137695008,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Front": [
-   0.8799616668642131,
-   0.4750446977385977,
-   0.0,
-   3.3273616804907986,
-   0.0,
-   0.0,
-   1.0,
-   -20.221807930998686,
-   0.4750446977385977,
-   -0.8799616668642131,
+   -3.880272,
    -0.0,
-   1.8510437137695008,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Back": [
-   0.8799616668642131,
-   0.4750446977385977,
-   0.0,
-   3.3273616804907986,
-   0.0,
-   0.0,
-   1.0,
-   -20.221807930998686,
-   0.4750446977385977,
-   -0.8799616668642131,
+   -1.0,
    -0.0,
-   1.8510437137695008,
+   3.744317,
    0.0,
    0.0,
    0.0,
    1.0
   ]
  },
- "category": "Accessories",
+ "category": "Plate Accessories",
  "original": {
   "name": "41-Pouch",
   "folder": "Accessories",
   "path": "Mar Fil - Tacticus\\Techmarine\\Accessories\\41-Pouch.stl"
- }
+ },
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Hip Plates\\MarFil Assault - Hip Plate L.stl",
+ "notes": {
+  "type": "plate accessory (was Accessories): hangs from the hip plate (Josh, Nov 3: plates only)",
+  "Plate Hang L": "hangs from the hip plate's Plate Hang like Josh's AM-V2 sheath: belt orientation (or from its shape), centred on the hang point, top 2.1 mm above it, deepest point 0.2 mm under the plate's outer face (Nov 3)"
+ },
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "MarFil Techmarine - Pouch R",
+   "title": "MarFil Techmarine - Pouch R",
+   "folder": "Accessories",
+   "from": "mirror of the left placement (right hip plate)",
+   "sidecar": {
+    "category": "Plate Accessories",
+    "fits": {
+     "Plate Hang R": [
+      0.0,
+      0.0,
+      -1.0,
+      20.094339,
+      1.0,
+      0.0,
+      0.0,
+      -3.880272,
+      0.0,
+      -1.0,
+      0.0,
+      3.744317,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": []
+   }
+  }
+ ]
 }

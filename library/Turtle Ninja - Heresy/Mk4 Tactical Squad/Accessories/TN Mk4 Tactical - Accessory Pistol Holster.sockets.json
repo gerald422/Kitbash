@@ -2,9 +2,9 @@
  "schemaVersion": 1,
  "part": "Mk4_Accessory_Pistol_Holster",
  "sockets": [],
- "category": "Accessories",
+ "category": "Plate Accessories",
  "fits": {
-  "Hip R": [
+  "Plate Hang L": [
    1.0,
    0.0,
    0.0,
@@ -12,65 +12,11 @@
    0.0,
    1.0,
    0.0,
-   1.015188,
+   -1.42842,
    0.0,
    0.0,
    1.0,
-   6.512808,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Hip L": [
-   1.0,
-   0.0,
-   0.0,
-   13.9728,
-   0.0,
-   1.0,
-   0.0,
-   1.015188,
-   0.0,
-   0.0,
-   1.0,
-   6.512808,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Front": [
-   1.0,
-   0.0,
-   0.0,
-   13.9728,
-   0.0,
-   1.0,
-   0.0,
-   1.015188,
-   0.0,
-   0.0,
-   1.0,
-   6.512808,
-   0.0,
-   0.0,
-   0.0,
-   1.0
-  ],
-  "Belt Back": [
-   1.0,
-   0.0,
-   0.0,
-   13.9728,
-   0.0,
-   1.0,
-   0.0,
-   1.015188,
-   0.0,
-   0.0,
-   1.0,
-   6.512808,
+   7.603593,
    0.0,
    0.0,
    0.0,
@@ -78,11 +24,65 @@
   ]
  },
  "notes": {
-  "belt": "lies on its back as exported: back face on the anchor, outer face out (+Z), top up (+Y); rocks and settles onto the belt"
+  "type": "plate accessory (was Accessories): hangs from the hip plate (Josh, Nov 3: plates only)",
+  "Plate Hang L": "hangs from the hip plate's Plate Hang like Josh's AM-V2 sheath: belt orientation (or from its shape), centred on the hang point, top 2.1 mm above it, deepest point 0.2 mm under the plate's outer face (Nov 3)"
  },
  "original": {
   "name": "Mk4_Accessory_Pistol_Holster",
   "folder": "Accessories",
   "path": "Turtle Ninja - Heresy\\Mk4 Tactical Squad\\Accessories\\Mk4_Accessory_Pistol_Holster.stl"
- }
+ },
+ "adaptor": "Mar Fil - Tacticus\\AssaultMarines-V2\\Hip Plates\\MarFil Assault - Hip Plate L.stl",
+ "variants": [
+  {
+   "side": "R",
+   "mirror": true,
+   "align": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "name": "TN Mk4 Tactical - Accessory Pistol Holster R",
+   "title": "TN Mk4 Tactical - Accessory Pistol Holster R",
+   "folder": "Accessories",
+   "from": "mirror of the left placement (right hip plate)",
+   "sidecar": {
+    "category": "Plate Accessories",
+    "fits": {
+     "Plate Hang R": [
+      1.0,
+      0.0,
+      0.0,
+      -13.9728,
+      0.0,
+      1.0,
+      0.0,
+      -1.42842,
+      0.0,
+      0.0,
+      1.0,
+      7.603593,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    "sockets": []
+   }
+  }
+ ]
 }
