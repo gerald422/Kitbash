@@ -46,8 +46,10 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
 ## Starting a fresh session
 
 1. Attach the repo with push access (`add_repo` gerald422/Kitbash, push) and clone to `/home/claude/kitbash`.
-2. Make sure the session is linked to Josh's PC (the remote-devices tools). Stage
-   `C:\Users\jpark\Desktop\part_sockets_6.2.0.zip`.
+2. Make sure the session is linked to Josh's PC (the remote-devices tools). A new session starts with **no folders
+   connected**: request them once with `device_request_folder_access` (`C:\Users\jpark\Desktop`, `D:\`,
+   `C:\Users\jpark\AppData\Roaming\Blender Foundation\Blender\5.1`, `C:\Users\jpark\AppData\Local\TIOW-FTRP`).
+   Then md5-check the "Installed now" list below against the PC. Stage `C:\Users\jpark\Desktop\part_sockets_6.2.0.zip`.
 3. `bash /home/claude/kitbash/tools/setup_container.sh` - venv `/home/claude/bpyenv` with bpy 5.1.2, numpy, scipy,
    pillow; Part Sockets, TIOW Inbox and Finalise in the container Blender's add-ons; the old working paths
    (`/home/claude/kits`, `/real`, `/test` ...) that the scripts import from.
