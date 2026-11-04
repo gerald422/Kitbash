@@ -143,9 +143,9 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   Backups `_backups\tn-plates-2026-11-04\before\` (sidecars + index), page `old-1.17.7-tn-plates\`. Holsters now place on TN
   legs too. **Mar Fil Intercessor (25 + their mirror copies) and Techmarine (4): installed Nov 4** (`kits/plates/legs_frame.py`:
   Waist or Flat Waist legs, mirror variants as `<path>#v<i>`; a mirror copy's plates = the mirror image of its file's, seated
-  separately they came out up to 7 mm apart); backups `_backups\marfil-plates-2026-11-04\before\`. Jump Chaplain (Josh: option b,
-  Mar Fil plates over the sculpted hip armour) seated, sheet sent, waiting for his OK; then deliver the page with the new
-  no-spot text (app.js / README edit to redo: Assault, Intercessor, Jump Chaplain, Techmarine, TN). Marta: the rule's seats
+  separately they came out up to 7 mm apart); backups `_backups\marfil-plates-2026-11-04\before\`. Jump Chaplain: left without plates (Josh,
+  Nov 4: they don't match up because of the sculpted tabard; never installed). Page no-spot text / README still say
+  "Mar Fil Assault and Turtle Ninja": redo the app.js / README edit (Assault, Intercessor, Techmarine, TN) with the next delivery. Marta: the rule's seats
   were off (buckle and plates); Josh places them by eye in `Marta plates - place by eye.blend` (Gurls Legs 2, Space Wolves
   Legs 1; parts keep their own mesh, read their matrices). Not: Mar Fil Assault B legs,
   Veterans, Bladeguard (sculpted tabard Josh doesn't like), Outriders (on the bike); the other makers aren't in the builder.
