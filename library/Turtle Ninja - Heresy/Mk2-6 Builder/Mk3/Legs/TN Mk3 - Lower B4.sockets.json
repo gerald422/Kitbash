@@ -136,6 +136,141 @@
    "props": {
     "tiow_from": "belt rule (flat legs): on the belt 1 mm under the top, Z out, Y up (as a clicked anchor)"
    }
+  },
+  {
+   "type": "Plate R",
+   "name": "Plate R",
+   "matrix": [
+    -0.906588,
+    -0.419309,
+    0.047719,
+    7.026193,
+    -0.341244,
+    0.794897,
+    0.501687,
+    20.85558,
+    -0.248294,
+    0.438541,
+    -0.863732,
+    6.897157,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 2.0,
+   "props": {
+    "tiow_from": "Mar Fil hip plate (mirror variant) seated by rule, as Plate L"
+   }
+  },
+  {
+   "type": "Plate L",
+   "name": "Plate L",
+   "matrix": [
+    0.907936,
+    -0.148176,
+    -0.392039,
+    4.630565,
+    0.357614,
+    0.761686,
+    0.540321,
+    21.430024,
+    0.218548,
+    -0.630776,
+    0.744553,
+    16.399127,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 2.0,
+   "props": {
+    "tiow_from": "Mar Fil hip plate seated by rule (tn_seat.py): contact points on the hip armour, top edge on the belt, 26 deg roll, top edge level"
+   }
+  },
+  {
+   "type": "Buckle",
+   "name": "Buckle",
+   "matrix": [
+    -0.046255,
+    0.005019,
+    -0.998916,
+    0.180475,
+    0.162907,
+    0.986638,
+    -0.002586,
+    20.552057,
+    0.985557,
+    -0.16285,
+    -0.046455,
+    11.67715,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "Mar Fil buckle part seated over the belt front by rule (Josh: Mar Fil buckle part on Turtle Ninja legs)"
+   }
+  },
+  {
+   "type": "Trophy R",
+   "name": "Trophy R",
+   "matrix": [
+    -0.664568,
+    -0.369653,
+    -0.649388,
+    2.697734,
+    -0.161966,
+    0.919663,
+    -0.357751,
+    20.399416,
+    0.729464,
+    -0.132571,
+    -0.67105,
+    8.22008,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule 45 deg right of the way the buckle faces, at these legs' belt height"
+   }
+  },
+  {
+   "type": "Trophy L",
+   "name": "Trophy L",
+   "matrix": [
+    0.649094,
+    -0.369653,
+    -0.664855,
+    2.359253,
+    0.357679,
+    0.919663,
+    -0.162124,
+    21.242752,
+    0.671373,
+    -0.132571,
+    0.729166,
+    15.009821,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.5,
+   "props": {
+    "tiow_from": "belt rule 45 deg left of the way the buckle faces, at these legs' belt height"
+   }
   }
  ],
  "category": "Legs",

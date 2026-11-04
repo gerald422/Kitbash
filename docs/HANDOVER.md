@@ -71,8 +71,8 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 | Mechadendrite assets | `Desktop\tubes, pipes, chains\` |
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
-`5c9c1290`, `_library.json` `a317139a`, page `559a58b9`, page README `59b23ccc`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `fc9435f5` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `4167d6cd` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`5c9c1290`, `_library.json` `a317139a`, page `decedfdd`, page README `c1f84bb7`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
+`_builder\index.json` `c0408a85` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `4167d6cd` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -137,10 +137,11 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 - **Holsters on the hip plate (Nov 3): installed** - 45 holsters, pouches and grenades are Plate Accessories (plates only,
   `kits/plates/hol_*.py`); backups `_backups\holsters-2026-11-03\old\`. They only place on legs with plate spots
-  (Mar Fil Assault so far): plates for other makers' legs are next (Turtle Ninja first).
-- **Turtle Ninja plates / buckle / trophies (Nov 3): rule agreed, rollout to all 465 TN legs OK'd by Josh** - fetch the legs
-  per kit (tar on the PC), `kits/plates/tn_seat.py OUT --jobs 2 --list LEGS --stl ROOT`, `tn_sheet.py` check sheet per kit for
-  Josh, then `tn_sidecars.py`, index part_data update, page `decedfdd` + README (no-spot text), deliver, md5 check.
+  (Mar Fil Assault and Turtle Ninja legs).
+- **Turtle Ninja plates / buckle / trophies: installed Nov 4** - all 465 TN legs have Plate R/L, Buckle, Trophy R/L
+  (`kits/plates/tn_seat.py`, `tn_sidecars.py`, `tn_sheet.py`; seats `tn_seat_all` not kept: re-run from the sidecars' sockets).
+  Backups `_backups\tn-plates-2026-11-04\before\` (sidecars + index), page `old-1.17.7-tn-plates\`. Holsters now place on TN
+  legs too. Next makers' legs for plates: Marta, Springles, CyberBrush, BBoosty, VitalyKhan.
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).
 
