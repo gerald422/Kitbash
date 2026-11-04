@@ -1,4 +1,4 @@
-# Kitbash build: handover (3 Nov 2026)
+# Kitbash build: handover (4 Nov 2026)
 
 Everything needed to pick this work up in a fresh Claude session. The full history, with every measured value and
 decision, is `docs/project-notes.md` (the Project doc `claude/part-sockets-tiow-integration.md` is an older copy: from Nov 3 the repo file is the current one).
@@ -29,7 +29,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
+- Latest commits: `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
 
@@ -129,7 +129,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   got yet keeps its side.
 - 1.17.6 hip plates and the buckle host parts: `Hip Plates` on the legs' `Plate R/L` (right = mirror variant),
   `Plate Accessories` (holsters/sheaths) on the plate's `Plate Hang R/L` (bring the plate), `Buckles` on `Buckle`,
-  `Tabards` on the buckle's `Tabard` (bring the buckle), `Trophies` on `Trophy R/L` first. Mar Fil Assault legs only so far.
+  `Tabards` on the buckle's `Tabard` (bring the buckle), `Trophies` on `Trophy R/L` first. Mar Fil Assault and Turtle Ninja legs so far.
 - 1.17.7 `Chest Equipment` on the torso's `Chest Equip R/L` (right = mirror variant), `Neck Guards` on `Neck Guard`; only
   the Old Style Space Knight MK8 torsos have the spots. Page steps Neck guard (6), Chest equipment (7).
 
@@ -139,7 +139,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   `kits/plates/hol_*.py`); backups `_backups\holsters-2026-11-03\old\`. They only place on legs with plate spots
   (Mar Fil Assault and Turtle Ninja legs).
 - **Turtle Ninja plates / buckle / trophies: installed Nov 4** - all 465 TN legs have Plate R/L, Buckle, Trophy R/L
-  (`kits/plates/tn_seat.py`, `tn_sidecars.py`, `tn_sheet.py`; seats `tn_seat_all` not kept: re-run from the sidecars' sockets).
+  (`kits/plates/tn_seat.py`, `tn_sidecars.py`, `tn_sheet.py`; the seat results live on as the sidecars' sockets).
   Backups `_backups\tn-plates-2026-11-04\before\` (sidecars + index), page `old-1.17.7-tn-plates\`. Holsters now place on TN
   legs too. Next makers' legs for plates: Marta, Springles, CyberBrush, BBoosty, VitalyKhan.
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
@@ -152,7 +152,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 - **Accessory anchors (Nov 3): first base delivered (1.17.6) on the Mar Fil Assault legs** - plates, buckle, sheaths,
   CB tabards and trophies; data and scripts `kits/plates/` (`marfil_assault_plates.json` holds every placement Josh
-  checked). Next (Josh: build in parts): one or two legs per creator (Marta, TN, Springles, CyberBrush, BBoosty,
+  checked). Next (Josh: build in parts): one or two legs per creator (Marta, Springles, CyberBrush, BBoosty,
   VitalyKhan), then roll out; fit the ~25 holsters/pouches already in the library to the plate; then chest, pack and
   pauldron anchors (necklace, book on the torso back, pack ornaments, pad ornaments, topper ribbons, wrist ornaments).
   Marta's loincloths left out for now (stay on Belt Front). Josh's missing-files check: later.
