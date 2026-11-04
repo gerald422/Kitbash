@@ -72,7 +72,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `decedfdd`, page README `c1f84bb7`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `c0408a85` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `4167d6cd` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `1496aed7` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `4167d6cd` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -141,8 +141,13 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - **Turtle Ninja plates / buckle / trophies: installed Nov 4** - all 465 TN legs have Plate R/L, Buckle, Trophy R/L
   (`kits/plates/tn_seat.py`, `tn_sidecars.py`, `tn_sheet.py`; the seat results live on as the sidecars' sockets).
   Backups `_backups\tn-plates-2026-11-04\before\` (sidecars + index), page `old-1.17.7-tn-plates\`. Holsters now place on TN
-  legs too. Next for plates (Josh, Nov 4): Marta's legs and Mar Fil Intercessor / Jump Chaplain / Techmarine legs
-  (`kits/plates/legs_frame.py`: Waist or Flat Waist legs, mirror variants as `<path>#v<i>`). Not: Mar Fil Assault B legs,
+  legs too. **Mar Fil Intercessor (25 + their mirror copies) and Techmarine (4): installed Nov 4** (`kits/plates/legs_frame.py`:
+  Waist or Flat Waist legs, mirror variants as `<path>#v<i>`; a mirror copy's plates = the mirror image of its file's, seated
+  separately they came out up to 7 mm apart); backups `_backups\marfil-plates-2026-11-04\before\`. Jump Chaplain (Josh: option b,
+  Mar Fil plates over the sculpted hip armour) seated, sheet sent, waiting for his OK; then deliver the page with the new
+  no-spot text (app.js / README edit to redo: Assault, Intercessor, Jump Chaplain, Techmarine, TN). Marta: the rule's seats
+  were off (buckle and plates); Josh places them by eye in `Marta plates - place by eye.blend` (Gurls Legs 2, Space Wolves
+  Legs 1; parts keep their own mesh, read their matrices). Not: Mar Fil Assault B legs,
   Veterans, Bladeguard (sculpted tabard Josh doesn't like), Outriders (on the bike); the other makers aren't in the builder.
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).

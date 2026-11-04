@@ -1,5 +1,6 @@
-// Turtle Ninja legs take the Mar Fil hip plates, buckle and trophy spots (TN plates rollout): the steps open on TN legs,
-// the right plate is the mirror variant, every part sits on its host socket by its fit, sent with its socket.
+// Legs given hip plate spots (TN, Mar Fil Intercessor / Techmarine ...) take the Mar Fil hip plates, buckle and trophies:
+// the steps open, the right plate is the mirror variant, every part sits on its host socket by its fit, sent with its socket.
+// node t_tn_step.js [URL] [SHOT] ['["torso", "legs", ...]']  (default: TN Mk8 Torso A1 with two TN legs)
 const { chromium } = require('playwright');
 const URL = process.argv[2] || 'http://localhost:8778/Squad%20Builder.html?lib=/pagelib/&libpath=D%3A%5CKitbash%20Library';
 const SHOT = process.argv[3] || '';
@@ -13,8 +14,9 @@ const SHOT = process.argv[3] || '';
   const ev = (f, a) => page.evaluate(f, a);
   const id = (n) => ev((n) => window.__sb.S.parts.find(p => p.name === n).id, n);
   const pick = async (slot, n) => { await ev((s) => window.__sb.goSlot(s), slot); const i = await id(n); await ev((i) => window.__sb.choose(i), i); await page.waitForTimeout(150); };
-  await pick('torso', 'TN Mk7-8 - Mk8 Torso A1');
-  for (const legs of ['TN Mk10 Assault - Legs A5', 'TN Mk7-8 - Lower A17']) {
+  const SET = process.argv[4] ? JSON.parse(process.argv[4]) : ['TN Mk7-8 - Mk8 Torso A1', 'TN Mk10 Assault - Legs A5', 'TN Mk7-8 - Lower A17'];
+  await pick('torso', SET[0]);
+  for (const legs of SET.slice(1)) {
     await pick('legs', legs);
     ck(legs + ': plates, buckle and trophies open', await ev(() => ['plateR', 'plateL', 'buckle', 'trophyR', 'trophyL'].every(k => !window.__sb.skippable(k))));
     const pR = await ev(() => { const sb = window.__sb; return sb.candidates(sb.SLOT.plateR).map(p => sb.asFor(p, sb.SLOT.plateR).name); });
