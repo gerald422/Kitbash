@@ -10,6 +10,9 @@ Files (keep them together)
   Prepare Squad Builder.bat    gets the library ready (below)
   prepare_builder.py           what the .bat runs, inside Blender
   build_index.py               used by prepare_builder.py
+  share_server.py              shares the page with people you choose (below)
+  Share Squad Builder*.bat     start sharing / add people
+  Build received models.bat    builds what they send
 
 Getting the library ready (once, then after adding parts)
   1. Blender 5.1 with Part Sockets and TIOW Inbox 1.17.5 enabled.
@@ -95,8 +98,8 @@ Notes
     connector, as in base_jumpack.blend; the page shows both, and
     Blender adds the connector itself. Backs without wing mounts skip the
     step. The six Malal3D Bladecrow wings come at x1.3, lefts mirrored.
-  - Hip plates (step 13) and Holsters (step 14): legs with plate spots (the
-    Mar Fil Assault and Turtle Ninja legs so far) take a hip plate on each side, the right one
+  - Hip plates (step 13) and Holsters (step 14): legs with plate spots (so far
+    Mar Fil Assault, Intercessor and Techmarine, and Turtle Ninja) take a hip plate on each side, the right one
     mirrored. Holsters and sheaths hang from the plate on their side (the
     right ones mirrored). Other legs skip both steps.
   - Buckle (step 15) and Tabard (step 16): the buckle sits on the sculpted
@@ -119,3 +122,28 @@ Notes
     Picking one replaces the arms, and picking an arm replaces it. A model
     with one skips the hands (its weapon is built in) and the pads (TIOW
     Inbox finds pad spots on single arms only); those picks aren't sent.
+
+Sharing (a username and password per person)
+  Lets a few people build models on this page from their own browser, so you
+  can print them. They see the page and the light preview copies only, never
+  an STL, and what they send is saved on this PC for you to build.
+  1. Once: install cloudflared (in a Command Prompt:
+       winget install --id Cloudflare.cloudflared).
+  2. Once per person: double-click "Share Squad Builder - people.bat", type
+     their name and a password (at least 10 characters). Add yourself too.
+     The same file changes a password, and takes someone off if you type
+     -NAME. Restart sharing after a change.
+  3. Double-click "Share Squad Builder.bat". Two windows open; the second
+     prints an address like https://some-words.trycloudflare.com. Send that
+     to them with their name and password. The address is new each time.
+  4. They build, then press "Send for printing". Each send lands in
+     D:\Kitbash Library\_builder\received\<name>\<date-time>\.
+  5. To build one: open Blender (TIOW Inbox on), then double-click
+     "Build received models.bat". It moves the newest set into the inbox
+     and Blender builds it as if you'd pressed Send to Blender. Run it again
+     for the next set.
+  6. Close both windows to stop sharing. Nothing is reachable then.
+  Light on the PC: the server and cloudflared use a few tens of MB and
+  next to no CPU while idle. It only answers people who sign in; eight wrong
+  passwords lock that address out for 15 minutes. Your hidden parts stay
+  hidden for them, and they can't change the hidden list.

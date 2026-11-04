@@ -71,7 +71,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 | Mechadendrite assets | `Desktop\tubes, pipes, chains\` |
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
-`5c9c1290`, `_library.json` `a317139a`, page `decedfdd`, page README `c1f84bb7`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
+`5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
 `_builder\index.json` `1496aed7` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `4167d6cd` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
@@ -144,10 +144,22 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   legs too. **Mar Fil Intercessor (25 + their mirror copies) and Techmarine (4): installed Nov 4** (`kits/plates/legs_frame.py`:
   Waist or Flat Waist legs, mirror variants as `<path>#v<i>`; a mirror copy's plates = the mirror image of its file's, seated
   separately they came out up to 7 mm apart); backups `_backups\marfil-plates-2026-11-04\before\`. Jump Chaplain: left without plates (Josh,
-  Nov 4: they don't match up because of the sculpted tabard; never installed). Page no-spot text / README still say
-  "Mar Fil Assault and Turtle Ninja": redo the app.js / README edit (Assault, Intercessor, Techmarine, TN) with the next delivery. Marta: the rule's seats
+  Nov 4: they don't match up because of the sculpted tabard; never installed). The page's no-spot text now lists Assault, Intercessor,
+  Techmarine and TN (delivered with the sharing page). Marta: the rule's seats
   were off (buckle and plates); Josh places them by eye in `Marta plates - place by eye.blend` (Gurls Legs 2, Space Wolves
-  Legs 1; parts keep their own mesh, read their matrices). Not: Mar Fil Assault B legs,
+  Legs 1; parts keep their own mesh, read their matrices).
+- **Sharing the page (Nov 4, Josh: own username and password for him + 2 people, builds land on his PC for printing):**
+  `squad-builder/share_server.py` (stdlib; Blender's bundled Python or miniconda), listens on 127.0.0.1:8765 only, PBKDF2
+  passwords in `share_users.json` beside it (never in the repo), Basic auth over a cloudflared quick tunnel (https, new
+  trycloudflare address each start), serves only the page, index, previews and `_hidden.txt`; `?share=1` page mode hides
+  the folder setup and Hide parts and POSTs `/send`; sends checked against the index and saved to
+  `_builder\received\<name>\<time>\` (model ids prefixed with the name); `Build received models.bat` moves the newest set
+  into the inbox. Tests `squad-builder/test/t_share.js` + curl probes (401/429/404/413/400). Josh still has to install
+  cloudflared (winget) and add the people himself (passwords never pass through Claude). Old page in `old-1.17.7-share\`.
+- **Bionic plug example:** `Desktop\Bionic plug - place by eye.blend` (Assault Legs 2 and 3A under Torso 1, his plates
+  locked, one LINK_LEG each to move); Josh does it with the Marta blend. The SM Mechanical Legs kit is at
+  `D:\new cults\legs-mechanicals-hand-sm-iron20240827-1-jr2qoj\WargamesPrint\legs-mechanicals-hand-sm-iron\` (three more
+  identical copies in `... (1)`, `(2)`, `(3)`). Not: Mar Fil Assault B legs,
   Veterans, Bladeguard (sculpted tabard Josh doesn't like), Outriders (on the bike); the other makers aren't in the builder.
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).

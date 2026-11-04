@@ -112,6 +112,7 @@
     var an = +localStorage.getItem("sb.adaptor"); if (an) S.adaptor = an;
   } catch (e) { /* storage blocked: keep the defaults */ }
   if (params.get("libpath")) S.libPath = params.get("libpath");
+  var SHARE = params.get("share") === "1";   // served by share_server.py to the people Josh shares it with: Send goes to his PC
 
   // ------------------------------------------------------------------ matrices (sidecars hold 4x4 row by row)
   function M4(a) { var m = new THREE.Matrix4(); m.set.apply(m, a); return m; }
@@ -693,7 +694,7 @@
   function updateSend() {
     var n = S.models.filter(function (m) { return m.torso; }).length;
     $("sendbtn").disabled = !n;
-    $("sendbtn").textContent = n > 1 ? "Send " + n + " models to Blender" : "Send to Blender";
+    $("sendbtn").textContent = SHARE ? (n > 1 ? "Send " + n + " models for printing" : "Send for printing") : n > 1 ? "Send " + n + " models to Blender" : "Send to Blender";
   }
 
   // ------------------------------------------------------------------ choosing
@@ -723,7 +724,7 @@
     if (!need || (sl.host !== "legs" && sl.host !== "torso")) return "";
     var h = layout(S.cur).filter(function (x) { return x.slot === sl.host; })[0];
     if (!h || !h.W || socketsOf(h)[sl.sock]) return "";
-    return sl.host === "legs" ? "These legs have no " + need + " yet (the Mar Fil Assault and Turtle Ninja legs so far)."
+    return sl.host === "legs" ? "These legs have no " + need + " yet (so far: Mar Fil Assault, Intercessor and Techmarine legs, and Turtle Ninja legs)."
                               : "This torso has no " + need + " (only the Old Style Space Knight MK8 torsos have them).";
   }
   function nextSlot() {
@@ -779,6 +780,14 @@
   function send() {
     var reqs = requestsFor();
     if (!reqs.length) return;
+    var nm = S.models.filter(function (m) { return m.torso; }).length, ms = nm + " model" + (nm > 1 ? "s" : "");
+    if (SHARE) {                  // the server checks every part against the index and saves them for Blender on the owner's PC
+      status("Sending…");
+      return fetch("send", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({requests: reqs})})
+        .then(function (r) { return r.ok ? r.json() : r.text().then(function (t) { throw new Error(t || ("error " + r.status)); }); })
+        .then(function (j) { status("Sent " + j.parts + " parts for " + ms + ". They're saved for printing: you can close the page."); })
+        .catch(function (e) { status("Couldn't send: " + e.message); });
+    }
     var n = 0, stamp = Date.now();
     function write(req, i) {
       var name = "sb-" + stamp + "-" + String(i).padStart(3, "0") + ".json", body = JSON.stringify(req);
@@ -894,8 +903,13 @@
     $("setupbtn").hidden = true;
     $("inbtxt").textContent = "Demo: Send shows what would go to Blender";
     loadIndex().catch(function (e) { status("Could not read the demo index: " + e.message); });
-  } else if (params.get("lib")) {                              // served for a test: read over HTTP, nothing written
+  } else if (params.get("lib")) {                              // served for a test or shared (share_server.py): read over HTTP
     S.source = params.get("lib").replace(/\/?$/, "/");
+    if (SHARE) {
+      $("setupbtn").hidden = true;
+      $("showhid").closest("label").hidden = true;            // they can't change the owner's hidden parts
+      $("inbtxt").textContent = "Shared: Send saves your models for printing";
+    }
     loadIndex().catch(function (e) { status("Could not read the index: " + e.message); });
   } else if (!window.showDirectoryPicker) {
     setupUI(true);
