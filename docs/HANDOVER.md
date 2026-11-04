@@ -130,7 +130,8 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   got yet keeps its side.
 - 1.17.6 hip plates and the buckle host parts: `Hip Plates` on the legs' `Plate R/L` (right = mirror variant),
   `Plate Accessories` (holsters/sheaths) on the plate's `Plate Hang R/L` (bring the plate), `Buckles` on `Buckle`,
-  `Tabards` on the buckle's `Tabard` (bring the buckle), `Trophies` on `Trophy R/L` first. Mar Fil Assault and Turtle Ninja legs so far.
+  `Tabards` on the buckle's `Tabard` (bring the buckle), `Trophies` on `Trophy R/L` first. Legs with the spots: Mar Fil Assault (16), Intercessor (25 + mirrors),
+  Techmarine (4), all Turtle Ninja (465).
 - 1.17.7 `Chest Equipment` on the torso's `Chest Equip R/L` (right = mirror variant), `Neck Guards` on `Neck Guard`; only
   the Old Style Space Knight MK8 torsos have the spots. Page steps Neck guard (6), Chest equipment (7).
 
@@ -138,17 +139,22 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 - **Holsters on the hip plate (Nov 3): installed** - 45 holsters, pouches and grenades are Plate Accessories (plates only,
   `kits/plates/hol_*.py`); backups `_backups\holsters-2026-11-03\old\`. They only place on legs with plate spots
-  (Mar Fil Assault and Turtle Ninja legs).
-- **Turtle Ninja plates / buckle / trophies: installed Nov 4** - all 465 TN legs have Plate R/L, Buckle, Trophy R/L
-  (`kits/plates/tn_seat.py`, `tn_sidecars.py`, `tn_sheet.py`; the seat results live on as the sidecars' sockets).
-  Backups `_backups\tn-plates-2026-11-04\before\` (sidecars + index), page `old-1.17.7-tn-plates\`. Holsters now place on TN
-  legs too. **Mar Fil Intercessor (25 + their mirror copies) and Techmarine (4): installed Nov 4** (`kits/plates/legs_frame.py`:
-  Waist or Flat Waist legs, mirror variants as `<path>#v<i>`; a mirror copy's plates = the mirror image of its file's, seated
-  separately they came out up to 7 mm apart); backups `_backups\marfil-plates-2026-11-04\before\`. Jump Chaplain: left without plates (Josh,
-  Nov 4: they don't match up because of the sculpted tabard; never installed). The page's no-spot text now lists Assault, Intercessor,
-  Techmarine and TN (delivered with the sharing page). Marta: the rule's seats
-  were off (buckle and plates); Josh places them by eye in `Marta plates - place by eye.blend` (Gurls Legs 2, Space Wolves
-  Legs 1; parts keep their own mesh, read their matrices).
+  (Mar Fil Assault, Intercessor, Techmarine and Turtle Ninja legs).
+- **Hip plates on more legs (Nov 4).** Rule: `kits/plates/tn_seat.py` (contact seat, top edge on the belt, 26 deg roll, level
+  top edge; buckle by contact; trophies by the belt rule) through `kits/plates/legs_frame.py` (Waist or Flat Waist legs, mirror
+  variants as `<path>#v<i>`), then `tn_sidecars.py` (adds Plate R/L, Buckle, Trophy R/L, keeps the rest), `tn_sheet.py` /
+  `tn_render.py` check sheets for Josh, index sockets updated in place. Tests `tests/plates/t_tn_plates.py` (TIOW) and
+  `squad-builder/test/t_tn_step.js` (page, takes a torso + legs list).
+  - **Installed:** all 465 Turtle Ninja legs (backups `_backups\tn-plates-2026-11-04\before\`); Mar Fil Intercessor (25 + their
+    mirror copies; a copy's plates are the mirror image of its file's) and Techmarine (4) (backups
+    `_backups\marfil-plates-2026-11-04\before\`).
+  - **Left out (Josh):** Jump Chaplain (doesn't match up because of its sculpted tabard; never installed), Mar Fil Assault B
+    legs, Veterans and Bladeguard (sculpted tabard he doesn't like), Outriders (on the bike); the other makers' legs aren't
+    in the builder.
+  - **Marta: next, from Josh's placement.** The rule's seats were off ("the buckle is off as is the hip plate placement";
+    Marta's belt is a thin band at the very top). Josh places the plates and buckle by eye in `Marta plates - place by
+    eye.blend` (sent in the chat: Gurls Legs 2, Space Wolves Legs 1, his Mar Fil 4A for reference; the parts keep their own
+    mesh, so read their matrices). Then start every Marta legs (about 215, 36 kits) from his placement, check sheet per kit.
 - **Sharing the page (Nov 4, Josh: own username and password for him + 2 people, builds land on his PC for printing):**
   `squad-builder/share_server.py` (stdlib; Blender's bundled Python or miniconda), listens on 127.0.0.1:8765 only, PBKDF2
   passwords in `share_users.json` beside it (never in the repo), Basic auth over a cloudflared quick tunnel (https, new
@@ -156,12 +162,18 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   the folder setup and Hide parts and POSTs `/send`; sends checked against the index and saved to
   `_builder\received\<name>\<time>\` (model ids prefixed with the name); `Build received models.bat` moves the newest set
   into the inbox. Tests `squad-builder/test/t_share.js` + curl probes (401/429/404/413/400). Josh still has to install
-  cloudflared (winget) and add the people himself (passwords never pass through Claude). Old page in `old-1.17.7-share\`.
-- **Bionic plug example:** `Desktop\Bionic plug - place by eye.blend` (Assault Legs 2 and 3A under Torso 1, his plates
-  locked, one LINK_LEG each to move); Josh does it with the Marta blend. The SM Mechanical Legs kit is at
-  `D:\new cults\legs-mechanicals-hand-sm-iron20240827-1-jr2qoj\WargamesPrint\legs-mechanicals-hand-sm-iron\` (three more
-  identical copies in `... (1)`, `(2)`, `(3)`). Not: Mar Fil Assault B legs,
-  Veterans, Bladeguard (sculpted tabard Josh doesn't like), Outriders (on the bike); the other makers aren't in the builder.
+  cloudflared (winget) and add the people himself (passwords never pass through Claude). The .bat files weren't run on
+  Windows itself: if one can't find Python, point FIND at his Blender install. Old page in `old-1.17.7-share\`.
+- **Bionic legs: resuming soon (Nov 4).** Plug example blend `Desktop\Bionic plug - place by eye.blend` (Assault Legs 2 =
+  old 29-Legs-2, the 1.18 tests' main marine, and 3A = old 37-Legs-3-A, under Torso 1, his plates locked, one LINK_LEG
+  each to move; read the plug's matrix, a scale on it is the kit size). Josh places it with the Marta blend. The SM
+  Mechanical Legs kit is at `D:\new cults\legs-mechanicals-hand-sm-iron20240827-1-jr2qoj\WargamesPrint\legs-mechanicals-hand-sm-iron\`
+  (identical copies in `... (1)`, `(2)`, `(3)`). Then merge `main` into `bionic-1.18` and carry on from the notes.
+- **New bits next month (Josh's preview sheets, Nov 4):** bionic legs, five capes (2-5 share a notched top that goes under
+  the power pack; 1 has straps), ten tabards (their own top plate, so they sit over the buckle), arms, a shield with a
+  knife. Suggested reference placements: cape 4 (cloth with two mechadendrites) under the pack on Torso 1 with his usual
+  jump pack; tabard top row 5th (gear plate, skull, tubes) on Mar Fil Assault 4A; then carry across each set. No aquilas,
+  seals or scrolls seen.
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).
 
@@ -172,7 +184,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 - **Accessory anchors (Nov 3): first base delivered (1.17.6) on the Mar Fil Assault legs** - plates, buckle, sheaths,
   CB tabards and trophies; data and scripts `kits/plates/` (`marfil_assault_plates.json` holds every placement Josh
-  checked). Next (Josh: build in parts): Marta's legs only (Nov 4), one or two first, then roll out; fit the ~25 holsters/pouches already in the library to the plate; then chest, pack and
+  checked). Next (Josh: build in parts): Marta's legs (above); then chest, pack and
   pauldron anchors (necklace, book on the torso back, pack ornaments, pad ornaments, topper ribbons, wrist ornaments).
   Marta's loincloths left out for now (stay on Belt Front). Josh's missing-files check: later.
 
@@ -186,7 +198,6 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - Mechadendrite tails and mechadendrites (spec in the notes; assets in `Desktop\tubes, pipes, chains\`); the TN Mk6
   Universal pack now has `Mechadendrite L/R` sockets from Josh.
 - BBoosty and CyberBrush accessories without fits; Plasma Incinerator 3A/3B by eye.
-- Bionic legs: waiting for Josh's plug example; `bionic-1.18` needs `main` merged in.
 - Which Chaplain / Techmarine "hip armour" files Josh meant.
 - Loincloths: offered to give the other banded loincloths (Marta May 1-8, Jul 1-6, Ghostrider 1-2, Thicc 1) the
   same tuck as May 3 (Fix the Part, Whole Folder per set) - waiting for Josh. TN Librarian Buckle and Bottle had
