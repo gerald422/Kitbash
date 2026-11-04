@@ -163,7 +163,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   `_builder\received\<name>\<time>\` (model ids prefixed with the name); `Build received models.bat` moves the newest set
   into the inbox. Tests `squad-builder/test/t_share.js` + curl probes (401/429/404/413/400). Josh still has to install
   cloudflared (winget) and add the people himself (passwords never pass through Claude). The .bat files weren't run on
-  Windows itself: if one can't find Python, point FIND at his Blender install. Old page in `old-1.17.7-share\`.
+  Windows itself: if one can't find Python, fix the python.exe paths at the top of the three .bat files. Old page in `old-1.17.7-share\`.
 - **Bionic legs: resuming soon (Nov 4).** Plug example blend `Desktop\Bionic plug - place by eye.blend` (Assault Legs 2 =
   old 29-Legs-2, the 1.18 tests' main marine, and 3A = old 37-Legs-3-A, under Torso 1, his plates locked, one LINK_LEG
   each to move; read the plug's matrix, a scale on it is the kit size). Josh places it with the Marta blend. The SM
