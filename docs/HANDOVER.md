@@ -141,7 +141,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - **Turtle Ninja plates / buckle / trophies: installed Nov 4** - all 465 TN legs have Plate R/L, Buckle, Trophy R/L
   (`kits/plates/tn_seat.py`, `tn_sidecars.py`, `tn_sheet.py`; the seat results live on as the sidecars' sockets).
   Backups `_backups\tn-plates-2026-11-04\before\` (sidecars + index), page `old-1.17.7-tn-plates\`. Holsters now place on TN
-  legs too. Next makers' legs for plates: Marta, Springles, CyberBrush, BBoosty, VitalyKhan.
+  legs too. Next and last for plates: Marta's legs (Josh, Nov 4: only Marta; the other makers don't need to be in the builder).
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).
 
@@ -152,8 +152,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 - **Accessory anchors (Nov 3): first base delivered (1.17.6) on the Mar Fil Assault legs** - plates, buckle, sheaths,
   CB tabards and trophies; data and scripts `kits/plates/` (`marfil_assault_plates.json` holds every placement Josh
-  checked). Next (Josh: build in parts): one or two legs per creator (Marta, Springles, CyberBrush, BBoosty,
-  VitalyKhan), then roll out; fit the ~25 holsters/pouches already in the library to the plate; then chest, pack and
+  checked). Next (Josh: build in parts): Marta's legs only (Nov 4), one or two first, then roll out; fit the ~25 holsters/pouches already in the library to the plate; then chest, pack and
   pauldron anchors (necklace, book on the torso back, pack ornaments, pad ornaments, topper ribbons, wrist ornaments).
   Marta's loincloths left out for now (stay on Belt Front). Josh's missing-files check: later.
 
