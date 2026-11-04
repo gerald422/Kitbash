@@ -29,7 +29,8 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
+- Latest commits: `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
+  `74573a8` plates seat for any legs (`legs_frame.py`), `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
 
