@@ -1,4 +1,5 @@
-"""Hip plates, buckle and trophy spots on other makers' legs (Turtle Ninja first, Nov 3; Josh: "seat by rule, I
+"""Hip plates, buckle and trophy spots on other legs (Turtle Ninja Nov 3; Mar Fil Intercessor / Jump Chaplain / Techmarine
+and Marta Nov 4, any legs and mirror variants through legs_frame.py; Josh: "seat by rule, I
 review"; the Mar Fil buckle part over their belt front). Rule, the Assault standing-legs method moved to torso
 coordinates (every maker's legs seated under a torso share them): each of the 16 Assault legs gives a starting
 pose for the part (plate L, plate R = mirror image, buckle) in torso coordinates; the part's contact points (where
@@ -24,10 +25,7 @@ inv = np.linalg.inv; A = np.diag([-1.0, 1, 1, 1])
 doc = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "marfil_assault_plates.json")))
 Pc, Sm = M16(doc["plate_frame"]["matrix"]), M16(doc["plate_self_mirror"]["matrix"])
 ORN = M16(doc["buckle_part"]["sockets"]["Buckle Ornament"]["matrix"])
-T1 = json.load(open(LIB + AM + "Chests/MarFil Assault - Torso 1.sockets.json"))
-S_WAIST = M16([s for s in T1["sockets"] if s["type"] == "Waist"][0]["matrix"])
-TT = json.load(open(LIB + "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso A1.sockets.json"))
-UP, FW = M16(TT["upright"]), M16([s for s in TT["sockets"] if s["type"] == "Flat Waist"][0]["matrix"])
+from legs_frame import S_WAIST, legs as legs_geo
 PV, PT = stl(U + AM + "Hip Plates/MarFil Assault - Hip Plate L.stl"); BV, BT = stl(U + AM + "Buckles/MarFil Assault - Buckle.stl")
 # starting poses (part file -> torso coordinates) from the 16 Assault legs
 starts = {"L": [], "R": [], "B": []}
@@ -99,8 +97,8 @@ def score(W, S, N, tree, Cp, Pall):
     Xa = tf(W, Pall); da, ja = tree.query(Xa); pen = (((Xa - S[ja]) * N[ja]).sum(1) < -0.3) & (da < 2)
     return np.median(np.abs(sd)) + 5 * pen.mean(), np.median(np.abs(sd)), pen.mean()
 def seat_one(rel):
-    sc = json.load(open(LIB + rel + ".sockets.json")); M = UP @ FW @ M16(sc["fits"]["Flat Waist"])         # legs file -> torso
-    V, T = stl(STL + rel + ".stl"); S, N = surf(V, T, 150000); S, N = tf(M, S), N @ M[:3, :3].T; tree = cKDTree(S)
+    sc, V, T, M = legs_geo(rel, STL)              # legs file (or its variant's) -> torso; rel may be "<path>#v<i>"
+    S, N = surf(V, T, 150000); S, N = tf(M, S), N @ M[:3, :3].T; tree = cKDTree(S)
     r = {"why": {}}
     for k in ("L", "R"):                       # every start through the whole rule; the best finished seat wins
         cands = []
@@ -124,7 +122,7 @@ def seat_one(rel):
     bf = M @ M16([s for s in sc["sockets"] if s["type"] == "Belt Front"][0]["matrix"])
     belt.BELT_Z = bf[2, 3]; belt.AXIS = np.array([0.0, 0.57, belt.BELT_Z])
     belt.DIRS = {"Trophy R": (np.sin(az + np.pi / 4), np.cos(az + np.pi / 4), 0), "Trophy L": (np.sin(az - np.pi / 4), np.cos(az - np.pi / 4), 0)}
-    belt.geo.load = lambda p: stl(STL + rel + ".stl")
+    belt.geo.load = lambda p: (V, T)
     tr = belt.belt_anchors(rel, M)
     r["sockets"] = {"Plate L": r["L"] @ Pc, "Plate R": r["R"] @ Pc @ A, "Buckle": r["B"] @ ORN, **{k: v for k, v in tr.items()}}
     return rel, {"parts": {k: r[k].tolist() for k in "LRB"}, "sockets": {k: v.tolist() for k, v in r["sockets"].items()}, "why": r["why"],

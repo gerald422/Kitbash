@@ -141,7 +141,9 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - **Turtle Ninja plates / buckle / trophies: installed Nov 4** - all 465 TN legs have Plate R/L, Buckle, Trophy R/L
   (`kits/plates/tn_seat.py`, `tn_sidecars.py`, `tn_sheet.py`; the seat results live on as the sidecars' sockets).
   Backups `_backups\tn-plates-2026-11-04\before\` (sidecars + index), page `old-1.17.7-tn-plates\`. Holsters now place on TN
-  legs too. Next and last for plates: Marta's legs (Josh, Nov 4: only Marta; the other makers don't need to be in the builder).
+  legs too. Next for plates (Josh, Nov 4): Marta's legs and Mar Fil Intercessor / Jump Chaplain / Techmarine legs
+  (`kits/plates/legs_frame.py`: Waist or Flat Waist legs, mirror variants as `<path>#v<i>`). Not: Mar Fil Assault B legs,
+  Veterans, Bladeguard (sculpted tabard Josh doesn't like), Outriders (on the bike); the other makers aren't in the builder.
 - **Hosted demo:** private artifact "Squad Builder demo (Nov 3)" (`squad-builder/make_demo.py`, previews fetched as one tar).
   The older "Squad Builder" artifact is public; ask Josh before republishing to it (low-poly copies of paid parts).
 
