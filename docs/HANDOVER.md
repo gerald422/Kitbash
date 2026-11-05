@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `1496aed7` (3,548 parts; the 613 + 33 new Marta parts need Prepare: Josh runs it), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `16210b4b` (4,194 parts, all with previews; Prepare run by Josh Nov 5), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -194,8 +194,9 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
     Arm 1A R, Pad 1; origins at the shield's back centre; a scale on them = the set's size); then Upper Chest R/L on the
     torsos, the pad spot on the pauldrons, sidecars for the 24, TIOW + page, Mar Fil Assault first. Notes: Nov 4-5 entry.
 
-- **Marta weapons: Josh runs Prepare once** (Nov 2: 613 one-handed parts; Nov 5: 33 the Nov 1 scan missed, `kits/marta/missed/`)
-  - previews, Pad anchors and index for all 646 - then spot-check on the page. Still not in: about 40 two-armed sets (next
+- **Marta weapons on the page (Prepare, Nov 5)** (Nov 2: 613 one-handed parts; Nov 5: 33 the Nov 1 scan missed, `kits/marta/missed/`):
+  all 646 indexed, previewed and anchored; Pad anchors on 236 of the 269 new arms (33 without - by eye if needed). Josh
+  saw a few misidentifications: he fixes them in the final build. `_builder\no_fit.txt`: 49, none of them Marta. Still not in: about 40 two-armed sets (next
   Marta weapons task: both shoulders at once), 15 strapped shields whose handle didn't match, hand-less blades and other
   unrecognised bits, Lion Knights shoulder shields, Oct 2025 heavy forearm pieces. New parts not checked for aquilas/seals.
   Marks (Josh): heavy = Gravis, thicc = Terminator, phobois/phobia = Phobos; `plan_library` files Oct 2025 heavy under

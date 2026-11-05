@@ -1,0 +1,107 @@
+{
+ "schemaVersion": 1,
+ "part": "DA_arm_1",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999171,
+   -0.040621,
+   0.002521,
+   8.344577,
+   0.002523,
+   3e-06,
+   0.999997,
+   -2.843278,
+   -0.040621,
+   0.999175,
+   0.0001,
+   -3.695652,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (25.9 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "DA_arm_1_socket_Hand R",
+   "matrix": [
+    0.828656,
+    0.379222,
+    0.411728,
+    1.894789,
+    -0.379892,
+    -0.159214,
+    0.911226,
+    3.148744,
+    0.41111,
+    -0.911505,
+    0.01213,
+    12.220997,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.2), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "Marta Gurls - DA Arm 1_socket_Pad R",
+   "matrix": [
+    -0.9749250411987305,
+    0.10974375903606415,
+    0.19359111785888672,
+    7.836048126220703,
+    0.17610767483711243,
+    0.9123067259788513,
+    0.36970606446266174,
+    5.1573591232299805,
+    -0.1360415518283844,
+    0.3945285677909851,
+    -0.9087573289871216,
+    0.10977411270141602,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 1.960106611251831,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     7.082892417907715,
+     5.242478370666504,
+     5.6173601150512695
+    ],
+    [
+     6.582592010498047,
+     1.0834498405456543,
+     3.8187813758850098
+    ],
+    [
+     7.836048126220703,
+     5.1573591232299805,
+     0.10977411270141602
+    ]
+   ]
+  }
+ ],
+ "original": {
+  "name": "DA_arm_1",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\GURLS\\Hooded models\\Arms\\DA_arm_1.stl"
+ }
+}
