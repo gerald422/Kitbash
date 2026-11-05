@@ -26,7 +26,7 @@ for i, rel in enumerate(legs):
     for side, dv in (("l", Vector((-0.75, 1, 0.3))), ("r", Vector((0.75, 1, 0.3)))):
         dv = dv.normalized(); u = Vector((0, 0, 1)); yv = (u - dv * u.dot(dv)).normalized(); xv = yv.cross(dv)
         cam.matrix_world = Matrix.LocRotScale(Vector(c) + dv * 300, Matrix((xv, yv, dv)).transposed().to_quaternion(), None); cam.data.ortho_scale = size * 1.6
-        f.append("/home/claude/work/tn/sheet/t%03d%s.png" % (i, side)); sc.render.filepath = f[-1]; bpy.ops.render.render(write_still=True)
+        f.append("/home/claude/work/tn/sheet/" + __import__("os").environ.get("SH", "x") + "_t%03d%s.png" % (i, side)); sc.render.filepath = f[-1]; bpy.ops.render.render(write_still=True)
     tiles.append((rel.split("/")[-1].split("#")[0] + (" (mirror)" if "#v" in rel else ""), f))
     for o in obs: bpy.data.objects.remove(o)
 W = 260; cols = 6; rows = (len(tiles) + cols - 1) // cols

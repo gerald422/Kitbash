@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `16210b4b` (4,194 parts, all with previews; Prepare run by Josh Nov 5), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `951cb3be` (4,194 parts; Prepare run by Josh Nov 5, Marta plates added in place), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -151,10 +151,11 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   - **Left out (Josh):** Jump Chaplain (doesn't match up because of its sculpted tabard; never installed), Mar Fil Assault B
     legs, Veterans and Bladeguard (sculpted tabard he doesn't like), Outriders (on the bike); the other makers' legs aren't
     in the builder.
-  - **Marta: next - roll out as the rule seats them.** Josh first said the rule's seats were off, then (Nov 5) that he's
-    OK with them after all: put Plate R/L, Buckle, Trophy R/L on every Marta legs (about 215, 36 kits) with `tn_seat.py`
-    through `legs_frame.py` as for TN, check sheet per kit, after the Marta weapons. (The by-eye blend
-    `Marta plates - place by eye.blend` was only a chat attachment, never on the PC; not needed now.)
+  - **Marta: installed Nov 5** on 178 legs (rule seats; backups `_backups\marta-plates-2026-11-05\before\`). Left out (Josh):
+    Terminator armour - the 9 legs in the Terminator folders and the 30 Thicc/Termi legs filed under Tacticus.
+- **Shin pads on Marta legs (asked Nov 5):** no Marta legs have Shin R/L spots (the shin rule only finds Mar Fil ankle balls),
+  so the 44 Marta shin pads only go on Mar Fil legs. Waiting on Josh: all Marta legs or only those without sculpted shin
+  armour; then he places a pad by eye on two or three and the rule carries it across, as for the plates.
 - **Sharing the page (Nov 4, Josh: own username and password for him + 2 people, builds land on his PC for printing):**
   `squad-builder/share_server.py` (stdlib; Blender's bundled Python or miniconda), listens on 127.0.0.1:8765 only, PBKDF2
   passwords in `share_users.json` beside it (never in the repo), Basic auth over a cloudflared quick tunnel (https, new
