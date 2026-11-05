@@ -153,9 +153,14 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
     in the builder.
   - **Marta: installed Nov 5** on 178 legs (rule seats; backups `_backups\marta-plates-2026-11-05\before\`). Left out (Josh):
     Terminator armour - the 9 legs in the Terminator folders and the 30 Thicc/Termi legs filed under Tacticus.
-- **Shin pads on Marta legs (asked Nov 5):** no Marta legs have Shin R/L spots (the shin rule only finds Mar Fil ankle balls),
-  so the 44 Marta shin pads only go on Mar Fil legs. Waiting on Josh: all Marta legs or only those without sculpted shin
-  armour; then he places a pad by eye on two or three and the rule carries it across, as for the plates.
+- **Shin pads on Marta legs (Nov 5; Josh: only legs without sculpted shin armour):** no Marta legs have Shin R/L spots yet (the
+  shin rule only finds Mar Fil ankle balls), so the 44 Marta shin pads only go on Mar Fil legs. Proposed list
+  `kits/shin/proposed.json` (40 legs: the sets Marta released with shin pads - Jan, Feb Thicc, May, Jun, Jul, Oct Heavy 2026,
+  Ghostrider bike, Techmarine V2 Mar 2026 and Thicc); lower-leg sheets sent for Josh to add/remove (`kits/shin/shins.py`).
+  Josh places pads by eye in `Desktop\Marta shin pads - place by eye.blend` (978b72cc, `kits/shin/mkblend.py`: May 2026 Legs 1 +
+  May pad 1 R/L, Jul 2026 Legs 1 + Jul pad 1 L, Jan 2026 Legs 1 + Jan pad 1 R; legs locked in torso coordinates 45 mm apart,
+  pad origins at their centre in the pad frame). Then: Shin R/L sockets = pad world @ inv(pad's existing Shin fit) on those
+  legs, carried to the rest by matching each lower leg, mirror for the other side, check sheets, sidecars + index in place.
 - **Sharing the page (Nov 4, Josh: own username and password for him + 2 people, builds land on his PC for printing):**
   `squad-builder/share_server.py` (stdlib; Blender's bundled Python or miniconda), listens on 127.0.0.1:8765 only, PBKDF2
   passwords in `share_users.json` beside it (never in the repo), Basic auth over a cloudflared quick tunnel (https, new
