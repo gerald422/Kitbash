@@ -1,0 +1,107 @@
+{
+ "schemaVersion": 1,
+ "part": "set_arms_2.2",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder L": [
+   -0.999101,
+   0.042132,
+   0.004771,
+   -30.772757,
+   0.004775,
+   6e-06,
+   0.999989,
+   -44.553005,
+   0.042131,
+   0.999112,
+   -0.000207,
+   -36.64286,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder L": "Marta single arm: shoulder face (30.2 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "set_arms_2.2_socket_Hand L",
+   "matrix": [
+    0.967581,
+    -0.150222,
+    -0.203026,
+    -24.946947,
+    0.154498,
+    -0.283859,
+    0.946337,
+    38.001648,
+    -0.199792,
+    -0.947026,
+    -0.251448,
+    55.559206,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  },
+  {
+   "type": "Pad L",
+   "name": "set_arms_2.2_socket_Pad L",
+   "matrix": [
+    -0.626659095287323,
+    -0.7726595401763916,
+    -0.10146737098693848,
+    -27.383405685424805,
+    -0.4757223129272461,
+    0.27616095542907715,
+    0.8351188898086548,
+    41.10032653808594,
+    -0.6172412037849426,
+    0.5716050863265991,
+    -0.5406301617622375,
+    42.357421875,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 2.24593448638916,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     -28.978038787841797,
+     37.22689437866211,
+     46.96173095703125
+    ],
+    [
+     -25.026525497436523,
+     35.81455993652344,
+     44.03844451904297
+    ],
+    [
+     -27.383405685424805,
+     41.10032653808594,
+     42.357421875
+    ]
+   ]
+  }
+ ],
+ "original": {
+  "name": "set_arms_2.2",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\Captain with Relic Shield\\Arms\\set_arms_2.2.stl"
+ }
+}

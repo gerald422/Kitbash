@@ -1,0 +1,107 @@
+{
+ "schemaVersion": 1,
+ "part": "set_arms_2.1",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999085,
+   -0.04249,
+   0.004941,
+   -26.044753,
+   0.004945,
+   3e-06,
+   0.999988,
+   -23.572719,
+   -0.04249,
+   0.999097,
+   0.000207,
+   23.346457,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (30.6 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "set_arms_2.1_socket_Hand R",
+   "matrix": [
+    0.868157,
+    0.478191,
+    0.132805,
+    -31.443924,
+    -0.334449,
+    0.366007,
+    0.868437,
+    -31.523626,
+    0.366671,
+    -0.798356,
+    0.477682,
+    28.417601,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "set_arms_2.1_socket_Pad R",
+   "matrix": [
+    0.6979356408119202,
+    -0.6471816897392273,
+    0.3066621422767639,
+    -25.01689910888672,
+    -0.2050105184316635,
+    0.229733407497406,
+    0.9514164924621582,
+    -19.915376663208008,
+    -0.6861898303031921,
+    -0.7268964648246765,
+    0.027660071849822998,
+    23.248247146606445,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 2.061328411102295,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     -24.903968811035156,
+     -26.684545516967773,
+     25.38551139831543
+    ],
+    [
+     -28.18940544128418,
+     -25.51829719543457,
+     21.69540023803711
+    ],
+    [
+     -25.01689910888672,
+     -19.915376663208008,
+     23.248247146606445
+    ]
+   ]
+  }
+ ],
+ "original": {
+  "name": "set_arms_2.1",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\Captain with Relic Shield\\Arms\\set_arms_2.1.stl"
+ }
+}

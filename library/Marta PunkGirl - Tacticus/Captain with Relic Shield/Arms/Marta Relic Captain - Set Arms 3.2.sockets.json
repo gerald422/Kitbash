@@ -1,0 +1,107 @@
+{
+ "schemaVersion": 1,
+ "part": "set_arms_3.2",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder L": [
+   -0.999109,
+   0.041914,
+   0.004885,
+   34.700178,
+   0.00489,
+   6e-06,
+   0.999988,
+   4.262341,
+   0.041914,
+   0.999121,
+   -0.000211,
+   -5.096882,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder L": "Marta single arm: shoulder face (25.5 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand L",
+   "name": "set_arms_3.2_socket_Hand L",
+   "matrix": [
+    0.663024,
+    -0.636858,
+    -0.39346,
+    43.188685,
+    0.513764,
+    0.004838,
+    0.857918,
+    1.85621,
+    -0.544469,
+    -0.770966,
+    0.330402,
+    3.606965,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  },
+  {
+   "type": "Pad L",
+   "name": "set_arms_3.2_socket_Pad L",
+   "matrix": [
+    -0.6866536140441895,
+    -0.7174810171127319,
+    0.11716586351394653,
+    37.5673828125,
+    -0.2710399627685547,
+    0.4022035300731659,
+    0.874511182308197,
+    6.967316627502441,
+    -0.6745696067810059,
+    0.5687295794487,
+    -0.4706405699253082,
+    -6.829892158508301,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 2.050166606903076,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     34.8710823059082,
+     3.2619473934173584,
+     -2.5964856147766113
+    ],
+    [
+     38.474082946777344,
+     1.242187261581421,
+     -5.452495574951172
+    ],
+    [
+     37.5673828125,
+     6.967316627502441,
+     -6.829892158508301
+    ]
+   ]
+  }
+ ],
+ "original": {
+  "name": "set_arms_3.2",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\Captain with Relic Shield\\Arms\\set_arms_3.2.stl"
+ }
+}

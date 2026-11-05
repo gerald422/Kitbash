@@ -1,0 +1,107 @@
+{
+ "schemaVersion": 1,
+ "part": "shoulder_plasma_with_arm",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.996286,
+   -0.042373,
+   -0.074954,
+   8.500347,
+   -0.075022,
+   3e-06,
+   0.997182,
+   1.516221,
+   -0.042254,
+   0.999102,
+   -0.003182,
+   -1.915839,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (26.2 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "shoulder_plasma_with_arm_socket_Hand R",
+   "matrix": [
+    0.739719,
+    0.573916,
+    0.351334,
+    -5.499875,
+    -0.428976,
+    -7.5e-05,
+    0.903316,
+    10.694955,
+    0.518454,
+    -0.818914,
+    0.246141,
+    17.124732,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.12), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "shoulder_plasma_with_arm_socket_Pad R",
+   "matrix": [
+    -0.8730417490005493,
+    0.4459474980831146,
+    -0.19730406999588013,
+    6.102120876312256,
+    0.050561532378196716,
+    0.4852057993412018,
+    0.8729369044303894,
+    4.791327476501465,
+    0.4850170910358429,
+    0.752134382724762,
+    -0.4461527466773987,
+    -2.4983386993408203,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.650524854660034,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     8.239233016967773,
+     1.4944262504577637,
+     1.6922030448913574
+    ],
+    [
+     6.350582122802734,
+     -0.5604891777038574,
+     -1.4931926727294922
+    ],
+    [
+     6.102120876312256,
+     4.791327476501465,
+     -2.4983386993408203
+    ]
+   ]
+  }
+ ],
+ "original": {
+  "name": "shoulder_plasma_with_arm",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\53 July 2026\\weapons and arms\\Arms\\shoulder_plasma_with_arm.stl"
+ }
+}

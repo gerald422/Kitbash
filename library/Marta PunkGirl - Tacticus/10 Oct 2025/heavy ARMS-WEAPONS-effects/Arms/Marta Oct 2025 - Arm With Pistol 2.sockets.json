@@ -1,0 +1,107 @@
+{
+ "schemaVersion": 1,
+ "part": "Arm_with_pistol_2",
+ "category": "Arms",
+ "scale": 0.9,
+ "fits": {
+  "Shoulder R": [
+   -0.999102,
+   -0.042377,
+   7.4e-05,
+   -40.7136,
+   7.4e-05,
+   3e-06,
+   1.0,
+   -8.642071,
+   -0.042377,
+   0.999102,
+   0.0,
+   -16.6788,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "notes": {
+  "Shoulder R": "Marta single arm: shoulder face (23.8 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+ },
+ "sockets": [
+  {
+   "type": "Hand R",
+   "name": "Arm_with_pistol_2_socket_Hand R",
+   "matrix": [
+    0.851615,
+    -0.484168,
+    0.20083,
+    -47.058559,
+    0.388383,
+    0.840155,
+    0.378547,
+    -7.843037,
+    -0.352009,
+    -0.244377,
+    0.903531,
+    -0.092504,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "Marta wrist: TIOW wrist face (round_tol 0.2), roll = torso up+forward (as Springles; TIOW armour roll scatters on Marta arms)"
+   }
+  },
+  {
+   "type": "Pad R",
+   "name": "Arm_with_pistol_2_socket_Pad R",
+   "matrix": [
+    0.4908512830734253,
+    -0.8706594705581665,
+    0.03189462795853615,
+    -43.5507926940918,
+    0.23972593247890472,
+    0.17016418278217316,
+    0.9558115601539612,
+    18.726640701293945,
+    -0.837613582611084,
+    -0.4615153670310974,
+    0.29224494099617004,
+    9.53962516784668,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 4.215001583099365,
+   "props": {
+    "tiow_anchor": "copied"
+   },
+   "points": [
+    [
+     -41.38324737548828,
+     12.645333290100098,
+     9.069355010986328
+    ],
+    [
+     -45.63357925415039,
+     13.476030349731445,
+     6.816357612609863
+    ],
+    [
+     -43.5507926940918,
+     18.726640701293945,
+     9.53962516784668
+    ]
+   ]
+  }
+ ],
+ "original": {
+  "name": "Arm_with_pistol_2",
+  "folder": "Arms",
+  "path": "Marta PunkGirl - Tacticus\\10 Oct 2025\\heavy ARMS-WEAPONS-effects\\Arms\\Arm_with_pistol_2.stl"
+ }
+}

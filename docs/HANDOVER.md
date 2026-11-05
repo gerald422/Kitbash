@@ -1,4 +1,4 @@
-# Kitbash build: handover (4 Nov 2026)
+# Kitbash build: handover (5 Nov 2026)
 
 Everything needed to pick this work up in a fresh Claude session. The full history, with every measured value and
 decision, is `docs/project-notes.md` (the Project doc `claude/part-sockets-tiow-integration.md` is an older copy: from Nov 3 the repo file is the current one).
@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `1496aed7` (3,548 parts; the 613 new Marta parts still need Prepare), `_sources.csv` `4167d6cd` (4,161 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `1496aed7` (3,548 parts; the 613 + 33 new Marta parts need Prepare: Josh runs it), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -151,10 +151,10 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   - **Left out (Josh):** Jump Chaplain (doesn't match up because of its sculpted tabard; never installed), Mar Fil Assault B
     legs, Veterans and Bladeguard (sculpted tabard he doesn't like), Outriders (on the bike); the other makers' legs aren't
     in the builder.
-  - **Marta: next, from Josh's placement.** The rule's seats were off ("the buckle is off as is the hip plate placement";
-    Marta's belt is a thin band at the very top). Josh places the plates and buckle by eye in `Marta plates - place by
-    eye.blend` (sent in the chat: Gurls Legs 2, Space Wolves Legs 1, his Mar Fil 4A for reference; the parts keep their own
-    mesh, so read their matrices). Then start every Marta legs (about 215, 36 kits) from his placement, check sheet per kit.
+  - **Marta: next - roll out as the rule seats them.** Josh first said the rule's seats were off, then (Nov 5) that he's
+    OK with them after all: put Plate R/L, Buckle, Trophy R/L on every Marta legs (about 215, 36 kits) with `tn_seat.py`
+    through `legs_frame.py` as for TN, check sheet per kit, after the Marta weapons. (The by-eye blend
+    `Marta plates - place by eye.blend` was only a chat attachment, never on the PC; not needed now.)
 - **Sharing the page (Nov 4, Josh: own username and password for him + 2 people, builds land on his PC for printing):**
   `squad-builder/share_server.py` (stdlib; Blender's bundled Python or miniconda), listens on 127.0.0.1:8765 only, PBKDF2
   passwords in `share_users.json` beside it (never in the repo), Basic auth over a cloudflared quick tunnel (https, new
@@ -166,7 +166,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   Windows itself: if one can't find Python, fix the python.exe paths at the top of the three .bat files. Old page in `old-1.17.7-share\`.
 - **Bionic legs: resuming soon (Nov 4).** Plug example blend `Desktop\Bionic plug - place by eye.blend` (Assault Legs 2 =
   old 29-Legs-2, the 1.18 tests' main marine, and 3A = old 37-Legs-3-A, under Torso 1, his plates locked, one LINK_LEG
-  each to move; read the plug's matrix, a scale on it is the kit size). Josh places it with the Marta blend. The SM
+  each to move; read the plug's matrix, a scale on it is the kit size). Josh places it by eye. The SM
   Mechanical Legs kit is at `D:\new cults\legs-mechanicals-hand-sm-iron20240827-1-jr2qoj\WargamesPrint\legs-mechanicals-hand-sm-iron\`
   (identical copies in `... (1)`, `(2)`, `(3)`). Then merge `main` into `bionic-1.18` and carry on from the notes.
 - **New bits next month (Josh's preview sheets, Nov 4):** bionic legs, five capes (2-5 share a notched top that goes under
@@ -185,14 +185,22 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - **Accessory anchors (Nov 3): first base delivered (1.17.6) on the Mar Fil Assault legs** - plates, buckle, sheaths,
   CB tabards and trophies; data and scripts `kits/plates/` (`marfil_assault_plates.json` holds every placement Josh
   checked). Next (Josh: build in parts): Marta's legs (above); then chest, pack and
-  pauldron anchors (necklace, book on the torso back, pack ornaments, pad ornaments, topper ribbons, wrist ornaments).
+  pauldron anchors (necklace, **tilt shields**, book on the torso back, pack ornaments, pad ornaments, topper ribbons, wrist ornaments).
   Marta's loincloths left out for now (stay on Belt Front). Josh's missing-files check: later.
+  - **Tilt shields (started Nov 4, waiting on Josh's placement):** four spots - torso Upper Chest L/R and a spot on each
+    pauldron (tier 2, like the pad's front ornament); never all four at once, but no blocking rule. Parts: the 24 in
+    `D:\new cults\Tilt Shields\Tilt Shields\` (one export orientation: X wide, Y out, Z up). Josh places Tilt Shield 1 on
+    the chest and on the pad in `Desktop\Tilt shields - place by eye.blend` (`kits/tilt/mkblend.py`; Mar Fil Assault Torso 1,
+    Arm 1A R, Pad 1; origins at the shield's back centre; a scale on them = the set's size); then Upper Chest R/L on the
+    torsos, the pad spot on the pauldrons, sidecars for the 24, TIOW + page, Mar Fil Assault first. Notes: Nov 4-5 entry.
 
-- **Marta one-handed (Nov 2): Josh to run Prepare** (previews, Pad anchors, index for the 613 new parts), then
-  spot-check on the page. Left out: 15 strapped shields whose handle didn't match (Greek, Jul 2025, Deathwatch,
-  Mithraism, Ghostrider), 35 two-armed pieces, 88 unrecognised (hand-less blades, armour plates, a few arms),
-  Lion Knights shoulder shields. New parts not checked for aquilas/seals (hide from the page). Tools/results in
-  `_backups\marta-1h-2026-11-01\`; method in the notes.
+- **Marta weapons: Josh runs Prepare once** (Nov 2: 613 one-handed parts; Nov 5: 33 the Nov 1 scan missed, `kits/marta/missed/`)
+  - previews, Pad anchors and index for all 646 - then spot-check on the page. Still not in: about 40 two-armed sets (next
+  Marta weapons task: both shoulders at once), 15 strapped shields whose handle didn't match, hand-less blades and other
+  unrecognised bits, Lion Knights shoulder shields, Oct 2025 heavy forearm pieces. New parts not checked for aquilas/seals.
+  Marks (Josh): heavy = Gravis, thicc = Terminator, phobois/phobia = Phobos; `plan_library` files Oct 2025 heavy under
+  Tacticus and thicc under Gravis - a Marta mark tidy-up (rename_library has --undo) is for later. Backups/tools
+  `_backups\marta-1h-2026-11-01\`, `_backups\marta-missed-2026-11-05\`.
 
 - Captain with Jump Pack belt plates: Josh to review; mirrored copies for the other hip; his chest plate and cape.
 - Mechadendrite tails and mechadendrites (spec in the notes; assets in `Desktop\tubes, pipes, chains\`); the TN Mk6
