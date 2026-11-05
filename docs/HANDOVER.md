@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `951cb3be` (4,194 parts; Prepare run by Josh Nov 5, Marta plates added in place), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `0b47a25c` (4,194 parts; Prepare run by Josh Nov 5, Marta plates and shin spots added in place), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -153,14 +153,10 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
     in the builder.
   - **Marta: installed Nov 5** on 178 legs (rule seats; backups `_backups\marta-plates-2026-11-05\before\`). Left out (Josh):
     Terminator armour - the 9 legs in the Terminator folders and the 30 Thicc/Termi legs filed under Tacticus.
-- **Shin pads on Marta legs (Nov 5; Josh: only legs without sculpted shin armour):** no Marta legs have Shin R/L spots yet (the
-  shin rule only finds Mar Fil ankle balls), so the 44 Marta shin pads only go on Mar Fil legs. Proposed list
-  `kits/shin/proposed.json` (40 legs: the sets Marta released with shin pads - Jan, Feb Thicc, May, Jun, Jul, Oct Heavy 2026,
-  Ghostrider bike, Techmarine V2 Mar 2026 and Thicc); lower-leg sheets sent for Josh to add/remove (`kits/shin/shins.py`).
-  Josh places pads by eye in `Desktop\Marta shin pads - place by eye.blend` (978b72cc, `kits/shin/mkblend.py`: May 2026 Legs 1 +
-  May pad 1 R/L, Jul 2026 Legs 1 + Jul pad 1 L, Jan 2026 Legs 1 + Jan pad 1 R; legs locked in torso coordinates 45 mm apart,
-  pad origins at their centre in the pad frame). Then: Shin R/L sockets = pad world @ inv(pad's existing Shin fit) on those
-  legs, carried to the rest by matching each lower leg, mirror for the other side, check sheets, sidecars + index in place.
+- **Shin spots on Marta legs: installed Nov 5** on 38 legs (the sets Marta sold with shin pads, minus Techmarine V2 Legs 4/5
+  whose robe hides the shins), carried from Josh's by-eye pads (`kits/shin/`); backups `_backups\marta-shins-2026-11-05\before\`.
+  Oct 2026 Heavy Legs 1's spots are wrong (pads at the back; kicked-back pose) - Josh fixes them with Fix the Socket; he
+  adjusts the rest by hand where needed. Other older Marta legs with bare shins: Josh may name more from the lower-leg sheets.
 - **Sharing the page (Nov 4, Josh: own username and password for him + 2 people, builds land on his PC for printing):**
   `squad-builder/share_server.py` (stdlib; Blender's bundled Python or miniconda), listens on 127.0.0.1:8765 only, PBKDF2
   passwords in `share_users.json` beside it (never in the repo), Basic auth over a cloudflared quick tunnel (https, new
