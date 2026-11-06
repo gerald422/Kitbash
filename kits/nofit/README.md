@@ -49,3 +49,13 @@ The makers covered are Mar Fil, Turtle Ninja, Springles, BBoosty and Marta (ever
 4. `plan_names`, then `rename_library` (its `_sources.csv` rewrite fails on the unquoted-comma rows, as before). The appended rows were renamed line by line.
 
 Backups and plans are in `D:\Kitbash Library\_backups\marta-nofit-2026-11-06\` and `nofit-survey-2026-11-06\`.
+
+## After Prepare (Josh, Nov 6)
+
+The index is `88ed6e38` (6,451 parts, all with previews). Of the 2,257 new parts:
+- **136 have fits:** 29 from the batch above, plus 107 that Prepare's hand and shield rules gave to held parts and shields.
+- **1,180 are in `no_fit.txt`** (copied here; 1,229 parts in all).
+- **703 torsos have no sockets yet**, so nothing attaches to them.
+- **238 are types with no page step.**
+
+`no_fit_all.csv` lists all 2,121 without a fit, with their status.

@@ -1,4 +1,4 @@
-# Kitbash build: handover (5 Nov 2026)
+# Kitbash build: handover (6 Nov 2026)
 
 Everything needed to pick this work up in a fresh Claude session. The full history, with every measured value and
 decision, is `docs/project-notes.md` (the Project doc `claude/part-sockets-tiow-integration.md` is an older copy: from Nov 3 the repo file is the current one).
@@ -29,7 +29,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
+- Latest commits: `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
   `74573a8` plates seat for any legs (`legs_frame.py`), `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `0b47a25c` (4,194 parts; Prepare run by Josh Nov 5, Marta plates and shin spots added in place), `_sources.csv` `30980a84` (6,451 rows: +2,257 filed Nov 6, most without fits - index not yet updated, Josh runs Prepare), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `88ed6e38` (6,451 parts, all with previews; Prepare run by Josh Nov 6), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `30980a84` (6,451 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -137,7 +137,19 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 ## Open items (oldest first)
 
-- **Parts filed without fits (Nov 6, `kits/nofit/`):** 2,257 new library parts (Marta two-armed batch 41 + Marta weapons/arms 144 + leftovers in set-up kits 2,072). Next: Josh runs Prepare, then copy `_builder\no_fit.txt` to the repo (`kits/nofit/no_fit.txt`), export sidecars, commit. Waiting on Josh's pick from `kits/nofit/setup-kits/never_set_up.json` (+ Iron bits, Techmarine Conversion Kit); file them with `classify_all.py` (add the tops to `MAKERS`).
+- **Parts filed without fits (Nov 6, `kits/nofit/`; Josh: nothing missed, everything without a fit logged).** 2,257 new
+  library parts: Marta two-armed batch 41, Marta weapons/arms 144, leftovers in kits already set up 2,072 (every type).
+  Prepare run by Josh Nov 6 (index `88ed6e38`, 6,451 parts). Of the 2,257: **136 have fits** (29 from the batch, 107 from
+  Prepare's hand and shield rules); **1,180 are in `no_fit.txt`**; **703 torsos have no sockets** (TN 418 other torso
+  poses, Marta 285 - nothing attaches to them until they get the torso / flat-torso rules); **238 are types with no page
+  step** (Unsorted, Accessories, Cloaks, ammo belts, Plate Accessories, Wings, bikes, servo arms). All 2,121 without a fit:
+  `kits/nofit/no_fit_all.csv` (type, status, path, how the type was found); everything left out and why:
+  `kits/nofit/setup-kits/log_all.csv`, `kits/nofit/marta/skipped.txt`. Types are best guesses - Josh retypes as he goes.
+  - **Waiting on Josh:** which never-set-up kits go in (`kits/nofit/setup-kits/never_set_up.json`: Mar Fil 20 kits, the
+    Iron Hands folder 27 kits plus its `Iron bits`, the Techmarine Conversion Kit, Springles mk6 cybernetics, TN Primus
+    Medicae / WGBL). File them with `classify_all.py` (add the tops to `MAKERS`), same delivery, then one Prepare.
+  - The repo has 5 Marta sidecars the library no longer has (old paths of parts since moved; `sync_sidecars.py` reports
+    them, not pruned).
 - **Holsters on the hip plate (Nov 3): installed** - 45 holsters, pouches and grenades are Plate Accessories (plates only,
   `kits/plates/hol_*.py`); backups `_backups\holsters-2026-11-03\old\`. They only place on legs with plate spots
   (Mar Fil Assault, Intercessor, Techmarine and Turtle Ninja legs).
@@ -190,7 +202,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   checked). Next (Josh: build in parts): Marta's legs (above); then chest, pack and
   pauldron anchors (necklace, **tilt shields**, book on the torso back, pack ornaments, pad ornaments, topper ribbons, wrist ornaments).
   Marta's loincloths left out for now (stay on Belt Front). Josh's missing-files check: later.
-  - **Tilt shields (started Nov 4, waiting on Josh's placement):** four spots - torso Upper Chest L/R and a spot on each
+  - **Tilt shields (started Nov 4; Josh saved his placement in the blend, not read yet):** four spots - torso Upper Chest L/R and a spot on each
     pauldron (tier 2, like the pad's front ornament); never all four at once, but no blocking rule. Parts: the 24 in
     `D:\new cults\Tilt Shields\Tilt Shields\` (one export orientation: X wide, Y out, Z up). Josh places Tilt Shield 1 on
     the chest and on the pad in `Desktop\Tilt shields - place by eye.blend` (`kits/tilt/mkblend.py`; Mar Fil Assault Torso 1,
@@ -199,9 +211,9 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 - **Marta weapons on the page (Prepare, Nov 5)** (Nov 2: 613 one-handed parts; Nov 5: 33 the Nov 1 scan missed, `kits/marta/missed/`):
   all 646 indexed, previewed and anchored; Pad anchors on 236 of the 269 new arms (33 without - by eye if needed). Josh
-  saw a few misidentifications: he fixes them in the final build. `_builder\no_fit.txt`: 49, none of them Marta. Still not in: about 40 two-armed sets (next
-  Marta weapons task: both shoulders at once), 15 strapped shields whose handle didn't match, hand-less blades and other
-  unrecognised bits, Lion Knights shoulder shields, Oct 2025 heavy forearm pieces. New parts not checked for aquilas/seals.
+  saw a few misidentifications: he fixes them in the final build. `_builder\no_fit.txt`: 49, none of them Marta. The two-armed sets, unmatched
+  strapped shields, hand-less blades, Lion Knights shoulder shields and Oct 2025 heavy forearm pieces went in on Nov 6
+  (above; 27 two-armed sets seated, the rest without fits). New parts checked for aquilas/seals by name only.
   Marks (Josh): heavy = Gravis, thicc = Terminator, phobois/phobia = Phobos; `plan_library` files Oct 2025 heavy under
   Tacticus and thicc under Gravis - a Marta mark tidy-up (rename_library has --undo) is for later. Backups/tools
   `_backups\marta-1h-2026-11-01\`, `_backups\marta-missed-2026-11-05\`.
