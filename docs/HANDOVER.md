@@ -140,8 +140,8 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - **Parts filed without fits (Nov 6, `kits/nofit/`; Josh: nothing missed, everything without a fit logged).** 2,257 new
   library parts: Marta two-armed batch 41, Marta weapons/arms 144, leftovers in kits already set up 2,072 (every type).
   Prepare run by Josh Nov 6 (index `88ed6e38`, 6,451 parts). Of the 2,257: **136 have fits** (29 from the batch, 107 from
-  Prepare's hand and shield rules); **1,180 are in `no_fit.txt`**; **703 torsos have no sockets** (TN 418 other torso
-  poses, Marta 285 - nothing attaches to them until they get the torso / flat-torso rules); **238 are types with no page
+  Prepare's hand and shield rules); **1,180 are in `no_fit.txt`**; **703 torsos have no sockets** (mostly TN's other torso
+  poses and Marta torsos - nothing attaches to them until they get the torso / flat-torso rules); **238 are types with no page
   step** (Unsorted, Accessories, Cloaks, ammo belts, Plate Accessories, Wings, bikes, servo arms). All 2,121 without a fit:
   `kits/nofit/no_fit_all.csv` (type, status, path, how the type was found); everything left out and why:
   `kits/nofit/setup-kits/log_all.csv`, `kits/nofit/marta/skipped.txt`. Types are best guesses - Josh retypes as he goes.
