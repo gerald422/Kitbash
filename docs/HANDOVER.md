@@ -218,6 +218,11 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   Tacticus and thicc under Gravis - a Marta mark tidy-up (rename_library has --undo) is for later. Backups/tools
   `_backups\marta-1h-2026-11-01\`, `_backups\marta-missed-2026-11-05\`.
 
+- **Mirror any part on the fly (Josh, Nov 6; deferred - "Let's do martas two hand sets first"):** keep one plain file
+  per part and mirror it in both the page and Blender (TIOW 1.17.8 + a page checkbox on two-armed parts and legs) instead
+  of maker's left copies / mirror variants. Feasible; open questions put to Josh: auto-mirror single-side parts when
+  placed on the other side, or a checkbox on every slot.
+- Bladeguard Volkite A/B: right-hand fit to check.
 - Captain with Jump Pack belt plates: Josh to review; mirrored copies for the other hip; his chest plate and cape.
 - Mechadendrite tails and mechadendrites (spec in the notes; assets in `Desktop\tubes, pipes, chains\`); the TN Mk6
   Universal pack now has `Mechadendrite L/R` sockets from Josh.
