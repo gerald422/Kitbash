@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `0b47a25c` (4,194 parts; Prepare run by Josh Nov 5, Marta plates and shin spots added in place), `_sources.csv` `e5fc5739` (4,194 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `0b47a25c` (4,194 parts; Prepare run by Josh Nov 5, Marta plates and shin spots added in place), `_sources.csv` `30980a84` (6,451 rows: +2,257 filed Nov 6, most without fits - index not yet updated, Josh runs Prepare), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -137,6 +137,7 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 ## Open items (oldest first)
 
+- **Parts filed without fits (Nov 6, `kits/nofit/`):** 2,257 new library parts (Marta two-armed batch 41 + Marta weapons/arms 144 + leftovers in set-up kits 2,072). Next: Josh runs Prepare, then copy `_builder\no_fit.txt` to the repo (`kits/nofit/no_fit.txt`), export sidecars, commit. Waiting on Josh's pick from `kits/nofit/setup-kits/never_set_up.json` (+ Iron bits, Techmarine Conversion Kit); file them with `classify_all.py` (add the tops to `MAKERS`).
 - **Holsters on the hip plate (Nov 3): installed** - 45 holsters, pouches and grenades are Plate Accessories (plates only,
   `kits/plates/hol_*.py`); backups `_backups\holsters-2026-11-03\old\`. They only place on legs with plate spots
   (Mar Fil Assault, Intercessor, Techmarine and Turtle Ninja legs).
