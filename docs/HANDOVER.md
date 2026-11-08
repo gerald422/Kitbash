@@ -1,4 +1,4 @@
-# Kitbash build: handover (6 Nov 2026)
+# Kitbash build: handover (8 Nov 2026)
 
 Everything needed to pick this work up in a fresh Claude session. The full history, with every measured value and
 decision, is `docs/project-notes.md` (the Project doc `claude/part-sockets-tiow-integration.md` is an older copy: from Nov 3 the repo file is the current one).
@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `88ed6e38` (6,451 parts, all with previews; Prepare run by Josh Nov 6), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `30980a84` (6,451 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `81ca5023` (6,451 parts, all with previews; Prepare run by Josh Nov 6, pad fix written in place Nov 8), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `30980a84` (6,451 rows), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -136,6 +136,15 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   the Old Style Space Knight MK8 torsos have the spots. Page steps Neck guard (6), Chest equipment (7).
 
 ## Open items (oldest first)
+
+- **Builder errors (Nov 6, Josh's `Desktop\example issues.blend`; diagnosis in the notes).** Fix shared causes, not pieces.
+  - **Pads: done Nov 8** (`kits/pads/`, notes entry): every arm's Pad socket in Josh's 62 convention, BBoosty/CyberBrush pad fits moved
+    off the old 'dome' sockets. 9 borderline arms listed in the notes.
+  - **Loincloth: next.** Josh: the Belt Front spot is right, the loincloth's own seating is wrong (tabards fit the same spot correctly).
+  - Still open: hip / belt-back bits stand upright on every legs except Assault 4B (Josh's Oct 30 tilt stayed on that one legs; TIOW rocks
+    belt bits only 8 deg); packs centred by bounding box (Backpack 1 Sword 1.9 mm off); scenic bases (legs into the wall, base rise skipped);
+    'torso hasn't followed the legs' roll' - not reproduced, asked Josh what it should follow; a headless audit over part families; Save
+    Correction scopes (part / folder / every host of a kit).
 
 - **Parts filed without fits (Nov 6, `kits/nofit/`; Josh: nothing missed, everything without a fit logged).** 2,257 new
   library parts: Marta two-armed batch 41, Marta weapons/arms 144, leftovers in kits already set up 2,072 (every type).
