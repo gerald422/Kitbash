@@ -14,11 +14,11 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   (`D:\new cults\...`), `_hidden.txt` hides parts from the page (renegade chapter: no aquilas, purity seals or
   scrolls, plus Josh's own hides), `_builder\index.json` + `_builder\previews\` feed the page, `_backups\` holds a
   dated folder per change.
-- **TIOW Inbox** (Blender add-on, `addons/tiow_inbox.py`, now **1.17.7**): imports parts sent from TIOW-FTRP or the
+- **TIOW Inbox** (Blender add-on, `addons/tiow_inbox.py`, now **1.17.8**): imports parts sent from TIOW-FTRP or the
   page, rebuilds their sockets, snaps them onto the model (rock/settle for belt bits, base rise, adaptors and
   connectors), Save Correction (Fix the Part / Fix the Socket).
 - **Squad Builder** (`squad-builder/`, one offline HTML page): pick parts step by step (Base, Legs, Torso, Arms
-  R/L/Two-handed, Head, Neck guard, Chest equipment, Back, Wings, Shoulder pads, Weapons, Shin pads, Loincloth, Belt), see them placed from the
+  R/L/Two-handed, Head, Neck guard, Chest equipment, Chest insert, Back, Wings, Shoulder pads, Weapons, Shin pads, Loincloth, Belt), see them placed from the
   index, send the squad to Blender through `<library>\_builder\inbox`.
 - Also: **Kitbash Finalise** (`addons/kitbash_finalise.py`, 0.3.3, booleans a model into print pieces) and
   **Part Sockets** (Josh's own add-on, 6.2.0 in the container; it is not in this repo).
@@ -29,7 +29,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: `96b651b` Springles additions + Redwarden Techmarine kit (323 parts, `kits/rw_spr/`), `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
+- Latest commits: chest inserts + TIOW 1.17.8 (`kits/inserts/`), `96b651b` Springles additions + Redwarden Techmarine kit (323 parts, `kits/rw_spr/`), `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
   `74573a8` plates seat for any legs (`legs_frame.py`), `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
@@ -71,9 +71,9 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 | Josh's working blends | `Desktop\query.blend` (his correction file), `Desktop\Operation Marine\*.blend` (large: base_jumpack.blend 191 MB) |
 | Mechadendrite assets | `Desktop\tubes, pipes, chains\` |
 
-**Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
-`5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `81ca5023` (6,451 parts, all with previews; Prepare run by Josh Nov 6, pad fix written in place Nov 8), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `af14d010` (6,774 rows: +323 Springles / Redwarden Nov 9, not in the index until Josh runs Prepare), `_hidden.txt` `8360ab52` (Josh's edits),
+**Installed now (md5, first 8):** TIOW Inbox 1.17.8 `688d6f96` (bridge + Blender add-ons), bridge README
+`256a6a0f`, `_library.json` `c43457c7`, page `56fea7f2`, page README `ff4bfd4f`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
+`_builder\index.json` `d54b37a1` (6,496 parts, all with previews; Prepare run by Josh Nov 6, pad fix Nov 8 and the 45 insert parts Nov 9 written in place; ASCII-escaped compact JSON), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `1f36e8ec` (6,819 rows: +323 Springles / Redwarden Nov 9, not in the index until Josh runs Prepare; +45 inserts), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -134,9 +134,14 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   Techmarine (4), all Turtle Ninja (465).
 - 1.17.7 `Chest Equipment` on the torso's `Chest Equip R/L` (right = mirror variant), `Neck Guards` on `Neck Guard`; only
   the Old Style Space Knight MK8 torsos have the spots. Page steps Neck guard (6), Chest equipment (7).
+- 1.17.8 `Chest Inserts` on the torso's `Chest Insert`; only `MarFil Assault - Torso 2 Insert` (Josh's cut of Torso 2) has it. Page step
+  Chest insert (8).
 
 ## Open items (oldest first)
 
+- **Chest inserts (Nov 9; notes entry): delivered**, TIOW 1.17.8. 44 inserts (Josh's scale baked into the library files) on the
+  one torso with the spot. Josh to check them in the builder; Iron Gorgon 01 / 07 have winged emblems (his call to hide).
+  More torsos with the spot: cut each like his Torso 2, then the same socket rule (`kits/inserts/build.py`).
 - **Springles additions + Redwarden Techmarine kit (Nov 9; notes entry).** 323 parts filed in the library with sidecars (helmets, pads,
   vox packs, belt bits, Prime torso). Waiting on Josh: run Prepare, look at the parts in the builder. 150 have no fit yet: the 50
   holsters / bolter holsters / sheaths could take the Nov 3 holster rule (`kits/plates/hol_fit.py`) onto the hip plate; arm computers /

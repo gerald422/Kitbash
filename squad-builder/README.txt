@@ -41,7 +41,7 @@ Using it
      Next time, one click on the page reconnects it (the browser asks).
   2. Set Squad to how many models you want.
   3. Work down the steps: Base, Legs, Torso, then arms, head, neck guard,
-     chest equipment, back, wings, pads, weapons, shin pads, hip plates,
+     chest equipment, chest insert, back, wings, pads, weapons, shin pads, hip plates,
      holsters, buckle, tabard, loincloth and belt. The legs stand on the base as soon as you pick
      them, so you see the pose before the torso. Hover a card to see that
      part in place (blue outline); click it to take it - it stays on that
@@ -92,26 +92,29 @@ Notes
     eight turtlenecks or the Collar, the back collar these torsos were made
     without - and a chest piece each side, the right one mirrored. Both sit
     exactly where the maker's builder has them. Other torsos skip both steps.
-  - Wings (step 9): Right and Left, on a back with wing mounts (the TN Mk6
+  - Chest insert (step 8): a torso with the spot (so far only MarFil
+    Assault - Torso 2 Insert, Josh's cut of Torso 2) takes one of the 44
+    chest inserts, where Josh placed his. Other torsos skip the step.
+  - Wings (step 10): Right and Left, on a back with wing mounts (the TN Mk6
     Universal jump pack). Each wing brings its connector (the Techmarine
     kit's Arm 2 Joint) onto the pack's Wing Mount and hangs from the
     connector, as in base_jumpack.blend; the page shows both, and
     Blender adds the connector itself. Backs without wing mounts skip the
     step. The six Malal3D Bladecrow wings come at x1.3, lefts mirrored.
-  - Hip plates (step 13) and Holsters (step 14): legs with plate spots (so far
+  - Hip plates (step 14) and Holsters (step 15): legs with plate spots (so far
     Mar Fil Assault, Intercessor and Techmarine, and Turtle Ninja) take a hip plate on each side, the right one
     mirrored. Holsters and sheaths hang from the plate on their side (the
     right ones mirrored). Other legs skip both steps.
-  - Buckle (step 15) and Tabard (step 16): the buckle sits on the sculpted
+  - Buckle (step 16) and Tabard (step 17): the buckle sits on the sculpted
     one (on Turtle Ninja legs, Mar Fil's buckle over their belt front) and
     prints on its own; tabards hang from it, so they follow its turn
     and tilt. Legs without a buckle spot skip both.
-  - Loincloth (step 17): the front of the belt is the loincloth's alone.
+  - Loincloth (step 18): the front of the belt is the loincloth's alone.
     Loincloths are their own type (Marta's and CyberBrush's), in Blender
     tilted to sit flush and settled onto the belt like belt bits. On legs
     striding forward, the bottom of a loincloth can pass through the raised
     thigh: a rigid cloth can't follow the knee.
-  - Belt (step 18): Trophy R and Trophy L (either side of the buckle, on
+  - Belt (step 19): Trophy R and Trophy L (either side of the buckle, on
     legs that have them), then Right hip, Left hip and Back - the anchors on
     every pair of legs. A part shows on the tabs it has a fit for. In Blender it is
     tilted to sit flush and settled onto the legs, so it can sit a little

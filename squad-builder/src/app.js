@@ -29,7 +29,9 @@
     "Tabards": {socket: "Tabard", adaptor: {"Tabard": "Buckle"}},
     // torsos with chest equipment and neck guard spots (Old Style Space Knight MK8, TIOW Inbox 1.17.7)
     "Chest Equipment": {socket: "Chest Equip", sided: true},
-    "Neck Guards": {socket: "Neck Guard"}
+    "Neck Guards": {socket: "Neck Guard"},
+    // chest inserts on Josh's cut Mar Fil Assault Torso 2 (TIOW Inbox 1.17.8)
+    "Chest Inserts": {socket: "Chest Insert"}
   };
   var ALIAS = {"arm__Torso_r": "Shoulder R", "arm__Torso_l": "Shoulder L", "Wrist_socket_r": "Hand R",
     "Wrist_socket_l": "Hand L", "Head": "Neck", "Backpack": "Back"};
@@ -48,6 +50,9 @@
     {key: "neckGuard", label: "Neck guard", types: ["Neck Guards"], need: "neck guard spot", slots: [{k: "neckG", host: "torso", sock: "Neck Guard"}]},
     {key: "chestEq", label: "Chest equipment", types: ["Chest Equipment"], need: "chest equipment spots",
       slots: [{k: "chestR", side: "R", host: "torso", sock: "Chest Equip R"}, {k: "chestL", side: "L", host: "torso", sock: "Chest Equip L"}]},
+    // only torsos with the spot (MarFil Assault - Torso 2 Insert, Nov 9)
+    {key: "insert", label: "Chest insert", types: ["Chest Inserts"], need: "chest insert spot", who: "so far only MarFil Assault - Torso 2 Insert has one",
+      slots: [{k: "insert", host: "torso", sock: "Chest Insert"}]},
     {key: "pack", label: "Back", types: ["Backpacks", "Jump Packs"], slots: [{k: "pack", host: "torso", sock: "Back"}]},
     {key: "wings", label: "Wings", types: ["Wings"],
       slots: [{k: "wingR", side: "R", host: "pack", sock: "Wing R"}, {k: "wingL", side: "L", host: "pack", sock: "Wing L"}]},
@@ -75,8 +80,8 @@
   ];
   var SLOT = {};
   STEPS.forEach(function (st, i) { st.slots.forEach(function (sl) { sl.step = i; SLOT[sl.k] = sl; }); });
-  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "neckG", "chestR", "chestL", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
-  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "neckG", "chestR", "chestL", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB"];   // the order you pick in
+  var ORDER = ["torso", "legs", "arm2", "armR", "armL", "head", "neckG", "chestR", "chestL", "insert", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB", "base"];   // how a model hangs together (and is sent)
+  var PICK = ["base", "legs", "torso", "armR", "armL", "arm2", "head", "neckG", "chestR", "chestL", "insert", "pack", "wingR", "wingL", "padR", "padL", "handR", "handL", "shinR", "shinL", "plateR", "plateL", "holsR", "holsL", "buckle", "tabard", "loin", "trophyR", "trophyL", "hipR", "hipL", "beltB"];   // the order you pick in
   // a two-handed piece (both arms and the weapon in one) takes both shoulders: these slots can't be filled with it
   // TIOW Inbox finds pad and wrist spots on single arms only, so a two-handed piece takes a pad only where one was saved by hand
   var COVERED = {padR: "no pad spot on the two-handed piece", padL: "no pad spot on the two-handed piece",
@@ -725,7 +730,7 @@
     var h = layout(S.cur).filter(function (x) { return x.slot === sl.host; })[0];
     if (!h || !h.W || socketsOf(h)[sl.sock]) return "";
     return sl.host === "legs" ? "These legs have no " + need + " yet (so far: Mar Fil Assault, Intercessor and Techmarine legs, and Turtle Ninja legs)."
-                              : "This torso has no " + need + " (only the Old Style Space Knight MK8 torsos have them).";
+                              : "This torso has no " + need + " (" + (STEPS[sl.step].who || "only the Old Style Space Knight MK8 torsos have them") + ").";
   }
   function nextSlot() {
     // picking model by model: the same slot on the next model first

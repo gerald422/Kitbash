@@ -730,6 +730,11 @@ wings sit on this pack, move the connector (Fix the Socket moves the pack's
 Wing Mount) or the wing on it (Fix the Socket moves the connector's Wing
 socket, Fix the Part the wing itself).
 
+1.17.8: chest inserts (type Chest Inserts: the 44 Torso Inserts sets under
+Bits) go on a torso's Chest Insert socket, exactly where Josh placed his
+HH GEN3 insert in for inserts.blend. For now only MarFil Assault - Torso 2
+Insert (his cut of Torso 2, with Torso 2's other sockets) has the spot.
+
 1.17.7: the Old Style Space Knight MK8 torsos (72, collarless, made in Mar
 Fil's kit frame so Mar Fil legs, arms, heads and packs fit them as they fit
 Mar Fil Torso 1) have chest equipment and neck guard spots. Chest equipment

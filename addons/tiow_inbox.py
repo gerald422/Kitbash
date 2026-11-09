@@ -66,11 +66,14 @@
 # Knight MK8 torsos): "Chest Equipment" goes on Chest Equip R / L (the left as
 # its file, the right its mirror image), "Neck Guards" on Neck Guard. Both are
 # placed exactly as the maker's builder has them (no rock or settle).
+#
+# 1.17.8: chest inserts ("Chest Inserts") go on a torso's Chest Insert socket;
+# for now only Josh's cut of Mar Fil Assault Torso 2 has one (Torso 2 Insert).
 
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 7),
+    "version": (1, 17, 8),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -603,6 +606,7 @@ DEFAULT_JOINTS = {
     "Tabards": {"socket": "Tabard", "adaptor": {"Tabard": "Buckle"}},
     "Chest Equipment": {"socket": "Chest Equip", "sided": True},
     "Neck Guards": {"socket": "Neck Guard"},
+    "Chest Inserts": {"socket": "Chest Insert"},
 }
 # Socket names from before the library rename, so library parts also snap
 # into files set up the old way.
