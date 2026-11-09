@@ -244,7 +244,7 @@ def build(lib, budget=1e9, target=6000, previews=True, preview_fn=None):
             base["fits"].setdefault(k, f)
         e = {"id": pid, "path": rel, "name": stem, "orig": oname, "folder": ofolder,
              "type": base.pop("category", None) or r.get("type") or parts_[-2],
-             "maker": MAKERS.get(parts_[0].split(" - ")[0], parts_[0]),
+             "maker": MAKERS.get(parts_[0].split(" - ")[0], parts_[0].split(" - ")[0]),   # a new maker: its own name, without the mark
              "kit": stem.split(" - ")[0].split(" ", 1)[1] if " - " in stem and " " in stem.split(" - ")[0] else parts_[1] if len(parts_) > 2 else parts_[0],
              "side": side_of(oname, ofolder, base["fits"])}
         e.update(base)
