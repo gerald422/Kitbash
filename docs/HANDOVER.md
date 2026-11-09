@@ -73,7 +73,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.7 `50f1cb91` (bridge + Blender add-ons), bridge README
 `5c9c1290`, `_library.json` `a317139a`, page `a0bf7983`, page README `52e097cd`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `81ca5023` (6,451 parts, all with previews; Prepare run by Josh Nov 6, pad fix written in place Nov 8), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `30980a84` (6,451 rows), `_hidden.txt` `8360ab52` (Josh's edits),
+`_builder\index.json` `81ca5023` (6,451 parts, all with previews; Prepare run by Josh Nov 6, pad fix written in place Nov 8), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `af14d010` (6,774 rows: +323 Springles / Redwarden Nov 9, not in the index until Josh runs Prepare), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -137,6 +137,10 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 ## Open items (oldest first)
 
+- **Springles additions + Redwarden Techmarine kit (Nov 9; notes entry).** 323 parts filed in the library with sidecars (helmets, pads,
+  vox packs, belt bits, Prime torso). Waiting on Josh: run Prepare, look at the parts in the builder. 150 have no fit yet: the 50
+  holsters / bolter holsters / sheaths could take the Nov 3 holster rule (`kits/plates/hol_fit.py`) onto the hip plate; arm computers /
+  augery scanners, iron halo / nuncio vox / vexilla (Backpack Toppers), unhelmeted heads, belt connectors need Josh's reference placement.
 - **Builder errors (Nov 6, Josh's `Desktop\example issues.blend`; diagnosis in the notes).** Fix shared causes, not pieces.
   - **Pads: done Nov 8** (`kits/pads/`, notes entry): every arm's Pad socket in Josh's 62 convention, BBoosty/CyberBrush pad fits moved
     off the old 'dome' sockets. 9 borderline arms listed in the notes.

@@ -15,7 +15,8 @@ import sys
 from collections import Counter, defaultdict
 
 MAKERS = {"Mar Fil": "MarFil", "Marta PunkGirl": "Marta", "Turtle Ninja": "TN", "BBoosty": "BBoosty",
-          "CyberBrush": "CyberBrush", "Springles": "Springles", "Old Style Space Knight": "OldStyle"}
+          "CyberBrush": "CyberBrush", "Springles": "Springles", "Old Style Space Knight": "OldStyle",
+          "Redwarden": "Redwarden"}
 # "maker - range\kit folder" -> short kit name; "*" = name the kit by its first subfolder (TN's builders)
 KITS = {
     "Old Style Space Knight - Heresy\\MK8": "MK8",
@@ -65,6 +66,9 @@ KITS = {
     "Marta PunkGirl - Weapons\\Primary Combo Weapons": "Combo Weapons", "Marta PunkGirl - Weapons\\Weapon Plasma HellBlaster": "Hellblaster",
     "Springles - Heresy\\patternC arms": "Pattern C", "Springles - Heresy\\patternP arms": "Pattern P",
     "Springles - Heresy\\patternS arms": "Pattern S",
+    "Springles - Heresy\\mk5 helmets": "Mk5", "Springles - Heresy\\mk5 alt helmets": "Mk5 Alt",
+    "Springles - Heresy\\shoulder pads": "Pads", "Springles - Heresy\\accessorys and equipment": "Equipment",
+    "Redwarden - Tacticus\\Techmarine Conversion Kit": "Techmarine",
     "Springles - Weapons\\assault cannon": "Assault Cannon", "Springles - Weapons\\banestrike weapons": "Banestrike",
     "Springles - Weapons\\carsoran power axes": "Carsoran Axes", "Springles - Weapons\\heavy weapons": "Heavy Weapons",
     "Springles - Weapons\\special weapons": "Special Weapons", "Springles - Weapons\\umbra bolters": "Umbra Bolters",

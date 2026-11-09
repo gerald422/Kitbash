@@ -70,10 +70,12 @@ TOP = {'All Mar All the time': ('Mar Fil', 1), 'Intercessors-V2': ('Mar Fil', 0)
        'VeteranBladeSquad-20251116T204804Z-1-001': ('Mar Fil', 0),
        'Marta': ('Marta PunkGirl', 1), 'Springles': ('Springles', 1),
        'Turtle Ninja': ('Turtle Ninja', 1), 'body adaptor': ('Bits', None),
-       'BBoosty': ('BBoosty', 1), 'CyberBrush': ('CyberBrush', 1)}
+       'BBoosty': ('BBoosty', 1), 'CyberBrush': ('CyberBrush', 1),
+       'Warhammer Techmarine Conversion Kit (1)': ('Redwarden', 1)}
 PRIMARY_TOPS = {'All Mar All the time', 'Marta', 'Springles', 'Turtle Ninja', 'body adaptor', 'BBoosty', 'CyberBrush'}
 KIT_ALIAS = {'helmetsupdates': 'HelmetsUpdate', 'helmetsupdate': 'HelmetsUpdate',
-             'backpackupdate': 'BackPackUpdate'}
+             'backpackupdate': 'BackPackUpdate',
+             'warhammer techmarine conversion kit @stl_printer': 'Techmarine Conversion Kit'}
 def clean(n):
     o = n
     n = re.sub(r'-\d{8}T\d{6}Z(-\d+)*', '', n)
@@ -100,8 +102,10 @@ def mark_of(creator, kit, top):
     k = kit.lower()
     if creator == 'Mar Fil':
         return 'Tacticus'
-    if creator == 'Springles':
-        return 'Heresy' if k.startswith('pattern') else 'Weapons'
+    if creator == 'Springles':      # armour and kit (helmets, pads, equipment, Nov 9) with the arms; guns under Weapons
+        return 'Heresy' if k.startswith('pattern') or k in ('mk5 helmets', 'mk5 alt helmets', 'shoulder pads', 'accessorys and equipment', 'mk6 uparmoured cybernetics') else 'Weapons'
+    if creator == 'Redwarden':
+        return 'Tacticus'
     if creator == 'Turtle Ninja':
         return 'Tacticus' if 'mk10' in k else 'Heresy'
     if creator == 'BBoosty':
