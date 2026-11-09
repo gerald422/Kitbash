@@ -29,7 +29,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: chest inserts + TIOW 1.17.8 (`kits/inserts/`), `96b651b` Springles additions + Redwarden Techmarine kit (323 parts, `kits/rw_spr/`), `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
+- Latest commits: armour dropdown + Marta marks re-filed (`library-tools/move_marks.py`), chest inserts + TIOW 1.17.8 (`kits/inserts/`), `96b651b` Springles additions + Redwarden Techmarine kit (323 parts, `kits/rw_spr/`), `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
   `74573a8` plates seat for any legs (`legs_frame.py`), `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
@@ -72,8 +72,8 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 | Mechadendrite assets | `Desktop\tubes, pipes, chains\` |
 
 **Installed now (md5, first 8):** TIOW Inbox 1.17.8 `688d6f96` (bridge + Blender add-ons), bridge README
-`256a6a0f`, `_library.json` `c43457c7`, page `56fea7f2`, page README `ff4bfd4f`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
-`_builder\index.json` `d54b37a1` (6,496 parts, all with previews; Prepare run by Josh Nov 6, pad fix Nov 8 and the 45 insert parts Nov 9 written in place; ASCII-escaped compact JSON), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `1f36e8ec` (6,819 rows: +323 Springles / Redwarden Nov 9, not in the index until Josh runs Prepare; +45 inserts), `_hidden.txt` `8360ab52` (Josh's edits),
+`256a6a0f`, `_library.json` `c43457c7`, page `86e7d95b`, page README `3ed66060`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `81b27aee`, `prepare_builder.py` `47521b31`,
+`_builder\index.json` `aca76380` (6,496 parts, all with previews; Prepare run by Josh Nov 6, pad fix Nov 8, the 45 insert parts and the 325 re-filed Marta parts Nov 9 written in place; ASCII-escaped compact JSON), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `4422836b` (6,819 rows: +323 Springles / Redwarden Nov 9, not in the index until Josh runs Prepare; +45 inserts), `_hidden.txt` `8360ab52` (Josh's edits),
 Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
@@ -140,6 +140,10 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 
 ## Open items (oldest first)
 
+- **Armour dropdown (Nov 9; notes entry): delivered.** Page header Armour = Tacticus / Terminator / Gravis from the mark folder;
+  325 Marta thicc/termi/heavy parts re-filed under Terminator / Gravis (`library-tools/move_marks.py`); leftover picks with no spot
+  are taken off and never sent. Open: no Terminator or Gravis torso has sockets yet (ask Josh for reference placements); the BBoosty IH
+  pad on CyberBrush Axe Arm 1 cuts ~2 mm; stale page tests `t_wings_step.js` / `t_belt_step.js` (step index).
 - **Chest inserts (Nov 9; notes entry): delivered**, TIOW 1.17.8. 44 inserts (Josh's scale baked into the library files) on the
   one torso with the spot. Josh to check them in the builder; Iron Gorgon 01 / 07 have winged emblems (his call to hide).
   More torsos with the spot: cut each like his Torso 2, then the same socket rule (`kits/inserts/build.py`).

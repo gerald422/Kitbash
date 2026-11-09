@@ -34,6 +34,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
 .btn.small { padding: 2px 8px; font-size: 12px; }
 .squad { display: flex; align-items: center; gap: 6px; }
 .squad input { width: 52px; background: var(--panel2); border: 1px solid var(--line); border-radius: 5px; padding: 4px 6px; }
+.squad select { background: var(--panel2); color: inherit; border: 1px solid var(--line); border-radius: 5px; padding: 4px 6px; }
 .main { display: grid; grid-template-columns: 250px 1fr 380px; min-height: 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .steps { border-right: 1px solid var(--line); overflow: auto; padding: 10px 0; }
 .step { padding: 6px 14px; cursor: pointer; border-left: 3px solid transparent; }
@@ -117,6 +118,8 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     <span class="conn"><span class="dot" id="inbdot"></span><span id="inbtxt">No inbox</span></span>
     <button class="btn small" id="setupbtn">Folders…</button>
     <span class="spacer"></span>
+    <label class="squad" title="Only parts for this armour are listed (bases, belt bits and Bits fit them all)">Armour <select id="armour" aria-label="Armour">
+      <option>Tacticus</option><option>Terminator</option><option>Gravis</option></select></label>
     <label class="squad">Squad <input type="number" id="squadn" min="1" max="10" value="1" aria-label="Models in the squad"></label>
     <button class="btn" id="clearbtn" title="Start the squad again">New squad</button>
     <button class="btn primary" id="sendbtn" disabled>Send to Blender</button>
@@ -1378,8 +1381,19 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     index: null, parts: [], byId: {}, types: {}, source: null, libHandle: null, inbHandle: null,
     libPath: "D:\\Kitbash Library", adaptor: 3, models: [{}], cur: 0, same: true, step: 0, slot: "base",
     hover: null, geo: {}, geoWait: {}, thumbs: {}, sentLog: [],
-    hide: {lines: [], paths: {}, words: [], types: []}, showHidden: false
+    hide: {lines: [], paths: {}, words: [], types: []}, showHidden: false, armour: "Tacticus"
   };
+  // ------------------------------------------------------------------ armour (Josh, Nov 9): Tacticus (all power armour:
+  // Tacticus, Heresy, Phobos), Terminator or Gravis, from the library's mark folder ("Maker - Mark\..."). Bases, Bits
+  // and belt bits fit them all.
+  var ARMOURS = ["Tacticus", "Terminator", "Gravis"];
+  var ANY_TYPES = {"Accessories": 1, "Grenades": 1, "Seals": 1, "Trophies": 1};
+  function armourOf(p) {
+    var top = String(p.path || "").split("\\")[0], mark = top.split(" - ").slice(1).join(" - ");
+    if (top === "Bases" || top === "Bits" || ANY_TYPES[p.type]) return "";
+    return mark === "Terminator" || mark === "Gravis" ? mark : "Tacticus";
+  }
+  function armourFits(p) { var a = armourOf(p); return !a || a === S.armour; }
   var params = new URLSearchParams(location.search);
   var $ = function (id) { return document.getElementById(id); };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
@@ -1551,7 +1565,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
   }
   function candidates(sl, all) {
     var st = STEPS[sl.step];
-    return S.parts.filter(function (p) { return st.types.indexOf(p.type) >= 0 && asFor(p, sl) && (all || S.showHidden || !hiddenBy(p)); });
+    return S.parts.filter(function (p) { return st.types.indexOf(p.type) >= 0 && armourFits(p) && asFor(p, sl) && (all || S.showHidden || !hiddenBy(p)); });
   }
 
   // ------------------------------------------------------------------ placing a model
@@ -1695,14 +1709,14 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
           inst.W = onto(T(at[0], at[1], at[2]), as, "Base") || T(at[0], at[1], at[2]); inst.free = true;
           out.push(inst); by.base = inst; return;
         }
-        if (!host) { inst.note = "needs " + (SLOT[hk] ? STEPS[SLOT[hk].step].label.toLowerCase() : hk); out.push(inst); return; }
+        if (!host) { inst.note = "needs " + (SLOT[hk] ? STEPS[SLOT[hk].step].label.toLowerCase() : hk); inst.nospot = true; out.push(inst); return; }
         var sock = sl.sock;
         if (spec(p).spans) sock = "Shoulder R";
         var hs = socketsOf(host)[sock];
         var via = (spec(p).adaptor || {})[sock];
         if (!hs && via) {               // a wing: its connector goes on the pack's Wing Mount first, the wing on the connector
           var vs = socketsOf(host)[via], conn = connectorOf(p);
-          if (!vs || !conn) { inst.note = !vs ? "no " + via + " on this back" : "its connector isn't in the library"; out.push(inst); return; }
+          if (!vs || !conn) { inst.note = !vs ? "no " + via + " on this back" : "its connector isn't in the library"; inst.nospot = !vs; out.push(inst); return; }
           var cas = asFor(conn, sl);
           var cw = cas && onto(vs, cas, via);
           if (cw) {
@@ -1712,7 +1726,10 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
           }
         }
         if (!hs) {
-          inst.note = host.part.anchored ? "no " + sock + " on these " + STEPS[SLOT[hk].step].label.toLowerCase() : "Blender finds the " + sock + " socket";
+          // only a wrist, pad or shin spot can still be found in Blender (on parts Prepare hasn't anchored yet)
+          var findable = !host.part.anchored && /^(Hand|Pad|Shin)( [RL])?$/.test(sock);
+          inst.note = findable ? "Blender finds the " + sock + " socket" : "no " + sock + " on these " + STEPS[SLOT[hk].step].label.toLowerCase();
+          inst.nospot = !findable;
           out.push(inst); return;
         }
         inst.W = onto(hs, as, sock);
@@ -2024,9 +2041,34 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
       if (pick && (k === "armR" || k === "armL")) delete S.models[i].arm2;
     });
   }
+  function prune() {             // picks with nowhere to go on these models (left over after a torso, legs or arms swap, or
+    var gone = [];               // from another armour) are dropped, so only parts that fit get sent
+    S.models.forEach(function (m, i) {
+      var again = true;
+      while (again) {            // dropping a host can strand what hangs from it: repeat until nothing changes
+        again = false;
+        layout(i).forEach(function (x) {
+          if (!m[x.slot] || x.slot === "torso" || x.slot === "legs" || x.slot === "base") {
+            if (m[x.slot] && x.slot !== "base" && !armourFits(x.part)) { gone.push(x.part.name); delete m[x.slot]; again = true; }
+            return;
+          }
+          if (x.nospot || !armourFits(x.part)) { gone.push(x.part.name); delete m[x.slot]; again = true; }
+        });
+      }
+    });
+    return gone.filter(function (n, j) { return gone.indexOf(n) === j; });
+  }
   function choose(id) {          // a click picks; Next moves on, so you can try parts in place first
     setPick(S.slot, {id: id});
-    status("");
+    var gone = prune();
+    status(gone.length ? "Taken off (no spot for them now): " + gone.join(", ") : "");
+    renderAll();
+  }
+  function setArmour(a) {
+    if (ARMOURS.indexOf(a) < 0 || a === S.armour) return;
+    S.armour = a; $("armour").value = a;
+    var gone = prune();
+    status(gone.length ? "Taken off (not " + a + "): " + gone.join(", ") : "");
     renderAll();
   }
 
@@ -2042,7 +2084,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
         if (!pk) return;
         var p = S.byId[pk.id];
         var inst = placed.filter(function (x) { return x.slot === k; })[0];
-        if (!p || !inst || inst.covered) return;
+        if (!p || !inst || inst.covered || inst.nospot) return;      // nowhere to put it: not sent
         var sl = SLOT[k];
         var req = {schemaVersion: 1, path: S.libPath.replace(/[\\\/]+$/, "") + "\\" + p.path, name: p.name, title: p.name,
           category: p.type, tags: [], itemId: "", sentAt: new Date().toISOString(), model: id};
@@ -2159,6 +2201,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
       while (S.models.length < n) S.models.push(Object.assign({}, S.models[0]));
       S.models.length = n; if (S.cur >= n) S.cur = n - 1; framed = -1; renderAll();
     });
+    $("armour").addEventListener("change", function () { setArmour($("armour").value); });
     $("clearbtn").addEventListener("click", function () { S.models = S.models.map(function () { return {}; }); S.cur = 0; goSlot("base"); framed = -1; status(""); });
     $("sendbtn").addEventListener("click", send);
     $("setupbtn").addEventListener("click", function () { setupUI(true); });
@@ -2174,7 +2217,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
 
   // ------------------------------------------------------------------ start
   initView(); bind();
-  window.__sb = {S: S, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
+  window.__sb = {S: S, setArmour: setArmour, armourOf: armourOf, prune: prune, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
   if (window.SB_DEMO) {                                       // the online demo: its own files, nothing sent
     S.source = "./";
     $("setupbtn").hidden = true;

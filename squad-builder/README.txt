@@ -39,7 +39,12 @@ Using it
      won't let a page write into AppData, where TIOW's own inbox is). The dot
      at the top says "Blender listening" while Blender is open.
      Next time, one click on the page reconnects it (the browser asks).
-  2. Set Squad to how many models you want.
+  2. Pick the Armour at the top: Tacticus (all power armour - Tacticus,
+     Heresy and Phobos kits), Terminator or Gravis. Only parts for that
+     armour are listed; bases, belt bits and Bits show for all. Switching
+     takes off picks that don't fit the new armour. (No Terminator or
+     Gravis torso has attachment spots yet, so those models are put
+     together in Blender.) Then set Squad to how many models you want.
   3. Work down the steps: Base, Legs, Torso, then arms, head, neck guard,
      chest equipment, chest insert, back, wings, pads, weapons, shin pads, hip plates,
      holsters, buckle, tabard, loincloth and belt. The legs stand on the base as soon as you pick
@@ -50,6 +55,9 @@ Using it
      Left are separate slots for arms, pads, weapons and shins: a right part
      with a maker's left copy appears in both, and pads and shin pads can
      always be mirrored. An arm with its weapon built in skips its hand.
+     Swapping the torso, legs or arms takes off anything that no longer has
+     a spot (chest equipment on a torso without the spots, shin pads on
+     legs without shin spots...), and such parts are never sent.
   4. With more than one model, "Same part for every model" (on by default)
      puts each pick on every model. Untick it to pick for each model in
      turn: five torsos, one after another, then five legs, and so on. A
