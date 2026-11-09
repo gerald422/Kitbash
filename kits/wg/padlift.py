@@ -51,7 +51,7 @@ def push_dir(trees, P):
     return acc / np.linalg.norm(acc) if n else None
 for rel, r in pads.items():
     if rel in out: continue
-    V = stl(U + rel); V = V[::max(1, len(V) // 4000)]; F = M(r["fit"]); W0 = S_pad @ F
+    V = stl(U + rel) * r.get("scale", 1.0); V = V[::max(1, len(V) // 4000)]; F = M(r["fit"]); W0 = S_pad @ F   # fits are in the maker's scaled coords
     c0 = c = cut(trees, tf(W0, V)); move = np.zeros(3); d = push_dir(trees, tf(W0, V)) if c0 > 0.45 else None
     while d is not None and c > 0.4 and np.linalg.norm(move) < 1.0:
         move = move + 0.05 * d; L = np.eye(4); L[:3, 3] = move; c = cut(trees, tf(L @ W0, V))

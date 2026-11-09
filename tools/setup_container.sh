@@ -18,8 +18,8 @@ A=/root/.config/blender/5.1/scripts/addons
 mkdir -p "$A"
 Z=/mnt/user-data/uploads/Desktop/part_sockets_6.2.0.zip
 if [ -f "$Z" ] && [ ! -d "$A/part_sockets" ]; then
-  T=$(mktemp -d); (cd "$T" && unzip -q "$Z"); P=$(dirname "$(find "$T" -name blender_manifest.toml | head -1)")
-  cp -r "$P" "$A/part_sockets"
+  T=$(mktemp -d); (cd "$T" && unzip -q "$Z"); M=$(find "$T" -name blender_manifest.toml | head -1)
+  if [ -n "$M" ]; then cp -r "$(dirname "$M")" "$A/part_sockets"; else echo "!! $Z holds no Part Sockets add-on"; fi
 fi
 [ -d "$A/part_sockets" ] || echo "!! Part Sockets missing: stage Desktop\\part_sockets_6.2.0.zip from Josh's PC first"
 cp "$R/addons/tiow_inbox.py" "$R/addons/kitbash_finalise.py" "$A/"

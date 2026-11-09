@@ -106,6 +106,16 @@ Take reference values from the existing library sidecars rather than retyping th
 **Parts exported together**
 - Parts the maker exports in one assembly frame (a whole kit, a bike, a one-off character) keep that frame. Fits come from the assembly, so they land as the maker posed them.
 
+## Fast path: a new maker's helmets, pauldrons and loose bits
+
+`kits/creator/add_creator.py` does the whole job in about eight tool calls (its docstring has the steps and the
+config keys; `kits/creator/wargame-exclusive.json` is the example). Helmets/heads get the Neck fit (AM Helmet 1 seat),
+pauldrons the Pad fit (pad 62, pushed out where thicker inside); every other type is filed without a fit and logged.
+Parts whose match fails a gate (neck ring > 0.30 mm off, pad 62 only matching at the scale limit) are filed without a
+fit too. On the PC, `Squad Builder\add_creator_pc.py survey ... --stage` surveys and packs one archive to stage, and
+the delivery's `on_pc.py apply` does the md5 checks, backups and writes in one call. Torsos, arms, legs, packs and
+other fitted types still need the procedure below (a kit script), then can be filed with the same delivery.
+
 ## Procedure
 
 1. **Scope with Josh.** Settle which maker, kits and part types are in. Skip by default: posed bodies, presupported copies, and duplicates (keep raw files only).

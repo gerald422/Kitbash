@@ -1,0 +1,20 @@
+{
+ "task": "wge-dryrun-2026-11-09",
+ "src": "WarGame Exclusive",
+ "root": "WargamesPrint - Tacticus\\BL",
+ "prefix": "WargamesPrint BL",
+ "scale": 1.0,
+ "date": "Nov 9",
+ "skip": ["CONNECTORS_"],
+ "types": [
+  {"match": "HELMET_(\\d+)", "name": "Helmet {1}", "category": "Heads", "fit": "head"},
+  {"match": "HEAD_(\\d+)", "name": "Head {1}", "category": "Heads", "fit": "head"},
+  {"match": "PAD_(\\d+)", "name": "Pad {1}", "category": "Shoulder Pads", "fit": "pad"},
+  {"match": "SHOULDER_SHIELDS_(\\d+)", "name": "Shoulder Shield {1}", "category": "Unsorted", "why": "shoulder shield (a pad ornament): no spot for it yet"},
+  {"match": "NECKLACE_(\\d+)", "name": "Necklace {1}", "category": "Unsorted", "why": "necklace: no spot for it yet"},
+  {"match": "ARM_PROTECTION_(\\d+)", "name": "Arm Plate {1}", "category": "Forearm Armour", "why": "forearm plate: no spot for it yet"},
+  {"match": "KNEE_PROTECTION_(\\d+)", "name": "Knee Plate {1}", "category": "Knee Pads", "why": "knee plate: no fit yet"},
+  {"match": "LEG_PROTECTION_(\\d+)", "name": "Leg Plate {1}", "category": "Unsorted", "why": "thigh plate: no spot for it yet"}
+ ],
+ "nofit": {"PAD_7": "the pad-62 match doesn't hold for it; place it by eye"}
+}

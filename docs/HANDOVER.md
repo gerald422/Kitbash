@@ -29,7 +29,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: WarGame Exclusive (`kits/wg/`), armour dropdown + Marta marks re-filed (`library-tools/move_marks.py`), chest inserts + TIOW 1.17.8 (`kits/inserts/`), `96b651b` Springles additions + Redwarden Techmarine kit (323 parts, `kits/rw_spr/`), `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
+- Latest commits: add-a-maker script (`kits/creator/`), WarGame Exclusive (`kits/wg/`), armour dropdown + Marta marks re-filed (`library-tools/move_marks.py`), chest inserts + TIOW 1.17.8 (`kits/inserts/`), `96b651b` Springles additions + Redwarden Techmarine kit (323 parts, `kits/rw_spr/`), `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
   `74573a8` plates seat for any legs (`legs_frame.py`), `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
@@ -74,7 +74,7 @@ Foundation\Blender\5.1` (and its `extensions\user_default\part_sockets`), `~\App
 **Installed now (md5, first 8):** TIOW Inbox 1.17.8 `688d6f96` (bridge + Blender add-ons), bridge README
 `256a6a0f`, `_library.json` `c43457c7`, page `86e7d95b`, page README `3ed66060`, `share_server.py` `fdd1c5d1` + `Share Squad Builder.bat` / `- people.bat` / `Build received models.bat`, `build_index.py` `32f1bf8f`, `prepare_builder.py` `47521b31`,
 `_builder\index.json` `c6adbb44` (6,564 parts, all with previews; Prepare run by Josh Nov 6, pad fix Nov 8, the 45 insert parts, the 325 re-filed Marta parts and 68 WarGame Exclusive parts Nov 9 written in place; ASCII-escaped compact JSON), `_builder\no_fit.txt` 1,229 parts, `_sources.csv` `94022a79` (6,887 rows: +68 WarGame Exclusive; +323 Springles / Redwarden Nov 9, not in the index until Josh runs Prepare; +45 inserts), `_hidden.txt` `8360ab52` (Josh's edits),
-Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
+Finalise 0.3.3 `5aea4027`, `add_creator_pc.py` (page folder) `e3982ec7`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, `aaa99390` / `0f51acbf`). Josh restarts Blender after an add-on change.
 
 ## How the work is done
 
@@ -92,6 +92,8 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   `build_index.build(minilib)` (a folder with their files and a `_sources.csv`), merged in with their previews;
   write it back compact (`separators=(",", ":")`, `ensure_ascii=True` since Prepare's Nov 6 run; check it round-trips
   byte-identically first, `kits/inserts/merge_index.py`). Previews need `fast_simplification` (pip) or they come out holed.
+- **A new maker's helmets / pauldrons / loose bits:** `kits/creator/add_creator.py` (survey + stage on the PC with
+  `Squad Builder\add_creator_pc.py`, then `unpack`, `go`, commit the delivery, `on_pc.py apply`, `record`); see its docstring.
 - **Josh's corrections in a blend** (`kits/corrections/query-*`): list the parts (`list_src.py`), rebuild the same
   model with TIOW in the container and compare each part to his relative to the torso (`rebuild.py`), so TIOW's own
   rock/settle/base rise isn't mistaken for his moves; then save with TIOW's `correct_socket` / `correct_part`
