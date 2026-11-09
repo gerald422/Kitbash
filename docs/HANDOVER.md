@@ -90,7 +90,8 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
 - **The page index:** update `_builder\index.json` in place so Josh needn't run Prepare: changed parts get
   `build_index.part_data(new sidecar)` (fits, sockets, exact, adaptor); new parts come from
   `build_index.build(minilib)` (a folder with their files and a `_sources.csv`), merged in with their previews;
-  write it back compact (`separators=(",", ":")`, it round-trips byte-identically).
+  write it back compact (`separators=(",", ":")`, `ensure_ascii=True` since Prepare's Nov 6 run; check it round-trips
+  byte-identically first, `kits/inserts/merge_index.py`). Previews need `fast_simplification` (pip) or they come out holed.
 - **Josh's corrections in a blend** (`kits/corrections/query-*`): list the parts (`list_src.py`), rebuild the same
   model with TIOW in the container and compare each part to his relative to the torso (`rebuild.py`), so TIOW's own
   rock/settle/base rise isn't mistaken for his moves; then save with TIOW's `correct_socket` / `correct_part`
