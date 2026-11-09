@@ -1,4 +1,4 @@
-# Kitbash build: handover (8 Nov 2026)
+# Kitbash build: handover (9 Nov 2026)
 
 Everything needed to pick this work up in a fresh Claude session. The full history, with every measured value and
 decision, is `docs/project-notes.md` (the Project doc `claude/part-sockets-tiow-integration.md` is an older copy: from Nov 3 the repo file is the current one).
@@ -29,7 +29,7 @@ Josh's Warhammer 40K kitbashing pipeline, three pieces that share one part libra
   previews - `.gitignore` blocks them; the makers' files are paid).
 - Branches: `main` = what is installed on Josh's PC. `bionic-1.18` = TIOW Inbox 1.18 bionic legs + Finalise 0.3.2,
   on hold (Josh: don't deliver it); it predates 1.17.1-1.17.5, so merge `main` in when it resumes.
-- Latest commits: `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
+- Latest commits: `96b651b` Springles additions + Redwarden Techmarine kit (323 parts, `kits/rw_spr/`), `ffdcce2` pad fix (458 arm Pad sockets + BBoosty/CyberBrush pad fits, `kits/pads/`), `816bbc1` builder-errors diagnosis (`kits/audit/`), `943f7be` parts filed without fits (2,257, `kits/nofit/`), `ddb2537` Marta shin spots, `28a6168` Marta hip plates, `c079870` Marta missed parts + tilt blend, `3215109` Squad Builder sharing (`share_server.py`), `8daa52e` Mar Fil Intercessor + Techmarine plates,
   `74573a8` plates seat for any legs (`legs_frame.py`), `f3e5c81` TN plates installed (465 legs), `f567bd6` Old Style Space Knight MK8 + TIOW 1.17.7, `57c09ac` / `5aeeb9a` plates, buckle, holsters, tabards, trophies (TIOW 1.17.6), `0954800` Marta one-handed parts (613), `0ad4c92` this handover, `4568b9a` blade wings (1.17.5), `453c8f6` loincloth 3 fit, `5426f65` loincloths own type
   (1.17.4), `be69b80` query.blend corrections (1.17.3).
 - Commit messages end with:
@@ -159,7 +159,8 @@ Finalise 0.3.3 `5aea4027`, `Caliper Swap.bat` + `caliper_swap.py` (page folder, 
   `kits/nofit/no_fit_all.csv` (type, status, path, how the type was found); everything left out and why:
   `kits/nofit/setup-kits/log_all.csv`, `kits/nofit/marta/skipped.txt`. Types are best guesses - Josh retypes as he goes.
   - **Waiting on Josh:** which never-set-up kits go in (`kits/nofit/setup-kits/never_set_up.json`: Mar Fil 20 kits, the
-    Iron Hands folder 27 kits plus its `Iron bits`, the Techmarine Conversion Kit, Springles mk6 cybernetics, TN Primus
+    Iron Hands folder 27 kits plus its `Iron bits`, the Techmarine Conversion Kit (its `(1)` copy's pads, helmets and Prime
+    torso went in Nov 9), Springles mk6 cybernetics, TN Primus
     Medicae / WGBL). File them with `classify_all.py` (add the tops to `MAKERS`), same delivery, then one Prepare.
   - The repo has 5 Marta sidecars the library no longer has (old paths of parts since moved; `sync_sidecars.py` reports
     them, not pruned).
