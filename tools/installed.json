@@ -1,0 +1,23 @@
+{
+ "_about": "What is installed on the PC. 'repo': the installed file must equal that repo file (no hash to keep up). 'md5': files that only live on the PC (first 8 of the md5; rewrite with `tools/kb.py record`). Check with `tools/kb.py verify`. Roots: tools/kb.py roots.",
+ "versions": {"TIOW Inbox": "1.17.8", "Kitbash Finalise": "0.3.3", "Part Sockets": "6.2.0 (Josh's own, not in the repo)"},
+ "files": [
+  {"root": "addons", "path": "tiow_inbox.py", "repo": "addons/tiow_inbox.py"},
+  {"root": "addons", "path": "kitbash_finalise.py", "repo": "addons/kitbash_finalise.py"},
+  {"root": "bridge", "path": "tiow_inbox.py", "repo": "addons/tiow_inbox.py"},
+  {"root": "bridge", "path": "README.txt", "repo": "bridge/README.txt"},
+  {"root": "bridge", "path": "_library.json", "repo": "bridge/_library.json"},
+  {"root": "page", "path": "Squad Builder.html", "repo": "squad-builder/Squad Builder.html"},
+  {"root": "page", "path": "README.txt", "repo": "squad-builder/README.txt"},
+  {"root": "page", "path": "build_index.py", "repo": "squad-builder/build_index.py"},
+  {"root": "page", "path": "prepare_builder.py", "repo": "squad-builder/prepare_builder.py"},
+  {"root": "page", "path": "Prepare Squad Builder.bat", "repo": "squad-builder/Prepare Squad Builder.bat"},
+  {"root": "page", "path": "share_server.py", "repo": "squad-builder/share_server.py"},
+  {"root": "page", "path": "add_creator_pc.py", "repo": "kits/creator/on_pc.py"},
+  {"root": "page", "path": "caliper_swap.py", "repo": "library-tools/caliper_swap.py"},
+  {"root": "page", "path": "Caliper Swap.bat", "repo": "library-tools/Caliper Swap.bat"},
+  {"root": "lib", "path": "_sources.csv", "repo": "library/_sources.csv"},
+  {"root": "lib", "path": "_hidden.txt", "md5": "8360ab52", "note": "Josh edits it from the page: a difference is his, merge with it"},
+  {"root": "lib", "path": "_builder/index.json", "md5": "c6adbb44", "note": "6,564 parts; Prepare or an in-place update changes it"}
+ ]
+}

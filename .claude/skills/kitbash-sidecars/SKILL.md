@@ -5,7 +5,11 @@ description: Use when adding a new maker, kit or part type to Josh's Kitbash Lib
 
 # Generating sidecars for the Kitbash Library
 
-A sidecar `<part>.sockets.json` sits beside each STL in `D:\Kitbash Library`. TIOW Inbox reads it on import (sockets, fits, category). Prepare Squad Builder reads it to build the page's index. The code and every sidecar are in this repo (`library/` mirrors the library's folders). **STLs never go in the repo.** The history of every kit done so far, with measured values, is in `docs/project-notes.md`: read the section for the nearest kit before starting. Starting in a fresh session: `docs/HANDOVER.md` (repo, PC paths, installed versions, container setup with `tools/setup_container.sh`).
+A sidecar `<part>.sockets.json` sits beside each STL in `D:\Kitbash Library`. TIOW Inbox reads it on import (sockets, fits, category). Prepare Squad Builder reads it to build the page's index. Every sidecar is in this repo (`library/` mirrors the library's folders). **STLs never go in the repo.**
+
+**Start here:**
+- A new maker's heads, pauldrons and loose bits: run `kits/creator/add_creator.py` (its docstring is the whole procedure; one JSON config per maker). Don't redo those steps by hand.
+- Anything else (a new part family, a new rule): read the nearest kit's entry via `docs/notes/INDEX.md`, write a script against `kb/` (`kb.geo`, `kb.sidecar`, `kb.index`, `kb.deliver`), deliver with `tools/kb.py apply`. Standing rules and the PC are in `CLAUDE.md` and `docs/reference.md`.
 
 ## Ground rules (Josh)
 
@@ -116,34 +120,17 @@ fit too. On the PC, `Squad Builder\add_creator_pc.py survey ... --stage` surveys
 the delivery's `on_pc.py apply` does the md5 checks, backups and writes in one call. Torsos, arms, legs, packs and
 other fitted types still need the procedure below (a kit script), then can be filed with the same delivery.
 
-## Procedure
+## Procedure (when add_creator.py doesn't cover it)
 
-1. **Scope with Josh.** Settle which maker, kits and part types are in. Skip by default: posed bodies, presupported copies, and duplicates (keep raw files only).
-2. **Survey on the device.** Use `device_bash` in `D:\new cults\...`.
-   - List the files by folder; get triangle counts and bounding boxes.
-   - Work out how the maker exports: kit frame, print plate, Y-up, or scattered.
-   - Render a small contact sheet from a few staged files to confirm front, up and left/right before writing any rule. A toe or knee heuristic has been wrong before.
-3. **Write a build script** in `kits/<maker-or-kit>/`.
-   - It reads the STLs with numpy and works out sockets and fits per the conventions.
-   - It writes sidecars into a staging folder that mirrors the library's paths.
-   - Reuse `kits/geo.py`, `kits/nc/geo.py` and the ICP and disc helpers.
-   - Record how each value was found in `props.tiow_from` / `notes`.
-4. **Check a subset in Blender.** Use the build container's `bpyenv`.
-   - Build 2–4 marines with TIOW Inbox's `import_request`, using the staged sidecars.
-   - Mix the new kit with Mar Fil parts both ways: new arms on a Mar Fil torso, Mar Fil arms on the new torso.
-   - Check every joint snaps, the closest approach and the deepest cut (≲0.65 mm, as within a kit), and render.
-   - Send Josh the renders before merging.
-5. **Into the library.**
-   - **New files:** `library-tools/plan_library.py --work --survey --only <plan>`, then `build_library.py --work --only`. Never a full re-run, because it overwrites sidecars.
-   - **Names:** apply the naming rules with `plan_names.py` / `rename_library.py` (log, `--undo`).
-   - **Mirror copies:** fold them with `fold_twins.py` (fold only if median ≤0.05 mm and 95% within 0.15 mm).
-   - **Existing parts:** merge the new keys in, back up first, and keep Josh's anchors.
-   - **Deliver** each file staged under a new path, `device_commit_files`, then check the md5 on the device.
-6. **Prepare.** Josh runs `Prepare Squad Builder.bat`, or start it from his Desktop folder. It only redoes new or changed parts. Read `_builder\no_fit.txt` for parts still without a fit.
-7. **Record it.**
-   - Run `library-tools\Export sidecars to repo.bat`, or `python library-tools/sync_sidecars.py export "D:\Kitbash Library" library` in the clone.
-   - Commit the build script and sidecars to `main` with the session attribution lines, and push.
-   - Add a short section to `docs/project-notes.md`: what was decided, the reference values, the test results, and the files delivered.
+1. **Scope with Josh.** Which maker, kits and part types are in. Skip by default: posed bodies, presupported copies, duplicates (raw files only).
+2. **Survey on the PC** (`kits/creator/on_pc.py survey`, or your own `device_bash` listing): files by folder, triangle counts, bounding boxes. Work out how the maker exports (kit frame, print plate, Y-up, scattered). Render one small contact sheet to confirm front, up and left/right before writing a rule: a toe or knee heuristic has been wrong before.
+3. **Write one build script** in `kits/<maker-or-kit>/` on `kb.geo`. It works out sockets and fits per the conventions and records how each value was found (`props.tiow_from`, `notes`). Gate each fit on a number (match residual), as `add_creator.py`'s `GATES` do; parts that fail the gate are filed without a fit and logged, not dropped.
+4. **Check a subset in Blender**: 2-4 marines through TIOW's `import_request`, the new kit mixed with Mar Fil both ways. Every joint snaps; closest approach and deepest cut within 0.65 mm. Send Josh the sheet before merging.
+5. **Write sidecars** with `kb.sidecar.merge` onto what is on the PC (never a full `build_library.py` re-run: it overwrites). Names by `plan_names.py`; mirror copies folded with `fold_twins.py` (median <= 0.05 mm and 95% within 0.15 mm).
+6. **Deliver** with `kb.deliver` + `tools/kb.py apply`: sidecars, `_sources.csv` rows (CRLF), the index updated in place (`kb.index`) with previews, hidden lines.
+7. **Record it**: `tools/validate.py`, sidecars exported into `library/`, commit and push, a `docs/notes/NNN-<slug>.md` entry (decisions, reference values, test numbers, files delivered) and its `INDEX.md` line, `docs/OPEN.md`.
+
+A new part type also needs: `joints.json` then `tools/gen_joints.py` (add-on table, bridge template, partTypes), a step or slot in `squad-builder/src/app.js` (`python3 build_page.py`), a short name in `plan_names.py`.
 
 ## Fixing one part later
 
@@ -155,10 +142,3 @@ Don't regenerate a whole kit for a small error. In Blender, move the part and us
 Then run Prepare (or update the index entries in place), export the sidecars and commit.
 
 When Josh sends a blend with parts moved by hand (`Desktop\query.blend`): rebuild the same model with TIOW in the container and compare each part relative to the torso (`kits/corrections/query-*/rebuild.py`), so TIOW's own rock/settle/base rise isn't taken for his moves; save the moves with TIOW's own `correct_socket` / `correct_part` (`both=False`, `folder=False`), rebuild to confirm, deliver.
-
-## Delivering
-
-- Staging copies from the PC are limited to 7 folder levels below a connected folder: tar deeper files into a connected folder and stage the archive.
-- Before replacing a file on the PC, check its md5 is still the one you worked from; back up to `D:\Kitbash Library\_backups\<task-date>\` (add-ons and page: `TIOW Blender bridge\old-<version>\`); `mkdir` new folders first; md5-check everything after `device_commit_files`.
-- Update `_builder\index.json` in place (`build_index.part_data` for changed parts; `build_index.build` on a small folder for new ones, plus their previews; compact JSON) and append `_sources.csv` rows (CRLF), so Josh needn't run Prepare.
-- A new part type also needs: TIOW's `DEFAULT_JOINTS` (and the bridge `_library.json` template), the page's `JOINTS` and a step or slot in `squad-builder/src/app.js` (`python3 build_page.py`), `library-tools/partTypes.json`, `plan_names.py`.

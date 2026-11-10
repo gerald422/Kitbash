@@ -9,7 +9,7 @@ the sidecars (`<part>.sockets.json`: sockets, fits and anchors) that make them f
 
 | Folder | What |
 |---|---|
-| `addons/tiow_inbox.py` | TIOW Inbox (Blender add-on): imports and snaps parts, Save Correction, bases settle |
+| `addons/tiow_inbox.py` (edited as `addons/tiow_inbox_src/`) | TIOW Inbox (Blender add-on): imports and snaps parts, Save Correction, bases settle |
 | `addons/kitbash_finalise.py` | Kitbash Finalise (Blender add-on): booleans a model into print pieces with pegs and letters |
 | `bridge/` | TIOW-FTRP side: `apply-blender-bridge.mjs` (Send to Blender patch), `_library.json`, the add-on's README, the lift-out script |
 | `squad-builder/` | The Squad Builder page (`src/`, built into `Squad Builder.html` by `build_page.py`), Prepare (`prepare_builder.py`, `build_index.py`) and its tests |
@@ -17,7 +17,9 @@ the sidecars (`<part>.sockets.json`: sockets, fits and anchors) that make them f
 | `library-tools/` | Building, renaming and folding the library; `sync_sidecars.py` copies sidecars between the library and `library/` |
 | `kits/` | The scripts that worked out each kit's sockets and fits |
 | `tests/`, `finalise/tests/` | Blender test scripts (written for the build machine's paths) |
-| `docs/project-notes.md` | The full history: decisions, measurements, versions |
+| `docs/notes/` | The full history, one entry per task (`INDEX.md` first); `docs/OPEN.md` what's open; `docs/reference.md` how the work is done |
+| `kb/`, `tools/` | Shared code for kit scripts; `tools/validate.py` (run before a commit), `tools/kb.py` (verify / apply on the PC), `joints.json` + `tools/gen_joints.py` (the one table of part types), `tools/build_addon.py` (the add-on's sections) |
+| `Run checks.bat` | On the PC: installed files, repo checks and the golden placements, at no Claude usage |
 
 ## Install
 
@@ -37,6 +39,5 @@ then commit. `sync_sidecars.py import library "D:\Kitbash Library"` puts a commi
 
 ## Branches
 
-- `main`: what is installed (TIOW Inbox 1.17.5, Finalise 0.3.3).
-- `bionic-1.18`: the bionic legs work (TIOW Inbox 1.18, Finalise 0.3.2), on hold until the plug position is settled.
-  It predates 1.17.1-1.17.5, so those changes need merging in when it resumes.
+- `main`: what is installed (versions in `tools/installed.json`).
+- `bionic-1.18`: an earlier attempt at bionic legs, abandoned (Nov 10). Kept for reference only; the work restarts from scratch on `main`.
