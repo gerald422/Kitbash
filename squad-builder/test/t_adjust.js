@@ -53,8 +53,22 @@ const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDi
   const nreq = await ev(() => window.__sb.requestsFor().length);
   await page.click('#adjbtn');
   ck('Adjust opens its panel', await page.isVisible('#adj') && (await page.textContent('#adjname')).includes('Click a part'), null);
-  await ev(() => window.__sb.adj.select(0, 'torso'));
-  ck('a torso cannot be adjusted', /no socket fit/.test(await page.textContent('#status')), await page.textContent('#status'));
+  // the torso turns on the legs (saved as the legs' fit, the other way round); the arms go with it
+  const rel = async (a, b) => ev(([a, b]) => { const L = window.__sb.layout(0), f = s => L.find(x => x.slot === s).W; return f(a).clone().invert().multiply(f(b)).elements.slice(); }, [a, b]);
+  const tl0 = await rel('torso', 'legs'), ta0 = await rel('torso', 'armR');
+  await ev(() => { window.__sb.adj.select(0, 'torso'); const p = window.__sb.adj.pivot(); p.rotateZ(15 * Math.PI / 180); window.__sb.adj.changed(); });
+  const tl1 = await rel('torso', 'legs'), ta1 = await rel('torso', 'armR');
+  ck('the torso can be turned on the legs: 15 deg between them, arms unchanged on the torso', Math.abs(ang(tl0, tl1) - 15) < 0.01 && ang(ta0, ta1) < 1e-6 && dist(ta0, ta1) < 1e-9 && /Torso on the legs/.test(await page.textContent('#adjname')) && (await page.isDisabled('#adjseat')), [ang(tl0, tl1), await page.textContent('#adjname')]);
+  await page.click('#adjreset');
+  ck('...and Reset puts it back', ang(tl0, await rel('torso', 'legs')) < 1e-6, null);
+  // the handle in the part's own middle: turning leaves the middle where it was
+  const mid = () => ev(() => { const m = window.__sb.adj.meshes().find(m => m.parent.userData.slot === 'handR'); m.geometry.computeBoundingBox(); return m.geometry.boundingBox.getCenter(new THREE.Vector3()).applyMatrix4(m.matrix).toArray(); });
+  await ev(() => window.__sb.adj.select(0, 'handR')); const joint = await ev(() => window.__sb.adj.pivot().position.toArray());
+  await page.click('#adjatmiddle'); const m0 = await mid(), hp = await ev(() => window.__sb.adj.pivot().position.toArray()), wm0 = await W('handR');
+  await ev(() => { const p = window.__sb.adj.pivot(); p.rotateX(25 * Math.PI / 180); window.__sb.adj.changed(); });
+  const m1 = await mid(), wm1 = await W('handR'), d3 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  ck('Handle at Middle: the handle sits in the part, and turning 25 deg keeps its middle in place', d3(hp, m0) < 1e-6 && d3(hp, joint) > 2 && d3(m0, m1) < 0.02 && Math.abs(ang(wm0, wm1) - 25) < 0.01, [d3(hp, joint), d3(m0, m1), ang(wm0, wm1)]);
+  await page.click('#adjreset'); await page.click('#adjatjoint');
   const w0 = await W('handR'), a0 = await W('armR');
   await ev(() => { window.__sb.adj.select(0, 'handR'); const p = window.__sb.adj.pivot(); p.rotateY(20 * Math.PI / 180); p.translateZ(0.5); window.__sb.adj.changed(); });
   const w1 = await W('handR');

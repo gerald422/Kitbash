@@ -25,6 +25,13 @@ When an item is done, delete its line (the notes entry is the record).
 ## In progress: placement without by-eye work (Nov 10-12, notes 085)
 
 - Done: Adjust on the page (move / turn / snap / seat, Save fit, `_builder\\corrections.jsonl`).
+- Done: handle at joint or middle, torso turns on the legs, owner's saves from the shared page (`/correct`).
+- **Next, Josh's long-standing ask: origins at the joint in Blender.** TIOW Inbox keeps the maker's file origin (the
+  middle of the scene for kit-frame parts), so turning a part in Blender swings it about a far point. Put each
+  part's origin on its joint at import (keep the offset on the object so fits are still read in file coordinates).
+  Needs Blender and the golden run; touch Save Correction, anchors, variants, Finalise.
+- To install on the PC (it was unreachable): `kb.py install` for the page, README and `share_server.py`; then start
+  sharing and send Josh the trycloudflare address (`Desktop\\kitbash-calib\\share-start.bat` logs it).
 - Next: apply a correction to the whole folder / every host of a kit; then read the corrections log for joints that
   keep being fixed and turn repeated nudges into rules.
 - Then: the anchor finder as a button (no Claude): shoulder and wrist proven on Assault arms; held weapons, heads,

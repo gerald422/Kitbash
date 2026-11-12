@@ -1,7 +1,8 @@
 """Share Squad Builder with a few people, each with their own username and password (see README.txt, "Sharing").
 
-Serves only the page, the library's _builder\\index.json, its previews and _hidden.txt - never an STL - to people
-who sign in. Their "Send for printing" is checked against the index (library parts only) and saved under
+Serves only the page, the library's _builder\\index.json, its previews, _hidden.txt and the corrections log - never
+an STL - to people who sign in. The owner's "Save fit" (Adjust) is written into that part's sockets file and the
+corrections log, as the page does on this PC; everyone else's lasts only for their visit. Their "Send for printing" is checked against the index (library parts only) and saved under
 <library>\\_builder\\received\\<name>\\<date-time>\\, as the same request files the page writes when you press
 Send to Blender, so you choose when Blender builds them (--build). Listens on this PC only (127.0.0.1); a tunnel such
 as cloudflared gives it an https address to share. Python's standard library only (Blender's own Python will do).
@@ -9,6 +10,8 @@ as cloudflared gives it an https address to share. Python's standard library onl
   python share_server.py --add-user NAME         set or change a password (asked for, stored hashed)
   python share_server.py --remove-user NAME
   python share_server.py --list-users
+  python share_server.py --owner NAME            whose sign-in may save fits from the page's Adjust (one person;
+                                                 until it is set, the first name added)
   python share_server.py [--lib "D:\\Kitbash Library"] [--port 8765]          run it (Ctrl+C stops)
   python share_server.py --build [NAME]          the newest received models (anyone's, or NAME's) into
                                                  _builder\\inbox, where Blender with TIOW Inbox builds them
@@ -27,6 +30,7 @@ SENDS_PER_HOUR = 30                # per person
 FAILS, LOCK_MIN = 8, 15            # 8 wrong passwords within 10 minutes locks that address out for 15 minutes
 PREVIEW = re.compile(r"^/lib/_builder/previews/[0-9a-f]{6,64}\.bin$")
 NAME_OK = re.compile(r"^[A-Za-z0-9_.-]{1,32}$")
+MAX_FIX = 64 * 1024                # one saved fit
 SOCKET_OK = re.compile(r"^[A-Za-z0-9 ]{1,40}$")
 KEYS = ("schemaVersion", "path", "name", "title", "category", "tags", "itemId", "sentAt", "model", "socket", "at")
 
@@ -106,6 +110,86 @@ def clean_requests(body, lib, user):
         q["sentAt"] = time.strftime("%Y-%m-%dT%H:%M:%S")
         out.append(q)
     return out
+
+
+def owner_of(users):
+    """the one name whose sign-in may save fits: the one marked, else the first added"""
+    marked = [n for n, r in users.items() if isinstance(r, dict) and r.get("owner")]
+    return marked[0] if marked else next(iter(users), None)
+
+
+def _near(a, b):
+    return isinstance(a, list) and isinstance(b, list) and len(a) == len(b) == 16 and all(abs(x - y) <= 1e-6 for x, y in zip(a, b))
+
+
+def save_fit(lib, c, user):
+    """One fit saved from the page's Adjust: into the part's sockets file (fits + exact) and the corrections log.
+    Returns the log line, or raises ValueError (bad request) / RuntimeError (the file has changed, or isn't as expected).
+    Only library parts, only that one fit; the file is otherwise rewritten exactly as it was, and backed up once a day."""
+    if not isinstance(c, dict):
+        raise ValueError("bad request")
+    p = lib.parts().get((lib.libpath.rstrip("\\/") + "\\" + str(c.get("part", ""))).lower())
+    if p is None:
+        raise ValueError("not a library part")
+    sock, v, after, before = c.get("sock"), c.get("v"), c.get("after"), c.get("before")
+    if not (isinstance(sock, str) and SOCKET_OK.match(sock)) or not (v is None or (isinstance(v, int) and not isinstance(v, bool) and 0 <= v < 64)):
+        raise ValueError("bad socket")
+    ok = isinstance(after, list) and len(after) == 16 and all(isinstance(x, (int, float)) and not isinstance(x, bool) and abs(x) < 1e4 for x in after)
+    if ok:
+        r = [after[0:3], after[4:7], after[8:11]]
+        ok = [round(x, 6) for x in after[12:]] == [0, 0, 0, 1] and all(
+            abs(sum(r[k][i] * r[k][j] for k in range(3)) - (1.0 if i == j else 0.0)) < 2e-3 for i in range(3) for j in range(3))
+    if not ok:
+        raise ValueError("bad fit")
+    after = [float(round(x, 9)) + 0.0 for x in after]
+    rel = re.split(r"[\\/]", re.sub(r"\.stl$", "", p["path"], flags=re.I) + ".sockets.json")
+    path = os.path.join(lib.lib, *rel)
+    with lib.lock:
+        try:
+            raw = open(path, "rb").read()
+        except FileNotFoundError:
+            raw = None
+        if raw is None:
+            d, crlf, end, asc = {"schemaVersion": 1, "part": p["name"]}, False, "", False
+        else:
+            text = raw.decode("utf-8-sig")
+            body = text.replace("\r\n", "\n")
+            d, crlf, end = json.loads(body), "\r\n" in text, "\n" if body.endswith("\n") else ""
+            asc = next((a for a in (False, True) if json.dumps(d, indent=1, ensure_ascii=a) == body.rstrip("\n")), None)
+            if asc is None or raw.startswith(b"\xef\xbb\xbf"):
+                raise RuntimeError("that part's sockets file isn't in the usual form: save this one on the PC")
+        sub = d
+        if v is not None:
+            try:
+                sub = d["variants"][v].setdefault("sidecar", {})
+            except (KeyError, IndexError, TypeError, AttributeError):
+                raise ValueError("no such copy of that part")
+        fits = sub.setdefault("fits", {})
+        cur = fits.get(sock)
+        if cur is not None and not _near(cur, before) and not _near(cur, after):
+            raise RuntimeError("that fit has changed since the page loaded it: reload the page and try again")
+        if raw is not None:
+            b = os.path.join(lib.lib, "_backups", "page-corrections", time.strftime("%Y-%m-%d"), *rel)
+            if not os.path.exists(b):
+                os.makedirs(os.path.dirname(b), exist_ok=True)
+                with open(b, "wb") as f:
+                    f.write(raw)
+        fits[sock] = after
+        ex = sub.setdefault("exact", [])
+        if sock not in ex:
+            ex.append(sock)
+        out = json.dumps(d, indent=1, ensure_ascii=bool(asc)) + end
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path + ".tmp", "wb") as f:
+            f.write((out.replace("\n", "\r\n") if crlf else out).encode("utf-8"))
+        os.replace(path + ".tmp", path)
+        line = {"at": time.strftime("%Y-%m-%dT%H:%M:%S"), "by": user, "part": p["path"], "name": str(c.get("name", ""))[:120], "v": v, "sock": sock,
+                "host": c.get("host") if isinstance(c.get("host"), str) and len(c["host"]) < 400 else None,
+                "before": before if isinstance(before, list) and len(before) == 16 and all(isinstance(x, (int, float)) for x in before) else None, "after": after,
+                "mm": c.get("mm") if isinstance(c.get("mm"), (int, float)) else None, "deg": c.get("deg") if isinstance(c.get("deg"), (int, float)) else None}
+        with open(os.path.join(lib.lib, "_builder", "corrections.jsonl"), "a", encoding="utf-8", newline="\n") as f:
+            f.write(json.dumps(line, ensure_ascii=False) + "\n")
+    return line
 
 
 def save_received(lib, user, reqs):
@@ -257,6 +341,8 @@ def make_handler(st):
                 self.file(PAGE, "text/html; charset=utf-8", "no-store")
             elif path == "/lib/_builder/index.json":
                 self.file(os.path.join(lib, "_builder", "index.json"), "application/json", "private, no-cache")
+            elif path == "/lib/_builder/corrections.jsonl":
+                self.file(os.path.join(lib, "_builder", "corrections.jsonl"), "text/plain; charset=utf-8", "private, no-cache")
             elif path == "/lib/_hidden.txt":
                 self.file(os.path.join(lib, "_hidden.txt"), "text/plain; charset=utf-8", "private, no-cache")
             elif PREVIEW.match(path):
@@ -268,12 +354,26 @@ def make_handler(st):
             user = self.who()
             if user is None:
                 return
-            if urlsplit(self.path).path != "/send":
+            what = urlsplit(self.path).path
+            if what not in ("/send", "/correct"):
                 return self.send_plain(404, "Not found")
             try:
                 n = int(self.headers.get("Content-Length", "0"))
             except ValueError:
                 n = -1
+            if what == "/correct":             # a fit saved from Adjust: the owner's sign-in only
+                if user != owner_of(load_users(st.users_file)):
+                    return self.send_plain(403, "Saving fits needs the owner's sign-in.")
+                if not 0 < n <= MAX_FIX:
+                    return self.send_plain(413, "Too big.")
+                try:
+                    line = save_fit(st.lib, json.loads(self.rfile.read(n).decode("utf-8")), user)
+                except (ValueError, UnicodeDecodeError) as e:
+                    return self.send_plain(400, str(e))
+                except RuntimeError as e:
+                    return self.send_plain(409, str(e))
+                print(time.strftime("%H:%M:%S"), "%s saved a fit: %s on %s" % (user, line["part"], line["sock"]))
+                return self.send_plain(200, "saved")
             if not 0 < n <= MAX_BODY:
                 return self.send_plain(413, "Too big to send.")
             now = time.time()
@@ -312,6 +412,7 @@ def main():
     ap.add_argument("--password-stdin", action="store_true", help=argparse.SUPPRESS)
     ap.add_argument("--remove-user", metavar="NAME")
     ap.add_argument("--list-users", action="store_true")
+    ap.add_argument("--owner", metavar="NAME", help="whose sign-in may save fits from Adjust")
     ap.add_argument("--build", nargs="?", const="", metavar="NAME")
     a = ap.parse_args()
     if a.add_user is not None:
@@ -326,7 +427,10 @@ def main():
         if len(pw) < 10:
             sys.exit("Use at least 10 characters: nothing changed.")
         u = load_users(a.users)
+        was_owner = isinstance(u.get(a.add_user), dict) and u[a.add_user].get("owner")
         u[a.add_user] = hash_pw(pw)
+        if was_owner:
+            u[a.add_user]["owner"] = True
         save_users(a.users, u)
         print("Saved", a.add_user, "(%d people can sign in)." % len(u))
         return
@@ -335,8 +439,19 @@ def main():
         print("Removed" if u.pop(a.remove_user, None) else "No such name:", a.remove_user)
         save_users(a.users, u)
         return
+    if a.owner:
+        u = load_users(a.users)
+        if a.owner not in u:
+            sys.exit("No such name: add them first with --add-user " + a.owner)
+        for n, r in u.items():
+            r.pop("owner", None)
+        u[a.owner]["owner"] = True
+        save_users(a.users, u)
+        print(a.owner, "may now save fits from the shared page. Nobody else can.")
+        return
     if a.list_users:
-        print("\n".join(sorted(load_users(a.users))) or "Nobody yet: add people with --add-user NAME")
+        u = load_users(a.users)
+        print("\n".join(n + ("  (owner: may save fits)" if n == owner_of(u) else "") for n in sorted(u)) or "Nobody yet: add people with --add-user NAME")
         return
     if a.build is not None:
         return build(a.lib, a.build or None)

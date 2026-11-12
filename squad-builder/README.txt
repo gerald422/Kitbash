@@ -79,6 +79,11 @@ Adjust (top left of the view) lets you correct a placed part on the page:
      Seat: slides the part onto what it hangs from until they touch.
   3. Save fit. Reset puts it back as it was saved; Done leaves Adjust.
 
+"Handle at" chooses what the part turns about: Joint (the joint it hangs
+from) or Middle (the part's own middle, for small twists in place).
+Clicking the torso turns it on the legs, about the waist; the arms, head and
+pack go with it. That is saved as the legs' fit.
+
 Save changes where that part sits on that kind of joint everywhere it is used:
 on every model here, and in Blender, which places it exactly as you left it
 (no rocking or settling). A part shown mirrored shares its fit with the other
@@ -89,8 +94,13 @@ line to _builder\corrections.jsonl (what was moved, on what, and how far).
 That log is replayed when the page loads, so there is no need to run Prepare
 after a correction. The page works on the light preview meshes, so it is good
 to about 0.15 mm: for a flush contact, finish in Blender with Save Correction.
-A torso, and parts that are brought along (the adaptor, a wing's connector),
-can't be adjusted here.
+Parts that are brought along (the adaptor, a wing's connector) can't be
+adjusted here.
+
+On the shared page (below) Save fit is written on your PC only for the
+owner's sign-in; for anyone else it lasts their visit. The owner is the first
+person you added, or whoever you name:
+    python share_server.py --owner NAME
 
 Notes
   - "no fit yet" on a card: that part has no fit saved for this slot, so the

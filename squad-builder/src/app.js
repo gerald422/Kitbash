@@ -567,7 +567,7 @@
     S.models.forEach(function (_m, i) {
       layout(i).forEach(function (inst) {
         if (!inst.W) return;
-        var picked = S.adj && S.adj.on && S.adj.sel && S.adj.sel.i === i && S.adj.sel.slot === inst.slot;
+        var picked = S.adj && S.adj.on && S.adj.sel && S.adj.sel.i === i && adjShown() === inst.slot;
         var o = meshFor(inst, false, picked || (!(S.adj && S.adj.on) && i === S.cur && S.models.length > 1));
         if (o) { o.userData = {i: i, slot: inst.slot}; groups.model.add(o); box.expandByObject(o); }
       });
@@ -1016,28 +1016,38 @@
     box.hidden = !S.adj.on;
     if (!S.adj.on) return;
     var inst = adjInst(), d = adjDelta();
-    $("adjname").textContent = inst ? inst.as.name + " on " + inst.asock : "Click a part in the view";
+    $("adjname").textContent = !inst ? "Click a part in the view" : s.inv ? "Torso on the legs (saved as " + inst.as.name + " on " + inst.asock + ")" : inst.as.name + " on " + inst.asock;
+    ["joint", "middle"].forEach(function (m) { $("adjat" + m).classList.toggle("on", (S.adj.at || "joint") === m); $("adjat" + m).disabled = !inst; });
     $("adjdelta").textContent = inst ? (S.adj.pending ? "moved " + d[0].toFixed(2) + " mm, turned " + d[1].toFixed(1) + "°" : "as saved") : "";
     $("adjsave").disabled = $("adjreset").disabled = !S.adj.pending;
     ["move", "turn"].forEach(function (m) { $("adj" + m).classList.toggle("on", S.adj.mode === m); $("adj" + m).disabled = !inst; });
-    $("adjsnap").disabled = $("adjseat").disabled = !inst; $("adjsnap").classList.toggle("on", !!S.adj.snap);
+    $("adjsnap").disabled = $("adjseat").disabled = !inst || !!s.inv; $("adjsnap").classList.toggle("on", !!S.adj.snap);
   }
-  function adjSync() {                 // put the handle on the selected part's socket, moved as the try-out says
-    var inst = adjInst();
+  function adjShown() { var s = S.adj.sel; return s ? s.show || s.slot : null; }     // the part the handle is drawn for
+  function adjSync() {                 // put the handle on the selected part: at its joint, or in its own middle
+    var inst = adjInst(), s = S.adj.sel;
     if (!tc) return;
     if (!S.adj.on || !inst) { tc.detach(); tc.visible = false; adjPanel(); return; }
     var pe = S.adj.pending, L = pe && pe.id === inst.part.id && pe.sock === inst.asock ? pe.F.clone().multiply(pe.F0.clone().invert()) : new THREE.Matrix4();
-    S.adj.Sw0 = inst.Sw.clone();
-    inst.Sw.clone().multiply(L).decompose(pivot.position, pivot.quaternion, pivot.scale);
+    // D: how the fit has moved, in the world. U: what the handle shows (the other way round when the torso is the one being turned)
+    var D = inst.Sw.clone().multiply(L).multiply(inst.Sw.clone().invert()), U = s.inv ? D.clone().invert() : D;
+    var P = U.clone().multiply(inst.Sw);
+    if (S.adj.at === "middle") {
+      var m = adjMeshes().filter(function (o) { return o.parent.userData.i === s.i && o.parent.userData.slot === adjShown(); })[0];
+      if (m) { m.geometry.computeBoundingBox(); P.setPosition(m.geometry.boundingBox.getCenter(new THREE.Vector3()).applyMatrix4(m.matrixWorld)); }
+    }
+    S.adj.Sw0 = inst.Sw.clone(); S.adj.P0 = U.clone().invert().multiply(P);
+    P.decompose(pivot.position, pivot.quaternion, pivot.scale);
     pivot.scale.set(1, 1, 1); pivot.updateMatrixWorld(true);
     tc.attach(pivot); tc.visible = true; tc.setMode(S.adj.mode === "turn" ? "rotate" : "translate");
     adjPanel();
   }
   function adjSelect(i, slot) {
     var old = S.adj.sel;
-    S.adj.sel = {i: i, slot: slot};
+    // everything hangs off the torso, so turning the torso is saved as the legs' fit, the other way round, about the waist
+    S.adj.sel = slot === "torso" ? {i: i, slot: "legs", inv: true, show: "torso"} : {i: i, slot: slot};
     var inst = adjInst();
-    if (!inst) { S.adj.sel = old; status("That part has no socket fit to adjust (a torso, or a part brought along)."); return; }
+    if (!inst) { S.adj.sel = old; status(slot === "torso" ? "Pick legs first: the torso is adjusted where it meets them." : "That part has no socket fit to adjust (a part brought along)."); return; }
     var pe = S.adj.pending;
     if (pe && !(pe.id === inst.part.id && pe.v === inst.as.v && pe.mirror === !!inst.as.mirror && pe.sock === inst.asock)) {
       S.adj.pending = null; status("The adjustment you hadn't saved was dropped."); redraw();
@@ -1049,7 +1059,8 @@
     pivot.updateMatrix();
     var F0 = S.adj.pending ? S.adj.pending.F0 : fitMatrix(inst.as, inst.asock, true);
     if (!F0) return;
-    var L = S.adj.Sw0.clone().invert().multiply(pivot.matrix);
+    var U = pivot.matrix.clone().multiply(S.adj.P0.clone().invert()), D = S.adj.sel.inv ? U.invert() : U;
+    var L = S.adj.Sw0.clone().invert().multiply(D).multiply(S.adj.Sw0);
     S.adj.pending = {id: inst.part.id, v: inst.as.v, mirror: !!inst.as.mirror, sock: inst.asock, F0: F0, F: L.multiply(F0)};
     redraw(); adjPanel();
   }
@@ -1069,6 +1080,13 @@
       redraw(); adjSync();
       status("Saved: " + inst.as.name + " on " + sock + " (" + c.mm.toFixed(2) + " mm, " + c.deg.toFixed(1) + "°)" + where);
     };
+    if (SHARE) {                 // the PC writes the sockets file and the log, for the owner's sign-in only
+      return fetch("correct", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(c)}).then(function (r) {
+        if (r.ok) { done(", saved to the library on the PC. Blender will place it the same way."); return c; }
+        if (r.status === 403) { done(" for this visit only: saving fits needs the owner's sign-in."); return c; }
+        return r.text().then(function (t) { status("Couldn't save the fit: " + (t || "error " + r.status)); });
+      }).catch(function (e) { status("Couldn't save the fit: " + e.message); });
+    }
     if (!S.libHandle) { done(" for this visit only (no library folder connected)."); return Promise.resolve(c); }
     return handleFor(rel, false).then(function (fh) { return fh.getFile(); }).then(function (f) { return f.text(); }, function () { return ""; })
       .then(function (text) { return writeText(rel, sidecarWithFit(text, p, pe.v, sock, c.after)); })
@@ -1084,7 +1102,7 @@
     var out = []; groups.model.children.forEach(function (g) { g.children.forEach(function (o) { if (o.isMesh) { o.updateMatrixWorld(true); out.push(o); } }); });
     return out;
   }
-  function isSel(o) { var s = S.adj.sel, u = o.parent.userData; return !!s && u.i === s.i && u.slot === s.slot; }
+  function isSel(o) { var s = S.adj.sel, u = o.parent.userData; return !!s && u.i === s.i && u.slot === s.slot; }      // the part whose fit changes
   function adjNudge(v) { pivot.position.add(v); adjChanged(); adjSync(); }
   function adjSnap() {
     if (!adjInst()) return;
@@ -1201,6 +1219,8 @@
     $("adjbtn").addEventListener("click", function () { adjToggle(); });
     $("adjmove").addEventListener("click", function () { S.adj.mode = "move"; adjSync(); });
     $("adjturn").addEventListener("click", function () { S.adj.mode = "turn"; adjSync(); });
+    $("adjatjoint").addEventListener("click", function () { S.adj.at = "joint"; adjSync(); });
+    $("adjatmiddle").addEventListener("click", function () { S.adj.at = "middle"; adjSync(); });
     $("adjsnap").addEventListener("click", adjSnap);
     $("adjseat").addEventListener("click", adjSeat);
     $("adjreset").addEventListener("click", adjReset);

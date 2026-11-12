@@ -33,3 +33,22 @@ needing fixes.
   finder fills unplaced parts, round wrists get corrected on the page.
 - `tools/kb.py install TASK [--check]`: on a repo clone on the PC, copies the repo's version of installed files that
   differ, backing the old ones up.
+
+**Later the same day (Josh: rotating is hard because of the origins; saves must work from the shared page).**
+
+- **Handle at Joint / Middle.** Middle puts the handle at the part's bounding-box centre (socket axes), so it turns in
+  place. General form: handle delta U = P.P0^-1 in the world, fit delta L = Sw^-1.D.Sw, D = U (or U^-1, below).
+- **The torso can be turned**: everything hangs off the torso, so it is saved as the legs' fit the other way round
+  (D = U^-1), about the waist socket. Snap and Seat are off for it.
+- **Shared page saves** (`share_server.py`): `POST /correct`, owner's sign-in only (403 otherwise; the page then keeps
+  it for the visit). Owner = the user marked by `--owner NAME`, else the first added. The server checks the part is in
+  the index, the fit is rigid, and that the file still has the page's `before` (409 if not); rewrites the sockets file
+  exactly but for that fit and `exact`; backs the old file up once a day in `_backups\page-corrections\<date>\`;
+  appends `corrections.jsonl` (with `by`). It also serves that log so the shared page replays it.
+- Tests: `t_adjust.js` 30 checks; `test/t_share_correct.py` (22, runs the server on a throwaway library and drives the
+  shared page as owner and as someone else).
+- **What Josh has been asking for since the start (origins):** in Blender every imported part keeps the maker's file
+  origin, which for kit-frame makers is the middle of the scene, so turning a part there swings it about a far point.
+  The page's handle already sits on the joint; Blender needs the same: TIOW Inbox to put each part's origin on its
+  joint at import. Not done: it changes how every placement is read back (Save Correction, anchors, variants), so it
+  needs the golden run in Blender. See OPEN.md.
