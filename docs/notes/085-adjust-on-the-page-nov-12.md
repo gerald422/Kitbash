@@ -52,3 +52,6 @@ needing fixes.
   The page's handle already sits on the joint; Blender needs the same: TIOW Inbox to put each part's origin on its
   joint at import. Not done: it changes how every placement is read back (Save Correction, anchors, variants), so it
   needs the golden run in Blender. See OPEN.md.
+- **View lock (Josh: the camera moved while he was placing).** A drag that missed the handle went to OrbitControls. While
+  a part is selected in Adjust: left button / one finger does nothing off the handle, right-drag / two fingers turns
+  the view, wheel / pinch zooms, damping off. "View locked" toggles it. `t_adjust.js` 33 checks.

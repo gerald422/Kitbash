@@ -69,6 +69,14 @@ const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDi
   const m1 = await mid(), wm1 = await W('handR'), d3 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
   ck('Handle at Middle: the handle sits in the part, and turning 25 deg keeps its middle in place', d3(hp, m0) < 1e-6 && d3(hp, joint) > 2 && d3(m0, m1) < 0.02 && Math.abs(ang(wm0, wm1) - 25) < 0.01, [d3(hp, joint), d3(m0, m1), ang(wm0, wm1)]);
   await page.click('#adjreset'); await page.click('#adjatjoint');
+  // the view holds still while a part is selected: a left-drag on empty space doesn't move the camera; right-drag and Done do
+  const cam = () => ev(() => window.__sb.adj.cam()), vb = await page.locator('#view canvas').boundingBox();
+  const drag = async (button) => { const x = vb.x + vb.width * 0.5, y = vb.y + vb.height * 0.92; await page.mouse.move(x, y); await page.mouse.down({ button }); await page.mouse.move(x + 90, y - 10, { steps: 4 }); await page.mouse.up({ button }); await page.waitForTimeout(120); };
+  const camMoved = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  await ev(() => window.__sb.adj.select(0, 'handR')); const c0 = await cam(); await drag('left'); const c1 = await cam(); await drag('right'); const c2 = await cam();
+  ck('with a part selected, a left-drag off the handle leaves the camera alone; a right-drag turns the view', camMoved(c0, c1) < 1e-9 && camMoved(c1, c2) > 1 && (await page.textContent('#adjlock')) === 'View locked', [camMoved(c0, c1), camMoved(c1, c2)]);
+  await page.click('#adjlock'); await drag('left'); const c3 = await cam(); await page.click('#adjlock');
+  ck('"View free" gives the left-drag back', camMoved(c2, c3) > 1 && (await page.textContent('#adjlock')) === 'View locked', camMoved(c2, c3));
   const w0 = await W('handR'), a0 = await W('armR');
   await ev(() => { window.__sb.adj.select(0, 'handR'); const p = window.__sb.adj.pivot(); p.rotateY(20 * Math.PI / 180); p.translateZ(0.5); window.__sb.adj.changed(); });
   const w1 = await W('handR');
@@ -145,6 +153,7 @@ const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDi
   fs.writeFileSync('/tmp/adjust_written.sockets.json', wrote.txt); fs.writeFileSync('/tmp/adjust_before.sockets.json', swordText);
   await page.click('#adjdone');
   ck('Done closes the panel', !(await page.isVisible('#adj')), null);
+  { const d0 = await cam(); await drag('left'); await page.waitForTimeout(300); ck('after Done the view turns with a left-drag again', camMoved(d0, await cam()) > 1, null); }
   await page.reload(); await page.waitForFunction(() => window.__sb && window.__sb.S.parts.length > 0, null, { timeout: 60000 });
   const fresh = await ev(l => { const S = window.__sb.S, p = S.parts.find(p => p.name === 'MarFil Assault - Chain Sword 1 R'), before = p.fits['Hand R'].slice(); window.__sb.adj.replay(l); return [before, p.fits['Hand R'], p.exact || []]; }, log);
   const want = JSON.parse(log.split('\n')[0]);

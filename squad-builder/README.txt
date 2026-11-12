@@ -79,6 +79,10 @@ Adjust (top left of the view) lets you correct a placed part on the page:
      Seat: slides the part onto what it hangs from until they touch.
   3. Save fit. Reset puts it back as it was saved; Done leaves Adjust.
 
+While a part is selected the view holds still, so a drag that misses the
+handle doesn't spin the camera. Right-drag (two fingers on a touch screen)
+still turns the view and the wheel zooms. "View locked" switches this off.
+
 "Handle at" chooses what the part turns about: Joint (the joint it hangs
 from) or Middle (the part's own middle, for small twists in place).
 Clicking the torso turns it on the legs, about the waist; the arms, head and

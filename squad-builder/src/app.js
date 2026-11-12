@@ -1021,12 +1021,23 @@
     $("adjdelta").textContent = inst ? (S.adj.pending ? "moved " + d[0].toFixed(2) + " mm, turned " + d[1].toFixed(1) + "°" : "as saved") : "";
     $("adjsave").disabled = $("adjreset").disabled = !S.adj.pending;
     ["move", "turn"].forEach(function (m) { $("adj" + m).classList.toggle("on", S.adj.mode === m); $("adj" + m).disabled = !inst; });
-    $("adjsnap").disabled = $("adjseat").disabled = !inst || !!s.inv; $("adjsnap").classList.toggle("on", !!S.adj.snap);
+    $("adjsnap").disabled = $("adjseat").disabled = !inst || !!s.inv;
+    $("adjlock").classList.toggle("on", S.adj.lock !== false); $("adjlock").textContent = S.adj.lock !== false ? "View locked" : "View free"; $("adjsnap").classList.toggle("on", !!S.adj.snap);
+  }
+  /* While a part is being adjusted the view holds still: a drag that misses the handle must not spin the camera.
+     Right-drag (two fingers on a touch screen) still turns the view and the wheel (pinch) still zooms. */
+  function adjLock() {
+    var lock = !!(S.adj.on && S.adj.sel && S.adj.lock !== false);
+    controls.mouseButtons = lock ? {LEFT: -1, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE} : {LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN};
+    controls.touches = lock ? {ONE: -1, TWO: THREE.TOUCH.DOLLY_ROTATE} : {ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN};
+    controls.enableDamping = !lock;             // no coasting on after the view is locked
+    return lock;
   }
   function adjShown() { var s = S.adj.sel; return s ? s.show || s.slot : null; }     // the part the handle is drawn for
   function adjSync() {                 // put the handle on the selected part: at its joint, or in its own middle
     var inst = adjInst(), s = S.adj.sel;
     if (!tc) return;
+    adjLock();
     if (!S.adj.on || !inst) { tc.detach(); tc.visible = false; adjPanel(); return; }
     var pe = S.adj.pending, L = pe && pe.id === inst.part.id && pe.sock === inst.asock ? pe.F.clone().multiply(pe.F0.clone().invert()) : new THREE.Matrix4();
     // D: how the fit has moved, in the world. U: what the handle shows (the other way round when the torso is the one being turned)
@@ -1151,7 +1162,7 @@
     S.adj.snap = null;
     if (!S.adj.on) { S.adj.sel = null; if (S.adj.pending) { S.adj.pending = null; redraw(); } }
     adjSync();
-    if (S.adj.on) status("Adjust: click a part, drag the handle, then Save. Saving changes where that part sits everywhere it is used.");
+    if (S.adj.on) status("Adjust: click a part, drag the handle, then Save fit. The view holds still while a part is selected: right-drag or two fingers turns it.");
   }
   function adjInit() {
     if (!THREE.TransformControls) return;
@@ -1221,6 +1232,7 @@
     $("adjturn").addEventListener("click", function () { S.adj.mode = "turn"; adjSync(); });
     $("adjatjoint").addEventListener("click", function () { S.adj.at = "joint"; adjSync(); });
     $("adjatmiddle").addEventListener("click", function () { S.adj.at = "middle"; adjSync(); });
+    $("adjlock").addEventListener("click", function () { S.adj.lock = S.adj.lock === false; adjSync(); });
     $("adjsnap").addEventListener("click", adjSnap);
     $("adjseat").addEventListener("click", adjSeat);
     $("adjreset").addEventListener("click", adjReset);
@@ -1239,7 +1251,7 @@
 
   // ------------------------------------------------------------------ start
   initView(); bind();
-  window.__sb = {S: S, adj: {toggle: adjToggle, select: adjSelect, save: adjSave, reset: adjReset, inst: adjInst, seat: adjSeat, nudge: adjNudge, meshes: adjMeshes, replay: replayCorrections, snapClick: adjSnapClick, snap: adjSnap, sidecarWithFit: sidecarWithFit, ljParse: ljParse, ljText: ljText, pivot: function () { return pivot; }, changed: adjChanged}, setArmour: setArmour, armourOf: armourOf, prune: prune, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
+  window.__sb = {S: S, adj: {toggle: adjToggle, select: adjSelect, save: adjSave, reset: adjReset, inst: adjInst, seat: adjSeat, nudge: adjNudge, meshes: adjMeshes, replay: replayCorrections, cam: function () { return camera.position.toArray(); }, snapClick: adjSnapClick, snap: adjSnap, sidecarWithFit: sidecarWithFit, ljParse: ljParse, ljText: ljText, pivot: function () { return pivot; }, changed: adjChanged}, setArmour: setArmour, armourOf: armourOf, prune: prune, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
   if (window.SB_DEMO) {                                       // the online demo: its own files, nothing sent
     S.source = "./";
     $("setupbtn").hidden = true;
