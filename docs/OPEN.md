@@ -30,14 +30,8 @@ When an item is done, delete its line (the notes entry is the record).
   middle of the scene for kit-frame parts), so turning a part in Blender swings it about a far point. Put each
   part's origin on its joint at import (keep the offset on the object so fits are still read in file coordinates).
   Needs Blender and the golden run; touch Save Correction, anchors, variants, Finalise.
-- To install on the PC (it was unreachable): `kb.py install` for the page, README and `share_server.py`; then start
-  sharing and send Josh the trycloudflare address (`Desktop\\kitbash-calib\\share-start.bat` logs it).
-- Next: apply a correction to the whole folder / every host of a kit; then read the corrections log for joints that
-  keep being fixed and turn repeated nudges into rules.
-- Then: the anchor finder as a button (no Claude): shoulder and wrist proven on Assault arms; held weapons, heads,
-  packs, legs still to check against Josh's placements. Josh's own placements always win; round wrists are flagged.
-- Golden placements (`Run checks.bat record`) wait until Josh has made his corrections.
-- Spacer between shoulder and arm for Springles arms (a fixed stand-off, arm keeps its roll): parked; distance not set.
+- Installed Nov 12 (page, README, `share_server.py`, `Restart share server.bat`); sharing restarted with the new
+  server. Waiting on Josh: first Save fit through the shared page (the `/correct` route has only run in tests).
 
 ## Next up (builder errors, Nov 6 diagnosis: fix shared causes, not pieces; notes 072)
 
