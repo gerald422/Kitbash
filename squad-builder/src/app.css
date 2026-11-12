@@ -101,3 +101,13 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
   .cards { max-height: none; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
   .hint { display: none; }
 }
+
+/* Adjust: move / turn / snap a placed part and save it as its fit */
+.adjbtn { position: absolute; left: 12px; top: 46px; }
+.adjbtn.on { background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
+.adj { position: absolute; left: 12px; top: 80px; width: 250px; background: rgba(18,20,23,.94); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
+.adj[hidden] { display: none; }
+.adj .row { display: flex; align-items: center; gap: 6px; }
+.adj .adjname { font-weight: 600; overflow-wrap: anywhere; }
+.adj .adjdelta { color: var(--muted); min-height: 15px; }
+.adj .seg button:disabled { opacity: .45; cursor: default; }

@@ -26,6 +26,14 @@
     <div class="view" id="view">
       <div class="models" id="models"></div>
       <div class="hint">Right-drag or left-drag to turn · wheel to zoom · hover a part to see where it goes</div>
+      <button class="btn small adjbtn" id="adjbtn" title="Move or turn a placed part and save that as its fit: it then sits that way on every model, here and in Blender">Adjust</button>
+      <div class="adj" id="adj" hidden>
+        <div class="adjname" id="adjname">Click a part in the view</div>
+        <div class="row"><span class="seg"><button id="adjmove" class="on" title="Drag the arrows to move the part">Move</button><button id="adjturn" title="Drag the rings to turn the part about its joint">Turn</button></span>
+          <span class="seg"><button id="adjsnap" title="Click a spot on the part, then the spot on the model it should meet">Snap</button><button id="adjseat" title="Slide the part onto what it hangs from until they touch">Seat</button></span></div>
+        <div class="adjdelta" id="adjdelta"></div>
+        <div class="row"><button class="btn small" id="adjreset" disabled>Reset</button><button class="btn small primary" id="adjsave" disabled>Save fit</button><span class="spacer"></span><button class="btn small" id="adjdone">Done</button></div>
+      </div>
       <div class="status" id="status"></div>
     </div>
     <section class="picker" aria-label="Parts">
@@ -63,6 +71,7 @@
 </div>
 <script>/*THREE*/</script>
 <script>/*ORBIT*/</script>
+<script>/*XFORM*/</script>
 <script>/*APP*/</script>
 </body>
 </html>

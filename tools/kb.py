@@ -7,6 +7,9 @@
                                    made by `kb.py expected` (run in the repo) instead.
   kb.py expected                   (in the repo) print installed.json with every entry's md5 filled in
   kb.py record                     (in a clone that sees the PC) rewrite the md5s tools/installed.json stores
+  kb.py install TASK [--check] [NAME...]   (in a repo clone on the PC) copy the repo's version of every installed file
+                                   that differs (or just those whose path contains a NAME) over the installed one,
+                                   after backing the old one up to <library>\\_backups\\TASK\\before\\<root>\\...
   kb.py apply DIR [--check]        put a delivery made by kb.deliver.build() in place:
                                      1. the delivery's own files are whole (md5)
                                      2. every file it replaces or adds to still has the md5 the work started from
@@ -75,6 +78,31 @@ def record(_):
     for e in d["files"]:
         if not e.get("repo"): e["md5"] = md5(at(R, e["root"], e["path"]))[:8]
     open(f, "w", encoding="utf-8", newline="\n").write(json.dumps(d, indent=1) + "\n"); print("recorded")
+
+
+def install(args):
+    check = "--check" in args; args = [a for a in args if a != "--check"]
+    if not args: sys.exit("install needs a task name, e.g. kb.py install adjust-2026-11-12")
+    task, names = args[0], args[1:]; R = roots(); todo = []
+    for e in expected():
+        if not e.get("repo") or (names and not any(n.lower() in (e["root"] + "/" + e["path"]).lower() for n in names)): continue
+        if not os.path.isdir(R[e["root"]]): print("SKIPPED  %s: %s  (that folder isn't reachable here)" % (e["root"], e["path"])); continue
+        p = at(R, e["root"], e["path"]); have = md5(p) if os.path.exists(p) else None
+        if have != e["md5"]: todo.append((e, p, have))
+    for e, p, have in todo: print("%s  %s: %s  (%s -> %s)" % ("WOULD INSTALL" if check else "INSTALL", e["root"], e["path"], (have or "new")[:8], e["md5"][:8]))
+    if check or not todo: print("%d file(s) differ from the repo" % len(todo)); return
+    B = os.path.join(R["lib"], "_backups", task, "before"); bad = []
+    for e, p, have in todo:
+        if have:
+            b = at({"x": B}, "x", e["root"] + "/" + e["path"])
+            if not os.path.exists(b):
+                os.makedirs(os.path.dirname(b), exist_ok=True)
+                with open(p, "rb") as s, open(b, "wb") as d: d.write(s.read())
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(os.path.join(REPO, e["repo"]), "rb") as s, open(p, "wb") as d: d.write(s.read())
+        if md5(p) != e["md5"]: bad.append(e["path"])
+    print("installed %d file(s); %s; old copies in _backups\\%s\\before" % (len(todo), "every md5 matches" if not bad else "MISMATCH %s" % bad, task))
+    sys.exit(1 if bad else 0)
 
 
 def payload(D, M):
@@ -147,5 +175,5 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if cmd == "roots": print(json.dumps(roots(), indent=1))
     elif cmd == "expected": print(json.dumps(expected(), indent=1))
-    elif cmd in ("verify", "apply", "record"): {"verify": verify, "apply": apply, "record": record}[cmd](sys.argv[2:])
+    elif cmd in ("verify", "apply", "record", "install"): {"verify": verify, "apply": apply, "record": record, "install": install}[cmd](sys.argv[2:])
     else: print(__doc__)

@@ -172,6 +172,8 @@
       S.parts.forEach(function (p) { S.byId[p.id] = p; norm(p); (p.variants || []).forEach(norm); });
       return readBytes("_hidden.txt").then(function (b) { readHide(new TextDecoder().decode(b)); }, function () { readHide(""); });
     }).then(function () {
+      return readBytes(BDIR() + CORR).then(function (b) { replayCorrections(new TextDecoder().decode(b)); }, function () {});
+    }).then(function () {
       $("libdot").classList.add("on");
       $("libtxt").textContent = S.parts.length + " parts";
       renderAll();
@@ -299,7 +301,12 @@
     (inst.as.data.sockets || []).forEach(function (s) { out[s.t] = inst.W.clone().multiply(M4(s.m)); });
     return out;
   }
-  function fitMatrix(as, tname) {
+  function fitMatrix(as, tname, stored) {
+    var pe = !stored && S.adj && S.adj.pending;
+    if (pe && as.pid === pe.id && as.v === pe.v) {            // an adjustment being tried out (Adjust), on every model showing the part
+      if (!!as.mirror === pe.mirror && tname === pe.sock) return pe.F.clone();
+      if (as.v == null && !!as.mirror !== pe.mirror && tname === swapSide(pe.sock) && tname !== pe.sock) return MX.clone().multiply(pe.F).multiply(MX);
+    }
     var f = as.data.fits && as.data.fits[tname];
     if (f) return M4(f);
     var t = S.types[tname];
@@ -310,6 +317,9 @@
     if (!off) return null;
     var gap = (S.types[tname] || {}).gap || 0;
     return sockW.clone().multiply(T(0, 0, gap)).multiply(off);
+  }
+  function seat(inst, sockW, tname, host) {   // where the part's fit hangs from (the socket with its gap): Adjust works in this frame
+    inst.Sw = sockW.clone().multiply(T(0, 0, (S.types[tname] || {}).gap || 0)); inst.asock = tname; inst.host = host || null;
   }
   function natural(a, b) {
     var x = a.toLowerCase().split(/(\d+)/), y = b.toLowerCase().split(/(\d+)/);
@@ -398,6 +408,7 @@
       if (!p) return;
       var sl = SLOT[k], as = asFor(p, sl);
       if (!as) return;
+      as.pid = p.id;
       var inst = {slot: k, part: p, as: as, W: null, note: ""};
       if (k === "torso") {
         var U = as.data.upright ? rotOnly(M4(as.data.upright)) : new THREE.Matrix4();
@@ -411,7 +422,7 @@
         }
         var ts = socketsOf(torso), placed = false;
         ["Waist", "Flat Waist"].forEach(function (w) {
-          if (!placed && ts[w] && as.data.fits[w]) { inst.W = onto(ts[w], as, w); inst.sock = w; placed = true; }
+          if (!placed && ts[w] && as.data.fits[w]) { inst.W = onto(ts[w], as, w); inst.sock = w; placed = true; seat(inst, ts[w], w, torso); }
         });
         if (!placed && as.data.fits["Flat Waist"] && ts["Waist"]) {
           var ad = adaptorPart();
@@ -422,7 +433,7 @@
               var ainst = {slot: "adaptor", part: ad, as: aas, W: aw, note: "adaptor, brought by the legs"};
               out.push(ainst); by.adaptor = ainst;
               var as2 = socketsOf(ainst);
-              if (as2["Flat Waist"]) { inst.W = onto(as2["Flat Waist"], as, "Flat Waist"); placed = !!inst.W; }
+              if (as2["Flat Waist"]) { inst.W = onto(as2["Flat Waist"], as, "Flat Waist"); placed = !!inst.W; if (placed) seat(inst, as2["Flat Waist"], "Flat Waist", ainst); }
             }
           }
         }
@@ -458,6 +469,7 @@
           out.push(inst); return;
         }
         inst.W = onto(hs, as, sock);
+        if (inst.W) seat(inst, hs, sock, by["mount" + (sl.side || "")] && via ? by["mount" + (sl.side || "")] : host);
         if (!inst.W) inst.note = "no " + sock + " fit yet: placed by eye in Blender";
         else if (k === "base" && (as.data.exact || []).indexOf("Base") < 0) {   // rise to meet the feet, as the inbox does (not once corrected by hand)
           var rise = baseRise(host, inst, hs);
@@ -477,7 +489,7 @@
         var pp = new THREE.Vector3().setFromMatrixPosition(bsock);
         var q = new THREE.Quaternion().setFromUnitVectors(up, new THREE.Vector3(0, 0, 1));
         var turn = T(pp.x, pp.y, pp.z).multiply(new THREE.Matrix4().makeRotationFromQuaternion(q)).multiply(T(-pp.x, -pp.y, -pp.z));
-        out.forEach(function (o) { if (o.W) o.W = turn.clone().multiply(o.W); });
+        out.forEach(function (o) { if (o.W) o.W = turn.clone().multiply(o.W); if (o.Sw) o.Sw = turn.clone().multiply(o.Sw); });
         var low = new THREE.Vector3().setFromMatrixPosition(turn.clone().multiply(bsock)).z;
         var g = S.geo[base.part.id];
         if (g) {
@@ -488,7 +500,7 @@
           geometry(base.part.id).then(function (g) { if (g) redraw(); });
         }
         var drop = by.torso ? T(0, 0, -low) : T(at[0] - pp.x, at[1] - pp.y, -low);   // no torso yet: the legs stand on the model's spot
-        out.forEach(function (o) { if (o.W) o.W = drop.clone().multiply(o.W); });
+        out.forEach(function (o) { if (o.W) o.W = drop.clone().multiply(o.W); if (o.Sw) o.Sw = drop.clone().multiply(o.Sw); });
       }
     } else if (base && base.free) {
       var gb = S.geo[base.part.id];
@@ -531,6 +543,7 @@
       renderer.setSize(r.width, r.height, false); camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix();
     }
     window.addEventListener("resize", size); size();
+    adjInit();
     (function loop() { controls.update(); renderer.render(scene, camera); requestAnimationFrame(loop); })();
   }
   function meshFor(inst, ghost, current) {
@@ -549,12 +562,14 @@
   function redraw() {
     if (!scene) return;
     clear(groups.model); clear(groups.ghost);
+    if (S.adj && S.adj.sel && !S.adj.dragging) setTimeout(adjSync, 0);
     var box = new THREE.Box3();
     S.models.forEach(function (_m, i) {
       layout(i).forEach(function (inst) {
         if (!inst.W) return;
-        var o = meshFor(inst, false, i === S.cur && S.models.length > 1);
-        if (o) { groups.model.add(o); box.expandByObject(o); }
+        var picked = S.adj && S.adj.on && S.adj.sel && S.adj.sel.i === i && S.adj.sel.slot === inst.slot;
+        var o = meshFor(inst, false, picked || (!(S.adj && S.adj.on) && i === S.cur && S.models.length > 1));
+        if (o) { o.userData = {i: i, slot: inst.slot}; groups.model.add(o); box.expandByObject(o); }
       });
     });
     if (S.hover) {
@@ -886,6 +901,260 @@
     }).catch(function () { return false; });
   }
 
+  // ------------------------------------------------------------------ Adjust: move or turn a placed part, save it as its fit
+  // A part sits at  socket x gap x fit.  Adjust changes the fit: the handle sits on the socket, the part follows it, and
+  // Save writes the new fit into the part's sockets file (marked "exact", so Blender places it as left here, without
+  // rocking or settling) and adds a line to _builder/corrections.jsonl. That log is replayed over the index when the
+  // page loads, so a correction shows here before Prepare is run again, and it records what needed correcting.
+  var CORR = "corrections.jsonl";
+  var tc = null, pivot = null, ray = null;
+  S.adj = {on: false, sel: null, pending: null, dragging: false, log: []};
+
+  /* A sockets file is read and written without touching what isn't changed: numbers and strings keep their exact text. */
+  function ljParse(text) {
+    var i = 0, n = text.length;
+    function ws() { while (i < n && " \t\r\n".indexOf(text[i]) >= 0) i++; }
+    function str() { var a = i; i++; while (i < n && text[i] !== '"') i += text[i] === "\\" ? 2 : 1; i++; return text.slice(a, i); }
+    function val() {
+      ws();
+      var c = text[i];
+      if (c === "{") {
+        var o = []; i++; ws();
+        if (text[i] === "}") { i++; return {o: o}; }
+        for (;;) { ws(); var k = str(); ws(); i++; var v = val(); o.push([k, v]); ws(); if (text[i] === ",") { i++; continue; } i++; return {o: o}; }
+      }
+      if (c === "[") {
+        var a = []; i++; ws();
+        if (text[i] === "]") { i++; return {a: a}; }
+        for (;;) { a.push(val()); ws(); if (text[i] === ",") { i++; continue; } i++; return {a: a}; }
+      }
+      if (c === '"') return {r: str()};
+      var s = i; while (i < n && ",]} \t\r\n".indexOf(text[i]) < 0) i++;
+      return {r: text.slice(s, i)};
+    }
+    var root = val(); ws();
+    if (i < n || !root.o) throw new Error("not a sockets file");
+    return root;
+  }
+  function ljText(node, nl) {
+    function out(v, d) {
+      var pad = nl + new Array(d + 2).join(" ");
+      if (v.o) return v.o.length ? "{" + v.o.map(function (kv) { return pad + kv[0] + ": " + out(kv[1], d + 1); }).join(",") + nl + new Array(d + 1).join(" ") + "}" : "{}";
+      if (v.a) return v.a.length ? "[" + v.a.map(function (x) { return pad + out(x, d + 1); }).join(",") + nl + new Array(d + 1).join(" ") + "]" : "[]";
+      return v.r;
+    }
+    return out(node, 0);
+  }
+  function ljGet(node, key) { var kv = (node.o || []).filter(function (x) { return JSON.parse(x[0]) === key; })[0]; return kv ? kv[1] : null; }
+  function ljSet(node, key, v) { var kv = node.o.filter(function (x) { return JSON.parse(x[0]) === key; })[0]; if (kv) kv[1] = v; else node.o.push([JSON.stringify(key), v]); return v; }
+  function pyFloat(x) {                // a number as Python's json writes a float, so the file reads the same from both
+    x = Math.round(x * 1e9) / 1e9 + 0;
+    if (!isFinite(x)) return "0.0";
+    if (Number.isInteger(x)) return x.toFixed(1);
+    if (Math.abs(x) >= 1e-4) return String(x);
+    var e = x.toExponential().split("e"), k = +e[1];
+    return e[0] + "e" + (k < 0 ? "-" : "+") + (Math.abs(k) < 10 ? "0" : "") + Math.abs(k);
+  }
+  function lj16(a) { return {a: a.map(function (x) { return {r: pyFloat(x)}; })}; }
+  function sidecarPath(p) { return p.path.replace(/\.stl$/i, "") + ".sockets.json"; }
+  function handleFor(rel, create) {
+    var parts = rel.split(/[\\\/]/), d = Promise.resolve(S.libHandle);
+    parts.slice(0, -1).forEach(function (q) { d = d.then(function (h) { return h.getDirectoryHandle(q, {create: !!create}); }); });
+    return d.then(function (h) { return h.getFileHandle(parts[parts.length - 1], {create: !!create}); });
+  }
+  function writeText(rel, text) {
+    return handleFor(rel, true).then(function (fh) { return fh.createWritable(); }).then(function (w) { return w.write(text).then(function () { return w.close(); }); });
+  }
+  /* the fit and "exact" written into a sockets file's text (v: the maker's-copy entry, or null for the part itself) */
+  function sidecarWithFit(text, p, v, sock, fit16) {
+    var bom = text.charCodeAt(0) === 0xFEFF ? "﻿" : "", body = bom ? text.slice(1) : text;
+    var nl = body.indexOf("\r\n") >= 0 ? "\r\n" : "\n", end = /\n$/.test(body) ? nl : "";
+    var root = body.trim() ? ljParse(body) : {o: [['"schemaVersion"', {r: "1"}], ['"part"', {r: JSON.stringify(p.name)}]]};
+    var sub = root;
+    if (v != null) {
+      var vs = ljGet(root, "variants"), ve = vs && vs.a && vs.a[v];
+      if (!ve || !ve.o) throw new Error("the sockets file has no copy " + v);
+      sub = ljGet(ve, "sidecar") || ljSet(ve, "sidecar", {o: []});
+    }
+    var fits = ljGet(sub, "fits") || ljSet(sub, "fits", {o: []});
+    var key = (fits.o.filter(function (kv) { return canon(JSON.parse(kv[0])) === sock; })[0] || [JSON.stringify(sock)])[0];
+    ljSet(fits, JSON.parse(key), lj16(fit16));
+    var ex = ljGet(sub, "exact") || ljSet(sub, "exact", {a: []});
+    if (!ex.a.some(function (x) { return x.r === key; })) ex.a.push({r: key});
+    return bom + ljText(root, nl) + end;
+  }
+
+  function near16(a, b) { if (!a || !b || a.length !== 16) return false; for (var i = 0; i < 16; i++) if (Math.abs(a[i] - b[i]) > 1e-6) return false; return true; }
+  function dataFor(p, v) { return v == null ? p : (p.variants || []).filter(function (x) { return x.i === v; })[0]; }
+  function applyCorrection(c) {       // onto the index in memory; false if the index has moved on since it was made
+    var p = S.parts.filter(function (x) { return x.path === c.part; })[0], d = p && dataFor(p, c.v);
+    if (!d) return false;
+    var cur = d.fits && d.fits[c.sock];
+    if (c.before && !near16(cur, c.before) && !near16(cur, c.after)) return false;
+    d.fits = d.fits || {}; d.fits[c.sock] = c.after.slice();
+    if ((d.exact || []).indexOf(c.sock) < 0) d.exact = (d.exact || []).concat([c.sock]);
+    return true;
+  }
+  function replayCorrections(text) {
+    S.adj.log = text.split(/\r?\n/).filter(function (l) { return l.trim(); }).map(function (l) { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean);
+    S.adj.log.forEach(applyCorrection);
+  }
+
+  function adjInst() {                 // the selected part as it is placed right now
+    var s = S.adj.sel; if (!s) return null;
+    return layout(s.i).filter(function (x) { return x.slot === s.slot && x.W && x.Sw; })[0] || null;
+  }
+  function adjDelta() {                // how far the try-out is from the stored fit: [mm, degrees]
+    var pe = S.adj.pending; if (!pe) return [0, 0];
+    var E = pe.F.clone().multiply(pe.F0.clone().invert()), t = new THREE.Vector3().setFromMatrixPosition(E);
+    var q = new THREE.Quaternion().setFromRotationMatrix(E);
+    return [t.length(), 2 * Math.acos(Math.min(1, Math.abs(q.w))) * 180 / Math.PI];
+  }
+  function adjPanel() {
+    var box = $("adj"), s = S.adj.sel;
+    $("adjbtn").classList.toggle("on", S.adj.on);
+    box.hidden = !S.adj.on;
+    if (!S.adj.on) return;
+    var inst = adjInst(), d = adjDelta();
+    $("adjname").textContent = inst ? inst.as.name + " on " + inst.asock : "Click a part in the view";
+    $("adjdelta").textContent = inst ? (S.adj.pending ? "moved " + d[0].toFixed(2) + " mm, turned " + d[1].toFixed(1) + "°" : "as saved") : "";
+    $("adjsave").disabled = $("adjreset").disabled = !S.adj.pending;
+    ["move", "turn"].forEach(function (m) { $("adj" + m).classList.toggle("on", S.adj.mode === m); $("adj" + m).disabled = !inst; });
+    $("adjsnap").disabled = $("adjseat").disabled = !inst; $("adjsnap").classList.toggle("on", !!S.adj.snap);
+  }
+  function adjSync() {                 // put the handle on the selected part's socket, moved as the try-out says
+    var inst = adjInst();
+    if (!tc) return;
+    if (!S.adj.on || !inst) { tc.detach(); tc.visible = false; adjPanel(); return; }
+    var pe = S.adj.pending, L = pe && pe.id === inst.part.id && pe.sock === inst.asock ? pe.F.clone().multiply(pe.F0.clone().invert()) : new THREE.Matrix4();
+    S.adj.Sw0 = inst.Sw.clone();
+    inst.Sw.clone().multiply(L).decompose(pivot.position, pivot.quaternion, pivot.scale);
+    pivot.scale.set(1, 1, 1); pivot.updateMatrixWorld(true);
+    tc.attach(pivot); tc.visible = true; tc.setMode(S.adj.mode === "turn" ? "rotate" : "translate");
+    adjPanel();
+  }
+  function adjSelect(i, slot) {
+    var old = S.adj.sel;
+    S.adj.sel = {i: i, slot: slot};
+    var inst = adjInst();
+    if (!inst) { S.adj.sel = old; status("That part has no socket fit to adjust (a torso, or a part brought along)."); return; }
+    var pe = S.adj.pending;
+    if (pe && !(pe.id === inst.part.id && pe.v === inst.as.v && pe.mirror === !!inst.as.mirror && pe.sock === inst.asock)) {
+      S.adj.pending = null; status("The adjustment you hadn't saved was dropped."); redraw();
+    }
+    adjSync();
+  }
+  function adjChanged() {              // the handle moved: the part's fit, in the socket's frame, follows it
+    var inst = adjInst(); if (!inst) return;
+    pivot.updateMatrix();
+    var F0 = S.adj.pending ? S.adj.pending.F0 : fitMatrix(inst.as, inst.asock, true);
+    if (!F0) return;
+    var L = S.adj.Sw0.clone().invert().multiply(pivot.matrix);
+    S.adj.pending = {id: inst.part.id, v: inst.as.v, mirror: !!inst.as.mirror, sock: inst.asock, F0: F0, F: L.multiply(F0)};
+    redraw(); adjPanel();
+  }
+  function adjReset() { S.adj.pending = null; redraw(); adjSync(); status("Back to the saved fit."); }
+  function adjSave() {
+    var pe = S.adj.pending, inst = adjInst();
+    if (!pe || !inst) return;
+    var p = inst.part, d = adjDelta();
+    // a part shown mirrored has no fit of its own: the fit it mirrors is the one saved, so both sides move together
+    var sock = pe.mirror ? swapSide(pe.sock) : pe.sock;
+    var F = pe.mirror ? MX.clone().multiply(pe.F).multiply(MX) : pe.F, F0 = pe.mirror ? MX.clone().multiply(pe.F0).multiply(MX) : pe.F0;
+    var c = {at: new Date().toISOString(), by: "page", part: p.path, name: inst.as.name, v: pe.v, sock: sock,
+      host: inst.host && inst.host.part ? inst.host.part.path : null, before: flat(F0), after: flat(F), mm: +d[0].toFixed(3), deg: +d[1].toFixed(2)};
+    var rel = sidecarPath(p);
+    var done = function (where) {
+      applyCorrection(c); S.adj.log.push(c); S.adj.pending = null;
+      redraw(); adjSync();
+      status("Saved: " + inst.as.name + " on " + sock + " (" + c.mm.toFixed(2) + " mm, " + c.deg.toFixed(1) + "°)" + where);
+    };
+    if (!S.libHandle) { done(" for this visit only (no library folder connected)."); return Promise.resolve(c); }
+    return handleFor(rel, false).then(function (fh) { return fh.getFile(); }).then(function (f) { return f.text(); }, function () { return ""; })
+      .then(function (text) { return writeText(rel, sidecarWithFit(text, p, pe.v, sock, c.after)); })
+      .then(function () { return handleFor(BDIR() + CORR, false).then(function (fh) { return fh.getFile(); }).then(function (f) { return f.text(); }, function () { return ""; }); })
+      .then(function (log) { return writeText(BDIR() + CORR, log + (log && !/\n$/.test(log) ? "\n" : "") + JSON.stringify(c) + "\n"); })
+      .then(function () { done(". Blender will place it the same way."); return c; })
+      .catch(function (e) { status("Couldn't save the fit: " + e.message + ". Choose the library again (Folders…)."); });
+  }
+  /* Snap: click a spot on the part, then the spot on the model it should meet: the part moves so the two touch.
+     Seat: slide the part straight onto what it hangs from until they touch (0.1 mm in). Both work on the light preview
+     meshes, so they are quick and good to about 0.15 mm: a rough fit to finish with the handle. */
+  function adjMeshes() {
+    var out = []; groups.model.children.forEach(function (g) { g.children.forEach(function (o) { if (o.isMesh) { o.updateMatrixWorld(true); out.push(o); } }); });
+    return out;
+  }
+  function isSel(o) { var s = S.adj.sel, u = o.parent.userData; return !!s && u.i === s.i && u.slot === s.slot; }
+  function adjNudge(v) { pivot.position.add(v); adjChanged(); adjSync(); }
+  function adjSnap() {
+    if (!adjInst()) return;
+    S.adj.snap = {p1: null}; status("Snap: click a spot on the part…"); adjPanel();
+  }
+  function adjSnapClick(hit) {
+    var sn = S.adj.snap;
+    if (!sn.p1) {
+      if (!isSel(hit.object)) { status("Snap: click a spot on the selected part first."); return; }
+      sn.p1 = hit.point.clone(); status("Snap: now click where that spot should go."); return;
+    }
+    if (isSel(hit.object)) { status("Snap: click the spot on the model it should meet (not the part itself)."); return; }
+    S.adj.snap = null; adjNudge(hit.point.clone().sub(sn.p1)); status("Snapped. Drag the handle to finish, then Save fit.");
+  }
+  function adjSeat() {
+    var inst = adjInst(), s = S.adj.sel; if (!inst) return;
+    var all = adjMeshes(), mine = all.filter(isSel)[0];
+    var others = all.filter(function (o) { return o.parent.userData.i === s.i && !isSel(o) && (!inst.host || o.parent.userData.slot === inst.host.slot); });
+    if (!mine || !others.length) { status("Nothing to seat it on yet."); return; }
+    var DS = new THREE.MeshBasicMaterial({side: THREE.DoubleSide});
+    function copy(o) { var m = new THREE.Mesh(o.geometry, DS); m.matrixAutoUpdate = false; m.matrix.copy(o.matrix); m.matrixWorld.copy(o.matrixWorld); return m; }
+    function verts(o, n) {
+      var a = o.geometry.attributes.position.array, step = Math.max(1, Math.floor(a.length / 3 / n)), out = [];
+      for (var i = 0; i < a.length; i += 3 * step) out.push(new THREE.Vector3(a[i], a[i + 1], a[i + 2]).applyMatrix4(o.matrixWorld));
+      return out;
+    }
+    var P = verts(mine, 500), c = new THREE.Vector3(); P.forEach(function (v) { c.add(v); }); c.multiplyScalar(1 / P.length);
+    var H = []; others.forEach(function (o) { H = H.concat(verts(o, 3000)); });
+    var best = null, bd = Infinity; H.forEach(function (u) { var d2 = u.distanceToSquared(c); if (d2 < bd) { bd = d2; best = u; } });
+    var d = best.clone().sub(c); if (d.length() < 1e-6) { status("Can't tell which way to seat it."); return; }
+    d.normalize();
+    var B = 0; P.forEach(function (v) { B = Math.max(B, v.distanceTo(c)); }); B *= 2;
+    var tmin = Infinity, rc = new THREE.Raycaster(), tg = others.map(copy), me = [copy(mine)], back = d.clone().multiplyScalar(-B), nd = d.clone().negate();
+    rc.far = 3 * B + 30;
+    P.forEach(function (v) { rc.set(v.clone().add(back), d); var h = rc.intersectObjects(tg, false)[0]; if (h && h.distance < tmin) tmin = h.distance; });
+    H.forEach(function (u) {                      // the host's own points against the part, for bits that poke between the part's points
+      if (u.distanceTo(c) > 1.5 * B) return;
+      rc.set(u.clone().sub(back), nd); var h = rc.intersectObjects(me, false)[0]; if (h && h.distance < tmin) tmin = h.distance;
+    });
+    if (!isFinite(tmin)) { status("Nothing to seat it on in that direction: use Snap."); return; }
+    var shift = Math.max(-15, Math.min(15, tmin - B + 0.1));
+    adjNudge(d.multiplyScalar(shift)); status("Seated (" + (shift >= 0 ? "moved in " : "backed out ") + Math.abs(shift).toFixed(2) + " mm). Check it, then Save fit.");
+  }
+  function adjToggle(on) {
+    S.adj.on = on == null ? !S.adj.on : on; S.adj.mode = S.adj.mode || "move";
+    S.adj.snap = null;
+    if (!S.adj.on) { S.adj.sel = null; if (S.adj.pending) { S.adj.pending = null; redraw(); } }
+    adjSync();
+    if (S.adj.on) status("Adjust: click a part, drag the handle, then Save. Saving changes where that part sits everywhere it is used.");
+  }
+  function adjInit() {
+    if (!THREE.TransformControls) return;
+    pivot = new THREE.Object3D(); scene.add(pivot);
+    tc = new THREE.TransformControls(camera, renderer.domElement);
+    tc.setSpace("local"); tc.setSize(0.9); tc.visible = false; scene.add(tc);
+    tc.addEventListener("dragging-changed", function (e) { S.adj.dragging = e.value; controls.enabled = !e.value; if (!e.value) adjSync(); });
+    tc.addEventListener("objectChange", adjChanged);
+    ray = new THREE.Raycaster();
+    var down = null;
+    renderer.domElement.addEventListener("pointerdown", function (e) { down = [e.clientX, e.clientY]; });
+    renderer.domElement.addEventListener("pointerup", function (e) {
+      if (!S.adj.on || !down || S.adj.dragging || tc.axis || Math.abs(e.clientX - down[0]) + Math.abs(e.clientY - down[1]) > 5) return;
+      var r = renderer.domElement.getBoundingClientRect();
+      ray.setFromCamera(new THREE.Vector2((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1), camera);
+      var hit = ray.intersectObjects(adjMeshes(), false)[0];
+      if (hit && S.adj.snap) adjSnapClick(hit);
+      else if (hit) adjSelect(hit.object.parent.userData.i, hit.object.parent.userData.slot);
+    });
+  }
+
   // ------------------------------------------------------------------ events
   function bind() {
     $("steps").addEventListener("click", function (e) {
@@ -929,6 +1198,14 @@
     $("armour").addEventListener("change", function () { setArmour($("armour").value); });
     $("clearbtn").addEventListener("click", function () { S.models = S.models.map(function () { return {}; }); S.cur = 0; goSlot("base"); framed = -1; status(""); });
     $("sendbtn").addEventListener("click", send);
+    $("adjbtn").addEventListener("click", function () { adjToggle(); });
+    $("adjmove").addEventListener("click", function () { S.adj.mode = "move"; adjSync(); });
+    $("adjturn").addEventListener("click", function () { S.adj.mode = "turn"; adjSync(); });
+    $("adjsnap").addEventListener("click", adjSnap);
+    $("adjseat").addEventListener("click", adjSeat);
+    $("adjreset").addEventListener("click", adjReset);
+    $("adjsave").addEventListener("click", adjSave);
+    $("adjdone").addEventListener("click", function () { adjToggle(false); });
     $("setupbtn").addEventListener("click", function () { setupUI(true); });
     $("picklib").addEventListener("click", pickLibrary);
     $("setupdone").addEventListener("click", function () {
@@ -942,7 +1219,7 @@
 
   // ------------------------------------------------------------------ start
   initView(); bind();
-  window.__sb = {S: S, setArmour: setArmour, armourOf: armourOf, prune: prune, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
+  window.__sb = {S: S, adj: {toggle: adjToggle, select: adjSelect, save: adjSave, reset: adjReset, inst: adjInst, seat: adjSeat, nudge: adjNudge, meshes: adjMeshes, replay: replayCorrections, snapClick: adjSnapClick, snap: adjSnap, sidecarWithFit: sidecarWithFit, ljParse: ljParse, ljText: ljText, pivot: function () { return pivot; }, changed: adjChanged}, setArmour: setArmour, armourOf: armourOf, prune: prune, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
   if (window.SB_DEMO) {                                       // the online demo: its own files, nothing sent
     S.source = "./";
     $("setupbtn").hidden = true;

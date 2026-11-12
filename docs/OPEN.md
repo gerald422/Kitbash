@@ -22,6 +22,16 @@ When an item is done, delete its line (the notes entry is the record).
 - cloudflared + adding people for the shared page (passwords never pass through Claude). (066)
 - Hosted demo: the older public "Squad Builder" artifact; ask before republishing to it.
 
+## In progress: placement without by-eye work (Nov 10-12, notes 085)
+
+- Done: Adjust on the page (move / turn / snap / seat, Save fit, `_builder\\corrections.jsonl`).
+- Next: apply a correction to the whole folder / every host of a kit; then read the corrections log for joints that
+  keep being fixed and turn repeated nudges into rules.
+- Then: the anchor finder as a button (no Claude): shoulder and wrist proven on Assault arms; held weapons, heads,
+  packs, legs still to check against Josh's placements. Josh's own placements always win; round wrists are flagged.
+- Golden placements (`Run checks.bat record`) wait until Josh has made his corrections.
+- Spacer between shoulder and arm for Springles arms (a fixed stand-off, arm keeps its roll): parked; distance not set.
+
 ## Next up (builder errors, Nov 6 diagnosis: fix shared causes, not pieces; notes 072)
 
 1. **Loincloth seating** (the Belt Front spot is right; the loincloth's own seat is wrong; tabards are fine there).

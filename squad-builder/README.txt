@@ -69,6 +69,29 @@ Using it
      touches it (the page shows the same). A base you've placed by hand and
      saved with Fix the Part doesn't rise: it sits where you put it.
 
+Adjust: fixing where a part sits
+--------------------------------
+Adjust (top left of the view) lets you correct a placed part on the page:
+
+  1. Click the part. A handle appears on the joint it hangs from.
+  2. Move: drag the arrows. Turn: drag the rings (the part turns about its joint).
+     Snap: click a spot on the part, then the spot on the model it should meet.
+     Seat: slides the part onto what it hangs from until they touch.
+  3. Save fit. Reset puts it back as it was saved; Done leaves Adjust.
+
+Save changes where that part sits on that kind of joint everywhere it is used:
+on every model here, and in Blender, which places it exactly as you left it
+(no rocking or settling). A part shown mirrored shares its fit with the other
+side, so both move. A maker's own left copy keeps its own fit.
+
+It writes the fit into the part's .sockets.json in the library and adds a
+line to _builder\corrections.jsonl (what was moved, on what, and how far).
+That log is replayed when the page loads, so there is no need to run Prepare
+after a correction. The page works on the light preview meshes, so it is good
+to about 0.15 mm: for a flush contact, finish in Blender with Save Correction.
+A torso, and parts that are brought along (the adaptor, a wing's connector),
+can't be adjusted here.
+
 Notes
   - "no fit yet" on a card: that part has no fit saved for this slot, so the
     page can't show where it goes and Blender parks it beside the model for

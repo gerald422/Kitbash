@@ -90,3 +90,4 @@ Add a new entry as the next number and append its line here.
 | `082-original-plan-superseded-above.md` | Oct 29 | Original plan, superseded above | 1.5 |
 | `083-original-integration-review-17-oct-mostly-supers.md` | Oct 17 | Original integration review (17 Oct; mostly superseded) | 15.3 |
 | `084-open-items-in-full-nov-9.md` | Nov 09 | Open items in full (detail behind docs/OPEN.md) | 13 |
+| `085-adjust-on-the-page-nov-12.md` | Nov 12 | Adjust on the page: move / turn / snap / seat a part, save as its fit; corrections log; arm anchor prototype | 3.4 |
