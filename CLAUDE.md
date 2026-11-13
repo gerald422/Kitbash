@@ -34,7 +34,8 @@ Do not read `addons/tiow_inbox.py` whole (226 KB): `grep -n "^def \|^class "` an
 - Public repo: no STL / OBJ / blend / npz / previews, and nothing identifying Josh (no surname, Windows user name;
   home paths as `~\...`). `tools/validate.py` and CI enforce this; run it before every commit.
 - Never write TIOW's `config.json`. Never `pkill -f`. Delete only your own temp files; deletes on the PC need permission.
-- Bionic legs (`bionic-1.18`, Finalise 0.3.2) are on hold: don't deliver them.
+- Bionic legs: branch `bionic-1.18` (TIOW 1.18, Finalise 0.3.2) is abandoned. Never merge or deliver it; the work
+  restarts from scratch on `main` (`docs/OPEN.md`).
 
 ## Doing a task
 

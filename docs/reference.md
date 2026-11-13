@@ -57,6 +57,9 @@ save with TIOW's `correct_socket` / `correct_part` (`both=False`, `folder=False`
 - After a change: `tests/golden/run.py --only <the models it can touch>` plus a task test on the affected parts
   (`tests/<task>/t_*.py`), and the page tests for the steps touched (`squad-builder/test/t_*_step.js` against a
   served test library).
+- `tests/kb/t_kb.py` (no Blender, a second; `validate.py` runs it): `kb.sidecar.merge` keeps clicked / copied / auto
+  anchors, corrected sockets, held spots and `exact` fits; load / save keep a file's bytes; `kb.py apply` refuses
+  files changed on the PC and backs up what it replaces. Add a check there when `kb/` gains a promise.
 - Everything: Josh runs `Run checks.bat` (installed files, repo checks, all golden squads). `record` re-saves the
   reference; do it only when the placements are right.
 - Prefer numbers to pictures: gate on distances, send a sheet to Josh, look at one yourself only for a new frame.
