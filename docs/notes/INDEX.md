@@ -92,3 +92,4 @@ Add a new entry as the next number and append its line here.
 | `084-open-items-in-full-nov-9.md` | Nov 09 | Open items in full (detail behind docs/OPEN.md) | 13 |
 | `085-adjust-on-the-page-nov-12.md` | Nov 12 | Adjust on the page: move / turn / snap / seat a part, save as its fit; corrections log; arm anchor prototype | 3.4 |
 | `086-review-fixes-nov-13.md` | Nov 13 | Review of the position; duplicate `Arms` / `arms` sidecars removed, no line-ending conversion, validator checks the page, the csv and `kb/` (tests/kb) | 3.4 |
+| `087-pc-clone-nov-13.md` | Nov 13 | The repo cloned on the PC (long paths); `validate.py` reads git's output as UTF-8 on Windows; the bridge `_library.json` brought up to `main` | 2.5 |

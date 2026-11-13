@@ -25,7 +25,8 @@ PRIVATE = [re.compile(r"[A-Za-z]:\\+Users\\+(?!<|\{|%|you\b|name\b|user\b)[^\\\s
            re.compile(r"[\w.+-]+@(?!anthropic\.com|example\.)[\w-]+\.(?:com|net|org|io|uk|co\.uk|me)\b", re.I)]
 
 
-def git(*a): return subprocess.run(["git", "-C", R] + list(a), capture_output=True, text=True).stdout
+def git(*a):                                         # git prints paths as UTF-8; Windows Python would read cp1252
+    return subprocess.run(["git", "-C", R] + list(a), capture_output=True, text=True, encoding="utf-8").stdout
 
 
 def main():
