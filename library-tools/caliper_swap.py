@@ -26,14 +26,6 @@ swapped twice; one with files kept back stays where it is, to look at.
 import os, sys, re, csv, glob, time, shutil, struct, hashlib
 import numpy as np
 
-argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
-DRY, SCAN, NOMOVE = '--dry' in argv, '--scan' in argv, '--no-move' in argv
-args = [a for a in argv if not a.startswith('--')]
-if not args:
-    sys.exit(__doc__)
-ROOT = os.path.abspath(args[0].strip('"'))
-if glob.glob(os.path.join(ROOT, '*_repaired.stl')):      # the Caliper output folder itself was dropped: work from its parent
-    ROOT = os.path.dirname(ROOT)
 TOL_BOX, TOL_95, TOL_MAX, TOL_TRIS = 0.05, 0.01, 0.25, 0.05
 STAMP = time.strftime('%Y-%m-%d')
 
@@ -157,106 +149,119 @@ def md5(path):
     return h.hexdigest()
 
 
-LIB = library_root(os.path.join(ROOT, 'x'))
-BACK = os.path.join(LIB, '_backups', 'caliper-' + STAMP) if LIB else os.path.join(ROOT, '_caliper_backups', STAMP)
-ORIGIN = LIB or ROOT                                   # backup paths mirror the paths below this
-rows, swapped = [], []
-# Caliper's output: any folder holding '*_repaired.stl' ('Caliper-repaired-<id>' by default, or the name chosen in Caliper)
-cal_dirs = sorted({os.path.dirname(f) for f in glob.glob(os.path.join(ROOT, '**', '*_repaired.stl'), recursive=True)
-                   if '_backups' not in f and '_caliper_backups' not in f})
-print('Caliper folders under %s: %d%s' % (ROOT, len(cal_dirs), ' (dry run)' if DRY else ''))
-for cd in cal_dirs:
-    home = os.path.dirname(cd)
-    done_here = 0
-    for rep in sorted(glob.glob(os.path.join(cd, '*_repaired.stl'))):
-        name = re.sub(r'_repaired\.stl$', '.stl', os.path.basename(rep), flags=re.I)
-        orig = os.path.join(home, name)
-        if not os.path.isfile(orig) and re.match(r'^\d+-', name):
-            orig = os.path.join(home, name.split('-', 1)[1])       # Caliper's '<batch no>-' prefix
-        if not os.path.isfile(orig) and os.path.isfile(os.path.join(cd, name)):
-            orig = os.path.join(cd, name)                          # written beside the original
-        row = {'original': os.path.relpath(orig, ORIGIN), 'repaired': os.path.relpath(rep, ORIGIN)}
-        if not os.path.isfile(orig):
-            row['status'] = 'no original found'; rows.append(row); continue
-        h0, V0, T0 = load(orig); h1, V1, T1 = load(rep)
-        if V1 is None or V0 is None:
-            row['status'] = 'not a binary STL'; rows.append(row); continue
-        f0, f1 = faults(T0), faults(T1)
-        box = float(np.abs(np.r_[V1.min(0) - V0.min(0), V1.max(0) - V0.max(0)]).max())
-        d = surface_distance(V0, T0, V1, nearest(V0, V1), TOL_95)
-        p95, dmax = float(np.percentile(d, 95)), float(d.max())
-        row.update(tris_before=len(T0), tris_after=len(T1), box_shift=round(box, 4), move_95=round(p95, 4), move_max=round(dmax, 4),
-                   **{k + '_before': v for k, v in f0.items()}, **{k + '_after': v for k, v in f1.items()})
-        why = []
-        if any(f1.values()): why.append('still has faults')
-        if box > TOL_BOX: why.append('bounding box moved %.3f mm' % box)
-        if p95 > TOL_95 or dmax > TOL_MAX: why.append('surface moved (95%% %.3f, max %.3f mm)' % (p95, dmax))
-        if abs(len(T1) - len(T0)) > TOL_TRIS * len(T0): why.append('triangle count changed %d -> %d' % (len(T0), len(T1)))
-        if why:
-            row['status'] = 'kept original: ' + '; '.join(why); rows.append(row); continue
-        if DRY:
-            row['status'] = 'would swap'; rows.append(row); continue
-        bk = os.path.join(BACK, os.path.relpath(orig, ORIGIN))
-        os.makedirs(os.path.dirname(bk), exist_ok=True)
-        if not os.path.exists(bk):
-            shutil.copy2(orig, bk)
-        shutil.copyfile(rep, orig + '.part'); os.replace(orig + '.part', orig)
-        row['status'] = 'swapped'; row['md5'] = md5(orig); rows.append(row); swapped.append(row); done_here += 1
-    n_here = len(glob.glob(os.path.join(cd, '*_repaired.stl')))
-    if not DRY and not NOMOVE and n_here and done_here == n_here:    # all taken: out of the way (kept otherwise, to look at)
-        dst = os.path.join(BACK, 'caliper-output', os.path.relpath(cd, ORIGIN))
-        os.makedirs(os.path.dirname(dst), exist_ok=True)
-        shutil.move(cd, dst)
-    print('  %-90s %d swapped' % (os.path.relpath(cd, ROOT)[-90:], done_here))
+def main():
+    argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else sys.argv[1:]
+    DRY, SCAN, NOMOVE = '--dry' in argv, '--scan' in argv, '--no-move' in argv
+    args = [a for a in argv if not a.startswith('--')]
+    if not args:
+        sys.exit(__doc__)
+    ROOT = os.path.abspath(args[0].strip('"'))
+    if glob.glob(os.path.join(ROOT, '*_repaired.stl')):      # the Caliper output folder itself was dropped: work from its parent
+        ROOT = os.path.dirname(ROOT)
+    LIB = library_root(os.path.join(ROOT, 'x'))
+    BACK = os.path.join(LIB, '_backups', 'caliper-' + STAMP) if LIB else os.path.join(ROOT, '_caliper_backups', STAMP)
+    ORIGIN = LIB or ROOT                                   # backup paths mirror the paths below this
+    rows, swapped = [], []
+    # Caliper's output: any folder holding '*_repaired.stl' ('Caliper-repaired-<id>' by default, or the name chosen in Caliper)
+    cal_dirs = sorted({os.path.dirname(f) for f in glob.glob(os.path.join(ROOT, '**', '*_repaired.stl'), recursive=True)
+                       if '_backups' not in f and '_caliper_backups' not in f})
+    print('Caliper folders under %s: %d%s' % (ROOT, len(cal_dirs), ' (dry run)' if DRY else ''))
+    for cd in cal_dirs:
+        home = os.path.dirname(cd)
+        done_here = 0
+        for rep in sorted(glob.glob(os.path.join(cd, '*_repaired.stl'))):
+            name = re.sub(r'_repaired\.stl$', '.stl', os.path.basename(rep), flags=re.I)
+            orig = os.path.join(home, name)
+            if not os.path.isfile(orig) and re.match(r'^\d+-', name):
+                orig = os.path.join(home, name.split('-', 1)[1])       # Caliper's '<batch no>-' prefix
+            if not os.path.isfile(orig) and os.path.isfile(os.path.join(cd, name)):
+                orig = os.path.join(cd, name)                          # written beside the original
+            row = {'original': os.path.relpath(orig, ORIGIN), 'repaired': os.path.relpath(rep, ORIGIN)}
+            if not os.path.isfile(orig):
+                row['status'] = 'no original found'; rows.append(row); continue
+            h0, V0, T0 = load(orig); h1, V1, T1 = load(rep)
+            if V1 is None or V0 is None:
+                row['status'] = 'not a binary STL'; rows.append(row); continue
+            f0, f1 = faults(T0), faults(T1)
+            box = float(np.abs(np.r_[V1.min(0) - V0.min(0), V1.max(0) - V0.max(0)]).max())
+            d = surface_distance(V0, T0, V1, nearest(V0, V1), TOL_95)
+            p95, dmax = float(np.percentile(d, 95)), float(d.max())
+            row.update(tris_before=len(T0), tris_after=len(T1), box_shift=round(box, 4), move_95=round(p95, 4), move_max=round(dmax, 4),
+                       **{k + '_before': v for k, v in f0.items()}, **{k + '_after': v for k, v in f1.items()})
+            why = []
+            if any(f1.values()): why.append('still has faults')
+            if box > TOL_BOX: why.append('bounding box moved %.3f mm' % box)
+            if p95 > TOL_95 or dmax > TOL_MAX: why.append('surface moved (95%% %.3f, max %.3f mm)' % (p95, dmax))
+            if abs(len(T1) - len(T0)) > TOL_TRIS * len(T0): why.append('triangle count changed %d -> %d' % (len(T0), len(T1)))
+            if why:
+                row['status'] = 'kept original: ' + '; '.join(why); rows.append(row); continue
+            if DRY:
+                row['status'] = 'would swap'; rows.append(row); continue
+            bk = os.path.join(BACK, os.path.relpath(orig, ORIGIN))
+            os.makedirs(os.path.dirname(bk), exist_ok=True)
+            if not os.path.exists(bk):
+                shutil.copy2(orig, bk)
+            shutil.copyfile(rep, orig + '.part'); os.replace(orig + '.part', orig)
+            row['status'] = 'swapped'; row['md5'] = md5(orig); rows.append(row); swapped.append(row); done_here += 1
+        n_here = len(glob.glob(os.path.join(cd, '*_repaired.stl')))
+        if not DRY and not NOMOVE and n_here and done_here == n_here:    # all taken: out of the way (kept otherwise, to look at)
+            dst = os.path.join(BACK, 'caliper-output', os.path.relpath(cd, ORIGIN))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.move(cd, dst)
+        print('  %-90s %d swapped' % (os.path.relpath(cd, ROOT)[-90:], done_here))
 
-if swapped and LIB and not DRY:
-    # parts the library keeps repaired: build_library.py leaves these alone
-    p = os.path.join(LIB, '_repaired.csv'); have = []
-    if os.path.isfile(p):
-        with open(p, encoding='utf-8-sig', newline='') as fh:
-            have = list(csv.reader(fh))[1:]
-    keep = {r[0].lower(): r for r in have if r}
-    for r in swapped:
-        keep[r['original'].replace('/', '\\').lower()] = [r['original'].replace('/', '\\'), STAMP, str(r['tris_before']), str(r['tris_after']),
-                                                         str(os.path.getsize(os.path.join(LIB, r['original']))), r['md5']]
-    with open(p, 'w', encoding='utf-8-sig', newline='') as fh:
-        w = csv.writer(fh, lineterminator='\r\n')
-        w.writerow(['library path', 'repaired on', 'triangles before', 'triangles after', 'bytes', 'md5'])
-        w.writerows(keep[k] for k in sorted(keep))
+    if swapped and LIB and not DRY:
+        # parts the library keeps repaired: build_library.py leaves these alone
+        p = os.path.join(LIB, '_repaired.csv'); have = []
+        if os.path.isfile(p):
+            with open(p, encoding='utf-8-sig', newline='') as fh:
+                have = list(csv.reader(fh))[1:]
+        keep = {r[0].lower(): r for r in have if r}
+        for r in swapped:
+            keep[r['original'].replace('/', '\\').lower()] = [r['original'].replace('/', '\\'), STAMP, str(r['tris_before']), str(r['tris_after']),
+                                                             str(os.path.getsize(os.path.join(LIB, r['original']))), r['md5']]
+        with open(p, 'w', encoding='utf-8-sig', newline='') as fh:
+            w = csv.writer(fh, lineterminator='\r\n')
+            w.writerow(['library path', 'repaired on', 'triangles before', 'triangles after', 'bytes', 'md5'])
+            w.writerows(keep[k] for k in sorted(keep))
 
-dirty = []
-if SCAN:
-    for f in sorted(glob.glob(os.path.join(ROOT, '**', '*.stl'), recursive=True)):
-        if '_backups' in f or '_caliper_backups' in f or f.lower().endswith('_repaired.stl') or os.path.dirname(f) in cal_dirs:
-            continue
-        h, V, T = load(f)
-        if V is None:
-            dirty.append([os.path.relpath(f, ORIGIN), 'not a binary STL', '', '', '']); continue
-        fl = faults(T)
-        if any(fl.values()):
-            dirty.append([os.path.relpath(f, ORIGIN), fl['open'], fl['nonmanifold'], fl['flipped'], fl['degenerate']])
+    dirty = []
+    if SCAN:
+        for f in sorted(glob.glob(os.path.join(ROOT, '**', '*.stl'), recursive=True)):
+            if '_backups' in f or '_caliper_backups' in f or f.lower().endswith('_repaired.stl') or os.path.dirname(f) in cal_dirs:
+                continue
+            h, V, T = load(f)
+            if V is None:
+                dirty.append([os.path.relpath(f, ORIGIN), 'not a binary STL', '', '', '']); continue
+            fl = faults(T)
+            if any(fl.values()):
+                dirty.append([os.path.relpath(f, ORIGIN), fl['open'], fl['nonmanifold'], fl['flipped'], fl['degenerate']])
 
-os.makedirs(BACK, exist_ok=True)
-log = os.path.join(BACK, 'caliper_swap_log.csv')
-fields = ['status', 'original', 'repaired', 'tris_before', 'tris_after', 'box_shift', 'move_95', 'move_max'] + \
-         [k + s for s in ('_before', '_after') for k in ('open', 'nonmanifold', 'flipped', 'degenerate')] + ['md5']
-new = not os.path.isfile(log)
-with open(log, 'a', encoding='utf-8-sig' if new else 'utf-8', newline='') as fh:
-    w = csv.DictWriter(fh, fields, extrasaction='ignore', lineterminator='\r\n')
-    if new:
-        w.writeheader()
-    w.writerows(rows)
-if SCAN:
-    with open(os.path.join(BACK, 'still_dirty.csv'), 'w', encoding='utf-8-sig', newline='') as fh:
-        w = csv.writer(fh, lineterminator='\r\n')
-        w.writerow(['file', 'open edges', 'non-manifold edges', 'flipped', 'degenerate'])
-        w.writerows(dirty)
-n = lambda s: sum(1 for r in rows if r['status'].startswith(s))
-print('\n%d repaired files: %d %s, %d kept original, %d other' % (len(rows), n('swapped') + n('would swap'), 'would swap' if DRY else 'swapped',
-                                                                  n('kept original'), len(rows) - n('swapped') - n('would swap') - n('kept original')))
-for r in rows:
-    if not r['status'].startswith(('swapped', 'would swap')):
-        print('  ', r['original'], '-', r['status'])
-if SCAN:
-    print('still not clean after this run: %d (listed in %s)' % (len(dirty), os.path.join(BACK, 'still_dirty.csv')))
-print('log:', log)
+    os.makedirs(BACK, exist_ok=True)
+    log = os.path.join(BACK, 'caliper_swap_log.csv')
+    fields = ['status', 'original', 'repaired', 'tris_before', 'tris_after', 'box_shift', 'move_95', 'move_max'] + \
+             [k + s for s in ('_before', '_after') for k in ('open', 'nonmanifold', 'flipped', 'degenerate')] + ['md5']
+    new = not os.path.isfile(log)
+    with open(log, 'a', encoding='utf-8-sig' if new else 'utf-8', newline='') as fh:
+        w = csv.DictWriter(fh, fields, extrasaction='ignore', lineterminator='\r\n')
+        if new:
+            w.writeheader()
+        w.writerows(rows)
+    if SCAN:
+        with open(os.path.join(BACK, 'still_dirty.csv'), 'w', encoding='utf-8-sig', newline='') as fh:
+            w = csv.writer(fh, lineterminator='\r\n')
+            w.writerow(['file', 'open edges', 'non-manifold edges', 'flipped', 'degenerate'])
+            w.writerows(dirty)
+    n = lambda s: sum(1 for r in rows if r['status'].startswith(s))
+    print('\n%d repaired files: %d %s, %d kept original, %d other' % (len(rows), n('swapped') + n('would swap'), 'would swap' if DRY else 'swapped',
+                                                                      n('kept original'), len(rows) - n('swapped') - n('would swap') - n('kept original')))
+    for r in rows:
+        if not r['status'].startswith(('swapped', 'would swap')):
+            print('  ', r['original'], '-', r['status'])
+    if SCAN:
+        print('still not clean after this run: %d (listed in %s)' % (len(dirty), os.path.join(BACK, 'still_dirty.csv')))
+    print('log:', log)
+
+
+if __name__ == '__main__':
+    main()

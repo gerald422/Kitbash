@@ -5,11 +5,13 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
-- **Record the placement baseline on the PC** (Nov 10): the clone is made (Nov 13, notes 087:
-  `~\Desktop\TIOW Blender bridge\Kitbash`, `kb.py verify` 18 of 18, validator passes there). Run
-  `Run checks.bat record` once when the builder looks right, then `Run checks.bat` after any change. Not run yet:
-  `tests/golden/run.py` is untested in real Blender and there is no `golden.json`. Do this before the origins work
-  below: it is the only baseline. Another clone needs `git clone -c core.longpaths=true` (9 paths are too long).
+- **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is
+  a snapshot of what TIOW does today, not a sign-off: `Run checks.bat record` again when the builder looks right.
+  `Run checks.bat` after any change. Another clone needs `git clone -c core.longpaths=true` (9 paths are too long).
+- **Caliper over the library** (notes 088): Turtle Ninja - Heresy done Nov 13 (609 of 612 swapped, golden unchanged).
+  His to look at: the 3 kept back (Mk6 Torso, Mk6 Legs, Lightning Claws: Caliper drops a third of their triangles);
+  the swap's 5% triangle rule also keeps back Old Style torsos (-13%, +18%). Next makers: drop the folder on
+  `Caliper Repair.bat` (page folder), say Y, then `Run checks.bat`. The work folder must not be on D: (exFAT).
 - Springles / Redwarden batch (Nov 9, 323 parts): run Prepare, look them over. 150 have no fit (notes 074).
 - Chest inserts (Nov 9): check the 44 in the builder; Iron Gorgon 01 / 07 have winged emblems (hide?). (075)
 - WarGame Exclusive: PAD_11 / PAD_13 cut 1.1-1.3 mm, Fix the Part if they look sunk. (077)
