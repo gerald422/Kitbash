@@ -1,1 +1,4 @@
+# Keep every file byte for byte on every machine: sidecars mirror the library (some LF, some CRLF) and
+# kb.py verify compares installed files with the clone by md5. Without this a Windows clone turns LF into CRLF.
+* -text
 *.bat text eol=crlf

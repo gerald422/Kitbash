@@ -7,7 +7,8 @@ When an item is done, delete its line (the notes entry is the record).
 
 - **Set up the free checks on the PC** (Nov 10): clone or unzip the repo on the PC, run `Run checks.bat record` once
   when the builder looks right, then `Run checks.bat` after any change. Not run yet: `tests/golden/run.py` is untested
-  in real Blender.
+  in real Blender and there is no `golden.json`. Do this before the origins work below: it is the only baseline.
+  A clone made before Nov 13 should be made again (line endings and duplicate sidecars, notes 086).
 - Springles / Redwarden batch (Nov 9, 323 parts): run Prepare, look them over. 150 have no fit (notes 074).
 - Chest inserts (Nov 9): check the 44 in the builder; Iron Gorgon 01 / 07 have winged emblems (hide?). (075)
 - WarGame Exclusive: PAD_11 / PAD_13 cut 1.1-1.3 mm, Fix the Part if they look sunk. (077)
@@ -53,7 +54,13 @@ When an item is done, delete its line (the notes entry is the record).
 - Mechadendrite tails and mechadendrites (spec: 079; assets `Desktop\tubes, pipes, chains\`).
 - New bits next month: capes, tabards, arms, a shield (sheets seen Nov 4).
 - 703 torsos without sockets (TN other poses, Marta): torso / flat-torso rules. 238 parts in types with no page step.
-- Marta mark tidy-up; 5 stale Marta sidecars in the repo the library no longer has.
+- Marta mark tidy-up; 5 stale Marta sidecars in the repo the library no longer has (not the 8 `Arms` / `arms`
+  duplicates removed Nov 13; check against the PC).
+- **Share server: refuse POSTs from other sites** (Nov 13 review, notes 086): `/correct` and `/send` don't check
+  `Origin` / `Content-Type`; about five lines in `share_server.py`, then deliver and restart sharing. Also: a removed
+  user stays signed in up to 12 h unless the server is restarted.
+- Fit coverage (Nov 13 count): 2,547 of 6,887 sidecars have no fit (877 are torsos, which need none). Most: Two-Handed
+  Held 332 / 446, Heads 287 / 657, Hand-less Weapons 238 / 262, Accessories 105 / 199, Unsorted 86 / 86.
 - Bladeguard Volkite A/B right-hand fit; Plasma Incinerator 3A/3B by eye; BBoosty / CyberBrush accessories without fits.
 - TN Mk5 Helmet 10 sits 0.82 mm off its fit in query.blend (he didn't mention it; left alone).
 - Stale page tests `t_wings_step.js` / `t_belt_step.js` (step index).

@@ -91,3 +91,4 @@ Add a new entry as the next number and append its line here.
 | `083-original-integration-review-17-oct-mostly-supers.md` | Oct 17 | Original integration review (17 Oct; mostly superseded) | 15.3 |
 | `084-open-items-in-full-nov-9.md` | Nov 09 | Open items in full (detail behind docs/OPEN.md) | 13 |
 | `085-adjust-on-the-page-nov-12.md` | Nov 12 | Adjust on the page: move / turn / snap / seat a part, save as its fit; corrections log; arm anchor prototype | 3.4 |
+| `086-review-fixes-nov-13.md` | Nov 13 | Review of the position; duplicate `Arms` / `arms` sidecars removed, no line-ending conversion, validator checks the page, the csv and `kb/` (tests/kb) | 3.4 |
