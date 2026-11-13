@@ -94,3 +94,4 @@ Add a new entry as the next number and append its line here.
 | `086-review-fixes-nov-13.md` | Nov 13 | Review of the position; duplicate `Arms` / `arms` sidecars removed, no line-ending conversion, validator checks the page, the csv and `kb/` (tests/kb) | 3.4 |
 | `087-pc-clone-nov-13.md` | Nov 13 | The repo cloned on the PC (long paths); `validate.py` reads git's output as UTF-8 on Windows; the bridge `_library.json` brought up to `main` | 2.5 |
 | `088-caliper-repair-launcher.md` | Nov 13 | Caliper Repair.bat (Caliper's batch from the command line, work folder off exFAT D:); golden baseline recorded; Turtle Ninja - Heresy repaired (609 swapped) | 4.1 |
+| `089-review-and-plan-nov-13.md` | Nov 13 | Whole-project review against the aim, Josh's answers (makers, printing, worst snaps, TIOW-FTRP retired, no STL backup), the order agreed, old folders archived | 2.9 |

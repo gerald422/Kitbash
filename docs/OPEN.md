@@ -3,6 +3,19 @@
 Short and current. Detail for most lines: `docs/notes/084-open-items-in-full-nov-9.md`, or the notes entry named.
 When an item is done, delete its line (the notes entry is the record).
 
+## Order agreed with Josh (Nov 13, notes 089)
+
+1. **Add-a-maker on the PC, a recipe per maker**: `kits/creator/add_creator.py` without the container (no staging), one
+   saved config per maker so new parts from a maker already in the library go in with one command. New makers are rare;
+   new parts from the same makers are frequent.
+2. Automatic fits beyond heads and pads: arms (Nov 12 prototype, notes 085), legs, torsos.
+3. Fit the parts that have none (he wants all of them fitted up front): match against the same maker's fitted parts.
+4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
+   below; a standing audit and a fit-quality score.
+5. Origins at the joint (below). 6. Finalise: export step, a peg test piece (pegs have never been printed).
+7. Housekeeping: retire the TIOW-FTRP bridge (he no longer uses TIOW-FTRP: `bridge/`, the bridge template, the
+   bridge's installed files); share server POST check (sharing is only for testing and limited printing).
+
 ## Waiting on Josh
 
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is
@@ -23,6 +36,7 @@ When an item is done, delete its line (the notes entry is the record).
 - 'Torso hasn't followed the legs' roll': not reproduced; what should it follow? (072)
 - Mirror on the fly: auto-mirror single-side parts, or a checkbox on every slot?
 - Which Chaplain / Techmarine "hip armour" files he meant. Captain with Jump Pack belt plates to review.
+- **A backup for the STLs**: D: is one external exFAT drive and the library (65 GB) is nowhere else. Where to?
 - cloudflared + adding people for the shared page (passwords never pass through Claude). (066)
 - Hosted demo: the older public "Squad Builder" artifact; ask before republishing to it.
 

@@ -13,6 +13,22 @@ Josh's working blends: `Desktop\query.blend` (corrections), `Desktop\Operation M
 `Desktop\example issues.blend`. Josh has a Blender MCP server, so his live Blender can be used; he restarts Blender
 after an add-on change.
 
+## A session running on the PC itself (Claude Code in the clone)
+
+Since Nov 13 the repo is cloned at `~\Desktop\TIOW Blender bridge\Kitbash` and sessions run there. Then none of the device
+tools, staging or `device_commit_files` below apply: the roots are real paths (`python tools/kb.py roots`), the
+library is read and written in place, and installed files are delivered with `python tools/kb.py install <task>
+[names]` (backs up, md5-checks) after adding them to `tools/installed.json`.
+- Python: the system `python` has no numpy; use Blender's (`C:\Program Files\Blender Foundation\Blender 5.1\5.1\python
+  \bin\python.exe`) for numpy work, `blender --background --python` when `bpy` / `mathutils` is needed (add
+  `--factory-startup` unless his add-ons are wanted: several print errors in background mode). Set `PYTHONUTF8=1`.
+- Blender tests: `blender --background --python tests/golden/run.py -- "D:\Kitbash Library" [--only ...]` (25 s for
+  all 140 parts). His live Blender is also reachable through the Blender MCP server.
+- D: is exFAT: no long-path trouble for Python (long paths are on), but tools that need NTFS features refuse it
+  (Caliper's batch: notes 088). Keep such work folders in the temp folder on C:.
+- The bridge folder's old `old-*` / `sidecars-*` / `library build` folders are in
+  `~\Desktop\TIOW Blender bridge archive\` (history only).
+
 ## Where to run
 
 1. **On the PC** (first choice): Python there sees the real library, so no staging, no 7-level limit, no chunking.
