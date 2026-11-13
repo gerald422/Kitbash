@@ -96,3 +96,4 @@ Add a new entry as the next number and append its line here.
 | `088-caliper-repair-launcher.md` | Nov 13 | Caliper Repair.bat (Caliper's batch from the command line, work folder off exFAT D:); golden baseline recorded; Turtle Ninja - Heresy repaired (609 swapped) | 4.1 |
 | `089-review-and-plan-nov-13.md` | Nov 13 | Whole-project review against the aim, Josh's answers (makers, printing, worst snaps, TIOW-FTRP retired, no STL backup), the order agreed, old folders archived | 2.9 |
 | `090-add-a-maker-on-the-pc.md` | Nov 13 | Add-a-maker on the PC: `add_creator.py add` inside Blender (no staging, no extra packages), recipes, `Add parts.bat`, `kb/fit.py`; Caliper keep-list | 4.2 |
+| `091-carry-fits-from-siblings-experiment.md` | Nov 13 | Item 2 experiment: carrying fits / sockets from fitted siblings (leave-one-out numbers, the gates); fitter not built yet | 3.1 |

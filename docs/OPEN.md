@@ -8,7 +8,8 @@ When an item is done, delete its line (the notes entry is the record).
 1. Done Nov 13 (notes 090): `add_creator.py add RECIPE --src FOLDER` and `Add parts.bat` run on the PC. **Still to do:
    a recipe for each main maker** (only `wargame-exclusive.json` exists), written when its next drop arrives; the
    first real drop is Josh's to pick.
-2. Automatic fits beyond heads and pads: arms (Nov 12 prototype, notes 085), legs, torsos.
+2. Automatic fits beyond heads and pads: **experiment done Nov 13 (notes 091), fitter not built**: carry from the
+   fitted parts in the same folder, gated by region match; next is `kb/carry.py` + a `"fit": "like"` type.
 3. Fit the parts that have none (he wants all of them fitted up front): match against the same maker's fitted parts.
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
    below; a standing audit and a fit-quality score.
