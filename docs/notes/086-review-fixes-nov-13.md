@@ -30,5 +30,5 @@ is cloned on the PC. Nothing on the PC changed; no installed file changed (`tool
   an installed file, so it goes with a delivery and a sharing restart.
 - **Position**: `main` = installed (TIOW Inbox 1.17.8, Finalise 0.3.3). No `golden.json` yet, so there is no
   placement baseline; record it before origins at the joint. Corrections so far: 16 sidecars with `exact`, 2 with a
-  corrected socket. Fit coverage by type is in `OPEN.md`. GitHub (pull requests, CI runs) wasn't reachable in the
-  session, so CI's result on this commit wasn't seen.
+  corrected socket. Fit coverage by type is in `OPEN.md`. No open pull requests; CI (`validate`) passed on the
+  fixes commit `ccc081f`. Pushed to the session's branch, not `main`: it needs merging.
