@@ -37,6 +37,13 @@ SUPPORTED = re.compile(r"(^|[^a-z])(pre-?sup(ported)?|pres|supported|sup)([^a-z]
 CHUNK = 250 * 2 ** 20
 
 
+def set_roots(nc, lib, page_bi=None):
+    """the real folders, for add_creator.py running on the PC itself (no device shell, no ~/mnt)"""
+    global NC, LIB, PAGE_BI
+    NC, LIB = nc, lib
+    if page_bi: PAGE_BI = page_bi
+
+
 def md5(p):
     h = hashlib.md5()
     with open(p, "rb") as f:

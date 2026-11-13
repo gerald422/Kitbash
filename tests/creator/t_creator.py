@@ -4,21 +4,31 @@ host (closest <= 0.5 mm) and cut in no deeper than 0.65 mm (inside = three rays 
 shell isn't read as a cut). Renders each model front and right into one sheet.
     /home/claude/bpyenv/bin/python t_creator.py -- JOB.json
 JOB: {"worklib", "tiow", "out", "new": "NEW/", "models": {name: [[path in worklib without .stl, category, socket], ...]}}
-Writes OUT/results.json and OUT/test.jpg."""
+"tiow": a tiow_inbox.py to install first (the container); null uses the add-on that is installed (the PC).
+Writes OUT/results.json and OUT/test.jpg (without PIL, as in Blender's own Python: OUT/<model>_front.png, _right.png)."""
 import bpy, json, os, sys, tempfile
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 J = json.load(open(sys.argv[sys.argv.index("--") + 1]))
-W, TIOW, OUTD, NEW, MODELS = J["worklib"], J["tiow"], J["out"], J.get("new", "NEW/"), J["models"]
+W, TIOW, OUTD, NEW, MODELS = J["worklib"], J.get("tiow"), J["out"], J.get("new", "NEW/"), J["models"]
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")); import rend
 fails, res = [], []
 def ck(l, c, d=""):
     print(("  ok   " if c else "  FAIL ") + l + ("" if c else "  " + str(d))); c or fails.append(l)
-bpy.ops.wm.read_factory_settings(use_empty=True)
-bpy.ops.preferences.addon_enable(module="part_sockets")
-bpy.ops.preferences.addon_install(filepath=TIOW, overwrite=True); bpy.ops.preferences.addon_enable(module="tiow_inbox")
+if TIOW:                                 # the container: a clean Blender, this tiow_inbox.py installed
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    bpy.ops.preferences.addon_enable(module="part_sockets")
+    bpy.ops.preferences.addon_install(filepath=TIOW, overwrite=True); bpy.ops.preferences.addon_enable(module="tiow_inbox")
+else:                                    # the PC: Blender as Josh has it, as tests/golden/run.py does
+    import addon_utils
+    bpy.ops.wm.read_homefile(use_empty=True)
+    for mod in ("bl_ext.user_default.part_sockets", "part_sockets"):
+        try:
+            if addon_utils.enable(mod, default_set=False): break
+        except Exception: pass
+    addon_utils.enable("tiow_inbox", default_set=False)
 import tiow_inbox as T
-prefs = T.get_prefs(); prefs.inbox_path = tempfile.mkdtemp()
+prefs = T.get_prefs(); old_inbox = (prefs.inbox_path, prefs.builder_inbox); prefs.inbox_path = tempfile.mkdtemp()
 inbox = os.path.join(tempfile.mkdtemp(), "_builder", "inbox"); os.makedirs(inbox); prefs.builder_inbox = inbox
 T.process_inbox(); n = 0
 for i, (m, parts) in enumerate(MODELS.items()):
@@ -29,6 +39,7 @@ for i, (m, parts) in enumerate(MODELS.items()):
         else: r["at"] = [80 * i, 0, 0]
         n += 1; json.dump(r, open(os.path.join(inbox, "sb-%04d.json" % n), "w"))
     T._state["beat"] = {}; T.process_inbox()
+prefs.inbox_path, prefs.builder_inbox = old_inbox         # never leave the test inboxes in Josh's preferences
 obs = [o for o in bpy.context.view_layer.objects if o.type == 'MESH']
 D3 = [Vector(d).normalized() for d in ((0.0123, 0.0177, 1), (1, 0.031, -0.017), (-0.023, -1, 0.041))]
 def bvh(o): return BVHTree.FromPolygons([o.matrix_world @ v.co for v in o.data.vertices], [p.vertices[:] for p in o.data.polygons])
@@ -67,12 +78,16 @@ for m in MODELS:
     cols = [COL.get(o.get("tiow_category"), rend.RED) if newb and os.path.basename(o.get("tiow_src", "")).startswith(newb)
             else (rend.BLUE if o.get("tiow_category") == "Chests" else rend.GREY) for o in ms]
     f = rend.render(sc, OUTD, m, ms, {"front": (0.35, 1, 0.25), "right": (1, 0.2, 0.15)}, cols); tiles.append((m, f))
-from PIL import Image, ImageDraw
-w = 420; sheet = Image.new("RGB", (2 * w, len(tiles) * (w + 20)), (255, 255, 255)); d = ImageDraw.Draw(sheet)
-for r, (m, f) in enumerate(tiles):
-    for c, v in enumerate(("front", "right")):
-        sheet.paste(Image.open(f[v]).convert("RGB"), (c * w, r * (w + 20) + 20)); os.remove(f[v])
-    d.text((6, r * (w + 20) + 4), m + ": " + ", ".join(os.path.basename(p) for p, _, _ in MODELS[m] if p.startswith(NEW)), fill=(0, 0, 0))
-sheet.save(os.path.join(OUTD, "test.jpg"), quality=85)
+try:
+    from PIL import Image, ImageDraw
+except ImportError:                     # Blender's own Python: the renders stay as they are, one file a view
+    Image = None
+if Image:
+    w = 420; sheet = Image.new("RGB", (2 * w, len(tiles) * (w + 20)), (255, 255, 255)); d = ImageDraw.Draw(sheet)
+    for r, (m, f) in enumerate(tiles):
+        for c, v in enumerate(("front", "right")):
+            sheet.paste(Image.open(f[v]).convert("RGB"), (c * w, r * (w + 20) + 20)); os.remove(f[v])
+        d.text((6, r * (w + 20) + 4), m + ": " + ", ".join(os.path.basename(p) for p, _, _ in MODELS[m] if p.startswith(NEW)), fill=(0, 0, 0))
+    sheet.save(os.path.join(OUTD, "test.jpg"), quality=85)
 json.dump({"fails": fails, "parts": res}, open(os.path.join(OUTD, "results.json"), "w"), indent=1)
 print("FAILS:", fails if fails else "none")

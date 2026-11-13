@@ -11,7 +11,7 @@ import os
 import shutil
 import sys
 
-KEEP_NAMES = {"_fits.json", "_sources.csv", "_renamed.csv", "_bases_moved.csv", "_mirror_copies.csv", "_repaired.csv"}
+KEEP_NAMES = {"_fits.json", "_sources.csv", "_renamed.csv", "_bases_moved.csv", "_mirror_copies.csv", "_repaired.csv", "_caliper_keep.txt"}
 SKIP_DIRS = {"_builder", "_backups", ".git", "__pycache__"}
 
 

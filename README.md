@@ -19,6 +19,7 @@ the sidecars (`<part>.sockets.json`: sockets, fits and anchors) that make them f
 | `tests/`, `finalise/tests/` | Blender test scripts (written for the build machine's paths) |
 | `docs/notes/` | The full history, one entry per task (`INDEX.md` first); `docs/OPEN.md` what's open; `docs/reference.md` how the work is done |
 | `kb/`, `tools/` | Shared code for kit scripts; `tools/validate.py` (run before a commit), `tools/kb.py` (verify / apply on the PC), `joints.json` + `tools/gen_joints.py` (the one table of part types), `tools/build_addon.py` (the add-on's sections) |
+| `Add parts.bat` | On the PC: drop a folder of a maker's new STLs on it; heads and pads are fitted, the rest filed, after you answer Y (`kits/creator/add_creator.py add`, one recipe per maker in `kits/creator/`) |
 | `Run checks.bat` | On the PC: installed files, repo checks and the golden placements, at no Claude usage |
 
 ## Install

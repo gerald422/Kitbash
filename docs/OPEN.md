@@ -5,9 +5,9 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Order agreed with Josh (Nov 13, notes 089)
 
-1. **Add-a-maker on the PC, a recipe per maker**: `kits/creator/add_creator.py` without the container (no staging), one
-   saved config per maker so new parts from a maker already in the library go in with one command. New makers are rare;
-   new parts from the same makers are frequent.
+1. Done Nov 13 (notes 090): `add_creator.py add RECIPE --src FOLDER` and `Add parts.bat` run on the PC. **Still to do:
+   a recipe for each main maker** (only `wargame-exclusive.json` exists), written when its next drop arrives; the
+   first real drop is Josh's to pick.
 2. Automatic fits beyond heads and pads: arms (Nov 12 prototype, notes 085), legs, torsos.
 3. Fit the parts that have none (he wants all of them fitted up front): match against the same maker's fitted parts.
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
@@ -21,10 +21,10 @@ When an item is done, delete its line (the notes entry is the record).
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is
   a snapshot of what TIOW does today, not a sign-off: `Run checks.bat record` again when the builder looks right.
   `Run checks.bat` after any change. Another clone needs `git clone -c core.longpaths=true` (9 paths are too long).
-- **Caliper over the library** (notes 088): Turtle Ninja - Heresy done Nov 13 (609 of 612 swapped, golden unchanged).
-  His to look at: the 3 kept back (Mk6 Torso, Mk6 Legs, Lightning Claws: Caliper drops a third of their triangles);
-  the swap's 5% triangle rule also keeps back Old Style torsos (-13%, +18%). Next makers: drop the folder on
-  `Caliper Repair.bat` (page folder), say Y, then `Run checks.bat`. The work folder must not be on D: (exFAT).
+- **Caliper over the library** (notes 088, 090): Turtle Ninja - Heresy done Nov 13. The other makers are his to
+  run: drop the maker folder on `Caliper Repair.bat` (page folder), say Y, then `Run checks.bat`, then tell Claude
+  (or run `Export sidecars to repo.bat`) so `_repaired.csv` is committed. Decided: the 3 kept-back files keep their
+  originals (`_caliper_keep.txt`), the 5% triangle rule stays.
 - Springles / Redwarden batch (Nov 9, 323 parts): run Prepare, look them over. 150 have no fit (notes 074).
 - Chest inserts (Nov 9): check the 44 in the builder; Iron Gorgon 01 / 07 have winged emblems (hide?). (075)
 - WarGame Exclusive: PAD_11 / PAD_13 cut 1.1-1.3 mm, Fix the Part if they look sunk. (077)
@@ -36,7 +36,8 @@ When an item is done, delete its line (the notes entry is the record).
 - 'Torso hasn't followed the legs' roll': not reproduced; what should it follow? (072)
 - Mirror on the fly: auto-mirror single-side parts, or a checkbox on every slot?
 - Which Chaplain / Techmarine "hip armour" files he meant. Captain with Jump Pack belt plates to review.
-- **A backup for the STLs**: D: is one external exFAT drive and the library (65 GB) is nowhere else. Where to?
+- **A backup for the STLs**: D: is one external exFAT drive and the library (65 GB) is nowhere else. He will put it
+  in cloud storage (Nov 13); not done yet.
 - cloudflared + adding people for the shared page (passwords never pass through Claude). (066)
 - Hosted demo: the older public "Squad Builder" artifact; ask before republishing to it.
 

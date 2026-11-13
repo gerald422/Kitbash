@@ -3,7 +3,26 @@ seat, pauldrons the Pad fit from his pad 62 (pushed out where they're thicker in
 without a fit and logged. These are the steps done by hand for Springles / Redwarden (kits/rw_spr) and WarGame
 Exclusive (kits/wg), driven by one JSON config per maker (kits/creator/<maker>.json; see wargame-exclusive.json).
 
-A new maker, start to finish (about eight tool calls):
+On the PC (a session in the repo clone, or Josh with "Add parts.bat"): one command, nothing staged. It runs inside the
+installed Blender, which has everything it needs (numpy, its own KD tree for the matching, Decimate for the previews):
+
+    blender --background --factory-startup --python kits/creator/add_creator.py -- add RECIPE [--src FOLDER] [--dry] [--yes]
+
+  RECIPE   a maker's saved config in kits/creator (name or path; `recipes` lists them; left out, it asks)
+  --src    the folder with the new STLs, inside D:\\new cults (default: the recipe's "src"). Files the library
+           already has (their source path is in _sources.csv) are left out, so a maker's folder can be run again
+           whenever it gains parts; "nothing new" ends the run.
+  It surveys the folder, plans the names, lists the new files with mesh faults (for Caliper Repair.bat afterwards),
+  renders the contact sheet, fits heads and pads, builds three test marines with TIOW Inbox, then asks before it adds:
+  the files under their library names, sidecars, previews, index, _sources.csv, no_fit and hidden lines (checked,
+  with the library's lists backed up in _backups\\TASK\\before), and the sidecars and rows into this clone for a
+  commit. --dry stops before adding (`finish TASK` adds later); --yes doesn't ask (and stops at a failed test check
+  unless --force); --no-open doesn't open the pictures; --no-record leaves the clone alone.
+  Work files: D:\\Kitbash Library\\_backups\\TASK\\work (sheet_front.png, sheet_back.png, test\\*.png).
+  A new maker needs a recipe first: copy wargame-exclusive.json, set root / prefix / types from the survey's names
+  (a file no type matches stops the plan and is listed), and look at the sheet once for front, up and aquilas.
+
+In the container (the earlier way), a new maker, start to finish (about eight tool calls):
  1. PC (device_bash):  python3 on_pc.py survey "<folder in D:\\new cults>" TASK [--only GLOB] [--skip TEXT] --stage
     (on_pc.py lives in the page folder: ~/mnt/Desktop/TIOW Blender bridge/Squad Builder/add_creator_pc.py)
  2. device_stage_files the stage-NN.tgz files it lists.
@@ -26,6 +45,31 @@ HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.pat
 UP = "/mnt/user-data/uploads"; U = UP + "/d/new cults/"; LIBU = UP + "/d/Kitbash Library/"
 PY = "/home/claude/bpyenv/bin/python"; ADDONS = "/root/.config/blender/5.1/scripts/addons"
 PCDIR = "~/mnt/d/Kitbash Library/_backups/"
+WORK, OUT = "/home/claude/work/%s", "/mnt/user-data/outputs/%s"
+sys.path.insert(0, REPO); sys.path.insert(0, HERE)
+PC = os.name == "nt"             # a session (or Josh) on the PC itself: the real folders, the Blender that is installed
+if PC:
+    import importlib.util
+    _sp = importlib.util.spec_from_file_location("kbtool", os.path.join(REPO, "tools", "kb.py"))
+    kbtool = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(kbtool); ROOTS = kbtool.roots()
+    U = ROOTS["nc"].replace("\\", "/").rstrip("/") + "/"; LIBU = ROOTS["lib"].replace("\\", "/").rstrip("/") + "/"
+    WORK, OUT = LIBU + "_backups/%s/work", LIBU + "_backups/%s/deliver"
+    try:
+        import bpy; BLENDER = bpy.app.binary_path
+    except ImportError:
+        BLENDER = os.environ.get("BLENDER", "C:\\Program Files\\Blender Foundation\\Blender 5.1\\blender.exe")
+
+
+def run_bpy(script, *args, addons=False):
+    """a Blender script as its own process: the bpy venv in the container; on the PC the installed Blender, started
+    clean, or with Josh's add-ons loaded (addons=True) for a TIOW Inbox test"""
+    cmd = ([BLENDER, "--background"] + ([] if addons else ["--factory-startup"]) + ["--python", script, "--"]) if PC else [PY, script, "--"]
+    return subprocess.run(cmd + list(args), capture_output=True, text=True, encoding="utf-8", errors="replace")
+
+
+def _link(src, dst):
+    try: os.symlink(src, dst)
+    except OSError: shutil.copyfile(src, dst)        # Windows without the privilege, or exFAT: a copy
 STATE = ["_sources.csv", "_builder/index.json", "_builder/no_fit.txt", "_hidden.txt"]
 REFS = {"Torso 1": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 1",
         "Legs 1A": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
@@ -51,7 +95,7 @@ def load_cfg(path):
     c = jl(path); c.setdefault("scale", 1.0); c.setdefault("padlift", True)
     c.setdefault("path", "{root}\\{category}\\{prefix} - {name}.stl")
     c.setdefault("date", time.strftime("%b ") + str(int(time.strftime("%d"))))
-    W = "/home/claude/work/" + c["task"]; os.makedirs(W, exist_ok=True)
+    W = WORK % c["task"]; os.makedirs(W, exist_ok=True)
     return c, W
 
 
@@ -100,17 +144,21 @@ def joint_types():
     return t | {"Unsorted"}
 
 
-def plan(c, W):
+def plan(c, W, skip_have=False):
+    """skip_have: files the library already holds (their source path is in _sources.csv) are left out, so a maker's
+    folder can be run again when it gains parts"""
     S = jl(W + "/survey.json"); assert S["task"] == c["task"]
     types = [(re.compile(t["match"], re.I), t) for t in c["types"]]
-    ok_types = joint_types(); have = set()
+    ok_types = joint_types(); have, have_src = set(), set()
     if os.path.exists(W + "/base/_sources.csv"):
-        have = {r[0].lower() for r in csv.reader(open(W + "/base/_sources.csv", encoding="utf-8-sig")) if r}
-    P, bad, skipped = [], [], []
+        rows = [r for r in csv.reader(open(W + "/base/_sources.csv", encoding="utf-8-sig")) if r]
+        have = {r[0].lower() for r in rows}; have_src = {r[1].replace("\\", "/").lower() for r in rows if len(r) > 1}
+    P, bad, skipped, already = [], [], [], []
     for e in S["files"]:
         rel = e["rel"]; stem = os.path.basename(rel)[:-4]; folder = os.path.basename(os.path.dirname(rel))
         if not rel.startswith(c["src"] + "/"): continue
         if any(s.lower() in rel.lower() for s in c.get("skip", [])): skipped.append(rel); continue
+        if skip_have and rel.lower() in have_src: already.append(stem); continue
         if e["ascii"]: bad.append((rel, "ascii STL: convert it first")); continue
         hit = next(((t, r.fullmatch(stem)) for r, t in types if r.fullmatch(stem) and t.get("in", "").lower() in rel.lower()), None)
         if hit is None: bad.append((rel, "no type in the config matches")); continue
@@ -124,12 +172,12 @@ def plan(c, W):
     libs = [p["lib"].lower() for p in P]
     bad += [(p["rel"], "library name used twice: " + p["lib"]) for p in P if libs.count(p["lib"].lower()) > 1]
     bad += [(p["rel"], "already in the library: " + p["lib"]) for p in P if p["lib"].lower() in have]
-    unk = set(c.get("nofit", {})) | set(c.get("hide", {})); unk -= {p["stem"] for p in P}
+    unk = set(c.get("nofit", {})) | set(c.get("hide", {})); unk -= {p["stem"] for p in P} | set(already)
     bad += [(n, "nofit/hide name not in the plan") for n in sorted(unk)]
     jd(P, W + "/plan.json", indent=0)
     cnt = {}
     for p in P: k = (p["category"], p["fit"] or "-"); cnt[k] = cnt.get(k, 0) + 1
-    print("plan: %d parts (%d skipped by the config)" % (len(P), len(skipped)))
+    print("plan: %d parts (%d skipped by the config%s)" % (len(P), len(skipped), ", %d already in the library" % len(already) if skip_have else ""))
     for (cat, f), k in sorted(cnt.items()): print("  %-18s fit %-5s %3d   e.g. %s" % (cat, f, k, next(p["lib"].split("\\")[-1] for p in P if (p["category"], p["fit"] or "-") == (cat, f))))
     if bad:
         for r, w in bad[:30]: print("  !! %s: %s" % (r, w))
@@ -144,9 +192,9 @@ def sheet(c, W):
         k = {}; P = [p for p in P if k.setdefault(p["category"], []).append(1) or len(k[p["category"]]) <= 10]
     job = {"items": [[U + p["rel"], p["name"]] for p in P], "scale": c["scale"], "out": W + "/sheet.jpg"}
     jd(job, W + "/sheet_job.json")
-    r = subprocess.run([PY, HERE + "/sheet.py", "--", W + "/sheet_job.json"], capture_output=True, text=True)
+    r = run_bpy(HERE + "/sheet.py", W + "/sheet_job.json")
     if r.returncode: sys.exit(r.stderr[-2000:])
-    print("sheet: %s (%d parts, numbered in plan order; categories: %s)" % (W + "/sheet.jpg", len(P), ", ".join(sorted({p["category"] for p in P}))))
+    print("sheet: %s (%d parts, numbered in plan order; categories: %s)" % (W + ("/sheet_front.png, sheet_back.png" if PC else "/sheet.jpg"), len(P), ", ".join(sorted({p["category"] for p in P}))))
 
 
 # ---------------------------------------------------------------- fit
@@ -156,10 +204,10 @@ def worklib(W, P=None, sc=None):
     for ref in REFS.values():
         for ext in (".stl", ".sockets.json"):
             d = L + "/MarFil/" + os.path.basename(ref) + ext
-            if not os.path.exists(d): os.symlink(LIBU + ref + ext, d)
+            if not os.path.exists(d): _link(LIBU + ref + ext, d)
     for p in P or []:
         b = L + "/NEW/" + os.path.basename(p["lib"].replace("\\", "/"))[:-4]
-        if not os.path.exists(b + ".stl"): os.symlink(U + p["rel"], b + ".stl")
+        if not os.path.exists(b + ".stl"): _link(U + p["rel"], b + ".stl")
         shutil.copyfile(sc + "/" + p["rel"][:-4] + ".sockets.json", b + ".sockets.json")
     return L
 
@@ -167,15 +215,13 @@ def worklib(W, P=None, sc=None):
 def fit(c, W):
     P = jl(W + "/plan.json"); F = jl(W + "/fits.json") if os.path.exists(W + "/fits.json") else {}
     todo = [p for p in P if p["fit"] in ("head", "pad") and p["rel"] not in F]
-    sys.path.insert(0, REPO + "/kits/rw_spr")
-    import common
-    sc = c["scale"]; t0 = time.time()
-    if any(p["fit"] == "head" for p in todo):
-        import heads as HM
-    if any(p["fit"] == "pad" for p in todo):
-        import pads as PM
-    for p in todo:
-        V, T = common.load(p["rel"], sc)
+    from kb import fit as KF                     # the Nov 9 head / pad rules (kits/rw_spr), without the container's paths
+    sc = c["scale"]; t0 = time.time(); lib = LIBU.rstrip("/")
+    HM = KF.Heads(lib) if any(p["fit"] == "head" for p in todo) else None
+    PM = KF.Pads(lib) if any(p["fit"] == "pad" for p in todo) else None
+    for k, p in enumerate(todo):
+        if k and k % 10 == 0: print("  fitted %d of %d (%.0f s)" % (k, len(todo), time.time() - t0), flush=True)
+        V, T = KF.load(U + p["rel"], sc)
         if p["fit"] == "head":
             Fn, m = HM.neck_fit(V, T); F[p["rel"]] = {"method": "head", "fit": flat(Fn), "med": round(m, 4)}
         else:
@@ -187,7 +233,7 @@ def fit(c, W):
     if c["padlift"] and pads and not any("cut_after" in r for r in pads.values()):
         jd({r: {"fit": v["fit"], "scale": sc} for r, v in pads.items()}, W + "/padlift_in.json")
         L = worklib(W)
-        r = subprocess.run([PY, REPO + "/kits/wg/padlift.py", "--", W + "/padlift_in.json", L, W + "/padlift.json"], capture_output=True, text=True)
+        r = run_bpy(REPO + "/kits/wg/padlift.py", W + "/padlift_in.json", L, W + "/padlift.json", U, LIBU)
         if r.returncode: sys.exit(r.stderr[-2000:])
         for rel, x in jl(W + "/padlift.json").items():
             F[rel].update(cut_before=x["cut_before"], cut_after=x["cut_after"])
@@ -272,17 +318,39 @@ def test(c, W):
         for p, s in zip(pick(pads, i, 2), ("Pad R", "Pad L")): m.append([nb(p), "Shoulder Pads", s])
         for p in pick(heads, i, 1): m.append([nb(p), "Heads", "Neck"])
         models["m%d" % (i + 1)] = m
-    job = {"worklib": L, "tiow": REPO + "/addons/tiow_inbox.py", "out": W + "/test", "new": "NEW/", "models": models}
+    job = {"worklib": L, "tiow": None if PC else REPO + "/addons/tiow_inbox.py", "out": W + "/test", "new": "NEW/", "models": models}
     jd(job, W + "/test_job.json", indent=0)
-    r = subprocess.run([PY, REPO + "/tests/creator/t_creator.py", "--", W + "/test_job.json"], capture_output=True, text=True)
+    if os.path.exists(W + "/test/results.json"): os.remove(W + "/test/results.json")
+    r = run_bpy(REPO + "/tests/creator/t_creator.py", W + "/test_job.json", addons=True)
     R = jl(W + "/test/results.json") if os.path.exists(W + "/test/results.json") else None
     if R is None: sys.exit(r.stdout[-1500:] + r.stderr[-1500:])
     for x in R["parts"]: print("  %s %-34s %-6s closest %.2f, cut %.2f" % (x["model"], x["part"][:34], x["socket"], x["closest"], x["cut"]))
-    print("test: %s; sheet %s" % ("all ok" if not R["fails"] else "FAILS %s" % R["fails"], W + "/test/test.jpg"))
+    print("test: %s; pictures in %s" % ("all ok" if not R["fails"] else "FAILS %s" % R["fails"], W + ("/test/" if PC else "/test/test.jpg")))
     return not R["fails"]
 
 
 # ---------------------------------------------------------------- build
+def bl_preview(stl, k, target):
+    """a light copy of the part for the page, by Blender's Decimate: what Prepare makes on the PC
+    (squad-builder/prepare_builder.py), for when this runs inside Blender"""
+    import bpy, numpy as np
+    before = set(bpy.data.objects)
+    bpy.ops.wm.stl_import('EXEC_DEFAULT', filepath=stl)
+    ob = next(o for o in bpy.data.objects if o not in before and o.type == 'MESH')
+    try:
+        tris = sum(len(q.vertices) - 2 for q in ob.data.polygons)
+        if tris > target:
+            ob.modifiers.new("preview", 'DECIMATE').ratio = max(0.001, target / tris)
+        dg = bpy.context.evaluated_depsgraph_get(); ev = ob.evaluated_get(dg); me = ev.to_mesh(); me.calc_loop_triangles()
+        V = np.empty(len(me.vertices) * 3); me.vertices.foreach_get("co", V)
+        Tr = np.empty(len(me.loop_triangles) * 3, dtype=np.int32); me.loop_triangles.foreach_get("vertices", Tr)
+        ev.to_mesh_clear()
+        return V.reshape(-1, 3) * k, Tr.reshape(-1, 3)
+    finally:
+        me_ = ob.data; bpy.data.objects.remove(ob)
+        if me_.users == 0: bpy.data.meshes.remove(me_)
+
+
 def build(c, W):
     P = jl(W + "/plan.json"); SC = sidecars(c, W)
     ML = W + "/minilib"; shutil.rmtree(ML, ignore_errors=True); os.makedirs(ML)
@@ -299,7 +367,7 @@ def build(c, W):
     open(ML + "/_rows.csv", "w", newline="", encoding="utf-8").write(buf.getvalue())
     open(ML + "/_sources.csv", "w", newline="", encoding="utf-8-sig").write("library path,copied from (D:\\new cults),type,folder fits folded in\r\n" + buf.getvalue())
     shutil.copyfile(REPO + "/bridge/_library.json", ML + "/_library.json")
-    build_index.build(ML)
+    build_index.build(ML, preview_fn=bl_preview if PC else None)
     nofit = [l.rstrip("\n") for l in open(ML + "/_builder/no_fit.txt", encoding="utf-8") if "\t" in l]
     # the PC's index with the new parts added (kept compact, ASCII-escaped or not as it was)
     raw = open(W + "/base/_builder__index.json", "rb").read(); d = json.loads(raw)
@@ -312,7 +380,7 @@ def build(c, W):
     for p in P:
         if p["stem"] in c.get("hide", {}): hide += ["# " + c["hide"][p["stem"]], p["lib"]]
     # the delivery
-    O = "/mnt/user-data/outputs/" + c["task"]; shutil.rmtree(O, ignore_errors=True); os.makedirs(O)
+    O = OUT % c["task"]; shutil.rmtree(O, ignore_errors=True); os.makedirs(O)
     def tgz(name, pairs):
         with tarfile.open(O + "/" + name, "w:gz") as t:
             for arc, src in pairs: t.add(src, arcname=arc)
@@ -327,7 +395,7 @@ def build(c, W):
     files = {f: md5(O + "/" + f) for f in sorted(os.listdir(O))}
     split = {}
     for f in list(files):
-        if os.path.getsize(O + "/" + f) > SPLIT:          # too big for one device_commit_files: parts, joined by apply
+        if not PC and os.path.getsize(O + "/" + f) > SPLIT:          # too big for one device_commit_files: parts, joined by apply
             data = open(O + "/" + f, "rb").read(); split[f] = []
             for i in range(0, len(data), SPLIT):
                 q = "%s.part%02d" % (f, i // SPLIT); open(O + "/" + q, "wb").write(data[i:i + SPLIT]); split[f].append(q)
@@ -341,6 +409,7 @@ def build(c, W):
     nf = sum(1 for p in P if not jl(SC + "/" + p["rel"][:-4] + ".sockets.json")["fits"])
     print("build: %d parts (%d with fits, %d filed without), %d previews, %d no_fit lines, %d hidden; index %d -> %d parts" % (
         len(P), len(P) - nf, nf, sum(1 for e in add if e.get("prev")), len(nofit), len(hide) // 2, len(d["parts"]) - len(add), len(d["parts"])))
+    if PC: return O
     print("deliver: %d files (%.1f MB) -> %s  (list: %s)" % (len(os.listdir(O)), sum(os.path.getsize(O + "/" + f) for f in os.listdir(O)) / 1e6, K, W + "/deliver_files.json"))
     print('then: python3 "$HOME/mnt/d/Kitbash Library/_backups/%s/deliver/on_pc.py" apply "$HOME/mnt/d/Kitbash Library/_backups/%s/deliver"' % (c["task"], c["task"]))
 
@@ -360,9 +429,121 @@ def record(c, W):
     print("record: %d sidecars, %d _sources.csv rows, %d hidden lines into the repo" % (n, rows.count(b"\r\n"), len(B["hide"]) // 2))
 
 
-if __name__ == "__main__":
-    cmd, arg = sys.argv[1], sys.argv[2]
-    if cmd == "unpack": unpack(arg); sys.exit()
+# ---------------------------------------------------------------- on the PC: one command
+def recipes():
+    return sorted(glob.glob(HERE + "/*.json"))
+
+
+def pc_setup(recipe, src=None, task=None):
+    """the recipe with this run's folder and task name, its work folder, and the survey done in place"""
+    import on_pc
+    if not recipe:
+        R = recipes()
+        for i, f in enumerate(R): print("  %d  %s  (%s)" % (i + 1, os.path.basename(f)[:-5], jl(f).get("root", "")))
+        a = input("Which maker's recipe? number: ").strip().lstrip(chr(0xfeff))
+        if not a.isdigit() or not 1 <= int(a) <= len(R): sys.exit("no recipe chosen: nothing done")
+        recipe = R[int(a) - 1]
+    elif not os.path.isfile(recipe): recipe = HERE + "/" + recipe + ("" if recipe.endswith(".json") else ".json")
+    c = jl(recipe); c.setdefault("scale", 1.0); c.setdefault("padlift", True)
+    c.setdefault("path", "{root}\\{category}\\{prefix} - {name}.stl")
+    c.setdefault("date", time.strftime("%b ") + str(int(time.strftime("%d"))))
+    if src:
+        a = os.path.abspath(src).replace("\\", "/")
+        if a.lower().startswith(U.lower()): src = a[len(U):]
+        src = src.replace("\\", "/").strip("/")
+        if not os.path.isdir(U + src): sys.exit("the folder has to be inside %s: %s" % (U, src))
+        c["src"] = src
+    name = os.path.basename(recipe)[:-5]
+    if not task:
+        task = "%s-%s" % (name, time.strftime("%Y-%m-%d")); n = 1
+        while os.path.exists(LIBU + "_backups/" + task): n += 1; task = "%s-%s-%d" % (name, time.strftime("%Y-%m-%d"), n)
+    c["task"] = task; W = WORK % task; os.makedirs(W + "/base", exist_ok=True)
+    on_pc.set_roots(U.rstrip("/"), LIBU.rstrip("/"), os.path.join(ROOTS["page"], "build_index.py"))
+    if not os.path.exists(W + "/survey.json"):
+        on_pc.survey([c["src"], task])
+        shutil.copyfile(LIBU + "_backups/" + task + "/stage/survey.json", W + "/survey.json")
+        for st in STATE:
+            if os.path.exists(LIBU + st): shutil.copyfile(LIBU + st, W + "/base/" + st.replace("/", "__"))
+    jd(c, W + "/config.json", indent=1)
+    return c, W
+
+
+def mesh_faults(c, W):
+    """the new files with open / non-manifold edges or flipped faces (library-tools/caliper_swap.py's test): told, not
+    stopped; Caliper Repair.bat mends them once they are in the library"""
+    sys.path.insert(0, REPO + "/library-tools"); import caliper_swap as CS
+    P = jl(W + "/plan.json"); out = {}
+    for p in P:
+        h, V, T = CS.load(U + p["rel"])
+        if V is None or not len(T): continue
+        f = CS.faults(T)
+        if any(f.values()): out[p["rel"]] = f
+    jd(out, W + "/faults.json", indent=0)
+    print("mesh faults: %d of %d new files%s" % (len(out), len(P), "" if not out else " (run Caliper Repair.bat on the library folder afterwards): "
+          + ", ".join(os.path.basename(r)[:-4] for r in list(out)[:8]) + (" ..." if len(out) > 8 else "")))
+
+
+def pc_check(c, W):
+    """plan -> faults -> sheet -> fit -> test. None when the library already has every file, else the test's
+    failed checks (an empty list when all passed)"""
+    P = plan(c, W, skip_have=True)
+    if not P:
+        print("nothing new: the library already has every STL in " + c["src"])
+        shutil.rmtree(LIBU + "_backups/" + c["task"], ignore_errors=True)      # this run's own, just made
+        return None
+    mesh_faults(c, W); sheet(c, W); fit(c, W)
+    if test(c, W): return []
+    return jl(W + "/test/results.json")["fails"]
+
+
+def pc_finish(c, W, rec=True):
+    """build -> check -> apply (backups in _backups\\TASK\\before) -> the sidecars and rows into the repo clone"""
+    import on_pc
+    on_pc.set_roots(U.rstrip("/"), LIBU.rstrip("/"), os.path.join(ROOTS["page"], "build_index.py"))
+    O = build(c, W)
+    on_pc.apply([O, "--check"]); on_pc.apply([O])
+    if rec:
+        record(c, W); print("the sidecars and rows are in the repo clone, not committed yet")
+    print("added to %s%s; the Squad Builder shows the new parts on its next load" % (LIBU, c["root"]))
+
+
+def pc_main(A):
+    flag = lambda f: f in A
+    opt = lambda f: A[A.index(f) + 1] if f in A else None
+    pos = [a for i, a in enumerate(A[1:]) if not a.startswith("--") and A[i] not in ("--src", "--task")]
+    cmd = A[0]
+    if cmd == "recipes":
+        for f in recipes(): print("%-28s %s" % (os.path.basename(f)[:-5], jl(f).get("root", "")))
+    elif cmd == "add":
+        c, W = pc_setup(pos[0] if pos else None, opt("--src"), opt("--task"))
+        fails = pc_check(c, W)
+        if fails is None: return
+        P = jl(W + "/plan.json")
+        if fails:
+            print("%d test check(s) did not pass. The parts can still go in and be put right in Blender with Save Correction:" % len(fails))
+            for f in fails: print("   " + f)
+        if flag("--dry"): print("dry run: nothing added. To add them: finish %s" % c["task"]); return
+        if flag("--yes"):
+            if fails and not flag("--force"): sys.exit("stopped at the failed checks (pictures in %s/test). To add them anyway: finish %s" % (W, c["task"]))
+        else:
+            if not flag("--no-open"):
+                for f in [W + "/sheet_front.png"] + sorted(glob.glob(W + "/test/*_front.png"))[:3]:
+                    if os.path.exists(f): os.startfile(f.replace("/", "\\"))
+            print("sheet and test pictures: " + W.replace("/", "\\"))
+            if input("Add these %d parts to the library? [y/N] " % len(P)).strip().lstrip(chr(0xfeff)).lower() not in ("y", "yes"):
+                print("nothing added. To add them later: finish %s" % c["task"]); return
+        pc_finish(c, W, not flag("--no-record"))
+    elif cmd == "finish":
+        W = WORK % pos[0]; c = jl(W + "/config.json")
+        pc_finish(c, W, not flag("--no-record"))
+
+
+def main(A):
+    cmd = A[0] if A else ""
+    if PC and cmd in ("add", "finish", "recipes"): return pc_main(A)
+    if len(A) < 2: sys.exit(__doc__)
+    arg = A[1]
+    if cmd == "unpack": unpack(arg); return
     c, W = load_cfg(arg)
     if cmd == "go":
         plan(c, W); sheet(c, W); fit(c, W)
@@ -370,3 +551,13 @@ if __name__ == "__main__":
         build(c, W)
     else:
         {"plan": plan, "sheet": sheet, "fit": fit, "test": test, "build": build, "record": record, "sidecars": sidecars}[cmd](c, W)
+
+
+if __name__ == "__main__":
+    A = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else sys.argv[1:]
+    try:
+        main(A)
+    except SystemExit as e:              # inside Blender a message given to sys.exit is not printed
+        if isinstance(e.code, str):
+            print(e.code); sys.exit(1)
+        raise

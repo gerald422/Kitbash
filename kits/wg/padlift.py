@@ -2,14 +2,14 @@
 are thicker inside, so the inside of the dome cuts into the top of the shoulder. Push each one out (the mean way out
 of the points inside: towards their nearest arm/torso surface, reversed) in 0.05 mm steps until it cuts in no deeper
 than 0.4 mm, at most 1 mm (Josh's 62 on Mar Fil Assault Arm 1A R, on Torso 1, as the reference).
-Run with the bpy venv: python padlift.py -- PADS.json TESTLIB OUT.json"""
+Run with the bpy venv: python padlift.py -- PADS.json TESTLIB OUT.json [NEW_CULTS/ LIBRARY/]"""
 import json, os, sys, numpy as np
 import bpy  # noqa: F401  (mathutils comes with it)
 from mathutils import Vector, Matrix
 from mathutils.bvhtree import BVHTree
 a = sys.argv[sys.argv.index("--") + 1:]; PADS, TL, OUTF = a[:3]
-U = "/mnt/user-data/uploads/d/new cults/"
-LIBU = "/mnt/user-data/uploads/d/Kitbash Library/"
+U = a[3] if len(a) > 3 else "/mnt/user-data/uploads/d/new cults/"
+LIBU = a[4] if len(a) > 4 else "/mnt/user-data/uploads/d/Kitbash Library/"
 def stl(p):
     d = np.fromfile(p, dtype=np.dtype([('n', '<f4', 3), ('v', '<f4', (3, 3)), ('a', '<u2')]), offset=84)
     return d['v'].reshape(-1, 3).astype(float)

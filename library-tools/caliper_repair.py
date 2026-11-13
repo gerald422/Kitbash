@@ -21,6 +21,9 @@ Nothing is replaced here: the originals stay as they are until Caliper Swap has 
 place, no faults) and backed the original up. A file that already has a repaired copy waiting is left out, so a run
 that was stopped can be started again and carries on.
 
+Parts to leave as the maker made them: '_caliper_keep.txt' at the top of the library, a library path per line
+('# why' lines above, as in _hidden.txt). They are not sent again.
+
 --dry: only list the files with faults. --timeout: passed to Caliper. CALIPER=<path to Caliper.exe> if it isn't in
 %LOCALAPPDATA%\\Programs\\CaliperView. Log: 'caliper_repair_log.csv' where Caliper Swap keeps its own (the library's
 '_backups\\caliper-<date>\\', elsewhere '<folder>\\_caliper_backups\\<date>\\').
@@ -137,6 +140,10 @@ def main():
             sys.exit('%s exists and is not this script\'s: move it away first.' % work)
         shutil.rmtree(work)                                # left by a run that was stopped
 
+    keep = set()
+    if lib and os.path.isfile(os.path.join(lib, '_caliper_keep.txt')):
+        with open(os.path.join(lib, '_caliper_keep.txt'), encoding='utf-8-sig') as fh:
+            keep = {l.strip().replace('/', os.sep).lower() for l in fh if l.strip() and not l.lstrip().startswith('#')}
     todo = list(folders(lp(root)))
     total = sum(len(n) for _, n in todo)
     print('%s: %d STL files in %d folders%s' % (root, total, len(todo), ' (dry run: nothing is repaired)' if DRY else ''))
@@ -152,6 +159,8 @@ def main():
                 if seen % 250 == 0:
                     print('  checked %d of %d, %d with faults, %d repaired (%.0f min)' % (seen, total, n_fault, n_done, (time.time() - t0) / 60))
                 row = {'folder': rel, 'file': name}
+                if os.path.join(rel, name).lower() in keep:
+                    continue                               # Josh's choice: the original stays
                 if name.lower() in have:
                     n_wait += 1; row['status'] = 'a repaired copy is already waiting'; rows.append(row); continue
                 try:

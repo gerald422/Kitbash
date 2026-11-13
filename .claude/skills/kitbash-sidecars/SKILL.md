@@ -8,7 +8,7 @@ description: Use when adding a new maker, kit or part type to Josh's Kitbash Lib
 A sidecar `<part>.sockets.json` sits beside each STL in `D:\Kitbash Library`. TIOW Inbox reads it on import (sockets, fits, category). Prepare Squad Builder reads it to build the page's index. Every sidecar is in this repo (`library/` mirrors the library's folders). **STLs never go in the repo.**
 
 **Start here:**
-- A new maker's heads, pauldrons and loose bits: run `kits/creator/add_creator.py` (its docstring is the whole procedure; one JSON config per maker). Don't redo those steps by hand.
+- A new maker's heads, pauldrons and loose bits: run `kits/creator/add_creator.py` (its docstring is the whole procedure; one JSON config per maker). Don't redo those steps by hand. On the PC it is one command inside Blender (`... add_creator.py -- add RECIPE --src FOLDER`), which also leaves out parts the library already has.
 - Anything else (a new part family, a new rule): read the nearest kit's entry via `docs/notes/INDEX.md`, write a script against `kb/` (`kb.geo`, `kb.sidecar`, `kb.index`, `kb.deliver`), deliver with `tools/kb.py apply`. Standing rules and the PC are in `CLAUDE.md` and `docs/reference.md`.
 
 ## Ground rules (Josh)

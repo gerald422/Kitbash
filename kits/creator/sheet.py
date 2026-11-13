@@ -2,9 +2,14 @@
 rendered straight on from -Y and from +Y (two renders in all), numbered. Confirms up / front before any rule runs
 and shows sculpted aquilas, seals and scrolls.
     /home/claude/bpyenv/bin/python sheet.py -- JOB.json
-JOB: {"items": [[stl_path, label], ...], "scale": 1.0, "out": "sheet.jpg", "px": 2600}"""
+JOB: {"items": [[stl_path, label], ...], "scale": 1.0, "out": "sheet.jpg", "px": 2600}
+Without PIL (Blender's own Python, on the PC) the labels are Blender text and the two views stay two files:
+<out>_front.png and <out>_back.png."""
 import bpy, json, math, os, sys
-from PIL import Image, ImageDraw, ImageFont
+try:
+    from PIL import Image, ImageDraw, ImageFont
+except ImportError:
+    Image = None
 job = json.load(open(sys.argv[sys.argv.index("--") + 1]))
 items, S = job["items"], job.get("scale", 1.0)
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -30,11 +35,25 @@ sc.render.resolution_x = PX; sc.render.resolution_y = max(64, round(PX * H / W))
 cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); sc.collection.objects.link(cam); sc.camera = cam
 cam.data.type = 'ORTHO'; cam.data.sensor_fit = 'HORIZONTAL'; cam.data.ortho_scale = W; cam.data.clip_end = 5000
 from mathutils import Euler
+texts = {"front": [], "back": []}
+if Image is None:                       # labels in the scene: one set facing each camera, white paper behind
+    sc.render.film_transparent = False; sc.world = bpy.data.worlds.new("paper"); sc.world.color = (1, 1, 1)
+    sc.view_settings.view_transform = 'Standard'
+    for name, back in (("front", False), ("back", True)):
+        for cx, ly, text in cells:
+            cu = bpy.data.curves.new("label", 'FONT'); cu.body = text; cu.size = CELL / 17
+            o = bpy.data.objects.new("label", cu); sc.collection.objects.link(o); o.color = (0.05, 0.05, 0.05, 1)
+            o.rotation_euler = Euler((math.pi / 2, 0, math.pi if back else 0))
+            o.location = (cx + CELL * (0.48 if back else -0.48), 0, ly - cu.size * 1.15); texts[name].append(o)
 shots = []
 for name, y, rot in (("front", -500, (math.pi / 2, 0, 0)), ("back", 500, (math.pi / 2, 0, math.pi))):
     cam.location = (W / 2, y, -H / 2); cam.rotation_euler = Euler(rot)
+    for k, obs in texts.items():
+        for o in obs: o.hide_render = k != name
     f = os.path.splitext(job["out"])[0] + "_" + name + ".png"; sc.render.filepath = f
     bpy.ops.render.render(write_still=True); shots.append((name, f))
+if Image is None:
+    print("sheet", ", ".join(f for _, f in shots)); sys.exit(0)
 try: FONT = ImageFont.load_default(size=max(11, round(PX / cols / 18)))
 except TypeError: FONT = None
 ims = []

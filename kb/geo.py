@@ -1,7 +1,7 @@
 """Shared numpy geometry for kit scripts: STL reading, frames, Kabsch / ICP, flat faces, spheres.
 One copy of the helpers that kits/lib/fitlib.py, kits/lib/stl_io.py and kits/nc/geo.py each carried (moved here
 unchanged). New scripts import from here:   from kb.geo import read_stl, stl, icp, best_fit, flats, spheres
-No fixed paths; nothing here reads the add-on. scipy is only needed by the ICP functions."""
+No fixed paths; nothing here reads the add-on. The ICP functions search with kdtree(): scipy, or Blender's KD tree."""
 import numpy as np
 try:
     from scipy.spatial import cKDTree
@@ -48,6 +48,21 @@ def surf(V, T, n, seed=0):
     rng = np.random.default_rng(seed); i = rng.choice(len(T), n, p=a / a.sum()); u, w = rng.random(n), rng.random(n)
     m = u + w > 1; u[m], w[m] = 1 - u[m], 1 - w[m]; t = tri[i]
     return t[:, 0] + u[:, None] * (t[:, 1] - t[:, 0]) + w[:, None] * (t[:, 2] - t[:, 0])
+class _BlenderKD:
+    """cKDTree's query() and .data on Blender's own KD tree, for a Python without scipy (Blender's, on the PC).
+    The tree keeps 32-bit coordinates, so the distances are worked out again here from the full ones."""
+    def __init__(self, P):
+        from mathutils.kdtree import KDTree
+        self.data = np.ascontiguousarray(P, float); kd = KDTree(len(self.data))
+        for i, q in enumerate(self.data.tolist()): kd.insert(q, i)
+        kd.balance(); self._find = kd.find
+    def query(self, P):
+        P = np.asarray(P, float); f = self._find
+        i = np.fromiter((f(q)[1] for q in P.tolist()), np.int64, len(P))
+        return np.linalg.norm(self.data[i] - P, axis=1), i
+def kdtree(P):
+    """nearest-point search over P: scipy's cKDTree, or the same two things from Blender's when scipy is missing"""
+    return cKDTree(P) if cKDTree is not None else _BlenderKD(P)
 def kabsch(P, Q):
     cp, cq = P.mean(0), Q.mean(0); U, S, Vt = np.linalg.svd((P - cp).T @ (Q - cq))
     D = np.diag([1, 1, np.sign(np.linalg.det(Vt.T @ U.T))]); R = Vt.T @ D @ U.T; return R, cq - R @ cp
@@ -64,7 +79,7 @@ def rots24():
             if np.linalg.det(R) > 0: out.append(R)
     return out
 def best_fit(src, tgt_pts, inits=None, iters=30):
-    tree = cKDTree(tgt_pts); best = None
+    tree = kdtree(tgt_pts); best = None
     for R0 in (inits or rots24()):
         t0 = tgt_pts.mean(0) - R0 @ src.mean(0)
         R, t, d = icp(src, tree, R0, t0, iters)
