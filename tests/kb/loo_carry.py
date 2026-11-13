@@ -1,144 +1,86 @@
-# Leave-one-out, second version: carry a joint the way the folder's own fitted parts do it.
-#   same  = every fitted sibling has one and the same matrix (a kit frame): copy it
-#   turn  = the siblings share the turn, only the place differs: move the joint region without turning it
-#   rigid = neither: match the region (and the whole shape) with turning
+"""Leave-one-out check of kb.carry on the library: is what it keeps right, and how much does it keep?
+
+    python tests/kb/loo_carry.py LIBRARY [PER_MAKER=12] [TYPES=Arms,Legs,Chests] [OUT.json]
+    (a Python with numpy; scipy makes it about ten times faster. Read only; about 5 s a part with scipy.)
+
+For a sample of fitted arms, legs and socketed torsos: the part's own sidecar is hidden, kb.carry.like carries its
+joints from the other fitted parts of its folder, and the result is compared with what the library has ("right" =
+within 0.5 mm and 3 deg). Prints, per type and per maker, how many joints were kept / right / dropped, and for legs
+the sockets that came with the waist. The sidecars are read from this clone's library/, the STLs from LIBRARY.
+"""
 import sys, os, json, time, random, collections
 import numpy as np
-REPO, LIB = sys.argv[1], sys.argv[2]
-NPER, K, CATS = int(sys.argv[3]), int(sys.argv[4]), sys.argv[5].split(",")
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 sys.path.insert(0, REPO)
-from kb import geo
+from kb import carry
+
+A = sys.argv[1:]
+if not A: sys.exit(__doc__)
+LIB = A[0]; NPER = int(A[1]) if len(A) > 1 else 12; CATS = (A[2] if len(A) > 2 else "Arms,Legs,Chests").split(",")
 random.seed(11)
-DT = np.dtype([("n", "<f4", 3), ("v", "<f4", (3, 3)), ("a", "<u2")])
-RADIUS = {"Arms": 6.0, "Legs": float(sys.argv[6]) if len(sys.argv) > 6 else 13.0, "Chests": 7.0}
-ROTS = geo.rots24(); cache = {}
-
-
-def soup(path, scale=1.0): return np.fromfile(path, dtype=DT, offset=84)["v"].astype(float) * scale
-def sample(tri, n, seed=0):
-    a = np.linalg.norm(np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0]), axis=1)
-    rng = np.random.default_rng(seed); i = rng.choice(len(tri), n, p=a / a.sum()); u, w = rng.random(n), rng.random(n)
-    m = u + w > 1; u[m], w[m] = 1 - u[m], 1 - w[m]; t = tri[i]
-    return t[:, 0] + u[:, None] * (t[:, 1] - t[:, 0]) + w[:, None] * (t[:, 2] - t[:, 0])
-def M4(R, t): M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t; return M
-def ang(A, B): return geo.ang(A[:3, :3].T @ B[:3, :3])
-def point(kind, X): return np.linalg.inv(X)[:3, 3] if kind == "fit" else X[:3, 3]
-
-
-def joints(cat, sc):
-    J = {}
-    if cat in ("Arms", "Legs"):
-        for k, F in sc.get("fits", {}).items(): J[k] = ("fit", np.array(F).reshape(4, 4))
-    else:
-        for s in sc.get("sockets", []):
-            if s["type"] in ("Shoulder R", "Shoulder L", "Neck", "Back", "Waist", "Flat Waist"): J[s["type"]] = ("sock", np.array(s["matrix"]).reshape(4, 4))
-    return J
-
-
-def regime(kind, Xs):
-    if len(Xs) < 2: return "rigid"
-    tu = max(ang(Xs[0], X) for X in Xs); P = np.array([point(kind, X) for X in Xs])
-    sp = float(np.linalg.norm(P - np.median(P, 0), axis=1).max())
-    return "same" if tu < 0.5 and sp < 0.05 else "turn" if tu < 0.5 else "rigid"
-
-
-def surf_of(rel, sc):
-    if rel not in cache:
-        tri = soup(os.path.join(LIB, rel[:-13] + ".stl"), sc.get("scale", 1.0)); S = sample(tri, 60000, 1)
-        cache[rel] = (S, S[np.random.default_rng(2).choice(len(S), 3000, replace=False)], np.sort(np.ptp(tri.reshape(-1, 3), 0)))
-    return cache[rel]
-
-
-def shift_icp(src, tree, t, iters=30, keep=0.85):
-    """move src onto the tree's points without turning it"""
-    for _ in range(iters):
-        d, i = tree.query(src + t); m = d <= np.quantile(d, keep)
-        t = t + (tree.data[i[m]] - (src[m] + t)).mean(0)
-    d, _ = tree.query(src + t); return t, d
-
-
-def carry(cat, mode, Q, tree, S, full, kind, X):
-    """the reference's joint X carried onto Q in the given mode: (matrix, region median, whole median)"""
-    pt = point(kind, X); reg = S[np.linalg.norm(S - pt, axis=1) < RADIUS[cat]]
-    if len(reg) < 150: return None
-    if len(reg) > 1500: reg = reg[np.random.default_rng(3).choice(len(reg), 1500, replace=False)]
-    I = np.eye(3)
-    if mode == "same":
-        cands = [(I, np.zeros(3))]
-    elif mode == "turn":
-        cands = []
-        for t0 in (np.zeros(3), Q.mean(0) - full.mean(0)):
-            t, _ = shift_icp(full, tree, t0, 20); t, _ = shift_icp(reg, tree, t, 30); cands.append((I, t))
-    else:
-        sub = full[:400]; coarse = []
-        for R0 in ROTS:
-            R, t, d = geo.icp(sub, tree, R0, Q.mean(0) - R0 @ full.mean(0), 20); coarse.append((float(np.median(d)), R, t))
-        starts = [(R, t) for _, R, t in sorted(coarse, key=lambda c: c[0])[:3]] + [(I, np.zeros(3))]
-        cands = []
-        for R, t in starts:
-            R, t, d = geo.icp(full, tree, R, t, 30); R, t, d = geo.icp(reg, tree, R, t, 30); cands.append((R, t))
-    best = None
-    for R, t in cands:
-        d, _ = tree.query(reg @ R.T + t); m = float(np.median(d)); dw, _ = tree.query(full @ R.T + t); mw = float(np.median(dw))
-        if best is None or m + 0.15 * mw < best[0]: best = (m + 0.15 * mw, m, mw, R, t)
-    _, m, mw, R, t = best; M = M4(R, t)
-    return (X @ np.linalg.inv(M)) if kind == "fit" else (M @ X), m, mw
-
-
+ok = lambda mm, dg: mm <= 0.5 and dg <= 3
 parts = collections.defaultdict(list)
 for d, _, fs in os.walk(os.path.join(REPO, "library")):
     for f in fs:
         if not f.endswith(".sockets.json"): continue
         rel = os.path.relpath(os.path.join(d, f), os.path.join(REPO, "library")).replace("\\", "/")
         sc = json.load(open(os.path.join(d, f), encoding="utf-8-sig")); cat = sc.get("category")
-        if cat in CATS and joints(cat, sc) and not sc.get("upright"): parts[cat].append((rel, sc))
-rows = []
+        if cat in CATS and carry.joints(cat, sc) and not sc.get("upright"): parts[cat].append((rel, sc))
+stl = lambda rel: os.path.join(LIB, rel[:-13] + ".stl")
+rows, socks = [], []
 for cat in CATS:
     bym = collections.defaultdict(list)
     for rel, sc in parts[cat]: bym[rel.split("/")[0]].append((rel, sc))
     for maker in sorted(bym, key=lambda m: -len(bym[m]))[:5]:
         for rel, sc in random.sample(bym[maker], min(NPER, len(bym[maker]))):
-            t0 = time.time(); J = joints(cat, sc)
-            sibs = [(r, s) for r, s in bym[maker] if os.path.dirname(r) == os.path.dirname(rel) and r != rel and set(joints(cat, s)) & set(J)]
-            if not sibs: rows.append((cat, maker, rel, "-", None)); continue
-            try: tri = soup(os.path.join(LIB, rel[:-13] + ".stl"), sc.get("scale", 1.0))
-            except OSError: continue
-            Q = sample(tri, 60000, 0); tree = geo.kdtree(Q); ext = np.sort(np.ptp(tri.reshape(-1, 3), 0))
+            t0 = time.time(); J = carry.joints(cat, sc)
+            refs = [carry.Ref(os.path.basename(r)[:-13], s, stl(r)) for r, s in bym[maker] if os.path.dirname(r) == os.path.dirname(rel) and r != rel]
+            if not os.path.isfile(stl(rel)): continue
+            got = carry.like(cat, carry.Shape(stl(rel), sc.get("scale", 1.0)), refs, mirror=False)
+            mine = dict(got["fits"]); mine.update({s["type"]: s["matrix"] for s in got["sockets"] if s["type"] in carry.TORSO and cat == "Chests"})
             line = []
             for name, (kind, T) in J.items():
-                refs = [(r, s) for r, s in sibs if name in joints(cat, s)]
-                if not refs: continue
-                mode = regime(kind, [joints(cat, s)[name][1] for r, s in refs])
-                def close(x):
-                    try: return float(np.abs(surf_of(*x)[2] - ext).sum())
-                    except OSError: return 9e9
-                use = sorted(random.sample(refs, min(len(refs), 12)), key=close)[:1 if mode == "same" else K]
-                best = None
-                for r, s in use:
-                    try: S, full, _ = surf_of(r, s)
-                    except OSError: continue
-                    got = carry(cat, mode, Q, tree, S, full, kind, joints(cat, s)[name][1])
-                    if got and (best is None or got[1] + 0.15 * got[2] < best[1] + 0.15 * best[2]): best = got
-                if best is None: continue
-                X, m, mw = best; mm = float(np.linalg.norm(point(kind, X) - point(kind, T))); dg = ang(X, T)
-                rows.append((cat, maker, rel, mode, (name, round(mm, 3), round(dg, 2), round(m, 3), round(mw, 3))))
-                line.append("%s[%s] %.2fmm %.1fdeg m%.2f" % (name, mode, mm, dg, m))
-            print("%-6s %-26s %-42s %s (%.0f s)" % (cat, maker[:26], os.path.basename(rel)[:-13][:42], "  ".join(line), time.time() - t0), flush=True)
-print("\n=== carried vs true, by how the folder's fitted parts do it ===")
-ok = lambda x: x[1] <= 0.5 and x[2] <= 3
+                how = got["how"].get(name)
+                if name in mine:
+                    X = np.array(mine[name]).reshape(4, 4); mm = float(np.linalg.norm(carry.point(kind, X) - carry.point(kind, T))); dg = carry.ang(X, T)
+                    rows.append((cat, maker, how["mode"], "kept", mm, dg, how["match"], how["whole"])); line.append("%s[%s] %.2fmm %.1fdeg (match %.2f, whole %.2f)" % (name, how["mode"], mm, dg, how["match"], how["whole"]))
+                else:
+                    rows.append((cat, maker, how["mode"] if how else "-", "dropped", None, None, how["match"] if how else None, how["whole"] if how else None)); line.append("%s dropped" % name)
+            if cat == "Legs" and got["fits"]:
+                true = collections.defaultdict(list)
+                for s in sc.get("sockets") or []: true[s["type"]].append(np.array(s["matrix"]).reshape(4, 4))
+                for s in got["sockets"]:
+                    X = np.array(s["matrix"]).reshape(4, 4)
+                    if true.get(s["type"]):
+                        T = min(true[s["type"]], key=lambda T: np.linalg.norm(T[:3, 3] - X[:3, 3]))
+                        socks.append((maker, s["type"], float(np.linalg.norm(T[:3, 3] - X[:3, 3])), carry.ang(X, T), max(h["match"] for h in got["how"].values())))
+            print("%-6s %-26s %-40s %s (%.0f s)" % (cat, maker[:26], os.path.basename(rel)[:-13][:40], "  ".join(line), time.time() - t0), flush=True)
+print("\n=== kb.carry, leave-one-out: kept / right (within 0.5 mm and 3 deg) / dropped ===")
 for cat in CATS:
-    for mode in ("same", "turn", "rigid"):
-        R = [x for c, m, r, md, x in rows if c == cat and md == mode and x]
-        if not R: continue
-        mm = np.array([x[1] for x in R]); dg = np.array([x[2] for x in R]); md_ = np.array([x[3] for x in R])
-        print("%-6s %-5s %3d joints: position median %.2f, 90%% %.2f, max %.2f mm; turn median %.1f, 90%% %.1f deg; within 0.5 mm / 3 deg: %d%%" % (
-            cat, mode, len(R), np.median(mm), np.quantile(mm, 0.9), mm.max(), np.median(dg), np.quantile(dg, 0.9), 100 * np.mean([ok(x) for x in R])))
-        for g in (0.08, 0.12, 0.20):
-            k = md_ <= g
-            if 0 < k.sum() < len(R): print("          region match <= %.2f: keeps %d, of those within 0.5 mm / 3 deg: %d%% (worst %.2f mm, %.1f deg)" % (g, k.sum(), 100 * np.mean([ok(x) for x, kk in zip(R, k) if kk]), mm[k].max(), dg[k].max()))
+    R = [r for r in rows if r[0] == cat]
+    if not R: continue
+    K = [r for r in R if r[3] == "kept"]
+    print("%-6s %3d joints: kept %d, right %d, dropped %d%s" % (cat, len(R), len(K), sum(ok(r[4], r[5]) for r in K), len(R) - len(K),
+          "" if not K else "; kept ones: position median %.2f, worst %.2f mm, turn worst %.1f deg" % (np.median([r[4] for r in K]), max(r[4] for r in K), max(r[5] for r in K))))
     by = collections.defaultdict(list)
-    for c, m, r, md, x in rows:
-        if c == cat and x: by[(m, md)].append(x)
-    for (m, md), X in sorted(by.items()): print("     %-30s %-5s %3d joints, within 0.5 mm / 3 deg: %3d%%  (position median %.2f, turn median %.1f)" % (m[:30], md, len(X), 100 * np.mean([ok(x) for x in X]), np.median([x[1] for x in X]), np.median([x[2] for x in X])))
-    print("     no fitted sibling in the folder: %d of %d parts" % (sum(1 for c, m, r, md, x in rows if c == cat and md == "-"), len({r for c, m, r, md, x in rows if c == cat})))
-json.dump(rows, open(sys.argv[7] if len(sys.argv) > 7 else "loo2.json", "w"))
+    for r in R: by[(r[1], r[2])].append(r)
+    for (m, mode), X in sorted(by.items()):
+        k = [r for r in X if r[3] == "kept"]
+        print("     %-30s %-5s %3d joints: kept %2d, right %2d, dropped %2d" % (m[:30], mode, len(X), len(k), sum(ok(r[4], r[5]) for r in k), len(X) - len(k)))
+if socks:
+    print("legs' sockets that came with the waist (against the library's):")
+    by = collections.defaultdict(list)
+    for m, t, mm, dg, mt in socks: by[t].append((mm, dg))
+    for t, X in sorted(by.items()): print("     %-11s %3d: position median %.2f, 90%% %.2f, worst %.2f mm; turn median %.1f, worst %.1f deg" % (
+        t, len(X), np.median([x[0] for x in X]), np.quantile([x[0] for x in X], 0.9), max(x[0] for x in X), np.median([x[1] for x in X]), max(x[1] for x in X)))
+for cat in CATS:                      # would a tighter gate have kept only right ones?
+    K = [r for r in rows if r[0] == cat and r[3] == "kept" and r[2] != "same"]
+    for g in (0.06, 0.08, 0.10):
+        k = [r for r in K if r[6] <= g]
+        if K and len(k) < len(K): print("%-6s (not 'same') region match <= %.2f: keeps %d of %d, right %d" % (cat, g, len(k), len(K), sum(ok(r[4], r[5]) for r in k)))
+    if cat == "Legs" and socks:
+        for g in (0.06, 0.08, 0.12):
+            k = [x for x in socks if x[4] <= g and x[1] != "Base"]
+            if k: print("       belt sockets where the waist matched <= %.2f: %d, position 90%% %.2f, worst %.2f mm; turn 90%% %.1f, worst %.1f deg" % (
+                g, len(k), np.quantile([x[2] for x in k], 0.9), max(x[2] for x in k), np.quantile([x[3] for x in k], 0.9), max(x[3] for x in k)))
+if len(A) > 3: json.dump([list(r) for r in rows], open(A[3], "w"))

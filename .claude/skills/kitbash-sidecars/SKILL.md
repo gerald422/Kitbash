@@ -117,7 +117,8 @@ config keys; `kits/creator/wargame-exclusive.json` is the example). Helmets/head
 pauldrons the Pad fit (pad 62, pushed out where thicker inside); every other type is filed without a fit and logged.
 Parts whose match fails a gate (neck ring > 0.30 mm off, pad 62 only matching at the scale limit) are filed without a
 fit too. On the PC, `Squad Builder\add_creator_pc.py survey ... --stage` surveys and packs one archive to stage, and
-the delivery's `on_pc.py apply` does the md5 checks, backups and writes in one call. Torsos, arms, legs, packs and
+the delivery's `on_pc.py apply` does the md5 checks, backups and writes in one call. Arms, legs and torsos filed into a folder that already has fitted ones take `"fit": "like"` (`kb/carry.py`, notes 091: carried from
+the fitted folder-mates, gated; the dropped ones are filed without a fit). A kit with no fitted folder-mates, packs and
 other fitted types still need the procedure below (a kit script), then can be filed with the same delivery.
 
 ## Procedure (when add_creator.py doesn't cover it)

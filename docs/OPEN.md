@@ -8,9 +8,11 @@ When an item is done, delete its line (the notes entry is the record).
 1. Done Nov 13 (notes 090): `add_creator.py add RECIPE --src FOLDER` and `Add parts.bat` run on the PC. **Still to do:
    a recipe for each main maker** (only `wargame-exclusive.json` exists), written when its next drop arrives; the
    first real drop is Josh's to pick.
-2. Automatic fits beyond heads and pads: **experiment done Nov 13 (notes 091), fitter not built**: carry from the
-   fitted parts in the same folder, gated by region match; next is `kb/carry.py` + a `"fit": "like"` type.
-3. Fit the parts that have none (he wants all of them fitted up front): match against the same maker's fitted parts.
+2. Done Nov 13 (notes 091): a recipe type with `"fit": "like"` carries arms, legs and torsos from the fitted parts
+   in their library folder (`kb/carry.py`); what it keeps was right in the check, about half of arms and legs are
+   dropped for by-eye placing. Still open: torsos in folders with no socketed torso (Marta, most Turtle Ninja).
+3. Fit the parts that have none (he wants all of them fitted up front): run `kb.carry.like` over each folder's own
+   unfitted arms / legs / torsos first (count what it keeps), heads and pads against the same maker's fitted ones.
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
    below; a standing audit and a fit-quality score.
 5. Origins at the joint (below). 6. Finalise: export step, a peg test piece (pegs have never been printed).

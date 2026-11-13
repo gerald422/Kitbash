@@ -38,7 +38,9 @@ Each step can also be run on its own: plan, sheet, fit, test, build. fit keeps w
 Config keys: task (the survey's), src (folder in new cults), root / prefix (library folder and name prefix), path
 (default "{root}\\{category}\\{prefix} - {name}.stl"; also {folder} {stem}), scale (maker's scale, default 1),
 types (first match wins: "match" a regex on the file name without .stl, "name" e.g. "Helmet {1}" ({0} the name, {1}..
-the regex groups), "category" a TIOW type, "fit" "head" | "pad" | none, "why" for no-fit types, optional "in" a text
+the regex groups), "category" a TIOW type, "fit" "head" | "pad" | "like" | none ("like": arms, legs and torsos take
+their fit / sockets from the fitted parts of the same type already in the library folder they are filed in, kb/carry.py;
+what its gates drop is filed without a fit, with the number), "why" for no-fit types, optional "in" a text
 the path must contain), nofit {name: why}, hide {name: why}, skip [texts], padlift (default true), date ("Nov 9")."""
 import csv, glob, hashlib, io, json, math, os, re, shutil, subprocess, sys, tarfile, time
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -212,15 +214,38 @@ def worklib(W, P=None, sc=None):
     return L
 
 
+_REFS = {}
+def like_refs(p):
+    """the fitted parts of the same type already in the library folder this part will be filed in"""
+    from kb import carry
+    d = LIBU + os.path.dirname(p["lib"].replace("\\", "/")); refs = []
+    if (d, p["category"]) in _REFS: return _REFS[(d, p["category"])]      # one reading of a folder's parts for the whole run
+    _REFS[(d, p["category"])] = refs
+    for f in sorted(glob.glob(glob.escape(d) + "/*.sockets.json")):
+        sc = jl(f)
+        if sc.get("category") == p["category"] and carry.joints(p["category"], sc) and os.path.exists(f[:-13] + ".stl"):
+            refs.append(carry.Ref(os.path.basename(f)[:-13], sc, f[:-13] + ".stl"))
+    return refs
+
+
+def fit_like(c, p):
+    from kb import carry
+    got = carry.like(p["category"], carry.Shape(U + p["rel"], c["scale"]), like_refs(p),
+                     stem=os.path.basename(p["lib"].replace("\\", "/"))[:-4], gates=c.get("gates", {}).get("like"))
+    return dict(method="like", **got)
+
+
 def fit(c, W):
     P = jl(W + "/plan.json"); F = jl(W + "/fits.json") if os.path.exists(W + "/fits.json") else {}
-    todo = [p for p in P if p["fit"] in ("head", "pad") and p["rel"] not in F]
+    todo = [p for p in P if p["fit"] in ("head", "pad", "like") and p["rel"] not in F]
     from kb import fit as KF                     # the Nov 9 head / pad rules (kits/rw_spr), without the container's paths
     sc = c["scale"]; t0 = time.time(); lib = LIBU.rstrip("/")
     HM = KF.Heads(lib) if any(p["fit"] == "head" for p in todo) else None
     PM = KF.Pads(lib) if any(p["fit"] == "pad" for p in todo) else None
     for k, p in enumerate(todo):
         if k and k % 10 == 0: print("  fitted %d of %d (%.0f s)" % (k, len(todo), time.time() - t0), flush=True)
+        if p["fit"] == "like":
+            F[p["rel"]] = fit_like(c, p); jd(F, W + "/fits.json", indent=0); continue
         V, T = KF.load(U + p["rel"], sc)
         if p["fit"] == "head":
             Fn, m = HM.neck_fit(V, T); F[p["rel"]] = {"method": "head", "fit": flat(Fn), "med": round(m, 4)}
@@ -248,6 +273,8 @@ def gate(c, W, P, F):
     for p in P:
         r = F.get(p["rel"])
         if not p["fit"] or r is None: continue
+        if r["method"] == "like" and not r["fits"] and not r["sockets"]:
+            out[p["rel"]] = "; ".join("%s: %s" % (n, w) if n != "*" else w for n, w in r["rejected"].items()) or "nothing to carry"
         if r["method"] == "head" and r["med"] > g["head_max"]:
             out[p["rel"]] = "helmet 1's neck ring didn't match it (%.2f mm off): place it by eye" % r["med"]
         if r["method"] == "pad":
@@ -255,6 +282,16 @@ def gate(c, W, P, F):
             if not lo < r["scale_vs_62"] < hi: out[p["rel"]] = "pad 62 only matched it at the scale limit (x%.2f): place it by eye" % r["scale_vs_62"]
             elif r["med"] > g["pad_max"]: out[p["rel"]] = "pad 62 didn't match it (%.2f mm off): place it by eye" % r["med"]
     jd(out, W + "/gated.json", indent=0)
+    lk = [(p, F[p["rel"]]) for p in P if p["fit"] == "like" and p["rel"] in F]
+    if lk:
+        modes = {}
+        for p, r in lk:
+            for n, h in r["how"].items():
+                if n in r["fits"] or any(s["type"] == n for s in r["sockets"]): modes[h["mode"]] = modes.get(h["mode"], 0) + 1
+        print("like: %d, carried %d (joints: %s), filed without a fit %d" % (len(lk), sum(1 for p, r in lk if p["rel"] not in out),
+              ", ".join("%s %d" % kv for kv in sorted(modes.items())) or "none", sum(1 for p, r in lk if p["rel"] in out)))
+        for p, r in lk:
+            if p["rel"] in out: print("   no fit: %s - %s" % (p["name"], out[p["rel"]][:150]))
     for meth in ("head", "pad"):
         R = [(p, F[p["rel"]]) for p in P if p["fit"] == meth and p["rel"] in F]
         if not R: continue
@@ -287,6 +324,12 @@ def sidecars(c, W):
             d["fits"][r["side"]] = r["fit"]
             d["notes"]["Pad"] = "Josh's pad 62 matched onto it (x%.2f, match %.3f mm), his Pad R fit carried across about 62's shell centre" % (r["scale_vs_62"], r["med"])
             if r.get("lift"): d["notes"]["Pad"] += "; pushed out %.2f mm off the shoulder (thicker inside than 62; padlift.py: %.2f mm into Arm 1A R after)" % (r["lift"], r["cut_after"])
+        elif r and r["method"] == "like":
+            d["fits"].update(r["fits"]); d["sockets"] = r["sockets"]
+            for n, h in r["how"].items():
+                if n in r["fits"] or any(s["type"] == n for s in r["sockets"]):
+                    d["notes"][n] = "carried from %s (%s): region match %.2f mm, whole shape %.2f mm" % (h["from"], h["mode"], h["match"], h["whole"])
+            for n, w in r["rejected"].items(): d["notes"]["no " + n] = w
         else:
             d["notes"]["category"] = "filed without a fit (%s): %s" % (c["date"], G.get(p["rel"], p["why"]))
         o = SC + "/" + p["rel"][:-4] + ".sockets.json"; os.makedirs(os.path.dirname(o), exist_ok=True)
@@ -295,6 +338,20 @@ def sidecars(c, W):
 
 
 # ---------------------------------------------------------------- test
+_FLAT = {}
+def flat_torso(p):
+    """a torso of the same maker that has a Flat Waist socket (library path without .stl), for standing flat legs under"""
+    maker = p["lib"].replace("\\", "/").split("/")[0]
+    if maker not in _FLAT:
+        _FLAT[maker] = None
+        for f in sorted(glob.glob(glob.escape(LIBU + maker) + "/**/*.sockets.json", recursive=True)):
+            try: sc = jl(f)
+            except ValueError: continue
+            if sc.get("category") == "Chests" and any(s.get("type") == "Flat Waist" for s in sc.get("sockets") or []) and os.path.exists(f[:-13] + ".stl"):
+                _FLAT[maker] = f[:-13]; break
+    return _FLAT[maker]
+
+
 def test(c, W):
     P = jl(W + "/plan.json"); F = jl(W + "/fits.json") if os.path.exists(W + "/fits.json") else {}
     G = jl(W + "/gated.json") if os.path.exists(W + "/gated.json") else {}
@@ -302,8 +359,10 @@ def test(c, W):
     ok = [p for p in P if p["rel"] in F and p["rel"] not in G]
     heads = sorted((p for p in ok if p["fit"] == "head"), key=lambda p: -F[p["rel"]]["med"])
     pads = sorted((p for p in ok if p["fit"] == "pad"), key=lambda p: -F[p["rel"]].get("cut_after", F[p["rel"]]["med"]))
-    if not heads and not pads: print("test: nothing with a fit to test"); return True
-    L = worklib(W, heads + pads, SC)
+    likes = sorted((p for p in ok if p["fit"] == "like"), key=lambda p: -max([h["match"] for h in F[p["rel"]]["how"].values()] or [0]))
+    tl = [p for cat in ("Arms", "Legs", "Chests") for p in [q for q in likes if q["category"] == cat][:2]]   # the loosest two a type
+    if not heads and not pads and not tl: print("test: nothing with a fit to test"); return True
+    L = worklib(W, heads + pads + tl, SC)
     def nb(p): return "NEW/" + os.path.basename(p["lib"].replace("\\", "/"))[:-4]
     def pick(lst, i, k):             # models 1-2: the worst fits; model 3: the middle ones
         if not lst: return []
@@ -318,7 +377,22 @@ def test(c, W):
         for p, s in zip(pick(pads, i, 2), ("Pad R", "Pad L")): m.append([nb(p), "Shoulder Pads", s])
         for p in pick(heads, i, 1): m.append([nb(p), "Heads", "Neck"])
         models["m%d" % (i + 1)] = m
-    job = {"worklib": L, "tiow": None if PC else REPO + "/addons/tiow_inbox.py", "out": W + "/test", "new": "NEW/", "models": models}
+    for p in tl:                    # a carried arm / legs on the Mar Fil body, a carried torso under the Mar Fil parts
+        r = F[p["rel"]]; me = nb(p); key = next(iter(r["fits"]), None)
+        if p["category"] == "Arms":
+            if key not in ("Shoulder R", "Shoulder L"): continue
+            m = [body[0], body[1], [me, "Arms", key], body[3] if key == "Shoulder R" else body[2]]
+        elif p["category"] == "Legs":
+            if key == "Waist": m = [body[0], [me, "Legs", "Waist"], body[2], body[3]]
+            else:
+                host = flat_torso(p)
+                if not host: print("  %s: no torso with a Flat Waist socket found to stand it under, not test-built" % p["name"]); continue
+                m = [[host, "Chests", None], [me, "Legs", key]]
+        else: m = [[me, "Chests", None], body[1], body[2], body[3]]
+        models["like%d" % (len(models) + 1)] = m
+    if not models: print("test: nothing to build"); return True
+    job = {"worklib": L, "tiow": None if PC else REPO + "/addons/tiow_inbox.py", "out": W + "/test", "new": "NEW/", "models": models,
+           "nocut": [os.path.basename(nb(p)) for p in tl]}
     jd(job, W + "/test_job.json", indent=0)
     if os.path.exists(W + "/test/results.json"): os.remove(W + "/test/results.json")
     r = run_bpy(REPO + "/tests/creator/t_creator.py", W + "/test_job.json", addons=True)

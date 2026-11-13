@@ -4,6 +4,8 @@ host (closest <= 0.5 mm) and cut in no deeper than 0.65 mm (inside = three rays 
 shell isn't read as a cut). Renders each model front and right into one sheet.
     /home/claude/bpyenv/bin/python t_creator.py -- JOB.json
 JOB: {"worklib", "tiow", "out", "new": "NEW/", "models": {name: [[path in worklib without .stl, category, socket], ...]}}
+A full path (a library part) is taken as it is. "nocut": names of new parts that only have to touch their host (arms
+and legs seat into the body, so how deep they go is not a fault).
 "tiow": a tiow_inbox.py to install first (the container); null uses the add-on that is installed (the PC).
 Writes OUT/results.json and OUT/test.jpg (without PIL, as in Blender's own Python: OUT/<model>_front.png, _right.png)."""
 import bpy, json, os, sys, tempfile
@@ -33,7 +35,7 @@ inbox = os.path.join(tempfile.mkdtemp(), "_builder", "inbox"); os.makedirs(inbox
 T.process_inbox(); n = 0
 for i, (m, parts) in enumerate(MODELS.items()):
     for p, cat, sock in parts:
-        r = {"schemaVersion": 1, "path": W + "/" + p + ".stl", "name": os.path.basename(p), "title": "", "category": cat,
+        r = {"schemaVersion": 1, "path": (p if os.path.isabs(p) else W + "/" + p) + ".stl", "name": os.path.basename(p), "title": "", "category": cat,
              "tags": [], "itemId": "", "sentAt": "", "model": m}
         if sock: r["socket"] = sock
         else: r["at"] = [80 * i, 0, 0]
@@ -67,7 +69,7 @@ for m, parts in MODELS.items():
         res.append({"model": m, "part": os.path.basename(p), "socket": sock, "closest": round(close, 3), "cut": round(deep, 3)})
         print("      %-40s closest %.2f mm, deepest cut %.2f mm" % (os.path.basename(p)[:40], close, deep))
         ck("%s: %s touches (closest <= 0.5 mm)" % (m, os.path.basename(p)), close <= 0.5, close)
-        ck("%s: %s cuts in <= 0.65 mm" % (m, os.path.basename(p)), deep <= 0.65, deep)
+        if os.path.basename(p) not in J.get("nocut", []): ck("%s: %s cuts in <= 0.65 mm" % (m, os.path.basename(p)), deep <= 0.65, deep)
 os.makedirs(OUTD, exist_ok=True)
 sc = bpy.context.scene; rend.setup(sc, 420)
 COL = {"Chests": rend.BLUE, "Shoulder Pads": rend.PURPLE, "Heads": rend.ORANGE, "Backpacks": rend.GREEN}
