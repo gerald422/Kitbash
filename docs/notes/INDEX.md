@@ -97,3 +97,4 @@ Add a new entry as the next number and append its line here.
 | `089-review-and-plan-nov-13.md` | Nov 13 | Whole-project review against the aim, Josh's answers (makers, printing, worst snaps, TIOW-FTRP retired, no STL backup), the order agreed, old folders archived | 2.9 |
 | `090-add-a-maker-on-the-pc.md` | Nov 13 | Add-a-maker on the PC: `add_creator.py add` inside Blender (no staging, no extra packages), recipes, `Add parts.bat`, `kb/fit.py`; Caliper keep-list | 4.2 |
 | `091-carry-fits-from-siblings-experiment.md` | Nov 13 | Item 2: `kb/carry.py` + `"fit": "like"` (arms, legs, torsos carried from the fitted parts in their folder), gates, leave-one-out numbers, end-to-end test | 5.0 |
+| `092-no-fit-parts-dropped-on-their-socket.md` | Nov 13 | The page drops a part with no fit on its socket (flagged), so Adjust + Save fit can give it its first fit | 2.3 |

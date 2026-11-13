@@ -318,6 +318,18 @@
     var gap = (S.types[tname] || {}).gap || 0;
     return sockW.clone().multiply(T(0, 0, gap)).multiply(off);
   }
+  /* A part with no fit for this socket yet: dropped with its middle on the socket, upright as its file is, and marked
+     (inst.nofit, inst.dropF = that place as a fit). It is only a starting place for Adjust: nothing is saved until
+     Save fit, and the part keeps its "no fit yet" tag until then. */
+  function dropOn(inst, sockW, as, tname) {
+    var Sg = sockW.clone().multiply(T(0, 0, (S.types[tname] || {}).gap || 0)), g = S.geo[as.pid], c = new THREE.Vector3();
+    if (g && g.g.boundingBox) { g.g.boundingBox.getCenter(c); if (as.align) c.applyMatrix4(as.align); }
+    else if (as.pid != null && !S.geoWait[as.pid]) geometry(as.pid).then(function (x) { if (x) redraw(); });
+    var o = new THREE.Vector3().setFromMatrixPosition(Sg), U = as.data.upright ? rotOnly(M4(as.data.upright)) : new THREE.Matrix4();
+    inst.W = T(o.x, o.y, o.z).multiply(U).multiply(T(-c.x, -c.y, -c.z));
+    inst.dropF = Sg.clone().invert().multiply(inst.W); inst.nofit = true;
+    inst.note = "no " + tname + " fit yet: dropped on its spot, place it with Adjust, then Save fit";
+  }
   function seat(inst, sockW, tname, host) {   // where the part's fit hangs from (the socket with its gap): Adjust works in this frame
     inst.Sw = sockW.clone().multiply(T(0, 0, (S.types[tname] || {}).gap || 0)); inst.asock = tname; inst.host = host || null;
   }
@@ -437,7 +449,8 @@
             }
           }
         }
-        if (!inst.W) inst.note = "no waist fit yet: placed by eye in Blender";
+        if (!inst.W && ts["Waist"]) { dropOn(inst, ts["Waist"], as, "Waist"); inst.sock = "Waist"; seat(inst, ts["Waist"], "Waist", torso); }
+        else if (!inst.W) inst.note = "no waist fit yet, and no Waist on this torso: placed by eye in Blender";
       } else {
         if (covered(picks, k)) { inst.note = covered(picks, k); inst.covered = true; out.push(inst); return; }
         var hk = hostKey(picks, sl), host = by[hk];
@@ -469,9 +482,9 @@
           out.push(inst); return;
         }
         inst.W = onto(hs, as, sock);
-        if (inst.W) seat(inst, hs, sock, by["mount" + (sl.side || "")] && via ? by["mount" + (sl.side || "")] : host);
-        if (!inst.W) inst.note = "no " + sock + " fit yet: placed by eye in Blender";
-        else if (k === "base" && (as.data.exact || []).indexOf("Base") < 0) {   // rise to meet the feet, as the inbox does (not once corrected by hand)
+        if (!inst.W) dropOn(inst, hs, as, sock);
+        seat(inst, hs, sock, by["mount" + (sl.side || "")] && via ? by["mount" + (sl.side || "")] : host);
+        if (!inst.nofit && k === "base" && (as.data.exact || []).indexOf("Base") < 0) {   // rise to meet the feet, as the inbox does (not once corrected by hand)
           var rise = baseRise(host, inst, hs);
           if (rise) { var zax = new THREE.Vector3().setFromMatrixColumn(hs, 2).normalize().multiplyScalar(rise); inst.W = T(zax.x, zax.y, zax.z).multiply(inst.W); }
         }
@@ -642,7 +655,7 @@
         else if (p) {
           var as = asFor(p, sl); txt = as ? as.name : p.name;
           var inst = layout(m).filter(function (x) { return x.slot === sl.k; })[0];
-          if (inst && !inst.W) { flag = true; txt += " · " + inst.note; }
+          if (inst && (!inst.W || inst.nofit)) { flag = true; txt += " · " + inst.note; }
         }
         var lab = sl.side || sl.lab;
         return '<div class="s' + (flag ? " flag" : "") + '">' + (lab ? '<span class="lab">' + lab + "</span>" : "") + "<b>" + esc(txt) + "</b></div>";
@@ -991,6 +1004,7 @@
     if (!d) return false;
     var cur = d.fits && d.fits[c.sock];
     if (c.before && !near16(cur, c.before) && !near16(cur, c.after)) return false;
+    if (!c.before && cur && !near16(cur, c.after)) return false;          // a first fit: not over one the part has gained since
     d.fits = d.fits || {}; d.fits[c.sock] = c.after.slice();
     if ((d.exact || []).indexOf(c.sock) < 0) d.exact = (d.exact || []).concat([c.sock]);
     return true;
@@ -1068,11 +1082,12 @@
   function adjChanged() {              // the handle moved: the part's fit, in the socket's frame, follows it
     var inst = adjInst(); if (!inst) return;
     pivot.updateMatrix();
-    var F0 = S.adj.pending ? S.adj.pending.F0 : fitMatrix(inst.as, inst.asock, true);
+    var F0 = S.adj.pending ? S.adj.pending.F0 : (fitMatrix(inst.as, inst.asock, true) || (inst.dropF && inst.dropF.clone()));
     if (!F0) return;
+    var first = S.adj.pending ? S.adj.pending.first : !fitMatrix(inst.as, inst.asock, true);
     var U = pivot.matrix.clone().multiply(S.adj.P0.clone().invert()), D = S.adj.sel.inv ? U.invert() : U;
     var L = S.adj.Sw0.clone().invert().multiply(D).multiply(S.adj.Sw0);
-    S.adj.pending = {id: inst.part.id, v: inst.as.v, mirror: !!inst.as.mirror, sock: inst.asock, F0: F0, F: L.multiply(F0)};
+    S.adj.pending = {id: inst.part.id, v: inst.as.v, mirror: !!inst.as.mirror, sock: inst.asock, F0: F0, F: L.multiply(F0), first: first};
     redraw(); adjPanel();
   }
   function adjReset() { S.adj.pending = null; redraw(); adjSync(); status("Back to the saved fit."); }
@@ -1084,7 +1099,7 @@
     var sock = pe.mirror ? swapSide(pe.sock) : pe.sock;
     var F = pe.mirror ? MX.clone().multiply(pe.F).multiply(MX) : pe.F, F0 = pe.mirror ? MX.clone().multiply(pe.F0).multiply(MX) : pe.F0;
     var c = {at: new Date().toISOString(), by: "page", part: p.path, name: inst.as.name, v: pe.v, sock: sock,
-      host: inst.host && inst.host.part ? inst.host.part.path : null, before: flat(F0), after: flat(F), mm: +d[0].toFixed(3), deg: +d[1].toFixed(2)};
+      host: inst.host && inst.host.part ? inst.host.part.path : null, before: pe.first ? null : flat(F0), after: flat(F), mm: +d[0].toFixed(3), deg: +d[1].toFixed(2)};
     var rel = sidecarPath(p);
     var done = function (where) {
       applyCorrection(c); S.adj.log.push(c); S.adj.pending = null;

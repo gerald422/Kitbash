@@ -11,6 +11,7 @@ When an item is done, delete its line (the notes entry is the record).
 2. Done Nov 13 (notes 091): a recipe type with `"fit": "like"` carries arms, legs and torsos from the fitted parts
    in their library folder (`kb/carry.py`); what it keeps was right in the check, about half of arms and legs are
    dropped for by-eye placing. Still open: torsos in folders with no socketed torso (Marta, most Turtle Ninja).
+   Parts with no fit can now be placed on the page: they are dropped on their socket, flagged (notes 092).
 3. Fit the parts that have none (he wants all of them fitted up front): run `kb.carry.like` over each folder's own
    unfitted arms / legs / torsos first (count what it keeps), heads and pads against the same maker's fitted ones.
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list

@@ -107,11 +107,15 @@ person you added, or whoever you name:
     python share_server.py --owner NAME
 
 Notes
-  - "no fit yet" on a card: that part has no fit saved for this slot, so the
-    page can't show where it goes and Blender parks it beside the model for
-    you to place by eye. Place one, use Save Correction > Fix the Part with
-    Whole Folder ticked, and the rest of its folder follows (the page picks
-    that up next time Prepare runs).
+  - "no fit yet" on a card: that part has no fit saved for this slot. The page
+    drops it with its middle on the spot it belongs to, upright as its file
+    is, and says so in the list under the model. Place it with Adjust (Move,
+    Turn, Snap, Seat) and Save fit: that is its fit from then on, in Blender
+    too. Until you save, nothing is written, the card keeps its tag, and
+    Blender still parks the part beside the model for you to place by eye
+    (Save Correction > Fix the Part with Whole Folder ticked carries one
+    placement to the rest of its folder; the page picks that up next time
+    Prepare runs).
   - Something slightly off? Fix it in Blender with Save Correction (TIOW
     Inbox panel), then run Prepare Squad Builder again so the page matches:
     it only redoes what changed.
