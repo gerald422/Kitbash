@@ -32,13 +32,16 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
-- **Pad shells (Nov 14, notes 094)**: one master a maker folder (maker + armour type), every pad mated to its
-  inside by the dome; Josh: the master's fit ("purple") is fine for now, he corrects it at the shell, never part by
-  part. His design: the shell lies at the centre of a scene (= the socket), parts are moved to it and mated there,
-  one fit per shell per creator, his to set. 12 pad shells made (`masters.py shells`, his Desktop `pad-shells\`).
-  **To build**: `shell` + `seat` in the sidecars and a re-seat command; the turn of pads lying another way in
-  their file (39 fitted, and the 57 unfitted); then the same for heads, hands, shin pads, backpacks, arms.
-  **Waiting on him**: files kept as they are with the seat stored (as built) or origins moved for real (item 5).
+- **Shells (Nov 14, notes 094 / 095)**: Josh's design: the shell of a joint lies at the centre of a scene (= the
+  socket), a part is moved to it and mated there, ONE fit a shell a creator, his to set. **Origins are to be moved
+  for real** (his decision, Nov 14), so a part that hangs off something needs no fit of its own. Made: 42 shells
+  (pads, heads, backpacks, arms, hands) and `shells.blend`, on his Desktop in `TIOW Blender bridge\shells`;
+  "Other way round" in the page's Adjust panel (installed; the turn itself not tried on a model).
+  **Waiting on him**: one example a type a creator placed in `shells.blend`; whether heads and hands shells are
+  his to cut by hand (they are rough); where re-origined files go (the STLs have no backup).
+  **To build**: reading his examples from the file; the seating for heads / packs / arms / hands (pads:
+  `masters.py one`); the turn of parts lying another way in their file; the origin move itself and "no fit =
+  origin is the joint" in TIOW Inbox and the page.
 - The 80 Turtle Ninja torsos socketed Nov 14 (posed copies, notes 093 / 094): **stay as they are** (Josh, Nov 14);
   no more posed ones are to be fitted. (A Marta head by eye: later, when he comes back to heads.)
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is

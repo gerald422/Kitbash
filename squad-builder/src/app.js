@@ -1035,7 +1035,7 @@
     $("adjdelta").textContent = inst ? (S.adj.pending ? "moved " + d[0].toFixed(2) + " mm, turned " + d[1].toFixed(1) + "°" : "as saved") : "";
     $("adjsave").disabled = $("adjreset").disabled = !S.adj.pending;
     ["move", "turn"].forEach(function (m) { $("adj" + m).classList.toggle("on", S.adj.mode === m); $("adj" + m).disabled = !inst; });
-    $("adjsnap").disabled = $("adjseat").disabled = !inst || !!s.inv;
+    $("adjsnap").disabled = $("adjseat").disabled = $("adjaround").disabled = !inst || !!s.inv;
     $("adjlock").classList.toggle("on", S.adj.lock !== false); $("adjlock").textContent = S.adj.lock !== false ? "View locked" : "View free"; $("adjsnap").classList.toggle("on", !!S.adj.snap);
   }
   /* While a part is being adjusted the view holds still: a drag that misses the handle must not spin the camera.
@@ -1091,6 +1091,17 @@
     redraw(); adjPanel();
   }
   function adjReset() { S.adj.pending = null; redraw(); adjSync(); status("Back to the saved fit."); }
+  function adjAround() {               // on the wrong way round: half a turn about the joint's own axis (the socket's Z), through the part's middle
+    var inst = adjInst(), s = S.adj.sel; if (!inst || s.inv) return;
+    var F0 = S.adj.pending ? S.adj.pending.F0 : (fitMatrix(inst.as, inst.asock, true) || (inst.dropF && inst.dropF.clone()));
+    if (!F0) return;
+    var first = S.adj.pending ? S.adj.pending.first : !fitMatrix(inst.as, inst.asock, true);
+    var F = S.adj.pending ? S.adj.pending.F : F0, c = new THREE.Vector3(), mine = adjMeshes().filter(isSel)[0];
+    if (mine) { mine.geometry.computeBoundingBox(); mine.geometry.boundingBox.getCenter(c).applyMatrix4(mine.matrixWorld).applyMatrix4(inst.Sw.clone().invert()); }
+    var T = new THREE.Matrix4().makeTranslation(c.x, c.y, 0).multiply(new THREE.Matrix4().makeRotationZ(Math.PI)).multiply(new THREE.Matrix4().makeTranslation(-c.x, -c.y, 0));
+    S.adj.pending = {id: inst.part.id, v: inst.as.v, mirror: !!inst.as.mirror, sock: inst.asock, F0: F0, F: T.multiply(F), first: first};
+    redraw(); adjSync(); status("Turned the other way round: Save fit to keep it.");
+  }
   function adjSave() {
     var pe = S.adj.pending, inst = adjInst();
     if (!pe || !inst) return;
@@ -1250,6 +1261,7 @@
     $("adjlock").addEventListener("click", function () { S.adj.lock = S.adj.lock === false; adjSync(); });
     $("adjsnap").addEventListener("click", adjSnap);
     $("adjseat").addEventListener("click", adjSeat);
+    $("adjaround").addEventListener("click", adjAround);
     $("adjreset").addEventListener("click", adjReset);
     $("adjsave").addEventListener("click", adjSave);
     $("adjdone").addEventListener("click", function () { adjToggle(false); });
@@ -1266,7 +1278,7 @@
 
   // ------------------------------------------------------------------ start
   initView(); bind();
-  window.__sb = {S: S, adj: {toggle: adjToggle, select: adjSelect, save: adjSave, reset: adjReset, inst: adjInst, seat: adjSeat, nudge: adjNudge, meshes: adjMeshes, replay: replayCorrections, cam: function () { return camera.position.toArray(); }, snapClick: adjSnapClick, snap: adjSnap, sidecarWithFit: sidecarWithFit, ljParse: ljParse, ljText: ljText, pivot: function () { return pivot; }, changed: adjChanged}, setArmour: setArmour, armourOf: armourOf, prune: prune, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
+  window.__sb = {S: S, adj: {toggle: adjToggle, select: adjSelect, save: adjSave, reset: adjReset, around: adjAround, inst: adjInst, seat: adjSeat, nudge: adjNudge, meshes: adjMeshes, replay: replayCorrections, cam: function () { return camera.position.toArray(); }, snapClick: adjSnapClick, snap: adjSnap, sidecarWithFit: sidecarWithFit, ljParse: ljParse, ljText: ljText, pivot: function () { return pivot; }, changed: adjChanged}, setArmour: setArmour, armourOf: armourOf, prune: prune, layout: layout, requestsFor: requestsFor, asFor: asFor, candidates: candidates, SLOT: SLOT, choose: choose, goSlot: goSlot, redraw: redraw, nextSlot: nextSlot, skippable: skippable, renderAll: renderAll, hiddenBy: hiddenBy, toggleHide: toggleHide};
   if (window.SB_DEMO) {                                       // the online demo: its own files, nothing sent
     S.source = "./";
     $("setupbtn").hidden = true;
