@@ -85,7 +85,7 @@
 - **Pad masters picked (`kits/nofit/masters.py`: `families`, `report`, `sheet`, `compose`; Josh, Nov 14: "pick 1 and
   I'll approve the fit; going forward if these are off I should be able to update the socket rather than a per part
   fit").** Every maker's fitted pads grouped by their inside (seated on each other at 0.20 mm, lefts mirrored; the
-  master of a family is its plainest right pad, the smallest box): 286 fitted pads in 70 families, 37 of them with
+  master of a family is its plainest right pad, the smallest box): 274 fitted pads in 70 families, 37 of them with
   more than one pad (Springles 2 families for 46 pads, Mar Fil 6 for 80, Redwarden 4 for 12, Marta Tacticus 22 for
   70, BBoosty 10 for 20, WargamesPrint 7 for 19, CyberBrush 7 for 10). Inside a family the present fits agree with
   the master's on Springles (44 of 44), Redwarden (8 of 8), Mar Fil Assault / Outrider (54 of 55) and Bladeguard;
