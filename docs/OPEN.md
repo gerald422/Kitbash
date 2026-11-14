@@ -17,8 +17,8 @@ When an item is done, delete its line (the notes entry is the record).
    Marta's torsos are not being done; heads are skipped for now, he comes back to them** (then: one Marta head placed
    by eye, her 250 share a frame, `carry.like(mode="turn")`). **Turtle Ninja's posed torsos are out too** (Josh,
    Nov 14, as on Oct 20, notes 026: one pose a torso, the straight one, usually 1 or 9 of a letter): the 338 without
-   sockets stay so (`OUT` in `kits/nofit/carry_library.py`), **and the 80 socketed on Nov 14 are posed copies: put
-   back or kept, his call (below)**. Still without a fit and needing a reference each: 80 arms, 51 legs, the pads the
+   sockets stay so (`OUT` in `kits/nofit/carry_library.py`); the 80 socketed on Nov 14 are posed copies and stay
+   (his call, Nov 14). Still without a fit and needing a reference each: 80 arms, 51 legs, the pads the
    pad rule did not take (notes 094). Not run: held weapons and accessories (fits with `offHand` / `pivot`).
    **Pads by their inside only** (Josh's idea, Nov 14, notes 094: `run` / `loo --inner`, `families`): works where
    insides coincide; the 57 unfitted pads have no fitted twin (45 families among them: TN Mk4 pauldrons are 2), so
@@ -32,9 +32,12 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
-- **80 Turtle Ninja torsos socketed Nov 14 (notes 093) are posed copies**, which he only wants the straight one of:
-  take their sockets off again (backups: `_backups\carry-nofit-2026-11-14\before`; the index entries too) or keep
-  them? Asked Nov 14. (A Marta head by eye: later, when he comes back to heads.)
+- **Pad masters to approve (Nov 14, notes 094)**: one fitted pad a maker and armour type, picked here, a picture of
+  each sent to him; he approves each master's fit, the family is then seated on it. **His rule for it: when a
+  family sits wrong he corrects it once (the master / the socket), never part by part**, so each seated part has to
+  keep its master and how it lies on it, and its fit is worked out from the master's.
+- The 80 Turtle Ninja torsos socketed Nov 14 (posed copies, notes 093 / 094): **stay as they are** (Josh, Nov 14);
+  no more posed ones are to be fitted. (A Marta head by eye: later, when he comes back to heads.)
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is
   a snapshot of what TIOW does today, not a sign-off: `Run checks.bat record` again when the builder looks right.
   `Run checks.bat` after any change. Another clone needs `git clone -c core.longpaths=true` (9 paths are too long).

@@ -82,3 +82,19 @@
   pads Mar Fil 80/0, Marta 44/4, WG 0/3; backpacks Marta 0/82, others complete but 3; jump packs Marta 0/11, TN
   5/16; arms Marta 267/74, Mar Fil 222/7; legs Marta 217/55. No master at all: Marta heads, backpacks and jump
   packs, Springles hands, WG knee pads.
+- **Pad masters picked (`kits/nofit/masters.py`: `families`, `report`, `sheet`, `compose`; Josh, Nov 14: "pick 1 and
+  I'll approve the fit; going forward if these are off I should be able to update the socket rather than a per part
+  fit").** Every maker's fitted pads grouped by their inside (seated on each other at 0.20 mm, lefts mirrored; the
+  master of a family is its plainest right pad, the smallest box): 286 fitted pads in 70 families, 37 of them with
+  more than one pad (Springles 2 families for 46 pads, Mar Fil 6 for 80, Redwarden 4 for 12, Marta Tacticus 22 for
+  70, BBoosty 10 for 20, WargamesPrint 7 for 19, CyberBrush 7 for 10). Inside a family the present fits agree with
+  the master's on Springles (44 of 44), Redwarden (8 of 8), Mar Fil Assault / Outrider (54 of 55) and Bladeguard;
+  they do not on Mar Fil Intercessor (3 of 9), Marta's two biggest (10 of 22, 8 of 11), WargamesPrint Pad 16's (2 of
+  6, one turned 180 deg), CyberBrush Set 1. Of the 57 pads without a fit, 2 sit on a master (Marta SW Terminator);
+  the rest have none (TN Mk4 pauldrons, Marta's thicc pads, shields, cloaks). The 37 masters built on the Mar Fil
+  body with their present fit: one numbered sheet sent to Josh (numbers = `report`'s), kept with the family lists in
+  `_backups\pads-rule-2026-11-14\work\masters\`. **Waiting on his approval of each master; nothing re-seated or
+  written yet.** To build next: the seated part keeps its master and how it lies on it in its sidecar, its fit is
+  the master's moved by that, and one command re-seats a family after he corrects its master.
+- A commit of this day's that carried the PC's user folder in a script path was taken out of `main`'s history by a
+  forced push (Josh's OK). `tools/validate.py`'s exit code has to gate the commit, not a `| tail`.
