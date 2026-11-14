@@ -20,6 +20,10 @@ When an item is done, delete its line (the notes entry is the record).
    sockets stay so (`OUT` in `kits/nofit/carry_library.py`), **and the 80 socketed on Nov 14 are posed copies: put
    back or kept, his call (below)**. Still without a fit and needing a reference each: 80 arms, 51 legs, the pads the
    pad rule did not take (notes 094). Not run: held weapons and accessories (fits with `offHand` / `pivot`).
+   **Pads by their inside only** (Josh's idea, Nov 14, notes 094: `run` / `loo --inner`, `families`): works where
+   insides coincide; the 57 unfitted pads have no fitted twin (45 families among them: TN Mk4 pauldrons are 2), so
+   each family wants one placed by eye, then `run --inner`. It also showed fitted pads with the same inside and
+   different fits (Marta, WargamesPrint, CyberBrush): item 4.
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
    below; a standing audit and a fit-quality score.
 5. Origins at the joint (below). 6. Finalise: export step, a peg test piece (pegs have never been printed).

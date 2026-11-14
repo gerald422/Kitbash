@@ -11,7 +11,12 @@
                                                                   (a posed torso beside one-pose ones): the missing
                                                                   joints once more, matched with turning -> WORK/run-zz-*.jsonl
     BL  carry_library.py loo   LIBRARY WORK [--types A,B] [--shard I/N] [--per 12] [--scope folder|maker] [--mode rigid]
+                                                                  (run and loo: --inner = pads matched by their inside
+                                                                  only, kb.carry.inner, not by what is on the outside)
                                                                   leave-one-out on fitted parts -> WORK/loo-<scope>-I.jsonl
+    BL  carry_library.py families LIBRARY WORK [--shard I/N]     the unfitted pads of each maker grouped by their inside:
+                                                                  one placed by eye a family, then run --inner copies it
+                                                                  to the rest -> WORK/families-*.jsonl (report: families)
     PY  carry_library.py report WORK [loo-folder|loo-maker|run]   what was kept / right / dropped, by type and maker
     PY  carry_library.py test  LIBRARY WORK [--per 4]             a subset built with TIOW Inbox (tests/creator/t_creator.py):
                                                                   the loosest and the middle kept parts of each type
@@ -150,6 +155,12 @@ class Lib:
                 r = make_ref(work, rel, sc, lib + "/" + rel + ".stl")
                 if E.get(rel): r._ext = np.array(E[rel])
                 self.refs[rel] = r
+    def inner_ref(self, r):
+        """the reference by its inside only (pads)"""
+        from kb import carry
+        I = self.__dict__.setdefault("_inner", {})
+        if id(r) not in I: I[id(r)] = carry.InnerRef(r)
+        return I[id(r)]
     def mates(self, cat, rel, scope, hide=()):
         if scope == "folder": return [r for q, r in self.refs.items() if folder(q) == folder(rel) and r.sc["category"] == cat and q not in hide]
         return [r for q, r in self.refs.items() if maker(q) == maker(rel) and folder(q) != folder(rel) and r.sc["category"] == cat and q not in hide]
@@ -192,22 +203,26 @@ def torso_again(L, rel, sc, g, hide=()):
     return g
 
 
-def carry_part(L, cat, rel, sc, scopes=("folder", "maker"), hide=(), heads=None, mode=None, pads=None):
+def carry_part(L, cat, rel, sc, scopes=("folder", "maker"), hide=(), heads=None, mode=None, pads=None, inner=False):
     """-> {"scope", "method", "fits", "sockets", "how", "rejected", ["upright"]} for one part"""
     from kb import carry
     part = carry.Shape(L.lib + "/" + rel + ".stl", sc.get("scale", 1.0)); got, tried = None, {}
+    inner = inner and cat == "Shoulder Pads"                # a pad sits by its inside: match that, not the badges on it
+    if inner: part = carry.Inner(part)
     for scope in scopes:
         refs = L.mates(cat, rel, scope, hide)
+        if inner: refs = [L.inner_ref(r) for r in refs]
         if not refs: tried[scope] = "no fitted %s" % ("part beside it" if scope == "folder" else "part of this maker elsewhere"); continue
         g = carry.like(cat, part, refs, stem=os.path.basename(rel), mode=mode)
         L.tidy([r for r in refs if r._shape is not None])
-        for n in [n for n, h in g["how"].items() if h["mode"] == "same" and h["match"] > SAME_REGION and (n in g["fits"] or any(s["type"] == n for s in g["sockets"]))]:
+        for n in [n for n, h in g["how"].items() if h["mode"] == "same" and h["match"] > (carry.GATES["inner"] if inner else SAME_REGION) and (n in g["fits"] or any(s["type"] == n for s in g["sockets"]))]:
             g["rejected"][n] = "copied from its folder's frame, but the part's surface is %.2f mm off there (limit %.2f): not in that pose" % (g["how"][n]["match"], SAME_REGION)
             g["fits"].pop(n, None); g["sockets"] = [s for s in g["sockets"] if s["type"] != n]
         if cat == "Chests": g["sockets"] = [s for s in g["sockets"] if s["type"] in carry.TORSO and s["type"] not in g["rejected"]] + \
                                            [s for s in g["sockets"] if s["type"] not in carry.TORSO and not g["rejected"]]
         if cat == "Legs" and not g["fits"]: g["sockets"] = []
         g["scope"], g["method"] = scope, "like"
+        if inner: g["inner"] = True
         if g["fits"] or g["sockets"]:
             if cat == "Chests": set_upright(L, rel, g, hide)
             got = g; break
@@ -246,6 +261,7 @@ def run(lib, work, A):
     todo = sorted((rel, cat, sc) for cat in types for rel, sc in L.P[cat] if not fitted(cat, sc) and rel not in have and ("--all" in A or not OUT(rel, cat)))[i::n]
     heads = pads = None; t0 = time.time(); print("shard %d/%d: %d parts to do, %d done before" % (i, n, len(todo), len(have)), flush=True)
     scopes = () if opt(A, "--scopes") == "rule" else ("folder", "maker")
+    if "--inner" in A: pads = False                         # carrying by the inside only: no pad-62 rule after it
     with open(out, "a", encoding="utf-8") as fo:
         for k, (rel, cat, sc) in enumerate(todo):
             if cat == "Heads" and heads is None:
@@ -253,7 +269,9 @@ def run(lib, work, A):
             if cat == "Shoulder Pads" and pads is None:
                 from kb import fit as KF; pads = KF.Pads(lib)
             t1 = time.time()
-            try: g = carry_part(L, cat, rel, sc, scopes=scopes, heads=heads, pads=pads)
+            if pads is False: pads_ = None
+            else: pads_ = pads
+            try: g = carry_part(L, cat, rel, sc, scopes=scopes, heads=heads, pads=pads_, inner="--inner" in A)
             except Exception as e: g = {"scope": "-", "method": "error", "fits": {}, "sockets": [], "how": {}, "rejected": {"*": "%s: %s" % (type(e).__name__, e)}, "tried": {}}
             g.update(rel=rel, cat=cat, secs=round(time.time() - t1, 1)); fo.write(json.dumps(g) + "\n"); fo.flush()
             print("%4d/%d %-13s %-60s %s (%.0f s)" % (k + 1, len(todo), cat, os.path.basename(rel)[:60],
@@ -275,11 +293,34 @@ def again(lib, work, A):
             print("%4d/%d %-50s %d -> %d sockets: %s (%.0f s)" % (k + 1, len(todo), os.path.basename(rel)[:50], before, len(g["sockets"]), ", ".join(s["type"] for s in g["sockets"]), time.time() - t1), flush=True)
 
 
+def families(lib, work, A):
+    from kb import carry
+    i, n = shard_of(A); L = Lib(lib, work, ["Shoulder Pads"]); by = collections.defaultdict(list); G = carry.GATES["inner"]
+    for rel, sc in L.P["Shoulder Pads"]:
+        if not fitted("Shoulder Pads", sc): by[maker(rel)].append((rel, sc))
+    with open("%s/families-%dof%d.jsonl" % (work, i, n), "w", encoding="utf-8") as fo:
+        for mk in sorted(by)[i::n]:
+            heads = []                                          # [first pad's rel, its inside, [(rel, match)]]
+            for rel, sc in by[mk]:
+                try: sh = carry.Inner(carry.Shape(lib + "/" + rel + ".stl", sc.get("scale", 1.0)))
+                except (OSError, ValueError) as e: print("unreadable", rel, e); continue
+                best = None
+                for h in heads:
+                    if np.abs(h[1].ext - sh.ext).sum() > 1.0: continue          # another size: not the same inside
+                    got = carry.carry_joint("Shoulder Pads", "rigid", sh, h[1], "fit", np.linalg.inv(carry.M4(np.eye(3), h[1].S.mean(0))))
+                    if got and got[2] <= G and (best is None or got[2] < best[1]): best = (h, got[2])
+                if best: best[0][2].append((rel, round(best[1], 3)))
+                else: heads.append([rel, sh, [(rel, 0.0)]])
+                print("%-60s %s" % (os.path.basename(rel)[:60], "with %s (%.2f mm)" % (os.path.basename(best[0][0]), best[1]) if best else "a new family"), flush=True)
+            for h in heads: fo.write(json.dumps({"maker": mk, "first": h[0], "members": h[2], "inner": int(len(h[1].S)), "ext": [round(float(x), 2) for x in h[1].ext]}) + "\n")
+
+
 def loo(lib, work, A):
     from kb import carry
     types = opt(A, "--types", ",".join(TYPES)).split(","); i, n = shard_of(A); per = int(opt(A, "--per", "12")); scope = opt(A, "--scope", "folder")
     mode = opt(A, "--mode"); only = opt(A, "--maker")
-    L = Lib(lib, work, types); out = "%s/loo-%s%s-%d.jsonl" % (work, scope, mode or "", i); have = done_rels(out); random.seed(11); todo = []
+    inner = "--inner" in A
+    L = Lib(lib, work, types); out = "%s/loo-%s%s%s-%d.jsonl" % (work, scope, mode or "", "inner" if inner else "", i); have = done_rels(out); random.seed(11); todo = []
     for cat in types:
         bym = collections.defaultdict(list)
         for rel, sc in L.P[cat]:
@@ -295,7 +336,7 @@ def loo(lib, work, A):
                 from kb import fit as KF; heads = KF.Heads(lib)
             if cat == "Shoulder Pads" and scope == "rule" and pads is None:
                 from kb import fit as KF; pads = KF.Pads(lib)
-            g = carry_part(L, cat, rel, sc, scopes=() if scope == "rule" else (scope,), hide=(rel,), heads=heads, mode=mode, pads=pads)
+            g = carry_part(L, cat, rel, sc, scopes=() if scope == "rule" else (scope,), hide=(rel,), heads=heads, mode=mode, pads=pads, inner=inner)
             mine = dict(g["fits"]); mine.update({s["type"]: s["matrix"] for s in g["sockets"] if cat == "Chests"}); g["cmp"] = {}
             for name, (kind, T) in carry.joints(cat, sc).items():
                 if name in mine:
@@ -324,6 +365,11 @@ def rows(work, kind):
 
 
 def report(work, kind):
+    if kind == "families":
+        R = rows(work, "families"); print("unfitted pads by their inside: %d pads in %d families" % (sum(len(g["members"]) for g in R), len(R)))
+        for g in sorted(R, key=lambda g: (g["maker"], -len(g["members"]))):
+            print("  %-28s %2d: %s" % (g["maker"][:28], len(g["members"]), "; ".join(os.path.basename(m[0]).split(" - ", 1)[-1] for m in g["members"])))
+        return
     R = rows(work, kind); ok = lambda c: c[0] <= 0.5 and c[1] <= 3
     if kind.startswith("loo"):
         by = collections.defaultdict(list)
@@ -466,6 +512,7 @@ if __name__ == "__main__":
     elif cmd == "run": run(A[1], A[2], A)
     elif cmd == "loo": loo(A[1], A[2], A)
     elif cmd == "again": again(A[1], A[2], A)
+    elif cmd == "families": families(A[1], A[2], A)
     elif cmd == "report": report(A[1], A[2] if len(A) > 2 else "run")
     elif cmd == "test": test(A[1], A[2], A)
     elif cmd == "build": build(A[1], A[2], A[3])

@@ -35,7 +35,8 @@ from . import geo
 DT = np.dtype([("n", "<f4", 3), ("v", "<f4", (3, 3)), ("a", "<u2")])
 TORSO = ("Shoulder R", "Shoulder L", "Neck", "Back", "Waist", "Flat Waist")
 RADIUS = {"Arms": 6.0, "Legs": 13.0, "Chests": 7.0, "Heads": 4.0, "Shoulder Pads": 8.0}   # the region round a joint, mm (others 6)
-GATES = {"turn": 0.12, "rigid": 0.10, "arm_rigid": 0.07, "arm_whole": 0.10, "on": 0.5, "belt": 16.0, "agree_mm": 0.5, "agree_deg": 3.0}
+GATES = {"turn": 0.12, "rigid": 0.10, "arm_rigid": 0.07, "arm_whole": 0.10, "on": 0.5, "belt": 16.0, "agree_mm": 0.5, "agree_deg": 3.0,
+         "inner": 0.20}     # pads by their inside: the 90% distance, both ways (the rim has to line up, not just the dome)
 MX = np.diag([-1.0, 1, 1, 1])
 ROTS = geo.rots24()
 
@@ -69,6 +70,46 @@ class Shape:
     def tree(self):
         if self._tree is None: self._tree = geo.kdtree(self.S)
         return self._tree
+
+
+def _centre(P):
+    A = np.c_[2 * P, np.ones(len(P))]; c = np.linalg.lstsq(A, (P ** 2).sum(1), rcond=None)[0]; return c[:3]
+def inner(S, bins=60, tol=0.2):
+    """the inside of a shell (a pauldron): of its surface points S, the ones seen from its middle, i.e. the nearest
+    in each direction (3 deg cells) from the centre of the ball the shell lies on. What sits on the outside (badges,
+    studs, trim, wings) is left out: only the inside decides where a pad sits on the arm."""
+    C = _centre(S); keep = np.ones(len(S), bool)
+    for _ in range(3):
+        d = S - C; r = np.linalg.norm(d, axis=1); u = d / np.maximum(r, 1e-9)[:, None]
+        th = np.arccos(np.clip(u[:, 2], -1, 1)); ph = np.arctan2(u[:, 1], u[:, 0]) + np.pi
+        key = np.minimum((th / np.pi * bins).astype(int), bins - 1) * (2 * bins) + np.minimum((ph / (2 * np.pi) * 2 * bins).astype(int), 2 * bins - 1)
+        rmin = np.full(2 * bins * bins, np.inf); np.minimum.at(rmin, key, r)
+        keep = (r <= rmin[key] + tol) & (rmin[key] <= 1.3 * np.median(rmin[np.isfinite(rmin)]))   # not what hangs far outside
+        if keep.sum() < 500: break
+        C = _centre(S[keep])
+    return S[keep]
+
+
+class Inner:
+    """a Shape cut down to its inside (see inner): the same things kb.carry reads off a Shape"""
+    def __init__(self, shape):
+        self.S = inner(shape.S); self.V = self.S; self.ext = np.sort(np.ptp(self.S, 0))
+        self.full = self.S[np.random.default_rng(2).choice(len(self.S), min(3000, len(self.S)), replace=False)]; self._tree = None; self.whole = {}
+    @property
+    def tree(self):
+        if self._tree is None: self._tree = geo.kdtree(self.S)
+        return self._tree
+
+
+class InnerRef:
+    """a fitted pad as a reference by its inside only (wraps a Ref)"""
+    def __init__(self, ref): self.ref, self.name, self.sc, self._shape = ref, ref.name, ref.sc, None
+    @property
+    def shape(self):
+        if self._shape is None: self._shape = Inner(self.ref.shape); self.ref._shape = None
+        return self._shape
+    @property
+    def ext(self): return self.shape.ext
 
 
 class Ref:
@@ -136,6 +177,16 @@ def carry_joint(cat, mode, part, ref, kind, X):
                                                [(R, t) for _, R, t in sorted(coarse, key=lambda c: c[0])[:3]] + [(I, np.zeros(3))]])
         cands = [geo.icp(reg, tree, R, t, 30)[:2] for R, t in memo[1]]
     best = None
+    if isinstance(part, Inner):
+        # two insides: a dome matches a dome at any turn about its axis, so score what the rim does too: the distance
+        # 90% of the points are within, each way; of the turns that match as well (0.03 mm) the smallest, since a
+        # maker's pads mostly share a frame and a front-back alike inside cannot say which way round it is
+        sc = []
+        for R, t in cands:
+            m = max(float(np.quantile(tree.query(full @ R.T + t)[0], 0.9)), float(np.quantile(ref.tree.query((part.full - t) @ R)[0], 0.9)))
+            sc.append((m, geo.ang(R), R, t))
+        lo = min(c[0] for c in sc); m, _, R, t = min((c for c in sc if c[0] <= lo + 0.03), key=lambda c: c[1]); M = M4(R, t)
+        return (X @ np.linalg.inv(M)) if kind == "fit" else (M @ X), M, m, m
     for R, t in cands:
         m = float(np.median(tree.query(reg @ R.T + t)[0])); mw = float(np.median(tree.query(full @ R.T + t)[0]))
         if best is None or m + 0.15 * mw < best[0]: best = (m + 0.15 * mw, m, mw, R, t)
@@ -153,6 +204,7 @@ def _sock(stem, typ, X, why, points=None):
 def _pass(cat, part, refs, G, k, force=None):
     """one go over the references: {name: (kind, matrix, move, ref, how)} kept, {name: why} dropped, {name: how}"""
     kept, dropped, hows = {}, {}, {}
+    if isinstance(part, Inner): G = dict(G, turn=G["inner"], rigid=G["inner"])
     for name in sorted({n for r in refs for n in joints(cat, r.sc)}):
         rs = [r for r in refs if name in joints(cat, r.sc)]
         kind = joints(cat, rs[0].sc)[name][0]; mode = force or regime(kind, [joints(cat, r.sc)[name][1] for r in rs])

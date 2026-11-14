@@ -42,3 +42,27 @@
   accessories), pads 57 (above), heads (later). Each family wants one placed by eye (Adjust on the page, Save fit)
   and can then be carried to its folder (`run` again), or a rule of its own. The pad rule's disagreement with the
   library on BBoosty / CyberBrush / Marta pads belongs to item 4 (pauldrons).
+- **Pads by their inside only (Josh, Nov 14: "the exterior is effectively irrelevant, only the internal shape matters
+  ... one fit should be needed and the rest copied by shape match").** `kb.carry.inner` cuts a pad's surface down to
+  what is seen from the middle of its dome (the nearest point in each 3 deg direction from the centre of the ball it
+  lies on; cross-sections looked at: clean on plain and badged pads, partial on a skull-hand pad, meaningless on
+  shields). `Inner` / `InnerRef` let `kb.carry.like` run on insides; the match is then the distance 90% of the points
+  are within, both ways (`GATES["inner"]` 0.20 mm: the rim has to line up, a dome alone matches at any turn), and of
+  turns matching alike the smallest is taken. Runner: `run` / `loo --inner`, `families`.
+- **Checked on fitted pads** (`loo --inner`, 87 pads, folder then maker): insides that coincide do exist (matches of
+  0.04-0.09 mm, rim included). Kept from folder-mates 54, 42 of them within 0.5 mm / 3 deg of the library's own fit
+  (Redwarden 10 of 10, Springles 10 of 10, Mar Fil 8 of 9, TN Mk10 2 of 2, BBoosty 6 of 7, WargamesPrint 2 of 3); from
+  the same maker elsewhere 31 kept, 24 within. **The ones that are not within are pairs of pads whose insides
+  coincide and whose library fits differ**: Marta Termi Shoulder 1 / 2 by 54 deg, Marta SW Terminator 3 / 5 by 8-9,
+  Techmarine V2 pads 6-14, WargamesPrint Pad 18 by 9, Mar Fil Outrider L by 18, CyberBrush Set 1 by 123-180 (a
+  front-back alike inside cannot say which way round it is). So it is the library's fits that disagree with each
+  other there, which is item 4's pauldron problem, measured: a family needs one fit and the rest copied from it.
+- **Over the 57 unfitted pads** (`run --inner`): 1 has a fitted pad with the same inside (Marta SW Terminator Pad 4,
+  0.20 mm, at the limit, from a pad whose own fit is one of the disagreeing ones: not delivered). The others are
+  unfitted because nothing fitted has their inside. Grouped among themselves (`families`): 45 families; the ones with
+  more than one pad are TN Mk4 Tactical Pauldron 1-5, 8 (6) and 6, 7 (2), Marta Sep 2026 Thicc Shoulder Pad 1-3,
+  Marta Aug 2025 Shoulder Pad 3 + Mithraism Shoulder Pad 1, 2, Marta Shoulder Sield 1, 7, Bike Chaplain Pad 2 R + L.
+  The measure is strict (a cloak or trim seen from inside counts), so Marta's singles may be split too far.
+- **Not done**: nothing written to the library from the inside matching. Next choices: one pad placed by eye in each
+  many-pad family, then `run --inner`; the same matching used to make each fitted family agree on one fit (item 4);
+  pad 62's inside (not its whole shell, with scale) as the rule for the one-offs.
