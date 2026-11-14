@@ -4,7 +4,8 @@ Short and current. Detail for most lines: `docs/notes/084-open-items-in-full-nov
 When an item is done, delete its line (the notes entry is the record).
 
 **New chat, start here (Nov 14):** the current work is item 5 (connectors, origins at the joint): read it, then
-`docs/notes/096`. The next step waits on Josh's leg connectors (`~\Desktop\mar fil connectors\`).
+`docs/notes/096` and `097`. Josh's pad spot, wrists and legs connectors are in and right; next is (b), starting with
+a stronger search.
 
 ## Order agreed with Josh (Nov 13, notes 089)
 
@@ -38,8 +39,12 @@ When an item is done, delete its line (the notes entry is the record).
    jump packs 2/2); other designs do not match (Veteran/Bladeguard necks, backpacks, guns). Round connectors (neck,
    disc, grip) fix place and tilt, not the turn: keep the turn the part has in its file (Mar Fil exports in its kit
    frame), else his fix.
-   **Next, in order:** (a) when his leg / arm connectors arrive, `connector_try.py` on 25 parts each; (b) a
-   production seating script: every part of a maker matched against all its connectors, the best <= 0.045 mm
+   **Done Nov 14 (notes 097):** his pad spot (one for the A and B arms), wrists A / B and legs waist are exact on
+   their parts and found at the library's joint on every part of the same design (legs: all 88 Mar Fil). The pad
+   spot sets a pad's seat, not its place on the dome (that stays with the pad master / inside). Josh: go ahead.
+   **Next, in order:** (b0) a search from scratch that finds them (now: wrist B 7 of 25, pad spot 0 of 25), tested
+   on the fitted parts against `connector_at_joint.py`; (b) a
+   production seating script: every part of a maker matched against all its connectors, the best <= ~0.05 mm
    wins, fit = connector's fit moved by the match, turn fixes per connector, and a list of unmatched parts grouped
    (= which connector to cut next); (c) the origin move, into a NEW folder (the STLs have no backup: ask Josh where),
    never over the originals; (d) "no fit = origin is the joint" in TIOW Inbox and the page. Torsos, and what hangs
@@ -50,8 +55,9 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
-- **Connectors**: his leg connectors next, then the arm's pad spot and wrist (item 5). Turtle Ninja / other makers
-  only after Mar Fil proves out.
+- **Connectors**: received Nov 14 (notes 097). Still to cut for Mar Fil, when he likes: pad spots for the
+  Intercessor, Bladeguard and Techmarine shoulders. Turtle Ninja / other makers only after Mar Fil proves out.
+- Assault Legs 3's library fit looks 0.5 mm / 9 deg off against the waist connector (notes 097): a look when he can.
 - **Where re-origined files go** (a new folder; the STLs have no backup): ask before item 5 (c).
 - Files on his Desktop from Nov 14: `TIOW Blender bridge\shells\` (Claude's automatic shells: the pauldron and
   shin pad shells are usable, the head / backpack / arm / hand ones are superseded by his connectors;
