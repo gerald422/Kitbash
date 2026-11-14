@@ -17,6 +17,8 @@ echo -- placements >> checks-report.txt
 if exist "%BLENDER%" (
   "%BLENDER%" --background --python tests\golden\run.py -- "%LIB%" %1 > "%TEMP%\kitbash-golden.log" 2>&1
   type tests\golden\report.txt >> checks-report.txt
+  echo -- connector search >> checks-report.txt
+  "%BLENDER%" --background --factory-startup --python tests\kb\t_connect.py 2>nul | findstr /b "t_connect   FAIL" >> checks-report.txt
 ) else (
   echo Blender not found: set BLENDER at the top of this file >> checks-report.txt
 )

@@ -4,8 +4,8 @@ Short and current. Detail for most lines: `docs/notes/084-open-items-in-full-nov
 When an item is done, delete its line (the notes entry is the record).
 
 **New chat, start here (Nov 14):** the current work is item 5 (connectors, origins at the joint): read it, then
-`docs/notes/096` and `097`. Josh's pad spot, wrists and legs connectors are in and right; next is (b), starting with
-a stronger search.
+`docs/notes/096`, `097`, `098`. The search from scratch is built (`kb/connect.py`, notes 098); next is (b), the
+production seating script, once Josh's pad-inside / shin connectors arrive (or arms and legs first).
 
 ## Order agreed with Josh (Nov 13, notes 089)
 
@@ -42,10 +42,17 @@ a stronger search.
    **Done Nov 14 (notes 097):** his pad spot (one for the A and B arms), wrists A / B and legs waist are exact on
    their parts and found at the library's joint on every part of the same design (legs: all 88 Mar Fil). The pad
    spot sets a pad's seat, not its place on the dome (that stays with the pad master / inside). Josh: go ahead.
-   **Next, in order:** (b0) a search from scratch that finds them (now: wrist B 7 of 25, pad spot 0 of 25), tested
-   on the fitted parts against `connector_at_joint.py`; (b) a
-   production seating script: every part of a maker matched against all its connectors, the best <= ~0.05 mm
-   wins, fit = connector's fit moved by the match, turn fixes per connector, and a list of unmatched parts grouped
+   - **Pauldrons and shin pads, two-sided** (Josh, Nov 14): arm side = his pad spot; pad side = the pad's inside,
+     **cut by Josh** from MarFil Assault Shoulder Pad 1 as it sits on Arm 1A; shin: the leg side cut from Legs 1B's
+     right shin, the pad side from Assault Shin Pad 1 as it sits on Legs 1B. Each pair is joined once, as on the
+     reference; whether the pad's inside fixes its turn is to be tested.
+   **Done Nov 14 (notes 098):** the search from scratch, `kb/connect.py` (`find`, `find_all`, levels sure / look /
+   none), test `tests/kb/t_connect.py`, check `kits/nofit/connector_search_check.py`: on all 220 Mar Fil arms and
+   88 legs a sure answer was never wrong where the library agrees with the shape.
+   **Next, in order:** (b) a
+   production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with
+   all its type's connectors (`find_all`); sure = fit written (`kb.sidecar.merge`, backed up), look = written and
+   flagged, none = listed; fit = connector's fit moved by the match, turn fixes per connector, and a list of unmatched parts grouped
    (= which connector to cut next); (c) the origin move, into a NEW folder (the STLs have no backup: ask Josh where),
    never over the originals; (d) "no fit = origin is the joint" in TIOW Inbox and the page. Torsos, and what hangs
    off arms and legs, keep their sockets until then.
@@ -57,7 +64,12 @@ a stronger search.
 
 - **Connectors**: received Nov 14 (notes 097). Still to cut for Mar Fil, when he likes: pad spots for the
   Intercessor, Bladeguard and Techmarine shoulders. Turtle Ninja / other makers only after Mar Fil proves out.
+- **Pad-inside and shin connectors** (his choice: cut by hand): Shoulder Pad 1 inside, Legs 1B right shin spot,
+  Shin Pad 1 inside (item 5).
 - Assault Legs 3's library fit looks 0.5 mm / 9 deg off against the waist connector (notes 097): a look when he can.
+- Library sockets that look wrong by shape (notes 098), to check by eye: Pad sockets of Outrider Arm Wight Handle
+  A1 L, B1 L, B2 L and Arm With Handle B R; Veteran Arm B's Hand socket. No Forearm socket on Assault Arm 8B / 8C and
+  Jump Chaplain Arm A-D, where wrist B is an exact copy.
 - **Where re-origined files go** (a new folder; the STLs have no backup): ask before item 5 (c).
 - Files on his Desktop from Nov 14: `TIOW Blender bridge\shells\` (Claude's automatic shells: the pauldron and
   shin pad shells are usable, the head / backpack / arm / hand ones are superseded by his connectors;
