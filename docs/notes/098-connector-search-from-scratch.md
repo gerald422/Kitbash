@@ -38,5 +38,15 @@ the shape, and the 5 where it disagrees look like library errors. The production
   Veteran "Body" parts (legs with torso) it also fits a ring 28 mm up (flagged ambiguous).
 - **Time**: ~12 s a legs, ~50 s an arm with four connectors (the wider pass runs on most): the KD tree queries in
   Python are the cost. Fine for a background `.bat` per drop; worth speeding up later.
+- **Whole marines** (`kits/nofit/connector_demo.py`, Assault Torso 1, library fits vs the connector method):
+  Assault legs / arms / pads 0.5-1.0 mm from the library's (median over the part); Veteran Arm C 0.0, Outrider
+  Handle B1 L 2.1. **The turn is the weak spot**: round connectors fix where a part sits, not the arm's swing about
+  the shoulder or the legs' heading; the search keeps the turn the part has in its own file, which holds only for a
+  kit exported in the reference's frame. Outrider Legs B end ~10 deg from the library (Outrider legs are exported
+  ~90 deg turned; flagged look); Captain with Jump Pack arms (no fit in the library) go on as their file has them,
+  arms out (its kit sits 13 mm higher; no Captain torso to check); its legs match no waist (another design).
+  Ways to fix the turn: connectors cut with a keyed (non-round) feature, or Josh's turn fix per connector.
+- **Never `read_factory_settings` in a script on the PC**: the first preview did, and Blender removed Node Arrange's
+  networkx from `extensions\.local` (put back by Blender on its next start; `docs/reference.md`).
 - **Test**: `tests/kb/t_connect.py` (Blender, ~10 s, made-up shapes: moved / turned / mirrored parts found exactly,
   a different design not). Nothing written to the library.
