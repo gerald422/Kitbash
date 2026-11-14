@@ -22,6 +22,9 @@ library is read and written in place, and installed files are delivered with `py
 - Python: the system `python` has no numpy; use Blender's (`C:\Program Files\Blender Foundation\Blender 5.1\5.1\python
   \bin\python.exe`) for numpy work, `blender --background --python` when `bpy` / `mathutils` is needed (add
   `--factory-startup` unless his add-ons are wanted: several print errors in background mode). Set `PYTHONUTF8=1`.
+  **Never call `bpy.ops.wm.read_factory_settings` in a script on the PC**: Blender then removes the Python packages
+  his extensions installed (`%APPDATA%\Blender Foundation\Blender\5.1\extensions\.local\...`; Nov 14 it removed Node
+  Arrange's networkx, put back when Blender next started with his settings). To empty a scene, remove its objects.
 - Blender tests: `blender --background --python tests/golden/run.py -- "D:\Kitbash Library" [--only ...]` (25 s for
   all 140 parts). His live Blender is also reachable through the Blender MCP server.
 - Adding parts: `blender --background --factory-startup --python kits/creator/add_creator.py -- add RECIPE --src
