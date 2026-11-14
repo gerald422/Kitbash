@@ -66,3 +66,19 @@
 - **Not done**: nothing written to the library from the inside matching. Next choices: one pad placed by eye in each
   many-pad family, then `run --inner`; the same matching used to make each fitted family agree on one fit (item 4);
   pad 62's inside (not its whole shell, with scale) as the rule for the one-offs.
+- **One master a maker and part type (Josh, Nov 14, later the same day): "create a shell from the inside faces of one
+  fitted piece per creator, mate each part to that, use the anchor from that ... almost back to bounding boxes".**
+  Tried on Mar Fil pads with his pad 62 (`MarFil Assault - Shoulder Pad 1`) as the master, 81 other pads
+  (`kits/nofit/master_seat_try.py`: boxes lined up, slid on without turning, then settled; when that does not sit,
+  the square turns whose box fits): the right pads of 62's own armour family (Assault, Veteran, Outrider, Jump
+  Chaplain, Bladeguard Death: about 25) sit at 0.06-0.10 mm and give the library's fit back to 0.00-0.12 mm /
+  0.6 deg, three of them found lying turned 180 deg in their files. Other armour (Intercessor 8, Bladeguard 5,
+  Techmarine, Captain 2) sits at 0.27-0.40 mm and lands 0.4-0.6 mm / 4-7 deg from the library's (whole-shell rule)
+  fit: another inside, so its own master, as he said (a maker and armour type). Left pads need the master mirrored
+  (they sit at 0.06 mm turned 180 deg when the inside is alike both ways, at 1.0 mm when not). Bike Chaplain pads
+  0.46 / 2.4 mm: no master. Not built into the runner yet; nothing written to the library.
+- **Where a first fit exists** (fitted / unfitted, Nov 14): pads Mar Fil 80/3, Marta Tacticus 70/30, Terminator
+  9/15, TN Heresy 3/8, WG 19/1; heads Marta 0/260, BBoosty 4/22, Mar Fil 81/5; hands Springles 0/30; knee (shin)
+  pads Mar Fil 80/0, Marta 44/4, WG 0/3; backpacks Marta 0/82, others complete but 3; jump packs Marta 0/11, TN
+  5/16; arms Marta 267/74, Mar Fil 222/7; legs Marta 217/55. No master at all: Marta heads, backpacks and jump
+  packs, Springles hands, WG knee pads.
