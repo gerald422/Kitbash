@@ -12,6 +12,8 @@ sits wrong is put right once, at its master, never part by part.
     PY  masters.py sheet    LIBRARY WORK [--min 2]   each master of a family of --min parts or more built on the Mar
                                          Fil body with its present fit (TIOW Inbox as installed,
                                          tests/creator/t_creator.py) -> WORK/sheet/out/m<n>_front.png, _right.png
+    PY  masters.py shells   LIBRARY WORK OUT             after `one`: each folder's master's inside as an STL lying where
+                                         it sits on the joint (the scene's origin = the socket) -> OUT/<maker> - <type> shell.stl
     BL  masters.py compose  WORK [--dir sheet|compare]   those pictures as one numbered sheet -> WORK/<dir>/masters.jpg
     PY  masters.py compare  LIBRARY WORK [--most 16]     after `one`: pads that lie on the master as it is and whose
                                          present fit differs, built with both fits (odd = now, even = the master's)
@@ -102,6 +104,32 @@ def report_one(work):
         for p in sorted((p for p in X if p not in b), key=lambda p: -p["lib_deg"])[:40]:
             print("      differs: %-46s %.1f mm %5.1f deg  (dome %.2f, rim %.2f, %s)" % (os.path.basename(p["rel"])[-46:], p["lib_mm"], p["lib_deg"], p["dome"], p["rim"], p["how"]))
         if U: print("   %d without a fit: %s" % (len(U), "; ".join("%s %.2f" % (os.path.basename(p["rel"]).split(" - ", 1)[-1][:28], p["dome"]) for p in U)))
+
+
+def shells(lib, work, out, A):
+    """Josh, Nov 14: the shell at the centre of a scene, every part moved to it and mated there. One STL a maker
+    folder: its master's inside faces, moved to where the master sits on the joint (the master's fit), so the scene's
+    origin is the socket and every maker's shell lies at the same place (an adaptor between two is the gap between
+    them). A part's place on the shell (`fit` in one-*.json: part -> shell) then is all a part needs; the shell's own
+    place on the socket is the one fit a maker and armour type, Josh's to set."""
+    from kb import carry
+    os.makedirs(out, exist_ok=True); bins = 60
+    for f in sorted(glob.glob(glob.escape(work) + "/one-*.json")):
+        D = json.load(open(f, encoding="utf-8")); sc = json.load(open(lib + "/" + D["master"] + ".sockets.json", encoding="utf-8-sig")); F, left = right_fit(sc)
+        tri = carry.soup(lib + "/" + D["master"] + ".stl", sc.get("scale", 1.0)) * (np.array([-1.0, 1, 1]) if left else 1.0)
+        I = carry.inner(carry.sample(tri, 60000, 0)); C = carry._centre(I)
+        def cell(P):
+            d = P - C; r = np.linalg.norm(d, axis=1); u = d / np.maximum(r, 1e-9)[:, None]
+            th = np.arccos(np.clip(u[:, 2], -1, 1)); ph = np.arctan2(u[:, 1], u[:, 0]) + np.pi
+            return np.minimum((th / np.pi * bins).astype(int), bins - 1) * (2 * bins) + np.minimum((ph / (2 * np.pi) * 2 * bins).astype(int), 2 * bins - 1), r
+        k, r = cell(I); far = np.full(2 * bins * bins, -1.0); np.maximum.at(far, k, r)       # how far the inside reaches, a direction
+        kc, rc = cell(tri.mean(1)); keep = rc <= far[kc] + 0.15; T = tri[keep]
+        T = (np.c_[T.reshape(-1, 3), np.ones(len(T) * 3)] @ F.T)[:, :3].reshape(-1, 3, 3)       # to the socket's own space
+        n = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]); n /= np.maximum(np.linalg.norm(n, axis=1), 1e-12)[:, None]
+        rec = np.zeros(len(T), dtype=[("n", "<f4", 3), ("v", "<f4", (3, 3)), ("a", "<u2")]); rec["n"], rec["v"] = n, T
+        name = "%s - %s shell" % (D["maker"], D["type"])
+        with open("%s/%s.stl" % (out, name), "wb") as fo: fo.write(b"shell".ljust(80, b" ")); fo.write(np.uint32(len(T)).tobytes()); fo.write(rec.tobytes())
+        c = T.reshape(-1, 3); print("%-46s %6d of %6d faces, from %s; box %s to %s" % (name, len(T), len(tri), os.path.basename(D["master"]), c.min(0).round(1), c.max(0).round(1)))
 
 
 def right_fit(sc):
@@ -242,6 +270,7 @@ if __name__ == "__main__":
     if A[0] == "families": families(A[1], A[2], A)
     elif A[0] == "report": report(A[1])
     elif A[0] == "one": one(A[1], A[2], A)
+    elif A[0] == "shells": shells(A[1], A[2], A[3], A)
     elif A[0] == "report-one": report_one(A[1])
     elif A[0] == "sheet": sheet(A[1], A[2], A)
     elif A[0] == "compose": compose(A[1], A)

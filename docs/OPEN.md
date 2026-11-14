@@ -32,10 +32,13 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
-- **Pad masters to approve (Nov 14, notes 094)**: one fitted pad a maker and armour type, picked here, a picture of
-  each sent to him; he approves each master's fit, the family is then seated on it. **His rule for it: when a
-  family sits wrong he corrects it once (the master / the socket), never part by part**, so each seated part has to
-  keep its master and how it lies on it, and its fit is worked out from the master's.
+- **Pad shells (Nov 14, notes 094)**: one master a maker folder (maker + armour type), every pad mated to its
+  inside by the dome; Josh: the master's fit ("purple") is fine for now, he corrects it at the shell, never part by
+  part. His design: the shell lies at the centre of a scene (= the socket), parts are moved to it and mated there,
+  one fit per shell per creator, his to set. 12 pad shells made (`masters.py shells`, his Desktop `pad-shells\`).
+  **To build**: `shell` + `seat` in the sidecars and a re-seat command; the turn of pads lying another way in
+  their file (39 fitted, and the 57 unfitted); then the same for heads, hands, shin pads, backpacks, arms.
+  **Waiting on him**: files kept as they are with the seat stored (as built) or origins moved for real (item 5).
 - The 80 Turtle Ninja torsos socketed Nov 14 (posed copies, notes 093 / 094): **stay as they are** (Josh, Nov 14);
   no more posed ones are to be fitted. (A Marta head by eye: later, when he comes back to heads.)
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is

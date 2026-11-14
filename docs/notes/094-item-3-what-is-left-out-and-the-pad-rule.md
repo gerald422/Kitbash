@@ -118,3 +118,21 @@
   is 6-180 deg from the master's, each built with both fits (sheet sent: odd = now, even = from the master; the
   master's fit cuts 0.9-1.1 mm into the arm on Marta Mithraism Pad 3 and SW Terminator Pad 3). His to judge which
   is right. Nothing written to the library.
+- **Josh on the sheet (Nov 14): "purple is fine for now as I can adjust that pretty easily going forward"**: one
+  master a maker folder goes ahead; the master's fit is his to correct.
+- **Shells at the centre of a scene (Josh, Nov 14: "the shell moved to the centre of a scene and then the pad moved
+  to it and mated there ... easier to set where spacers should go, or an adaptor for an aggressor shoulder onto a
+  tacticus shell ... one fit per shell per creator, which I am happy to do manually as long as the placement of the
+  shell is consistent").** This is item 5 (origins at the joint) done by reference instead of by rewriting files:
+  - a **shell** = a master's inside faces as their own STL, lying where the master sits on the joint, so the
+    scene's origin is the socket and every maker's shell is in the same place (`masters.py shells`; 12 pad shells
+    written to `~\Desktop\TIOW Blender bridge\pad-shells\`, not in the library yet). In that space Mar Fil,
+    Redwarden, Springles, TN Mk10, Marta Tacticus and WargamesPrint shells fill the same box (x -0.5..4.6, y
+    -3.5..4.6, z -7.8..0.2 mm); TN Moritat's lies turned, i.e. its present fit is the odd one.
+  - a **part** keeps `shell` (which one) and `seat` (part -> shell, what `one` works out by mating); its fit is the
+    shell's place on the socket times its seat. The shell's place on the socket is the ONE fit a maker and armour
+    type, set by Josh; `fits` is still written into each sidecar from it, so TIOW Inbox needs no change.
+  - the part files are not rewritten (the STLs have no backup); moving their origins for real is still item 5.
+  - Of the 262 other fitted pads, 223 have a certain turn on their shell (same rim, or the present fit agrees
+    within 1 mm / 6 deg), 39 do not (lying another way in their file: the turn from the inside is still to build);
+    57 have no fit. Not written to the library yet: sidecar keys, the delivery and the re-seat command are next.
