@@ -41,3 +41,20 @@
 - **Next:** Josh places one example a type a creator in `shells.blend` (import the library STL, its name is kept;
   move it onto the shell; save); the placements are then read from the file and the rest of each folder mated to
   the shell (`masters.py one` does pads; the same seating for the other types is to build).
+- **Remade (Nov 14, Josh: "those shells are pretty awful", then "you are overcomplicating this massively ... a shell for
+  the pauldron, a shell for the shin pad; for the backpack just the connector; for the heads just the neck; arms
+  again just the connector. If there is a better thing to use for an exact match use that. It doesn't need to be a
+  shell for everything").** `shells.py make` now:
+  - **pauldrons and shin pads** (`Knee Pads`, fit `Shin R`): a shell, the inside of the folder's pads laid over each
+    other in the dome's own directions, the middle kept where most agree (badges and the odd pad lying another way
+    drop out): 12 pauldron, 5 shin pad shells, clean.
+  - **heads, backpacks, arms, hands**: the **connector** of ONE reference part (Josh's helmet 1 / arm 1A R for Mar
+    Fil, else the folder's most ordinary fitted right part): its faces within R of the joint and no more than D out of
+    it towards the part, the joined piece nearest the joint (heads 3.5 / 2.5 mm: the neck ball; backpacks 3 / 3: the
+    plug or slot; arms 3.2 / 1.5: the shoulder disc; hands 2 / 1.5: the wrist). The direction from host to part is
+    taken from where Mar Fil's body lies round the joint (a socket's Z is not always that way).
+  - 47 in all, `shells.blend` one scene a type (a collection a maker, one switched on, the Mar Fil body as a wire
+    guide), `check.jpg` beside it (every one alone, numbered as `shells.json`). Looked at: pauldrons, shin pads and
+    necks clean; backpack connectors clean but CyberBrush (bits of the back plate) and Springles Weapons (machinery
+    round it); arm discs and hand wrists carry a thin fringe of what is next to the disc. The averaged first remake
+    and the cut-out first try are in `old-averaged\` / `old-first-try\` (his to delete).

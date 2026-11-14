@@ -34,8 +34,8 @@ When an item is done, delete its line (the notes entry is the record).
 
 - **Shells (Nov 14, notes 094 / 095)**: Josh's design: the shell of a joint lies at the centre of a scene (= the
   socket), a part is moved to it and mated there, ONE fit a shell a creator, his to set. **Origins are to be moved
-  for real** (his decision, Nov 14), so a part that hangs off something needs no fit of its own. Made: 42 shells
-  (pads, heads, backpacks, arms, hands) and `shells.blend`, on his Desktop in `TIOW Blender bridge\shells`;
+  for real** (his decision, Nov 14), so a part that hangs off something needs no fit of its own. Made: 47 shells
+  (pauldron and shin pad shells; head, backpack, arm and hand connectors) and `shells.blend`, on his Desktop in `TIOW Blender bridge\shells`;
   "Other way round" in the page's Adjust panel (installed; the turn itself not tried on a model).
   **Waiting on him**: one example a type a creator placed in `shells.blend`; whether heads and hands shells are
   his to cut by hand (they are rough); where re-origined files go (the STLs have no backup).
