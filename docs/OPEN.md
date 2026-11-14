@@ -3,6 +3,9 @@
 Short and current. Detail for most lines: `docs/notes/084-open-items-in-full-nov-9.md`, or the notes entry named.
 When an item is done, delete its line (the notes entry is the record).
 
+**New chat, start here (Nov 14):** the current work is item 5 (connectors, origins at the joint): read it, then
+`docs/notes/096`. The next step waits on Josh's leg connectors (`~\Desktop\mar fil connectors\`).
+
 ## Order agreed with Josh (Nov 13, notes 089)
 
 1. Done Nov 13 (notes 090): `add_creator.py add RECIPE --src FOLDER` and `Add parts.bat` run on the PC. **Still to do:
@@ -12,41 +15,49 @@ When an item is done, delete its line (the notes entry is the record).
    in their library folder (`kb/carry.py`); what it keeps was right in the check, about half of arms and legs are
    dropped for by-eye placing. Still open: torsos in folders with no socketed torso (Marta, most Turtle Ninja).
    Parts with no fit can now be placed on the page: they are dropped on their socket, flagged (notes 092).
-3. Fit the parts that have none: **carrying done Nov 14 (notes 093)**: 80 Turtle Ninja torsos got sockets, 1 arm a
-   fit; legs, pads, heads and the other 564 torsos cannot be carried (no fitted part like them). **Josh, Nov 14:
-   Marta's torsos are not being done; heads are skipped for now, he comes back to them** (then: one Marta head placed
-   by eye, her 250 share a frame, `carry.like(mode="turn")`). **Turtle Ninja's posed torsos are out too** (Josh,
-   Nov 14, as on Oct 20, notes 026: one pose a torso, the straight one, usually 1 or 9 of a letter): the 338 without
-   sockets stay so (`OUT` in `kits/nofit/carry_library.py`); the 80 socketed on Nov 14 are posed copies and stay
-   (his call, Nov 14). Still without a fit and needing a reference each: 80 arms, 51 legs, the pads the
-   pad rule did not take (notes 094). Not run: held weapons and accessories (fits with `offHand` / `pivot`).
-   **Pads by their inside only** (Josh's idea, Nov 14, notes 094: `run` / `loo --inner`, `families`): works where
-   insides coincide; the 57 unfitted pads have no fitted twin (45 families among them: TN Mk4 pauldrons are 2), so
-   each family wants one placed by eye, then `run --inner`. It also showed fitted pads with the same inside and
-   different fits (Marta, WargamesPrint, CyberBrush): item 4.
+3. Fit the parts that have none. **Carrying done Nov 14** (notes 093): 80 Turtle Ninja torsos got sockets, 1 arm a
+   fit. **Left out on purpose** (Josh; `OUT` in `kits/nofit/carry_library.py`): Turtle Ninja posed torsos (only the
+   straight one of each, usually 1 or 9 of a letter; the 80 posed ones socketed Nov 14 stay), TN "Rigging Required"
+   folders, Marta torsos; Marta heads later. Pads: one master a maker folder, every pad seated on its inside
+   (`kits/nofit/masters.py one`; Josh accepted the master's fit, "purple", Nov 14; nothing written yet; notes 094).
+   **The rest (80 arms, 51 legs, 57 pads, heads, held weapons) now goes through connectors (item 5).**
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
    below; a standing audit and a fit-quality score.
-5. Origins at the joint (below). 6. Finalise: export step, a peg test piece (pegs have never been printed).
+5. **Connectors and origins at the joint (the current work, notes 094-096; read 096 first).** Decided by Josh,
+   Nov 14:
+   - **The torso stays on its sockets** (standardised; everything else matches onto it).
+   - **Josh cuts the connectors himself**, one per connector DESIGN, as open surfaces in place on a reference part
+     (`~\Desktop\mar fil connectors\`: Mar Fil arm disc, neck, jump pack mount, chainsword grip). **Legs next**,
+     the same way; he offered the arm's **pad spot** (do this first: pauldrons snap worst) and **wrist**.
+   - **Pauldrons and shin pads mate by their inside (a shell)**, the same way; shin pads need no examples where a
+     fitted master exists (Mar Fil 80, Marta, Old Style); only WargamesPrint's 3 and a few Marta ones have none.
+   - **Origins are to be moved for real**, so a part that hangs off something needs no fit of its own.
+   - **He fixes turns himself** (round connectors don't fix the turn); a fix is stored per connector, never per part.
+   What the test showed (`kits/nofit/connector_try.py`, 25 parts a connector): a part with the same connector
+   matches at <= ~0.045 mm and gets its library fit back (necks 11/11, arms 7/7 with the turn kept as in the file,
+   jump packs 2/2); other designs do not match (Veteran/Bladeguard necks, backpacks, guns). Round connectors (neck,
+   disc, grip) fix place and tilt, not the turn: keep the turn the part has in its file (Mar Fil exports in its kit
+   frame), else his fix.
+   **Next, in order:** (a) when his leg / arm connectors arrive, `connector_try.py` on 25 parts each; (b) a
+   production seating script: every part of a maker matched against all its connectors, the best <= 0.045 mm
+   wins, fit = connector's fit moved by the match, turn fixes per connector, and a list of unmatched parts grouped
+   (= which connector to cut next); (c) the origin move, into a NEW folder (the STLs have no backup: ask Josh where),
+   never over the originals; (d) "no fit = origin is the joint" in TIOW Inbox and the page. Torsos, and what hangs
+   off arms and legs, keep their sockets until then.
+6. Finalise: export step, a peg test piece (pegs have never been printed).
 7. Housekeeping: retire the TIOW-FTRP bridge (he no longer uses TIOW-FTRP: `bridge/`, the bridge template, the
    bridge's installed files); share server POST check (sharing is only for testing and limited printing).
 
 ## Waiting on Josh
 
-- **Connectors (Josh, Nov 14, notes 096)**: the torso stays on its sockets (standardised, everything matches onto
-  it). Josh cuts the connectors himself, one per connector design (Mar Fil: arm disc, neck, jump pack mount, grip so
-  far); legs next, the same way; he offered the arm's pad spot and wrist too. Shin pads work like shoulder pads
-  (inside shell). A part's connector = the one it matches at <= ~0.045 mm; round connectors don't fix the turn, he
-  fixes turns (to be stored per connector, not per part). Unmatched parts list = which connector to cut next.
-- **Shells (Nov 14, notes 094 / 095)**: Josh's design: the shell of a joint lies at the centre of a scene (= the
-  socket), a part is moved to it and mated there, ONE fit a shell a creator, his to set. **Origins are to be moved
-  for real** (his decision, Nov 14), so a part that hangs off something needs no fit of its own. Made: 47 shells
-  (pauldron and shin pad shells; head, backpack, arm and hand connectors) and `shells.blend`, on his Desktop in `TIOW Blender bridge\shells`;
-  "Other way round" in the page's Adjust panel (installed; the turn itself not tried on a model).
-  **Waiting on him**: one example a type a creator placed in `shells.blend`; whether heads and hands shells are
-  his to cut by hand (they are rough); where re-origined files go (the STLs have no backup).
-  **To build**: reading his examples from the file; the seating for heads / packs / arms / hands (pads:
-  `masters.py one`); the turn of parts lying another way in their file; the origin move itself and "no fit =
-  origin is the joint" in TIOW Inbox and the page.
+- **Connectors**: his leg connectors next, then the arm's pad spot and wrist (item 5). Turtle Ninja / other makers
+  only after Mar Fil proves out.
+- **Where re-origined files go** (a new folder; the STLs have no backup): ask before item 5 (c).
+- Files on his Desktop from Nov 14: `TIOW Blender bridge\shells\` (Claude's automatic shells: the pauldron and
+  shin pad shells are usable, the head / backpack / arm / hand ones are superseded by his connectors;
+  `old-averaged\`, `old-first-try\` are his to delete); `pad-masters-sheet.jpg`, `pad-now-vs-master.jpg`,
+  `item3-test-sheet.jpg`. Work data (family lists, matches): library `_backups\pads-rule-2026-11-14\work\`.
+- Page: "Other way round" in the Adjust panel (installed Nov 14, notes 095): the turn itself not yet tried on a model.
 - The 80 Turtle Ninja torsos socketed Nov 14 (posed copies, notes 093 / 094): **stay as they are** (Josh, Nov 14);
   no more posed ones are to be fitted. (A Marta head by eye: later, when he comes back to heads.)
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is
