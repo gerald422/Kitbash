@@ -32,6 +32,11 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
+- **Connectors (Josh, Nov 14, notes 096)**: the torso stays on its sockets (standardised, everything matches onto
+  it). Josh cuts the connectors himself, one per connector design (Mar Fil: arm disc, neck, jump pack mount, grip so
+  far); legs next, the same way; he offered the arm's pad spot and wrist too. Shin pads work like shoulder pads
+  (inside shell). A part's connector = the one it matches at <= ~0.045 mm; round connectors don't fix the turn, he
+  fixes turns (to be stored per connector, not per part). Unmatched parts list = which connector to cut next.
 - **Shells (Nov 14, notes 094 / 095)**: Josh's design: the shell of a joint lies at the centre of a scene (= the
   socket), a part is moved to it and mated there, ONE fit a shell a creator, his to set. **Origins are to be moved
   for real** (his decision, Nov 14), so a part that hangs off something needs no fit of its own. Made: 47 shells
