@@ -65,8 +65,9 @@ production seating script, once Josh's pad-inside / shin connectors arrive (or a
 - **Connectors**: received Nov 14 (notes 097). Still to cut for Mar Fil, when he likes: pad spots for the
   Intercessor, Bladeguard and Techmarine shoulders. Turtle Ninja / other makers only after Mar Fil proves out.
 - **The turn of round connectors** (notes 098, demo): the disc and waist fix place, not arm swing / legs heading;
-  across kits the file's own turn is wrong (Outrider legs ~10 deg, Captain arms unverified). Keyed connectors (cut
-  with a non-round feature) or his turn fix per connector: his call. Captain with Jump Pack legs need a waist cut.
+  across kits the file's own turn is wrong (Outrider legs ~10 deg, Captain arms unverified). **Josh, Nov 14: recut
+  them keyed** (a non-round feature in the cut); he is doing it. Then rerun `connector_search_check.py` and
+  `connector_demo.py`. Captain with Jump Pack legs need a waist cut.
 - **Pad-inside and shin connectors** (his choice: cut by hand): Shoulder Pad 1 inside, Legs 1B right shin spot,
   Shin Pad 1 inside (item 5).
 - Assault Legs 3's library fit looks 0.5 mm / 9 deg off against the waist connector (notes 097): a look when he can.
