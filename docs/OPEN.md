@@ -15,9 +15,11 @@ When an item is done, delete its line (the notes entry is the record).
 3. Fit the parts that have none: **carrying done Nov 14 (notes 093)**: 80 Turtle Ninja torsos got sockets, 1 arm a
    fit; legs, pads, heads and the other 564 torsos cannot be carried (no fitted part like them). **Josh, Nov 14:
    Marta's torsos are not being done; heads are skipped for now, he comes back to them** (then: one Marta head placed
-   by eye, her 250 share a frame, `carry.like(mode="turn")`). Still without a fit and needing a reference each: 338
-   Turtle Ninja torsos that match no socketed folder-mate (flat-torso rule or more references), 82 arms, 52 legs,
-   56 pads. Not run: held weapons and accessories (fits with `offHand` / `pivot`).
+   by eye, her 250 share a frame, `carry.like(mode="turn")`). **Turtle Ninja's posed torsos are out too** (Josh,
+   Nov 14, as on Oct 20, notes 026: one pose a torso, the straight one, usually 1 or 9 of a letter): the 338 without
+   sockets stay so (`OUT` in `kits/nofit/carry_library.py`), **and the 80 socketed on Nov 14 are posed copies: put
+   back or kept, his call (below)**. Still without a fit and needing a reference each: 80 arms, 51 legs, the pads the
+   pad rule did not take (notes 094). Not run: held weapons and accessories (fits with `offHand` / `pivot`).
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
    below; a standing audit and a fit-quality score.
 5. Origins at the joint (below). 6. Finalise: export step, a peg test piece (pegs have never been printed).
@@ -26,9 +28,9 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
-- **80 Turtle Ninja torsos newly socketed (Nov 14, notes 093)**: build a few on the page (Mk7-8, Mk6 Assault Addon
-  torsos beyond the first of each letter) and say if any shoulder or neck sits wrong. (A Marta head by eye: later,
-  when he comes back to heads.)
+- **80 Turtle Ninja torsos socketed Nov 14 (notes 093) are posed copies**, which he only wants the straight one of:
+  take their sockets off again (backups: `_backups\carry-nofit-2026-11-14\before`; the index entries too) or keep
+  them? Asked Nov 14. (A Marta head by eye: later, when he comes back to heads.)
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is
   a snapshot of what TIOW does today, not a sign-off: `Run checks.bat record` again when the builder looks right.
   `Run checks.bat` after any change. Another clone needs `git clone -c core.longpaths=true` (9 paths are too long).
@@ -83,7 +85,7 @@ When an item is done, delete its line (the notes entry is the record).
 - Mechadendrite tails and mechadendrites (spec: 079; assets `Desktop\tubes, pipes, chains\`).
 - New bits next month: capes, tabards, arms, a shield (sheets seen Nov 4).
 - 623 torsos without sockets (Marta 277, Turtle Ninja 338 after Nov 14's 80, BBoosty 5, Mar Fil 3): torso /
-  flat-torso rules or a reference a folder (notes 093); Marta's are not being done (Josh, Nov 14). 238 parts in types with no page step.
+  left so on purpose (Marta: no torsos; Turtle Ninja: only the straight pose of each; Josh, notes 026 / 094). 238 parts in types with no page step.
 - Marta mark tidy-up; 5 stale Marta sidecars in the repo the library no longer has (not the 8 `Arms` / `arms`
   duplicates removed Nov 13; check against the PC).
 - **Share server: refuse POSTs from other sites** (Nov 13 review, notes 086): `/correct` and `/send` don't check

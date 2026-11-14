@@ -72,6 +72,7 @@ Take reference values from the existing library sidecars rather than retyping th
 
 **Torso and legs**
 - **Chests:** the Assault torso's sockets exactly, i.e. Shoulder R/L, Neck, Back, Waist (see `MarFil Assault - Torso 3.sockets.json`). A flat-bottomed torso also gets `Flat Waist`. For Turtle Ninja style torsos, use the flat torso rule and neck rule D (`kits/cr`, `kits/tn`).
+  - **Left out on purpose (Josh, Oct 20, notes 026; again Nov 14): don't fit these.** Turtle Ninja: one pose a torso, the straight ("flat") one, usually number 1 or 9 of each letter (about 30-40 in the Mk7-8 builder); its posed copies stay without sockets. Nothing from TN's "Kitbash Files (Rigging Required)" folders. Marta: no torsos, no heads.
 - **Legs → Waist:** seated like Josh's Assault legs. Match the Assault waist region onto the new legs and carry Josh's placement across (`kits/legs_match.py`, `kits/*/legs_seat.py`).
   - Flat-topped legs (Marta, TN) get a `Flat Waist` fit from their top face and bring the body adaptor.
   - Legs also get `Base` (under the feet), and belt anchors Hip R/L and Belt Front/Back from `kits/belt.py` (Z out of the belt, Y up).

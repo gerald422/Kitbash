@@ -3,7 +3,10 @@
     PY  carry_library.py ext   LIBRARY WORK                      box sizes of every fitted / unfitted part (numpy only)
     PY  carry_library.py shapes LIBRARY WORK [--shard I/N]        the fitted parts' surface samples -> WORK/shapes (0.7 MB
                                                                   each), so the shards don't all read the library's drive
-    BL  carry_library.py run   LIBRARY WORK [--types A,B] [--shard I/N]      the unfitted parts -> WORK/run-I.jsonl
+    BL  carry_library.py run   LIBRARY WORK [--types A,B] [--shard I/N] [--scopes rule] [--all]
+                                                                  the unfitted parts -> WORK/run-I.jsonl (--scopes rule:
+                                                                  no carrying, the head / pad rule only; --all: also
+                                                                  the parts Josh left out, see OUT)
     BL  carry_library.py again LIBRARY WORK [--shard I/N]        torsos that got some joints but not all from their folder
                                                                   (a posed torso beside one-pose ones): the missing
                                                                   joints once more, matched with turning -> WORK/run-zz-*.jsonl
@@ -36,16 +39,30 @@ REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 sys.path.insert(0, REPO)
 TYPES = ["Arms", "Legs", "Chests", "Heads", "Shoulder Pads"]
 HEAD_MAX = 0.30                                          # add_creator's gate for the head rule
+PAD_SCALE, PAD_MAX = (0.851, 1.349), 0.60                # add_creator's gates for the pad rule (pad 62's shell)
+
+
+def OUT(rel, cat):
+    """parts Josh left out on purpose (Oct 20, notes 026; again Nov 14): they stay without a fit.
+    Turtle Ninja: one pose a torso, the straight one (usually number 1 or 9 of a letter), not its posed copies, and
+    nothing from the "Kitbash Files (Rigging Required)" folders. Marta: no torsos, no heads (heads: for now)."""
+    m = rel.split("/")[0]
+    return "RIGGING REQUIRED" in rel.upper() or \
+           (cat == "Chests" and m.startswith(("Turtle Ninja", "Marta"))) or (cat == "Heads" and m.startswith("Marta"))
 SAME_REGION = 0.12                                       # a copied (kit frame) joint: its region has to lie on the part
 ALL = ("same", "turn", "rigid")
 POLICY = {"Arms": {"folder": ALL}, "Legs": {"folder": ALL}, "Chests": {"folder": ALL, "maker": ALL},
-          "Shoulder Pads": {"folder": ("same", "turn")}, "Heads": {}}
+          "Shoulder Pads": {"folder": ("same", "turn"), "rule": ("pad rule",)}, "Heads": {}}
+PAD_USE = 0.10                                           # the pad rule is used only this close (mm): checked against the
+                                                         # library's own pads (notes 094), every one this close was right
+                                                         # (Mar Fil, TN Mk10, one Marta); from 0.11 on, BBoosty / CyberBrush /
+                                                         # Marta pads came out turned 7-180 deg (62's shell is nearly round)
 
 
 def used(g):
     """the result with only what POLICY allows left in it (None when nothing is)"""
     ok = POLICY.get(g["cat"], {}).get(g["scope"], ())
-    names = {n for n, h in g["how"].items() if h["mode"] in ok}
+    names = {n for n, h in g["how"].items() if h["mode"] in ok and (h["mode"] != "pad rule" or h["match"] <= PAD_USE)}
     fits = {n: F for n, F in g["fits"].items() if n in names}
     if g["cat"] == "Chests":
         socks = [s for s in g["sockets"] if s["type"] in names or (s["type"] not in g["how"] and names)]; t = {s["type"] for s in socks}
@@ -175,7 +192,7 @@ def torso_again(L, rel, sc, g, hide=()):
     return g
 
 
-def carry_part(L, cat, rel, sc, scopes=("folder", "maker"), hide=(), heads=None, mode=None):
+def carry_part(L, cat, rel, sc, scopes=("folder", "maker"), hide=(), heads=None, mode=None, pads=None):
     """-> {"scope", "method", "fits", "sockets", "how", "rejected", ["upright"]} for one part"""
     from kb import carry
     part = carry.Shape(L.lib + "/" + rel + ".stl", sc.get("scale", 1.0)); got, tried = None, {}
@@ -204,6 +221,14 @@ def carry_part(L, cat, rel, sc, scopes=("folder", "maker"), hide=(), heads=None,
         else:
             tried["rule"] = "helmet 1's neck ring didn't match it (%.2f mm off)" % m
             got = got or g
+    if (got is None or not (got["fits"] or got["sockets"])) and cat == "Shoulder Pads" and pads is not None:
+        from kb import fit as KF
+        side, Fn, sv, m = pads.pad_fit(*KF.load(L.lib + "/" + rel + ".stl", sc.get("scale", 1.0)))
+        g = {"scope": "rule", "method": "pad", "fits": {}, "sockets": [], "rejected": {},
+             "how": {side: {"mode": "pad rule", "from": "pad 62", "match": round(m, 3), "whole": round(m, 3), "scale": round(float(sv), 4)}}}
+        if not PAD_SCALE[0] < sv < PAD_SCALE[1]: tried["rule"] = "pad 62 only matched it at the scale limit (x%.2f)" % sv; got = got or g
+        elif m > PAD_MAX: tried["rule"] = "pad 62 didn't match it (%.2f mm off)" % m; got = got or g
+        else: g["fits"][side] = KF.flat(Fn); got = g
     if got is None: got = {"scope": "-", "method": "-", "fits": {}, "sockets": [], "how": {}, "rejected": {}}
     got["tried"] = tried
     return got
@@ -218,14 +243,17 @@ def done_rels(f):
 def run(lib, work, A):
     types = opt(A, "--types", ",".join(TYPES)).split(","); i, n = shard_of(A); L = Lib(lib, work, types)
     out = "%s/run-%dof%d.jsonl" % (work, i, n); have = {g["rel"] for g in rows(work, "run")}      # whatever any shard has done
-    todo = sorted((rel, cat, sc) for cat in types for rel, sc in L.P[cat] if not fitted(cat, sc) and rel not in have)[i::n]
-    heads = None; t0 = time.time(); print("shard %d/%d: %d parts to do, %d done before" % (i, n, len(todo), len(have)), flush=True)
+    todo = sorted((rel, cat, sc) for cat in types for rel, sc in L.P[cat] if not fitted(cat, sc) and rel not in have and ("--all" in A or not OUT(rel, cat)))[i::n]
+    heads = pads = None; t0 = time.time(); print("shard %d/%d: %d parts to do, %d done before" % (i, n, len(todo), len(have)), flush=True)
+    scopes = () if opt(A, "--scopes") == "rule" else ("folder", "maker")
     with open(out, "a", encoding="utf-8") as fo:
         for k, (rel, cat, sc) in enumerate(todo):
             if cat == "Heads" and heads is None:
                 from kb import fit as KF; heads = KF.Heads(lib)
+            if cat == "Shoulder Pads" and pads is None:
+                from kb import fit as KF; pads = KF.Pads(lib)
             t1 = time.time()
-            try: g = carry_part(L, cat, rel, sc, heads=heads)
+            try: g = carry_part(L, cat, rel, sc, scopes=scopes, heads=heads, pads=pads)
             except Exception as e: g = {"scope": "-", "method": "error", "fits": {}, "sockets": [], "how": {}, "rejected": {"*": "%s: %s" % (type(e).__name__, e)}, "tried": {}}
             g.update(rel=rel, cat=cat, secs=round(time.time() - t1, 1)); fo.write(json.dumps(g) + "\n"); fo.flush()
             print("%4d/%d %-13s %-60s %s (%.0f s)" % (k + 1, len(todo), cat, os.path.basename(rel)[:60],
@@ -259,13 +287,15 @@ def loo(lib, work, A):
         for m in sorted(bym):
             if not only or only in m: todo += random.sample(bym[m], min(per, len(bym[m])))
     todo = [t for k, t in enumerate(todo) if k % n == i and t[0] not in have]
-    heads = None
+    heads = pads = None
     with open(out, "a", encoding="utf-8") as fo:
         for k, (rel, cat, sc) in enumerate(todo):
             t1 = time.time()
             if cat == "Heads" and scope == "rule" and heads is None:
                 from kb import fit as KF; heads = KF.Heads(lib)
-            g = carry_part(L, cat, rel, sc, scopes=() if scope == "rule" else (scope,), hide=(rel,), heads=heads, mode=mode)
+            if cat == "Shoulder Pads" and scope == "rule" and pads is None:
+                from kb import fit as KF; pads = KF.Pads(lib)
+            g = carry_part(L, cat, rel, sc, scopes=() if scope == "rule" else (scope,), hide=(rel,), heads=heads, mode=mode, pads=pads)
             mine = dict(g["fits"]); mine.update({s["type"]: s["matrix"] for s in g["sockets"] if cat == "Chests"}); g["cmp"] = {}
             for name, (kind, T) in carry.joints(cat, sc).items():
                 if name in mine:
@@ -281,7 +311,8 @@ def loo(lib, work, A):
             if "upright" in g and sc.get("upright"): g["up_deg"] = round(carry.ang(np.array(g["upright"]).reshape(4, 4), np.array(sc["upright"]).reshape(4, 4)), 2)
             g.update(rel=rel, cat=cat, secs=round(time.time() - t1, 1)); g.pop("sockets"); g.pop("fits"); fo.write(json.dumps(g) + "\n"); fo.flush()
             print("%4d/%d %-13s %-50s %s (%.0f s)" % (k + 1, len(todo), cat, os.path.basename(rel)[:50], "  ".join(
-                "%s %s" % (nm, "dropped" if c is None else "%.2fmm %.1fdeg [%s %.2f]" % (c[0], c[1], g["how"][nm]["mode"], g["how"][nm]["match"])) for nm, c in g["cmp"].items()), g["secs"]), flush=True)
+                "%s %s" % (nm, "dropped" if c is None else "%.2fmm %.1fdeg [%s %.2f]" % (c[0], c[1], g["how"][nm]["mode"], g["how"][nm]["match"])) for nm, c in g["cmp"].items()) +
+                ("  rule: %s" % g["how"] if scope == "rule" else ""), g["secs"]), flush=True)
 
 
 def rows(work, kind):
@@ -337,6 +368,7 @@ def merged(lib, g):
     for nm, h in g["how"].items():
         if nm in g["fits"] or any(s["type"] == nm for s in g["sockets"]):
             new["notes"][nm] = ("helmet 1's neck ring matched onto it (%.2f mm), Josh's Neck fit carried across (Nov 14)" % h["match"]) if g["method"] == "head" else \
+                ("Josh's pad 62 matched onto it (x%.2f, match %.3f mm), his Pad R fit carried across about 62's shell centre (Nov 14)" % (h["scale"], h["match"])) if g["method"] == "pad" else \
                 "carried from %s (%s, %s; Nov 14): region match %.2f mm, whole shape %.2f mm" % (h["from"], h["mode"], "its folder" if g["scope"] == "folder" else "same maker", h["match"], h["whole"])
     if not new["sockets"]: del new["sockets"]
     m, kept = sidecar.merge(new, old)
