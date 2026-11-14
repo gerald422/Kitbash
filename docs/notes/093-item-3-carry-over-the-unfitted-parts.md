@@ -9,7 +9,8 @@ sidecar and were run.
   parts: folder-mates first, then the same maker's fitted parts elsewhere, heads then the head rule), `again`, `loo`
   (leave-one-out through the same code), `report`, `test`, `build`. Shards (`--shard I/N`) run side by side; a
   stopped run carries on. Blender's KD tree makes a maker-wide match about 150 s a part: the whole run was 12 CPU-hours
-  (about an hour on 21 processes). Results stay in the work folder as `run-*.jsonl` (every part, what was tried, why not).
+  (about an hour on 21 processes). Results (every part, what was tried, why not): `run-*.jsonl`, with the `loo-*.jsonl`, in the library's
+  `_backups\carry-nofit-2026-11-14\work\`.
 - **`kb/carry.py` changes**: any fit type can be carried (not only arms / legs: `joints`, `RADIUS` Heads 4 mm,
   Shoulder Pads 8 mm, others 6); the whole-shape match is worked out once a reference and reused for each joint;
   `like(..., mode="rigid" | "turn")` carries every joint that way whatever the references' own relation says;
