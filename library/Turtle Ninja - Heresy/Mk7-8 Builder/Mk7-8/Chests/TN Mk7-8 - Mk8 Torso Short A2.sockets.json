@@ -2,14 +2,201 @@
  "schemaVersion": 1,
  "part": "Mk8 Torso Short A 2",
  "category": "Chests",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Flat Waist",
+   "name": "TN Mk7-8 - Mk8 Torso Short A2_socket_Flat Waist",
+   "matrix": [
+    8.2e-05,
+    -0.999997,
+    -0.002536,
+    7.427153,
+    4.9e-05,
+    -0.002536,
+    0.999997,
+    0.0905,
+    -1.0,
+    -8.2e-05,
+    4.8e-05,
+    7.232933,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Mk8 Torso Short A1 (turn, match 0.09 mm)"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "TN Mk7-8 - Mk8 Torso Short A2_socket_Waist",
+   "matrix": [
+    8.2e-05,
+    -0.999997,
+    -0.002536,
+    7.392799,
+    4.9e-05,
+    -0.002536,
+    0.999997,
+    4.609239,
+    -1.0,
+    -8.2e-05,
+    4.8e-05,
+    7.198801,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Mk8 Torso Short A1 (turn, match 0.10 mm)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "TN Mk7-8 - Mk8 Torso Short A2_socket_Back",
+   "matrix": [
+    -0.19142,
+    -0.980786,
+    0.037632,
+    13.622112,
+    0.000108,
+    0.03832,
+    0.999265,
+    6.016176,
+    -0.981508,
+    0.191283,
+    -0.007229,
+    5.976956,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Mk8 Torso Short E1 (rigid, match 0.09 mm)"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "TN Mk7-8 - Mk8 Torso Short A2_socket_Neck",
+   "matrix": [
+    0.169671,
+    0.916248,
+    -0.362907,
+    8.257079,
+    -0.019484,
+    0.371294,
+    0.928311,
+    7.503668,
+    0.985308,
+    -0.150437,
+    0.08085,
+    6.907148,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Mk8 Torso Short A1 (rigid, match 0.09 mm)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "TN Mk7-8 - Mk8 Torso Short A2_socket_Shoulder L",
+   "matrix": [
+    -0.162363,
+    -0.986728,
+    0.002691,
+    9.263684,
+    0.049758,
+    -0.005464,
+    0.998746,
+    6.615595,
+    -0.985475,
+    0.162294,
+    0.049986,
+    13.218999,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Mk8 Torso Short A1 (rigid, match 0.10 mm)"
+   }
+  },
+  {
+   "type": "Shoulder R",
+   "name": "TN Mk7-8 - Mk8 Torso Short A2_socket_Shoulder R",
+   "matrix": [
+    -0.169476,
+    -0.985497,
+    0.008569,
+    7.092008,
+    -0.026518,
+    0.013252,
+    0.999561,
+    6.759665,
+    -0.985177,
+    0.169175,
+    -0.028379,
+    0.643124,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Mk8 Torso Short E1 (rigid, match 0.09 mm)"
+   }
+  }
+ ],
  "fits": {},
  "notes": {
-  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet"
+  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
+  "Back": "carried from TN Mk7-8 - Mk8 Torso Short E1 (rigid, its folder; Nov 14): region match 0.09 mm, whole shape 0.10 mm",
+  "Flat Waist": "carried from TN Mk7-8 - Mk8 Torso Short A1 (turn, its folder; Nov 14): region match 0.09 mm, whole shape 0.12 mm",
+  "Neck": "carried from TN Mk7-8 - Mk8 Torso Short A1 (rigid, its folder; Nov 14): region match 0.09 mm, whole shape 0.09 mm",
+  "Shoulder L": "carried from TN Mk7-8 - Mk8 Torso Short A1 (rigid, its folder; Nov 14): region match 0.10 mm, whole shape 0.09 mm",
+  "Shoulder R": "carried from TN Mk7-8 - Mk8 Torso Short E1 (rigid, its folder; Nov 14): region match 0.09 mm, whole shape 0.10 mm",
+  "Waist": "carried from TN Mk7-8 - Mk8 Torso Short A1 (turn, its folder; Nov 14): region match 0.10 mm, whole shape 0.13 mm"
  },
  "original": {
   "name": "Mk8 Torso Short A 2",
   "folder": "Chests",
   "path": "Turtle Ninja - Heresy\\Mk7-8 Builder\\Mk7-8\\Chests\\Mk8 Torso Short A 2.stl"
- }
+ },
+ "upright": [
+  8.2e-05,
+  4.9e-05,
+  -1.0,
+  7.197975,
+  -0.999997,
+  -0.002536,
+  -8.2e-05,
+  7.976325,
+  -0.002536,
+  0.999997,
+  4.8e-05,
+  24.716479,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ]
 }

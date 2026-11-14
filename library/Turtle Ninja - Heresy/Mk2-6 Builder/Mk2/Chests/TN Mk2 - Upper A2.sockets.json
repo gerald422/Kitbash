@@ -2,14 +2,173 @@
  "schemaVersion": 1,
  "part": "Upper A 2",
  "category": "Chests",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Back",
+   "name": "TN Mk2 - Upper A2_socket_Back",
+   "matrix": [
+    -0.000575,
+    -0.999347,
+    0.036128,
+    13.003362,
+    0.173525,
+    0.035481,
+    0.98419,
+    9.495849,
+    -0.984829,
+    0.006835,
+    0.173391,
+    6.769862,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk3 - Upper A9 (rigid, match 0.06 mm)"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "TN Mk2 - Upper A2_socket_Neck",
+   "matrix": [
+    0.004985,
+    0.927358,
+    -0.374141,
+    7.042018,
+    -0.170799,
+    0.369437,
+    0.913424,
+    10.031549,
+    0.985293,
+    0.059349,
+    0.160233,
+    6.833496,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk3 - Upper A9 (rigid, match 0.06 mm)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "TN Mk2 - Upper A2_socket_Shoulder L",
+   "matrix": [
+    0.003395,
+    -0.999992,
+    -0.001897,
+    6.992445,
+    0.213131,
+    -0.00113,
+    0.977023,
+    8.16344,
+    -0.977018,
+    -0.003721,
+    0.213126,
+    12.970128,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk3 - Upper A9 (rigid, match 0.06 mm)"
+   }
+  },
+  {
+   "type": "Shoulder R",
+   "name": "TN Mk2 - Upper A2_socket_Shoulder R",
+   "matrix": [
+    7e-05,
+    -0.999999,
+    0.000767,
+    7.00873,
+    0.130653,
+    0.000769,
+    0.991428,
+    10.344229,
+    -0.991428,
+    3e-05,
+    0.130653,
+    0.427573,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk3 - Upper A9 (rigid, match 0.06 mm)"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "TN Mk2 - Upper A2_socket_Waist",
+   "matrix": [
+    -0.002288,
+    -0.999997,
+    0.000966,
+    7.421569,
+    0.178587,
+    0.000542,
+    0.983924,
+    7.06474,
+    -0.983921,
+    0.002424,
+    0.178585,
+    6.241225,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk3 - Upper A9 (rigid, match 0.08 mm)"
+   }
+  }
+ ],
  "fits": {},
  "notes": {
-  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet"
+  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
+  "Back": "carried from TN Mk3 - Upper A9 (rigid, same maker; Nov 14): region match 0.06 mm, whole shape 0.08 mm",
+  "Neck": "carried from TN Mk3 - Upper A9 (rigid, same maker; Nov 14): region match 0.06 mm, whole shape 0.08 mm",
+  "Shoulder L": "carried from TN Mk3 - Upper A9 (rigid, same maker; Nov 14): region match 0.06 mm, whole shape 0.08 mm",
+  "Shoulder R": "carried from TN Mk3 - Upper A9 (rigid, same maker; Nov 14): region match 0.06 mm, whole shape 0.08 mm",
+  "Waist": "carried from TN Mk3 - Upper A9 (rigid, same maker; Nov 14): region match 0.08 mm, whole shape 0.08 mm"
  },
  "original": {
   "name": "Upper A 2",
   "folder": "Chests",
   "path": "Turtle Ninja - Heresy\\Mk2-6 Builder\\Mk2\\Chests\\Upper A 2.stl"
- }
+ },
+ "upright": [
+  -0.002288,
+  0.178587,
+  -0.983922,
+  4.896194,
+  -0.999996,
+  0.000542,
+  0.002424,
+  7.97386,
+  0.000966,
+  0.983923,
+  0.178585,
+  21.234377,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ]
 }

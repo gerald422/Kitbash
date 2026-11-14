@@ -12,8 +12,12 @@ When an item is done, delete its line (the notes entry is the record).
    in their library folder (`kb/carry.py`); what it keeps was right in the check, about half of arms and legs are
    dropped for by-eye placing. Still open: torsos in folders with no socketed torso (Marta, most Turtle Ninja).
    Parts with no fit can now be placed on the page: they are dropped on their socket, flagged (notes 092).
-3. Fit the parts that have none (he wants all of them fitted up front): run `kb.carry.like` over each folder's own
-   unfitted arms / legs / torsos first (count what it keeps), heads and pads against the same maker's fitted ones.
+3. Fit the parts that have none: **carrying done Nov 14 (notes 093)**: 80 Turtle Ninja torsos got sockets, 1 arm a
+   fit; legs, pads, heads and the other 564 torsos cannot be carried (no fitted part like them). What is left needs a
+   reference each, most parts first: **a Marta torso rule / one socketed Marta torso a family** (259 torsos), **one
+   Marta head placed by eye** (her 250 heads share a frame: then `carry.like(mode="turn")`), the flat-torso rule or
+   more references for the 338 Turtle Ninja torsos that match no socketed folder-mate. Not run: held weapons and
+   accessories (fits with `offHand` / `pivot`).
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
    below; a standing audit and a fit-quality score.
 5. Origins at the joint (below). 6. Finalise: export step, a peg test piece (pegs have never been printed).
@@ -22,6 +26,8 @@ When an item is done, delete its line (the notes entry is the record).
 
 ## Waiting on Josh
 
+- **80 Turtle Ninja torsos newly socketed (Nov 14, notes 093)**: build a few on the page (Mk7-8, Mk6 Assault Addon
+  torsos beyond the first of each letter) and say if any shoulder or neck sits wrong; and place one Marta head.
 - **Placement baseline: recorded Nov 13** (notes 088; `tests/golden/golden.json`, 140 parts, TIOW Inbox 1.17.8). It is
   a snapshot of what TIOW does today, not a sign-off: `Run checks.bat record` again when the builder looks right.
   `Run checks.bat` after any change. Another clone needs `git clone -c core.longpaths=true` (9 paths are too long).
@@ -75,14 +81,15 @@ When an item is done, delete its line (the notes entry is the record).
 - Hip plates on more torsos / legs; chest, pack and pauldron anchors (necklace, book, ornaments, ribbons). (057)
 - Mechadendrite tails and mechadendrites (spec: 079; assets `Desktop\tubes, pipes, chains\`).
 - New bits next month: capes, tabards, arms, a shield (sheets seen Nov 4).
-- 703 torsos without sockets (TN other poses, Marta): torso / flat-torso rules. 238 parts in types with no page step.
+- 623 torsos without sockets (Marta 277, Turtle Ninja 338 after Nov 14's 80, BBoosty 5, Mar Fil 3): torso /
+  flat-torso rules or a reference a folder (notes 093). 238 parts in types with no page step.
 - Marta mark tidy-up; 5 stale Marta sidecars in the repo the library no longer has (not the 8 `Arms` / `arms`
   duplicates removed Nov 13; check against the PC).
 - **Share server: refuse POSTs from other sites** (Nov 13 review, notes 086): `/correct` and `/send` don't check
   `Origin` / `Content-Type`; about five lines in `share_server.py`, then deliver and restart sharing. Also: a removed
   user stays signed in up to 12 h unless the server is restarted.
-- Fit coverage (Nov 13 count): 2,547 of 6,887 sidecars have no fit (877 are torsos, which need none). Most: Two-Handed
-  Held 332 / 446, Heads 287 / 657, Hand-less Weapons 238 / 262, Accessories 105 / 199, Unsorted 86 / 86.
+- Fit coverage (Nov 14, after notes 093): 2,292 of 6,887 parts have no fit (torsos counted by sockets: 623 of 877).
+  Most: Two-Handed Held 332 / 446, Heads 287 / 657, Hand-less Weapons 238 / 262, Accessories 105 / 199, Unsorted 86 / 86.
 - Bladeguard Volkite A/B right-hand fit; Plasma Incinerator 3A/3B by eye; BBoosty / CyberBrush accessories without fits.
 - TN Mk5 Helmet 10 sits 0.82 mm off its fit in query.blend (he didn't mention it; left alone).
 - Stale page tests `t_wings_step.js` / `t_belt_step.js` (step index).

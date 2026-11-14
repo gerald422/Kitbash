@@ -34,7 +34,7 @@ from . import geo
 
 DT = np.dtype([("n", "<f4", 3), ("v", "<f4", (3, 3)), ("a", "<u2")])
 TORSO = ("Shoulder R", "Shoulder L", "Neck", "Back", "Waist", "Flat Waist")
-RADIUS = {"Arms": 6.0, "Legs": 13.0, "Chests": 7.0}            # the region round a joint, mm
+RADIUS = {"Arms": 6.0, "Legs": 13.0, "Chests": 7.0, "Heads": 4.0, "Shoulder Pads": 8.0}   # the region round a joint, mm (others 6)
 GATES = {"turn": 0.12, "rigid": 0.10, "arm_rigid": 0.07, "arm_whole": 0.10, "on": 0.5, "belt": 16.0, "agree_mm": 0.5, "agree_deg": 3.0}
 MX = np.diag([-1.0, 1, 1, 1])
 ROTS = geo.rots24()
@@ -64,7 +64,7 @@ class Shape:
         if mirror: tri = tri * np.array([-1.0, 1, 1])
         self.V = tri.reshape(-1, 3); self.ext = np.sort(np.ptp(self.V, 0))
         self.S = sample(tri, 60000, seed); self.full = self.S[np.random.default_rng(2).choice(60000, 3000, replace=False)]
-        self._tree = None
+        self._tree = None; self.whole = {}
     @property
     def tree(self):
         if self._tree is None: self._tree = geo.kdtree(self.S)
@@ -89,12 +89,12 @@ class Ref:
     def mirrored(self):
         """the other side's part: the shape mirrored in X, every fit conjugated and its side swapped"""
         sc = dict(self.sc, sockets=[], fits={swap(k): flat(MX @ np.array(F).reshape(4, 4) @ MX) for k, F in self.sc.get("fits", {}).items()})
-        return Ref(self.name + " (mirrored)", sc, self.path, not self.mirror)
+        return type(self)(self.name + " (mirrored)", sc, self.path, not self.mirror)
 
 
 def joints(cat, sc):
     """name -> ('fit' | 'sock', 4x4): what a part of this type is carried by"""
-    if cat in ("Arms", "Legs"):
+    if cat != "Chests":
         return {k: ("fit", np.array(F).reshape(4, 4)) for k, F in (sc.get("fits") or {}).items()}
     return {s["type"]: ("sock", np.array(s["matrix"]).reshape(4, 4)) for s in sc.get("sockets") or [] if s["type"] in TORSO}
 
@@ -118,7 +118,7 @@ def carry_joint(cat, mode, part, ref, kind, X):
     """the reference's joint X carried onto the part: (matrix, the move reference -> part, region median, whole
     median), or None when the reference has no surface round the joint"""
     S, full, tree = ref.S, ref.full, part.tree
-    reg = S[np.linalg.norm(S - point(kind, X), axis=1) < RADIUS[cat]]
+    reg = S[np.linalg.norm(S - point(kind, X), axis=1) < RADIUS.get(cat, 6.0)]
     if len(reg) < 150: return None
     if len(reg) > 1500: reg = reg[np.random.default_rng(3).choice(len(reg), 1500, replace=False)]
     I, Q = np.eye(3), part.S
@@ -127,12 +127,14 @@ def carry_joint(cat, mode, part, ref, kind, X):
     elif mode == "turn":
         cands = [(I, shift_icp(reg, tree, shift_icp(full, tree, t0, 20), 30)) for t0 in (np.zeros(3), Q.mean(0) - full.mean(0))]
     else:
-        sub = full[:400]; coarse = []
-        for R0 in ROTS:
-            R, t, d = geo.icp(sub, tree, R0, Q.mean(0) - R0 @ full.mean(0), 20); coarse.append((float(np.median(d)), R, t))
-        cands = []
-        for R, t in [(R, t) for _, R, t in sorted(coarse, key=lambda c: c[0])[:3]] + [(I, np.zeros(3))]:
-            R, t, d = geo.icp(full, tree, R, t, 30); R, t, d = geo.icp(reg, tree, R, t, 30); cands.append((R, t))
+        memo = part.whole.get(id(ref))                              # the whole-shape match is the same for every joint
+        if memo is None or memo[0] is not ref:
+            sub = full[:400]; coarse = []
+            for R0 in ROTS:
+                R, t, d = geo.icp(sub, tree, R0, Q.mean(0) - R0 @ full.mean(0), 20); coarse.append((float(np.median(d)), R, t))
+            memo = part.whole[id(ref)] = (ref, [geo.icp(full, tree, R, t, 30)[:2] for R, t in
+                                               [(R, t) for _, R, t in sorted(coarse, key=lambda c: c[0])[:3]] + [(I, np.zeros(3))]])
+        cands = [geo.icp(reg, tree, R, t, 30)[:2] for R, t in memo[1]]
     best = None
     for R, t in cands:
         m = float(np.median(tree.query(reg @ R.T + t)[0])); mw = float(np.median(tree.query(full @ R.T + t)[0]))
@@ -148,12 +150,12 @@ def _sock(stem, typ, X, why, points=None):
     return s
 
 
-def _pass(cat, part, refs, G, k):
+def _pass(cat, part, refs, G, k, force=None):
     """one go over the references: {name: (kind, matrix, move, ref, how)} kept, {name: why} dropped, {name: how}"""
     kept, dropped, hows = {}, {}, {}
     for name in sorted({n for r in refs for n in joints(cat, r.sc)}):
         rs = [r for r in refs if name in joints(cat, r.sc)]
-        kind = joints(cat, rs[0].sc)[name][0]; mode = regime(kind, [joints(cat, r.sc)[name][1] for r in rs])
+        kind = joints(cat, rs[0].sc)[name][0]; mode = force or regime(kind, [joints(cat, r.sc)[name][1] for r in rs])
         close = lambda r: float(np.abs(r.ext - part.ext).sum())
         use = sorted(rs, key=close)[:1 if mode == "same" else k]       # the fitted parts nearest in size
         all_ = []
@@ -189,15 +191,17 @@ def _pass(cat, part, refs, G, k):
     return kept, dropped, hows
 
 
-def like(cat, part, refs, stem="part", gates=None, k=4, mirror=True):
-    """Carry what the folder's fitted parts have onto `part` (a Shape). -> {"fits", "sockets", "how", "rejected"}"""
+def like(cat, part, refs, stem="part", gates=None, k=4, mirror=True, mode=None):
+    """Carry what the folder's fitted parts have onto `part` (a Shape). -> {"fits", "sockets", "how", "rejected"}
+    mode: carry every joint this way ('turn' / 'rigid') whatever the references' own relation says, e.g. 'rigid' for
+    the joints of a posed torso that its folder's one-pose torsos could not give without turning."""
     G = dict(GATES, **(gates or {})); out = {"fits": {}, "sockets": [], "how": {}, "rejected": {}}
     refs = [r for r in refs if joints(cat, r.sc)]
     if not refs:
         out["rejected"]["*"] = "no fitted part of this type beside it to carry from"; return out
-    kept, dropped, hows = _pass(cat, part, refs, G, k)
+    kept, dropped, hows = _pass(cat, part, refs, G, k, mode)
     if cat == "Arms" and not kept and mirror:                     # only fitted arms of the other side beside it?
-        k2, d2, h2 = _pass(cat, part, [r.mirrored() for r in refs], G, k)
+        k2, d2, h2 = _pass(cat, part, [r.mirrored() for r in refs], G, k, mode)
         if k2: kept, dropped, hows = k2, {}, h2
     if cat in ("Arms", "Legs") and len(kept) > 1:                 # one shoulder, one waist: the better match
         best = min(kept, key=lambda n: kept[n][4]["match"] + 0.15 * kept[n][4]["whole"])

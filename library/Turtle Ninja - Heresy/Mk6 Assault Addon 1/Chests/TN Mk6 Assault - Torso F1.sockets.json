@@ -2,14 +2,201 @@
  "schemaVersion": 1,
  "part": "Mk6_Assault_Torso_F_1",
  "category": "Chests",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Flat Waist",
+   "name": "TN Mk6 Assault - Torso F1_socket_Flat Waist",
+   "matrix": [
+    1.1e-05,
+    -0.999998,
+    -0.00223,
+    5.919651,
+    -6e-05,
+    -0.00223,
+    0.999998,
+    0.00863,
+    -1.0,
+    -1.1e-05,
+    -6e-05,
+    6.70922,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 Assault - Torso D1 (turn, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "TN Mk6 Assault - Torso F1_socket_Waist",
+   "matrix": [
+    1.1e-05,
+    -0.999998,
+    -0.00223,
+    5.865227,
+    -6e-05,
+    -0.00223,
+    0.999998,
+    4.511114,
+    -1.0,
+    -1.1e-05,
+    -6e-05,
+    6.774381,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 Assault - Torso D1 (turn, match 0.11 mm)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "TN Mk6 Assault - Torso F1_socket_Back",
+   "matrix": [
+    0.247039,
+    -0.968524,
+    0.03055,
+    11.933189,
+    0.014024,
+    0.035097,
+    0.999286,
+    6.988537,
+    -0.968904,
+    -0.246434,
+    0.022252,
+    8.406884,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 Assault - Torso B2 (rigid, match 0.06 mm)"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "TN Mk6 Assault - Torso F1_socket_Neck",
+   "matrix": [
+    -0.214378,
+    0.908144,
+    -0.359605,
+    6.555541,
+    0.011037,
+    0.370393,
+    0.928809,
+    7.360451,
+    0.976689,
+    0.195148,
+    -0.089427,
+    7.03105,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 Assault - Torso B2 (rigid, match 0.07 mm)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "TN Mk6 Assault - Torso F1_socket_Shoulder L",
+   "matrix": [
+    0.210207,
+    -0.977635,
+    -0.00661,
+    5.222122,
+    0.040969,
+    0.002054,
+    0.999159,
+    6.609082,
+    -0.976798,
+    -0.210301,
+    0.040485,
+    13.070709,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 Assault - Torso B2 (rigid, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Shoulder R",
+   "name": "TN Mk6 Assault - Torso F1_socket_Shoulder R",
+   "matrix": [
+    0.203956,
+    -0.978969,
+    0.004754,
+    7.797975,
+    -0.039491,
+    -0.003375,
+    0.999214,
+    6.515071,
+    -0.978183,
+    -0.203983,
+    -0.039349,
+    0.959698,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 Assault - Torso B2 (rigid, match 0.08 mm)"
+   }
+  }
+ ],
  "fits": {},
  "notes": {
-  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet"
+  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
+  "Back": "carried from TN Mk6 Assault - Torso B2 (rigid, its folder; Nov 14): region match 0.06 mm, whole shape 0.07 mm",
+  "Flat Waist": "carried from TN Mk6 Assault - Torso D1 (turn, its folder; Nov 14): region match 0.08 mm, whole shape 0.14 mm",
+  "Neck": "carried from TN Mk6 Assault - Torso B2 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.08 mm",
+  "Shoulder L": "carried from TN Mk6 Assault - Torso B2 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.08 mm",
+  "Shoulder R": "carried from TN Mk6 Assault - Torso B2 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.09 mm",
+  "Waist": "carried from TN Mk6 Assault - Torso D1 (turn, its folder; Nov 14): region match 0.11 mm, whole shape 0.14 mm"
  },
  "original": {
   "name": "Mk6_Assault_Torso_F_1",
   "folder": "Chests",
   "path": "Turtle Ninja - Heresy\\Mk6 Assault Addon 1\\Chests\\Mk6_Assault_Torso_F_1.stl"
- }
+ },
+ "upright": [
+  1.1e-05,
+  -6e-05,
+  -1.0,
+  6.774585,
+  -0.999998,
+  -0.00223,
+  -1.1e-05,
+  6.446619,
+  -0.00223,
+  0.999998,
+  -6e-05,
+  24.809681,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ]
 }

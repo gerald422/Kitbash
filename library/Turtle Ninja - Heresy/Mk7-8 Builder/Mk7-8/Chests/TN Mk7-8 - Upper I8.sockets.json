@@ -2,14 +2,201 @@
  "schemaVersion": 1,
  "part": "Upper I 8",
  "category": "Chests",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Flat Waist",
+   "name": "TN Mk7-8 - Upper I8_socket_Flat Waist",
+   "matrix": [
+    1e-06,
+    -0.999997,
+    -0.002318,
+    6.892517,
+    0.000298,
+    -0.002318,
+    0.999997,
+    0.06805,
+    -1.0,
+    -2e-06,
+    0.000298,
+    7.247006,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Upper H1 (turn, match 0.09 mm)"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "TN Mk7-8 - Upper I8_socket_Waist",
+   "matrix": [
+    1.8e-05,
+    -0.999998,
+    -0.002132,
+    6.736534,
+    1e-06,
+    -0.002132,
+    0.999998,
+    4.585932,
+    -1.0,
+    -1.8e-05,
+    1e-06,
+    7.191522,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Upper O9 (turn, match 0.10 mm)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "TN Mk7-8 - Upper I8_socket_Back",
+   "matrix": [
+    -0.222945,
+    -0.974364,
+    0.030164,
+    13.088841,
+    -0.016496,
+    0.034709,
+    0.999262,
+    5.997242,
+    -0.974692,
+    0.222282,
+    -0.023812,
+    5.811482,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Upper F1 (rigid, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "TN Mk7-8 - Upper I8_socket_Neck",
+   "matrix": [
+    0.180038,
+    0.915105,
+    -0.360791,
+    7.747234,
+    -0.014909,
+    0.36928,
+    0.929198,
+    7.473588,
+    0.983547,
+    -0.161912,
+    0.080127,
+    6.893761,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Upper I9 (rigid, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "TN Mk7-8 - Upper I8_socket_Shoulder L",
+   "matrix": [
+    -0.177495,
+    -0.984109,
+    0.004898,
+    8.876408,
+    0.045804,
+    -0.00329,
+    0.998945,
+    6.613053,
+    -0.983055,
+    0.177532,
+    0.045659,
+    13.167281,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Upper F1 (rigid, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Shoulder R",
+   "name": "TN Mk7-8 - Upper I8_socket_Shoulder R",
+   "matrix": [
+    -0.174322,
+    -0.984688,
+    -0.000922,
+    6.577953,
+    -0.035847,
+    0.00541,
+    0.999343,
+    6.717682,
+    -0.984036,
+    0.17424,
+    -0.036241,
+    0.653287,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk7-8 - Upper F1 (rigid, match 0.08 mm)"
+   }
+  }
+ ],
  "fits": {},
  "notes": {
-  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet"
+  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
+  "Back": "carried from TN Mk7-8 - Upper F1 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.10 mm",
+  "Flat Waist": "carried from TN Mk7-8 - Upper H1 (turn, its folder; Nov 14): region match 0.09 mm, whole shape 0.12 mm",
+  "Neck": "carried from TN Mk7-8 - Upper I9 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.09 mm",
+  "Shoulder L": "carried from TN Mk7-8 - Upper F1 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.09 mm",
+  "Shoulder R": "carried from TN Mk7-8 - Upper F1 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.09 mm",
+  "Waist": "carried from TN Mk7-8 - Upper O9 (turn, its folder; Nov 14): region match 0.10 mm, whole shape 0.12 mm"
  },
  "original": {
   "name": "Upper I 8",
   "folder": "Chests",
   "path": "Turtle Ninja - Heresy\\Mk7-8 Builder\\Mk7-8\\Chests\\Upper I 8.stl"
- }
+ },
+ "upright": [
+  1.8e-05,
+  1e-06,
+  -1.0,
+  7.191396,
+  -0.999998,
+  -0.002132,
+  -1.8e-05,
+  7.317701,
+  -0.002132,
+  0.999998,
+  1e-06,
+  24.735738,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ]
 }

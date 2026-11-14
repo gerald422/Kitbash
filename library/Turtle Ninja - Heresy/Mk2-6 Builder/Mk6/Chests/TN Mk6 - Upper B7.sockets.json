@@ -2,14 +2,201 @@
  "schemaVersion": 1,
  "part": "Upper B 7",
  "category": "Chests",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Flat Waist",
+   "name": "TN Mk6 - Upper B7_socket_Flat Waist",
+   "matrix": [
+    -3.1e-05,
+    -0.999997,
+    -0.002238,
+    6.776689,
+    5.7e-05,
+    -0.002238,
+    0.999997,
+    0.031403,
+    -1.0,
+    3.1e-05,
+    5.7e-05,
+    6.594467,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (turn, match 0.09 mm)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "TN Mk6 - Upper B7_socket_Back",
+   "matrix": [
+    0.24063,
+    -0.97006,
+    0.032885,
+    13.031482,
+    0.008904,
+    0.036086,
+    0.999309,
+    6.787106,
+    -0.970576,
+    -0.24017,
+    0.017321,
+    8.325094,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper B9 (rigid, match 0.07 mm)"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "TN Mk6 - Upper B7_socket_Neck",
+   "matrix": [
+    -0.21192,
+    0.908981,
+    -0.358947,
+    7.487958,
+    0.012429,
+    0.369767,
+    0.929042,
+    7.4454,
+    0.977208,
+    0.19242,
+    -0.089659,
+    6.987999,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (rigid, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "TN Mk6 - Upper B7_socket_Shoulder L",
+   "matrix": [
+    0.211464,
+    -0.97738,
+    0.003176,
+    6.081441,
+    0.03431,
+    0.01067,
+    0.999354,
+    6.695976,
+    -0.976783,
+    -0.211219,
+    0.03579,
+    13.184408,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper B9 (rigid, match 0.07 mm)"
+   }
+  },
+  {
+   "type": "Shoulder R",
+   "name": "TN Mk6 - Upper B7_socket_Shoulder R",
+   "matrix": [
+    0.210269,
+    -0.977641,
+    -0.002419,
+    8.822761,
+    -0.046512,
+    -0.012474,
+    0.99884,
+    6.578173,
+    -0.976536,
+    -0.209912,
+    -0.048095,
+    0.754791,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (rigid, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "TN Mk6 - Upper B7_socket_Waist",
+   "matrix": [
+    0.213778,
+    -0.976881,
+    -0.001038,
+    6.789714,
+    -0.006808,
+    -0.002552,
+    0.999973,
+    4.544235,
+    -0.976859,
+    -0.213765,
+    -0.007196,
+    6.74708,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (rigid, match 0.07 mm)"
+   }
+  }
+ ],
  "fits": {},
  "notes": {
-  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet"
+  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
+  "Back": "carried from TN Mk6 - Upper B9 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.08 mm",
+  "Flat Waist": "carried from TN Mk6 - Upper A9 (turn, its folder; Nov 14): region match 0.09 mm, whole shape 0.15 mm",
+  "Neck": "carried from TN Mk6 - Upper A9 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.08 mm",
+  "Shoulder L": "carried from TN Mk6 - Upper B9 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.09 mm",
+  "Shoulder R": "carried from TN Mk6 - Upper A9 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.08 mm",
+  "Waist": "carried from TN Mk6 - Upper A9 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.08 mm"
  },
  "original": {
   "name": "Upper B 7",
   "folder": "Chests",
   "path": "Turtle Ninja - Heresy\\Mk2-6 Builder\\Mk6\\Chests\\Upper B 7.stl"
- }
+ },
+ "upright": [
+  0.213778,
+  -0.006808,
+  -0.976858,
+  5.170385,
+  -0.976882,
+  -0.002552,
+  -0.213765,
+  8.657912,
+  -0.001038,
+  0.999973,
+  -0.007196,
+  24.818786,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ]
 }

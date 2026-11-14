@@ -2,14 +2,201 @@
  "schemaVersion": 1,
  "part": "Mk10_Assault_Torso_Bird_Aquilla_2",
  "category": "Chests",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Flat Waist",
+   "name": "TN Mk10 Assault - Torso Bird Aquilla 2_socket_Flat Waist",
+   "matrix": [
+    -1.0,
+    -1e-06,
+    4e-05,
+    6.532538,
+    4e-05,
+    -0.002254,
+    0.999997,
+    -0.079243,
+    -1e-06,
+    0.999997,
+    0.002254,
+    8.721362,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk10 Assault - Torso Skull Aquilla 1 (same, match 0.10 mm)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "TN Mk10 Assault - Torso Bird Aquilla 2_socket_Back",
+   "matrix": [
+    -0.981438,
+    0.189706,
+    -0.028132,
+    5.181278,
+    -0.021939,
+    0.034667,
+    0.999158,
+    5.871951,
+    0.190521,
+    0.981228,
+    -0.029861,
+    1.741689,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, match 0.09 mm)"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "TN Mk10 Assault - Torso Bird Aquilla 2_socket_Neck",
+   "matrix": [
+    0.99094,
+    -0.112408,
+    0.0735,
+    6.162924,
+    -0.026749,
+    0.371113,
+    0.928202,
+    7.384851,
+    -0.131615,
+    -0.921759,
+    0.364743,
+    7.662672,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, match 0.10 mm)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "TN Mk10 Assault - Torso Bird Aquilla 2_socket_Shoulder L",
+   "matrix": [
+    -0.992764,
+    0.106857,
+    0.054786,
+    12.274732,
+    0.051837,
+    -0.03019,
+    0.998199,
+    6.498348,
+    0.108318,
+    0.993816,
+    0.024432,
+    6.927069,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, match 0.10 mm)"
+   }
+  },
+  {
+   "type": "Shoulder R",
+   "name": "TN Mk10 Assault - Torso Bird Aquilla 2_socket_Shoulder R",
+   "matrix": [
+    -0.991604,
+    0.124584,
+    -0.034654,
+    0.08643,
+    -0.032994,
+    0.015363,
+    0.999337,
+    6.710119,
+    0.125034,
+    0.99209,
+    -0.011124,
+    8.493943,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk10 Assault - Torso Skull Aquilla 1 (rigid, match 0.10 mm)"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "TN Mk10 Assault - Torso Bird Aquilla 2_socket_Waist",
+   "matrix": [
+    -0.993332,
+    0.115223,
+    0.003994,
+    6.304857,
+    0.004094,
+    0.000631,
+    0.999991,
+    4.430405,
+    0.11522,
+    0.993339,
+    -0.001098,
+    8.776664,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, match 0.10 mm)"
+   }
+  }
+ ],
  "fits": {},
  "notes": {
-  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet"
+  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
+  "Back": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, its folder; Nov 14): region match 0.09 mm, whole shape 0.10 mm",
+  "Flat Waist": "carried from TN Mk10 Assault - Torso Skull Aquilla 1 (same, its folder; Nov 14): region match 0.10 mm, whole shape 0.17 mm",
+  "Neck": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, its folder; Nov 14): region match 0.10 mm, whole shape 0.10 mm",
+  "Shoulder L": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, its folder; Nov 14): region match 0.10 mm, whole shape 0.12 mm",
+  "Shoulder R": "carried from TN Mk10 Assault - Torso Skull Aquilla 1 (rigid, its folder; Nov 14): region match 0.10 mm, whole shape 0.11 mm",
+  "Waist": "carried from TN Mk10 Assault - Torso Bird Aquilla 1 (rigid, its folder; Nov 14): region match 0.10 mm, whole shape 0.10 mm"
  },
  "original": {
   "name": "Mk10_Assault_Torso_Bird_Aquilla_2",
   "folder": "Chests",
   "path": "Turtle Ninja - Tacticus\\Mk10 Assault Intercessor + Jumppack Addon\\Chests\\Mk10_Assault_Torso_Bird_Aquilla_2.stl"
- }
+ },
+ "upright": [
+  -0.993331,
+  0.004094,
+  0.11522,
+  5.233427,
+  0.115223,
+  0.00063,
+  0.993339,
+  -8.876199,
+  0.003994,
+  0.999991,
+  -0.001099,
+  24.861393,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ]
 }

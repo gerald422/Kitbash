@@ -98,3 +98,4 @@ Add a new entry as the next number and append its line here.
 | `090-add-a-maker-on-the-pc.md` | Nov 13 | Add-a-maker on the PC: `add_creator.py add` inside Blender (no staging, no extra packages), recipes, `Add parts.bat`, `kb/fit.py`; Caliper keep-list | 4.2 |
 | `091-carry-fits-from-siblings-experiment.md` | Nov 13 | Item 2: `kb/carry.py` + `"fit": "like"` (arms, legs, torsos carried from the fitted parts in their folder), gates, leave-one-out numbers, end-to-end test | 5.0 |
 | `092-no-fit-parts-dropped-on-their-socket.md` | Nov 13 | The page drops a part with no fit on its socket (flagged), so Adjust + Save fit can give it its first fit | 2.3 |
+| `093-item-3-carry-over-the-unfitted-parts.md` | Nov 14 | Item 3: `kits/nofit/carry_library.py` over the 1,191 unfitted arms / legs / torsos / heads / pads; which sources the leave-one-out trusts; 80 TN torsos + 1 arm delivered; what the rest needs | 5.5 |

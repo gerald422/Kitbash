@@ -5,7 +5,8 @@ shell isn't read as a cut). Renders each model front and right into one sheet.
     /home/claude/bpyenv/bin/python t_creator.py -- JOB.json
 JOB: {"worklib", "tiow", "out", "new": "NEW/", "models": {name: [[path in worklib without .stl, category, socket], ...]}}
 A full path (a library part) is taken as it is. "nocut": names of new parts that only have to touch their host (arms
-and legs seat into the body, so how deep they go is not a fault).
+and legs seat into the body, so how deep they go is not a fault). "check": names of library parts to measure too (what
+hangs on a new torso).
 "tiow": a tiow_inbox.py to install first (the container); null uses the add-on that is installed (the PC).
 Writes OUT/results.json and OUT/test.jpg (without PIL, as in Blender's own Python: OUT/<model>_front.png, _right.png)."""
 import bpy, json, os, sys, tempfile
@@ -64,7 +65,7 @@ for m, parts in MODELS.items():
     for p, cat, sock in parts:
         o = next((x for x in mine if os.path.basename(x.get("tiow_src", "")).startswith(os.path.basename(p))), None)
         ck("%s: %s placed%s" % (m, os.path.basename(p), (" on " + sock) if sock else ""), o is not None)
-        if o is None or not sock or not p.startswith(NEW): continue
+        if o is None or not sock or not (p.startswith(NEW) or os.path.basename(p) in J.get("check", [])): continue
         close, deep = inside_depth(o, [x for x in mine if x is not o])
         res.append({"model": m, "part": os.path.basename(p), "socket": sock, "closest": round(close, 3), "cut": round(deep, 3)})
         print("      %-40s closest %.2f mm, deepest cut %.2f mm" % (os.path.basename(p)[:40], close, deep))

@@ -2,14 +2,201 @@
  "schemaVersion": 1,
  "part": "Upper B 8",
  "category": "Chests",
- "sockets": [],
+ "sockets": [
+  {
+   "type": "Flat Waist",
+   "name": "TN Mk6 - Upper B8_socket_Flat Waist",
+   "matrix": [
+    -3.1e-05,
+    -0.999997,
+    -0.002238,
+    6.806741,
+    5.7e-05,
+    -0.002238,
+    0.999997,
+    0.033129,
+    -1.0,
+    3.1e-05,
+    5.7e-05,
+    7.082843,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (turn, match 0.09 mm)"
+   }
+  },
+  {
+   "type": "Back",
+   "name": "TN Mk6 - Upper B8_socket_Back",
+   "matrix": [
+    -0.240861,
+    -0.970004,
+    0.032823,
+    13.044512,
+    -0.011672,
+    0.036711,
+    0.999258,
+    6.779014,
+    -0.970489,
+    0.240299,
+    -0.020164,
+    5.554399,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper B9 (rigid, match 0.07 mm)"
+   }
+  },
+  {
+   "type": "Neck",
+   "name": "TN Mk6 - Upper B8_socket_Neck",
+   "matrix": [
+    0.229489,
+    0.90564,
+    -0.356582,
+    7.485757,
+    -0.009715,
+    0.368473,
+    0.929588,
+    7.43091,
+    0.973263,
+    -0.209866,
+    0.093358,
+    6.823118,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (rigid, match 0.07 mm)"
+   }
+  },
+  {
+   "type": "Shoulder L",
+   "name": "TN Mk6 - Upper B8_socket_Shoulder L",
+   "matrix": [
+    -0.212021,
+    -0.977235,
+    -0.007673,
+    8.846889,
+    0.046269,
+    -0.01788,
+    0.998769,
+    6.596088,
+    -0.976169,
+    0.211405,
+    0.049007,
+    13.069805,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (rigid, match 0.08 mm)"
+   }
+  },
+  {
+   "type": "Shoulder R",
+   "name": "TN Mk6 - Upper B8_socket_Shoulder R",
+   "matrix": [
+    -0.213502,
+    -0.97693,
+    0.004831,
+    6.083199,
+    -0.037286,
+    0.013089,
+    0.999218,
+    6.683916,
+    -0.976231,
+    0.213154,
+    -0.03922,
+    0.627235,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper B9 (rigid, match 0.07 mm)"
+   }
+  },
+  {
+   "type": "Waist",
+   "name": "TN Mk6 - Upper B8_socket_Waist",
+   "matrix": [
+    -0.218855,
+    -0.975756,
+    -0.001599,
+    6.760509,
+    0.005436,
+    -0.002858,
+    0.999981,
+    4.546221,
+    -0.975742,
+    0.218842,
+    0.00593,
+    6.942027,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "display_type": "ARROWS",
+   "display_size": 3.0,
+   "props": {
+    "tiow_from": "carried from TN Mk6 - Upper A9 (rigid, match 0.07 mm)"
+   }
+  }
+ ],
  "fits": {},
  "notes": {
-  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet"
+  "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
+  "Back": "carried from TN Mk6 - Upper B9 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.08 mm",
+  "Flat Waist": "carried from TN Mk6 - Upper A9 (turn, its folder; Nov 14): region match 0.09 mm, whole shape 0.14 mm",
+  "Neck": "carried from TN Mk6 - Upper A9 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.07 mm",
+  "Shoulder L": "carried from TN Mk6 - Upper A9 (rigid, its folder; Nov 14): region match 0.08 mm, whole shape 0.09 mm",
+  "Shoulder R": "carried from TN Mk6 - Upper B9 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.09 mm",
+  "Waist": "carried from TN Mk6 - Upper A9 (rigid, its folder; Nov 14): region match 0.07 mm, whole shape 0.07 mm"
  },
  "original": {
   "name": "Upper B 8",
   "folder": "Chests",
   "path": "Turtle Ninja - Heresy\\Mk2-6 Builder\\Mk6\\Chests\\Upper B 8.stl"
- }
+ },
+ "upright": [
+  -0.218855,
+  0.005436,
+  -0.975743,
+  8.228486,
+  -0.975755,
+  -0.002858,
+  0.218842,
+  5.661664,
+  -0.001599,
+  0.99998,
+  0.00593,
+  24.730816,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ]
 }
