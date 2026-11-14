@@ -98,3 +98,23 @@
   the master's moved by that, and one command re-seats a family after he corrects its master.
 - A commit of this day's that carried the PC's user folder in a script path was taken out of `main`'s history by a
   forced push (Josh's OK). `tools/validate.py`'s exit code has to gate the commit, not a `| tail`.
+- **Josh on the 70 families (Nov 14): "surely for Marta Tacticus there is one fit rather than multiple families? The
+  same should apply across the board."** Checked (`masters.py one`, `report-one`): ONE master a maker folder (maker +
+  armour type), every pad slid onto it without turning by the 60% of the inside that lies closest (the dome;
+  `seat_dome`). **He is right about the dome**: it sits at a median of 0.04-0.09 mm in every folder (Mar Fil's 79 pads
+  worst 0.11, Springles' 45 all 0.04, Marta Tacticus' 69 median 0.06); the 70 families were split by rim shape, which
+  does not decide where a pad sits. Present fits against the one master's (within 1 mm / 6 deg): Springles 45 of
+  45, Redwarden 11 of 11, Mar Fil 74 of 79, Marta Tacticus 50 of 69, Marta Terminator 2 of 8, WargamesPrint 6 of 18,
+  BBoosty 8 of 19, CyberBrush 2 of 9.
+- **What the dome does not give: which way round a pad lies in its file.** A dome sits on a dome at any turn. A
+  maker's packs do not all share a frame: BBoosty's Iron Hands pads lie exactly 90 deg from its Medusas ones,
+  CyberBrush's sets 90 / 120 / 180, some Marta pads 90-180; where the rims are alike a square turn is found
+  (Mar Fil: 43 pads taken as turned, lefts and 180s), where they are not, it is not. Still to build: the turn from
+  the inside's own axis (the dome's middle to its opening) and the rim, not from the file.
+- **The master's own fit matters most**: WargamesPrint's (Pad 16) is about 9 deg from the fit 10 other WG pads
+  share, so everything seated on it moves by that. A master should be the fit most of the folder already agrees
+  with, or the one Josh corrects.
+- `masters.py compare`: 10 pads whose inside lies on the master as it is (rim within 0.35 mm) and whose present fit
+  is 6-180 deg from the master's, each built with both fits (sheet sent: odd = now, even = from the master; the
+  master's fit cuts 0.9-1.1 mm into the arm on Marta Mithraism Pad 3 and SW Terminator Pad 3). His to judge which
+  is right. Nothing written to the library.
