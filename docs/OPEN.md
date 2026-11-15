@@ -62,8 +62,9 @@ undoes). Next is 5 (d), then the other part types and makers.
    (`kits/connectors/origins.py`, `kb/origin.py`): 478 files moved by their own fit (joint on the origin, the fit
    kept as identity), sidecar / preview / index with them, originals in `_backups\origins-2026-11-15\before`;
    268 of 272 test parts exactly where they were (the 4: hip plates on moved legs). A moved sidecar keeps
-   `origin.from_file`; `seat.py`, `kb.carry` and the golden run read it. **Still to do:** (d) below; then heads,
-   packs, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
+   `origin.from_file`; `seat.py`, `kb.carry` and the golden run read it. **Heads and jump packs done Nov 15 (notes
+   102):** 59 sure fits by his neck / jump-pack connectors (`seat.py --sure`), 88 files moved, 326 test parts where
+   they were. **Still to do:** (d) below; then backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
    `scale` / `types` are not handled by the move yet, such parts are left and listed); the other makers.
    What follows was the spec. **In order:** (b) a
    production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with
@@ -81,7 +82,8 @@ undoes). Next is 5 (d), then the other part types and makers.
 ## Waiting on Josh
 
 - **Connectors**: received Nov 14 (notes 097). Still to cut for Mar Fil, when he likes: pad spots for the
-  Intercessor, Bladeguard and Techmarine shoulders. Turtle Ninja / other makers only after Mar Fil proves out.
+  Intercessor, Bladeguard and Techmarine shoulders; the Veteran / Bladeguard neck (27 heads, notes 102); a backpack
+  mount (32 backpacks); Captain with Jump Pack heads, pack and legs; grips for guns, swords, spears. Turtle Ninja / other makers only after Mar Fil proves out.
 - **Turn of round connectors** (notes 099): no recut can key it. Per-kit turn fix for Outrider and Jump Chaplain
   arms (~9 deg) when he likes; legs he turns by hand. Captain with Jump Pack legs need their own waist cut. Wrist A
   (hands) is weak (11 deg median, 19 look wrong): a better hand cut if hands snap badly.

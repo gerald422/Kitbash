@@ -4,7 +4,8 @@
     "Seat connectors.bat" restore    put back what the last run wrote (its backup), or: restore TASK
     "Seat connectors.bat" write      write the last run that was searched but not written (no new search)
 
-    BL kits/connectors/seat.py -- run CONFIG [--lib LIB] [--only TEXT] [--types Arms,Legs] [--workers N] [--yes] [--dry]
+    BL kits/connectors/seat.py -- run CONFIG [--lib LIB] [--only TEXT] [--types Arms,Legs] [--workers N] [--yes] [--dry] [--sure]
+    BL kits/connectors/seat.py -- write [TASK] [--lib LIB] [--yes] [--sure]     (--sure: write sure fits only, not look)
     BL kits/connectors/seat.py -- restore [TASK] [--lib LIB]
   BL = blender --background --factory-startup --python
 
@@ -369,6 +370,9 @@ def write_task(lib, task, A):
 
 def ask_and_write(lib, T, text, todo, socks, A):
     print("\n" + text.split("\r\n== LOOK")[0].replace("\r\n", "\n")); print("The full list: %s/report.txt" % T)
+    if "--sure" in A:          # look matches left as they are (another design of the connector: Veteran necks, notes 102)
+        n = len(todo); todo = [p for p in todo if p["fit"]["level"] == "sure"]
+        print("--sure: writing the %d sure fits only; %d look fits left as they are" % (len(todo), n - len(todo)))
     if "--yes" not in A:
         try: os.startfile(os.path.normpath(T + "/report.txt"))
         except (AttributeError, OSError): pass
