@@ -29,6 +29,8 @@ library is read and written in place, and installed files are delivered with `py
   all 140 parts). His live Blender is also reachable through the Blender MCP server.
 - Adding parts: `blender --background --factory-startup --python kits/creator/add_creator.py -- add RECIPE --src
   FOLDER` (notes 090; its docstring is the procedure), or Josh's `Add parts.bat`.
+- Seating by connectors: `Seat connectors.bat` (`kits/connectors/seat.py`, config `kits/connectors/marfil.json`;
+  notes 100): search, report, Y to write (backups in `_backups\connectors-DATE\before`); `restore`, `write`.
 - D: is exFAT: no long-path trouble for Python (long paths are on), but tools that need NTFS features refuse it
   (Caliper's batch: notes 088). Keep such work folders in the temp folder on C:.
 - The bridge folder's old `old-*` / `sidecars-*` / `library build` folders are in

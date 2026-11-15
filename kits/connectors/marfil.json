@@ -1,0 +1,23 @@
+{
+ "_about": "Josh's Mar Fil connectors (notes 097-100): which blend object is which connector, the reference part it was cut on, and the joint it stands for. seat.py reads this. fit = the part's fit of that name (+ side); socket = a socket of that type on the part (+ side), written only where the part has none.",
+ "maker": "Mar Fil - Tacticus",
+ "blends": "~/Desktop/mar fil connectors",
+ "types": {
+  "Arms": [
+   {"name": "shoulder disc", "blend": "arms a.blend", "object": "77-Arm-1-R-B.003", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 1B R", "fit": "Shoulder"},
+   {"name": "pad spot", "blend": "arms a.blend", "object": "77-Arm-1-R-B.002", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 1B R", "socket": "Pad"},
+   {"name": "wrist A", "blend": "wrist a.blend", "object": "76-Arm-1-R-A.001", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 1A R", "socket": "Hand"},
+   {"name": "wrist B", "blend": "arms a.blend", "object": "77-Arm-1-R-B.001", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 1B R", "socket": "Forearm"}
+  ],
+  "Legs": [
+   {"name": "waist", "blend": "legs.blend", "object": "29-Legs-2.001", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Legs/MarFil Assault - Legs 2", "fit": "Waist"},
+   {"name": "shin spot", "blend": "legs.blend", "object": "29-Legs-2.002", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Legs/MarFil Assault - Legs 2", "socket": "Shin", "both_sides": true}
+  ],
+  "Shoulder Pads": [
+   {"name": "pad inside", "blend": "arms a.blend", "pad": "62-ShoulderPad-1", "spot": "77-Arm-1-R-B.002", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1", "fit": "Pad"}
+  ],
+  "Knee Pads": [
+   {"name": "shin pad inside", "blend": "legs.blend", "pad": "68-ShinPad-1", "spot": "29-Legs-2.002", "ref": "Mar Fil - Tacticus/AssaultMarines-V2/Knee Pads/MarFil Assault - Shin Pad 1", "fit": "Shin"}
+  ]
+ }
+}
