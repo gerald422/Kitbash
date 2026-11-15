@@ -35,5 +35,11 @@ weapons with a hand in 16 groups. Dry runs only; nothing written to the library.
   - Final: 329 of 345 in groups, 10 alone. 5 not covered: Absolvor and Techmarine Grav Pistol (Hand L only, each
     other's only candidate), Bike Chaplain handle and Bladeguard Shields 1C / 3C (no fit). They keep what they have,
     and mirroring (notes 106) covers the other side.
-- **Move origins** (dry run, `kits/connectors/marfil_held_origins.json`): 342 files would move (Melee 190, Pistols
-  125, Hands 11, Shields 16; origin moves 3-9 mm median); 3 have no Hand fit.
+- **Moved Nov 15** (Josh: "Yes"; `origins.py run kits/connectors/marfil_held_origins.json`, task
+  `origins-2026-11-15-4`): 342 files (Melee 190, Pistols 125, Hands 11, Shields 16; origin moved 3-9 mm median). The 3
+  with no Hand fit were left. Originals are in its `before`; `Move origins.bat restore` undoes it.
+  - Check: 30 models, each with Arm 1A R on both shoulders and 60 of the moved weapons in both hands, many mirrored
+    onto the other side. Built from the originals (a copy on C:) and from the library: all 150 parts are where they
+    were.
+  - The golden run's `maker_frame` used to read a mirror made on the spot (`tiow_variant` -1, notes 106) as the last
+    variant. It now takes the file's own `origin.from_file`, mirrored.

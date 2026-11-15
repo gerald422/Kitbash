@@ -58,10 +58,12 @@ def maker_frame(o):
     keeps 'origin.from_file' in its sidecar, so the reference stays good whichever way the file's origin lies"""
     try:
         d = json.load(open(os.path.splitext(o.get("tiow_src", ""))[0] + ".sockets.json", encoding="utf-8-sig"))
-        if o.get("tiow_variant") is not None: d = d["variants"][int(o["tiow_variant"])]["sidecar"]
+        # a variant's own sidecar; -1 is a mirror made on the spot and not saved (TIOW Inbox 1.17.10, notes 106): the file's, mirrored
+        synth = o.get("tiow_variant") is not None and int(o["tiow_variant"]) < 0
+        if o.get("tiow_variant") is not None and not synth: d = d["variants"][int(o["tiow_variant"])]["sidecar"]
         g = d["origin"]["from_file"]; G = Matrix([g[i:i + 4] for i in (0, 4, 8, 12)])
         G.translation = G.translation * (float(o.get("tiow_unit", 1.0)) or 1.0)
-        if o.get("tiow_mirrored"):                    # mirrored on the spot (a right pad on a left arm): its mesh is the file's, mirrored
+        if o.get("tiow_mirrored") or synth:           # mirrored on the spot (a right pad on a left arm): its mesh is the file's, mirrored
             MX = Matrix.Scale(-1, 4, (1, 0, 0)); G = MX @ G @ MX
         return o.matrix_world @ G
     except (OSError, ValueError, KeyError, IndexError, TypeError):

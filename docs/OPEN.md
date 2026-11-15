@@ -72,7 +72,7 @@ undoes). Next is 5 (d), then the other part types and makers.
    example per hand design placed by its library fit (`kits/connectors/hands.py`): Mar Fil 324 of 345 in 16 groups,
    288 written Nov 15 (`--sure --near 2`); **the 20 that came out flipped (Bladeguard swords / hammers / shields)
    Josh fixes in the app**; the left-hand-only ones searched mirrored (`hands.py --resume`); then Move origins
-   (`kits/connectors/marfil_held_origins.json`). **Right parts mirrored for the left (notes 106, TIOW Inbox
+   (`kits/connectors/marfil_held_origins.json`): **342 moved Nov 15**. **Right parts mirrored for the left (notes 106, TIOW Inbox
    1.17.10):** arms, held weapons and hands fitted for one side go on the other as their mirror image; left-only
    sculpts stay as extra designs. Under this, connectors and fits are only strictly needed on the right. **Still to do:** backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
    `scale` / `types` are not handled by the move yet, such parts are left and listed); the other makers.
