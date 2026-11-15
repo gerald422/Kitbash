@@ -112,7 +112,9 @@ def move(sc, bases, rel="", by="kb.origin"):
     try:
         if float(sc.get("scale") or 1.0) != 1.0: raise Skip("has a scale")
     except (TypeError, ValueError): raise Skip("has a scale")
-    out = json.loads(json.dumps(sc)); did = []
+    out = with_joint_fit(json.loads(json.dumps(sc))); did = []
+    for v in out.get("variants") or []:
+        if isinstance(v, dict) and isinstance(v.get("sidecar"), dict): v["sidecar"] = with_joint_fit(v["sidecar"])
     key = primary(out.get("fits"), bases, side_of(rel))
     G = rigid(out["fits"][key]) if key else list(I16)
     main = not is_identity(G)
@@ -131,11 +133,19 @@ def move(sc, bases, rel="", by="kb.origin"):
     return out, (G if main else None), did
 
 
+def with_joint_fit(d):
+    """d with its joint's fit as identity where the file was moved onto that joint and no fit is stored (notes 101: a
+    reader may treat 'origin is the joint' as the fit; TIOW Inbox 1.17.9 and the page index do)"""
+    o = (d or {}).get("origin"); jn = o.get("joint") if isinstance(o, dict) else None
+    if not jn or jn in (d.get("fits") or {}): return d
+    out = json.loads(json.dumps(d)); out.setdefault("fits", {})[jn] = list(I16); return out
+
+
 def maker_view(sc):
     """the sidecar's own sockets and fits back in the maker's file coordinates (copies inside it are left alone)"""
     G = from_file(sc)
     if not G: return sc
-    out = json.loads(json.dumps(sc)); Gi = inv(G)
+    out = with_joint_fit(json.loads(json.dumps(sc))); Gi = inv(G)
     for s in out.get("sockets") or []:
         s["matrix"] = mul(Gi, s["matrix"])
         if isinstance(s.get("points"), list): s["points"] = [point(Gi, p) for p in s["points"]]

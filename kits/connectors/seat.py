@@ -5,7 +5,8 @@
     "Seat connectors.bat" write      write the last run that was searched but not written (no new search)
 
     BL kits/connectors/seat.py -- run CONFIG [--lib LIB] [--only TEXT] [--types Arms,Legs] [--workers N] [--yes] [--dry] [--sure]
-    BL kits/connectors/seat.py -- write [TASK] [--lib LIB] [--yes] [--sure]     (--sure: write sure fits only, not look)
+    BL kits/connectors/seat.py -- write [TASK] [--lib LIB] [--yes] [--sure] [--near MM]   (--sure: sure fits only; --near:
+                                    only fits within MM and 10 deg of the old fit)
     BL kits/connectors/seat.py -- restore [TASK] [--lib LIB]
   BL = blender --background --factory-startup --python
 
@@ -373,6 +374,13 @@ def ask_and_write(lib, T, text, todo, socks, A):
     if "--sure" in A:          # look matches left as they are (another design of the connector: Veteran necks, notes 102)
         n = len(todo); todo = [p for p in todo if p["fit"]["level"] == "sure"]
         print("--sure: writing the %d sure fits only; %d look fits left as they are" % (len(todo), n - len(todo)))
+    if "--near" in A:          # only fits within MM (and 10 deg) of the part's old fit: a two-handed piece has a disc on both
+        lim = float(opt(A, "--near")); n = len(todo)       # arms, and the left one can win (notes 103)
+        far = [p for p in todo if p["fit"]["had"] and (p["fit"]["moved_mm"] > lim or p["fit"]["turn_deg"] > 10)]
+        todo = [p for p in todo if p not in far]
+        print("--near %g: %d fits that would move further left as they are:" % (lim, len(far)))
+        for p in far: print("   %-60s %.1f mm %.0f deg" % (p["rel"].split("/")[-1][:60], p["fit"]["moved_mm"], p["fit"]["turn_deg"]))
+        open(T + "/left_far.txt", "w", encoding="utf-8").write("".join("%s\t%.2f mm\t%.1f deg\n" % (p["rel"], p["fit"]["moved_mm"], p["fit"]["turn_deg"]) for p in far))
     if "--yes" not in A:
         try: os.startfile(os.path.normpath(T + "/report.txt"))
         except (AttributeError, OSError): pass

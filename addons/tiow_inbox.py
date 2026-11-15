@@ -73,7 +73,7 @@
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 8),
+    "version": (1, 17, 9),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -398,6 +398,10 @@ def load_stl(path, job, prefs, collection=True, variant=None):
                 fit = Matrix((m[0:4], m[4:8], m[8:12], m[12:16]))
                 fit.translation = fit.translation * s
                 meshes[0][f"ws_fit::{tname}"] = [x for row in fit for x in row]
+        # a file moved onto its joint (Move origins, notes 101): its origin IS that joint, so no fit is needed for it
+        jn = (side.get("origin") or {}).get("joint") if isinstance(side.get("origin"), dict) else None
+        if isinstance(jn, str) and jn and f"ws_fit::{jn}" not in meshes[0].keys():
+            meshes[0][f"ws_fit::{jn}"] = [x for row in Matrix.Identity(4) for x in row]
     if len(meshes) == 1 and vrec is None:
         # (a variant's folder fits were folded into its own sockets file)
         apply_folder_fits(meshes[0], path, s)

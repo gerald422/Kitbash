@@ -64,7 +64,10 @@ undoes). Next is 5 (d), then the other part types and makers.
    268 of 272 test parts exactly where they were (the 4: hip plates on moved legs). A moved sidecar keeps
    `origin.from_file`; `seat.py`, `kb.carry` and the golden run read it. **Heads and jump packs done Nov 15 (notes
    102):** 59 sure fits by his neck / jump-pack connectors (`seat.py --sure`), 88 files moved, 326 test parts where
-   they were. **Still to do:** (d) below; then backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
+   they were. **Two-handed / heavy weapons and (d) done Nov 15 (notes 103):** 121 seated by the disc, 169 moved;
+   44 took the left arm's disc and kept their library fits (`find_all` to prefer the right one: no cut needed);
+   TIOW Inbox 1.17.9 / the page index read `origin.joint` as the fit. **Cuts still needed: `docs/cuts-needed.md`**
+   (`kits/connectors/cuts_needed.py` regenerates it). **Still to do:** backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
    `scale` / `types` are not handled by the move yet, such parts are left and listed); the other makers.
    What follows was the spec. **In order:** (b) a
    production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with
@@ -77,7 +80,7 @@ undoes). Next is 5 (d), then the other part types and makers.
    off arms and legs, keep their sockets until then.
 6. Finalise: export step, a peg test piece (pegs have never been printed).
 7. Housekeeping: retire the TIOW-FTRP bridge (he no longer uses TIOW-FTRP: `bridge/`, the bridge template, the
-   bridge's installed files); share server POST check (sharing is only for testing and limited printing).
+   bridge's installed files: deletes on the PC, ask first). Share server POST check done Nov 15 (notes 103).
 
 ## Waiting on Josh
 
@@ -166,9 +169,7 @@ undoes). Next is 5 (d), then the other part types and makers.
   left so on purpose (Marta: no torsos; Turtle Ninja: only the straight pose of each; Josh, notes 026 / 094). 238 parts in types with no page step.
 - Marta mark tidy-up; 5 stale Marta sidecars in the repo the library no longer has (not the 8 `Arms` / `arms`
   duplicates removed Nov 13; check against the PC).
-- **Share server: refuse POSTs from other sites** (Nov 13 review, notes 086): `/correct` and `/send` don't check
-  `Origin` / `Content-Type`; about five lines in `share_server.py`, then deliver and restart sharing. Also: a removed
-  user stays signed in up to 12 h unless the server is restarted.
+- Share server: a removed user stays signed in up to 12 h unless the server is restarted.
 - Fit coverage (Nov 14, after notes 093): 2,292 of 6,887 parts have no fit (torsos counted by sockets: 623 of 877).
   Most: Two-Handed Held 332 / 446, Heads 287 / 657, Hand-less Weapons 238 / 262, Accessories 105 / 199, Unsorted 86 / 86.
 - Bladeguard Volkite A/B right-hand fit; Plasma Incinerator 3A/3B by eye; BBoosty / CyberBrush accessories without fits.

@@ -369,6 +369,11 @@ def make_handler(st):
             what = urlsplit(self.path).path
             if what not in ("/send", "/correct"):
                 return self.send_plain(404, "Not found")
+            # only the page itself: another site's form can't send JSON without the browser asking first (which this
+            # server never allows), and browsers mark a request from another site as cross-site (Nov 13 review, notes 086)
+            if self.headers.get("Content-Type", "").split(";")[0].strip().lower() != "application/json" or \
+                    self.headers.get("Sec-Fetch-Site", "same-origin").lower() == "cross-site":
+                return self.send_plain(403, "Only the Squad Builder page can send here.")
             try:
                 n = int(self.headers.get("Content-Length", "0"))
             except ValueError:

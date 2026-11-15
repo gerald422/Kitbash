@@ -194,6 +194,15 @@ for bad, why in (({"upright": M()}, "upright"), ({"scale": 0.9}, "scale"), ({"pi
     except OG.Skip: ok(True, "")
 try: OG.move({"schemaVersion": 1, "category": "Arms", "fits": {"Waist": F}}, ["Shoulder"]); ok(False, "origin: moved a part by another joint's fit")
 except OG.Skip as e: ok("no fit" in str(e), "origin: %s" % e)
+bare = copy.deepcopy(new); del bare["fits"]["Shoulder R"]                  # the identity fit left out: origin is the joint
+ok(near(OG.maker_view(bare)["fits"]["Shoulder R"], F, 1e-5), "origin: maker_view doesn't read a missing joint fit as identity")
+try: OG.move(bare, ["Shoulder"], "Maker/Arms/Arm R"); ok(False, "origin: a part on its joint with no fit stored was moved")
+except OG.Skip as e: ok(str(e) == "done", "origin: a part on its joint with no fit stored says %r, not done" % str(e))
+sys.path.insert(0, os.path.join(R, "squad-builder"))
+try: import build_index                                                     # needs numpy: checked where it is there
+except ImportError: build_index = None
+if build_index:
+    ok(build_index.part_data(bare)["fits"].get("Shoulder R") == OG.I16, "page index: no identity fit for a part moved onto its joint")
 
 if fails:
     print("%d of %d kb checks failed:\n  %s" % (len(fails), count[0], "\n  ".join(fails))); sys.exit(1)

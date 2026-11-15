@@ -26,10 +26,11 @@ subprocess.run([sys.executable, srv, "--users", users, "--owner", "owner1"], che
 u = json.load(open(users)); ck("--owner marks one person only", u["owner1"].get("owner") is True and "owner" not in u["friend1"], u)
 proc = subprocess.Popen([sys.executable, srv, "--users", users, "--lib", lib, "--libpath", "D:\\Kitbash Library", "--port", "8791"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 time.sleep(1.2)
-def call(path, user, pw, body=None):
+def call(path, user, pw, body=None, ctype="application/json", site=None):
     r = urllib.request.Request("http://127.0.0.1:8791" + path, data=None if body is None else json.dumps(body).encode(), method="GET" if body is None else "POST")
     r.add_header("Authorization", "Basic " + base64.b64encode(("%s:%s" % (user, pw)).encode()).decode())
-    if body is not None: r.add_header("Content-Type", "application/json")
+    if body is not None: r.add_header("Content-Type", ctype)
+    if site: r.add_header("Sec-Fetch-Site", site)
     try:
         with urllib.request.urlopen(r) as f: return f.status, f.read().decode()
     except urllib.error.HTTPError as e: return e.code, e.read().decode()
@@ -41,6 +42,8 @@ try:
     fix = {"part": sword["path"], "name": sword["name"], "v": None, "sock": "Hand R", "host": arm["path"], "before": before, "after": after, "mm": 0.4, "deg": 20}
     ck("someone else's sign-in can't save a fit (403), and nothing changes", call("/correct", *F, fix)[0] == 403 and open(path, "rb").read() == orig)
     ck("no sign-in, no save (401)", call("/correct", "owner1", "wrong-password-x", fix)[0] == 401)
+    ck("another site's form post is refused (403), nothing changes", call("/correct", *O, fix, ctype="application/x-www-form-urlencoded")[0] == 403 and open(path, "rb").read() == orig)
+    ck("a request the browser marks cross-site is refused (403)", call("/correct", *O, fix, site="cross-site")[0] == 403 and call("/send", *F, {"requests": []}, site="cross-site")[0] == 403 and open(path, "rb").read() == orig)
     st, _ = call("/correct", *O, fix); new = open(path, "rb").read(); d1 = json.loads(new.decode("utf-8-sig"))
     ck("the owner's save is written (200): fit and exact", st == 200 and all(abs(a - b) < 1e-9 for a, b in zip(d1["fits"]["Hand R"], after)) and "Hand R" in d1["exact"], st)
     strip = lambda d: {k: (dict((a, b) for a, b in v.items() if a != "Hand R") if k == "fits" else v) for k, v in d.items() if k != "exact"}

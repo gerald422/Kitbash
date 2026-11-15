@@ -166,6 +166,10 @@ def part_data(d):
         f = flat16(m)
         if f:
             out["fits"][t] = f
+    o = d.get("origin") if isinstance(d.get("origin"), dict) else {}
+    if isinstance(o.get("joint"), str) and o["joint"] and o["joint"] not in out["fits"]:
+        # a file moved onto its joint (Move origins, notes 101): its origin is that joint, the fit is "none"
+        out["fits"][o["joint"]] = [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]
     for s in d.get("sockets") or []:
         if isinstance(s, dict) and flat16(s.get("matrix")) and s.get("type"):
             e = {"t": str(s["type"]), "m": flat16(s["matrix"])}
