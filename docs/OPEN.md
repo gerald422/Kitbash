@@ -61,8 +61,9 @@ written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (
    all its type's connectors (`find_all`); sure = fit written (`kb.sidecar.merge`, backed up), look = written and
    flagged, none = listed; fit = connector's fit moved by the match, turn fixes per connector, and a list of unmatched parts grouped
    (= which connector to cut next). It reads his blends (`connector_export.py`'s way), cuts pad insides as notes 099,
-   searches the shin spot on both shins (R / L by side) and lists every look leg so he can turn it; (c) the origin move, into a NEW folder (the STLs have no backup: ask Josh where),
-   never over the originals; (d) "no fit = origin is the joint" in TIOW Inbox and the page. Torsos, and what hangs
+   searches the shin spot on both shins (R / L by side) and lists every look leg so he can turn it; (c) the origin move, **in place in the Kitbash Library** (Josh, Nov 15:
+   files being adjusted in the library may be updated there; no STL backup for now, he can get them all again from
+   MMF / Discord). Keep each run's originals in its `_backups` folder so `restore` works; (d) "no fit = origin is the joint" in TIOW Inbox and the page. Torsos, and what hangs
    off arms and legs, keep their sockets until then.
 6. Finalise: export step, a peg test piece (pegs have never been printed).
 7. Housekeeping: retire the TIOW-FTRP bridge (he no longer uses TIOW-FTRP: `bridge/`, the bridge template, the
@@ -79,7 +80,8 @@ written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (
 - Library sockets that look wrong by shape (notes 098), to check by eye: Pad sockets of Outrider Arm Wight Handle
   A1 L, B1 L, B2 L and Arm With Handle B R; Veteran Arm B's Hand socket. No Forearm socket on Assault Arm 8B / 8C and
   Jump Chaplain Arm A-D, where wrist B is an exact copy.
-- **Where re-origined files go** (a new folder; the STLs have no backup): ask before item 5 (c).
+- **The Mar Fil connector run** (`connectors-2026-11-15-8`): he is checking it on the share server (Nov 15); item
+  5 (c) bakes these fits into the files, so it waits for his verdict.
 - Files on his Desktop from Nov 14: `TIOW Blender bridge\shells\` (Claude's automatic shells: the pauldron and
   shin pad shells are usable, the head / backpack / arm / hand ones are superseded by his connectors;
   `old-averaged\`, `old-first-try\` are his to delete); `pad-masters-sheet.jpg`, `pad-now-vs-master.jpg`,
@@ -105,8 +107,6 @@ written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (
 - 'Torso hasn't followed the legs' roll': not reproduced; what should it follow? (072)
 - Mirror on the fly: auto-mirror single-side parts, or a checkbox on every slot?
 - Which Chaplain / Techmarine "hip armour" files he meant. Captain with Jump Pack belt plates to review.
-- **A backup for the STLs**: D: is one external exFAT drive and the library (65 GB) is nowhere else. He will put it
-  in cloud storage (Nov 13); not done yet.
 - cloudflared + adding people for the shared page (passwords never pass through Claude). (066)
 - Hosted demo: the older public "Squad Builder" artifact; ask before republishing to it.
 
