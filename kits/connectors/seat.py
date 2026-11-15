@@ -83,7 +83,9 @@ def side_fit(sc, base):
 
 
 def side_sock(sc, typ):
-    """the socket typ (R, else L mirrored to R) or None"""
+    """the socket typ (an unsided one such as Back as it is; else R, else L mirrored to R) or None"""
+    for s in sc.get("sockets") or []:
+        if s.get("type") == typ: return mat(s["matrix"])
     for s in sc.get("sockets") or []:
         if s.get("type") == typ + " R": return mat(s["matrix"])
     for s in sc.get("sockets") or []:
@@ -112,8 +114,9 @@ def read_connectors(cfg, lib, work):
     opened = None
     for cat, cons in cfg["types"].items():
         for c in cons:
-            p = os.path.join(blends, c["blend"])
-            if opened != p: bpy.ops.wm.open_mainfile(filepath=p, load_ui=False); opened = p
+            if c.get("blend"):                    # (a placed connector whose spot is a library part needs no blend)
+                p = os.path.join(blends, c["blend"])
+                if opened != p: bpy.ops.wm.open_mainfile(filepath=p, load_ui=False); opened = p
             obs = bpy.data.objects
             if "pad" in c:                        # the pad's inside: what of the placed pad rests on the spot shell
                 if c["pad"] not in obs or c["spot"] not in obs: bad.append("%s: %s or %s not in %s" % (c["name"], c["pad"], c["spot"], c["blend"])); continue
@@ -121,13 +124,16 @@ def read_connectors(cfg, lib, work):
                 spot = C.Surface(tris(obs[c["spot"]]), spacing=0.03)
                 Tw = T @ Mw[:3, :3].T + Mw[:3, 3]; T = T[spot.dist(Tw.mean(1))[1] < GAP]
             elif "placed" in c:                   # the same from a part placed by its LIBRARY fit on the reference arm's socket
-                if c["spot"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["spot"], c["blend"])); continue
-                ra = maker(lib + "/" + c["on"] + SC.SUFFIX)[0]; S = side_sock(ra, c["socket"])      # (a weapon's hand on the wrist:
+                if "spot" in c and c["spot"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["spot"], c["blend"])); continue
+                ra, _, rb = maker(lib + "/" + c["on"] + SC.SUFFIX); S = side_sock(ra, c["socket"])  # (a weapon's hand on the wrist:
                 ws, _, wb = maker(lib + "/" + c["placed"] + SC.SUFFIX); F, _ = side_fit(ws, c["fit"])  #  notes 104)
                 if S is None or F is None: bad.append("%s: no %s socket on %s or no %s fit on %s" % (c["name"], c["socket"], c["on"], c["fit"], c["placed"])); continue
                 T = unmoved(C.soup(lib + "/" + c["placed"] + ".stl", ws.get("scale", 1.0)), wb); P = S @ F
-                spot = C.Surface(tris(obs[c["spot"]]), spacing=0.03)
-                T = T[spot.dist((T @ P[:3, :3].T + P[:3, 3]).mean(1))[1] < GAP]
+                if "spot" in c: spot = C.Surface(tris(obs[c["spot"]]), spacing=0.03)
+                else:                             # no cut: the "on" part's own surface within spot_mm of its socket (a backpack
+                    O = unmoved(C.soup(lib + "/" + c["on"] + ".stl", ra.get("scale", 1.0)), rb)   # on the torso's back, notes 107)
+                    spot = C.Surface(O[np.linalg.norm(O.mean(1) - S[:3, 3], axis=1) < float(c.get("spot_mm", 25))], spacing=0.05)
+                T = T[spot.dist((T @ P[:3, :3].T + P[:3, 3]).mean(1))[1] < float(c.get("gap", GAP))]
             else:
                 if c["object"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["object"], c["blend"])); continue
                 T = tris(obs[c["object"]])

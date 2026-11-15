@@ -37,34 +37,38 @@ def scan(lib, maker, types):
 def kit(rel): return rel.split("/")[1]
 
 
-def nxt(P, left, tried):
-    """the next example: a fitted right-hand weapon (else a left one: seat.py mirrors it) from the kit with the most left"""
-    cands = [x for x in left if x not in tried and "Hand R" in (P[x].get("fits") or {})] or \
-            [x for x in left if x not in tried and any(f.startswith("Hand") for f in (P[x].get("fits") or {}))]
+def nxt(P, left, tried, base="Hand"):
+    """the next example: one fitted for base (a right-hand fit first, else a left one: seat.py mirrors it) from the kit
+    with the most left"""
+    fits = lambda x: P[x].get("fits") or {}
+    cands = [x for x in left if x not in tried and (base in fits(x) or base + " R" in fits(x))] or \
+            [x for x in left if x not in tried and base + " L" in fits(x)]
     if not cands: return None
     big = collections.Counter(kit(x) for x in cands).most_common(1)[0][0]
-    return sorted((x for x in cands if kit(x) == big), key=lambda x: (not (P[x].get("exact") and any(e.startswith("Hand") for e in P[x]["exact"])), x))[0]
+    return sorted((x for x in cands if kit(x) == big),
+                  key=lambda x: (not any(e in (base, base + " R", base + " L") for e in P[x].get("exact") or []), x))[0]
 
 
 def main():
     cfgp = sys.argv[1]; lib = opt("--lib", "D:/Kitbash Library"); cfg = json.load(open(cfgp, encoding="utf-8"))
+    base, label = cfg.get("fit", "Hand"), cfg.get("label", "hands")
     P = scan(lib, cfg["maker"], cfg["types"]); left = set(P); covered = {}; rounds = []; tried = set()
     if opt("--resume"):        # carry on a run that hit --rounds: its summary's rounds and what was left
         T = opt("--resume").rstrip("/\\"); s = json.load(open(T + "/summary.json", encoding="utf-8")); rounds = s["rounds"]
         left = set(s["left"]) & set(P); tried = {r["example"] for r in rounds}
         for r in rounds:
             for x in r["group"] + [r["example"]]: covered[x] = r["round"]
-        ex = nxt(P, left, tried)
+        ex = nxt(P, left, tried, base)
     else:
-        T = lib + "/_backups/hands-" + time.strftime("%Y-%m-%d"); k = 1
-        while os.path.exists(T): k += 1; T = lib + "/_backups/hands-%s-%d" % (time.strftime("%Y-%m-%d"), k)
+        T = lib + "/_backups/%s-%s" % (label, time.strftime("%Y-%m-%d")); k = 1
+        while os.path.exists(T): k += 1; T = lib + "/_backups/%s-%s-%d" % (label, time.strftime("%Y-%m-%d"), k)
         os.makedirs(T); ex = cfg["first"]
-    print("%d weapons with a hand (%s)" % (len(P), ", ".join("%s %d" % x for x in collections.Counter(kit(r) for r in P).most_common())), flush=True)
+    print("%d parts (%s)" % (len(P), ", ".join("%s %d" % x for x in collections.Counter(kit(r) for r in P).most_common())), flush=True)
     for rnd in range(len(rounds), len(rounds) + int(opt("--rounds", 20))):
         if ex is None: break
         tried.add(ex); left.discard(ex)
-        con = {"name": "hand %d" % (rnd + 1), "blend": cfg["blend"], "spot": cfg["spot"], "on": cfg["on"], "socket": cfg["socket"],
-               "placed": ex, "ref": ex, "fit": "Hand"}
+        con = {"name": "%s %d" % (label.rstrip("s"), rnd + 1), "on": cfg["on"], "socket": cfg["socket"], "placed": ex, "ref": ex, "fit": base}
+        con.update({k: cfg[k] for k in ("blend", "spot", "spot_mm", "gap") if k in cfg})   # no "spot": the "on" part's own surface
         rc = {"maker": cfg["maker"], "blends": cfg["blends"], "types": {t: [con] for t in cfg["types"]}}
         json.dump(rc, open(T + "/round%02d.json" % (rnd + 1), "w", encoding="utf-8"), indent=1)
         open(T + "/round%02d.txt" % (rnd + 1), "w", encoding="utf-8").write("\n".join(sorted(left)))
@@ -73,6 +77,12 @@ def main():
                               T + "/round%02d.json" % (rnd + 1), "--lib", lib, "--list", T + "/round%02d.txt" % (rnd + 1), "--dry"],
                              capture_output=True, text=True, encoding="utf-8", errors="replace", stdin=subprocess.DEVNULL).stdout
         m = re.search(r"(connectors-\d{4}-\d\d-\d\d(?:-\d+)?): reading", out)
+        if m and "STOPPED" in out and re.search(r"only \d+ triangles", out):     # placed by its fit it doesn't touch the
+            rounds.append({"round": rnd + 1, "example": ex, "task": m.group(1), "group": [], "far": [], "no_side": True,  # spot
+                           "moved_med": None, "turn_med": None, "moved_max": None, "kits": {}, "secs": round(time.time() - t0)})
+            print("round %2d  %-58s no side: placed by its fit it doesn't touch the spot" % (rnd + 1, ex.split("/")[-1][:58]), flush=True)
+            json.dump({"config": cfg, "rounds": rounds, "left": sorted(left)}, open(T + "/summary.json", "w", encoding="utf-8"), indent=1)
+            ex = nxt(P, left, tried, base); continue
         if not m or "STOPPED" in out: print(out[-1500:]); break
         task = m.group(1); plan = json.load(open(lib + "/_backups/" + task + "/plan.json", encoding="utf-8"))
         sure = [p for p in plan if p.get("fit") and p["fit"]["level"] == "sure"]
@@ -87,9 +97,9 @@ def main():
         print("round %2d  %-58s +%3d (%s)  moved med %s mm / %s deg, %d far  [%d left, %d s]" % (rnd + 1, ex.split("/")[-1][:58], len(sure),
               ", ".join("%s %d" % x for x in r["kits"].items()), r["moved_med"], r["turn_med"], len(far), len(left), r["secs"]), flush=True)
         json.dump({"config": cfg, "rounds": rounds, "left": sorted(left)}, open(T + "/summary.json", "w", encoding="utf-8"), indent=1)
-        ex = nxt(P, left, tried)
-    W = ["Weapon hand designs: %s (%s)" % (cfg["maker"], os.path.basename(T)), "",
-         "%d weapons with a hand; %d in a group of 2 or more, %d alone (their own hand, or the search found no match), %d with no fit to try." % (
+        ex = nxt(P, left, tried, base)
+    W = ["Designs at the %s joint: %s (%s)" % (base, cfg["maker"], os.path.basename(T)), "",
+         "%d parts; %d in a group of 2 or more, %d alone (their own hand, or the search found no match), %d with no fit to try." % (
              len(P), sum(len(r["group"]) + 1 for r in rounds if r["group"]), sum(1 for r in rounds if not r["group"]), len(left)), ""]
     for r in sorted(rounds, key=lambda r: -len(r["group"])):
         W.append("%3d + 1  %s   (%s)   new fits from the library: %s mm / %s deg median, %s mm most%s   [%s]" % (

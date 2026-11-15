@@ -26,7 +26,7 @@ JOINTS = {
     "Shoulder Pads": [("pad inside", "place one pad on the pad spot (the inside is cut from it)", ("pad inside",))],
     "Knee Pads": [("shin pad inside", "place one shin pad on the shin spot", ("shin pad inside",))],
     "Heads": [("neck", "cut the neck on one head", ("neck",))],
-    "Backpacks": [("backpack mount", "cut the mount on one backpack", ("backpack mount",))],
+    "Backpacks": [("backpack mount", "no cut: one backpack of each mount design placed on the torso's back from its library fit (notes 107)", ("backpack mount",))],
     "Jump Packs": [("jump pack mount", "cut the mount on one jump pack", ("jump pack mount",))],
     "Two-Handed Guns": [("shoulder disc", "cut the shoulder disc on one arm", ("shoulder disc",))],
     "Two-Handed Melee": [("shoulder disc", "cut the shoulder disc on one arm", ("shoulder disc",))],
@@ -106,7 +106,7 @@ def main():
             if own and t not in searched[maker]: unsearched[maker][(t, sorted(own)[0])] += 1; continue
             need[maker][joint].append(e)
     W = []; w = W.append
-    PLACE, AUTO = ("pad inside", "shin pad inside"), ("hand at wrist",)
+    PLACE, AUTO = ("pad inside", "shin pad inside"), ("hand at wrist", "backpack mount")
     kind = lambda j: "auto" if j in AUTO else "place" if j in PLACE else "cut"
     cnt = lambda m, k: sum(1 for j in need[m] if kind(j) == k)
     total = sum(cnt(m, "cut") for m in need); places = sum(cnt(m, "place") for m in need); autos = sum(cnt(m, "auto") for m in need)
@@ -118,8 +118,8 @@ def main():
     if unsearched:
         w(""); w("**No cut needed, a search to run:** types whose connector already exists but that haven't been searched with it:")
         for m, c in unsearched.items(): w("- %s: %s." % (m, ", ".join("%s %d (the %s)" % (t, n, k) for (t, k), n in c.most_common())))
-    w(""); w("**%d cuts and %d pads to place, across %d maker folders; and %d weapon groups whose hand is taken from a fitted "
-             "weapon, no work from you.** Torsos (stay on their sockets), accessories and belt "
+    w(""); w("**%d cuts and %d pads to place, across %d maker folders; and %d groups taken from a fitted part (weapon hands, backpack mounts), "
+             "no work from you.** Torsos (stay on their sockets), accessories and belt "
              "bits (last), bases, Marta heads (deferred), Turtle Ninja \"Rigging Required\" folders, weapons without a hand (not used) and hidden parts are "
              "left out." % (total, places, len(need), autos)); w("")
     w("| Maker folder | Cuts | Pads to place | Weapon hands (no work) | Parts waiting | Already seated by a connector |"); w("|---|---|---|---|---|---|")
@@ -141,7 +141,7 @@ def main():
     w(""); w("Other types: " + ", ".join("%s %d" % x for x in other.most_common()) + ".")
     out = os.path.join(REPO, "docs", "cuts-needed.md")
     open(out, "w", encoding="utf-8", newline="\n").write("\n".join(W) + "\n")
-    print("%s: %d cuts, %d pads to place, %d weapon hand groups (no work), %d maker folders" % (out, total, places, autos, len(need)))
+    print("%s: %d cuts, %d pads to place, %d groups from fitted parts (no work), %d maker folders" % (out, total, places, autos, len(need)))
     for m in order: print("  %-36s %2d cuts, %d to place, %4d parts" % (m, cnt(m, "cut"), cnt(m, "place"), sum(len(v) for v in need[m].values())))
 
 
