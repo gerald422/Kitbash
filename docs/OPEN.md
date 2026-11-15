@@ -15,6 +15,11 @@ fit, cut, seat or move them. **Plain arms: Mar Fil only** (Marta first, then eve
 he may add a specific posed arm by name later). Other makers' two-handed weapons (they carry their arms) and weapons
 with a hand stay in, and Marta's **legs** stay (some unique poses). `kits/connectors/cuts_needed.py` leaves the rest
 out (`NOT_NOW`, `ARMS_FROM`).
+**No old fits kept (Josh, Nov 15):** every part is to be fitted against the matching part (his cut), not anchored on a
+library fit. So weapons with a hand and backpacks are **one cut per design** again (he sits one of the design on a Mar
+Fil arm's wrist / torso's back and cuts what meets it); the no-cut runs (notes 105, 107, 108: an example placed by its
+library fit) only sorted them into designs, which `docs/cuts-needed.md` lists. The fits those runs wrote (Mar Fil
+hands 289, packs 29; BBoosty 22, Turtle Ninja 10, Marta Weapons 2, Bits 34) are to be redone from his cuts.
 
 ## Order agreed with Josh (Nov 13, notes 089)
 
