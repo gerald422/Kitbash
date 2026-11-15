@@ -23,7 +23,16 @@ class Index:
     def update_part(self, path, sidecar_data):
         """Refresh one part's fits / sockets / exact / adaptor from its (new) sidecar. path as in the index."""
         sys.path.insert(0, os.path.join(REPO, "squad-builder")); import build_index
-        e = self.by_path[path]; e.update(build_index.part_data(sidecar_data)); return e
+        e = self.by_path[path]; e.update(build_index.part_data(sidecar_data))
+        if e.get("variants") and sidecar_data.get("variants"):      # the maker's copies too, as build() lists them
+            for ve in e["variants"]:
+                v = sidecar_data["variants"][ve["i"]] if isinstance(ve.get("i"), int) and ve["i"] < len(sidecar_data["variants"]) else None
+                if not isinstance(v, dict) or not isinstance(v.get("sidecar"), dict): continue
+                ve["align"] = build_index.flat16(v.get("align")) or ve["align"]
+                d = build_index.part_data(v["sidecar"]); d.pop("category", None)
+                for k in ("fits", "sockets", "noPad", "noHand", "adaptor", "exact", "upright", "offHand", "scale"): ve.pop(k, None)
+                ve.update(d)
+        return e
 
     def add_parts(self, entries, joints=None):
         """Entries from build_index.build() on a small folder of new parts. Refuses paths already there."""

@@ -141,6 +141,60 @@ try:
 finally:
     shutil.rmtree(T, ignore_errors=True)
 
+# ---------------------------------------------------------------- kb.origin: a part moved onto its joint lands where it did
+from kb import origin as OG
+import math
+
+
+def rot(ax, deg, t=(0.0, 0.0, 0.0)):
+    c, s = math.cos(math.radians(deg)), math.sin(math.radians(deg)); i, j, k = ax, (ax + 1) % 3, (ax + 2) % 3
+    m = [[0.0] * 4 for _ in range(4)]; m[3][3] = 1.0; m[i][i] = 1.0; m[j][j] = c; m[j][k] = -s; m[k][j] = s; m[k][k] = c
+    for a in range(3): m[a][3] = t[a]
+    return [x for row in m for x in row]
+
+
+def near(a, b, tol=1e-6): return all(abs(x - y) <= tol for x, y in zip(a, b))
+
+
+F = OG.mul(rot(0, 17, (3.0, -1.5, -30.0)), rot(2, 40))                 # the arm's own fit
+FL = OG.mul(rot(1, -8, (-3.0, -1.2, -29.0)), rot(2, -33))              # its left copy's
+AL = OG.mul(OG.MX16, rot(0, 5, (0.4, 0.1, -0.2)))                      # file -> the copy (a mirror and a nudge)
+arm = {"schemaVersion": 1, "part": "Arm R", "category": "Arms", "fits": {"Shoulder R": F, "Other": rot(1, 12, (1.0, 2.0, 3.0))},
+       "exact": ["Shoulder R"], "notes": {"Shoulder R": "by hand"},
+       "sockets": [{"type": "Pad R", "name": "p", "matrix": rot(1, 25, (-5.0, 2.0, 36.0)), "props": {"tiow_anchor": "clicked"},
+                    "points": [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.5]]}],
+       "variants": [{"side": "L", "mirror": True, "align": AL, "name": "Arm L", "sidecar": {
+           "category": "Arms", "fits": {"Shoulder L": FL}, "sockets": [{"type": "Pad L", "name": "q", "matrix": rot(0, -20, (5.0, 2.0, 36.0))}]}}]}
+new, G, did = OG.move(arm, ["Shoulder"], "Maker/Arms/Arm R", "test")
+P = [1.3, -2.7, 11.0]; Pn = OG.point(G, P)                              # a corner of the mesh, before and after
+ok(OG.is_identity(new["fits"]["Shoulder R"]) and near(OG.point(F, P), Pn), "origin: the joint's fit isn't none after the move, or the mesh isn't where the fit put it")
+ok(near(OG.point(arm["fits"]["Other"], P), OG.point(new["fits"]["Other"], Pn)), "origin: another fit of the part places it elsewhere after the move")
+ok(near(OG.point(OG.mul(F, arm["sockets"][0]["matrix"]), [0.5, 0.2, 0.1]), OG.point(new["sockets"][0]["matrix"], [0.5, 0.2, 0.1])),
+   "origin: a socket didn't move with the file")
+ok(near(OG.point(F, arm["sockets"][0]["points"][2]), new["sockets"][0]["points"][2]) and new["sockets"][0]["props"] == {"tiow_anchor": "clicked"},
+   "origin: an anchor's points didn't move with the file, or its props changed")
+v0, v1 = arm["variants"][0], new["variants"][0]
+Pc, Pcn = OG.point(v0["align"], P), OG.point(v1["align"], Pn)           # the same corner on the copy
+ok(OG.is_identity(v1["sidecar"]["fits"]["Shoulder L"]) and near(OG.point(FL, Pc), Pcn), "origin: the maker's copy isn't on its own joint after the move")
+ok(near(OG.point(OG.mul(FL, v0["sidecar"]["sockets"][0]["matrix"]), [0.0, 0.0, 0.0]), OG.point(v1["sidecar"]["sockets"][0]["matrix"], [0.0, 0.0, 0.0])),
+   "origin: the copy's socket didn't move with it")
+ok(new["exact"] == ["Shoulder R"] and new["notes"] == arm["notes"] and near(OG.from_file(new), OG.rigid(F)) and new["origin"]["joint"] == "Shoulder R",
+   "origin: exact / notes lost, or from_file isn't the move")
+ok(not sidecar.problems(new), "origin: the moved sidecar has problems: %s" % sidecar.problems(new))
+back = OG.maker_view(new)
+ok(near(back["fits"]["Shoulder R"], F) and near(back["fits"]["Other"], arm["fits"]["Other"]) and near(back["sockets"][0]["matrix"], arm["sockets"][0]["matrix"]),
+   "origin: maker_view doesn't give the maker's coordinates back")
+try: OG.move(new, ["Shoulder"], "Maker/Arms/Arm R"); ok(False, "origin: a part already on its joint was moved again")
+except OG.Skip as e: ok(str(e) == "done", "origin: a second run says %r, not done" % str(e))
+again = copy.deepcopy(new); again["fits"]["Shoulder R"] = rot(2, 3, (0.2, 0.0, 0.1))      # corrected by hand after the move
+n2, G2, _ = OG.move(again, ["Shoulder"], "Maker/Arms/Arm R")
+ok(near(OG.from_file(n2), OG.mul(G2, OG.from_file(new))) and OG.is_identity(n2["fits"]["Shoulder R"]), "origin: a second move doesn't add up in from_file")
+for bad, why in (({"upright": M()}, "upright"), ({"scale": 0.9}, "scale"), ({"pivot": [0, 0, 0]}, "pivot")):
+    try: OG.move(dict(arm, **bad), ["Shoulder"]); ok(False, "origin: moved a part with %s" % why)
+    except OG.Skip: ok(True, "")
+try: OG.move({"schemaVersion": 1, "category": "Arms", "fits": {"Waist": F}}, ["Shoulder"]); ok(False, "origin: moved a part by another joint's fit")
+except OG.Skip as e: ok("no fit" in str(e), "origin: %s" % e)
+
 if fails:
     print("%d of %d kb checks failed:\n  %s" % (len(fails), count[0], "\n  ".join(fails))); sys.exit(1)
 print("all %d kb checks pass" % count[0])

@@ -23,7 +23,7 @@ searched but not written."""
 import sys, os, json, time, subprocess, shutil, hashlib, struct
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", "..")); sys.path.insert(0, REPO)
-from kb import sidecar as SC
+from kb import sidecar as SC, origin as OG
 
 LIB = "D:/Kitbash Library"
 MX = np.diag([-1.0, 1, 1, 1])
@@ -35,6 +35,18 @@ def opt(A, n, d=None): return A[A.index(n) + 1] if n in A else d
 def md5(p): return hashlib.md5(open(p, "rb").read()).hexdigest()
 def flat(M): return [round(float(x), 6) for x in np.asarray(M).reshape(-1)]
 def mat(m): return np.array(m, float).reshape(4, 4)
+
+
+def maker(path):
+    """(the sidecar in the maker's file coordinates, G, G inverse): a part whose origin was moved onto its joint
+    (origins.py, notes 101) is searched as the maker exported it, where Josh's connectors were cut and where a kit's
+    parts share one frame; G takes those coordinates to the file as it is now (None for a part never moved)"""
+    sc = json.load(open(path, encoding="utf-8-sig")); g = OG.from_file(sc)
+    if not g: return sc, None, None
+    G = mat(g); return OG.maker_view(sc), G, np.linalg.inv(G)
+
+
+def unmoved(tri, back): return tri if back is None else tri @ back[:3, :3].T + back[:3, 3]
 
 
 def write_stl(T, out):
@@ -110,9 +122,11 @@ def read_connectors(cfg, lib, work):
                 if c["object"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["object"], c["blend"])); continue
                 T = tris(obs[c["object"]])
             if len(T) < 20: bad.append("%s: only %d triangles" % (c["name"], len(T))); continue
-            rs = json.load(open(lib + "/" + c["ref"] + SC.SUFFIX, encoding="utf-8-sig"))
-            ref = C.Surface(C.soup(lib + "/" + c["ref"] + ".stl", rs.get("scale", 1.0))); con = C.Connector(T, c["name"])
+            rs, Gr, back = maker(lib + "/" + c["ref"] + SC.SUFFIX); now = C.soup(lib + "/" + c["ref"] + ".stl", rs.get("scale", 1.0))
+            ref = C.Surface(unmoved(now, back)); con = C.Connector(T, c["name"])
             m = float(np.median(ref.dist(con.fine)[0]))
+            if m > ON_REF and back is not None and float(np.median(C.Surface(now).dist(con.fine)[0])) <= ON_REF:
+                T = unmoved(T, back); con = C.Connector(T, c["name"]); m = float(np.median(ref.dist(con.fine)[0]))   # cut on the moved file
             if m > ON_REF: bad.append("%s: %.4f mm off its reference part %s (moved in the blend?)" % (c["name"], m, c["ref"])); continue
             out = "%s/conn/%s__%s.stl" % (work, cat, c["name"].replace(" ", "_")); write_stl(T, out); c["stl"] = out
             print("  connector %-16s %-14s %6d triangles, on its reference at %.4f mm" % (c["name"], cat, len(T), m), flush=True)
@@ -127,7 +141,7 @@ def search(cfgp, lib, work, i, n):
     for cat, cons in cfg["types"].items():
         L = []
         for c in cons:
-            rs = json.load(open(lib + "/" + c["ref"] + SC.SUFFIX, encoding="utf-8-sig"))
+            rs = maker(lib + "/" + c["ref"] + SC.SUFFIX)[0]
             info = dict(c, con=C.Connector.from_stl(c["stl"], c["name"]))
             if "fit" in c:
                 F, s = side_fit(rs, c["fit"]); info.update(F_ref=F, sided=s is not None)
@@ -136,9 +150,10 @@ def search(cfgp, lib, work, i, n):
         setup[cat] = L
     out = open("%s/res_%d.jsonl" % (work, i), "a", encoding="utf-8")
     for cat, rel in jobs:
-        t0 = time.time(); L = setup[cat]; sc = json.load(open(lib + "/" + rel + SC.SUFFIX, encoding="utf-8-sig"))
+        t0 = time.time(); L = setup[cat]; sc, Gp, back = maker(lib + "/" + rel + SC.SUFFIX)
+        now = (lambda F: F) if back is None else (lambda F: F @ back)           # a fit found in the maker's frame, for the file as it is now
         fc = next(x for x in L if "fit" in x); side = part_side(rel, sc, fc["fit"], fc["sided"]); left = side == "L"
-        try: tri = C.soup(lib + "/" + rel + ".stl", sc.get("scale", 1.0)); surf = C.Surface(tri, mirror=left)
+        try: tri = unmoved(C.soup(lib + "/" + rel + ".stl", sc.get("scale", 1.0)), back); surf = C.Surface(tri, mirror=left)
         except (OSError, ValueError) as e:
             out.write(json.dumps({"cat": cat, "rel": rel, "error": str(e)}) + "\n"); out.flush(); continue
         # where the part's own fit / sockets put each connector: the turn to keep among equals (a round connector
@@ -168,7 +183,7 @@ def search(cfgp, lib, work, i, n):
             if "fit" in x and x.get("F_ref") is not None:
                 Fr = x["F_ref"] @ np.linalg.inv(M); key = x["fit"] + (" " + side if x["sided"] else "")
                 F = MX @ Fr @ MX if left else Fr; old = (sc.get("fits") or {}).get(key)
-                fit = {"key": key, "matrix": flat(F), "level": f["level"], "connector": x["name"],
+                fit = {"key": key, "matrix": flat(now(F)), "level": f["level"], "connector": x["name"],
                        "match": f["match"], "cover": f["cover"], "ambiguous": bool(f.get("ambiguous")),
                        "exact": key in (sc.get("exact") or []), "had": old is not None}
                 if old is not None:
@@ -177,7 +192,7 @@ def search(cfgp, lib, work, i, n):
                 r["fit"] = fit
             elif "socket" in x and x.get("S_ref") is not None and not x.get("both_sides"):
                 typ = x["socket"] + " " + (side or "R"); Sr = M @ x["S_ref"]; S = MX @ Sr @ MX if left else Sr
-                r["sockets"].append({"type": typ, "matrix": flat(S), "level": f["level"], "connector": x["name"],
+                r["sockets"].append({"type": typ, "matrix": flat(S if Gp is None else Gp @ S), "level": f["level"], "connector": x["name"],
                                      "has": any(s.get("type") == typ for s in sc.get("sockets") or [])})
         out.write(json.dumps(r) + "\n"); out.flush()
     print("worker %d done: %d parts" % (i, len(jobs)), flush=True)

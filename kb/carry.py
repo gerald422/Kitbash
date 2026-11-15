@@ -30,7 +30,7 @@ Shoulder R / L, Neck, Back, Waist / Flat Waist sockets, each by its own region. 
 Blender's KD tree).
 """
 import numpy as np
-from . import geo
+from . import geo, origin
 
 DT = np.dtype([("n", "<f4", 3), ("v", "<f4", (3, 3)), ("a", "<u2")])
 TORSO = ("Shoulder R", "Shoulder L", "Neck", "Back", "Waist", "Flat Waist")
@@ -60,8 +60,9 @@ def swap(name): return name[:-1] + {"R": "L", "L": "R"}[name[-1]] if name[-2:] i
 
 class Shape:
     """a part's surface: 60,000 points (S), 3,000 of them (full), its corners (V) and sorted box (ext)"""
-    def __init__(self, path, scale=1.0, seed=0, mirror=False):
+    def __init__(self, path, scale=1.0, seed=0, mirror=False, back=None):
         tri = soup(path, scale)
+        if back is not None: tri = tri @ back[:3, :3].T + back[:3, 3]       # a part moved to its joint: as the maker's file
         if mirror: tri = tri * np.array([-1.0, 1, 1])
         self.V = tri.reshape(-1, 3); self.ext = np.sort(np.ptp(self.V, 0))
         self.S = sample(tri, 60000, seed); self.full = self.S[np.random.default_rng(2).choice(60000, 3000, replace=False)]
@@ -115,17 +116,24 @@ class InnerRef:
 class Ref:
     """a fitted part of the folder: its name, sidecar and (read when first needed) its shape"""
     def __init__(self, name, sc, path, mirror=False):
+        # a part whose origin was moved to its joint (kb.origin) is read back in the maker's file coordinates: the
+        # folder's parts are compared as the maker exported them, and a new part still lies that way
+        G = origin.from_file(sc); self.back = None if G is None else np.linalg.inv(np.array(G, float).reshape(4, 4))
+        if G is not None: sc = origin.maker_view(sc)
         self.name, self.sc, self.path, self.mirror, self._shape, self._ext = name, sc, path, mirror, None, None
     @property
     def ext(self):
         """the part's sorted box, read without sampling it: cheap enough to rank every part of a folder"""
         if self._ext is None:
-            try: self._ext = np.sort(np.ptp(soup(self.path, self.sc.get("scale", 1.0)).reshape(-1, 3), 0))
+            try:
+                V = soup(self.path, self.sc.get("scale", 1.0)).reshape(-1, 3)
+                if self.back is not None: V = V @ self.back[:3, :3].T
+                self._ext = np.sort(np.ptp(V, 0))
             except (OSError, ValueError): self._ext = np.full(3, 9e9)
         return self._ext
     @property
     def shape(self):
-        if self._shape is None: self._shape = Shape(self.path, self.sc.get("scale", 1.0), 1, self.mirror)
+        if self._shape is None: self._shape = Shape(self.path, self.sc.get("scale", 1.0), 1, self.mirror, self.back)
         return self._shape
     def mirrored(self):
         """the other side's part: the shape mirrored in X, every fit conjugated and its side swapped"""

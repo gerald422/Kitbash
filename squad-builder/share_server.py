@@ -306,17 +306,29 @@ def make_handler(st):
             self.send_plain(401, "Sign in to use Squad Builder.", {"WWW-Authenticate": 'Basic realm="Squad Builder", charset="UTF-8"'})
             return None
 
-        def file(self, path, ctype, cache):
+        def file(self, path, ctype, cache, tag=False):
             try:
-                size = os.path.getsize(path)
+                st = os.stat(path); size = st.st_size
                 f = open(path, "rb")
             except OSError:
                 return self.send_plain(404, "Not found")
             with f:
+                # tag: the browser keeps its copy but asks each time whether the file changed (a preview does when
+                # its part is repaired or its origin moved: a day-old copy then sits wrong under the new index)
+                etag = '"%x-%x"' % (st.st_mtime_ns, size) if tag else None
+                if etag and self.headers.get("If-None-Match") == etag:
+                    self.send_response(304)
+                    self.send_header("ETag", etag)
+                    self.send_header("Cache-Control", cache)
+                    self.common()
+                    self.end_headers()
+                    return
                 self.send_response(200)
                 self.send_header("Content-Type", ctype)
                 self.send_header("Content-Length", str(size))
                 self.send_header("Cache-Control", cache)
+                if etag:
+                    self.send_header("ETag", etag)
                 self.common()
                 self.end_headers()
                 if self.command != "HEAD":
@@ -346,7 +358,7 @@ def make_handler(st):
             elif path == "/lib/_hidden.txt":
                 self.file(os.path.join(lib, "_hidden.txt"), "text/plain; charset=utf-8", "private, no-cache")
             elif PREVIEW.match(path):
-                self.file(os.path.join(lib, "_builder", "previews", path.rsplit("/", 1)[1]), "application/octet-stream", "private, max-age=86400")
+                self.file(os.path.join(lib, "_builder", "previews", path.rsplit("/", 1)[1]), "application/octet-stream", "private, no-cache", tag=True)
             else:
                 self.send_plain(404, "Not found")
 

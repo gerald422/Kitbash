@@ -6,6 +6,7 @@ Builder sends them, and compare every part's place (relative to its torso) with 
   record       write golden.json from this run (do it when placements are known good, and after re-making squads)
   --only       just these models (a subset after a change)
   --addon      install this tiow_inbox.py first (the container; on the PC the installed add-on is used)
+  --squads F   other squads than squads.json; --golden F  another reference file (a one-off before / after check)
 Writes report.txt next to this file: one line per part that moved more than 0.05 mm / 0.1 deg, went missing or is
 new; 'all N parts where they were' otherwise. Exit code 1 if anything differs. Costs no Claude usage on the PC:
 Run checks.bat runs it."""
@@ -16,7 +17,7 @@ A = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 LIB = A[0] if A else "D:\\Kitbash Library"
 record = "record" in A
 only = A[A.index("--only") + 1].split(",") if "--only" in A else None
-squads = json.load(open(os.path.join(HERE, "squads.json"), encoding="utf-8"))
+squads = json.load(open(A[A.index("--squads") + 1] if "--squads" in A else os.path.join(HERE, "squads.json"), encoding="utf-8"))
 if only: squads = {k: v for k, v in squads.items() if k in only}
 
 import addon_utils
@@ -50,18 +51,35 @@ try:
 finally:
     prefs.inbox_path, prefs.builder_inbox = old         # never leave the test inboxes in Josh's preferences
 obs = [o for o in bpy.context.view_layer.objects if o.type == 'MESH']
+
+
+def maker_frame(o):
+    """o's place as its maker's file would lie: a part whose origin was moved to its joint (kb.origin, notes 101)
+    keeps 'origin.from_file' in its sidecar, so the reference stays good whichever way the file's origin lies"""
+    try:
+        d = json.load(open(os.path.splitext(o.get("tiow_src", ""))[0] + ".sockets.json", encoding="utf-8-sig"))
+        if o.get("tiow_variant") is not None: d = d["variants"][int(o["tiow_variant"])]["sidecar"]
+        g = d["origin"]["from_file"]; G = Matrix([g[i:i + 4] for i in (0, 4, 8, 12)])
+        G.translation = G.translation * (float(o.get("tiow_unit", 1.0)) or 1.0)
+        if o.get("tiow_mirrored"):                    # mirrored on the spot (a right pad on a left arm): its mesh is the file's, mirrored
+            MX = Matrix.Scale(-1, 4, (1, 0, 0)); G = MX @ G @ MX
+        return o.matrix_world @ G
+    except (OSError, ValueError, KeyError, IndexError, TypeError):
+        return o.matrix_world.copy()
+
+
 for m, parts in squads.items():
     mine = [o for o in obs if o.get("tiow_model") == m]
     stem = lambda o: os.path.splitext(os.path.basename(o.get("tiow_src", "")))[0]
     root = next((o for o in mine if stem(o) == os.path.basename(parts[0][0])), None)
-    inv = root.matrix_world.inverted() if root else Matrix.Identity(4)
+    inv = maker_frame(root).inverted() if root else Matrix.Identity(4)
     for p, cat, sock in parts[1:] if root else []:
         o = next((x for x in mine if stem(x) == os.path.basename(p) and x is not root), None)
         if o is not None:
-            got["%s|%s|%s" % (m, sock, p)] = [round(v, 4) for row in (inv @ o.matrix_world) for v in row]
+            got["%s|%s|%s" % (m, sock, p)] = [round(v, 4) for row in (inv @ maker_frame(o)) for v in row]
     if root: got["%s|root|%s" % (m, parts[0][0])] = [1.0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 1.0]
 
-G = os.path.join(HERE, "golden.json")
+G = A[A.index("--golden") + 1] if "--golden" in A else os.path.join(HERE, "golden.json")
 lines = []
 if record or not os.path.exists(G):
     old_g = json.load(open(G, encoding="utf-8")) if os.path.exists(G) else {}
@@ -80,7 +98,9 @@ else:
         a, b = Matrix([gold[k][i:i + 4] for i in (0, 4, 8, 12)]), Matrix([got[k][i:i + 4] for i in (0, 4, 8, 12)])
         d = (a.inverted() @ b)
         mm = (b.to_translation() - a.to_translation()).length
-        c = max(-1.0, min(1.0, (d[0][0] + d[1][1] + d[2][2] - 1) / 2)); deg = math.degrees(math.acos(c))
+        # the turn from the matrix's skew part: acos of the trace alone turns a last-place rounding into 0.6 deg
+        sn = 0.5 * math.sqrt((d[2][1] - d[1][2]) ** 2 + (d[0][2] - d[2][0]) ** 2 + (d[1][0] - d[0][1]) ** 2)
+        deg = math.degrees(math.atan2(sn, (d[0][0] + d[1][1] + d[2][2] - 1) / 2))
         if mm > 0.05 or deg > 0.1: bad += 1; lines.append("MOVED    %s  %.2f mm, %.1f deg" % (k, mm, deg))
     lines.append(("all %d parts where they were" % len(got)) if not bad else "%d of %d parts differ" % (bad, len(gold)))
 if missing_files: lines.append("not in the library (re-make squads?): " + ", ".join(missing_files[:8]))

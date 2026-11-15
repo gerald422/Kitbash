@@ -31,6 +31,11 @@ library is read and written in place, and installed files are delivered with `py
   FOLDER` (notes 090; its docstring is the procedure), or Josh's `Add parts.bat`.
 - Seating by connectors: `Seat connectors.bat` (`kits/connectors/seat.py`, config `kits/connectors/marfil.json`;
   notes 100): search, report, Y to write (backups in `_backups\connectors-DATE\before`); `restore`, `write`.
+- Origins onto the joint: `Move origins.bat` (`kits/connectors/origins.py`, `kb/origin.py`, the same config; notes
+  101): the STL is rewritten so its joint is the origin and that fit becomes none; sidecar, page preview and index
+  moved with it (originals in `_backups\origins-DATE\before`); `restore`. A moved part's sidecar keeps
+  `origin.from_file` (the maker's coordinates -> the file now): `kb.origin.maker_view`, `seat.py`, `kb.carry` and the
+  golden run use it, and anything else that compares a part with the maker's own file must too.
 - D: is exFAT: no long-path trouble for Python (long paths are on), but tools that need NTFS features refuse it
   (Caliper's batch: notes 088). Keep such work folders in the temp folder on C:.
 - The bridge folder's old `old-*` / `sidecars-*` / `library build` folders are in

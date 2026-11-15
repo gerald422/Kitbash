@@ -4,8 +4,9 @@ Short and current. Detail for most lines: `docs/notes/084-open-items-in-full-nov
 When an item is done, delete its line (the notes entry is the record).
 
 **New chat, start here (Nov 15):** the current work is item 5 (connectors, origins at the joint): read it, then
-`docs/notes/096`-`100`. The seating script is built (`Seat connectors.bat`, notes 100) and the full Mar Fil run is
-written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (`Seat connectors.bat restore` undoes).
+`docs/notes/100`-`101`. Mar Fil arms, legs, shoulder pads and shin pads are seated by connectors (notes 100; Josh:
+"looked good") and their **origins are moved onto the joint for real** (notes 101, `Move origins.bat`; `restore`
+undoes). Next is 5 (d), then the other part types and makers.
 
 ## Order agreed with Josh (Nov 13, notes 089)
 
@@ -23,7 +24,8 @@ written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (
    (`kits/nofit/masters.py one`; Josh accepted the master's fit, "purple", Nov 14; nothing written yet; notes 094).
    **The rest (80 arms, 51 legs, 57 pads, heads, held weapons) now goes through connectors (item 5).**
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list
-   below; a standing audit and a fit-quality score.
+   below; a standing audit and a fit-quality score. **Accessories: last, on purpose** (Josh, Nov 15: they still
+   need work and he is leaving them till the end).
 5. **Connectors and origins at the joint (the current work, notes 094-096; read 096 first).** Decided by Josh,
    Nov 14:
    - **The torso stays on its sockets** (standardised; everything else matches onto it).
@@ -56,7 +58,14 @@ written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (
    round the disc / waist is shared); a kit exported turned (Outrider, Jump Chaplain arms ~9 deg) needs a per-kit fix.
    **(b) done Nov 15 (notes 100):** `Seat connectors.bat`; run `_backups\connectors-2026-11-15-8` written Nov 15
    (Josh: test in the Squad Builder, then `Run checks.bat`; record the golden squads only if they look right). What follows was its spec.
-   **Next, in order:** (b) a
+   **(c) done Nov 15 for Mar Fil arms, legs, shoulder pads, shin pads (notes 101):** `Move origins.bat`
+   (`kits/connectors/origins.py`, `kb/origin.py`): 478 files moved by their own fit (joint on the origin, the fit
+   kept as identity), sidecar / preview / index with them, originals in `_backups\origins-2026-11-15\before`;
+   268 of 272 test parts exactly where they were (the 4: hip plates on moved legs). A moved sidecar keeps
+   `origin.from_file`; `seat.py`, `kb.carry` and the golden run read it. **Still to do:** (d) below; then heads,
+   packs, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
+   `scale` / `types` are not handled by the move yet, such parts are left and listed); the other makers.
+   What follows was the spec. **In order:** (b) a
    production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with
    all its type's connectors (`find_all`); sure = fit written (`kb.sidecar.merge`, backed up), look = written and
    flagged, none = listed; fit = connector's fit moved by the match, turn fixes per connector, and a list of unmatched parts grouped
@@ -80,8 +89,17 @@ written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (
 - Library sockets that look wrong by shape (notes 098), to check by eye: Pad sockets of Outrider Arm Wight Handle
   A1 L, B1 L, B2 L and Arm With Handle B R; Veteran Arm B's Hand socket. No Forearm socket on Assault Arm 8B / 8C and
   Jump Chaplain Arm A-D, where wrist B is an exact copy.
-- **The Mar Fil connector run** (`connectors-2026-11-15-8`): he is checking it on the share server (Nov 15); item
-  5 (c) bakes these fits into the files, so it waits for his verdict.
+- **After the origin move** (notes 101): `Restart share server.bat` (previews are no longer cached for a day; until
+  then, and for previews a browser fetched before, moved parts can sit wrong on the SHARED page: clear its cache);
+  a look at a few moved parts in Blender (turning an arm, a pad: the pivot is the joint now; a pad's or shin pad's
+  file lies in its spot's frame, legs lean as on the waist); `Run checks.bat record` when it looks right
+  (`golden.json` is still Nov 13's, from before the connector run).
+- **Hip plates on moved legs** (Jump Captain Hip Plate With Pouch / Holster) sit 0.1-2.2 mm from where they did:
+  rock / settle taking other samples, believed (notes 101). With accessories, last.
+- **No fit for their joint, so not moved** (5): Captain with Jump Pack Arm 3 L and Legs, Bike Chaplain Shoulder Pad
+  1 R / 2 R / L. Seat by eye (Save fit) or cut their connector, then `Move origins.bat` again.
+- `_backups\origins-2026-11-15\before` holds the 478 original STLs (4.7 GB): his to delete once he is happy
+  (`Move origins.bat restore` needs it).
 - Files on his Desktop from Nov 14: `TIOW Blender bridge\shells\` (Claude's automatic shells: the pauldron and
   shin pad shells are usable, the head / backpack / arm / hand ones are superseded by his connectors;
   `old-averaged\`, `old-first-try\` are his to delete); `pad-masters-sheet.jpg`, `pad-now-vs-master.jpg`,
@@ -114,7 +132,9 @@ written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (
 
 - Done: Adjust on the page (move / turn / snap / seat, Save fit, `_builder\\corrections.jsonl`).
 - Done: handle at joint or middle, torso turns on the legs, owner's saves from the shared page (`/correct`).
-- **Next, Josh's long-standing ask: origins at the joint in Blender.** TIOW Inbox keeps the maker's file origin (the
+- **Done another way for Mar Fil arms / legs / pads (Nov 15, notes 101): the files themselves are moved (item 5 c);
+  the rest of the library follows there, so the import-time idea below is dropped unless item 5 stalls.**
+  Josh's long-standing ask was origins at the joint in Blender. TIOW Inbox keeps the maker's file origin (the
   middle of the scene for kit-frame parts), so turning a part in Blender swings it about a far point. Put each
   part's origin on its joint at import (keep the offset on the object so fits are still read in file coordinates).
   Needs Blender and the golden run; touch Save Correction, anchors, variants, Finalise.
