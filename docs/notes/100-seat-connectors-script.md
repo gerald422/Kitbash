@@ -28,7 +28,7 @@ Claude. Search (~22 min, 12 Blender workers), report, Y to write (backups first)
   - **find_all**: a connector at its own joint (within 1 mm of `near`) goes first and keeps its place even when a
     neighbour's claim overlaps it (the pad spot touches the disc and pushed it 59 deg round on Power Fist A2).
   - seat.py: a look match keeps the old place (settled from it) when that fits within 0.01 mm: no legs flipped.
-- **Full dry run** (478 Mar Fil parts): 440 fits (304 sure, 136 look), 11 sockets (Forearm on Assault Arm 8B / 8C and
+- **Full run, written** (478 Mar Fil parts): 440 fits (304 sure, 136 look), 11 sockets (Forearm on Assault Arm 8B / 8C and
   Jump Chaplain Arm A-D), 7 parts get their first fit (Captain with Jump Pack arms 1 / 2 / 4, Bike Chaplain arms and
   legs); left: 36 none (Intercessor / Bladeguard / Techmarine / Bike Chaplain pads, 5 bolter arms, Captain legs,
   Intercessor Legs 10, Veteran Body F, Veteran Shin Pad M, 4 Bike Chaplain weapons filed as knee pads), 3 exact.
