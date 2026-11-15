@@ -70,9 +70,11 @@ undoes). Next is 5 (d), then the other part types and makers.
    TIOW Inbox 1.17.9 / the page index read `origin.joint` as the fit. **Cuts still needed: `docs/cuts-needed.md`**
    (`kits/connectors/cuts_needed.py` regenerates it). **Weapons with a hand, Nov 15 (notes 104-105):** no cut; one
    example per hand design placed by its library fit (`kits/connectors/hands.py`): Mar Fil 324 of 345 in 16 groups,
-   dry runs only. **Waiting on Josh:** look at the 39 chainsword-hand ones on the page and at the 20 that came out
-   flipped (Bladeguard swords / hammers / shields), then `seat.py write TASK --sure --near 2` per group and move.
-   17 are left (12 have only Hand L: they need a left wrist cut or the mirror). **Still to do:** backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
+   288 written Nov 15 (`--sure --near 2`); **the 20 that came out flipped (Bladeguard swords / hammers / shields)
+   Josh fixes in the app**; the left-hand-only ones searched mirrored (`hands.py --resume`); then Move origins
+   (`kits/connectors/marfil_held_origins.json`). **Right parts mirrored for the left (notes 106, TIOW Inbox
+   1.17.10):** arms, held weapons and hands fitted for one side go on the other as their mirror image; left-only
+   sculpts stay as extra designs. Under this, connectors and fits are only strictly needed on the right. **Still to do:** backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
    `scale` / `types` are not handled by the move yet, such parts are left and listed); the other makers.
    What follows was the spec. **In order:** (b) a
    production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with

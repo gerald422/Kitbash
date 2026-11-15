@@ -21,5 +21,8 @@ weapons with a hand in 16 groups. Dry runs only; nothing written to the library.
   Plasma B, Veteran Pistol); 12 only have Hand L (Bionic swords / hammer / spear, Volk, Techmarine, Jump Chaplain);
   2 have no fit (Shields 1C, 3C, the Bike Chaplain handle). Hand-L-only examples need a left-arm wrist cut (or the
   mirror) before they can be used.
-- **Next:** once Josh agrees, write each group with `seat.py write TASK --sure --near 2`. `--near 2` keeps the 20
-  far ones on their library fits until he has looked. Then move the groups with Move origins.
+- **Written Nov 15** (Josh: the 39 "happy"; the flipped ones "I'll sort those out in the app"): each group's task
+  with `seat.py write TASK --sure --near 2`, so 288 fits were written. The 20 far ones keep their library fits; each
+  task's `left_far.txt` lists them. Backups are in each `_backups/connectors-2026-11-15-NN/before`.
+- **Left-hand-only weapons:** Josh: "they should be mirrored". `seat.py` already searches a left part mirrored, so
+  `hands.py --resume DIR` carries on the run past the round limit.

@@ -18,7 +18,7 @@ P = lambda *a: os.path.join(R, *a)
 ADDON, PAGE, LIBJ, PT, NAMES = (P("addons", "tiow_inbox.py"), P("squad-builder", "src", "app.js"),
                                 P("bridge", "_library.json"), P("library-tools", "partTypes.json"),
                                 P("library-tools", "plan_names.py"))
-PAGE_KEYS = ("socket", "sided", "mirrorLeft", "spans", "adaptor")     # what the page's table carries
+PAGE_KEYS = ("socket", "sided", "mirrorLeft", "mirror", "spans", "adaptor")     # what the page's table carries
 
 
 def addon_tables(src):

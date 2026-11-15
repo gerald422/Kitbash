@@ -325,6 +325,17 @@ def import_request(job, prefs):
         except Exception as exc:          # never let the side choice stop an import
             print("[TIOW Inbox] variant choice failed:", repr(exc))
             vi = None
+    if vi is None and prefs.auto_snap and not job.get("_nosnap"):
+        # fitted for one side only, going onto the other: its mirror image (1.17.10)
+        try:
+            want = str(job.get("_side") or "")
+            for t in (str(job.get("socket") or ""), str((focus.get("ws_type") if focus is not None else "") or "")):
+                if not want and t[-2:] in (" R", " L"):
+                    want = t[-1]
+            vi = mirror_for_side(path, job, data, library_table(path)[0].get(str(job.get("category") or "")), want)
+        except Exception as exc:          # never let the side choice stop an import
+            print("[TIOW Inbox] mirror choice failed:", repr(exc))
+            vi = None
     vrec = None
     if isinstance(vi, dict):              # a mirror made on the spot (Mirror)
         vrec, vi = vi, int(vi.get("_index", -1))

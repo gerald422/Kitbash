@@ -1,6 +1,6 @@
 """Find a maker's weapon hand designs (notes 104 / 105): no cuts, dry runs only, nothing written to the library.
 
-    python kits/connectors/hands.py CONFIG [--lib LIB] [--rounds 20]
+    python kits/connectors/hands.py CONFIG [--lib LIB] [--rounds 20] [--resume _backups/hands-DATE]
 
 CONFIG (e.g. kits/connectors/marfil_hands.json): maker, blends, the arm-side cut ("blend", "spot"), the arm it is on
 ("on", with its "socket"), the first example ("first") and the types. A weapon that comes with its hand mates at the
@@ -37,14 +37,30 @@ def scan(lib, maker, types):
 def kit(rel): return rel.split("/")[1]
 
 
+def nxt(P, left, tried):
+    """the next example: a fitted right-hand weapon (else a left one: seat.py mirrors it) from the kit with the most left"""
+    cands = [x for x in left if x not in tried and "Hand R" in (P[x].get("fits") or {})] or \
+            [x for x in left if x not in tried and any(f.startswith("Hand") for f in (P[x].get("fits") or {}))]
+    if not cands: return None
+    big = collections.Counter(kit(x) for x in cands).most_common(1)[0][0]
+    return sorted((x for x in cands if kit(x) == big), key=lambda x: (not (P[x].get("exact") and any(e.startswith("Hand") for e in P[x]["exact"])), x))[0]
+
+
 def main():
     cfgp = sys.argv[1]; lib = opt("--lib", "D:/Kitbash Library"); cfg = json.load(open(cfgp, encoding="utf-8"))
     P = scan(lib, cfg["maker"], cfg["types"]); left = set(P); covered = {}; rounds = []; tried = set()
-    T = lib + "/_backups/hands-" + time.strftime("%Y-%m-%d"); k = 1
-    while os.path.exists(T): k += 1; T = lib + "/_backups/hands-%s-%d" % (time.strftime("%Y-%m-%d"), k)
-    os.makedirs(T); ex = cfg["first"]
+    if opt("--resume"):        # carry on a run that hit --rounds: its summary's rounds and what was left
+        T = opt("--resume").rstrip("/\\"); s = json.load(open(T + "/summary.json", encoding="utf-8")); rounds = s["rounds"]
+        left = set(s["left"]) & set(P); tried = {r["example"] for r in rounds}
+        for r in rounds:
+            for x in r["group"] + [r["example"]]: covered[x] = r["round"]
+        ex = nxt(P, left, tried)
+    else:
+        T = lib + "/_backups/hands-" + time.strftime("%Y-%m-%d"); k = 1
+        while os.path.exists(T): k += 1; T = lib + "/_backups/hands-%s-%d" % (time.strftime("%Y-%m-%d"), k)
+        os.makedirs(T); ex = cfg["first"]
     print("%d weapons with a hand (%s)" % (len(P), ", ".join("%s %d" % x for x in collections.Counter(kit(r) for r in P).most_common())), flush=True)
-    for rnd in range(int(opt("--rounds", 20))):
+    for rnd in range(len(rounds), len(rounds) + int(opt("--rounds", 20))):
         if ex is None: break
         tried.add(ex); left.discard(ex)
         con = {"name": "hand %d" % (rnd + 1), "blend": cfg["blend"], "spot": cfg["spot"], "on": cfg["on"], "socket": cfg["socket"],
@@ -71,13 +87,7 @@ def main():
         print("round %2d  %-58s +%3d (%s)  moved med %s mm / %s deg, %d far  [%d left, %d s]" % (rnd + 1, ex.split("/")[-1][:58], len(sure),
               ", ".join("%s %d" % x for x in r["kits"].items()), r["moved_med"], r["turn_med"], len(far), len(left), r["secs"]), flush=True)
         json.dump({"config": cfg, "rounds": rounds, "left": sorted(left)}, open(T + "/summary.json", "w", encoding="utf-8"), indent=1)
-        # the next example: a fitted right-hand weapon (else any fitted) from the kit with the most still left
-        cands = [x for x in left if x not in tried and "Hand R" in (P[x].get("fits") or {})] or \
-                [x for x in left if x not in tried and any(f.startswith("Hand") for f in (P[x].get("fits") or {}))]
-        if not cands: ex = None; continue
-        big = collections.Counter(kit(x) for x in cands).most_common(1)[0][0]
-        pick = sorted((x for x in cands if kit(x) == big), key=lambda x: (not (P[x].get("exact") and any(e.startswith("Hand") for e in P[x]["exact"])), x))
-        ex = pick[0]
+        ex = nxt(P, left, tried)
     W = ["Weapon hand designs: %s (%s)" % (cfg["maker"], os.path.basename(T)), "",
          "%d weapons with a hand; %d in a group of 2 or more, %d alone (their own hand, or the search found no match), %d with no fit to try." % (
              len(P), sum(len(r["group"]) + 1 for r in rounds if r["group"]), sum(1 for r in rounds if not r["group"]), len(left)), ""]

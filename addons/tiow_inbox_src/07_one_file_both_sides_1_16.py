@@ -176,6 +176,43 @@ def _is_tiow(ob):
     return bool(ob.get("tiow_src")) and os.path.isfile(str(ob.get("tiow_src")))
 
 
+def mirror_for_side(path, job, data, spec, want):
+    """1.17.10 (Josh, Nov 15: "using right arms and weapons and just mirroring
+    everything"): a part of a "mirror" type (arms, held weapons, hands) going
+    onto side `want` with a fit only for the other side, and no maker's copy
+    for `want`, comes in as its plain mirror image: mesh, sockets and fits
+    mirrored, as the Mirror button makes it (not saved). A record for
+    import_request's _variant, or None."""
+    if not (isinstance(spec, dict) and spec.get("mirror") and spec.get("sided")) or want not in ("R", "L"):
+        return None
+    base, other = str(spec.get("socket") or ""), ("L" if want == "R" else "R")
+    fits = dict((data or {}).get("fits") or {})
+    og = (data or {}).get("origin") if isinstance((data or {}).get("origin"), dict) else {}
+    jn = og.get("joint")
+    if isinstance(jn, str) and jn and jn not in fits:
+        fits[jn] = _flat(Matrix.Identity(4))       # a file moved onto its joint (notes 101)
+    ff = {}
+    for t, e in read_folder_fits(path).items():
+        m = e.get("m") if isinstance(e, dict) else e
+        if isinstance(m, list) and len(m) == 16:
+            ff[t] = m
+    have = set(fits) | set(ff)
+    if f"{base} {want}" in have or f"{base} {other}" not in have:
+        return None
+    if any(isinstance(v, dict) and v.get("side") == want and not v.get("synth") and not v.get("duplicate")
+           for v in part_variants(data)):
+        return None
+    sc = mirrored_sidecar(dict(data or {}, fits=fits), ff)
+    if og:
+        sc["origin"] = dict(og, joint=_swap_side(jn)) if isinstance(jn, str) else dict(og)
+    orig = (data or {}).get("original") if isinstance((data or {}).get("original"), dict) else {}
+    stem = os.path.splitext(os.path.basename(path))[0]
+    return {"side": want, "mirror": True, "synth": True, "align": _flat(MXM), "_index": -1,
+            "name": _mirror_name(orig.get("name") or stem),
+            "folder": str(orig.get("folder") or os.path.basename(os.path.dirname(path))),
+            "title": _mirror_name(job.get("name") or stem), "sidecar": sc}
+
+
 def _counterpart(part, whole, other):
     """What the Mirror button turns `part` into, as import_request's _variant:
     -1 (the file itself) for a variant; for the file itself, the maker's copy

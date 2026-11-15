@@ -2606,13 +2606,14 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
 
   // ------------------------------------------------------------------ joints (TIOW Inbox's table)
   var JOINTS = {
-    "Arms": {socket: "Shoulder", sided: true},
+    // mirror: a part fitted for one side only goes on the other as its mirror image (Josh, Nov 15: right parts, mirrored)
+    "Arms": {socket: "Shoulder", sided: true, mirror: true},
     "Two-Handed Guns": {socket: "Shoulder R", spans: ["Shoulder L"]},
     "Two-Handed Melee": {socket: "Shoulder R", spans: ["Shoulder L"]},
     "Heavy Weapons": {socket: "Shoulder R", spans: ["Shoulder L"]},
     "Two-Handed Held": {socket: "Hand R"},     // held in both hands, no arms of its own: right hand, the other hand meets the left arm
-    "Pistols": {socket: "Hand", sided: true}, "Melee": {socket: "Hand", sided: true},
-    "Shields": {socket: "Hand", sided: true}, "Hands": {socket: "Hand", sided: true},
+    "Pistols": {socket: "Hand", sided: true, mirror: true}, "Melee": {socket: "Hand", sided: true, mirror: true},
+    "Shields": {socket: "Hand", sided: true, mirror: true}, "Hands": {socket: "Hand", sided: true, mirror: true},
     "Heads": {socket: "Neck"}, "Backpacks": {socket: "Back"}, "Jump Packs": {socket: "Back"},
     "Legs": {socket: ["Waist", "Flat Waist"]}, "Adapters": {socket: "Waist"}, "Bases": {socket: "Base"},
     "Shoulder Pads": {socket: "Pad", sided: true, mirrorLeft: true},
@@ -2841,6 +2842,10 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
     if (sp.spans) return null;                                    // ...and nowhere else
     if (!side) return base;
     var mine = p.side || sideOfFits(p);
+    // fitted for the other side only, no maker's copy for this one: its mirror image (the same rule as TIOW Inbox 1.17.10)
+    if (sp.mirror && !p.fits[sp.socket + " " + side] && p.fits[sp.socket + " " + (side === "R" ? "L" : "R")] &&
+        !(p.variants || []).some(function (x) { return x.side === side && !x.synth && !x.duplicate; }))
+      return {data: plainMirror(p), v: null, mirror: true, align: MX.clone(), name: p.name + " (mirrored)"};
     // a part with no side of its own is a right-hand part (Mar Fil ship their pads that way)
     if (mine === side || (!mine && (side === "R" || p.fits[(sp.socket || "") + " " + side]))) return base;
     var v = (p.variants || []).filter(function (x) { return x.side === side && !x.synth; })[0];
