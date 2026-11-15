@@ -8,6 +8,13 @@ When an item is done, delete its line (the notes entry is the record).
 "looked good") and their **origins are moved onto the joint for real** (notes 101, `Move origins.bat`; `restore`
 undoes). Next is 5 (d), then the other part types and makers.
 
+**Scope (Josh, Nov 15; it has been lost a few times, keep it):** the base body is mostly Mar Fil, with weapons and
+customisation on top. **Terminators and Gravis are not part of this system**: no expectation that they work in it,
+as they would need their own base fits (their own torsos, sockets, joints). No Marta Phobos either, for now. Don't
+fit, cut, seat or move them. **Marta: no plain arms** (he may add a specific posed arm by
+name later); its two-handed weapons (they carry their arms) and weapons with a hand stay in, and its **legs** stay
+(some unique poses). `kits/connectors/cuts_needed.py` leaves the rest out (`NOT_NOW`, `NO_ARMS`).
+
 ## Order agreed with Josh (Nov 13, notes 089)
 
 1. Done Nov 13 (notes 090): `add_creator.py add RECIPE --src FOLDER` and `Add parts.bat` run on the PC. **Still to do:

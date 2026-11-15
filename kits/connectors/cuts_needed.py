@@ -11,7 +11,7 @@ it wrote) is covered; a part the search found nothing on, or only a look it did 
 Left out on purpose: torsos (they stay on their sockets), accessories and belt bits (last, Josh Nov 15), bases,
 cables and the other types the connector plan doesn't cover (counted at the end), Marta heads (deferred), Turtle
 Ninja "Rigging Required" folders, weapons without a hand (Josh, Nov 15: not used, as Marta's torsos), parts hidden
-from the page (_hidden.txt). A weapon that comes with its hand mates at the wrist: no cut, one of each hand design is
+from the page (_hidden.txt); for now (Josh, Nov 15) Marta Terminator / Gravis / Phobos and Marta's plain arms. A weapon that comes with its hand mates at the wrist: no cut, one of each hand design is
 placed on the arm's wrist from its library fit (notes 104)."""
 import sys, os, json, glob, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -36,8 +36,13 @@ for t in ("Hands", "Melee", "Pistols", "Shields", "Two-Handed Held"):     # they
     JOINTS[t] = [("hand at wrist", "no cut: one weapon of each hand design placed on the wrist from its library fit (notes 104)",
                   ("hand at wrist A",))]
 HANDLESS = ("no hand", "handless", "hand-less", "without hand")       # not used (Josh, Nov 15): weapons without a wrist
+PLACED = {"Hand": "hand at wrist A", "Back": "backpack mount"}        # hands.py runs: the fit they search -> the name that covers it
 HINT = {"shoulder disc": "Arm", "pad spot": "Arm", "wrist": "Arm", "waist": "Legs", "shin spot": "Legs", "pad inside": "Pad",
         "shin pad inside": "Pad", "neck": "Hel", "backpack mount": "Pack", "jump pack mount": "Pack", "hand at wrist": ""}
+# scope (Josh, Nov 15, notes 108): the base body is mostly Mar Fil, with weapons and customisation on top
+NOT_NOW = ("Marta PunkGirl - Terminator", "Marta PunkGirl - Gravis", "Marta PunkGirl - Phobos")   # no Terminators (or Gravis, Phobos) for now
+NO_ARMS = ("Marta",)        # Marta: plain arms not used (a posed one may be added by name later); its two-handed weapons
+                            # (they carry their arms) and weapons with a hand are, and its legs (some unique poses)
 LATER = {"Accessories", "Plate Accessories", "Loincloths", "Trophies", "Seals", "Hip Plates", "Buckles", "Tabards"}
 SKIP = {"Chests", "Bases"}
 
@@ -69,7 +74,7 @@ def covered(lib):
     have, makers, searched = collections.defaultdict(set), {}, collections.defaultdict(set)
     for f in glob.glob(os.path.join(HERE, "*.json")):
         c = json.load(open(f, encoding="utf-8"))
-        if isinstance(c, dict) and c.get("maker") and isinstance(c.get("types"), dict):      # seat.py configs only
+        if isinstance(c, dict) and c.get("maker") and isinstance(c.get("types"), dict) and not c.get("origins_only"):   # seat.py configs only
             makers.setdefault(c["maker"], set()).update(x["name"] for v in c["types"].values() for x in v); searched[c["maker"]].update(c["types"])
     for T in sorted(glob.glob(lib + "/_backups/connectors-*")):
         if not os.path.exists(T + "/written.json"): continue
@@ -80,6 +85,19 @@ def covered(lib):
                 if f.get("level") == "sure" or (f.get("level") == "look" and p["rel"] in wrote): have[k].add(name)
         for c in json.load(open(T + "/work/config.json", encoding="utf-8"))["types"].values():     # reference parts: where the
             for x in c: have[x["ref"].replace("/", "\\") + ".stl"].update(y["name"] for y in c)   # type's connectors were cut
+    # designs found from a fitted part (hands.py: weapon hands, backpack mounts; notes 105 / 107 / 108): an example
+    # is its own design and keeps its library fit; its group is covered once its round was written
+    for sp in sorted(glob.glob(lib + "/_backups/*/summary.json")):
+        try: s = json.load(open(sp, encoding="utf-8"))
+        except ValueError: continue
+        if not isinstance(s, dict) or "rounds" not in s or "config" not in s: continue
+        name = PLACED.get(s["config"].get("fit", "Hand"))
+        if not name: continue
+        for r in s["rounds"]:
+            have[r["example"].replace("/", "\\") + ".stl"].add(name)
+            wj = lib + "/_backups/" + (r.get("task") or "-") + "/written.json"
+            if os.path.exists(wj):                 # (a sure one left as it was, moved too far or fixed by hand, is still that design)
+                for x in r.get("group") or []: have[x.replace("/", "\\") + ".stl"].add(name)
     return have, makers, searched
 
 
@@ -90,10 +108,13 @@ def main():
     unsearched = collections.defaultdict(collections.Counter)                   # maker -> (type, connector) -> parts: no cut, a search
     need = collections.defaultdict(lambda: collections.defaultdict(list))         # maker -> (joint, how) -> [entries]
     later, other, done = collections.Counter(), collections.Counter(), collections.Counter()
+    notnow, noarms = collections.Counter(), collections.Counter()
     for e in idx["parts"]:
         maker = e["path"].split("\\")[0]; t = e["type"]
         if is_hidden(e) or "rigging required" in e["path"].lower() or t in SKIP: continue
         if maker.startswith("Marta") and t == "Heads": continue
+        if maker in NOT_NOW: notnow[maker] += 1; continue
+        if t == "Arms" and maker.startswith(NO_ARMS): noarms[maker] += 1; continue
         if t == "Hand-less Weapons" or any(w in e["name"].lower() for w in HANDLESS): continue
         if t in LATER: later[maker] += 1; continue
         if t not in JOINTS: other[t] += 1; continue
@@ -111,6 +132,11 @@ def main():
     cnt = lambda m, k: sum(1 for j in need[m] if kind(j) == k)
     total = sum(cnt(m, "cut") for m in need); places = sum(cnt(m, "place") for m in need); autos = sum(cnt(m, "auto") for m in need)
     w("# Connectors still to cut"); w("")
+    w("> **Scope (Josh, Nov 15 2026; it has been lost before, keep it):** the base body is mostly Mar Fil, with weapons and "
+      "customisation added on top. **Terminators and Gravis are not part of this system**: there is no expectation that they "
+      "work in it, as they would need their own base fits (their own torsos, sockets and joints). They, and Marta Phobos, are "
+      "left out here. **Marta: only its two-handed weapons and weapons with a hand attached**, not its plain arms (a specific "
+      "posed arm may be added by name later); its legs stay in for their unique poses."); w("")
     w("Generated by `kits/connectors/cuts_needed.py` from the page index and the written `Seat connectors` runs; run it "
       "again after a cut. One cut a maker folder and joint first: the search then shows which kits share it (Mar Fil's "
       "Veteran / Bladeguard neck turned out to be its own), and only those that don't need a cut of their own. A pad "
@@ -120,8 +146,8 @@ def main():
         for m, c in unsearched.items(): w("- %s: %s." % (m, ", ".join("%s %d (the %s)" % (t, n, k) for (t, k), n in c.most_common())))
     w(""); w("**%d cuts and %d pads to place, across %d maker folders; and %d groups taken from a fitted part (weapon hands, backpack mounts), "
              "no work from you.** Torsos (stay on their sockets), accessories and belt "
-             "bits (last), bases, Marta heads (deferred), Turtle Ninja \"Rigging Required\" folders, weapons without a hand (not used) and hidden parts are "
-             "left out." % (total, places, len(need), autos)); w("")
+             "bits (last), bases, Marta heads (deferred), Marta's plain arms, Marta Terminator / Gravis / Phobos (not now), Turtle Ninja \"Rigging Required\" "
+             "folders, weapons without a hand (not used) and hidden parts are left out." % (total, places, len(need), autos)); w("")
     w("| Maker folder | Cuts | Pads to place | Weapon hands (no work) | Parts waiting | Already seated by a connector |"); w("|---|---|---|---|---|---|")
     order = sorted(need, key=lambda m: -sum(len(v) for v in need[m].values()))
     for m in order: w("| %s | %d | %d | %d | %d | %d |" % (m, cnt(m, "cut"), cnt(m, "place"), cnt(m, "auto"), sum(len(v) for v in need[m].values()), done[m]))
@@ -139,6 +165,8 @@ def main():
     w(""); w("## Not in the connector plan (left as they are)"); w("")
     w("Accessories and belt bits, last on purpose: " + ", ".join("%s %d" % x for x in later.most_common()) + ".")
     w(""); w("Other types: " + ", ".join("%s %d" % x for x in other.most_common()) + ".")
+    w(""); w("Not for now (Josh, Nov 15): " + ", ".join("%s %d" % x for x in notnow.most_common()) + "; Marta's plain arms " +
+             ", ".join("%s %d" % x for x in noarms.most_common()) + " (its two-handed weapons and weapons with a hand stay in).")
     out = os.path.join(REPO, "docs", "cuts-needed.md")
     open(out, "w", encoding="utf-8", newline="\n").write("\n".join(W) + "\n")
     print("%s: %d cuts, %d pads to place, %d groups from fitted parts (no work), %d maker folders" % (out, total, places, autos, len(need)))
