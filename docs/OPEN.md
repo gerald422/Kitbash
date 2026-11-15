@@ -11,9 +11,10 @@ undoes). Next is 5 (d), then the other part types and makers.
 **Scope (Josh, Nov 15; it has been lost a few times, keep it):** the base body is mostly Mar Fil, with weapons and
 customisation on top. **Terminators and Gravis are not part of this system**: no expectation that they work in it,
 as they would need their own base fits (their own torsos, sockets, joints). No Marta Phobos either, for now. Don't
-fit, cut, seat or move them. **Marta: no plain arms** (he may add a specific posed arm by
-name later); its two-handed weapons (they carry their arms) and weapons with a hand stay in, and its **legs** stay
-(some unique poses). `kits/connectors/cuts_needed.py` leaves the rest out (`NOT_NOW`, `NO_ARMS`).
+fit, cut, seat or move them. **Plain arms: Mar Fil only** (Marta first, then every other maker, Nov 15;
+he may add a specific posed arm by name later). Other makers' two-handed weapons (they carry their arms) and weapons
+with a hand stay in, and Marta's **legs** stay (some unique poses). `kits/connectors/cuts_needed.py` leaves the rest
+out (`NOT_NOW`, `ARMS_FROM`).
 
 ## Order agreed with Josh (Nov 13, notes 089)
 

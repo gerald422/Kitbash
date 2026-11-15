@@ -31,8 +31,8 @@ Do not read `addons/tiow_inbox.py` whole (226 KB): `grep -n "^def \|^class "` an
   anchors, `tiow_corrected`, `tiow_holds`, `exact`). Back up first.
 - Parts without a fit are still filed under their type and logged, never dropped.
 - Scope (Nov 15): base body mostly Mar Fil, weapons and customisation on top. Terminators and Gravis are not part of
-  this system (they would need their own base fits); no Marta Phobos; Marta only for two-handed weapons, weapons with
-  a hand, and legs. Details: `docs/OPEN.md`, top.
+  this system (they would need their own base fits); no Marta Phobos. Plain arms: Mar Fil only; other makers give
+  two-handed weapons and weapons with a hand (and Marta its legs). Details: `docs/OPEN.md`, top.
 - Renegade chapter: no aquilas, purity seals or scrolls (`_hidden.txt`; merge with Josh's current file).
 - Public repo: no STL / OBJ / blend / npz / previews, and nothing identifying Josh (no surname, Windows user name;
   home paths as `~\...`). `tools/validate.py` and CI enforce this; run it before every commit.
