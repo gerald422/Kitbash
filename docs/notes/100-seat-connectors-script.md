@@ -1,6 +1,7 @@
 **`Seat connectors.bat` (Nov 15): Mar Fil arms, legs, shoulder pads and shin pads seated by Josh's connectors, no
-Claude. Search (~22 min, 12 Blender workers), report, Y to write (backups first), `restore`, `write`. A full dry run
-is ready to write (`_backups\connectors-2026-11-15-8`); nothing has been written to the library yet.**
+Claude. Search (~22 min, 12 Blender workers), report, Y to write (backups first), `restore`, `write`. Run
+`_backups\connectors-2026-11-15-8` written Nov 15 on Josh's yes: 440 sidecars + the page index (checked: each fit
+= the plan, a seat.py note on each, 11 parts gained their socket, no new problems, nothing of Josh's lost).**
 
 - **Files**: `Seat connectors.bat` (repo root), `kits/connectors/seat.py` (run / search worker / write / restore),
   `kits/connectors/marfil.json` (which object in which of Josh's blends is which connector, its reference part, and

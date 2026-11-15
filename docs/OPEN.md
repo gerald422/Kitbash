@@ -4,8 +4,8 @@ Short and current. Detail for most lines: `docs/notes/084-open-items-in-full-nov
 When an item is done, delete its line (the notes entry is the record).
 
 **New chat, start here (Nov 15):** the current work is item 5 (connectors, origins at the joint): read it, then
-`docs/notes/096`-`100`. The seating script is built (`Seat connectors.bat`, notes 100); a full Mar Fil dry run waits
-for Josh to write it (`Seat connectors.bat write`) and test in the Squad Builder.
+`docs/notes/096`-`100`. The seating script is built (`Seat connectors.bat`, notes 100) and the full Mar Fil run is
+written (Nov 15); Josh tests it in the Squad Builder and runs `Run checks.bat` (`Seat connectors.bat restore` undoes).
 
 ## Order agreed with Josh (Nov 13, notes 089)
 
@@ -54,8 +54,8 @@ for Josh to write it (`Seat connectors.bat write`) and test in the Squad Builder
    fixes (tie window, round test, exact file turn). Arms, pauldrons, shin pads right with their turn; legs placed
    right, heading loose (8 of 88 back to front): **Josh turns those by hand**. No cut can key the turn (nothing
    round the disc / waist is shared); a kit exported turned (Outrider, Jump Chaplain arms ~9 deg) needs a per-kit fix.
-   **(b) done Nov 15 (notes 100):** `Seat connectors.bat`; dry run `_backups\connectors-2026-11-15-8` not written yet
-   (Josh: `Seat connectors.bat write`, then the Squad Builder, then `Run checks.bat`). What follows was its spec.
+   **(b) done Nov 15 (notes 100):** `Seat connectors.bat`; run `_backups\connectors-2026-11-15-8` written Nov 15
+   (Josh: test in the Squad Builder, then `Run checks.bat`; record the golden squads only if they look right). What follows was its spec.
    **Next, in order:** (b) a
    production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with
    all its type's connectors (`find_all`); sure = fit written (`kb.sidecar.merge`, backed up), look = written and
