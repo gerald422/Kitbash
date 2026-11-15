@@ -2,13 +2,15 @@
 library's fits. One torso (its sockets, as TIOW uses them); the legs, both arms and both pauldrons placed by
   library: part placed at socket @ the part's own fit (the arm's own Pad socket for the pauldron)
   new:     the fit / Pad socket taken from where kb.connect found the connector (the reference's fit moved by the
-           match); pauldrons keep their own fit on that Pad socket until the pad-inside connector exists.
+           match); pauldrons on that Pad socket by their own fit, or (--pad-conn, --pad-ref) by the pad-inside
+           connector found on the pad (the reference pad's library fit moved by the match).
 Parts the library can't snap (no fit), and parts the search finds no connector on, are left out and said so;
 each new placement says how far it is from the library's (median over the part). Colours in the new row: green =
 sure, yellow = look, red = none (left at the library's placement, or left out). Read-only on the library.
 
     BL  connector_demo.py LIBRARY OUT.png --arm-conns DISC.stl,PADSPOT.stl,OTHER.stl.. --legs-conn WAIST.stl
-        --arm-ref ARM_REL --legs-ref LEGS_REL --model "LABEL|TORSO|LEGS|ARM_R|ARM_L|PAD_R|PAD_L" [--model ...]
+        --arm-ref ARM_REL --legs-ref LEGS_REL [--pad-conn PADINSIDE.stl --pad-ref PAD_REL]
+        --model "LABEL|TORSO|LEGS|ARM_R|ARM_L|PAD_R|PAD_L" [--model ...]
   BL = blender --background --factory-startup --python connector_demo.py --
   (arm connectors: the first is the shoulder disc, the second the pad spot, any others are searched with them)
 """
@@ -58,6 +60,17 @@ def run(lib, out, A):
     legs_con = C.Connector.from_stl(opt("--legs-conn"), "waist")
     aref, lref = side(lib, opt("--arm-ref")), side(lib, opt("--legs-ref"))
     F_disc, S_pad = fit(aref, "Shoulder R"), socket(aref, "Pad R"); F_waist = fit(lref, "Waist")
+    pad_con = C.Connector.from_stl(opt("--pad-conn"), "pad inside") if opt("--pad-conn") else None
+    F_padref = fit(side(lib, opt("--pad-ref")), "Pad R") if pad_con else None
+
+    def pad_fits(sp, ptri):
+        """the pad's fits: its own (library), or from the pad-inside connector found on it -> (fits, level or None)"""
+        if pad_con is None: return sp.get("fits") or {}, None
+        left = fit(sp, "Pad R") is None and fit(sp, "Pad L") is not None       # a left pad file: searched mirrored
+        f = C.find(pad_con, C.Surface(ptri, mirror=left))
+        if f["level"] == "none": return {}, "none"
+        Fr = F_padref @ np.linalg.inv(f["M"])
+        return ({"Pad L": (MX @ Fr @ MX).reshape(-1).tolist()} if left else {"Pad R": Fr.reshape(-1).tolist()}), f["level"]
     for ob in list(bpy.data.objects): bpy.data.objects.remove(ob)        # never read_factory_settings (notes 098)
     sc = bpy.context.scene
     cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); sc.collection.objects.link(cam); sc.camera = cam
@@ -82,9 +95,11 @@ def run(lib, out, A):
         for sd, arm, pad in (("R", arm_r, pad_r), ("L", arm_l, pad_l)):
             sa = side(lib, arm); left = arm.endswith(" L"); tri = C.soup(lib + "/" + arm + ".stl", sa.get("scale", 1.0))
             Ssh = socket(st, "Shoulder " + sd); sp = side(lib, pad); ptri = C.soup(lib + "/" + pad + ".stl", sp.get("scale", 1.0))
-            Fp = fit(sp, "Pad " + sd); pmir = False
-            if Fp is None: Fp = fit(sp, "Pad R" if sd == "L" else "Pad L"); pmir = True     # a one-sided pad on the other side: mirrored
-            P = (lambda Fp_: (MX @ Fp_ if pmir else Fp_))(Fp) if Fp is not None else None
+            def pick(fits):
+                Fp = fits.get("Pad " + sd); other = fits.get("Pad R" if sd == "L" else "Pad L")
+                if Fp is not None: return np.array(Fp).reshape(4, 4)
+                return MX @ np.array(other).reshape(4, 4) if other is not None else None   # a one-sided pad on the other side: mirrored
+            P = pick(sp.get("fits") or {}); nf, plev = pad_fits(sp, ptri); P_new = pick(nf)
             # library
             O = off.copy(); O[2, 3] = row; Fa = fit(sa, "Shoulder " + sd)
             if Fa is not None:
@@ -105,10 +120,12 @@ def run(lib, out, A):
             else:
                 Sp_new = socket(sa, "Pad " + sd); how = "none, library's socket" if Sp_new is not None else "none"
             pad_moved = ""
-            if Sp_new is not None and P is not None:
-                add("pad", ptri, A_ @ Sp_new @ P, LEVEL[fpd["level"]])
-                if Fa is not None and socket(sa, "Pad " + sd) is not None:
-                    pad_moved = moved(ptri, Ssh @ Fa @ socket(sa, "Pad " + sd) @ P, Ssh @ Fa_new @ Sp_new @ P)
+            if pad_con is not None: how += ", inside %s" % plev
+            if Sp_new is not None and P_new is not None:
+                worst = max((fpd["level"], plev or "sure"), key=["sure", "look", "none"].index)
+                add("pad", ptri, A_ @ Sp_new @ P_new, LEVEL[worst])
+                if Fa is not None and socket(sa, "Pad " + sd) is not None and P is not None:
+                    pad_moved = moved(ptri, Ssh @ Fa @ socket(sa, "Pad " + sd) @ P, Ssh @ Fa_new @ Sp_new @ P_new)
             lines["new"].append("arm %s: %s%s | pad: %s%s" % (sd, fd["level"], arm_moved, how, pad_moved))
         rows = [("library fits", row, lines["lib"] or ["everything has a fit"]), ("connector method", 0.0, lines["new"])]
         for title, dz, ls in rows:

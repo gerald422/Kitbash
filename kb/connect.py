@@ -158,17 +158,29 @@ def _result(R, t, m, q, cov, **kw):
     return dict(M=M, match=round(m, 4), q90=round(q, 4), cover=round(cov, 3), level=lv, same=lv != "none", **kw)
 
 
+ROUND = 0.02         # mm: a connector still within this of its fit when turned 30 deg (not settled) is round
 def prefer_file_turn(con, surf, best, tol=0.01):
     """a round connector fits at any turn about its own axis: keep the turn closest to the part's file frame (no turn)
-    if it fits as well (within tol mm). Returns the result kept, with 'turned' = deg moved and 'round' = fits turned"""
+    if it fits as well (within tol mm). Returns the result kept, with 'turned' = deg moved and 'round' = fits turned.
+    Round = within ROUND mm turned 30 deg: Josh's 2nd shoulder disc (a little more than the round face) is 0.012 off
+    there, and with the old 0.01 it counted as keyed, so its turn was left to the shape, which does not hold it (6 deg
+    median off vs 0.4; notes 099). Keyed cuts (pad spot, wrist B, shin spot) are 0.09-0.12 off at 30 deg."""
     R, t = best["M"][:3, :3], best["M"][:3, 3]; ax = R @ con.axis; c1 = R @ con.c + t
-    angs = np.arange(-180, 180, 5.0); dev = [geo.ang(_rot(ax, a) @ R) for a in angs]; a = float(angs[int(np.argmin(dev))])
     Rr = _rot(ax, 30.0) @ R; spun = settle(con, surf, Rr, c1 - Rr @ con.c, 0)[2]      # 30 deg turned, not settled
-    rnd = spun <= best["match"] + tol
-    if abs(a) < 7.5 or not rnd: return dict(best, turned=0.0, round=bool(rnd))
-    R2 = _rot(ax, a) @ R; r = settle(con, surf, R2, c1 - R2 @ con.c)
-    if r[2] <= best["match"] + tol: return dict(_result(*r), turned=a, round=True)
-    return dict(best, turned=0.0, round=True)
+    rnd = spun <= best["match"] + max(tol, ROUND)
+    angs = np.arange(-180, 180, 5.0); dev = [geo.ang(_rot(ax, a) @ R) for a in angs]; a = float(angs[int(np.argmin(dev))])
+    fine = np.arange(a - 5, a + 5.01, 0.25); a = float(fine[int(np.argmin([geo.ang(_rot(ax, x) @ R) for x in fine]))])
+    # a keyed connector keeps its shape's turn when it is a copy (sure); on a variant (look) the shape holds the turn
+    # only loosely (the oval waist: 10-20 deg off by noise, notes 099), so the file frame's turn is taken if it is
+    # within 30 deg and fits as well. Never a flip.
+    if not rnd and (best["level"] == "sure" or abs(a) > 30): return dict(best, turned=0.0, round=False)
+    if abs(a) < 0.25: return dict(best, turned=0.0, round=bool(rnd))
+    # the file frame's turn exactly, about the connector's own axis, not settled again (a settle lets a nearly round
+    # connector drift back a few degrees: notes 099)
+    R2 = _rot(ax, a) @ R; r = settle(con, surf, R2, c1 - R2 @ con.c, 0)
+    if r[2] <= best["match"] + tol:            # the level stays the shape's (turning a round connector is free)
+        M = np.eye(4); M[:3, :3] = r[0]; M[:3, 3] = r[1]; return dict(best, M=M, turned=a, round=bool(rnd), turned_match=round(r[2], 4))
+    return dict(best, turned=0.0, round=bool(rnd))
 
 
 class Claim:
@@ -242,7 +254,12 @@ def find_all(cons, surf, file_turn=True):
     return done
 
 
-TIE = 0.01           # mm: places / turns that fit within this of the best fit as well
+TIE = 0.01           # mm: places / turns that fit within this of the best fit as well (at most)
+TIE_MIN, TIE_REL = 0.002, 0.25   # ...and within a quarter of the best fit's own gap (at least 0.002): a 0.000 fit never
+                                 # ties with a 0.009 one (left shin pads, Outrider pads: a 180 deg flip won the tie)
+def tie_window(m): return min(TIE, max(TIE_MIN, TIE_REL * m))
+
+
 def file_dist(con, r):
     """how far a pose is from where the connector sits on its reference part (mm, 20 deg counted as 1 mm)"""
     R, t = r["M"][:3, :3], r["M"][:3, 3]; return float(np.linalg.norm(R @ con.c + t - con.c)) + geo.ang(R) / 20.0
@@ -253,7 +270,7 @@ def choose(con, surf, out, file_turn=True):
     own place (the maker's kit frame) is kept. 'ambiguous': another tied pose is elsewhere on the part (> 1 mm), so
     the shape alone does not say where the joint is"""
     good = [r for r in out if r["cover"] >= 0.7] or out; m = min(r["match"] for r in good)
-    tied = [r for r in good if r["match"] <= m + TIE]
+    tied = [r for r in good if r["match"] <= m + tie_window(m)]
     best = min(tied, key=lambda r: file_dist(con, r)) if file_turn else min(tied, key=lambda r: r["match"])
     at = lambda r: r["M"][:3, :3] @ con.c + r["M"][:3, 3]
     amb = [r for r in tied if np.linalg.norm(at(r) - at(best)) > 1.0]

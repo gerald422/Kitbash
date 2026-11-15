@@ -50,7 +50,8 @@ def run(lib, cat, maker, out, specs, A):
                 Rt, Rf = tr["M"][:3, :3], f["M"][:3, :3]
                 r.update(truth=tr["match"], truth_cover=tr["cover"], truth_same=tr["same"], truth_level=tr["level"],
                          place_mm=round(float(np.linalg.norm((Rf @ con.c + f["M"][:3, 3]) - (Rt @ con.c + tr["M"][:3, 3]))), 2),
-                         tilt=round(float(np.degrees(np.arccos(np.clip(abs((Rf @ con.axis) @ (Rt @ con.axis)), -1, 1)))), 1), turn=round(geo.ang(Rf @ Rt.T), 1))
+                         tilt=round(float(np.degrees(np.arccos(np.clip(abs((Rf @ con.axis) @ (Rt @ con.axis)), -1, 1)))), 1), turn=round(geo.ang(Rf @ Rt.T), 1),
+                         turn_lib=round(geo.ang(Rf @ M0[:3, :3].T), 1))   # against the library's joint as it is (a round connector's settle drifts in turn)
                 r["verdict"] = ("right" if r["place_mm"] <= 0.5 and r["tilt"] <= 5 else "WRONG PLACE") if tr["same"] and f["same"] else \
                                "missed" if tr["same"] else "FALSE" if f["same"] else "no (right)"
                 line.append("%s %.3f/%.2f->%.3f/%.2f %s%s" % (con.name[:8], tr["match"], tr["cover"], f["match"], f["cover"], r["verdict"],

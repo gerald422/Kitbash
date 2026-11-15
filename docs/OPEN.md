@@ -3,9 +3,9 @@
 Short and current. Detail for most lines: `docs/notes/084-open-items-in-full-nov-9.md`, or the notes entry named.
 When an item is done, delete its line (the notes entry is the record).
 
-**New chat, start here (Nov 14):** the current work is item 5 (connectors, origins at the joint): read it, then
-`docs/notes/096`, `097`, `098`. The search from scratch is built (`kb/connect.py`, notes 098); next is (b), the
-production seating script, once Josh's pad-inside / shin connectors arrive (or arms and legs first).
+**New chat, start here (Nov 15):** the current work is item 5 (connectors, origins at the joint): read it, then
+`docs/notes/096`-`099`. Mar Fil's connectors are all in and checked (notes 099); next is (b), the production
+seating script.
 
 ## Order agreed with Josh (Nov 13, notes 089)
 
@@ -49,11 +49,17 @@ production seating script, once Josh's pad-inside / shin connectors arrive (or a
    **Done Nov 14 (notes 098):** the search from scratch, `kb/connect.py` (`find`, `find_all`, levels sure / look /
    none), test `tests/kb/t_connect.py`, check `kits/nofit/connector_search_check.py`: on all 220 Mar Fil arms and
    88 legs a sure answer was never wrong where the library agrees with the shape.
+   **Done Nov 15 (notes 099):** his recut (Arm 1B disc / pad spot / wrist B, keyed wrist A, Legs 2 waist and shin
+   spot, Shoulder Pad 1 and Shin Pad 1 placed); pad insides cut from his placed pads (no hand cut needed); search
+   fixes (tie window, round test, exact file turn). Arms, pauldrons, shin pads right with their turn; legs placed
+   right, heading loose (8 of 88 back to front): **Josh turns those by hand**. No cut can key the turn (nothing
+   round the disc / waist is shared); a kit exported turned (Outrider, Jump Chaplain arms ~9 deg) needs a per-kit fix.
    **Next, in order:** (b) a
    production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with
    all its type's connectors (`find_all`); sure = fit written (`kb.sidecar.merge`, backed up), look = written and
    flagged, none = listed; fit = connector's fit moved by the match, turn fixes per connector, and a list of unmatched parts grouped
-   (= which connector to cut next); (c) the origin move, into a NEW folder (the STLs have no backup: ask Josh where),
+   (= which connector to cut next). It reads his blends (`connector_export.py`'s way), cuts pad insides as notes 099,
+   searches the shin spot on both shins (R / L by side) and lists every look leg so he can turn it; (c) the origin move, into a NEW folder (the STLs have no backup: ask Josh where),
    never over the originals; (d) "no fit = origin is the joint" in TIOW Inbox and the page. Torsos, and what hangs
    off arms and legs, keep their sockets until then.
 6. Finalise: export step, a peg test piece (pegs have never been printed).
@@ -64,12 +70,9 @@ production seating script, once Josh's pad-inside / shin connectors arrive (or a
 
 - **Connectors**: received Nov 14 (notes 097). Still to cut for Mar Fil, when he likes: pad spots for the
   Intercessor, Bladeguard and Techmarine shoulders. Turtle Ninja / other makers only after Mar Fil proves out.
-- **The turn of round connectors** (notes 098, demo): the disc and waist fix place, not arm swing / legs heading;
-  across kits the file's own turn is wrong (Outrider legs ~10 deg, Captain arms unverified). **Josh, Nov 14: recut
-  them keyed** (a non-round feature in the cut); he is doing it. Then rerun `connector_search_check.py` and
-  `connector_demo.py`. Captain with Jump Pack legs need a waist cut.
-- **Pad-inside and shin connectors** (his choice: cut by hand): Shoulder Pad 1 inside, Legs 1B right shin spot,
-  Shin Pad 1 inside (item 5).
+- **Turn of round connectors** (notes 099): no recut can key it. Per-kit turn fix for Outrider and Jump Chaplain
+  arms (~9 deg) when he likes; legs he turns by hand. Captain with Jump Pack legs need their own waist cut. Wrist A
+  (hands) is weak (11 deg median, 19 look wrong): a better hand cut if hands snap badly.
 - Assault Legs 3's library fit looks 0.5 mm / 9 deg off against the waist connector (notes 097): a look when he can.
 - Library sockets that look wrong by shape (notes 098), to check by eye: Pad sockets of Outrider Arm Wight Handle
   A1 L, B1 L, B2 L and Arm With Handle B R; Veteran Arm B's Hand socket. No Forearm socket on Assault Arm 8B / 8C and
