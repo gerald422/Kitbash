@@ -20,7 +20,8 @@ undoes). Next is 5 (d), then the other part types and makers.
 3. Fit the parts that have none. **Carrying done Nov 14** (notes 093): 80 Turtle Ninja torsos got sockets, 1 arm a
    fit. **Left out on purpose** (Josh; `OUT` in `kits/nofit/carry_library.py`): Turtle Ninja posed torsos (only the
    straight one of each, usually 1 or 9 of a letter; the 80 posed ones socketed Nov 14 stay), TN "Rigging Required"
-   folders, Marta torsos; Marta heads later. Pads: one master a maker folder, every pad seated on its inside
+   folders, Marta torsos; Marta heads later; **weapons without a hand (wrist) are not used** (Josh, Nov 15, as
+   Marta's torsos: `Hand-less Weapons` and "No Hand" / handless files get no fit, no cut, no connector work). Pads: one master a maker folder, every pad seated on its inside
    (`kits/nofit/masters.py one`; Josh accepted the master's fit, "purple", Nov 14; nothing written yet; notes 094).
    **The rest (80 arms, 51 legs, 57 pads, heads, held weapons) now goes through connectors (item 5).**
 4. Shared causes of bad snaps, worst first by his account: **pauldrons, necks, accessories**; then the Nov 6 list

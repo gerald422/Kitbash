@@ -120,6 +120,14 @@ def read_connectors(cfg, lib, work):
                 pad = obs[c["pad"]]; T = tris(pad); Mw = np.array(pad.matrix_world)
                 spot = C.Surface(tris(obs[c["spot"]]), spacing=0.03)
                 Tw = T @ Mw[:3, :3].T + Mw[:3, 3]; T = T[spot.dist(Tw.mean(1))[1] < GAP]
+            elif "placed" in c:                   # the same from a part placed by its LIBRARY fit on the reference arm's socket
+                if c["spot"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["spot"], c["blend"])); continue
+                ra = maker(lib + "/" + c["on"] + SC.SUFFIX)[0]; S = side_sock(ra, c["socket"])      # (a weapon's hand on the wrist:
+                ws, _, wb = maker(lib + "/" + c["placed"] + SC.SUFFIX); F, _ = side_fit(ws, c["fit"])  #  notes 104)
+                if S is None or F is None: bad.append("%s: no %s socket on %s or no %s fit on %s" % (c["name"], c["socket"], c["on"], c["fit"], c["placed"])); continue
+                T = unmoved(C.soup(lib + "/" + c["placed"] + ".stl", ws.get("scale", 1.0)), wb); P = S @ F
+                spot = C.Surface(tris(obs[c["spot"]]), spacing=0.03)
+                T = T[spot.dist((T @ P[:3, :3].T + P[:3, 3]).mean(1))[1] < GAP]
             else:
                 if c["object"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["object"], c["blend"])); continue
                 T = tris(obs[c["object"]])
