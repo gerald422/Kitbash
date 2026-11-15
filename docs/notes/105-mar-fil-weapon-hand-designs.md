@@ -26,3 +26,14 @@ weapons with a hand in 16 groups. Dry runs only; nothing written to the library.
   task's `left_far.txt` lists them. Backups are in each `_backups/connectors-2026-11-15-NN/before`.
 - **Left-hand-only weapons:** Josh: "they should be mirrored". `seat.py` already searches a left part mirrored, so
   `hands.py --resume DIR` carries on the run past the round limit.
+  - Resumed for rounds 21-29:
+    - Veteran Pistol +1 at 0.04 mm (written).
+    - Bladeguard Sword 5A Bionic +2, both 2.1 mm / 11 deg off (not written: over `--near 2`).
+    - Six examples matched nothing else.
+    - Round 29 stopped: the Techmarine Hand's library fit doesn't put its wrist on the Assault wrist cut (0
+      triangles), so it gives no side.
+  - Final: 329 of 345 in groups, 10 alone. 5 not covered: Absolvor and Techmarine Grav Pistol (Hand L only, each
+    other's only candidate), Bike Chaplain handle and Bladeguard Shields 1C / 3C (no fit). They keep what they have,
+    and mirroring (notes 106) covers the other side.
+- **Move origins** (dry run, `kits/connectors/marfil_held_origins.json`): 342 files would move (Melee 190, Pistols
+  125, Hands 11, Shields 16; origin moves 3-9 mm median); 3 have no Hand fit.
