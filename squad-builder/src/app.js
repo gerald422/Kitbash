@@ -156,8 +156,8 @@
   function idbGet(k) { return idb().then(function (db) { return new Promise(function (res) { var q = db.transaction("h").objectStore("h").get(k); q.onsuccess = function () { res(q.result); }; q.onerror = function () { res(null); }; }); }).catch(function () { return null; }); }
   function idbSet(k, v) { return idb().then(function (db) { db.transaction("h", "readwrite").objectStore("h").put(v, k); }).catch(function () {}); }
 
-  function readBytes(rel) {
-    if (S.source) return fetch(S.source + rel.split("/").map(encodeURIComponent).join("/")).then(function (r) { if (!r.ok) throw new Error(rel + " " + r.status); return r.arrayBuffer(); });
+  function readBytes(rel, stamp) {
+    if (S.source) return fetch(S.source + rel.split("/").map(encodeURIComponent).join("/") + (stamp ? "?v=" + stamp : "")).then(function (r) { if (!r.ok) throw new Error(rel + " " + r.status); return r.arrayBuffer(); });
     var parts = rel.split("/"), d = Promise.resolve(S.libHandle);
     parts.slice(0, -1).forEach(function (p) { d = d.then(function (h) { return h.getDirectoryHandle(p); }); });
     return d.then(function (h) { return h.getFileHandle(parts[parts.length - 1]); })
@@ -169,7 +169,7 @@
       var idx = JSON.parse(new TextDecoder().decode(b));
       S.index = idx; S.parts = idx.parts; S.types = idx.types || {}; S.byId = {};
       if (idx.joints) Object.keys(idx.joints).forEach(function (k) { if (JOINTS[k] && idx.joints[k] && typeof idx.joints[k] === "object") Object.assign(JOINTS[k], idx.joints[k]); });
-      S.parts.forEach(function (p) { S.byId[p.id] = p; norm(p); (p.variants || []).forEach(norm); });
+      S.parts.forEach(function (p) { S.byId[p.id] = p; norm(p); (p.variants || []).forEach(norm); p.pv = stampOf(p); });
       return readBytes("_hidden.txt").then(function (b) { readHide(new TextDecoder().decode(b)); }, function () { readHide(""); });
     }).then(function () {
       return readBytes(BDIR() + CORR).then(function (b) { replayCorrections(new TextDecoder().decode(b)); }, function () {});
@@ -178,6 +178,14 @@
       $("libtxt").textContent = S.parts.length + " parts";
       renderAll();
     });
+  }
+  /* A preview fetched from a server is asked for under a stamp of the part's placement data: when a part's file is
+     moved (its origin onto the joint, notes 101) its fits, sockets and preview change together, so a browser can't
+     draw a copy of the preview it kept from before under the new fits. FNV-1a of the data, base 36. */
+  function stampOf(p) {
+    var t = JSON.stringify([p.fits, p.sockets, (p.variants || []).map(function (v) { return [v.align, v.fits, v.sockets]; })]), h = 0x811c9dc5;
+    for (var i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return h.toString(36);
   }
   function norm(d) {           // socket and fit names on the current names
     var f = {};
@@ -203,7 +211,7 @@
         return u.buffer;
       });
       get = S.packs[at[0]].then(function (b) { return b.slice(r[0], r[0] + r[1]); });
-    } else get = readBytes(BDIR() + p.prev);
+    } else get = readBytes(BDIR() + p.prev, p.pv);
     S.geoWait[id] = get.then(function (b) {
       var dv = new DataView(b), nv = dv.getUint32(4, true), nt = dv.getUint32(8, true);
       var pos = new Float32Array(b, 12, nv * 3), idx = new Uint32Array(b.slice(12 + nv * 12, 12 + nv * 12 + nt * 12));

@@ -61,3 +61,12 @@ did (268 of 272 test parts exactly; the 4 others are hip plates on moved legs, 0
   `before` or `after`.
 - **Not touched:** `golden.json` (still Nov 13's, before the connector run: `Run checks.bat` lists Mar Fil parts by
   those fractions of a mm until Josh records again), TIOW Inbox, the page.
+- **Same day, Josh: "pauldrons and shin pads are all over the place even after restart", Mar Fil only, on the shared
+  page.** Not the data: the page's own placement over the current index puts every Mar Fil pad and shin pad where it
+  was before the move (0.00 mm), and the page loaded fresh (local server, real library, no cache) draws Assault and
+  Veteran marines right. It was the browser: the old server sent previews with `max-age=86400`, so a preview fetched
+  before the restart is reused without asking, the old mesh under the new (identity) fit. Fix: the page asks for a
+  preview from a server as `...bin?v=<stamp>`, the stamp an FNV-1a hash of the part's fits, sockets and copies (the
+  server ignores the query), so a moved part's preview has a new address and an old saved copy is never used. Parts
+  whose data is the same share a stamp (a pad with only an identity fit), which is fine: since the restart previews
+  are revalidated (ETag) anyway. Page rebuilt and installed (`page-preview-stamp-2026-11-15`).
