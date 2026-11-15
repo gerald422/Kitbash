@@ -69,7 +69,7 @@ def covered(lib):
     have, makers, searched = collections.defaultdict(set), {}, collections.defaultdict(set)
     for f in glob.glob(os.path.join(HERE, "*.json")):
         c = json.load(open(f, encoding="utf-8"))
-        if isinstance(c, dict) and c.get("maker"):
+        if isinstance(c, dict) and c.get("maker") and isinstance(c.get("types"), dict):      # seat.py configs only
             makers.setdefault(c["maker"], set()).update(x["name"] for v in c["types"].values() for x in v); searched[c["maker"]].update(c["types"])
     for T in sorted(glob.glob(lib + "/_backups/connectors-*")):
         if not os.path.exists(T + "/written.json"): continue

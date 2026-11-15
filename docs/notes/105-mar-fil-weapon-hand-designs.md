@@ -1,0 +1,25 @@
+**Mar Fil weapon hand designs found with no cuts (Nov 15): `kits/connectors/hands.py`, 20 rounds, 324 of 345
+weapons with a hand in 16 groups. Dry runs only; nothing written to the library.**
+
+- **How:** `hands.py CONFIG` (config `kits/connectors/marfil_hands.json`). Each round puts one example weapon on
+  Assault Arm 1A R's wrist A cut by its library fit (a `seat.py` "placed" connector, notes 104) and dry-runs
+  `seat.py run --list` over the weapons not yet covered. The sure matches form the example's group. The next example
+  is a right-hand-fitted weapon from the kit with the most still uncovered. `seat.py --list FILE` limits a run to the
+  listed parts. Output goes to `_backups/hands-2026-11-15/` (`report.txt`, `summary.json`, `roundNN.json/.txt`);
+  each round's plan is in its `_backups/connectors-2026-11-15-NN`.
+- **Result** (345 weapons, hand-less left out): the groups by size are 69 Intercessor bolter grip, 53 Intercessor
+  open hand (also Assault), 39 chainsword, 38 / 28 / 26 / 16 Bladeguard axe hands (1B, 1A, 1B Bionic, 1A Bionic),
+  20 Veteran gun, then 5, 5, 3, 2, 1, 1, 1, 1. Four examples matched nothing else (Shield 2B, Combat Knife 3,
+  Hand 3, Power Sword C3).
+  - Medians from the library fits are 0.02-0.54 mm and 0.1-6 deg.
+  - 20 sure matches turned far, all about the socket Y axis:
+    - 15 flipped about 155-178 deg (round 4: 7 Bionic / L swords; round 5: 8 Bladeguard swords, hammers and shields).
+      The flip swaps the weapon end-for-end along the hand socket's Z; the hand band still matches at about 0.001 mm.
+      Which one is right (the library fit or the new one) needs Josh's eye.
+    - 5 more turned 11-14 deg (round 6 three, Volk B L) or 154 deg (Volk A L).
+- **Left:** 17, stopped by the 20-round limit and not exhausted. 3 have a Hand R fit (Captain shield, Bladeguard
+  Plasma B, Veteran Pistol); 12 only have Hand L (Bionic swords / hammer / spear, Volk, Techmarine, Jump Chaplain);
+  2 have no fit (Shields 1C, 3C, the Bike Chaplain handle). Hand-L-only examples need a left-arm wrist cut (or the
+  mirror) before they can be used.
+- **Next:** once Josh agrees, write each group with `seat.py write TASK --sure --near 2`. `--near 2` keeps the 20
+  far ones on their library fits until he has looked. Then move the groups with Move origins.

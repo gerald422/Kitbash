@@ -68,7 +68,11 @@ undoes). Next is 5 (d), then the other part types and makers.
    they were. **Two-handed / heavy weapons and (d) done Nov 15 (notes 103):** 121 seated by the disc, 169 moved;
    44 took the left arm's disc and kept their library fits (`find_all` to prefer the right one: no cut needed);
    TIOW Inbox 1.17.9 / the page index read `origin.joint` as the fit. **Cuts still needed: `docs/cuts-needed.md`**
-   (`kits/connectors/cuts_needed.py` regenerates it). **Still to do:** backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
+   (`kits/connectors/cuts_needed.py` regenerates it). **Weapons with a hand, Nov 15 (notes 104-105):** no cut; one
+   example per hand design placed by its library fit (`kits/connectors/hands.py`): Mar Fil 324 of 345 in 16 groups,
+   dry runs only. **Waiting on Josh:** look at the 39 chainsword-hand ones on the page and at the 20 that came out
+   flipped (Bladeguard swords / hammers / shields), then `seat.py write TASK --sure --near 2` per group and move.
+   17 are left (12 have only Hand L: they need a left wrist cut or the mirror). **Still to do:** backpacks, hands and weapons (they need connectors and a `fit` entry in the config; `upright` / `offHand` / `pivot` /
    `scale` / `types` are not handled by the move yet, such parts are left and listed); the other makers.
    What follows was the spec. **In order:** (b) a
    production seating script (a `.bat`, Blender in the background, no Claude): every part of a maker searched with

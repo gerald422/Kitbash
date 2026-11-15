@@ -4,7 +4,7 @@
     "Seat connectors.bat" restore    put back what the last run wrote (its backup), or: restore TASK
     "Seat connectors.bat" write      write the last run that was searched but not written (no new search)
 
-    BL kits/connectors/seat.py -- run CONFIG [--lib LIB] [--only TEXT] [--types Arms,Legs] [--workers N] [--yes] [--dry] [--sure]
+    BL kits/connectors/seat.py -- run CONFIG [--lib LIB] [--only TEXT] [--list FILE] [--types Arms,Legs] [--workers N] [--yes] [--dry] [--sure]
     BL kits/connectors/seat.py -- write [TASK] [--lib LIB] [--yes] [--sure] [--near MM]   (--sure: sure fits only; --near:
                                     only fits within MM and 10 deg of the old fit)
     BL kits/connectors/seat.py -- restore [TASK] [--lib LIB]
@@ -339,7 +339,8 @@ def run(cfgp, A):
     if bad: print("\nSTOPPED, a connector isn't right:\n  " + "\n  ".join(bad)); return
     json.dump(cfg, open(work + "/config.json", "w", encoding="utf-8"), indent=1)
     refs = {c["ref"] for cons in cfg["types"].values() for c in cons}
-    P = [(c, r) for c, r, sc in parts(lib, cfg["maker"], list(cfg["types"])) if r not in refs and (not only or only in r)]
+    keep = set(open(opt(A, "--list"), encoding="utf-8").read().splitlines()) if opt(A, "--list") else None      # --list FILE: these library paths only
+    P = [(c, r) for c, r, sc in parts(lib, cfg["maker"], list(cfg["types"])) if r not in refs and (not only or only in r) and (keep is None or r in keep)]
     order = {c: i for i, c in enumerate(cfg["types"])}; P.sort(key=lambda x: (order[x[0]], x[1]))
     json.dump(P, open(work + "/jobs.json", "w", encoding="utf-8"))
     n = max(1, min(n, len(P))); print("searching %d parts (%s) with %d Blender workers..." % (len(P), ", ".join(cfg["types"]), n), flush=True)
