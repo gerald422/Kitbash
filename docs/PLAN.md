@@ -68,7 +68,7 @@ without guessing:
    maker's cuts collection, with exactly one of these names (which part it was cut on is read from where it lies):
    `torso shoulder`, `torso neck`, `torso waist`, `torso back`, `arm shoulder disc`, `arm pad spot`, `arm wrist`,
    `legs waist`, `legs shin spot`, `legs buckle`, `head neck`, `jump pack mount`, `backpack mount`, `weapon wrist`;
-   optional `pad inside`, `shin pad inside`. A `.001` Blender adds to a repeated name is ignored.
+   optional `pad inside`, `shin pad inside`; also `arm wrist armour`, `legs back plate` (`legs backplate` reads the same). Case doesn't matter. A second cut of the same joint takes a label after the name (`arm wrist a`, `weapon wrist 2`): the fixed part names the joint, the rest is only a label. A `.001` Blender adds is ignored. Parts may also carry the maker's original file name (`81-Arm-2-R-A`): the reader keeps the library file whose mesh lines up with the object.
 4. **Both sides of each joint are cut:**
 
    | Joint | host side | part side |
