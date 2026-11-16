@@ -1,8 +1,9 @@
 """Make the starting reference file for Josh's cuts (docs/PLAN.md, "The reference file"): Mar Fil Torso 2 at the centre
 and the Mar Fil parts on it, each imported straight from the library and put where the library places it today. No
-cuts: Josh adjusts each pose by eye (that pose is the anchor) and cuts the mating surfaces. Writes a NEW file only.
+cuts, no notes: objects are named as their library file, in the collection "Mar Fil"; the empty collection "Mar Fil
+cuts" is for his cuts (names: docs/PLAN.md). Josh adjusts each pose by eye (that pose is the anchor) and cuts.
 
-    blender --background --factory-startup --python kits/connectors/make_reference.py -- [OUT.blend] [--lib LIB]"""
+    blender --background --factory-startup --python kits/connectors/make_reference.py -- [OUT.blend] [--lib LIB] [--force]"""
 import bpy, os, sys, json
 import numpy as np
 from mathutils import Matrix
@@ -23,8 +24,7 @@ PARTS = [
     (MF + "AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R", "Arm 2B R", "Hand R", ("Hand R", "Hand"), "Mar Fil"),
     (MF + "AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1", "Arm 2B R", "Pad R", ("Pad R", "Pad"), "Mar Fil"),
     (MF + "AssaultMarines-V2/Knee Pads/MarFil Assault - Shin Pad 1", "Legs 1A", "Shin R", ("Shin R", "Shin"), "Mar Fil"),
-    (MF + "Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1", None, "Back", ("Back",),
-     "Mar Fil - backpack (instead of the jump pack: hide one)"),
+    (MF + "Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1", None, "Back", ("Back",), "Mar Fil"),
 ]
 M = lambda a: np.array(a, float).reshape(4, 4)
 
@@ -43,7 +43,7 @@ def fit(sc, names):
 
 
 def main():
-    if os.path.exists(OUT): sys.exit("STOP: %s exists already; nothing written" % OUT)
+    if os.path.exists(OUT) and "--force" not in A: sys.exit("STOP: %s exists already; nothing written (--force replaces it)" % OUT)
     for o in list(bpy.data.objects): bpy.data.objects.remove(o)
     colls = {}
     def coll(name):
@@ -54,7 +54,6 @@ def main():
         o = bpy.context.selected_objects[0]; o.name = os.path.basename(rel); o.data.name = o.name
         for c in list(o.users_collection): c.objects.unlink(o)
         coll(cname).objects.link(o); o.matrix_world = Matrix(W.tolist())
-        o["kitbash_library"] = rel; o["kitbash_file"] = "the library file as it is: don't apply transforms or edit the mesh"
         return o
     placed = {"torso": (np.eye(4), sidecar(TORSO))}
     load(TORSO, np.eye(4), "Mar Fil")
@@ -69,8 +68,7 @@ def main():
             W = Hw @ S @ F
         load(rel, W, cname)
         placed[os.path.basename(rel).split(" - ", 1)[1]] = (W, sc)
-    for c in ("Cuts", ):
-        coll(c)
+    coll("Mar Fil cuts")
     bpy.ops.wm.save_as_mainfile(filepath=OUT)
     print("saved %s" % OUT)
     for r in report: print("  !! " + r)
