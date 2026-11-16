@@ -163,6 +163,8 @@ def _result(R, t, m, q, cov, **kw):
 
 
 ROUND = 0.02         # mm: a connector still within this of its fit when turned 30 deg (not settled) is round
+KEYED_KEEPS_SHAPE = False   # True (the plan's searches, Josh Nov 16): a keyed cut (a notch: his waist) keeps the shape's
+                            # turn even on a near match; only round cuts take the file's roll. False: the old rule below.
 def prefer_file_turn(con, surf, best, tol=0.01, near=None):
     """a round connector fits at any turn about its own axis: keep the turn closest to the part's file frame (no turn),
     or to near (a 4x4 pose: where the part's own fit puts the connector, notes 100), if it fits as well (within tol mm). Returns the result kept, with 'turned' = deg moved and 'round' = fits turned.
@@ -178,7 +180,7 @@ def prefer_file_turn(con, surf, best, tol=0.01, near=None):
     # a keyed connector keeps its shape's turn when it is a copy (sure); on a variant (look) the shape holds the turn
     # only loosely (the oval waist: 10-20 deg off by noise, notes 099), so the file frame's turn is taken if it is
     # within 30 deg and fits as well. Never a flip.
-    if not rnd and (best["level"] == "sure" or abs(a) > 30): return dict(best, turned=0.0, round=False)
+    if not rnd and (KEYED_KEEPS_SHAPE or best["level"] == "sure" or abs(a) > 30): return dict(best, turned=0.0, round=False)
     if abs(a) < 0.25: return dict(best, turned=0.0, round=bool(rnd))
     # the file frame's turn exactly, about the connector's own axis, not settled again (a settle lets a nearly round
     # connector drift back a few degrees: notes 099)

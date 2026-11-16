@@ -21,6 +21,8 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
   BBoosty and CyberBrush. Weapons without a hand are not used. Turtle Ninja: only the straight pose of each torso,
   nothing from "Rigging Required" folders.
 - **Later:** accessories, including the legs' rear belt plate.
+- **Bike parts later, with their own cuts** (Josh, Nov 16): bike torsos (Bike Chaplain body), riding legs (Outriders)
+  and bike parts are left out of the Mar Fil searches until they have their own torso / legs cuts.
 
 ## The method
 
@@ -39,6 +41,8 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
    - sure: written;
    - near (look): written, flagged, shown flagged in the Squad Builder;
    - none: listed by cut (= the cut to make next).
+   - **Hosts (torsos, arms, legs) take a sure match only** (Josh, Nov 16: a near match put an axe on a shoulder); a near
+     host match is listed as a cut to make. Child parts keep "near = written and flagged".
 6. **Hosts** (parts others hang off): the cuts write their anchors, **replacing** any old socket.
 7. **Joints stored as numbers.** Each part's joint is stored as data; TIOW Inbox and the Squad Builder put the origin
    on the joint when the part comes in. Library STLs are not rewritten any more (the ~1,100 Mar Fil files moved on
