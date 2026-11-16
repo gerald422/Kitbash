@@ -49,6 +49,40 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
     STLs. Anyone runs them on their own downloads; nothing depends on folder structure. Josh's hand fixes, if shared,
     are keyed by the original file's checksum, not its path. (Check each maker's licence before sharing cuts.)
 
+## The reference file (agreed Nov 16)
+
+One blend holds every cut and every reference placement: **`~\Desktop\mar fil connectors\Kitbash reference.blend`**,
+started by `kits/connectors/make_reference.py` (Mar Fil Torso 2 at the centre; Arm 2B R, Legs 1A, Bladeguard Helmet
+3A, Jump Pack 1, Chain Sword 1 R, Shoulder Pad 1, Shin Pad 1 and, in its own collection, Intercessor Back Pack 1, each
+straight from the library at the library's position of Nov 16, no cuts). Josh redoes the cuts there from scratch;
+the older cut blends (`arms a`, `wrist a`, `legs`, `marfil nck`, `mar back pack`, `mostof a marine`, and the
+`marfil reference.blend` Claude built from them on Nov 16) are superseded once it is done. Rules, so a script reads it
+without guessing:
+
+1. **Parts are imported from the library as they are** (`D:\Kitbash Library`): no applied transforms, no edits to the
+   mesh, the file name as the object name (`make_reference.py` also stores the library path on each object). So
+   which file, and which frame, every part is, is known.
+2. **Mar Fil Torso 2 stays at the centre, unmoved.** Every other part is sat where it should be by eye: that pose
+   is the anchor.
+3. **Each cut is its own object**, faces duplicated off the part (Shift+D, P), only the mating surface. Named
+   *part – joint*, e.g. `Legs 1A – waist`, `Torso 2 – shoulder`.
+4. **Both sides of each joint are cut:**
+
+   | Joint | host side | part side |
+   |---|---|---|
+   | shoulder | torso shoulder | arm's shoulder disc |
+   | neck | torso neck | head's neck |
+   | waist | torso waist | legs' waist |
+   | back | torso back | backpack mount; jump pack mount |
+   | wrist | arm wrist (so the anchor is found on other arms) | the hand's wrist on a weapon |
+   | pad | arm pad spot | the pad's inside (or just the pad placed: its inside is taken from where it rests) |
+   | shin | legs shin spot (right shin) | the shin pad's inside (or just the shin pad placed) |
+   | buckle | belt buckle on the legs | |
+
+5. **One collection per maker and armour mark** (`Mar Fil`, `Turtle Ninja Mk7`, `Springles`, ...). Each other maker's
+   part sits **against Mar Fil parts**: their arm on the Mar Fil torso, their weapon on a Mar Fil wrist, their torso
+   (set to one side, anywhere: only relative poses are read) with Mar Fil arms, head, pack and legs on it.
+
 ## The cuts
 
 | Host / part | Cut | How many |
@@ -98,8 +132,8 @@ kit gets its own cut: the search's "none" list says so.
 
 ## What Josh provides
 
-- For Mar Fil: the reference pairs sat on their host in blends (legs, an arm, a head and a jump pack on a torso; his
-  pad and shin pad blends are done), a back cut on a pack sat on a torso, one hand-wrist cut on a Mar Fil weapon sat
-  on a Mar Fil wrist.
+- For Mar Fil: the cuts in the reference file (see "The reference file"; it replaces the reference pairs asked for
+  before: legs, an arm, a head and a jump pack on a torso, a back cut, a hand-wrist cut on a Mar Fil weapon on a
+  Mar Fil wrist).
 - Then per maker, against Mar Fil parts: the cuts in the table.
 - Answers when a search lists parts it couldn't match.
