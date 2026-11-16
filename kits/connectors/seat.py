@@ -105,7 +105,7 @@ def part_side(rel, sc, base, sided):
 def read_connectors(cfg, lib, work):
     import bpy, bmesh
     from kb import connect as C
-    blends = os.path.expanduser(cfg["blends"]); os.makedirs(work + "/conn", exist_ok=True); bad = []
+    blends = os.path.expanduser(cfg.get("blends") or ""); os.makedirs(work + "/conn", exist_ok=True); bad = []
 
     def tris(ob):
         bm = bmesh.new(); bm.from_mesh(ob.data); bmesh.ops.triangulate(bm, faces=bm.faces)
@@ -123,23 +123,27 @@ def read_connectors(cfg, lib, work):
                 pad = obs[c["pad"]]; T = tris(pad); Mw = np.array(pad.matrix_world)
                 spot = C.Surface(tris(obs[c["spot"]]), spacing=0.03)
                 Tw = T @ Mw[:3, :3].T + Mw[:3, 3]; T = T[spot.dist(Tw.mean(1))[1] < GAP]
-            elif "placed" in c:                   # the same from a part placed by its LIBRARY fit on the reference arm's socket
+            elif "placed" in c:                   # RETIRED Nov 16 (docs/PLAN.md): not for placing. The same from a part placed by its LIBRARY fit on the reference arm's socket
                 if "spot" in c and c["spot"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["spot"], c["blend"])); continue
                 ra, _, rb = maker(lib + "/" + c["on"] + SC.SUFFIX); S = side_sock(ra, c["socket"])  # (a weapon's hand on the wrist:
-                ws, _, wb = maker(lib + "/" + c["placed"] + SC.SUFFIX); F, _ = side_fit(ws, c["fit"])  #  notes 104)
+                ws, _, wb = maker(lib + "/" + c["placed"] + SC.SUFFIX); F, fs = side_fit(ws, c["fit"])  #  notes 104)
                 if S is None or F is None: bad.append("%s: no %s socket on %s or no %s fit on %s" % (c["name"], c["socket"], c["on"], c["fit"], c["placed"])); continue
                 T = unmoved(C.soup(lib + "/" + c["placed"] + ".stl", ws.get("scale", 1.0)), wb); P = S @ F
+                if fs == "L": T = (T * np.array([-1.0, 1, 1]))[:, [0, 2, 1]]; c["mirrored"] = True   # fitted for the left only: its mirror
+                                                  # image is placed (F is the fit as on a right part), as the search mirrors a left part
                 if "spot" in c: spot = C.Surface(tris(obs[c["spot"]]), spacing=0.03)
                 else:                             # no cut: the "on" part's own surface within spot_mm of its socket (a backpack
                     O = unmoved(C.soup(lib + "/" + c["on"] + ".stl", ra.get("scale", 1.0)), rb)   # on the torso's back, notes 107)
                     spot = C.Surface(O[np.linalg.norm(O.mean(1) - S[:3, 3], axis=1) < float(c.get("spot_mm", 25))], spacing=0.05)
-                T = T[spot.dist((T @ P[:3, :3].T + P[:3, 3]).mean(1))[1] < float(c.get("gap", GAP))]
+                X = (T @ P[:3, :3].T + P[:3, 3]).mean(1); i = np.arange(len(T))
+                if "spot" not in c: i = i[np.linalg.norm(X - S[:3, 3], axis=1) < float(c.get("spot_mm", 25)) + 3.0]   # (only these can touch it)
+                T = T[i[spot.dist(X[i])[1] < float(c.get("gap", GAP))]] if len(i) else T[:0]
             else:
                 if c["object"] not in obs: bad.append("%s: %s not in %s" % (c["name"], c["object"], c["blend"])); continue
                 T = tris(obs[c["object"]])
             if len(T) < 20: bad.append("%s: only %d triangles" % (c["name"], len(T))); continue
             rs, Gr, back = maker(lib + "/" + c["ref"] + SC.SUFFIX); now = C.soup(lib + "/" + c["ref"] + ".stl", rs.get("scale", 1.0))
-            ref = C.Surface(unmoved(now, back)); con = C.Connector(T, c["name"])
+            ref = C.Surface(unmoved(now, back), mirror=bool(c.get("mirrored"))); con = C.Connector(T, c["name"])
             m = float(np.median(ref.dist(con.fine)[0]))
             if m > ON_REF and back is not None and float(np.median(C.Surface(now).dist(con.fine)[0])) <= ON_REF:
                 T = unmoved(T, back); con = C.Connector(T, c["name"]); m = float(np.median(ref.dist(con.fine)[0]))   # cut on the moved file
@@ -150,6 +154,19 @@ def read_connectors(cfg, lib, work):
 
 
 # ---------------------------------------------------------------- 2. the search (a worker, bpy for the KD tree)
+def at_fit(C, con, surf, N):
+    """config "near_first" (hands.py's rounds, notes 108): a part that has a fit for the joint is not searched from
+    scratch. The connector is settled where that fit puts it, and at its three half turns about its own axes there (a
+    library fit that holds the hand the other way round: the flipped Bladeguard swords, notes 105); the best is
+    chosen as find() does. So a round over a maker costs seconds a part, not a minute; a part whose fit is far out
+    another way reads as none (it would not be written under --near anyway). Parts with no fit are searched in full."""
+    w, v = np.linalg.eigh(np.cov((con.surf.S - con.c).T)); out = []
+    for ax in (None, v[:, 0], v[:, 1], v[:, 2]):
+        R = N[:3, :3] if ax is None else N[:3, :3] @ C._rot(ax, 180.0)
+        out.append(C._result(*C.settle(con, surf, R, N[:3, :3] @ con.c + N[:3, 3] - R @ con.c)))
+    return dict(C.choose(con, surf, out, near=N), at_fit=True)
+
+
 def search(cfgp, lib, work, i, n):
     from kb import connect as C, geo
     cfg = json.load(open(cfgp, encoding="utf-8")); jobs = json.load(open(work + "/jobs.json", encoding="utf-8"))[i::n]
@@ -182,7 +199,8 @@ def search(cfgp, lib, work, i, n):
             elif "socket" in x and x.get("S_ref") is not None:
                 So = side_sock(sc, x["socket"])
                 if So is not None: near[x["name"]] = So @ np.linalg.inv(x["S_ref"])
-        found = C.find_all([x["con"] for x in L], surf, near=near)
+        if cfg.get("near_first") and len(L) == 1 and L[0]["name"] in near: found = {L[0]["name"]: at_fit(C, L[0]["con"], surf, near[L[0]["name"]])}
+        else: found = C.find_all([x["con"] for x in L], surf, near=near)
         for x in L:
             f = found[x["name"]]; N = near.get(x["name"])
             if N is not None and f["level"] == "look":         # a variant: keep the old place if it fits as well (no flips)
@@ -338,9 +356,12 @@ def run(cfgp, A):
     cfg["types"] = {k: v for k, v in cfg["types"].items() if k in types}
     n = int(opt(A, "--workers", max(1, min(12, (os.cpu_count() or 4) - 2)))); only = opt(A, "--only")
     task = "connectors-" + time.strftime("%Y-%m-%d"); k = 1
-    while os.path.exists(lib + "/_backups/" + task): k += 1; task = "connectors-%s-%d" % (time.strftime("%Y-%m-%d"), k)
-    T = lib + "/_backups/" + task; work = T + "/work"; os.makedirs(work)
-    t0 = time.time(); print("%s: reading Josh's connectors from %s" % (task, cfg["blends"]), flush=True)
+    while True:                                    # (two runs at once, hands.py for two makers, never share a folder)
+        T = lib + "/_backups/" + task
+        try: os.mkdir(T); break
+        except FileExistsError: k += 1; task = "connectors-%s-%d" % (time.strftime("%Y-%m-%d"), k)
+    work = T + "/work"; os.makedirs(work)
+    t0 = time.time(); print("%s: reading Josh's connectors from %s" % (task, cfg.get("blends") or "(none: placed parts only)"), flush=True)
     bad = read_connectors(cfg, lib, work)
     if bad: print("\nSTOPPED, a connector isn't right:\n  " + "\n  ".join(bad)); return
     json.dump(cfg, open(work + "/config.json", "w", encoding="utf-8"), indent=1)

@@ -14,7 +14,9 @@ part where it belongs, whatever maker it came from, and prints cleanly. Consiste
 
 | Need | Read |
 |---|---|
-| What's open / waiting on Josh | `docs/OPEN.md` |
+| **The placement plan (read first for any placing / connector / cut work)** | `docs/PLAN.md` |
+| What's open / waiting on Josh outside the plan | `docs/OPEN.md` |
+| Old plans | `docs/archive/`: superseded history, never follow |
 | How a kit or feature was done | `docs/notes/INDEX.md`, then the one entry |
 | Sidecar format and placing conventions | skill `kitbash-sidecars` |
 | PC paths, delivery, index, corrections, tests | `docs/reference.md` |
@@ -30,9 +32,10 @@ Do not read `addons/tiow_inbox.py` whole (226 KB): `grep -n "^def \|^class "` an
 - Never overwrite what Josh or Prepare made: merge sidecars with `kb.sidecar.merge` (it keeps clicked / copied / auto
   anchors, `tiow_corrected`, `tiow_holds`, `exact`). Back up first.
 - Parts without a fit are still filed under their type and logged, never dropped.
-- Scope (Nov 15): base body mostly Mar Fil, weapons and customisation on top. Terminators and Gravis are not part of
-  this system (they would need their own base fits); no Marta Phobos. Plain arms: Mar Fil only; other makers give
-  two-handed weapons and weapons with a hand (and Marta its legs). Details: `docs/OPEN.md`, top.
+- Placing follows `docs/PLAN.md` (Nov 16), and only it. In short: Mar Fil base body; Terminators and Gravis not part of
+  this system for now (they would need their own base fits); plain arms Mar Fil and Springles; every placement from
+  Josh's cuts of the mating surface, each sat against a Mar Fil part; roll from the file; no old library fits used
+  as anchors. Don't drift back to the archived methods (`docs/archive/`).
 - Renegade chapter: no aquilas, purity seals or scrolls (`_hidden.txt`; merge with Josh's current file).
 - Public repo: no STL / OBJ / blend / npz / previews, and nothing identifying Josh (no surname, Windows user name;
   home paths as `~\...`). `tools/validate.py` and CI enforce this; run it before every commit.
@@ -49,4 +52,4 @@ Do not read `addons/tiow_inbox.py` whole (226 KB): `grep -n "^def \|^class "` an
 3. Deliver with `tools/kb.py apply` (checks, backup, write, verify). Never hand-roll the md5 steps.
 4. A new part type or joint: edit `joints.json`, run `tools/gen_joints.py`.
 5. Finish: `tools/validate.py`, commit to `main` and push (session attribution lines), add `docs/notes/NNN-<slug>.md`
-   plus its line in `INDEX.md`, update `docs/OPEN.md` and `tools/installed.json`. Notes are not copied anywhere else.
+   plus its line in `INDEX.md`, update `docs/PLAN.md` (status) / `docs/OPEN.md` and `tools/installed.json`. Notes are not copied anywhere else.
