@@ -95,7 +95,7 @@ without guessing:
    | back | torso back | backpack mount; jump pack mount |
    | wrist | arm wrist (so the anchor is found on other arms) | the hand's wrist on a weapon |
    | pad | arm pad spot | the pad's inside (or just the pad placed: its inside is taken from where it rests) |
-   | shin | legs shin spot (right shin) | the shin pad's inside (or just the shin pad placed) |
+   | shin | legs shin spot (right shin); optional a second one on the left shin, under a mirrored shin pad placed by eye (Nov 17; the side is read from where it lies) | the shin pad's inside (or just the shin pad placed) |
    | buckle | belt buckle on the legs | |
 
 5. **Two collections per maker and armour mark**: parts in `<Maker>` or `<Maker> <mark>` (`Mar Fil`, `Turtle Ninja
@@ -103,6 +103,11 @@ without guessing:
    Each other maker's part sits **against Mar Fil parts**: their arm on the Mar Fil torso, their weapon on a Mar Fil
    wrist, their torso (set to one side, anywhere: only relative poses are read) with Mar Fil arms, head, pack and
    legs on it.
+6. **Each cut takes its joint from the reference part sat on it** (Nov 17): a host cut from the child placed on it
+   (Chain Sword 1 R in an Intercessor arm's hand, Shoulder Pad 1 on it), a child cut from the host it sits on (the
+   Captain's pack on a Torso 2 copy). So a new part can be set anywhere in the file, as long as a part whose joint
+   is already known sits against it. An arm group also gets a Torso 2 copy with the arm on its shoulder, so that its
+   spots are searched round the shoulder. `kits/connectors/add_reference_parts.py` adds such groups (backup first).
 
 ## The cuts
 

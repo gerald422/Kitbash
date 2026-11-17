@@ -127,25 +127,28 @@ def buckle(b, wj, con, surf, F, d):
 def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False):
     """both shin spots, each searched on its own leg. Right / left is decided in the waist joint's frame (the torso's:
     +X is the marine's right), not the file's: some legs are turned in their file (Outrider legs, 90 deg). The left
-    shin is searched as the mirror image (the cut is a right shin), mirrored about the legs' own middle plane; its
-    socket is the mirror of a right one (Shin L = mirror x right x mirror, as the library keeps left sockets)."""
+    shin: with a left shin spot cut (Josh's left pad placed by eye: Nov 17), that cut on the left leg as it is; without
+    one, the right cut on the left leg mirrored about the legs' own middle plane, its socket the mirror of a right one
+    (Shin L = mirror x right x mirror, as the library keeps left sockets). Either way the left pad is the right pad
+    mirrored (left = right mirrored)."""
     if Fw is None: Fw = np.eye(4)                              # no waist found: the file's own axes
     Fi = np.linalg.inv(Fw); P = Fi @ MX @ Fw                   # the mirror about the legs' middle plane, in file coordinates
     xw = S_tf(tri.mean(1), Fw)[:, 0]
     out = {"role": "host", "level": "none", "match": 9.0, "cover": 0.0, "cut": "-", "sides": {}}
-    for side, keep, M_in in (("Shin R", xw > 0, np.eye(4)), ("Shin L", xw < 0, P)):
-        T = tri[keep]
+    own_left = [c for c in j["hosts"] if c.get("side") == "L"]; rights = [c for c in j["hosts"] if c.get("side", "R") == "R"]
+    for side, keep in (("Shin R", xw > 0), ("Shin L", xw < 0)):
+        T = tri[keep]; mir = side == "Shin L" and not own_left
         if len(T) < 50: continue
-        T = S_tf(T.reshape(-1, 3), M_in).reshape(-1, 3, 3)[:, [0, 2, 1]] if side == "Shin L" else T   # mirrored, faces kept outward
+        if mir: T = S_tf(T.reshape(-1, 3), P).reshape(-1, 3, 3)[:, [0, 2, 1]]   # mirrored, faces kept outward
         surf = C.Surface(T); best = None
-        for c in j["hosts"]:
+        for c in (own_left if side == "Shin L" and own_left else rights):
             rg = region(c); f = C.find(con(c), surf, region=rg); f["cut"] = c["cut"]; f["J"] = c["J"]; f["rg"] = rg
             rank = ({"sure": 0, "look": 1, "none": 2}[f["level"]], f["match"])
             if best is None or rank < best[0]: best = (rank, f)
         f = best[1]; s = {"level": f["level"], "match": f["match"], "cover": f["cover"], "cut": f["cut"]}
         # a host anchor: sure, or near inside the region round a sure waist (Josh, Nov 16 / 17)
         if f["level"] == "sure" or (HOST_NEAR_IN_REGION and f["level"] == "look" and f["rg"] is not None and place_sure):
-            MJ = f["M"] @ M4(f["J"]); s["matrix"] = flat(MJ if side == "Shin R" else P @ MJ @ MX)
+            MJ = f["M"] @ M4(f["J"]); s["matrix"] = flat(P @ MJ @ MX if mir else MJ)
         out["sides"][side] = s
     R_ = out["sides"].get("Shin R")
     if R_:
@@ -155,6 +158,19 @@ def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False):
     L_ = out["sides"].get("Shin L")
     if L_ and "matrix" in L_: out["other"] = {"socket": "Shin L", "matrix": L_["matrix"], "level": L_["level"], "match": L_["match"]}
     return out
+
+
+def place_joint(ref, pj, obj):
+    """the placing joint (shoulder / waist) of a part in the reference's world: from the nearest torso (a copy of a torso
+    with that joint known) within 40 mm; None = the part sits on no torso, no region for its spots"""
+    P = ref["parts"]; HJ = ref["joints"][pj]["host_J"]; best = None
+    for key, J in HJ.items():
+        rel, sd = key.rsplit("|", 1)
+        for pn, p in P.items():
+            if p["rel"] == rel and pn != obj:
+                d = float(np.linalg.norm(p["mid"] - P[obj]["mid"]))
+                if best is None or d < best[0]: best = (d, P[pn]["Wm"] @ J)
+    return best[1] if best and best[0] <= 40 else None
 
 
 def run(A):
@@ -172,14 +188,17 @@ def run(A):
             d[key] = []
             for c in j[key]:
                 k += 1; np.save("%s/cut%02d.npy" % (work, k), c["tri"]); e = {"cut": c["cut"], "part": c["part"], "npy": "cut%02d.npy" % k, "J": flat(c["J"])}
+                if "side" in c: e["side"] = c["side"]
                 if key == "hosts" and jn in PLACE and PLACE[jn] in ref["joints"]:   # the placing joint in the cut's part coordinates
-                    e["Jplace"] = flat(np.linalg.inv(ref["parts"][c["obj"]]["Wm"]) @ ref["joints"][PLACE[jn]]["Jw"])
+                    Jp = place_joint(ref, PLACE[jn], c["obj"])
+                    if Jp is not None: e["Jplace"] = flat(np.linalg.inv(ref["parts"][c["obj"]]["Wm"]) @ Jp)
                 d[key].append(e)
         dump["joints"][jn] = d
     for b in ref.get("spots", {}).get("legs buckle", [])[:1]:
         if "waist" in ref["joints"]:
             k += 1; np.save("%s/cut%02d.npy" % (work, k), b["tri"])
-            dump["buckle"] = {"cut": b["cut"], "part": b["part"], "npy": "cut%02d.npy" % k, "Jplace": flat(np.linalg.inv(b["Wm"]) @ ref["joints"]["waist"]["Jw"])}
+            Jp = place_joint(ref, "waist", b["obj"])
+            if Jp is not None: dump["buckle"] = {"cut": b["cut"], "part": b["part"], "npy": "cut%02d.npy" % k, "Jplace": flat(np.linalg.inv(b["Wm"]) @ Jp)}
     json.dump(dump, open(work + "/ref.json", "w", encoding="utf-8"))
     jobs = pick(lib, maker, int(opt(A, "--per", 4)), {p["rel"] for p in ref["parts"].values()})
     json.dump(jobs, open(work + "/jobs.json", "w", encoding="utf-8")); n = 0 if "--reuse" in A else min(int(opt(A, "--workers", 8)), len(jobs))
