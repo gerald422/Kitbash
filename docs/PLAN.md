@@ -38,6 +38,18 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
 4. **Anchor = Josh's placement** of the reference part on its host in the cut blend. No library fit is used.
 5. **Search.** Every part of the type is searched for the cut. The shape gives the place and tilt; **the roll comes
    from the file** (the maker's own frame, converted by the Mar Fil reference). Never from a part's old fit.
+   - **It looks for the shape of the cut, never the geometry** (Josh, Nov 13 and Nov 17; this has slipped back
+     several times). The only thing compared is the cut's mating surface against the part's surface. Never triangle
+     counts, never the part's whole mesh compared with another, never "what touches", never sculpt detail. The mesh
+     around the joint doesn't matter; only the mating surface and the roll do.
+   - **Where to look** (Nov 17): a spot on a host (arm wrist, arm pad spot, legs shin spot, legs buckle) is looked
+     for only within a shell round the joint that placed that host (its shoulder, its waist), at the distance it has
+     on the reference part, a few mm either way. That only narrows where the shape is searched; what is compared
+     doesn't change. It keeps answers in the right place (no axe on a shoulder). It does not make a different sculpt
+     match: tried Nov 17, the Intercessor arm's near pad spot inside the shell sat flipped, so hosts stay sure only.
+   - **Legs' turn** (Nov 17): the waist gives the place and tilt and its notch the turn; the belt buckle, which sits
+     forward of the waist, then sets the turn about the waist (a longer lever). A buckle that disagrees with the
+     notch by more than 3 deg is written and flagged; no buckle found, the notch alone.
    - sure: written;
    - near (look): written, flagged, shown flagged in the Squad Builder;
    - none: listed by cut (= the cut to make next).

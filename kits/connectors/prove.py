@@ -1,7 +1,7 @@
 """The proving run (docs/PLAN.md, Order 1): Josh's reference file read, its cuts searched on a small set of parts, test
 marines assembled from the numbers alone. Nothing is written to the library.
 
-    blender --background --factory-startup --python kits/connectors/prove.py -- run [--lib LIB] [--ref BLEND] [--out DIR]
+    blender --background --factory-startup --python kits/connectors/prove.py -- run [--lib LIB] [--ref BLEND] [--out DIR] [--reuse]
                                                                                 [--maker "Mar Fil - Tacticus"] [--per 4] [--workers 8]
 Output in DIR (default ~/Desktop/mar fil connectors/proving): report.txt, results.json, "proving set.blend".
 For each part and joint: the cut found (sure / look / none), and how far the new socket or fit is from the library's
@@ -15,6 +15,14 @@ C.KEYED_KEEPS_SHAPE = True       # a cut with a notch keeps its own turn; only r
 
 MX = np.diag([-1.0, 1, 1, 1])
 BIKE = ("ChaplainOnBike", "Outriders")    # bike torsos and riding legs: their own cuts later (Josh, Nov 16)
+# The search looks for the SHAPE of Josh's cut surface only: never triangle counts, never the part's whole mesh or
+# geometry compared (Josh, Nov 13 / 17; it has slipped back before). The region below only narrows where to look.
+PLACE = {"wrist": "shoulder", "pad": "shoulder", "shin": "waist"}   # spots on a host, and the joint that places that host
+TOL = {"wrist": 4.0, "pad": 2.5, "shin": 4.0, "buckle": 3.0}        # mm either way of the reference's distance from it
+BUCKLE_FLAG = 3.0     # deg: the buckle turns the legs more than this from the waist's own turn: written, flagged
+HOST_NEAR_IN_REGION = False   # tried Nov 17: a near host match inside the region, written. The Intercessor arm's near pad
+                              # spot sat flipped behind the shoulder: a different sculpt is not found by narrowing where
+                              # to look. Hosts stay sure only (Josh, Nov 16); the region only keeps answers in the right place.
 def opt(A, n, d=None): return A[A.index(n) + 1] if n in A else d
 def M4(a): return np.array(a, float).reshape(4, 4)
 def flat(M): return [round(float(x), 6) for x in np.asarray(M).reshape(-1)]
@@ -48,33 +56,45 @@ def search(work, i, n):
     def con(c):
         if c["cut"] not in cons: cons[c["cut"]] = C.Connector(np.load(work + "/" + c["npy"]), c["cut"])
         return cons[c["cut"]]
+    def region(c, jn, placeF):
+        """the shell round the host's placing joint where this cut should be (Josh, Nov 17), or None"""
+        F = placeF.get(PLACE.get(jn, ""))
+        if F is None or "Jplace" not in c: return None
+        d = float(np.linalg.norm(S_tf(con(c).c[None], np.linalg.inv(M4(c["Jplace"])))[0]))
+        return (np.linalg.inv(F)[:3, 3], max(0.0, d - TOL[jn]), d + TOL[jn])
     out = open("%s/res_%d.jsonl" % (work, i), "a", encoding="utf-8")
     for cat, rel in jobs:
         t0 = time.time(); r = {"cat": cat, "rel": rel, "joints": {}}
         try:
             sc, G, back = S.maker(lib + "/" + rel + S.SC.SUFFIX); tri = S.unmoved(C.soup(lib + "/" + rel + ".stl", sc.get("scale", 1.0)), back)
-            surf = C.Surface(tri); V = tri.reshape(-1, 3)[::max(1, len(tri) * 3 // 400)]; Fw = None
+            surf = C.Surface(tri); V = tri.reshape(-1, 3)[::max(1, len(tri) * 3 // 400)]; Fw = None; placeF = {}; placeSure = {}
             for jn, j in ref["joints"].items():
                 for role, key in (("host", "hosts"), ("child", "children")):
                     if cat not in j[role + "_types"]: continue
                     if jn == "shin" and role == "host":       # each shin on its own, sides from the legs' waist (as on the torso)
-                        r["joints"]["shin:host"] = shins(j, con, tri, Fw); continue
+                        r["joints"]["shin:host"] = shins(j, con, tri, Fw, lambda c: region(c, "shin", placeF), placeSure.get("waist", False)); continue
                     best = None
                     for c in j[key]:
-                        f = C.find(con(c), surf); f["cut"] = c["cut"]; f["J"] = c["J"]
+                        rg = region(c, jn, placeF) if role == "host" else None
+                        f = C.find(con(c), surf, region=rg); f["cut"] = c["cut"]; f["J"] = c["J"]; f["rg"] = rg
                         rank = ({"sure": 0, "look": 1, "none": 2}[f["level"]], f["match"])
                         if best is None or rank < best[0]: best = (rank, f)
                     f = best[1]; d = {"role": role, "cut": f["cut"], "level": f["level"], "match": f["match"], "cover": f["cover"],
                                       "turned": f.get("turned"), "round": f.get("round"), "ambiguous": bool(f.get("ambiguous"))}
-                    if role == "host" and f["level"] == "look": d["note"] = "near only: a host anchor needs a sure match (Josh, Nov 16): cut this"
-                    if f["level"] == "sure" or (f["level"] == "look" and role == "child"):
+                    near_ok = role == "child" or (HOST_NEAR_IN_REGION and f["rg"] is not None and placeSure.get(PLACE[jn], False))
+                    if f["rg"] is not None: d["region"] = "%.1f-%.1f mm from its %s" % (f["rg"][1], f["rg"][2], PLACE[jn])
+                    if role == "host" and f["level"] == "look":
+                        d["note"] = ("near, inside the region round its sure %s: written, flagged" % PLACE[jn]) if near_ok else "near only, no region: a host anchor needs a sure match (Josh, Nov 16): cut this"
+                    if f["level"] == "sure" or (f["level"] == "look" and near_ok):
                         MJ = f["M"] @ M4(f["J"])
                         if role == "host":
                             d["socket"] = j["socket"]; d["matrix"] = flat(MJ)
                             old = next((M4(s["matrix"]) for s in sc.get("sockets") or [] if s.get("type") == j["socket"]), None)
                             if old is not None: d["lib_mm"] = round(float(np.linalg.norm(old[:3, 3] - MJ[:3, 3])), 2); d["lib_deg"] = round(geo.ang(old[:3, :3].T @ MJ[:3, :3]), 1)
                         else:
-                            F = np.linalg.inv(MJ); d["fit"] = j["fit"]; d["matrix"] = flat(F)
+                            F = np.linalg.inv(MJ)
+                            if jn == "waist" and ref.get("buckle"): F = buckle(ref["buckle"], ref["joints"]["waist"], con, surf, F, d)
+                            d["fit"] = j["fit"]; d["matrix"] = flat(F); placeF[jn] = F; placeSure[jn] = f["level"] == "sure"
                             if jn == "waist": Fw = F
                             fits = sc.get("fits") or {}; old = next((M4(fits[k]) for k in (j["fit"], j["fit"].replace(" R", "")) if k in fits), None)
                             if old is not None:
@@ -88,7 +108,23 @@ def search(work, i, n):
 def S_tf(V, M): return V @ M[:3, :3].T + M[:3, 3]
 
 
-def shins(j, con, tri, Fw):
+def buckle(b, wj, con, surf, F, d):
+    """the legs' turn about the waist from the belt buckle (Josh, Nov 17): the buckle sits forward of the waist, so it
+    points the way the legs face with a long lever. Found (sure) -> the legs are turned about the waist's axis until
+    their buckle lies the way the reference's does; the waist still gives the place and tilt. Not found -> the notch."""
+    cb = con(b); Qr = S_tf(cb.c[None], np.linalg.inv(M4(b["Jplace"])))[0]; dr = float(np.linalg.norm(Qr))
+    rg = (np.linalg.inv(F)[:3, 3], max(0.0, dr - TOL["buckle"]), dr + TOL["buckle"])
+    f = C.find(cb, surf, region=rg); d["buckle"] = {"level": f["level"], "match": f["match"], "cover": f["cover"]}
+    if f["level"] != "sure": return F
+    w = wj["children"][0]; ax = np.linalg.inv(M4(w["J"]))[:3, :3] @ con(w).axis; ax /= np.linalg.norm(ax)   # the waist's axis, joint frame
+    Qn = S_tf(S_tf(cb.c[None], f["M"]), F)[0]
+    pr = lambda q: q - ax * (q @ ax); a, b_ = pr(Qn), pr(Qr)
+    deg = float(np.degrees(np.arctan2(np.cross(a, b_) @ ax, a @ b_))); d["buckle"]["deg"] = round(deg, 1)
+    if abs(deg) > BUCKLE_FLAG: d["note"] = "the buckle turned the legs %.1f deg from the waist's own turn: flagged" % deg
+    Rz = np.eye(4); Rz[:3, :3] = C._rot(ax, deg); return Rz @ F
+
+
+def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False):
     """both shin spots, each searched on its own leg. Right / left is decided in the waist joint's frame (the torso's:
     +X is the marine's right), not the file's: some legs are turned in their file (Outrider legs, 90 deg). The left
     shin is searched as the mirror image (the cut is a right shin), mirrored about the legs' own middle plane; its
@@ -103,16 +139,18 @@ def shins(j, con, tri, Fw):
         T = S_tf(T.reshape(-1, 3), M_in).reshape(-1, 3, 3)[:, [0, 2, 1]] if side == "Shin L" else T   # mirrored, faces kept outward
         surf = C.Surface(T); best = None
         for c in j["hosts"]:
-            f = C.find(con(c), surf); f["cut"] = c["cut"]; f["J"] = c["J"]
+            rg = region(c); f = C.find(con(c), surf, region=rg); f["cut"] = c["cut"]; f["J"] = c["J"]; f["rg"] = rg
             rank = ({"sure": 0, "look": 1, "none": 2}[f["level"]], f["match"])
             if best is None or rank < best[0]: best = (rank, f)
         f = best[1]; s = {"level": f["level"], "match": f["match"], "cover": f["cover"], "cut": f["cut"]}
-        if f["level"] == "sure":                               # a host anchor: sure only (Josh, Nov 16)
+        # a host anchor: sure, or near inside the region round a sure waist (Josh, Nov 16 / 17)
+        if f["level"] == "sure" or (HOST_NEAR_IN_REGION and f["level"] == "look" and f["rg"] is not None and place_sure):
             MJ = f["M"] @ M4(f["J"]); s["matrix"] = flat(MJ if side == "Shin R" else P @ MJ @ MX)
         out["sides"][side] = s
     R_ = out["sides"].get("Shin R")
     if R_:
         out.update({k: R_[k] for k in ("level", "match", "cover", "cut")}); out["socket"] = "Shin R"
+        if R_["level"] == "look" and "matrix" in R_: out["note"] = "near, inside the region round its sure waist: written, flagged"
         if "matrix" in R_: out["matrix"] = R_["matrix"]
     L_ = out["sides"].get("Shin L")
     if L_ and "matrix" in L_: out["other"] = {"socket": "Shin L", "matrix": L_["matrix"], "level": L_["level"], "match": L_["match"]}
@@ -133,14 +171,25 @@ def run(A):
         for key in ("hosts", "children"):
             d[key] = []
             for c in j[key]:
-                k += 1; np.save("%s/cut%02d.npy" % (work, k), c["tri"]); d[key].append({"cut": c["cut"], "part": c["part"], "npy": "cut%02d.npy" % k, "J": flat(c["J"])})
+                k += 1; np.save("%s/cut%02d.npy" % (work, k), c["tri"]); e = {"cut": c["cut"], "part": c["part"], "npy": "cut%02d.npy" % k, "J": flat(c["J"])}
+                if key == "hosts" and jn in PLACE and PLACE[jn] in ref["joints"]:   # the placing joint in the cut's part coordinates
+                    e["Jplace"] = flat(np.linalg.inv(ref["parts"][c["obj"]]["Wm"]) @ ref["joints"][PLACE[jn]]["Jw"])
+                d[key].append(e)
         dump["joints"][jn] = d
+    for b in ref.get("spots", {}).get("legs buckle", [])[:1]:
+        if "waist" in ref["joints"]:
+            k += 1; np.save("%s/cut%02d.npy" % (work, k), b["tri"])
+            dump["buckle"] = {"cut": b["cut"], "part": b["part"], "npy": "cut%02d.npy" % k, "Jplace": flat(np.linalg.inv(b["Wm"]) @ ref["joints"]["waist"]["Jw"])}
     json.dump(dump, open(work + "/ref.json", "w", encoding="utf-8"))
     jobs = pick(lib, maker, int(opt(A, "--per", 4)), {p["rel"] for p in ref["parts"].values()})
-    json.dump(jobs, open(work + "/jobs.json", "w", encoding="utf-8")); n = min(int(opt(A, "--workers", 8)), len(jobs))
-    print("searching %d parts with %d workers..." % (len(jobs), n), flush=True)
+    json.dump(jobs, open(work + "/jobs.json", "w", encoding="utf-8")); n = 0 if "--reuse" in A else min(int(opt(A, "--workers", 8)), len(jobs))
+    if "--reuse" in A:                      # the report and test marines again from DIR/results.json, no search
+        old = json.load(open(out + "/results.json", encoding="utf-8"))["results"]
+        for x in old: open(work + "/res_0.jsonl", "a", encoding="utf-8").write(json.dumps(x) + "\n")
+        n = 1; jobs = [(x["cat"], x["rel"]) for x in old]
+    else: print("searching %d parts with %d workers..." % (len(jobs), n), flush=True)
     env = dict(os.environ, OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1", MKL_NUM_THREADS="1")
-    procs = [subprocess.Popen([bpy.app.binary_path, "--background", "--factory-startup", "--python", os.path.abspath(__file__), "--", "search", work, str(i), str(n)],
+    procs = [] if "--reuse" in A else [subprocess.Popen([bpy.app.binary_path, "--background", "--factory-startup", "--python", os.path.abspath(__file__), "--", "search", work, str(i), str(n)],
                               stdout=open("%s/worker_%d.log" % (work, i), "w"), stderr=subprocess.STDOUT, env=env) for i in range(n)]
     last = -1
     while any(p.poll() is None for p in procs):
@@ -161,10 +210,12 @@ def run(A):
     for r in R:
         W.append("%s  [%s]%s" % (r["rel"].split("/", 1)[1], r["cat"], "  ERROR " + r["error"] if r.get("error") else ""))
         for jk, d in r["joints"].items():
-            W.append("    %-15s %-5s %.4f mm %3.0f%%  cut %-34s%s%s%s%s" % (jk, d["level"], d["match"], 100 * d["cover"], d["cut"][:34],
+            W.append("    %-15s %-5s %.4f mm %3.0f%%  cut %-34s%s%s%s%s%s%s" % (jk, d["level"], d["match"], 100 * d["cover"], d["cut"][:34],
                      "  roll moved %.1f deg to the file's" % d["turned"] if d.get("turned") else "",
                      "  library's is %.2f mm / %.1f deg away" % (d["lib_mm"], d["lib_deg"]) if "lib_mm" in d else ("  (library has none)" if d["level"] != "none" else ""),
-                     "  left shin: %s" % d["other"]["level"] if d.get("other") else "", "  (" + d["note"] + ")" if d.get("note") else ""))
+                     "  left shin: %s" % d["other"]["level"] if d.get("other") else "",
+                     "  buckle %s%s" % (d["buckle"]["level"], " turned %.1f deg" % d["buckle"]["deg"] if "deg" in d["buckle"] else "") if d.get("buckle") else "",
+                     "  [" + d["region"] + "]" if d.get("region") else "", "  (" + d["note"] + ")" if d.get("note") else ""))
     open(out + "/report.txt", "w", encoding="utf-8").write("\n".join(W) + "\n")
     # ---- test marines from the numbers alone
     by = collections.defaultdict(list)

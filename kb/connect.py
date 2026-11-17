@@ -1,5 +1,8 @@
 """Connectors (notes 096-098): Josh's hand-cut mating surfaces, found on a part by shape.
 
+Shape, never geometry (Josh; docs/PLAN.md, Method 5): only the cut's surface is compared with the part's surface. No
+triangle counts, no whole-mesh comparison, no "what touches". The mesh around the joint doesn't matter.
+
 A connector is an open surface cut in place from a reference part, so it is in that part's file coordinates. find()
 looks for it anywhere on another part and returns the pose that carries the connector onto that part (connector coords
 -> part coords); the part's joint is then the reference's joint moved by that pose.
@@ -210,21 +213,31 @@ class Claim:
 def placed(con, r): return con.fine @ r["M"][:3, :3].T + r["M"][:3, 3]
 
 
-def find(con, surf, keep=KEEP, file_turn=True, claim=None, near=None):
+def find(con, surf, keep=KEEP, file_turn=True, claim=None, near=None, region=None):
     """the connector's best pose on this part: dict(M = 4x4 connector -> part, match = median mm point to plane,
     q90, cover = share of the connector on the surface, level = sure / look / none (same = not none), ambiguous =
     another place fits as well, others). claim: places other connectors already sit on are not used (a pose with
     over 30% of it there is dropped). When the first search isn't sure, a wider one (more places, finer spins) runs.
-    near: a 4x4 pose (connector -> part) to prefer among equals instead of the file frame (the part's own fit)."""
-    r = _find(con, surf, keep, SPIN, file_turn, claim, near=near)
+    near: a 4x4 pose (connector -> part) to prefer among equals instead of the file frame (the part's own fit).
+    region: (centre, lo, hi) in part coordinates: only places whose connector middle is lo..hi mm from centre (a shell
+    round the part's own placing joint, which a sure cut found: Josh, Nov 17). It narrows WHERE the shape is looked
+    for; what is compared is still only the cut's surface shape, never the part's mesh or triangles."""
+    r = _find(con, surf, keep, SPIN, file_turn, claim, near=near, region=region)
     if r["level"] != "sure" or r.get("ambiguous"):
-        r2 = _find(con, surf, 3 * keep, SPIN * 2 / 3, file_turn, claim, more=r.get("_out", []), near=near)
+        r2 = _find(con, surf, 3 * keep, SPIN * 2 / 3, file_turn, claim, more=r.get("_out", []), near=near, region=region)
         r2["wider"] = True; r = r2
     r.pop("_out", None); return r
 
 
-def _find(con, surf, keep, spin, file_turn, claim, more=(), near=None):
+def _in_region(region, X):
+    d = np.linalg.norm(np.asarray(X) - np.asarray(region[0]), axis=-1); return (d >= region[1]) & (d <= region[2])
+
+
+def _find(con, surf, keep, spin, file_turn, claim, more=(), near=None, region=None):
     P, Nn = surf.patches(CAND); spins = np.arange(0, 360, spin); X = con.coarse
+    if region is not None:                                   # the anchor sits ~at the connector's middle: 1 mm slack
+        inn = _in_region((region[0], region[1] - 1.0, region[2] + 1.0), P); P, Nn = P[inn], Nn[inn]
+        if not len(P): return dict(_result(np.eye(3), np.zeros(3), 9.0, 9.0, 0.0), ambiguous=False, tied=0, others=[], claimed=True)
     if claim is not None and len(claim.keys):
         free = ~claim.has(P); P, Nn = P[free], Nn[free]
         if not len(P): return dict(_result(np.eye(3), np.zeros(3), 9.0, 9.0, 0.0), ambiguous=False, tied=0, others=[], claimed=True)
@@ -242,6 +255,7 @@ def _find(con, surf, keep, spin, file_turn, claim, more=(), near=None):
             if any(min(abs(spins[si] - x), 360 - abs(spins[si] - x)) < 45 for x in took): continue
             took.append(spins[si]); R, t = _poses(con, p[None], Nn[pi][None], spins[[si]])
             r = _result(*settle(con, surf, R[0], t[0]), hits=int(S[pi, si]))
+            if region is not None and not _in_region(region, r["M"][:3, :3] @ con.c + r["M"][:3, 3]): continue   # slid out
             if claim is None or claim.has(placed(con, r)).mean() <= 0.3: out.append(r)
         if len(where) == keep: break
     out += list(more)

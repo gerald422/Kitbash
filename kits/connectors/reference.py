@@ -2,6 +2,7 @@
 
 read(blend, lib) -> {"parts", "joints", "notes"}:
   parts   object name -> {"rel": library path, "Wm": maker coordinates -> the reference's world}
+  spots   the other cuts (legs buckle, arm wrist armour, legs back plate) by fixed name: [{"cut", "part", "tri", "Wm"}]
   joints  one per joint (shoulder, neck, waist, back, wrist, pad, shin): the socket / fit names it stands for and
           "hosts" / "children": [{"cut", "part" (library path), "tri" (the cut in its part's maker coordinates),
           "J" (the joint's frame in that part's maker coordinates)}]
@@ -149,7 +150,10 @@ def read(blend, lib):
         else:
             Jw = np.eye(4); Jw[:3, 3] = np.concatenate([cuts[h["cut"]]["world"] for h in hosts]).reshape(-1, 3).mean(0); conv = "the host cut's middle"
         for x in hosts + kids: x["J"] = np.linalg.inv(parts[x["obj"]]["Wm"]) @ Jw
-        joints[jn] = {"socket": sock, "fit": fit, "host_types": htypes, "child_types": ctypes, "hosts": hosts, "children": kids, "frame": conv}
-    later = sorted({c["fixed"] for c in cuts.values()} - {x for j in JOINTS.values() for x in [j[0]] + j[1]})
-    if later: notes.append("cuts read but not used yet: " + ", ".join(later))
-    return {"parts": {n: {"rel": p["rel"], "Wm": p["Wm"]} for n, p in parts.items()}, "joints": joints, "notes": notes}
+        joints[jn] = {"socket": sock, "fit": fit, "host_types": htypes, "child_types": ctypes, "hosts": hosts, "children": kids, "frame": conv, "Jw": Jw}
+    # the other cuts (buckle, wrist armour, back plate): their surface, part and world pose, for the callers that use them
+    spots = {}
+    for n, c in sorted(cuts.items()):
+        if c["fixed"] not in {x for j in JOINTS.values() for x in [j[0]] + j[1]}:
+            e = side(n, c); e["Wm"] = parts[c["part"]]["Wm"]; spots.setdefault(c["fixed"], []).append(e)
+    return {"parts": {n: {"rel": p["rel"], "Wm": p["Wm"]} for n, p in parts.items()}, "joints": joints, "spots": spots, "notes": notes}

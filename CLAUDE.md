@@ -36,6 +36,9 @@ Do not read `addons/tiow_inbox.py` whole (226 KB): `grep -n "^def \|^class "` an
   this system for now (they would need their own base fits); plain arms Mar Fil and Springles; every placement from
   Josh's cuts of the mating surface, each sat against a Mar Fil part; roll from the file; no old library fits used
   as anchors. Don't drift back to the archived methods (`docs/archive/`).
+- **Searches match the shape of Josh's cut surface, never the geometry**: no triangle counts, no whole-mesh comparison,
+  no "what touches", no sculpt detail. Only the mating surfaces and the roll matter. This has slipped back several
+  times; check any new search against it.
 - Renegade chapter: no aquilas, purity seals or scrolls (`_hidden.txt`; merge with Josh's current file).
 - Public repo: no STL / OBJ / blend / npz / previews, and nothing identifying Josh (no surname, Windows user name;
   home paths as `~\...`). `tools/validate.py` and CI enforce this; run it before every commit.
