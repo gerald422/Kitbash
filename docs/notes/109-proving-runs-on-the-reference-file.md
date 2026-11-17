@@ -47,3 +47,22 @@ again. The region stays, to keep answers in the right place.
   - Shields: near, 12-31 mm off. A shield is held differently; it needs its own grip cut.
   - Captain jump pack mount.
   - Jump Chaplain and Techmarine torso backs.
+
+## Nov 17, evening: placed weapons, renamed parts, left shin
+
+- **Groups and joints.** `add_reference_parts.py` added the parts to cut, each with a Mar Fil part already sat
+  against it. Each cut now takes its joint from the known part sat on it (`reference.read`).
+- **Pieces moved and renamed.** Josh moved every piece onto the main marine and renamed some copies to "Torso 2"
+  by mistake. The reader now knows a part by its name, by a shortened name ("Bladeguard Axe 1A"), or by its mesh
+  (against the files the reference is built from). Stray 1-12 triangle objects are left out.
+  `~\Desktop\mar fil connectors\rename misnamed parts.py` puts the names back in his open Blender.
+- **Weapons need no new wrist cut** (Josh: the axe, combi weapon and shield fitted as placed). A weapon placed in the
+  hand is read the way a pad is: its wrist is what rests on the arm wrist cut. In run 4 the Bladeguard axe, Veteran
+  axe, Veteran combi weapon and Assault shield came out sure, 0.3-0.6 mm / 6 deg from the library.
+- **One placed copy per file.** With everything piled at the centre, a Shoulder Pad 1 copy on the Intercessor arm
+  crossed the main arm's pad spot. Run 4 took its inside and put Assault pads 4.3 mm / 59 deg out. Now the copy kept
+  is the one sitting flush on the cut (within 0.05 mm), and only if it rests on a part that carries the cut as well
+  as on any other.
+- **Left shin cut** (`legs shin spot left`, under a mirrored pad set by eye): left pads now touch their legs 12-22%,
+  against 6-10% when mirrored from the right.
+- **Bladeguard arms out for now** (`reference.EXCLUDE`).

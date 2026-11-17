@@ -21,6 +21,8 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
   BBoosty and CyberBrush. Weapons without a hand are not used. Turtle Ninja: only the straight pose of each torso,
   nothing from "Rigging Required" folders.
 - **Later:** accessories, including the legs' rear belt plate.
+- **Bladeguard arms out for now** (Josh, Nov 17: a bad example of a normal fit, Arm 10 especially). Mar Fil arms are
+  the Assault and Intercessor ones; the reader leaves Bladeguard arms out (`reference.EXCLUDE`).
 - **Bike parts later, with their own cuts** (Josh, Nov 16): bike torsos (Bike Chaplain body), riding legs (Outriders)
   and bike parts are left out of the Mar Fil searches until they have their own torso / legs cuts.
 
@@ -93,7 +95,7 @@ without guessing:
    | neck | torso neck | head's neck |
    | waist | torso waist | legs' waist |
    | back | torso back | backpack mount; jump pack mount |
-   | wrist | arm wrist (so the anchor is found on other arms) | the hand's wrist on a weapon |
+   | wrist | arm wrist (so the anchor is found on other arms) | the hand's wrist on a weapon (or just the weapon placed in the hand: its wrist is what rests on the arm wrist cut; Josh, Nov 17: the axe, combi weapon and shield fitted as placed, no new cuts) |
    | pad | arm pad spot | the pad's inside (or just the pad placed: its inside is taken from where it rests) |
    | shin | legs shin spot (right shin); optional a second one on the left shin, under a mirrored shin pad placed by eye (Nov 17; the side is read from where it lies) | the shin pad's inside (or just the shin pad placed) |
    | buckle | belt buckle on the legs | |

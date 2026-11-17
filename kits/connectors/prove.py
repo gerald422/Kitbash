@@ -37,6 +37,7 @@ def pick(lib, maker, per, ref_rels):
     for t in types:
         es = [e for e in idx["parts"] if e["path"].startswith(maker) and e["type"] == t and e.get("side") in (None, "R")
               and not (t in ("Chests", "Legs") and any(k in e["path"] for k in BIKE))
+              and not any(x in e["path"].replace("\\", "/") for x in RF.EXCLUDE)
               and e["path"].lower() not in hidden and not any(w in e["name"].lower() for w in ("no hand", "handless"))]
         bykit = collections.defaultdict(list)
         for e in sorted(es, key=lambda e: e["name"]): bykit[e["path"].split("\\")[1]].append(e)
@@ -179,7 +180,10 @@ def run(A):
     lib = opt(A, "--lib", "D:/Kitbash Library"); blend = opt(A, "--ref", os.path.expanduser("~/Desktop/mar fil connectors/Kitbash reference.blend"))
     out = opt(A, "--out", os.path.expanduser("~/Desktop/mar fil connectors/proving")); maker = opt(A, "--maker", "Mar Fil - Tacticus")
     os.makedirs(out, exist_ok=True); work = tempfile.mkdtemp(prefix="kitbash-prove-"); t0 = time.time()
-    ref = RF.read(blend, lib); print("reference: %d parts, joints %s" % (len(ref["parts"]), ", ".join(ref["joints"])), flush=True)
+    import add_reference_parts as AR, make_reference as MR     # the files the reference is built from: a renamed object is known by its mesh
+    pool = sorted({MR.TORSO} | {p[0] for p in MR.PARTS} | {AR.TORSO, AR.ARM, AR.SWORD, AR.PAD, AR.JUMP, AR.PACK} | {g[1] for g in AR.GROUPS} | {p[0] for g in AR.GROUPS for p in g[2]}
+                  | {AR.MF + "AssaultMarines-V2/Knee Pads/MarFil Assault - Shin Pad 1"})
+    ref = RF.read(blend, lib, pool); print("reference: %d parts, joints %s" % (len(ref["parts"]), ", ".join(ref["joints"])), flush=True)
     for n in ref["notes"]: print("  note: " + n, flush=True)
     dump = {"lib": lib, "joints": {}}; k = 0
     for jn, j in ref["joints"].items():

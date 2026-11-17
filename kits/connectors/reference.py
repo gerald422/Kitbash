@@ -31,6 +31,8 @@ JOINTS = {"shoulder": ("torso shoulder", ["arm shoulder disc"], "Shoulder R", "S
           "pad": ("arm pad spot", ["pad inside"], "Pad R", "Pad R", ["Arms"], ["Shoulder Pads"]),
           "shin": ("legs shin spot", ["shin pad inside"], "Shin R", "Shin R", ["Legs"], ["Knee Pads"])}
 MX = np.diag([-1.0, 1, 1, 1])
+EXCLUDE = ("VeteranBladeSquad/Arms/",)   # parts left out of the reference for now (Josh, Nov 17: Bladeguard arms are a bad example of a normal fit)
+TINY = 50            # triangles: a smaller object in a parts collection is a stray bit, not a part
 GAP = 0.3            # mm: a placed pad's inside = its triangles within this of the spot cut
 M4 = lambda a: np.array(a, float).reshape(4, 4)
 
@@ -78,7 +80,7 @@ def frame_of(obj_tri, file_tri):
     return None
 
 
-def read(blend, lib):
+def read(blend, lib, pool=()):
     import bpy
     bpy.ops.wm.open_mainfile(filepath=blend, load_ui=False)
     idx = json.load(open(lib + "/_builder/index.json", encoding="utf-8"))
@@ -96,6 +98,19 @@ def read(blend, lib):
         hits = bystem.get(n) or [p for s, ps in bystem.items() if s.startswith(n + "-") for p in ps]
         return [h[:-4].replace("\\", "/") for h in sorted(set(hits))]
 
+    toks = lambda s: set(re.findall(r"[a-z0-9]+", re.sub(r"#\d+|\.\d{3}$", "", s.lower()))) - {"marfil"}
+    def like(name):
+        """library files whose name holds every word of the object's (a shortened name: 'Bladeguard Axe 1A')"""
+        t = toks(name)
+        return [e["path"][:-4].replace("\\", "/") for e in idx["parts"] if t and t <= toks(e["name"])][:12]
+
+    mks = {}
+    def maker_mesh(rel):
+        if rel not in mks:
+            sc = json.load(open(lib + "/" + rel + ".sockets.json", encoding="utf-8-sig")); G = OG.from_file(sc)
+            now = C.soup(lib + "/" + rel + ".stl", sc.get("scale", 1.0)); mks[rel] = (sc, tf(now, np.linalg.inv(M4(G))) if G else now)
+        return mks[rel]
+
     def tris(o):
         me = o.data; me.calc_loop_triangles(); n = len(me.loop_triangles)
         i = np.empty(n * 3, np.int64); me.loop_triangles.foreach_get("vertices", i)
@@ -110,14 +125,16 @@ def read(blend, lib):
             f = fixed(o.name)
             if not f: notes.append("cut %r: not one of the fixed names, left out" % o.name); continue
             cuts[o.name] = {"fixed": f.replace("legs backplate", "legs back plate"), "world": tf(T, W), "coll": cn[0]}; continue
-        cands = resolve(o.name)
-        if not cands: notes.append("part %r: no library file by that name, left out" % o.name); continue
-        for rel in cands:
-            sc = json.load(open(lib + "/" + rel + ".sockets.json", encoding="utf-8-sig")); G = OG.from_file(sc)
-            now = C.soup(lib + "/" + rel + ".stl", sc.get("scale", 1.0)); mk = tf(now, np.linalg.inv(M4(G))) if G else now
-            O2M = frame_of(T, mk)
+        if len(T) < TINY: notes.append("object %r: %d triangles, a stray bit, left out" % (o.name, len(T))); continue
+        # which file: its name (the library's, the maker's file name, or a shortened one), else, when the name says
+        # otherwise (a renamed copy), the mesh against the files the reference is built from (pool)
+        named = resolve(o.name) or like(re.sub(r"\.\d{3}$", "", o.name)); O2M = None
+        for rel in named + [r for r in pool if r not in named]:
+            sc, mk = maker_mesh(rel); O2M = frame_of(T, mk)
             if O2M is not None: break
-        if O2M is None: notes.append("part %r (%s): its mesh could not be lined up with the library file, left out" % (o.name, " or ".join(cands))); continue
+        if O2M is None: notes.append("part %r: its mesh is none of %s, left out" % (o.name, " / ".join(os.path.basename(r) for r in named) or "the reference's files")); continue
+        if rel not in named: notes.append("part %r is %s (by its mesh; the name says otherwise)" % (o.name, os.path.basename(rel)))
+        if any(x in rel for x in EXCLUDE): notes.append("part %r (%s): left out for now" % (o.name, os.path.basename(rel))); continue
         parts[o.name] = {"rel": rel, "cat": cat.get(rel), "Wm": W @ np.linalg.inv(O2M), "world": tf(T, W), "sc": OG.maker_view(sc), "maker_tri": mk}
     keys = {n: _keys(p["world"]) for n, p in parts.items()}
     for n, c in cuts.items():                                    # the part a cut was taken from: the corner points they share
@@ -142,15 +159,28 @@ def read(blend, lib):
             for h in hosts: h["side"] = "R" if tf(world(h).reshape(-1, 3).mean(0)[None], np.linalg.inv(joints["waist"]["Jw"]))[0, 0] > 0 else "L"
         right = [h for h in hosts if h.get("side", "R") == "R"] or hosts
         kids = [side(n, c) for n, c in sorted(cuts.items()) if c["fixed"] in ccs]
-        if jn in ("pad", "shin"):        # a placed pad with no cut of its own: its inside = what of it rests on a (right) spot cut, on any copy of that part
+        if jn in ("pad", "shin", "wrist"):   # a placed pad / weapon with no cut of its own: its inside = what of it rests on a (right) spot cut, on any copy of that part
             have = {k["part"] for k in kids}; spots_w = []
             for h in right:
                 for pn in inst[h["part"]]: spots_w.append(tf(h["tri"], parts[pn]["Wm"]))
             spot = C.Surface(np.concatenate(spots_w), spacing=0.03)
+            best = {}                     # one per file: the copy with the most of it resting on a spot (another copy may only graze one)
+            cut_rels = {h["part"] for h in right}; host_objs = [pn for pn, p in parts.items() if p["cat"] in htypes]
+            def rests_on(pn):             # None if it sits on a part that carries the cut (as well as on any, within 80%: Arm 2A and 2B are one shape at the shoulder); else the part it does sit on
+                X = parts[pn]["world"].mean(1); X = X[::max(1, len(X) // 3000)]
+                t = {h: float(np.mean(surf(h).dist(X)[1] < GAP)) for h in host_objs}
+                if not t: return None
+                top = max(t, key=t.get); on_cut = max((v for h, v in t.items() if parts[h]["rel"] in cut_rels), default=0.0)
+                return None if on_cut >= 0.8 * t[top] else top
             for pn, p in parts.items():
                 if p["cat"] not in ctypes or p["rel"] in have or mirrored(pn): continue
                 keep = p["world"][spot.dist(p["world"].mean(1))[1] < GAP]
-                if len(keep) >= 20: kids.append({"cut": ccs[0] + " (from the placed %s)" % pn, "part": p["rel"], "obj": pn, "tri": tf(keep, np.linalg.inv(p["Wm"]))})
+                other = rests_on(pn) if len(keep) >= 20 else None
+                if other: notes.append("%s: sits on %s, which has no %s cut: not used" % (pn, other, hc)); continue
+                flush = int(np.sum(spot.dist(keep.mean(1))[1] < 0.05))   # the copy the cut was taken under sits flush on it; another only crosses it
+                if len(keep) >= 20 and flush > best.get(p["rel"], (-1,))[0]: best[p["rel"]] = (flush, pn, keep)
+            for rel, (_, pn, keep) in sorted(best.items()):
+                kids.append({"cut": ccs[0] + " (from the placed %s)" % pn, "part": rel, "obj": pn, "tri": tf(keep, np.linalg.inv(parts[pn]["Wm"]))})
         if not kids: notes.append("joint %s: no child cut (%s) or placed part" % (jn, " / ".join(ccs))); continue
         # the joint's frame in the reference's world (a convention): the first (right) host's own socket, else its cut's middle
         x0 = right[0]; h0 = parts[x0["obj"]]; S = next((M4(s["matrix"]) for s in h0["sc"].get("sockets") or [] if s.get("type") == sock), None)
