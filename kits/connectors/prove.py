@@ -372,6 +372,9 @@ def run(A):
     by = collections.defaultdict(list)
     for r in R: by[r["cat"]].append(r)
     def got(r, jk): d = (r or {}).get("joints", {}).get(jk); return M4(d["matrix"]) if d and "matrix" in d else None
+    if not by["Chests"]:                     # a run of some types only (--types without Chests): no torso to build on
+        open(out + "/report.txt", "a", encoding="utf-8").write("\nNo test marines: no torsos in this run (sheets.py --base gives the rest).\n")
+        print("\n".join(W[:len(ref["notes"]) + 4 + len(cnt) + 1])); print("done in %.0f min: %s" % ((time.time() - t0) / 60, out)); return
     for o in list(bpy.data.objects): bpy.data.objects.remove(o)
     for c in list(bpy.data.collections): bpy.data.collections.remove(c)
     made = []; nm = max(len(by["Chests"]), 4)

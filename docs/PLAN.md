@@ -125,7 +125,8 @@ without guessing:
 | Host / part | Cut | How many |
 |---|---|---|
 | Torso (host) | shoulder (left = mirror), neck, back, waist | per armour mark per maker (torso shapes differ by mark) |
-| Arms (Mar Fil, Springles) | shoulder disc places the arm; pad spot, wrist anchor, armour spots found on the arm | per maker |
+| Arms (Mar Fil) | shoulder disc places the arm; pad spot, wrist anchor, armour spots found on the arm | per maker |
+| Arms (Springles) | no shoulder cut (Josh, Nov 18: the cuts would not be clean): each arm's origin = the centre of its shoulder flat (file axes, the roll from the file), on a printed **Springles spacer** that sits on the torso; Josh's placement gives arm on spacer and spacer on torso; one arm per pattern (C, P, S) in the reference, his `arms.blend` (74 arms on the origin) kept as the check; outliers moved by hand. Wrist: `Springles arm wrist` cut (P unsheathing arm) with a Mar Fil weapon in that hand | per maker |
 | Legs | waist places the legs; shin spot and belt buckle found on the legs | per maker (legs don't differ by mark) |
 | Shoulder pads | the pad's inside | per maker |
 | Shin pads | the pad's inside | per maker |

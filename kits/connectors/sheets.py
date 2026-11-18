@@ -2,24 +2,31 @@
 (the run's reference parts) with only the tested part swapped in, its name and result under it. Two sheets per type:
 working (every joint it takes part in sure, no note) and flagged (placed but near / noted). Parts with nothing placed
 are listed only. Saves PNGs and a text list, nothing else.
-blender -b --factory-startup --python kits/connectors/sheets.py -- DIR/results.json DIR [per_sheet]   (after a prove.py run)"""
+blender -b --factory-startup --python kits/connectors/sheets.py -- DIR/results.json DIR [per_sheet] [--base OTHER/results.json]
+(after a prove.py run; --base: a run whose reference parts stand in for the types this run did not search, e.g. its torso)"""
 import bpy, os, sys, json, math, collections
 import numpy as np
 from mathutils import Matrix, Vector
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", ".."))); sys.path.insert(0, HERE)
 import seat as S
-A = sys.argv[sys.argv.index("--") + 1:]; res, outdir = A[0], A[1]; PER = int(A[2]) if len(A) > 2 else 16
+A = sys.argv[sys.argv.index("--") + 1:]; BASE = A[A.index("--base") + 1] if "--base" in A else None
+A = [a for i, a in enumerate(A) if a != "--base" and not (i and A[i - 1] == "--base")]; res, outdir = A[0], A[1]; PER = int(A[2]) if len(A) > 2 else 16
 D = json.load(open(res, encoding="utf-8")); R = D["results"]; lib = "D:/Kitbash Library"
 M4 = lambda a: np.array(a, float).reshape(4, 4); MX = np.diag([-1.0, 1, 1, 1])
 by = collections.defaultdict(list)
 for r in R: by[r["cat"]].append(r)
 refrels = {c["part"] for j in D["reference"].values() for k in ("hosts", "children") for c in j[k]}
+base_by = collections.defaultdict(list)
+if BASE:
+    B = json.load(open(BASE, encoding="utf-8"))
+    for r in B["results"]: base_by[r["cat"]].append(r)
+    refrels |= {c["part"] for j in B["reference"].values() for k in ("hosts", "children") for c in j[k]}
 def J(r, jk): return (r or {}).get("joints", {}).get(jk) or {}
 def mat(r, jk): d = J(r, jk); return M4(d["matrix"]) if "matrix" in d else None
 def good(d): return d.get("level") == "sure" and not d.get("note") and "matrix" in d
 def ref(cat, need):
     """the reference part of a type (the run lists the reference's parts first), else the first whose joints are good"""
-    xs = by.get(cat, [])
+    xs = by.get(cat) or base_by.get(cat, [])
     for r in sorted(xs, key=lambda r: r["rel"] not in refrels):
         if all(good(J(r, k)) for k in need): return r
     return None

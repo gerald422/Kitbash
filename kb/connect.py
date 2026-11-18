@@ -244,6 +244,21 @@ def _in_region(region, X):
     d = np.linalg.norm(np.asarray(X) - np.asarray(region[0]), axis=-1); return (d >= region[1]) & (d <= region[2])
 
 
+TIE_PLACES = 600     # places at (or 1 under) the best coarse score that are scored again with more of the cut's points
+TIE_PTS = 192        # points for that: a small cut on a detailed part fills all 48 coarse points at many places (Nov 18:
+                     # 76 on the Veteran Combi Weapon 4A, 200 on Chain Sword 3); in file order its own place was never settled
+def _break_ties(con, surf, P, Nn, spins, S, top, order):
+    """the order of places, ties on the coarse score broken by more points of the cut's surface (its 3 best turns
+    there). Only the cut's shape is compared, as in the coarse score"""
+    tie = order[top[order] >= top[order[0]] - 1][:TIE_PLACES]
+    if len(tie) <= KEEP: return order
+    X = con.fine[:TIE_PTS]; fs = np.empty(len(tie), np.int32)
+    for k, pi in enumerate(tie):
+        sis = np.argsort(-S[pi], kind="stable")[:3]; R, t = _poses(con, P[pi][None], Nn[pi][None], spins[sis])
+        fs[k] = surf.on(np.einsum("nij,kj->nki", R, X) + t[:, None]).sum(1).max()
+    return np.r_[tie[np.argsort(-fs, kind="stable")], order[len(tie):]]     # the tie is the front of order (sorted by score)
+
+
 def _find(con, surf, keep, spin, file_turn, claim, more=(), near=None, region=None):
     P, Nn = surf.patches(CAND); spins = np.arange(0, 360, spin); X = con.coarse
     if region is not None:                                   # the anchor sits ~at the connector's middle: 1 mm slack
@@ -256,19 +271,25 @@ def _find(con, surf, keep, spin, file_turn, claim, more=(), near=None, region=No
     for a in range(0, len(P), step):
         R, t = _poses(con, P[a:a + step], Nn[a:a + step], spins)
         scores[a * len(spins):a * len(spins) + len(R)] = surf.on(np.einsum("nij,kj->nki", R, X) + t[:, None]).sum(1)
-    S = scores.reshape(len(P), len(spins)); top = S.max(1); order = np.argsort(-top, kind="stable"); where = []; out = []
-    for pi in order[:4000]:                                    # the best places, 0.8 mm apart
-        p = P[pi]
-        if any(np.linalg.norm(p - q) <= 0.8 for q in where): continue
-        where.append(p); took = []
-        for si in np.argsort(-S[pi], kind="stable"):            # at each place, up to 3 turns 45+ deg apart
-            if S[pi, si] < 0.6 * top[pi] or len(took) == 3: break
-            if any(min(abs(spins[si] - x), 360 - abs(spins[si] - x)) < 45 for x in took): continue
-            took.append(spins[si]); R, t = _poses(con, p[None], Nn[pi][None], spins[[si]])
-            r = _result(*settle(con, surf, R[0], t[0]), hits=int(S[pi, si]))
-            if region is not None and not _in_region(region, r["M"][:3, :3] @ con.c + r["M"][:3, 3]): continue   # slid out
-            if claim is None or claim.has(placed(con, r)).mean() <= 0.3: out.append(r)
-        if len(where) == keep: break
+    S = scores.reshape(len(P), len(spins)); top = S.max(1); order = np.argsort(-top, kind="stable"); out = []
+    # the best places in file order, and (when many tie) the best by the tie-break as well, each list spaced on its own:
+    # the tie-break alone put a near place 0.5 mm off first, and the true one was then skipped as too close (Outrider
+    # arms' shoulder disc, Nov 18); with both, nothing found before is lost
+    tied = _break_ties(con, surf, P, Nn, spins, S, top, order)
+    for lst in ([order] if tied is order else [order, tied]):
+        where = []
+        for pi in lst[:4000]:                                  # the best places, 0.8 mm apart
+            p = P[pi]
+            if any(np.linalg.norm(p - q) <= 0.8 for q in where): continue
+            where.append(p); took = []
+            for si in np.argsort(-S[pi], kind="stable"):        # at each place, up to 3 turns 45+ deg apart
+                if S[pi, si] < 0.6 * top[pi] or len(took) == 3: break
+                if any(min(abs(spins[si] - x), 360 - abs(spins[si] - x)) < 45 for x in took): continue
+                took.append(spins[si]); R, t = _poses(con, p[None], Nn[pi][None], spins[[si]])
+                r = _result(*settle(con, surf, R[0], t[0]), hits=int(S[pi, si]))
+                if region is not None and not _in_region(region, r["M"][:3, :3] @ con.c + r["M"][:3, 3]): continue   # slid out
+                if claim is None or claim.has(placed(con, r)).mean() <= 0.3: out.append(r)
+            if len(where) == keep: break
     out += list(more)
     if not out: return dict(_result(np.eye(3), np.zeros(3), 9.0, 9.0, 0.0), ambiguous=False, tied=0, others=[], claimed=True)
     r = choose(con, surf, out, file_turn, near); r["_out"] = out; return r
@@ -314,7 +335,10 @@ def choose(con, surf, out, file_turn=True, near=None):
     """of the settled poses, those that fit as well as the best are tied; of those, the one nearest the reference's
     own place (the maker's kit frame) is kept. 'ambiguous': another tied pose is elsewhere on the part (> 1 mm), so
     the shape alone does not say where the joint is"""
-    good = [r for r in out if r["cover"] >= 0.7] or out; m = min(r["match"] for r in good)
+    good = [r for r in out if r["cover"] >= 0.7] or out
+    lv = {"sure": 0, "look": 1, "none": 2}; b = min(lv[r["level"]] for r in good)   # only poses at the best level tie: a near
+    good = [r for r in good if lv[r["level"]] == b]   # pose (0.0019 mm, 88%) tied with a sure one (0.0003, 100%) and won on place (Nov 18)
+    m = min(r["match"] for r in good)
     tied = [r for r in good if r["match"] <= m + tie_window(m)]
     best = min(tied, key=lambda r: file_dist(con, r, near)) if file_turn else min(tied, key=lambda r: r["match"])
     at = lambda r: r["M"][:3, :3] @ con.c + r["M"][:3, 3]
