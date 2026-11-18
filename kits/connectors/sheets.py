@@ -2,7 +2,7 @@
 (the run's reference parts) with only the tested part swapped in, its name and result under it. Two sheets per type:
 working (every joint it takes part in sure, no note) and flagged (placed but near / noted). Parts with nothing placed
 are listed only. Saves PNGs and a text list, nothing else.
-blender -b --factory-startup --python kits/connectors/sheets.py -- DIR/results.json DIR [per_sheet] [--base OTHER/results.json]
+blender -b --factory-startup --python kits/connectors/sheets.py -- DIR/results.json DIR [per_sheet] [--base OTHER/results.json] [--types Arms,Melee]
 (after a prove.py run; --base: a run whose reference parts stand in for the types this run did not search, e.g. its torso)"""
 import bpy, os, sys, json, math, collections
 import numpy as np
@@ -10,7 +10,8 @@ from mathutils import Matrix, Vector
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", ".."))); sys.path.insert(0, HERE)
 import seat as S
 A = sys.argv[sys.argv.index("--") + 1:]; BASE = A[A.index("--base") + 1] if "--base" in A else None
-A = [a for i, a in enumerate(A) if a != "--base" and not (i and A[i - 1] == "--base")]; res, outdir = A[0], A[1]; PER = int(A[2]) if len(A) > 2 else 16
+TYPES = A[A.index("--types") + 1].split(",") if "--types" in A else None
+A = [a for i, a in enumerate(A) if a not in ("--base", "--types") and not (i and A[i - 1] in ("--base", "--types"))]; res, outdir = A[0], A[1]; PER = int(A[2]) if len(A) > 2 else 16
 D = json.load(open(res, encoding="utf-8")); R = D["results"]; lib = "D:/Kitbash Library"
 M4 = lambda a: np.array(a, float).reshape(4, 4); MX = np.diag([-1.0, 1, 1, 1])
 by = collections.defaultdict(list)
@@ -79,13 +80,20 @@ def marine(r, W, coll):
     def hang(child, jn, Wh, host):
         Sx, F = mat(host, jn + ":host"), mat(child, jn + ":child")
         if child is None or Sx is None or F is None: return None
-        Wc = Wh @ Sx @ F; put(child["rel"], Wc, coll); return Wc
-    Wa = hang(pick("Arms"), "shoulder", W, torso)
+        Wc = Wh @ Sx @ F; placed.append(put(child["rel"], Wc, coll)); return Wc
+    placed = []; Wa = hang(pick("Arms"), "shoulder", W, torso); arm_objs = placed[:]
     if cat in ("Chests", "Legs", "Knee Pads") or True: Wl = hang(pick("Legs"), "waist", W, torso)
     hang(pick("Heads"), "neck", W, torso)
     pack = r if cat in ("Jump Packs", "Backpacks") else REF.get("Backpacks"); hang(pack, "back", W, torso)
     if Wa is not None:
-        hang(pick("Shoulder Pads"), "pad", Wa, pick("Arms")); hang(weapon, "wrist", Wa, pick("Arms"))
+        n0 = len(placed); hang(pick("Shoulder Pads"), "pad", Wa, pick("Arms")); hang(weapon, "wrist", Wa, pick("Arms")); arm_objs += placed[n0:]
+        # the left arm, its pad and weapon: the right ones mirrored about the torso's waist frame (+X = the right, as
+        # for the left shin pad; Josh, Nov 18: left arms are right arms mirrored, so the sheets show both)
+        Sw = mat(torso, "waist:host")
+        if Sw is not None:
+            Mw = Matrix((W @ Sw @ MX @ np.linalg.inv(Sw) @ np.linalg.inv(W)).tolist())
+            for o in arm_objs:
+                m = bpy.data.objects.new(o.name[:56] + " L", o.data); coll.objects.link(m); m.matrix_world = Mw @ o.matrix_world
     if Wl is not None:
         legs, pad = pick("Legs"), pick("Knee Pads")
         if hang(pad, "shin", Wl, legs) is not None:
@@ -109,6 +117,7 @@ def spread(xs, n):
     if len(xs) <= n: return xs
     return [xs[int(round(i * (len(xs) - 1) / (n - 1)))] for i in range(n)]
 for cat in ["Chests", "Arms", "Legs", "Heads", "Jump Packs", "Backpacks", "Shoulder Pads", "Knee Pads", "Melee", "Pistols", "Hands", "Shields"]:
+    if TYPES and cat not in TYPES: continue
     xs = sorted(by.get(cat, []), key=lambda r: r["rel"]); st = {r["rel"]: status(r) for r in xs}
     cnt = collections.Counter(s for s, _ in st.values())
     lines.append("== %s: %d parts: %d working, %d flagged (placed), %d not placed" % (cat, len(xs), cnt["ok"], cnt["flag"], cnt["none"]))
