@@ -17,6 +17,7 @@ C.KEYED_KEEPS_SHAPE = True       # a cut with a notch keeps its own turn; only r
 MX = np.diag([-1.0, 1, 1, 1])
 BIKE = ("ChaplainOnBike", "Outriders")    # bike torsos and riding legs: their own cuts later (Josh, Nov 16)
 NOT_LEGS = ("VeteranBladeSquad", "VeteranSquad")   # Veteran and Bladeguard legs: not looked at for now (Josh, Nov 17)
+NOT_KITS = ("CaptainWithJumpPack",)                 # left out altogether, going forward (Josh, Nov 18)
 # The search looks for the SHAPE of Josh's cut surface only: never triangle counts, never the part's whole mesh or
 # geometry compared (Josh, Nov 13 / 17; it has slipped back before). The region below only narrows where to look.
 PLACE = {"wrist": "shoulder", "pad": "shoulder", "shin": "waist"}   # spots on a host, and the joint that places that host
@@ -42,7 +43,7 @@ def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None):
     for t in types:
         es = [e for e in idx["parts"] if e["path"].startswith(maker) and e["type"] == t and e.get("side") in (None, "R")
               and not (t in ("Chests", "Legs") and any(k in e["path"] for k in BIKE)) and not (t == "Legs" and any(k in e["path"] for k in NOT_LEGS))
-              and not any(x in e["path"].replace("\\", "/") for x in RF.EXCLUDE)
+              and not any(x in e["path"].replace("\\", "/") for x in RF.EXCLUDE) and e["path"].split("\\")[1] not in NOT_KITS
               and e["path"].lower() not in hidden and not any(w in e["name"].lower() for w in ("no hand", "handless"))]
         bykit = collections.defaultdict(list)
         for e in sorted(es, key=lambda e: e["name"]): bykit[e["path"].split("\\")[1]].append(e)
@@ -83,10 +84,10 @@ def search(work, i, n):
                     best = None
                     for c in j[key]:
                         rg = region(c, jn, placeF) if role == "host" else None
-                        f = C.find(con(c), surf, region=rg); f["cut"] = c["cut"]; f["J"] = c["J"]; f["rg"] = rg
+                        f = C.find(con(c), surf, region=rg); f["cut"] = c["cut"]; f["kind"] = c.get("kind"); f["J"] = c["J"]; f["rg"] = rg
                         rank = ({"sure": 0, "look": 1, "none": 2}[f["level"]], f["match"])
                         if best is None or rank < best[0]: best = (rank, f)
-                    f = best[1]; d = {"role": role, "cut": f["cut"], "level": f["level"], "match": f["match"], "cover": f["cover"],
+                    f = best[1]; d = {"role": role, "cut": f["cut"], "kind": f["kind"], "level": f["level"], "match": f["match"], "cover": f["cover"],
                                       "turned": f.get("turned"), "round": f.get("round"), "ambiguous": bool(f.get("ambiguous"))}
                     near_ok = role == "child" or (HOST_NEAR_IN_REGION and f["rg"] is not None and placeSure.get(PLACE[jn], False))
                     if f["rg"] is not None: d["region"] = "%.1f-%.1f mm from its %s" % (f["rg"][1], f["rg"][2], PLACE[jn])
@@ -100,7 +101,7 @@ def search(work, i, n):
                             if old is not None: d["lib_mm"] = round(float(np.linalg.norm(old[:3, 3] - MJ[:3, 3])), 2); d["lib_deg"] = round(geo.ang(old[:3, :3].T @ MJ[:3, :3]), 1)
                         else:
                             F = np.linalg.inv(MJ)
-                            if jn == "waist" and ref.get("buckle"): F = buckle(ref["buckle"], ref["joints"]["waist"], con, surf, F, d)
+                            if jn == "waist" and ref.get("buckles"): F = buckle(ref["buckles"], ref["joints"]["waist"], con, surf, F, d)
                             d["fit"] = j["fit"]; d["matrix"] = flat(F); placeF[jn] = F; placeSure[jn] = f["level"] == "sure"
                             if jn == "waist": Fw = F
                             fits = sc.get("fits") or {}; old = next((M4(fits[k]) for k in (j["fit"], j["fit"].replace(" R", "")) if k in fits), None)
@@ -115,13 +116,19 @@ def search(work, i, n):
 def S_tf(V, M): return V @ M[:3, :3].T + M[:3, 3]
 
 
-def buckle(b, wj, con, surf, F, d):
+def buckle(bs, wj, con, surf, F, d):
     """the legs' turn about the waist from the belt buckle (Josh, Nov 17): the buckle sits forward of the waist, so it
     points the way the legs face with a long lever. Found (sure) -> the legs are turned about the waist's axis until
-    their buckle lies the way the reference's does; the waist still gives the place and tilt. Not found -> the notch."""
-    cb = con(b); Qr = S_tf(cb.c[None], np.linalg.inv(M4(b["Jplace"])))[0]; dr = float(np.linalg.norm(Qr))
-    rg = (np.linalg.inv(F)[:3, 3], max(0.0, dr - TOL["buckle"]), dr + TOL["buckle"])
-    f = C.find(cb, surf, region=rg); d["buckle"] = {"level": f["level"], "match": f["match"], "cover": f["cover"]}
+    their buckle lies the way the reference's does; the waist still gives the place and tilt. Not found -> the notch.
+    One buckle cut per armour type (Josh, Nov 18: 'Intercessor Legs belt buckle'): the one that fits best."""
+    best = None
+    for b in bs:
+        cb = con(b); Qr = S_tf(cb.c[None], np.linalg.inv(M4(b["Jplace"])))[0]; dr = float(np.linalg.norm(Qr))
+        rg = (np.linalg.inv(F)[:3, 3], max(0.0, dr - TOL["buckle"]), dr + TOL["buckle"]); f = C.find(cb, surf, region=rg)
+        rank = ({"sure": 0, "look": 1, "none": 2}[f["level"]], f["match"])
+        if best is None or rank < best[0]: best = (rank, b, cb, Qr, f)
+    _, b, cb, Qr, f = best
+    d["buckle"] = {"cut": b["cut"], "kind": b.get("kind"), "level": f["level"], "match": f["match"], "cover": f["cover"]}
     if f["level"] == "none": return F
     w = wj["children"][0]; ax = np.linalg.inv(M4(w["J"]))[:3, :3] @ con(w).axis; ax /= np.linalg.norm(ax)   # the waist's axis, joint frame
     Qn = S_tf(S_tf(cb.c[None], f["M"]), F)[0]
@@ -284,18 +291,20 @@ def run(A):
         for key in ("hosts", "children"):
             d[key] = []
             for c in j[key]:
-                k += 1; np.save("%s/cut%02d.npy" % (work, k), c["tri"]); e = {"cut": c["cut"], "part": c["part"], "npy": "cut%02d.npy" % k, "J": flat(c["J"])}
+                k += 1; np.save("%s/cut%02d.npy" % (work, k), c["tri"]); e = {"cut": c["cut"], "kind": c.get("kind"), "part": c["part"], "npy": "cut%02d.npy" % k, "J": flat(c["J"])}
                 if "side" in c: e["side"] = c["side"]
                 if key == "hosts" and jn in PLACE and PLACE[jn] in ref["joints"]:   # the placing joint in the cut's part coordinates
                     Jp = place_joint(ref, PLACE[jn], c["obj"])
                     if Jp is not None: e["Jplace"] = flat(np.linalg.inv(ref["parts"][c["obj"]]["Wm"]) @ Jp)
                 d[key].append(e)
         dump["joints"][jn] = d
-    for b in ref.get("spots", {}).get("legs buckle", [])[:1]:
+    dump["buckles"] = []
+    for b in ref.get("spots", {}).get("legs buckle", []):   # one per armour type
         if "waist" in ref["joints"]:
             k += 1; np.save("%s/cut%02d.npy" % (work, k), b["tri"])
             Jp = place_joint(ref, "waist", b["obj"])
-            if Jp is not None: dump["buckle"] = {"cut": b["cut"], "part": b["part"], "npy": "cut%02d.npy" % k, "Jplace": flat(np.linalg.inv(b["Wm"]) @ Jp)}
+            if Jp is None: ref["notes"].append("buckle %r: its legs sit on no torso in the reference, left out" % b["cut"]); continue
+            dump["buckles"].append({"cut": b["cut"], "kind": b.get("kind"), "part": b["part"], "npy": "cut%02d.npy" % k, "Jplace": flat(np.linalg.inv(b["Wm"]) @ Jp)})
     dump["balls"] = []                       # the ankle balls, per side: their size, and where they are on the reference legs
     cuts = {}                                # (legs, side) -> {kind: (centre, radius)}: Josh's ankle ball cuts
     for b in ref.get("spots", {}).get("legs ankle ball", []):
@@ -350,7 +359,7 @@ def run(A):
                      "  roll moved %.1f deg to the file's" % d["turned"] if d.get("turned") else "",
                      "  library's is %.2f mm / %.1f deg away" % (d["lib_mm"], d["lib_deg"]) if "lib_mm" in d else ("  (library has none)" if d["level"] != "none" else ""),
                      "  left shin: %s" % d["other"]["level"] if d.get("other") else "",
-                     "  buckle %s%s" % (d["buckle"]["level"], " turned %.1f deg" % d["buckle"]["deg"] if "deg" in d["buckle"] else "") if d.get("buckle") else "",
+                     "  buckle %s %s%s" % (d["buckle"].get("cut", ""), d["buckle"]["level"], " turned %.1f deg" % d["buckle"]["deg"] if "deg" in d["buckle"] else "") if d.get("buckle") else "",
                      "  [" + d["region"] + "]" if d.get("region") else "", "  (" + d["note"] + ")" if d.get("note") else ""))
             for sn, sd in (d.get("sides") or {}).items():           # the shin, each side: the ankle balls
                 if "balls" in sd:

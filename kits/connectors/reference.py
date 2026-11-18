@@ -37,9 +37,22 @@ GAP = 0.3            # mm: a placed pad's inside = its triangles within this of 
 M4 = lambda a: np.array(a, float).reshape(4, 4)
 
 
-def fixed(name):
-    n = re.sub(r"\.\d{3}$", "", name).lower().strip()
-    return next((f for f in FIXED if n.startswith(f)), None)
+ALIAS = {"belt buckle": "buckle"}   # Josh's wording -> the fixed name's ("Intercessor Legs belt buckle")
+
+
+def cut_name(name):
+    """(fixed name, armour type) of a cut: '<type> <fixed name> <anything>', the type optional (Josh, Nov 18: 'intercessor
+    arm pad spot', 'Intercessor Legs belt buckle'; one cut per armour type). (None, None) if no fixed name"""
+    n = re.sub(r"\s+", " ", re.sub(r"\.\d{3}$", "", name).lower()).strip()
+    for a, b in ALIAS.items(): n = n.replace(a, b)
+    w = n.split(" ")
+    for i in range(len(w)):
+        rest = " ".join(w[i:]); f = next((f for f in FIXED if rest.startswith(f)), None)
+        if f: return f, " ".join(w[:i]) or None
+    return None, None
+
+
+def fixed(name): return cut_name(name)[0]
 
 
 def tf(T, M): M = np.asarray(M); return T @ M[:3, :3].T + M[:3, 3]
@@ -96,6 +109,8 @@ def read(blend, lib, pool=()):
         n = norm(re.sub(r"\.\d{3}$", "", name))
         if n in byname: return [byname[n]["path"][:-4].replace("\\", "/")]
         hits = bystem.get(n) or [p for s, ps in bystem.items() if s.startswith(n + "-") for p in ps]
+        if not hits:                  # a copy lettered by hand: 'Forearm 2 a', 'Forearm 2.b' (CyberBrush forearm armour)
+            m = re.sub(r"[ .][a-z]$", "", n); hits = bystem.get(m, []) if m != n else []
         return [h[:-4].replace("\\", "/") for h in sorted(set(hits))]
 
     toks = lambda s: set(re.findall(r"[a-z0-9]+", re.sub(r"#\d+|\.\d{3}$", "", s.lower()))) - {"marfil"}
@@ -122,9 +137,9 @@ def read(blend, lib, pool=()):
         if o.type != "MESH" or not cn or any(c.startswith("ND.") for c in cn): continue
         T = tris(o); W = np.array(o.matrix_world)
         if any(c.lower().endswith(" cuts") for c in cn):
-            f = fixed(o.name)
+            f, kind = cut_name(o.name)
             if not f: notes.append("cut %r: not one of the fixed names, left out" % o.name); continue
-            cuts[o.name] = {"fixed": f.replace("legs backplate", "legs back plate"), "world": tf(T, W), "coll": cn[0]}; continue
+            cuts[o.name] = {"fixed": f.replace("legs backplate", "legs back plate"), "kind": kind, "world": tf(T, W), "coll": cn[0]}; continue
         if len(T) < TINY: notes.append("object %r: %d triangles, a stray bit, left out" % (o.name, len(T))); continue
         # which file: its name (the library's, the maker's file name, or a shortened one), else, when the name says
         # otherwise (a renamed copy), the mesh against the files the reference is built from (pool)
@@ -142,7 +157,7 @@ def read(blend, lib, pool=()):
         if not sh or sh[0][0] < 3: notes.append("cut %r: shares no points with a part, left out" % n); c["part"] = None; continue
         c["part"] = sh[0][1]
     cuts = {n: c for n, c in cuts.items() if c["part"]}
-    side = lambda n, c: {"cut": n, "part": parts[c["part"]]["rel"], "obj": c["part"], "tri": tf(c["world"], np.linalg.inv(parts[c["part"]]["Wm"]))}
+    side = lambda n, c: {"cut": n, "kind": c.get("kind"), "part": parts[c["part"]]["rel"], "obj": c["part"], "tri": tf(c["world"], np.linalg.inv(parts[c["part"]]["Wm"]))}
     joints = {}
     inst = {}                                                    # library file -> its objects (copies too)
     for pn, p in parts.items(): inst.setdefault(p["rel"], []).append(pn)

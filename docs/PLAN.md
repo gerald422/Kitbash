@@ -96,7 +96,7 @@ without guessing:
    `torso shoulder`, `torso neck`, `torso waist`, `torso back`, `arm shoulder disc`, `arm pad spot`, `arm wrist`,
    `legs waist`, `legs shin spot`, `legs buckle`, `legs ankle ball` (`legs ankle ball outer right` / `inner right` /
    `outer left` / `inner left`: the exposed dome of each ankle ball, under the shin pad), `head neck`, `jump pack mount`, `backpack mount`, `weapon wrist`;
-   optional `pad inside`, `shin pad inside`; also `arm wrist armour`, `legs back plate` (`legs backplate` reads the same). Case doesn't matter. A second cut of the same joint takes a label after the name (`arm wrist a`, `weapon wrist 2`): the fixed part names the joint, the rest is only a label. A `.001` Blender adds is ignored. Parts may also carry the maker's original file name (`81-Arm-2-R-A`): the reader keeps the library file whose mesh lines up with the object.
+   optional `pad inside`, `shin pad inside`; also `arm wrist armour`, `legs back plate` (`legs backplate` reads the same). Case doesn't matter. A second cut of the same joint takes a label after the name (`arm wrist a`, `weapon wrist 2`): the fixed part names the joint, the rest is only a label. An armour type may go in front (Josh, Nov 18, to be kept to from now on: `intercessor arm pad spot`, `Intercessor Legs belt buckle`; `belt buckle` reads as `buckle`): every part is searched with each type's cut and takes the one that fits, so the search says which armour it is. A `.001` Blender adds is ignored. Parts may also carry the maker's original file name (`81-Arm-2-R-A`): the reader keeps the library file whose mesh lines up with the object.
 4. **Both sides of each joint are cut:**
 
    | Joint | host side | part side |
@@ -106,7 +106,7 @@ without guessing:
    | waist | torso waist | legs' waist |
    | back | torso back | backpack mount; jump pack mount |
    | wrist | arm wrist (so the anchor is found on other arms) | the hand's wrist on a weapon (or just the weapon placed in the hand: its wrist is what rests on the arm wrist cut; Josh, Nov 17: the axe, combi weapon and shield fitted as placed, no new cuts) |
-   | pad | arm pad spot: one per arm type, a bigger section of the shape that type shares (Josh, Nov 18; the Assault one is sure on 35 of 37 Assault arms, Intercessor arms need their own) | the pad's inside (or just the pad placed: its inside is taken from where it rests) |
+   | pad | arm pad spot: one per arm type, a bigger section of the shape that type shares (Josh, Nov 18; the Assault one is sure on 35 of 37 Assault arms, Intercessor arms have their own, `intercessor arm pad spot`: sure on 27 of 32 Intercessor arms and on the Techmarine arms) | the pad's inside (or just the pad placed: its inside is taken from where it rests) |
    | shin | legs ankle ball outer / inner, each side (they place the shin); legs shin spot (right shin), and one on the left shin under a mirrored shin pad placed by eye (Nov 17; the side is read from where it lies): it says where to look and sets the lean | the shin pad's inside (or just the shin pad placed) |   | buckle | belt buckle on the legs | |
 
 5. **Two collections per maker and armour mark**: parts in `<Maker>` or `<Maker> <mark>` (`Mar Fil`, `Turtle Ninja
@@ -137,8 +137,8 @@ without guessing:
 | Hip plates, trophies | spots set once relative to the buckle, which a cut finds on the legs | per armour type per maker |
 | (later) belt-back accessories | the legs' rear belt plate | per maker |
 
-If a search shows a kit that doesn't match (Mar Fil's Veteran / Bladeguard neck, Captain with Jump Pack legs), that
-kit gets its own cut: the search's "none" list says so.
+If a search shows a kit that doesn't match (Mar Fil's Veteran / Bladeguard neck), that kit gets its own cut: the
+search's "none" list says so. Captain with Jump Pack is left out altogether for now (Josh, Nov 18).
 
 ## Order
 
