@@ -23,6 +23,8 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
 - **Later:** accessories, including the legs' rear belt plate.
 - **Bladeguard arms out for now** (Josh, Nov 17: a bad example of a normal fit, Arm 10 especially). Mar Fil arms are
   the Assault and Intercessor ones; the reader leaves Bladeguard arms out (`reference.EXCLUDE`).
+- **Also out (Josh, Nov 18):** Techmarine arms (no Techmarine cut), Captain with Jump Pack (`NOT_KITS`); Hellblaster
+  packs not worried about for now.
 - **Bike parts later, with their own cuts** (Josh, Nov 16): bike torsos (Bike Chaplain body), riding legs (Outriders)
   and bike parts are left out of the Mar Fil searches until they have their own torso / legs cuts.
 
@@ -70,7 +72,8 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
 7. **Joints stored as numbers.** Each part's joint is stored as data; TIOW Inbox and the Squad Builder put the origin
    on the joint when the part comes in. Library STLs are not rewritten any more (the ~1,100 Mar Fil files moved on
    Nov 15 stay as they are: their sidecars record where they came from).
-8. **Left = right mirrored** (notes 106).
+8. **Left = right mirrored** (notes 106). The proving sheets show it too (Nov 18): each marine's left arm, pad and
+   weapon are the right ones mirrored about the torso's waist frame, so only right arms are placed.
 9. **Hand fixes survive re-runs** (Save fit / `exact`), and are the only per-part placement data kept.
 10. **Sharing:** the scripts, the per-maker recipes and the cuts (cut surfaces + anchor numbers), never the makers'
     STLs. Anyone runs them on their own downloads; nothing depends on folder structure. Josh's hand fixes, if shared,
@@ -126,7 +129,7 @@ without guessing:
 |---|---|---|
 | Torso (host) | shoulder (left = mirror), neck, back, waist | per armour mark per maker (torso shapes differ by mark) |
 | Arms (Mar Fil) | shoulder disc places the arm; pad spot, wrist anchor, armour spots found on the arm | per maker |
-| Arms (Springles) | no shoulder cut (Josh, Nov 18: the cuts would not be clean): each arm's origin = the centre of its shoulder flat (file axes, the roll from the file), on a printed **Springles spacer** that sits on the torso; Josh's placement gives arm on spacer and spacer on torso; one arm per pattern (C, P, S) in the reference, his `arms.blend` (74 arms on the origin) kept as the check; outliers moved by hand. Wrist: `Springles arm wrist` cut (P unsheathing arm) with a Mar Fil weapon in that hand | per maker |
+| Arms (Springles) | no shoulder cut (Josh, Nov 18: the cuts would not be clean): each arm's origin = the centre of its shoulder flat (file axes, the roll from the file), on a printed **Springles spacer** that sits on the torso; Josh's placement gives arm on spacer and spacer on torso; one arm per pattern (C, P, S) in the reference, his `arms.blend` (74 arms on the origin) kept as the check; outliers moved by hand. Wrist: `Springles arm wrist` cut (P unsheathing arm) with a Mar Fil weapon in that hand. **Scale** (Nov 18): the arms are 3% bigger than the rest of Springles (sidecar `scale` 1.133, 1.1332 for pattern C; was 1.1 / 1.1002), so an arm held out is about an outstretched Mar Fil Assault arm's length (notes 114) | per maker |
 | Legs | waist places the legs; shin spot and belt buckle found on the legs | per maker (legs don't differ by mark) |
 | Shoulder pads | the pad's inside | per maker |
 | Shin pads | the pad's inside | per maker |
@@ -170,8 +173,10 @@ search's "none" list says so. Captain with Jump Pack is left out altogether for 
 
 ## What Josh provides
 
-- For Mar Fil: the cuts in the reference file (see "The reference file"; it replaces the reference pairs asked for
-  before: legs, an arm, a head and a jump pack on a torso, a back cut, a hand-wrist cut on a Mar Fil weapon on a
-  Mar Fil wrist).
+- For Mar Fil: the cuts in the reference file (see "The reference file"). **Done Nov 18** (35 parts read, run 19)
+  except the head neck cuts for the Assault and Intercessor helmets (Josh is doing them; then a Heads run).
+- For Springles (next): the printed spacer on the reference Assault Torso 2, one arm per pattern (C, P, S) on it, and
+  the `Springles arm wrist` cut with a Mar Fil weapon in the P unsheathing hand. Import the arms after Nov 18's 3%
+  (the sidecars now carry it), so the reader knows them by mesh.
 - Then per maker, against Mar Fil parts: the cuts in the table.
 - Answers when a search lists parts it couldn't match.

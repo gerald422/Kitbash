@@ -6,8 +6,13 @@ is the record).
 
 ## Waiting on Josh
 
-- **For the plan** (`docs/PLAN.md`, "What Josh provides"): the Mar Fil reference pairs on a torso, a back cut, a
-  hand-wrist cut on a Mar Fil weapon.
+- **For the plan** (`docs/PLAN.md`, "What Josh provides"): the Assault and Intercessor head neck cuts; the Springles
+  spacer, one arm per pattern and the wrist cut in the reference.
+- **Springles arms** (notes 114): 14 arms in `arms.blend` have the shoulder flat 0.2-0.4 mm off the origin (use the
+  measured flat?); the pattern C / S helmet-hold arms match no library file there (mirrored?). Springles shoulder
+  pads and helmets were left at 1.1 when the arms took the 3%: grow them too?
+- `Run checks.bat` will show 3 Springles arms in the baseline 3% bigger (Nov 18, on purpose): `Run checks.bat record`
+  once they look right.
 - **The fits written Nov 15 from old-fit examples** (Mar Fil weapon hands and backpacks, BBoosty, Turtle Ninja, Marta
   Weapons and Bits hands; notes 105, 107, 108) are in the library until the plan redoes them. Each run's backup is in
   its `_backups\connectors-2026-11-15-NN\before`.
