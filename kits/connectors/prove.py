@@ -2,6 +2,7 @@
 marines assembled from the numbers alone. Nothing is written to the library.
 
     blender --background --factory-startup --python kits/connectors/prove.py -- run [--lib LIB] [--ref BLEND] [--out DIR] [--reuse]
+                                                                                [--types Chests,Legs] [--all Legs] [--kits AssaultMarines-V2]
                                                                                 [--maker "Mar Fil - Tacticus"] [--per 4] [--workers 8]
 Output in DIR (default ~/Desktop/mar fil connectors/proving): report.txt, results.json, "proving set.blend".
 For each part and joint: the cut found (sure / look / none), and how far the new socket or fit is from the library's
@@ -15,11 +16,15 @@ C.KEYED_KEEPS_SHAPE = True       # a cut with a notch keeps its own turn; only r
 
 MX = np.diag([-1.0, 1, 1, 1])
 BIKE = ("ChaplainOnBike", "Outriders")    # bike torsos and riding legs: their own cuts later (Josh, Nov 16)
+NOT_LEGS = ("VeteranBladeSquad", "VeteranSquad")   # Veteran and Bladeguard legs: not looked at for now (Josh, Nov 17)
 # The search looks for the SHAPE of Josh's cut surface only: never triangle counts, never the part's whole mesh or
 # geometry compared (Josh, Nov 13 / 17; it has slipped back before). The region below only narrows where to look.
 PLACE = {"wrist": "shoulder", "pad": "shoulder", "shin": "waist"}   # spots on a host, and the joint that places that host
 TOL = {"wrist": 4.0, "pad": 2.5, "shin": 4.0, "buckle": 3.0}        # mm either way of the reference's distance from it
 BUCKLE_FLAG = 3.0     # deg: the buckle turns the legs more than this from the waist's own turn: written, flagged
+BALL_TOL = 8.0        # mm: an ankle ball is looked for this close to where the shin spot puts it (run 6: the shin spot,
+                      # sure, slid 0.2-4 mm along the smooth shin; a ball is sure only on its own radius, so no mix-ups)
+BALL_FLAG = (0.3, 3.0)   # mm / deg: the balls move the shin socket more than this from the shin spot's: flagged
 HOST_NEAR_IN_REGION = False   # tried Nov 17: a near host match inside the region, written. The Intercessor arm's near pad
                               # spot sat flipped behind the shoulder: a different sculpt is not found by narrowing where
                               # to look. Hosts stay sure only (Josh, Nov 16); the region only keeps answers in the right place.
@@ -28,15 +33,15 @@ def M4(a): return np.array(a, float).reshape(4, 4)
 def flat(M): return [round(float(x), 6) for x in np.asarray(M).reshape(-1)]
 
 
-def pick(lib, maker, per, ref_rels):
+def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None):
     """a small spread of the maker's right / unsided parts per type, one kit after another; the reference's parts first"""
     idx = json.load(open(lib + "/_builder/index.json", encoding="utf-8")); hidden = set()
     try: hidden = {l.strip().lower() for l in open(lib + "/_hidden.txt", encoding="utf-8-sig") if l.strip() and not l.startswith("#")}
     except OSError: pass
-    types = sorted({t for j in RF.JOINTS.values() for t in j[4] + j[5]}); out = []
+    types = [t for t in sorted({t for j in RF.JOINTS.values() for t in j[4] + j[5]}) if types is None or t in types]; out = []
     for t in types:
         es = [e for e in idx["parts"] if e["path"].startswith(maker) and e["type"] == t and e.get("side") in (None, "R")
-              and not (t in ("Chests", "Legs") and any(k in e["path"] for k in BIKE))
+              and not (t in ("Chests", "Legs") and any(k in e["path"] for k in BIKE)) and not (t == "Legs" and any(k in e["path"] for k in NOT_LEGS))
               and not any(x in e["path"].replace("\\", "/") for x in RF.EXCLUDE)
               and e["path"].lower() not in hidden and not any(w in e["name"].lower() for w in ("no hand", "handless"))]
         bykit = collections.defaultdict(list)
@@ -47,6 +52,7 @@ def pick(lib, maker, per, ref_rels):
             if bykit[k]:
                 e = bykit[k].pop(0)
                 if e not in got: got.append(e)
+        if t in every: got = sorted([e for e in es if only_kits is None or e["path"].split("\\")[1] in only_kits], key=lambda e: (e["path"][:-4].replace("\\", "/") not in ref_rels, e["path"]))   # --all: every one of the type
         out += [(t, e["path"][:-4].replace("\\", "/")) for e in got]
     return out
 
@@ -73,7 +79,7 @@ def search(work, i, n):
                 for role, key in (("host", "hosts"), ("child", "children")):
                     if cat not in j[role + "_types"]: continue
                     if jn == "shin" and role == "host":       # each shin on its own, sides from the legs' waist (as on the torso)
-                        r["joints"]["shin:host"] = shins(j, con, tri, Fw, lambda c: region(c, "shin", placeF), placeSure.get("waist", False)); continue
+                        r["joints"]["shin:host"] = shins(j, con, tri, Fw, lambda c: region(c, "shin", placeF), placeSure.get("waist", False), ref.get("balls", [])); continue
                     best = None
                     for c in j[key]:
                         rg = region(c, jn, placeF) if role == "host" else None
@@ -116,16 +122,99 @@ def buckle(b, wj, con, surf, F, d):
     cb = con(b); Qr = S_tf(cb.c[None], np.linalg.inv(M4(b["Jplace"])))[0]; dr = float(np.linalg.norm(Qr))
     rg = (np.linalg.inv(F)[:3, 3], max(0.0, dr - TOL["buckle"]), dr + TOL["buckle"])
     f = C.find(cb, surf, region=rg); d["buckle"] = {"level": f["level"], "match": f["match"], "cover": f["cover"]}
-    if f["level"] != "sure": return F
+    if f["level"] == "none": return F
     w = wj["children"][0]; ax = np.linalg.inv(M4(w["J"]))[:3, :3] @ con(w).axis; ax /= np.linalg.norm(ax)   # the waist's axis, joint frame
     Qn = S_tf(S_tf(cb.c[None], f["M"]), F)[0]
     pr = lambda q: q - ax * (q @ ax); a, b_ = pr(Qn), pr(Qr)
     deg = float(np.degrees(np.arctan2(np.cross(a, b_) @ ax, a @ b_))); d["buckle"]["deg"] = round(deg, 1)
-    if abs(deg) > BUCKLE_FLAG: d["note"] = "the buckle turned the legs %.1f deg from the waist's own turn: flagged" % deg
+    if f["level"] == "look":                  # a near buckle only says which way the legs face (run 13: 12 Intercessor legs
+        if abs(deg) < 90: return F            # are saved facing back in their files; the round waist kept that, backwards)
+        d["note"] = "the legs faced backwards (round waist, the file's turn); a near buckle turned them %.1f deg: flagged" % deg
+    elif abs(deg) > BUCKLE_FLAG: d["note"] = "the buckle turned the legs %.1f deg from the waist's own turn: flagged" % deg
     Rz = np.eye(4); Rz[:3, :3] = C._rot(ax, deg); return Rz @ F
 
 
-def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False):
+BALL_REACH = 10.0     # mm round where the shin spot puts the ankle: where the balls are looked for
+BALL_PAIR = 0.04      # mm: the two balls' spacing within this of the reference's (run 12: true pairs within 0.03; 0.1 = a wrong ball)
+
+
+def balls_near(surf, r, around, reach=BALL_REACH):
+    """balls of radius r (Josh's ankle ball cut: a ball this size) near `around`: each surface point facing out of
+    such a ball votes for the centre r behind it; the most voted places are refined on the points that lie on that ball
+    (centre only, the radius kept). Shape only: a ball this size, nothing else of the part. -> [(centre, rms, points)]"""
+    near = np.linalg.norm(surf.S - around, axis=1) < reach + r; P, N = surf.S[near], surf.N[near]
+    if len(P) < 100: return []
+    Cn = P - r * N; u, inv, cnt = np.unique(np.floor(Cn / 0.2).astype(np.int64), axis=0, return_inverse=True, return_counts=True); inv = inv.reshape(-1); out = []
+    for j in np.argsort(-cnt)[:200]:
+        c = Cn[inv == j].mean(0)
+        if any(np.linalg.norm(c - o[0]) < 1.2 for o in out): continue
+        ok = True
+        for band in (0.3, 0.15, 0.08, 0.05):
+            D = np.linalg.norm(P - c, axis=1); U = (P - c) / np.maximum(D, 1e-9)[:, None]
+            m = (np.abs(D - r) < band) & (np.einsum("ij,ij->i", U, N) > 0.9)
+            if m.sum() < 50: ok = False; break
+            for _ in range(5):
+                D = np.linalg.norm(P[m] - c, axis=1); c = c + np.linalg.lstsq(-(P[m] - c) / D[:, None], -(D - r), rcond=None)[0]
+        if ok and not any(np.linalg.norm(c - o[0]) < 0.5 for o in out):
+            D = np.linalg.norm(P[m] - c, axis=1); out.append((c, float(np.sqrt(np.mean((D - r) ** 2))), int(m.sum())))
+        if len(out) >= 10: break
+    return out
+
+
+def ankle_pair(surf, r, gap, mid, a):
+    """the ankle's two balls: of the balls near mid, the pair the reference's spacing apart (BALL_PAIR), nearest mid;
+    outer first, outer = the way `a` (the outer-from-inner direction the shin spot gives) points. None if no pair"""
+    B = balls_near(surf, r, mid); best = None
+    for i in range(len(B)):
+        for j in range(i + 1, len(B)):
+            d = abs(float(np.linalg.norm(B[i][0] - B[j][0])) - gap)
+            if d > BALL_PAIR: continue
+            k = float(np.linalg.norm((B[i][0] + B[j][0]) / 2 - mid))
+            if best is None or k < best[0]: best = (k, B[i], B[j], d)
+    if best is None: return None
+    _, x, y, d = best
+    if a @ (x[0] - y[0]) < 0: x, y = y, x
+    return x, y, d
+
+
+def ankle(MJ, ab, surf, s, spot=None, Jspot=None, whole=None):
+    """the shin socket from the ankle balls (Josh, Nov 17). The shin spot (MJ) only says where to look: on a smooth shin
+    it fits as well slid or rolled (run 6: 0.2-4 mm, up to 19 deg). Josh's ankle ball cuts say: a ball this size, two
+    of them this far apart, here on the reference. A ball fits itself at any turn, so a cut's pose doesn't say which ball
+    it is on (run 11: even on the reference legs the search put the inner cut on the outer ball); the balls are found
+    as balls instead (balls_near), the reference's by the same search, so both are measured the same way. Outer = the
+    one the shin spot points to (it rolls up to ~30 deg, never 180). Both balls: the ankle is set (their middle and the
+    line through them where the reference's are); the one turn left, about that line (the shin's lean), is the turn at
+    which the shin spot cut fits the leg best. Else the shin spot's, flagged."""
+    qo, qi = np.array(ab["qo"]), np.array(ab["qi"]); gap = float(np.linalg.norm(qo - qi))
+    pr = ankle_pair(whole or surf, ab["r"], gap, S_tf(((qo + qi) / 2)[None], MJ)[0], MJ[:3, :3] @ (qo - qi))
+    if pr is None:
+        s["note"] = "no pair of ankle balls %.2f mm apart near the shin spot: the shin spot's socket (it can slide on the shin): flagged" % gap; return MJ
+    (co, rmo, no), (ci, rmi, ni), d = pr
+    s["balls"] = {"outer": {"level": "sure", "match": round(rmo, 4), "points": no}, "inner": {"level": "sure", "match": round(rmi, 4), "points": ni}}
+    s["ball_gap"] = round(d, 3)
+    R0 = MJ[:3, :3]; a = R0 @ (qo - qi); a /= np.linalg.norm(a); ax = (co - ci) / np.linalg.norm(co - ci)
+    x = np.cross(a, ax); sn = np.linalg.norm(x)
+    R = (C._rot(x / sn, float(np.degrees(np.arctan2(sn, a @ ax)))) if sn > 1e-9 else np.eye(3)) @ R0
+    q, cn = (qo + qi) / 2, (co + ci) / 2; M0 = np.eye(4); M0[:3, :3] = R; M0[:3, 3] = cn - R @ q
+    def turned(th):
+        T = np.eye(4); T[:3, :3] = C._rot(ax, th); T[:3, 3] = cn - T[:3, :3] @ cn; return T @ M0
+    th = 0.0
+    if spot is not None:                      # the lean: only the turn about the ankle line, from the shin spot's shape
+        X = spot.fine; Ji = np.linalg.inv(Jspot)
+        fit = lambda t: float(np.median(surf.dist(S_tf(X, turned(t) @ Ji))[0]))
+        ths = np.arange(-60.0, 60.01, 1.0); th = float(ths[int(np.argmin([fit(t) for t in ths]))])
+        for step in (0.2, 0.05):
+            loc = np.arange(th - 5 * step, th + 5.01 * step, step); th = float(loc[int(np.argmin([fit(t) for t in loc]))])
+        s["lean_deg"] = round(th, 2); s["lean_match"] = round(fit(th), 4)
+    M = turned(th)
+    s["ball_mm"] = round(float(np.linalg.norm(M[:3, 3] - MJ[:3, 3])), 3); s["ball_deg"] = round(geo.ang(R0.T @ M[:3, :3]), 2)
+    if s.get("lean_match", 0) > C.LOOK[0]: s["note"] = "the shin spot fits no lean about the ankle (%.3f mm): flagged" % s["lean_match"]
+
+    return M
+
+
+def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False, balls=()):
     """both shin spots, each searched on its own leg. Right / left is decided in the waist joint's frame (the torso's:
     +X is the marine's right), not the file's: some legs are turned in their file (Outrider legs, 90 deg). The left
     shin: with a left shin spot cut (Josh's left pad placed by eye: Nov 17), that cut on the left leg as it is; without
@@ -136,6 +225,7 @@ def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False):
     Fi = np.linalg.inv(Fw); P = Fi @ MX @ Fw                   # the mirror about the legs' middle plane, in file coordinates
     xw = S_tf(tri.mean(1), Fw)[:, 0]
     out = {"role": "host", "level": "none", "match": 9.0, "cover": 0.0, "cut": "-", "sides": {}}
+    wh = []; whole = lambda: wh[0] if wh else (wh.append(C.Surface(tri)) or wh[0])
     own_left = [c for c in j["hosts"] if c.get("side") == "L"]; rights = [c for c in j["hosts"] if c.get("side", "R") == "R"]
     for side, keep in (("Shin R", xw > 0), ("Shin L", xw < 0)):
         T = tri[keep]; mir = side == "Shin L" and not own_left
@@ -147,9 +237,12 @@ def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False):
             rank = ({"sure": 0, "look": 1, "none": 2}[f["level"]], f["match"])
             if best is None or rank < best[0]: best = (rank, f)
         f = best[1]; s = {"level": f["level"], "match": f["match"], "cover": f["cover"], "cut": f["cut"]}
-        # a host anchor: sure, or near inside the region round a sure waist (Josh, Nov 16 / 17)
-        if f["level"] == "sure" or (HOST_NEAR_IN_REGION and f["level"] == "look" and f["rg"] is not None and place_sure):
-            MJ = f["M"] @ M4(f["J"]); s["matrix"] = flat(P @ MJ @ MX if mir else MJ)
+        # a host anchor: both ankle balls sure (the shin spot near or sure only says where to look and sets the lean:
+        # Josh, Nov 17); else the shin spot sure (Josh, Nov 16)
+        if f["level"] in ("sure", "look"):
+            MJ = f["M"] @ M4(f["J"]); ab = next((b for b in balls if b["side"] == ("R" if mir else side[-1])), None)
+            if ab: MJ = ankle(MJ, ab, surf, s, con(f), M4(f["J"]), None if mir else whole())   # the whole legs: half may cut an inner ball
+            if "ball_mm" in s or f["level"] == "sure": s["matrix"] = flat(P @ MJ @ MX if mir else MJ)
         out["sides"][side] = s
     R_ = out["sides"].get("Shin R")
     if R_:
@@ -203,8 +296,28 @@ def run(A):
             k += 1; np.save("%s/cut%02d.npy" % (work, k), b["tri"])
             Jp = place_joint(ref, "waist", b["obj"])
             if Jp is not None: dump["buckle"] = {"cut": b["cut"], "part": b["part"], "npy": "cut%02d.npy" % k, "Jplace": flat(np.linalg.inv(b["Wm"]) @ Jp)}
+    dump["balls"] = []                       # the ankle balls, per side: their size, and where they are on the reference legs
+    cuts = {}                                # (legs, side) -> {kind: (centre, radius)}: Josh's ankle ball cuts
+    for b in ref.get("spots", {}).get("legs ankle ball", []):
+        n = b["cut"].lower(); c, rad, rms = C.sphere(C.Surface(b["tri"], spacing=0.02, most=50000).S)
+        cuts.setdefault((b["part"], "L" if "left" in n else "R"), {})["inner" if "inner" in n else "outer"] = (c, rad)
+        ref["notes"].append("ankle ball %r: radius %.3f mm (fit within %.3f mm)" % (b["cut"], rad, rms))
+    if cuts: r_ball = round(min(v[1] for kc in cuts.values() for v in kc.values()), 3)   # one size for all: the balls are one sculpt
+    for (rel, sd), kc in sorted(cuts.items()):
+        J = ref["joints"].get("shin", {}).get("host_J", {}).get("%s|%s" % (rel, sd))
+        if J is None or len(kc) < 2: ref["notes"].append("ankle balls on %s %s: %s, left out" % (os.path.basename(rel), sd, "no shin joint" if J is None else "one cut only")); continue
+        sc_, G_, back_ = S.maker(lib + "/" + rel + S.SC.SUFFIX); ls = C.Surface(S.unmoved(C.soup(lib + "/" + rel + ".stl", sc_.get("scale", 1.0)), back_), spacing=0.08, most=1500000)
+        (co, _), (ci, _) = kc["outer"], kc["inner"]; B = balls_near(ls, r_ball, (co + ci) / 2); pr = None
+        for x in B:                                   # the reference's balls: the same search, the ones at the cuts
+            for y in B:
+                if np.linalg.norm(x[0] - co) < 1.0 and np.linalg.norm(y[0] - ci) < 1.0: pr = (x[0], y[0])
+        if pr is None: ref["notes"].append("ankle balls on %s %s: no ball of %.3f mm at the cuts, left out" % (os.path.basename(rel), sd, r_ball)); continue
+        Ji = np.linalg.inv(J); dump["balls"].append({"part": rel, "side": sd, "r": r_ball, "qo": [float(x) for x in S_tf(pr[0][None], Ji)[0]], "qi": [float(x) for x in S_tf(pr[1][None], Ji)[0]]})
+        ref["notes"].append("ankle balls on %s %s: radius %.3f, %.3f mm apart (%.2f / %.2f mm from the cuts' centres)" % (os.path.basename(rel), sd, r_ball,
+                            float(np.linalg.norm(pr[0] - pr[1])), float(np.linalg.norm(pr[0] - co)), float(np.linalg.norm(pr[1] - ci))))
     json.dump(dump, open(work + "/ref.json", "w", encoding="utf-8"))
-    jobs = pick(lib, maker, int(opt(A, "--per", 4)), {p["rel"] for p in ref["parts"].values()})
+    jobs = pick(lib, maker, int(opt(A, "--per", 4)), {p["rel"] for p in ref["parts"].values()}, (opt(A, "--all") or "").split(","),
+                opt(A, "--types").split(",") if opt(A, "--types") else None, opt(A, "--kits").split(",") if opt(A, "--kits") else None)
     json.dump(jobs, open(work + "/jobs.json", "w", encoding="utf-8")); n = 0 if "--reuse" in A else min(int(opt(A, "--workers", 8)), len(jobs))
     if "--reuse" in A:                      # the report and test marines again from DIR/results.json, no search
         old = json.load(open(out + "/results.json", encoding="utf-8"))["results"]
@@ -239,6 +352,11 @@ def run(A):
                      "  left shin: %s" % d["other"]["level"] if d.get("other") else "",
                      "  buckle %s%s" % (d["buckle"]["level"], " turned %.1f deg" % d["buckle"]["deg"] if "deg" in d["buckle"] else "") if d.get("buckle") else "",
                      "  [" + d["region"] + "]" if d.get("region") else "", "  (" + d["note"] + ")" if d.get("note") else ""))
+            for sn, sd in (d.get("sides") or {}).items():           # the shin, each side: the ankle balls
+                if "balls" in sd:
+                    W.append("        %s ankle balls: %s%s%s%s" % (sn, ", ".join("%s %s %.4f mm" % (k, b["level"], b["match"]) for k, b in sorted(sd["balls"].items())),
+                             "  lean %.1f deg (shin spot %.4f mm)" % (sd["lean_deg"], sd["lean_match"]) if "lean_deg" in sd else "",
+                             "  vs the shin spot alone %.2f mm / %.1f deg" % (sd["ball_mm"], sd["ball_deg"]) if "ball_mm" in sd else "", "  (" + sd["note"] + ")" if sd.get("note") else ""))
     open(out + "/report.txt", "w", encoding="utf-8").write("\n".join(W) + "\n")
     # ---- test marines from the numbers alone
     by = collections.defaultdict(list)

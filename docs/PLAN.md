@@ -52,6 +52,15 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
    - **Legs' turn** (Nov 17): the waist gives the place and tilt and its notch the turn; the belt buckle, which sits
      forward of the waist, then sets the turn about the waist (a longer lever). A buckle that disagrees with the
      notch by more than 3 deg is written and flagged; no buckle found, the notch alone.
+     A near buckle can't set the turn, but it still says which way the legs face: legs whose round waist kept a file
+     turn facing backwards (12 Intercessor legs are saved that way round) are turned round by it, flagged.
+   - **Shins from the ankle balls** (Josh, Nov 17-18): the shin spot alone slides on the smooth shin (0.2-4 mm, up to
+     30 deg, while still "sure"). The two balls on each ankle are one sculpt and fit themselves at any turn, so they
+     are found as balls: a ball the size of his cut (the vote of every surface point facing out of a ball that size),
+     the pair the reference's spacing apart (4.44 mm, within 0.04), near where the shin spot puts it. Their middle and
+     the line through them set the shin; the shin spot then sets only the lean, the one turn left about that line.
+     The reference's balls are found by the same search, so both are measured alike. Outer = the ball the shin spot
+     points to.
    - sure: written;
    - near (look): written, flagged, shown flagged in the Squad Builder;
    - none: listed by cut (= the cut to make next).
@@ -85,7 +94,8 @@ without guessing:
 3. **Each cut is its own object**, faces duplicated off the part (Shift+D, P), only the mating surface, in the
    maker's cuts collection, with exactly one of these names (which part it was cut on is read from where it lies):
    `torso shoulder`, `torso neck`, `torso waist`, `torso back`, `arm shoulder disc`, `arm pad spot`, `arm wrist`,
-   `legs waist`, `legs shin spot`, `legs buckle`, `head neck`, `jump pack mount`, `backpack mount`, `weapon wrist`;
+   `legs waist`, `legs shin spot`, `legs buckle`, `legs ankle ball` (`legs ankle ball outer right` / `inner right` /
+   `outer left` / `inner left`: the exposed dome of each ankle ball, under the shin pad), `head neck`, `jump pack mount`, `backpack mount`, `weapon wrist`;
    optional `pad inside`, `shin pad inside`; also `arm wrist armour`, `legs back plate` (`legs backplate` reads the same). Case doesn't matter. A second cut of the same joint takes a label after the name (`arm wrist a`, `weapon wrist 2`): the fixed part names the joint, the rest is only a label. A `.001` Blender adds is ignored. Parts may also carry the maker's original file name (`81-Arm-2-R-A`): the reader keeps the library file whose mesh lines up with the object.
 4. **Both sides of each joint are cut:**
 
@@ -96,9 +106,8 @@ without guessing:
    | waist | torso waist | legs' waist |
    | back | torso back | backpack mount; jump pack mount |
    | wrist | arm wrist (so the anchor is found on other arms) | the hand's wrist on a weapon (or just the weapon placed in the hand: its wrist is what rests on the arm wrist cut; Josh, Nov 17: the axe, combi weapon and shield fitted as placed, no new cuts) |
-   | pad | arm pad spot | the pad's inside (or just the pad placed: its inside is taken from where it rests) |
-   | shin | legs shin spot (right shin); optional a second one on the left shin, under a mirrored shin pad placed by eye (Nov 17; the side is read from where it lies) | the shin pad's inside (or just the shin pad placed) |
-   | buckle | belt buckle on the legs | |
+   | pad | arm pad spot: one per arm type, a bigger section of the shape that type shares (Josh, Nov 18; the Assault one is sure on 35 of 37 Assault arms, Intercessor arms need their own) | the pad's inside (or just the pad placed: its inside is taken from where it rests) |
+   | shin | legs ankle ball outer / inner, each side (they place the shin); legs shin spot (right shin), and one on the left shin under a mirrored shin pad placed by eye (Nov 17; the side is read from where it lies): it says where to look and sets the lean | the shin pad's inside (or just the shin pad placed) |   | buckle | belt buckle on the legs | |
 
 5. **Two collections per maker and armour mark**: parts in `<Maker>` or `<Maker> <mark>` (`Mar Fil`, `Turtle Ninja
    Mk7`, `Springles`), their cuts in the same name + ` cuts` (`Mar Fil cuts`). Parts keep their library file name.

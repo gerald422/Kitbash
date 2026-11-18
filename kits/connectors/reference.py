@@ -20,7 +20,7 @@ import numpy as np
 from kb import origin as OG, connect as C
 
 FIXED = ["torso shoulder", "torso neck", "torso waist", "torso back", "arm shoulder disc", "arm pad spot", "arm wrist armour", "arm wrist",
-         "legs waist", "legs shin spot", "legs buckle", "legs back plate", "legs backplate", "head neck", "jump pack mount",
+         "legs waist", "legs shin spot", "legs buckle", "legs ankle ball", "legs back plate", "legs backplate", "head neck", "jump pack mount",
          "backpack mount", "weapon wrist", "shin pad inside", "pad inside"]
 # joint: (host cut, child cuts, socket on the host, fit on the child, host types, child types)
 JOINTS = {"shoulder": ("torso shoulder", ["arm shoulder disc"], "Shoulder R", "Shoulder R", ["Chests"], ["Arms"]),

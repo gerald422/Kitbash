@@ -210,6 +210,17 @@ class Claim:
         return np.isin(self._code(np.floor(np.asarray(X) / self.H).astype(np.int64)), self.keys)
 
 
+def sphere(P):
+    """the ball through points P (n x 3): (centre, radius, rms mm). For a ball cut (Josh's ankle balls, Nov 17) the
+    centre is the shape: a ball has no turn, so only its centre is used, carried by the cut's found pose"""
+    P = np.asarray(P, float); A = np.c_[2 * P, np.ones(len(P))]; x = np.linalg.lstsq(A, (P * P).sum(1), rcond=None)[0]
+    c = x[:3]; r = float(np.sqrt(max(x[3] + c @ c, 1e-12)))
+    for _ in range(6):                                       # geometric refinement
+        d = np.linalg.norm(P - c, axis=1); u = (P - c) / d[:, None]
+        dx = np.linalg.lstsq(np.c_[-u, -np.ones(len(P))], -(d - r), rcond=None)[0]; c = c + dx[:3]; r = r + float(dx[3])
+    d = np.linalg.norm(P - c, axis=1); return c, r, float(np.sqrt(np.mean((d - r) ** 2)))
+
+
 def placed(con, r): return con.fine @ r["M"][:3, :3].T + r["M"][:3, 3]
 
 
