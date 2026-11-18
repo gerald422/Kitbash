@@ -18,6 +18,7 @@ MX = np.diag([-1.0, 1, 1, 1])
 BIKE = ("ChaplainOnBike", "Outriders")    # bike torsos and riding legs: their own cuts later (Josh, Nov 16)
 NOT_LEGS = ("VeteranBladeSquad", "VeteranSquad")   # Veteran and Bladeguard legs: not looked at for now (Josh, Nov 17)
 NOT_KITS = ("CaptainWithJumpPack",)                 # left out altogether, going forward (Josh, Nov 18)
+NOT_ARMS = ("Techmarine",)                          # Techmarine arms: left out for now (Josh, Nov 18)
 # The search looks for the SHAPE of Josh's cut surface only: never triangle counts, never the part's whole mesh or
 # geometry compared (Josh, Nov 13 / 17; it has slipped back before). The region below only narrows where to look.
 PLACE = {"wrist": "shoulder", "pad": "shoulder", "shin": "waist"}   # spots on a host, and the joint that places that host
@@ -42,7 +43,7 @@ def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None):
     types = [t for t in sorted({t for j in RF.JOINTS.values() for t in j[4] + j[5]}) if types is None or t in types]; out = []
     for t in types:
         es = [e for e in idx["parts"] if e["path"].startswith(maker) and e["type"] == t and e.get("side") in (None, "R")
-              and not (t in ("Chests", "Legs") and any(k in e["path"] for k in BIKE)) and not (t == "Legs" and any(k in e["path"] for k in NOT_LEGS))
+              and not (t in ("Chests", "Legs") and any(k in e["path"] for k in BIKE)) and not (t == "Legs" and any(k in e["path"] for k in NOT_LEGS)) and not (t == "Arms" and any(k in e["path"] for k in NOT_ARMS))
               and not any(x in e["path"].replace("\\", "/") for x in RF.EXCLUDE) and e["path"].split("\\")[1] not in NOT_KITS
               and e["path"].lower() not in hidden and not any(w in e["name"].lower() for w in ("no hand", "handless"))]
         bykit = collections.defaultdict(list)
