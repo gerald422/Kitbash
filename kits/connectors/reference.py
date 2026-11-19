@@ -49,6 +49,7 @@ def cut_name(name):
     for i in range(len(w)):
         rest = " ".join(w[i:]); f = next((f for f in FIXED if rest.startswith(f)), None)
         if f: return f, " ".join(w[:i]) or None
+    if len(w) > 1 and w[-1] == "neck": return "head neck", " ".join(w[:-1])   # 'Intercessor Neck' (Josh, Nov 19): a torso's neck always says 'torso'
     return None, None
 
 

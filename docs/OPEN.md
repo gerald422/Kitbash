@@ -6,8 +6,8 @@ is the record).
 
 ## Waiting on Josh
 
-- **For the plan** (`docs/PLAN.md`, "What Josh provides"): the Assault and Intercessor head neck cuts; the Springles
-  spacer, one arm per pattern and the wrist cut in the reference.
+- **For the plan** (`docs/PLAN.md`, "What Josh provides"): the Springles spacer, one arm per pattern and the wrist
+  cut in the reference. Marta legs, then Marta arms, next (notes 115).
 - **Springles arms** (notes 114): 14 arms in `arms.blend` have the shoulder flat 0.2-0.4 mm off the origin (use the
   measured flat? Josh not sure yet). The rest of Springles - Heresy (heads, backpacks, toppers, accessories, plate
   accessories, grenades) is still at 1.1: Josh will check each against Mar Fil before the 3% (by the median size,

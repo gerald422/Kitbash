@@ -15,10 +15,14 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
 
 - **In:** Mar Fil is the base body. Plain arms: **Mar Fil and Springles (Heresy)** (Springles' arms were already
   moved by Josh; the originals are set in `~\Desktop\Operation Marine\3rd attempt finalising actual.blend`).
-  Weapons with a hand, two-armed weapons and customisation from every maker. Marta legs (unique poses).
-- **Out for now:** Terminators and Gravis (they would need their own base fits; when they come, the same method),
-  Marta Phobos, Springles' guns (they carry the hands; "not yet"), Marta heads, plain arms of Marta, Turtle Ninja,
-  BBoosty and CyberBrush. Weapons without a hand are not used. Turtle Ninja: only the straight pose of each torso,
+  Weapons with a hand, two-armed weapons and customisation from every maker.
+- **Marta (Josh, Nov 19; Marta PunkGirl - Tacticus):** legs (unique poses), arms, hands, weapons (ranged, melee,
+  two-handed), bases, pauldrons, shin pads, all accessories and most of the loose bits. **Not** Marta torsos, heads
+  or backpacks. Order: Marta legs first, then Marta arms. Accessories from Marta's Terminator and Gravis folders can
+  be used too (their bodies stay out).
+- **Out for now:** Terminators and Gravis (they would need their own base fits; when they come, the same method;
+  their accessories can be used), Marta Phobos, Springles' guns (they carry the hands; "not yet"), Turtle Ninja,
+  BBoosty and CyberBrush plain arms. Weapons without a hand are not used. Turtle Ninja: only the straight pose of each torso,
   nothing from "Rigging Required" folders.
 - **Later:** accessories, including the legs' rear belt plate.
 - **Bladeguard arms out for now** (Josh, Nov 17: a bad example of a normal fit, Arm 10 especially). Mar Fil arms are
@@ -131,6 +135,7 @@ without guessing:
 | Arms (Mar Fil) | shoulder disc places the arm; pad spot, wrist anchor, armour spots found on the arm | per maker |
 | Arms (Springles) | no shoulder cut (Josh, Nov 18: the cuts would not be clean): each arm's origin = the centre of its shoulder flat (file axes, the roll from the file), on a printed **Springles spacer** that sits on the torso; Josh's placement gives arm on spacer and spacer on torso; one arm per pattern (C, P, S) in the reference, his `arms.blend` (74 arms on the origin) kept as the check; outliers moved by hand. Wrist: `Springles arm wrist` cut (P unsheathing arm) with a Mar Fil weapon in that hand. **Scale** (Nov 18-19): the arms and what fits on the arm (hands, melee, hand-less weapons, forearm armour, shoulder pads) are 3% bigger (sidecar `scale` 1.133, 1.1332 for pattern C arms; was 1.1 / 1.1002), so an arm held out is about an outstretched Mar Fil Assault arm's length; the rest of Springles waits for a check per part (notes 114) | per maker |
 | Legs | waist places the legs; shin spot and belt buckle found on the legs | per maker (legs don't differ by mark) |
+| Legs (Marta) | their own waist cut (Josh, Nov 19: the Mar Fil one won't do). Marta legs are flat topped, so on a Mar Fil torso they sit on a **torso spacer**, as the Springles arms do: Josh's placement gives legs on spacer and spacer on torso | per maker |
 | Shoulder pads | the pad's inside | per maker |
 | Shin pads | the pad's inside | per maker |
 | Weapons with a hand | the wrist on the hand (the arm only has the anchor point) | per maker |
@@ -173,9 +178,12 @@ search's "none" list says so. Captain with Jump Pack is left out altogether for 
 
 ## What Josh provides
 
-- For Mar Fil: the cuts in the reference file (see "The reference file"). **Done Nov 18** (35 parts read, run 19)
-  except the head neck cuts for the Assault and Intercessor helmets (Josh is doing them; then a Heads run).
-- For Springles (next): the printed spacer on the reference Assault Torso 2, one arm per pattern (C, P, S) on it, and
+- For Mar Fil: the cuts in the reference file (see "The reference file"). **Done Nov 19**: the last one,
+  `Intercessor Neck` (one cut for the Intercessor and Assault helmets, which are the same), is in `Kitbash reference
+  updated.blend`; heads run 20: 72 of 74 sure (notes 115).
+- For Marta legs (next, then Marta arms): in the reference, a Marta legs on the torso spacer on the Assault
+  Torso 2, with the Marta legs waist cut (and, for Marta shin pads and hip plates later, its shin spot and buckle).
+- For Springles: the printed spacer on the reference Assault Torso 2, one arm per pattern (C, P, S) on it, and
   the `Springles arm wrist` cut with a Mar Fil weapon in the P unsheathing hand. Import the arms after Nov 18's 3%
   (the sidecars now carry it), so the reader knows them by mesh.
 - Then per maker, against Mar Fil parts: the cuts in the table.
