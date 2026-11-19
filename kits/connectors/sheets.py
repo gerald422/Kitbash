@@ -15,7 +15,8 @@ A = [a for i, a in enumerate(A) if a not in ("--base", "--types") and not (i and
 D = json.load(open(res, encoding="utf-8")); R = D["results"]; lib = "D:/Kitbash Library"
 M4 = lambda a: np.array(a, float).reshape(4, 4); MX = np.diag([-1.0, 1, 1, 1])
 by = collections.defaultdict(list)
-for r in R: by[r["cat"]].append(r)
+for r in R:
+    if r.get("side") != "L": by[r["cat"]].append(r)          # right parts (a left file is its right twin mirrored)
 refrels = {c["part"] for j in D["reference"].values() for k in ("hosts", "children") for c in j[k]}
 base_by = collections.defaultdict(list)
 if BASE:

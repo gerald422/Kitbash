@@ -3,7 +3,7 @@ marines assembled from the numbers alone. Nothing is written to the library.
 
     blender --background --factory-startup --python kits/connectors/prove.py -- run [--lib LIB] [--ref BLEND] [--out DIR] [--reuse]
                                                                                 [--types Chests,Legs] [--all Legs] [--kits AssaultMarines-V2]
-                                                                                [--maker "Mar Fil - Tacticus"] [--per 4] [--workers 8]
+                                                                                [--maker "Mar Fil - Tacticus"] [--per 4] [--workers 8] [--left]
 Output in DIR (default ~/Desktop/mar fil connectors/proving): report.txt, results.json, "proving set.blend".
 For each part and joint: the cut found (sure / look / none), and how far the new socket or fit is from the library's
 (for information: the library's is not used). Roll: the file's (the search prefers no turn from the maker's frame)."""
@@ -35,14 +35,18 @@ def M4(a): return np.array(a, float).reshape(4, 4)
 def flat(M): return [round(float(x), 6) for x in np.asarray(M).reshape(-1)]
 
 
-def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None):
-    """a small spread of the maker's right / unsided parts per type, one kit after another; the reference's parts first"""
+LEFT_TYPES = ("Arms", "Melee", "Pistols", "Hands", "Shields", "Shoulder Pads", "Knee Pads")
+
+
+def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None, left=False):
+    """a small spread of the maker's right / unsided parts per type, one kit after another; the reference's parts first.
+    left: the left files of the sided types too (searched mirrored: left = right mirrored, notes 106)"""
     idx = json.load(open(lib + "/_builder/index.json", encoding="utf-8")); hidden = set()
     try: hidden = {l.strip().lower() for l in open(lib + "/_hidden.txt", encoding="utf-8-sig") if l.strip() and not l.startswith("#")}
     except OSError: pass
     types = [t for t in sorted({t for j in RF.JOINTS.values() for t in j[4] + j[5]}) if types is None or t in types]; out = []
     for t in types:
-        es = [e for e in idx["parts"] if e["path"].startswith(maker) and e["type"] == t and e.get("side") in (None, "R")
+        es = [e for e in idx["parts"] if e["path"].startswith(maker) and e["type"] == t and (e.get("side") in (None, "R") or (left and t in LEFT_TYPES and e.get("side") == "L"))
               and not (t in ("Chests", "Legs") and any(k in e["path"] for k in BIKE)) and not (t == "Legs" and any(k in e["path"] for k in NOT_LEGS)) and not (t == "Arms" and any(k in e["path"] for k in NOT_ARMS))
               and not any(x in e["path"].replace("\\", "/") for x in RF.EXCLUDE) and e["path"].split("\\")[1] not in NOT_KITS
               and e["path"].lower() not in hidden and not any(w in e["name"].lower() for w in ("no hand", "handless"))]
@@ -61,6 +65,7 @@ def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None):
 
 def search(work, i, n):
     ref = json.load(open(work + "/ref.json", encoding="utf-8")); lib = ref["lib"]; jobs = json.load(open(work + "/jobs.json", encoding="utf-8"))[i::n]
+    lefts = set(ref.get("left") or [])
     cons = {}
     def con(c):
         if c["cut"] not in cons: cons[c["cut"]] = C.Connector(np.load(work + "/" + c["npy"]), c["cut"])
@@ -76,6 +81,7 @@ def search(work, i, n):
         t0 = time.time(); r = {"cat": cat, "rel": rel, "joints": {}}
         try:
             sc, G, back = S.maker(lib + "/" + rel + S.SC.SUFFIX); tri = S.unmoved(C.soup(lib + "/" + rel + ".stl", sc.get("scale", 1.0)), back)
+            if rel in lefts: tri = (tri * np.array([-1.0, 1, 1]))[:, [0, 2, 1]]; r["side"] = "L"   # a left file searched as its mirror (a right one)
             surf = C.Surface(tri); V = tri.reshape(-1, 3)[::max(1, len(tri) * 3 // 400)]; Fw = None; placeF = {}; placeSure = {}
             for jn, j in ref["joints"].items():
                 for role, key in (("host", "hosts"), ("child", "children")):
@@ -109,12 +115,23 @@ def search(work, i, n):
                             if old is not None:
                                 d["lib_mm"] = round(float(np.median(np.linalg.norm(S_tf(V, F) - S_tf(V, old), axis=1))), 2); d["lib_deg"] = round(geo.ang(F[:3, :3] @ old[:3, :3].T), 1)
                     r["joints"][jn + ":" + role] = d
+            if r.get("side") == "L": to_left(r)
         except Exception as e:
             r["error"] = repr(e)
         r["secs"] = round(time.time() - t0); out.write(json.dumps(r) + "\n"); out.flush()
 
 
 def S_tf(V, M): return V @ M[:3, :3].T + M[:3, 3]
+
+
+def to_left(r):
+    """a left file's numbers, found on its mirror: back in its own coordinates (left = mirror x right x mirror, as the
+    library keeps left fits and sockets) and named for the left side"""
+    for d in r["joints"].values():
+        if "matrix" in d: d["matrix"] = flat(MX @ M4(d["matrix"]) @ MX)
+        for k in ("socket", "fit"):
+            if isinstance(d.get(k), str) and d[k].endswith(" R"): d[k] = d[k][:-2] + " L"
+        d.pop("lib_mm", None); d.pop("lib_deg", None)
 
 
 def buckle(bs, wj, con, surf, F, d):
@@ -327,7 +344,9 @@ def run(A):
                             float(np.linalg.norm(pr[0] - pr[1])), float(np.linalg.norm(pr[0] - co)), float(np.linalg.norm(pr[1] - ci))))
     json.dump(dump, open(work + "/ref.json", "w", encoding="utf-8"))
     jobs = pick(lib, maker, int(opt(A, "--per", 4)), {p["rel"] for p in ref["parts"].values()}, (opt(A, "--all") or "").split(","),
-                opt(A, "--types").split(",") if opt(A, "--types") else None, opt(A, "--kits").split(",") if opt(A, "--kits") else None)
+                opt(A, "--types").split(",") if opt(A, "--types") else None, opt(A, "--kits").split(",") if opt(A, "--kits") else None, "--left" in A)
+    side_of = {e["path"][:-4].replace("\\", "/"): e.get("side") for e in json.load(open(lib + "/_builder/index.json", encoding="utf-8"))["parts"]}
+    dump["left"] = [rel for _, rel in jobs if side_of.get(rel) == "L"]; json.dump(dump, open(work + "/ref.json", "w", encoding="utf-8"))
     json.dump(jobs, open(work + "/jobs.json", "w", encoding="utf-8")); n = 0 if "--reuse" in A else min(int(opt(A, "--workers", 8)), len(jobs))
     if "--reuse" in A:                      # the report and test marines again from DIR/results.json, no search
         old = json.load(open(out + "/results.json", encoding="utf-8"))["results"]
@@ -370,7 +389,8 @@ def run(A):
     open(out + "/report.txt", "w", encoding="utf-8").write("\n".join(W) + "\n")
     # ---- test marines from the numbers alone
     by = collections.defaultdict(list)
-    for r in R: by[r["cat"]].append(r)
+    for r in R:
+        if r.get("side") != "L": by[r["cat"]].append(r)      # the test marines: right parts (the left are their mirrors)
     def got(r, jk): d = (r or {}).get("joints", {}).get(jk); return M4(d["matrix"]) if d and "matrix" in d else None
     if not by["Chests"]:                     # a run of some types only (--types without Chests): no torso to build on
         open(out + "/report.txt", "a", encoding="utf-8").write("\nNo test marines: no torsos in this run (sheets.py --base gives the rest).\n")

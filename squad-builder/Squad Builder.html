@@ -3255,6 +3255,13 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
 
   // ------------------------------------------------------------------ the panels
   function pickOf(i, k) { return (S.models[i] || {})[k]; }
+  // a fit the cuts found only near (a variant of the cut's shape: written, to be looked at; docs/PLAN.md): flagged
+  // until it is corrected by hand (Save Correction makes it exact)
+  function nearFit(as) {
+    var d = (as && as.data) || {}, ex = d.exact || [];
+    var c = (d.check || []).filter(function (t) { return ex.indexOf(t) < 0; });
+    return c.length ? "near fit (" + c.join(", ") + "): check it" : "";
+  }
   function renderSteps() {
     var m = S.cur, html = "", mdl = S.models[m] || {};
     STEPS.forEach(function (st, si) {
@@ -3268,6 +3275,7 @@ header h1 { font: 700 18px var(--font-head); letter-spacing: .02em; margin: 0 8p
           var as = asFor(p, sl); txt = as ? as.name : p.name;
           var inst = layout(m).filter(function (x) { return x.slot === sl.k; })[0];
           if (inst && (!inst.W || inst.nofit)) { flag = true; txt += " · " + inst.note; }
+          else if (inst && nearFit(as)) { flag = true; txt += " · " + nearFit(as); }
         }
         var lab = sl.side || sl.lab;
         return '<div class="s' + (flag ? " flag" : "") + '">' + (lab ? '<span class="lab">' + lab + "</span>" : "") + "<b>" + esc(txt) + "</b></div>";

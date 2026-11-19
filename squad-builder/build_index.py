@@ -185,6 +185,9 @@ def part_data(d):
     ex = [str(t) for t in (d.get("exact") or []) if isinstance(t, str)]
     if ex:
         out["exact"] = ex            # fit types corrected by hand in Blender (Save Correction): no settling
+    ck = [str(t) for t in (d.get("check") or []) if isinstance(t, str)]
+    if ck:
+        out["check"] = ck            # fits the cuts found only near (write_joints.py): flagged on the page
     for k in ("upright", "offHand"):
         if flat16(d.get(k)):
             out[k] = flat16(d[k])
