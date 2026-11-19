@@ -34,6 +34,9 @@ MX = np.diag([-1.0, 1, 1, 1])
 EXCLUDE = ("VeteranBladeSquad/Arms/",)   # parts left out of the reference for now (Josh, Nov 17: Bladeguard arms are a bad example of a normal fit)
 TINY = 50            # triangles: a smaller object in a parts collection is a stray bit, not a part
 GAP = 0.3            # mm: a placed pad's inside = its triangles within this of the spot cut
+SKIP_COLLS = ("parts put back (under cuts)",)   # Claude's copies put under cuts (Nov 19), not Josh's placement: never read
+ON_CUT = 0.8         # a part is under its cut when this share of the cut's corners are its corners; else it was moved after cutting
+SEAT = 0.5           # mm: a cut takes its joint from a part under a cut of the other side within this (median), never further
 M4 = lambda a: np.array(a, float).reshape(4, 4)
 
 
@@ -136,6 +139,7 @@ def read(blend, lib, pool=()):
     for o in bpy.data.objects:
         cn = [c.name for c in o.users_collection]
         if o.type != "MESH" or not cn or any(c.startswith("ND.") for c in cn): continue
+        if any(c.lower() in SKIP_COLLS for c in cn): notes.append("object %r: in %r (Claude's put-back copies), not read" % (o.name, cn[0])); continue
         T = tris(o); W = np.array(o.matrix_world)
         if any(c.lower().endswith(" cuts") for c in cn):
             f, kind = cut_name(o.name)
@@ -158,6 +162,25 @@ def read(blend, lib, pool=()):
         if not sh or sh[0][0] < 3: notes.append("cut %r: shares no points with a part, left out" % n); c["part"] = None; continue
         c["part"] = sh[0][1]
     cuts = {n: c for n, c in cuts.items() if c["part"]}
+    # a cut whose part was moved after it was cut (reused for another match, Nov 19): the cut is where Josh put it, so its
+    # file is found under the cut itself (its triangles are the file's) and that copy, in memory, is the cut's part.
+    # Josh's file is not changed.
+    jtypes = {}
+    for hc, ccs, _s, _f, ht, ct in JOINTS.values():
+        jtypes[hc] = ht
+        for x in ccs: jtypes[x] = ct
+    rels = sorted({p["rel"] for p in parts.values()} | set(pool))
+    for n, c in sorted(cuts.items()):
+        k = _keys(c["world"]); pn = c["part"]
+        if c["fixed"] not in jtypes or len(k & keys[pn]) >= ON_CUT * len(k): continue      # only a joint's own cuts
+        want = jtypes.get(c["fixed"]); first = parts[pn]["rel"]
+        for rel in [first] + [r for r in rels if r != first and (not want or cat.get(r) in want)]:
+            sc, mk = maker_mesh(rel); M = frame_of(c["world"], mk)      # the cut (world) -> the file
+            if M is None: continue
+            vn = "%s (its part, under the cut)" % n; Wm = np.linalg.inv(M)
+            parts[vn] = {"rel": rel, "cat": cat.get(rel), "Wm": Wm, "world": tf(mk, Wm), "sc": OG.maker_view(sc), "maker_tri": mk, "virtual": True}
+            notes.append("cut %r: %s had been moved off it; %s is used where the cut is" % (n, pn, os.path.basename(rel))); c["part"] = vn; break
+        else: notes.append("cut %r: %s had been moved off it and no file of its type lies under it: its part as it sits is used" % (n, pn))
     side = lambda n, c: {"cut": n, "kind": c.get("kind"), "part": parts[c["part"]]["rel"], "obj": c["part"], "tri": tf(c["world"], np.linalg.inv(parts[c["part"]]["Wm"]))}
     joints = {}
     inst = {}                                                    # library file -> its objects (copies too)
@@ -171,13 +194,13 @@ def read(blend, lib, pool=()):
     for jn, (hc, ccs, sock, fit, htypes, ctypes) in JOINTS.items():
         hosts = [side(n, c) for n, c in sorted(cuts.items()) if c["fixed"] == hc]
         if not hosts: notes.append("joint %s: no %r cut" % (jn, hc)); continue
-        if jn == "shin" and "waist" in joints:                # each shin spot's side, in the waist's frame (+X = the right)
-            for h in hosts: h["side"] = "R" if tf(world(h).reshape(-1, 3).mean(0)[None], np.linalg.inv(joints["waist"]["Jw"]))[0, 0] > 0 else "L"
+        if jn == "shin":                                      # each shin spot's side, in its legs' own file frame (+X = the right, as the
+            for h in hosts: h["side"] = "R" if h["tri"].reshape(-1, 3).mean(0)[0] > 0 else "L"   # waist frame; Nov 19: the legs need not sit on a torso)
         right = [h for h in hosts if h.get("side", "R") == "R"] or hosts
         kids = [side(n, c) for n, c in sorted(cuts.items()) if c["fixed"] in ccs]
         if jn in ("pad", "shin", "wrist"):   # a placed pad / weapon with no cut of its own: its inside = what of it rests on a (right) spot cut, on any copy of that part
             have = {k["part"] for k in kids}; spots_w = []
-            for h in right:
+            for h in right[:1]:              # the joint's main (frame) host cut only: a copy seated on another host is that host's partner, not a source (Nov 19)
                 for pn in inst[h["part"]]: spots_w.append(tf(h["tri"], parts[pn]["Wm"]))
             spot = C.Surface(np.concatenate(spots_w), spacing=0.03)
             best = {}                     # one per file: the copy with the most of it resting on a spot (another copy may only graze one)
@@ -214,6 +237,7 @@ def read(blend, lib, pool=()):
         # part): a host cut from the child placed on it, a child cut from the host it sits on. A file's joint is the same
         # on every copy of it. A mirrored copy (a left shin pad) gives the left joint: right = left mirrored.
         kh, kk = {}, {}                                       # (library file, side) -> the joint in its maker coordinates
+        mine_v = {"host": {h["obj"] for h in hosts}, "kid": {k["obj"] for k in kids}}   # this joint's parts found under its cuts
         def setJ(role, x, Jw):
             x["J"] = np.linalg.inv(parts[x["obj"]]["Wm"]) @ Jw; (kh if role == "host" else kk)[(x["part"], x.get("side", "R"))] = x["J"]
         setJ("host", x0, Jw0)
@@ -228,15 +252,15 @@ def read(blend, lib, pool=()):
                 for (rel, sd), J in other.items():
                     if sd != "R": continue
                     for pn in inst[rel]:
-                        if pn == x["obj"]: continue
+                        if pn == x["obj"] or (parts[pn].get("virtual") and pn not in mine_v["kid" if role == "host" else "host"]): continue
                         d = float(np.median(surf(pn).dist(X)[1]))
                         if best is None or d < best[0]: best = (d, pn, J)
-                if best and best[0] <= 1.5:
+                if best and best[0] <= SEAT:
                     Jw = parts[best[1]]["Wm"] @ best[2] @ (MX if mirrored(best[1]) else np.eye(4))
                     x["joint_from"] = best[1]; setJ(role, x, Jw); done.append((role, x))
             if not done:
                 for role, x in todo:
-                    notes.append("joint %s: %r has no Mar Fil part sat on it to take the joint from: the main reference's assumed" % (jn, x["cut"]))
+                    notes.append("joint %s: %r has no Mar Fil part seated on it (within %.1f mm) to take the joint from: the main reference's assumed" % (jn, x["cut"], SEAT))
                     setJ(role, x, Jw0)
                 break
             todo = [t for t in todo if not any(t[1] is d_[1] for d_ in done)]
