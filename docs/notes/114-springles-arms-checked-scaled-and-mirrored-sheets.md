@@ -17,3 +17,9 @@
   golden baseline has 3 Springles arms (C Melee 2 L, P Heavy 1 L, S Melee 3 R): they will show as changed.
 - `sheets.py`: each marine also gets its left arm, pad and weapon, the right ones mirrored about the torso's waist
   frame (as the left shin pads are), so only right arms need placing. `--types Arms,Melee` renders only those types.
+- Nov 19, Josh: scale everything, checking each part first. What fits on the arm went with it, so its fit to the
+  arm stays the same: hands 30, melee 18, hand-less weapons 13, forearm armour 12, shoulder pads 46 (scale 1.133,
+  the pads' fits moved with it). Median size against Mar Fil (long / mid / short side, at the old scale): pads
+  1.04 / 1.07 / 1.00, melee 1.02 / 0.83 / 1.06, heads 1.09 / 1.11 / 1.14; backpacks, accessories and plate
+  accessories are other kinds of part (not comparable this way). Heads and the torso / belt bits are left for his
+  check. The pattern C / S helmet-hold arms hold a helmet: no wrist, a shoulder only.

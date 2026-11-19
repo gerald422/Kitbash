@@ -9,8 +9,10 @@ is the record).
 - **For the plan** (`docs/PLAN.md`, "What Josh provides"): the Assault and Intercessor head neck cuts; the Springles
   spacer, one arm per pattern and the wrist cut in the reference.
 - **Springles arms** (notes 114): 14 arms in `arms.blend` have the shoulder flat 0.2-0.4 mm off the origin (use the
-  measured flat?); the pattern C / S helmet-hold arms match no library file there (mirrored?). Springles shoulder
-  pads and helmets were left at 1.1 when the arms took the 3%: grow them too?
+  measured flat? Josh not sure yet). The rest of Springles - Heresy (heads, backpacks, toppers, accessories, plate
+  accessories, grenades) is still at 1.1: Josh will check each against Mar Fil before the 3% (by the median size,
+  the helmets are already 9-14% bigger than Mar Fil's). Springles - Weapons has 98 sidecars at 1.1 and 360 with no
+  scale (guns, not used for now): which is right?
 - `Run checks.bat` will show 3 Springles arms in the baseline 3% bigger (Nov 18, on purpose): `Run checks.bat record`
   once they look right.
 - **The fits written Nov 15 from old-fit examples** (Mar Fil weapon hands and backpacks, BBoosty, Turtle Ninja, Marta
