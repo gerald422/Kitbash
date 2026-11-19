@@ -4,64 +4,44 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Veteran - Gun 4B L_socket_Pad L",
+   "name": "98-Gun-4-B-Mirrored_socket_Pad L",
    "matrix": [
-    0.989799181,
-    -0.031775212,
-    0.138887642,
-    -0.006469627,
-    0.140859018,
-    0.364679471,
-    -0.920416883,
-    -3.268238745,
-    -0.02140364,
-    0.930590802,
-    0.36543547,
-    1.102148326,
+    0.918053,
+    0.149645,
+    0.36713,
+    -0.256585,
+    0.184532,
+    0.658311,
+    -0.729777,
+    -1.970441,
+    -0.350894,
+    0.737721,
+    0.576751,
+    1.537704,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.4183461666107178,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from TN Mk4 Tactical - Bolter Arm C1 R, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     -2.514371872,
-     -2.081354718,
-     -0.926253009
-    ],
-    [
-     -1.368671967,
-     1.619180178,
-     2.492425829
-    ],
-    [
-     -1.349322457,
-     2.994599328,
-     -2.590377823
-    ]
-   ]
+    "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 19)"
+   }
   }
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999994,
+   -0.000418,
+   0.003298,
+   -5.1e-05,
+   0.000408,
+   0.999996,
+   0.00279,
+   -0.000308,
+   -0.003299,
+   -0.002789,
+   0.99999,
+   -0.005575,
    0.0,
    0.0,
    0.0,
@@ -75,7 +55,7 @@
   "path": "Mar Fil - Tacticus\\VeteranSquad\\Weapons\\Arms\\98-Gun-4-B-Mirrored.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, sure (0.0017 mm, 98% on), seat.py Nov 15"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0007 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

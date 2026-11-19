@@ -4,47 +4,28 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Intercessor - Pyreblaster 7 L_socket_Pad L",
+   "name": "201-Pyreblaster-7-L_socket_Pad L",
    "matrix": [
-    0.944773854,
-    -0.11822641,
-    0.305654761,
-    -0.456504835,
-    0.293629889,
-    0.719580791,
-    -0.629273301,
-    -2.178160235,
-    -0.145546568,
-    0.684270398,
-    0.714555983,
-    2.072219665,
+    0.930083,
+    -0.1527,
+    0.334106,
+    -0.372752,
+    0.050985,
+    0.954368,
+    0.294248,
+    1.646232,
+    -0.363792,
+    -0.25664,
+    0.895427,
+    4.495577,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 4.070549964904785,
    "props": {
-    "tiow_anchor": "copied"
-   },
-   "points": [
-    [
-     -2.337369083,
-     3.004569478,
-     0.318918281
-    ],
-    [
-     -1.746257583,
-     -0.593209541,
-     -3.102314908
-    ],
-    [
-     -0.456504835,
-     -2.178160235,
-     2.072219665
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand L",
@@ -76,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999983,
+   -5e-05,
+   0.005853,
+   -0.001866,
+   0.000172,
+   0.999779,
+   -0.021018,
+   0.004278,
+   -0.00585,
+   0.021019,
+   0.999762,
+   -0.032201,
    0.0,
    0.0,
    0.0,
@@ -101,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Pyreblaster\\Arms\\201-Pyreblaster-7-L.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, sure (0.0017 mm, 98% on), seat.py Nov 15"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

@@ -4,48 +4,28 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Intercessor - Pyreblaster 8_socket_Pad L",
+   "name": "202-Pyreblaster-8_socket_Pad L",
    "matrix": [
-    0.908836272,
-    0.192099764,
-    0.370289424,
-    -0.081344356,
-    0.096700514,
-    0.766461726,
-    -0.63496987,
-    -1.510548831,
-    -0.405790146,
-    0.61289055,
-    0.678011678,
-    1.696053078,
+    0.878342,
+    0.018061,
+    0.47769,
+    0.459009,
+    -0.264465,
+    0.850789,
+    0.45411,
+    2.921795,
+    -0.398212,
+    -0.525197,
+    0.752061,
+    3.807696,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.7268996238708496,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from MarFil Intercessor - Plasma Incinerator 6, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     -2.739676249,
-     -1.838457095,
-     -0.822942849
-    ],
-    [
-     -0.824833492,
-     1.321816512,
-     2.653607773
-    ],
-    [
-     -0.465379652,
-     2.93514006,
-     -3.121238624
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand L",
@@ -77,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999995,
+   -0.002972,
+   9.9e-05,
+   0.000979,
+   0.002972,
+   0.999994,
+   0.001644,
+   -0.009244,
+   -0.000104,
+   -0.001644,
+   0.999999,
+   0.015746,
    0.0,
    0.0,
    0.0,
@@ -102,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Pyreblaster\\Arms\\202-Pyreblaster-8.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, look (0.0047 mm, 88% on), seat.py Nov 15: LOOK, check by eye"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

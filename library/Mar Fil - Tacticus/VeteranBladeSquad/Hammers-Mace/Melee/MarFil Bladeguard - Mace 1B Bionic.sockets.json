@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   -0.997198,
+   -0.074237,
+   -0.009321,
+   0.02586,
+   -0.074023,
+   0.997024,
+   -0.021506,
+   -0.320395,
+   0.010889,
+   -0.020755,
+   -0.999726,
+   -0.259545,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      -0.997198,
+      0.074237,
+      0.009321,
+      -0.02586,
+      0.074023,
+      0.997024,
+      -0.021506,
+      -0.320395,
+      -0.010889,
+      -0.020755,
+      -0.999726,
+      -0.259545,
       0.0,
       0.0,
       0.0,
@@ -72,9 +72,7 @@
      ]
     },
     "category": "Melee",
-    "ruled": {
-     "Hand L": "wrist-1"
-    },
+    "ruled": {},
     "origin": {
      "from_file": [
       0.989661476,
@@ -96,6 +94,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand L": "cut Assault weapon wrist 3, sure (0.0022 mm, 92% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Hammer Mace 124 L"
@@ -108,7 +109,7 @@
  },
  "ruled": {},
  "notes": {
-  "Hand R": "connector hand 6, sure (0.0014 mm, 100% on), seat.py Nov 15"
+  "Hand R": "cut Assault weapon wrist 3, sure (0.0022 mm, 92% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

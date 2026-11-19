@@ -33,17 +33,17 @@
  "fits": {
   "Back": [
    1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.000534,
+   -0.000835,
+   -0.003067,
+   -0.000485,
+   0.998369,
+   0.057085,
+   0.470942,
+   0.000864,
+   -0.057084,
+   0.998369,
+   0.001304,
    0.0,
    0.0,
    0.0,
@@ -57,7 +57,7 @@
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Backpacks\\61-Backpack-1.stl"
  },
  "notes": {
-  "Back": "connector pack 2, sure (0.0010 mm, 100% on), seat.py Nov 15"
+  "Back": "cut Intercessor backpack mount, look (0.0107 mm, 100% on), write_joints Nov 19: NEAR, check by eye"
  },
  "origin": {
   "from_file": [
@@ -80,5 +80,8 @@
   ],
   "joint": "Back",
   "by": "origins.py Nov 15"
- }
+ },
+ "check": [
+  "Back"
+ ]
 }

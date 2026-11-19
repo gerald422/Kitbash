@@ -4,48 +4,28 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Intercessor - Bolter B2 Individual L_socket_Pad L",
+   "name": "133-Bolter-B--2-Individual-L_socket_Pad L",
    "matrix": [
-    0.94051773,
-    0.00527336,
-    0.339704352,
-    0.051621649,
-    0.082607501,
-    0.966323669,
-    -0.243712676,
-    -1.059659483,
-    -0.329549496,
-    0.257279377,
-    0.908408341,
-    3.905573161,
+    0.918941,
+    -0.151168,
+    0.364276,
+    -0.160547,
+    -0.201976,
+    0.612946,
+    0.763873,
+    4.179856,
+    -0.338755,
+    -0.775529,
+    0.532729,
+    2.316181,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.068939447402954,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from MarFil Intercessor - Bolter A2 Individual L, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     -2.120475393,
-     -2.422702893,
-     -0.754497509
-    ],
-    [
-     -1.558949012,
-     1.875819222,
-     2.04083783
-    ],
-    [
-     -1.658918266,
-     2.237834631,
-     -4.019484518
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand L",
@@ -77,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999979,
+   -0.004577,
+   0.004491,
+   -0.000942,
+   0.004451,
+   0.999615,
+   0.0274,
+   0.032652,
+   -0.004615,
+   -0.02738,
+   0.999614,
+   -0.02609,
    0.0,
    0.0,
    0.0,
@@ -102,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Bolter-Individual\\Arms\\133-Bolter-B--2-Individual-L.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, sure (0.0020 mm, 94% on), seat.py Nov 15"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

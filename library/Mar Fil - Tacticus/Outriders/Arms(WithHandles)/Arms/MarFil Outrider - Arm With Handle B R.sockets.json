@@ -4,48 +4,28 @@
  "sockets": [
   {
    "type": "Pad R",
-   "name": "MarFil Outrider - Arm With Handle B R_socket_Pad R",
+   "name": "8-ArmWithHandle-Right-B_socket_Pad R",
    "matrix": [
-    0.989338205,
-    -0.067182011,
-    -0.129208876,
-    -0.054936814,
-    -0.084767642,
-    0.455791118,
-    -0.886041916,
-    -2.888852843,
-    0.118417563,
-    0.887548104,
-    0.44523668,
-    1.371455314,
+    0.930331,
+    -0.353996,
+    -0.095768,
+    1.225291,
+    0.117025,
+    0.53407,
+    -0.837301,
+    -2.419819,
+    0.347548,
+    0.76776,
+    0.538289,
+    1.927534,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 2.9836463928222656,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from TN Mk4 Tactical - Bolter Arm B4 L, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     2.72420277,
-     -1.623616212,
-     -1.132800569
-    ],
-    [
-     0.983842893,
-     1.062977958,
-     3.123326593
-    ],
-    [
-     0.623316077,
-     3.861716543,
-     -1.922689862
-    ]
-   ]
+    "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand R",
@@ -77,18 +57,18 @@
  ],
  "fits": {
   "Shoulder R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999977,
+   -0.006487,
+   -0.002262,
+   0.007542,
+   0.006202,
+   0.994009,
+   -0.109123,
+   -0.251404,
+   0.002956,
+   0.109106,
+   0.994026,
+   -0.194884,
    0.0,
    0.0,
    0.0,
@@ -102,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Outriders\\Arms(WithHandles)\\Arms\\8-ArmWithHandle-Right-B.stl"
  },
  "notes": {
-  "Shoulder R": "connector shoulder disc, sure (0.0026 mm, 99% on), seat.py Nov 15"
+  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 92% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

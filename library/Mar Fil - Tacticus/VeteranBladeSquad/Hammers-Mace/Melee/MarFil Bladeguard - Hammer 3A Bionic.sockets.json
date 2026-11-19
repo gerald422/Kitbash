@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.997362,
+   0.071793,
+   0.010759,
+   -0.016641,
+   -0.072031,
+   0.997121,
+   0.023691,
+   -0.322081,
+   -0.009027,
+   -0.024405,
+   0.999662,
+   -0.27313,
    0.0,
    0.0,
    0.0,
@@ -69,6 +69,24 @@
       0.0,
       0.0,
       1.0
+     ],
+     "Hand R": [
+      0.997362,
+      -0.071793,
+      -0.010759,
+      0.016641,
+      0.072031,
+      0.997121,
+      0.023691,
+      -0.322081,
+      0.009027,
+      -0.024405,
+      0.999662,
+      -0.27313,
+      0.0,
+      0.0,
+      0.0,
+      1.0
      ]
     },
     "category": "Melee",
@@ -96,6 +114,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand R": "cut Assault weapon wrist 3, sure (0.0027 mm, 93% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Hammer Mace 118 L"
@@ -106,9 +127,7 @@
   "folder": "Melee",
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Hammers-Mace\\Melee\\118-Hammer-3-A-Bionic.stl"
  },
- "ruled": {
-  "Hand L": "wrist-1"
- },
+ "ruled": {},
  "origin": {
   "from_file": [
    0.959575931,
@@ -130,5 +149,8 @@
   ],
   "joint": "Hand L",
   "by": "origins.py Nov 15"
+ },
+ "notes": {
+  "Hand L": "cut Assault weapon wrist 3, sure (0.0027 mm, 93% on), write_joints Nov 19"
  }
 }

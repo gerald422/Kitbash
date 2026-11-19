@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.953701,
+   -0.217207,
+   -0.208027,
+   2.374864,
+   0.224001,
+   0.974543,
+   0.009384,
+   -3.99162,
+   0.200692,
+   -0.055548,
+   0.978078,
+   3.304861,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.953701,
+      0.217207,
+      0.208027,
+      -2.374864,
+      -0.224001,
+      0.974543,
+      0.009384,
+      -3.99162,
+      -0.200692,
+      -0.055548,
+      0.978078,
+      3.304861,
       0.0,
       0.0,
       0.0,
@@ -72,9 +72,7 @@
      ]
     },
     "category": "Melee",
-    "ruled": {
-     "Hand L": "wrist-1"
-    },
+    "ruled": {},
     "origin": {
      "from_file": [
       0.999967648,
@@ -96,6 +94,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand L": "cut Veteran weapon wrist, sure (0.0033 mm, 98% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Hammer Mace 111 L"
@@ -106,9 +107,7 @@
   "folder": "Melee",
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Hammers-Mace\\Melee\\111-Hammer-1-B.stl"
  },
- "ruled": {
-  "Hand R": "wrist-1"
- },
+ "ruled": {},
  "origin": {
   "from_file": [
    0.99996765,
@@ -130,5 +129,8 @@
   ],
   "joint": "Hand R",
   "by": "origins.py Nov 15"
+ },
+ "notes": {
+  "Hand R": "cut Veteran weapon wrist, sure (0.0033 mm, 98% on), write_joints Nov 19"
  }
 }

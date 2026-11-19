@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.107953,
+   0.991424,
+   -0.07366,
+   3.393344,
+   -0.992544,
+   0.111698,
+   0.048771,
+   0.783181,
+   0.056579,
+   0.067845,
+   0.99609,
+   -10.550975,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.107953,
+      -0.991424,
+      0.07366,
+      -3.393344,
+      0.992544,
+      0.111698,
+      0.048771,
+      0.783181,
+      -0.056579,
+      0.067845,
+      0.99609,
+      -10.550975,
       0.0,
       0.0,
       0.0,
@@ -72,9 +72,7 @@
      ]
     },
     "category": "Melee",
-    "ruled": {
-     "Hand L": "wrist-1"
-    },
+    "ruled": {},
     "origin": {
      "from_file": [
       0.999957223,
@@ -96,6 +94,12 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "check": [
+     "Hand L"
+    ],
+    "notes": {
+     "Hand L": "cut Assault weapon wrist 1, look (0.0063 mm, 86% on), write_joints Nov 19: NEAR, check by eye (mirrored)"
     }
    },
    "title": "MarFil Veteran - Chain Sword B L"
@@ -108,7 +112,7 @@
  },
  "ruled": {},
  "notes": {
-  "Hand R": "connector hand 5, sure (0.0020 mm, 100% on), seat.py Nov 15"
+  "Hand R": "cut Assault weapon wrist 1, look (0.0063 mm, 86% on), write_joints Nov 19: NEAR, check by eye"
  },
  "origin": {
   "from_file": [
@@ -131,5 +135,8 @@
   ],
   "joint": "Hand R",
   "by": "origins.py Nov 15"
- }
+ },
+ "check": [
+  "Hand R"
+ ]
 }

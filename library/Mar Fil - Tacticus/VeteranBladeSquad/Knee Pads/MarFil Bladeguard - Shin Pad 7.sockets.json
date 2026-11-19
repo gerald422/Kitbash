@@ -1,18 +1,18 @@
 {
  "fits": {
   "Shin R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999999,
+   -0.000887,
+   -0.000668,
+   -0.00161,
+   0.000896,
+   0.999893,
+   0.014601,
+   -0.154009,
+   0.000655,
+   -0.014603,
+   0.999893,
+   -0.225283,
    0.0,
    0.0,
    0.0,
@@ -51,18 +51,18 @@
    "sidecar": {
     "fits": {
      "Shin L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.999999,
+      0.000887,
+      0.000668,
+      0.00161,
+      -0.000896,
+      0.999893,
+      0.014601,
+      -0.154009,
+      -0.000655,
+      -0.014603,
+      0.999893,
+      -0.225283,
       0.0,
       0.0,
       0.0,
@@ -91,6 +91,9 @@
      ],
      "joint": "Shin L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Shin L": "cut shin pad inside (from the placed MarFil Assault - Shin Pad 1), sure (0.0015 mm, 96% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Shin Pad 7 L"
@@ -102,7 +105,7 @@
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Knee Pads\\35-Shin-Pad-7.stl"
  },
  "notes": {
-  "Shin R": "connector shin pad inside, sure (0.0014 mm, 95% on), seat.py Nov 15"
+  "Shin R": "cut shin pad inside (from the placed MarFil Assault - Shin Pad 1), sure (0.0015 mm, 96% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

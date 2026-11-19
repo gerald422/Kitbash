@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.946155,
+   -0.220797,
+   -0.236723,
+   2.379032,
+   0.227066,
+   0.973879,
+   -0.000807,
+   -4.002033,
+   0.230717,
+   -0.052988,
+   0.971577,
+   3.114368,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.946155,
+      0.220797,
+      0.236723,
+      -2.379032,
+      -0.227066,
+      0.973879,
+      -0.000807,
+      -4.002033,
+      -0.230717,
+      -0.052988,
+      0.971577,
+      3.114368,
       0.0,
       0.0,
       0.0,
@@ -72,9 +72,7 @@
      ]
     },
     "category": "Melee",
-    "ruled": {
-     "Hand L": "wrist-1"
-    },
+    "ruled": {},
     "origin": {
      "from_file": [
       0.999998865,
@@ -96,6 +94,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand L": "cut Veteran weapon wrist, sure (0.0042 mm, 98% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Spear Glaive 127 L"
@@ -108,7 +109,7 @@
  },
  "ruled": {},
  "notes": {
-  "Hand R": "connector hand 5, sure (0.0016 mm, 100% on), seat.py Nov 15"
+  "Hand R": "cut Veteran weapon wrist, sure (0.0042 mm, 98% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.99284,
+   -0.118006,
+   -0.01852,
+   -0.641531,
+   0.102483,
+   0.921158,
+   -0.375451,
+   1.422964,
+   0.061365,
+   0.370865,
+   0.926657,
+   -12.331498,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.99284,
+      0.118006,
+      0.01852,
+      0.641531,
+      -0.102483,
+      0.921158,
+      -0.375451,
+      1.422964,
+      -0.061365,
+      0.370865,
+      0.926657,
+      -12.331498,
       0.0,
       0.0,
       0.0,
@@ -72,9 +72,7 @@
      ]
     },
     "category": "Melee",
-    "ruled": {
-     "Hand L": "wrist-1"
-    },
+    "ruled": {},
     "origin": {
      "from_file": [
       0.999966363,
@@ -96,6 +94,12 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "check": [
+     "Hand L"
+    ],
+    "notes": {
+     "Hand L": "cut Assault weapon wrist 1, look (0.0059 mm, 87% on), write_joints Nov 19: NEAR, check by eye (mirrored)"
     }
    },
    "title": "MarFil Veteran - Hammer B L"
@@ -106,9 +110,7 @@
   "folder": "Melee",
   "path": "Mar Fil - Tacticus\\VeteranSquad\\Melee\\136-Hammer-B.stl"
  },
- "ruled": {
-  "Hand R": "wrist-1"
- },
+ "ruled": {},
  "origin": {
   "from_file": [
    0.999966362,
@@ -130,5 +132,11 @@
   ],
   "joint": "Hand R",
   "by": "origins.py Nov 15"
+ },
+ "check": [
+  "Hand R"
+ ],
+ "notes": {
+  "Hand R": "cut Assault weapon wrist 1, look (0.0059 mm, 87% on), write_joints Nov 19: NEAR, check by eye"
  }
 }

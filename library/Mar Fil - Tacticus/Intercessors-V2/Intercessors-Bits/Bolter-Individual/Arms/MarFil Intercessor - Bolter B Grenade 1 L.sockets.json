@@ -4,90 +4,69 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Intercessor - Bolter B Grenade 1 L_socket_Pad L",
+   "name": "128-Bolter-B-Grenade-1-L_socket_Pad L",
    "matrix": [
-    0.961915713,
-    0.084800702,
-    0.25985984,
-    -0.47553296,
-    0.200630128,
-    0.426633144,
-    -0.881891039,
-    -2.99809841,
-    -0.185649828,
-    0.900440501,
-    0.393371536,
-    1.932395381,
+    0.895047,
+    -0.059826,
+    0.44194,
+    0.447623,
+    -0.051731,
+    0.970344,
+    0.236126,
+    1.067829,
+    -0.442961,
+    -0.234206,
+    0.865409,
+    4.844234,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.6193130016326904,
    "props": {
-    "tiow_anchor": "copied"
-   },
-   "points": [
-    [
-     -1.595772115,
-     2.611160563,
-     2.189926289
-    ],
-    [
-     -2.021722186,
-     0.468201874,
-     -2.332944936
-    ],
-    [
-     -0.47553296,
-     -2.99809841,
-     1.932395381
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand L",
-   "name": "MarFil Intercessor - Bolter B Grenade 1 L_socket_Hand L",
+   "name": "128-Bolter-B-Grenade-1-L_socket_Hand L",
    "matrix": [
-    0.629554445,
-    0.21263679,
-    -0.747293002,
-    -4.672109061,
-    -0.770070487,
-    0.298538203,
-    -0.563796399,
-    -3.464697083,
-    0.103211648,
-    0.93040883,
-    0.351691364,
-    -17.387368345,
+    -0.731449,
+    0.047523,
+    -0.680238,
+    -3.125223,
+    0.446459,
+    -0.720646,
+    -0.530418,
+    8.955463,
+    -0.515418,
+    -0.691672,
+    0.505899,
+    -2.713254,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 2.4128754138946533,
    "props": {
-    "tiow_anchor": "rule"
+    "tiow_from": "cut intercessor arm wrist a, sure (write_joints Nov 19)"
    }
   }
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999763,
+   0.004778,
+   0.021231,
+   -0.001387,
+   -0.004433,
+   0.999858,
+   -0.016265,
+   -0.022884,
+   -0.021306,
+   0.016167,
+   0.999642,
+   -0.134799,
    0.0,
    0.0,
    0.0,
@@ -101,7 +80,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Bolter-Individual\\Arms\\128-Bolter-B-Grenade-1-L.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, look (0.0076 mm, 85% on), seat.py Nov 15: LOOK, check by eye"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0007 mm, 99% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

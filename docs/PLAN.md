@@ -180,7 +180,8 @@ search's "none" list says so. Captain with Jump Pack is left out altogether for 
 
 - For Mar Fil: the cuts in the reference file (see "The reference file"). **Done Nov 19**: the last one,
   `Intercessor Neck` (one cut for the Intercessor and Assault helmets, which are the same), is in `Kitbash reference
-  updated.blend`; heads run 20: 72 of 74 sure (notes 115).
+  updated.blend`; heads run 20: 72 of 74 sure (notes 115). **Written to the library Nov 19** (run 25, all of Mar Fil
+  with the left files: 723 sidecars, 124 near and flagged; notes 116).
 - For Marta legs (next, then Marta arms): in the reference, a Marta legs on the torso spacer on the Assault
   Torso 2, with the Marta legs waist cut (and, for Marta shin pads and hip plates later, its shin spot and buckle).
 - For Springles: the printed spacer on the reference Assault Torso 2, one arm per pattern (C, P, S) on it, and

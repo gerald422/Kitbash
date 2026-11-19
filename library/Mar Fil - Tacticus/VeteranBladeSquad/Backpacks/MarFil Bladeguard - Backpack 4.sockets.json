@@ -32,18 +32,18 @@
  ],
  "fits": {
   "Back": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999999,
+   3.9e-05,
+   0.001069,
+   0.00063,
+   -0.000114,
+   0.997501,
+   0.070645,
+   0.345231,
+   -0.001063,
+   -0.070645,
+   0.9975,
+   -0.573738,
    0.0,
    0.0,
    0.0,
@@ -57,7 +57,7 @@
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Backpacks\\64-Backpack-4.stl"
  },
  "notes": {
-  "Back": "connector pack 2, sure (0.0008 mm, 100% on), seat.py Nov 15"
+  "Back": "cut Assault jump pack mount, look (0.0111 mm, 100% on), write_joints Nov 19: NEAR, check by eye"
  },
  "origin": {
   "from_file": [
@@ -80,5 +80,8 @@
   ],
   "joint": "Back",
   "by": "origins.py Nov 15"
- }
+ },
+ "check": [
+  "Back"
+ ]
 }

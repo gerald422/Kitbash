@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.994502,
+   -0.072192,
+   -0.07586,
+   -0.023859,
+   0.073294,
+   0.99724,
+   0.011841,
+   -0.13312,
+   0.074795,
+   -0.017336,
+   0.997048,
+   -0.061201,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.994502,
+      0.072192,
+      0.07586,
+      0.023859,
+      -0.073294,
+      0.99724,
+      0.011841,
+      -0.13312,
+      -0.074795,
+      -0.017336,
+      0.997048,
+      -0.061201,
       0.0,
       0.0,
       0.0,
@@ -72,9 +72,7 @@
      ]
     },
     "category": "Melee",
-    "ruled": {
-     "Hand L": "wrist-1"
-    },
+    "ruled": {},
     "origin": {
      "from_file": [
       0.998680501,
@@ -96,6 +94,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand L": "cut weapon wrist (from the placed Bladeguard Axe 1A), sure (0.0026 mm, 98% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Sword 89 L"
@@ -108,7 +109,7 @@
  },
  "ruled": {},
  "notes": {
-  "Hand R": "connector hand 2, sure (0.0022 mm, 97% on), seat.py Nov 15"
+  "Hand R": "cut weapon wrist (from the placed Bladeguard Axe 1A), sure (0.0026 mm, 98% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

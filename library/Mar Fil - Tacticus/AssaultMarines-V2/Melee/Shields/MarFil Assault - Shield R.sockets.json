@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.996425,
+   -0.036261,
+   -0.076305,
+   -0.050969,
+   0.037649,
+   0.999149,
+   0.016841,
+   -0.071534,
+   0.07563,
+   -0.019653,
+   0.996943,
+   0.005125,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.996425,
+      0.036261,
+      0.076305,
+      0.050969,
+      -0.037649,
+      0.999149,
+      0.016841,
+      -0.071534,
+      -0.07563,
+      -0.019653,
+      0.996943,
+      0.005125,
       0.0,
       0.0,
       0.0,
@@ -93,6 +93,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand L": "cut Assault weapon wrist 1, sure (0.0013 mm, 100% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Assault - Shield L"
@@ -104,7 +107,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\Melee\\Shields\\211-Shield-R.stl"
  },
  "notes": {
-  "Hand R": "connector hand 1, sure (0.0027 mm, 100% on), seat.py Nov 15"
+  "Hand R": "cut Assault weapon wrist 1, sure (0.0013 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

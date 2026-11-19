@@ -8,6 +8,9 @@ is the record).
 
 - **For the plan** (`docs/PLAN.md`, "What Josh provides"): the Springles spacer, one arm per pattern and the wrist
   cut in the reference. Marta legs, then Marta arms, next (notes 115).
+- **Mar Fil joints written Nov 19** (notes 116): `Run checks.bat` will show the Mar Fil changes; `Run checks.bat
+  record` once they look right. 124 near fits show "check it" in the Squad Builder until corrected. Undo:
+  `Write joints.bat restore`.
 - **Springles arms** (notes 114): 14 arms in `arms.blend` have the shoulder flat 0.2-0.4 mm off the origin (use the
   measured flat? Josh not sure yet). The rest of Springles - Heresy (heads, backpacks, toppers, accessories, plate
   accessories, grenades) is still at 1.1: Josh will check each against Mar Fil before the 3% (by the median size,

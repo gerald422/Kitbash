@@ -4,47 +4,28 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Intercessor - Bolter B1 L_socket_Pad L",
+   "name": "127-Bolter-B-1-L_socket_Pad L",
    "matrix": [
-    0.961830145,
-    0.080737013,
-    0.26146585,
-    -0.466705345,
-    0.202847055,
-    0.430968885,
-    -0.87927184,
-    -2.999624775,
-    -0.183673432,
-    0.898747644,
-    0.398141615,
-    1.946763469,
+    0.899145,
+    -0.056444,
+    0.433994,
+    0.398324,
+    -0.05285,
+    0.970387,
+    0.235699,
+    1.074442,
+    -0.434447,
+    -0.234864,
+    0.869537,
+    4.870723,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.619354009628296,
    "props": {
-    "tiow_anchor": "copied"
-   },
-   "points": [
-    [
-     -1.602919196,
-     2.617907916,
-     2.200775838
-    ],
-    [
-     -2.008606318,
-     0.452376672,
-     -2.315248849
-    ],
-    [
-     -0.466705345,
-     -2.999624775,
-     1.946763469
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand L",
@@ -76,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999679,
+   0.00986,
+   0.023333,
+   -0.002102,
+   -0.009503,
+   0.999836,
+   -0.015406,
+   -0.04428,
+   -0.023481,
+   0.015179,
+   0.999608,
+   -0.150172,
    0.0,
    0.0,
    0.0,
@@ -101,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Bolter-Individual\\Arms\\127-Bolter-B-1-L.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, look (0.0083 mm, 86% on), seat.py Nov 15: LOOK, check by eye"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 99% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

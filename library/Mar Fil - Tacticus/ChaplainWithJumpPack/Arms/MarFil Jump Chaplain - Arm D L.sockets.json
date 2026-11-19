@@ -6,73 +6,51 @@
    "type": "Hand L",
    "name": "20-Arm-Left-D_socket_Hand L",
    "matrix": [
-    -0.586128331,
-    0.423431127,
-    -0.690767443,
-    -5.86640107,
-    -0.806776128,
-    -0.383521716,
-    0.449470102,
-    -1.456412374,
-    -0.074604683,
-    0.820741844,
-    0.566407068,
-    -9.202201311,
+    -0.878425,
+    0.477382,
+    0.021808,
+    -5.760581,
+    -0.172528,
+    -0.359364,
+    0.917111,
+    -1.424722,
+    0.445649,
+    0.80185,
+    0.398037,
+    -9.026248,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.0,
    "props": {
-    "tiow_from": "wrist rule (outermost round face)"
+    "tiow_from": "cut Assault arm wrist b, sure (write_joints Nov 19)"
    }
   },
   {
    "type": "Pad L",
-   "name": "MarFil Jump Chaplain - Arm D L_socket_Pad L",
+   "name": "20-Arm-Left-D_socket_Pad L",
    "matrix": [
-    0.950582771,
-    -0.230845676,
-    0.207611819,
-    -0.337408426,
-    0.143313196,
-    0.91944912,
-    0.366163454,
-    1.083467941,
-    -0.275415484,
-    -0.318314755,
-    0.907096467,
-    3.426924479,
+    0.967327,
+    -0.019867,
+    0.25275,
+    -0.480011,
+    -0.154062,
+    0.745687,
+    0.64824,
+    2.546067,
+    -0.201352,
+    -0.666,
+    0.718263,
+    2.682153,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 2.087677478790283,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from MarFil Jump Chaplain - Arm C R, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     -1.978121948,
-     1.256259783,
-     -3.336416684
-    ],
-    [
-     -1.619387726,
-     -2.949556405,
-     0.314292056
-    ],
-    [
-     -0.209083341,
-     2.69012705,
-     2.761697535
-    ]
-   ]
+    "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Forearm L",
@@ -102,18 +80,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999958,
+   0.009027,
+   -0.001555,
+   -0.001049,
+   -0.009085,
+   0.999106,
+   -0.0413,
+   -0.068892,
+   0.00118,
+   0.041311,
+   0.999145,
+   -0.003466,
    0.0,
    0.0,
    0.0,
@@ -127,7 +105,7 @@
   "path": "Mar Fil - Tacticus\\ChaplainWithJumpPack\\Arms\\20-Arm-Left-D.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, sure (0.0023 mm, 96% on), seat.py Nov 15"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0001 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

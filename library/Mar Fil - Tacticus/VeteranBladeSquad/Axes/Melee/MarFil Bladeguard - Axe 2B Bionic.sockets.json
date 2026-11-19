@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.991492,
+   -0.115755,
+   0.059542,
+   -0.022522,
+   0.114263,
+   0.993058,
+   0.027887,
+   -0.071333,
+   -0.062356,
+   -0.020847,
+   0.997836,
+   -0.189288,
    0.0,
    0.0,
    0.0,
@@ -53,18 +53,18 @@
     "sockets": [],
     "fits": {
      "Hand L": [
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0,
+      0.991492,
+      0.115755,
+      -0.059542,
+      0.022522,
+      -0.114263,
+      0.993058,
+      0.027887,
+      -0.071333,
+      0.062356,
+      -0.020847,
+      0.997836,
+      -0.189288,
       0.0,
       0.0,
       0.0,
@@ -72,9 +72,7 @@
      ]
     },
     "category": "Melee",
-    "ruled": {
-     "Hand L": "wrist-1"
-    },
+    "ruled": {},
     "origin": {
      "from_file": [
       0.993328424,
@@ -96,6 +94,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand L": "cut Assault weapon wrist 1, sure (0.0019 mm, 90% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Axe 104 L"
@@ -106,9 +107,7 @@
   "folder": "Melee",
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Axes\\Melee\\104-Axe-2-B-Bionic.stl"
  },
- "ruled": {
-  "Hand R": "wrist-1"
- },
+ "ruled": {},
  "origin": {
   "from_file": [
    0.993328421,
@@ -130,5 +129,8 @@
   ],
   "joint": "Hand R",
   "by": "origins.py Nov 15"
+ },
+ "notes": {
+  "Hand R": "cut Assault weapon wrist 1, sure (0.0019 mm, 90% on), write_joints Nov 19"
  }
 }

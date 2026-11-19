@@ -4,63 +4,69 @@
  "sockets": [
   {
    "type": "Pad R",
-   "name": "MarFil Intercessor - Bolter A1 R_socket_Pad R",
+   "name": "125-Bolter-A-1-R_socket_Pad R",
    "matrix": [
-    0.960732231,
-    -0.101393258,
-    -0.258288507,
-    0.474712386,
-    -0.190574738,
-    0.435457213,
-    -0.879805928,
-    -3.023451621,
-    0.201679962,
-    0.8944811,
-    0.399034806,
-    1.92869443,
+    0.902002,
+    0.039623,
+    -0.429909,
+    -0.362645,
+    0.067026,
+    0.970854,
+    0.230106,
+    1.038847,
+    0.426497,
+    -0.236371,
+    0.873057,
+    4.866061,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.2609665393829346,
    "props": {
-    "tiow_anchor": "copied"
-   },
-   "points": [
-    [
-     1.539705699,
-     2.602135381,
-     2.171264277
-    ],
-    [
-     2.049390682,
-     0.413173203,
-     -2.325125331
-    ],
-    [
-     0.474712386,
-     -3.023451621,
-     1.92869443
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
+  },
+  {
+   "type": "Hand R",
+   "name": "125-Bolter-A-1-R_socket_Hand R",
+   "matrix": [
+    -0.798551,
+    -0.06292,
+    0.598629,
+    3.474755,
+    -0.384512,
+    -0.711834,
+    -0.587744,
+    9.012816,
+    0.463106,
+    -0.699523,
+    0.544243,
+    -2.756314,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "props": {
+    "tiow_from": "cut intercessor arm wrist a, sure (write_joints Nov 19)"
+   }
   }
  ],
  "fits": {
   "Shoulder R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999813,
+   -0.003939,
+   -0.0189,
+   0.000591,
+   0.004295,
+   0.999815,
+   0.018776,
+   -0.029126,
+   0.018823,
+   -0.018854,
+   0.999644,
+   -0.127708,
    0.0,
    0.0,
    0.0,
@@ -74,7 +80,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Bolter-Individual\\Arms\\125-Bolter-A-1-R.stl"
  },
  "notes": {
-  "Shoulder R": "connector shoulder disc, look (0.0082 mm, 85% on), seat.py Nov 15: LOOK, check by eye"
+  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0005 mm, 99% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

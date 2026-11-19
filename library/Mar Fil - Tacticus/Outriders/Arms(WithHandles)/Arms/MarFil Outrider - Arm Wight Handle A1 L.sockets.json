@@ -4,48 +4,28 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Outrider - Arm Wight Handle A1 L_socket_Pad L",
+   "name": "7-ArmWightHandle-Left-A-1_socket_Pad L",
    "matrix": [
-    0.953007874,
-    0.041113327,
-    0.300145661,
-    -0.141994809,
-    0.197812985,
-    0.665937124,
-    -0.719302754,
-    -2.80209882,
-    -0.229449746,
-    0.744874388,
-    0.626509569,
-    2.202171878,
+    0.959592,
+    0.165202,
+    0.227796,
+    -0.433026,
+    0.007706,
+    0.793795,
+    -0.608135,
+    -1.929435,
+    -0.28129,
+    0.585318,
+    0.760447,
+    2.355523,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 2.627432346343994,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from MarFil Outrider - Arm With Handle C R, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     -2.305293317,
-     -2.111550278,
-     -1.175588069
-    ],
-    [
-     -1.224696388,
-     1.308046096,
-     2.760824708
-    ],
-    [
-     -1.03247512,
-     3.115858212,
-     -2.886583096
-    ]
-   ]
+    "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand L",
@@ -77,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999903,
+   0.012778,
+   -0.005509,
+   0.00167,
+   -0.013735,
+   0.969802,
+   -0.243509,
+   -0.047086,
+   0.002231,
+   0.243561,
+   0.969883,
+   0.028399,
    0.0,
    0.0,
    0.0,
@@ -102,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Outriders\\Arms(WithHandles)\\Arms\\7-ArmWightHandle-Left-A-1.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, sure (0.0025 mm, 95% on), seat.py Nov 15"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0007 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

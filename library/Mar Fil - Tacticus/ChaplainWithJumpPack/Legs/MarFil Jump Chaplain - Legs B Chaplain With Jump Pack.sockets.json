@@ -170,107 +170,69 @@
   },
   {
    "type": "Shin R",
-   "name": "MarFil Jump Chaplain - Legs B Chaplain With Jump Pack_socket_Sh",
+   "name": "4-Legs-B-ChaplainWithJumppack_socket_Shin R",
    "matrix": [
-    -0.989567922,
-    -0.140695454,
-    -0.030988324,
-    3.778093722,
-    -0.08316306,
-    0.382217152,
-    0.920322766,
-    8.342607873,
-    -0.117640965,
-    0.913298799,
-    -0.389930508,
-    -15.288949079,
+    -0.988945,
+    -0.145139,
+    -0.030379,
+    3.753755,
+    -0.084149,
+    0.380618,
+    0.920895,
+    8.33395,
+    -0.122095,
+    0.913271,
+    -0.388624,
+    -15.299812,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 4.036693572998047,
    "props": {
-    "tiow_anchor": "auto"
-   },
-   "points": [
-    [
-     1.192969378,
-     4.83668281,
-     -23.358269276
-    ],
-    [
-     9.939033231,
-     5.571699845,
-     -22.318527171
-    ],
-    [
-     3.778093722,
-     8.342607873,
-     -15.288949079
-    ]
-   ]
+    "tiow_from": "cut Assault Legs Shin Spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Shin L",
-   "name": "MarFil Jump Chaplain - Legs B Chaplain With Jump Pack_socket_Sh.001",
+   "name": "4-Legs-B-ChaplainWithJumppack_socket_Shin L",
    "matrix": [
-    -0.665906419,
-    -0.428426058,
-    -0.610753508,
-    -6.136140606,
-    -0.652966123,
-    0.730671215,
-    0.199386028,
-    -4.032219775,
-    0.360837855,
-    0.531573763,
-    -0.766306342,
-    -16.418874791,
+    -0.691199,
+    -0.408187,
+    -0.596344,
+    -6.029724,
+    -0.629852,
+    0.744848,
+    0.220201,
+    -3.9203,
+    0.354301,
+    0.527811,
+    -0.771937,
+    -16.434241,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 4.036693572998047,
    "props": {
-    "tiow_anchor": "auto"
-   },
-   "points": [
-    [
-     -5.913205594,
-     -13.413527766,
-     -19.037488127
-    ],
-    [
-     -0.040708077,
-     -7.655148226,
-     -22.219646017
-    ],
-    [
-     -6.136140606,
-     -4.032219775,
-     -16.418874791
-    ]
-   ]
+    "tiow_from": "cut Assault legs shin spot left, sure (write_joints Nov 19)"
+   }
   }
  ],
  "fits": {
   "Waist": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.983727,
+   0.17821,
+   0.022907,
+   -0.30844,
+   -0.179673,
+   0.976449,
+   0.119442,
+   0.364565,
+   -0.001082,
+   -0.121614,
+   0.992577,
+   0.568983,
    0.0,
    0.0,
    0.0,
@@ -284,7 +246,7 @@
   "path": "Mar Fil - Tacticus\\ChaplainWithJumpPack\\Legs\\4-Legs-B-ChaplainWithJumppack.stl"
  },
  "notes": {
-  "Waist": "connector waist, look (0.0078 mm, 100% on), seat.py Nov 15: LOOK, check by eye"
+  "Waist": "cut Legs Waist another, look (0.0182 mm, 83% on), write_joints Nov 19: NEAR, check by eye"
  },
  "origin": {
   "from_file": [
@@ -307,5 +269,8 @@
   ],
   "joint": "Waist",
   "by": "origins.py Nov 15"
- }
+ },
+ "check": [
+  "Waist"
+ ]
 }

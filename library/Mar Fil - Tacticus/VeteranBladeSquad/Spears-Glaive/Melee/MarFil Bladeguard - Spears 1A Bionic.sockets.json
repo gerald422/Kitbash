@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   -0.995627,
+   0.073762,
+   0.057329,
+   0.139582,
+   0.07191,
+   0.996841,
+   -0.033715,
+   -0.337187,
+   -0.059635,
+   -0.029445,
+   -0.997786,
+   -0.620815,
    0.0,
    0.0,
    0.0,
@@ -69,6 +69,24 @@
       0.0,
       0.0,
       1.0
+     ],
+     "Hand R": [
+      -0.995627,
+      -0.073762,
+      -0.057329,
+      -0.139582,
+      -0.07191,
+      0.996841,
+      -0.033715,
+      -0.337187,
+      0.059635,
+      -0.029445,
+      -0.997786,
+      -0.620815,
+      0.0,
+      0.0,
+      0.0,
+      1.0
      ]
     },
     "category": "Melee",
@@ -96,6 +114,9 @@
      ],
      "joint": "Hand L",
      "by": "origins.py Nov 15"
+    },
+    "notes": {
+     "Hand R": "cut Assault weapon wrist 3, sure (0.0020 mm, 91% on), write_joints Nov 19 (mirrored)"
     }
    },
    "title": "MarFil Bladeguard - Spear Glaive 126 L"
@@ -106,9 +127,7 @@
   "folder": "Melee",
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Spears-Glaive\\Melee\\126-Spears-1-A-Bionic.stl"
  },
- "ruled": {
-  "Hand L": "wrist-1"
- },
+ "ruled": {},
  "origin": {
   "from_file": [
    -0.980672784,
@@ -130,5 +149,8 @@
   ],
   "joint": "Hand L",
   "by": "origins.py Nov 15"
+ },
+ "notes": {
+  "Hand L": "cut Assault weapon wrist 3, sure (0.0020 mm, 91% on), write_joints Nov 19"
  }
 }

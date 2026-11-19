@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Pad L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999671,
+   -0.016205,
+   -0.019859,
+   -0.052505,
+   0.015927,
+   0.999775,
+   -0.014046,
+   -0.03244,
+   0.020081,
+   0.013724,
+   0.999705,
+   -0.011276,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\Outriders\\Shoulder Pads\\12-ShoulderPad-IF-2.stl"
  },
  "notes": {
-  "Pad L": "connector pad inside, look (0.0123 mm, 100% on), seat.py Nov 15: LOOK, check by eye"
+  "Pad L": "cut pad inside (from the placed MarFil Assault - Shoulder Pad 1), look (0.0152 mm, 100% on), write_joints Nov 19: NEAR, check by eye"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Pad L",
   "by": "origins.py Nov 15"
- }
+ },
+ "check": [
+  "Pad L"
+ ]
 }

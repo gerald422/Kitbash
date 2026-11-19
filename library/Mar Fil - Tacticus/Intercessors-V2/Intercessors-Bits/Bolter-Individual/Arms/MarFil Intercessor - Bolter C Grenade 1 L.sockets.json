@@ -4,63 +4,69 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Intercessor - Bolter C Grenade 1 L_socket_Pad L",
+   "name": "130-Bolter-C-Grenade-1-L_socket_Pad L",
    "matrix": [
-    0.962611279,
-    0.099217262,
-    0.252062414,
-    -0.502198208,
-    0.233020354,
-    0.1712084,
-    -0.957282231,
-    -3.454232856,
-    -0.13813411,
-    0.980226389,
-    0.141687497,
-    0.919016021,
+    0.896574,
+    -0.028932,
+    0.441946,
+    0.417179,
+    0.039707,
+    0.999096,
+    -0.015147,
+    -0.343341,
+    -0.441109,
+    0.03113,
+    0.896913,
+    4.81043,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 3.6193222999572754,
    "props": {
-    "tiow_anchor": "copied"
-   },
-   "points": [
-    [
-     -1.545992746,
-     1.898040585,
-     2.673979127
-    ],
-    [
-     -2.045464461,
-     1.036156638,
-     -2.260599631
-    ],
-    [
-     -0.502198208,
-     -3.454232856,
-     0.919016021
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
+  },
+  {
+   "type": "Hand L",
+   "name": "130-Bolter-C-Grenade-1-L_socket_Hand L",
+   "matrix": [
+    -0.722903,
+    0.026457,
+    -0.690444,
+    -3.00111,
+    0.582919,
+    -0.513149,
+    -0.629986,
+    9.315515,
+    -0.370969,
+    -0.857891,
+    0.355535,
+    -0.361309,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "props": {
+    "tiow_from": "cut intercessor arm wrist a, sure (write_joints Nov 19)"
+   }
   }
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999953,
+   -0.00763,
+   0.005994,
+   0.009806,
+   0.005868,
+   0.96756,
+   0.252573,
+   0.038878,
+   -0.007726,
+   -0.252525,
+   0.967559,
+   0.009029,
    0.0,
    0.0,
    0.0,
@@ -74,7 +80,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Bolter-Individual\\Arms\\130-Bolter-C-Grenade-1-L.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, look (0.0165 mm, 82% on), seat.py Nov 15: LOOK, check by eye"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0009 mm, 99% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

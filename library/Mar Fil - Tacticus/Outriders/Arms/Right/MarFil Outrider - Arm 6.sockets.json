@@ -4,48 +4,28 @@
  "sockets": [
   {
    "type": "Pad R",
-   "name": "MarFil Outrider - Arm 6_socket_Pad R",
+   "name": "18-Arm-6_socket_Pad R",
    "matrix": [
-    0.920889994,
-    0.077347187,
-    -0.382072748,
-    -0.221288848,
-    -0.018208327,
-    0.987583003,
-    0.156042066,
-    0.508486346,
-    0.389398392,
-    -0.136739424,
-    0.910862608,
-    4.064846303,
+    0.916367,
+    0.144949,
+    -0.373176,
+    -0.11257,
+    -0.072974,
+    0.977014,
+    0.200295,
+    0.601761,
+    0.393631,
+    -0.156312,
+    0.905881,
+    3.947926,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 2.0625534057617188,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from MarFil Outrider - Arm 6B L, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     2.188904076,
-     2.525798409,
-     -1.648904976
-    ],
-    [
-     1.707424775,
-     -2.976298448,
-     -0.678718932
-    ],
-    [
-     -0.135121974,
-     0.603377084,
-     4.041558618
-    ]
-   ]
+    "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand R",
@@ -77,18 +57,18 @@
  ],
  "fits": {
   "Shoulder R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999973,
+   0.007052,
+   0.002136,
+   -8.9e-05,
+   -0.007355,
+   0.972786,
+   0.231588,
+   -0.208736,
+   -0.000444,
+   -0.231597,
+   0.972811,
+   0.04967,
    0.0,
    0.0,
    0.0,
@@ -102,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Outriders\\Arms\\Right\\18-Arm-6.stl"
  },
  "notes": {
-  "Shoulder R": "connector shoulder disc, sure (0.0024 mm, 92% on), seat.py Nov 15"
+  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0012 mm, 94% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [

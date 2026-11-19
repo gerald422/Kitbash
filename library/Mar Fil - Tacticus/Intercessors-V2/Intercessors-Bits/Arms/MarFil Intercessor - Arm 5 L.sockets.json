@@ -4,48 +4,28 @@
  "sockets": [
   {
    "type": "Pad L",
-   "name": "MarFil Intercessor - Arm 5 L_socket_Pad L",
+   "name": "61-Arm-5-L_socket_Pad L",
    "matrix": [
-    0.947431625,
-    -0.177556713,
-    0.266171744,
-    -0.525676069,
-    0.313906514,
-    0.354776764,
-    -0.880679469,
-    -2.759957057,
-    0.061938651,
-    0.917936152,
-    0.391862577,
-    1.540916091,
+    0.942536,
+    0.023482,
+    0.333276,
+    0.065986,
+    -0.088169,
+    0.979647,
+    0.180325,
+    0.945727,
+    -0.322259,
+    -0.199347,
+    0.925424,
+    4.391771,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "display_type": "ARROWS",
-   "display_size": 2.1439945697784424,
    "props": {
-    "tiow_anchor": "pose",
-    "tiow_from": "Nov 8 pad fix: Josh's 62 seat from MarFil Intercessor - Arm 5 R, turned about the shoulder joint to this arm's pose (was 'copied')"
-   },
-   "points": [
-    [
-     -1.985166339,
-     -2.569212938,
-     -1.194999746
-    ],
-    [
-     -1.417679821,
-     1.206137333,
-     2.299925806
-    ],
-    [
-     -0.783961224,
-     3.212580614,
-     -3.145398453
-    ]
-   ]
+    "tiow_from": "cut intercessor arm pad spot, sure (write_joints Nov 19)"
+   }
   },
   {
    "type": "Hand L",
@@ -77,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.999993,
+   -0.001317,
+   -0.003725,
+   0.001219,
+   0.001323,
+   0.999998,
+   0.001707,
+   -0.000148,
+   0.003723,
+   -0.001712,
+   0.999991,
+   0.037588,
    0.0,
    0.0,
    0.0,
@@ -102,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Arms\\61-Arm-5-L.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, sure (0.0022 mm, 94% on), seat.py Nov 15"
+  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 100% on), write_joints Nov 19"
  },
  "origin": {
   "from_file": [
