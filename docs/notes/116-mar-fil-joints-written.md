@@ -31,3 +31,14 @@ Pistols 49, Legs 46, Backpacks 27, Hands 12, Chests 6, Jump Packs 6, Shields 3.
 
 **Reference renames** (Josh, Nov 19): `another waist legs cut` -> `Intercessor Legs Waist`, the old `Assault Legs
 Waist` -> `set aside old Waist` (not read). Backup: `Kitbash reference updated (before waist renames 2026-11-19).blend`.
+
+**Cut-only page (Josh, Nov 19, after 20 random marines).** The write left 640 Mar Fil parts untouched (532 with old
+fits: types with no cut yet, parts the search missed) and, on written parts, old sockets where no cut joint was sure:
+58 arm wrists (13 of 23 weapons on the random marines sat on them, the ones that looked wrong), 26 pad spots, every
+belt / hip / plate / buckle / trophy spot. So the page now shows only what the cuts made: `_builder\cut_only.json`
+lists each written part's cut-made fits and sockets (and its mirror copies'); with `"on": true`, `build_index.py`
+leaves out every other part and every other joint (fits Josh corrected by hand stay), and parts with no cut fit
+for their step. Sidecars are not changed. 719 parts on the page (all Mar Fil: Arms 190, Melee 160, Shoulder Pads 78,
+Knee Pads 74, Heads 72, Pistols 49, Legs 42, Backpacks 27, Hands 12, Chests 6, Jump Packs 6, Shields 3); weapons go
+only on the 69 arms with a cut wrist. `write_joints.py` adds what it writes to the list and rebuilds the index while
+it is on; restore puts the list back. `"on": false` and Prepare: everything again.

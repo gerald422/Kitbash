@@ -344,6 +344,8 @@ def restore(lib, task):
             if k in idx.by_path: idx.update_part(k, SC.load(lib + "/" + rel + SC.SUFFIX)[0])
         open(ip, "wb").write(idx.dumps()); note = "page index refreshed"
       except (ValueError, OSError) as ex: note = "page index NOT refreshed (%s): run Prepare" % ex
+    cb = T + "/before/_builder/cut_only.json"
+    if os.path.exists(cb): shutil.copyfile(cb, lib + "/_builder/cut_only.json"); note += "; cut-only list put back (run Prepare)"
     print("put back %d; %d changed since that run, left as they are%s; %s" % (len(back), len(changed), (": " + ", ".join(changed[:5])) if changed else "", note))
     with open(T + "/restored.txt", "a", encoding="utf-8") as f: f.write("%s: put back %d, kept %d\n" % (time.strftime("%Y-%m-%d %H:%M"), len(back), len(changed)))
 

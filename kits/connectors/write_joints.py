@@ -121,6 +121,29 @@ def mirror_variants(new, check, sc_file):
     return out, notes
 
 
+def cut_made(new, vars_, kept):
+    """The joints this write made from the cuts, for the page's cut-only list (_builder/cut_only.json): the part's own
+    and each mirror copy's, less what the merge kept of the old sidecar (protected sockets, exact fits)."""
+    k = {x.split(" (")[0] for x in kept or []}
+    e = {"fits": sorted(t for t in new.get("fits") or {} if "fit " + t not in k),
+         "sockets": sorted({s["type"] for s in new.get("sockets") or []} - {x[7:] for x in k if x.startswith("socket ")})}
+    vs = {"%s|%s" % (v.get("name"), v.get("side")): {"fits": sorted(v["sidecar"].get("fits") or {}), "sockets": sorted({s["type"] for s in v["sidecar"].get("sockets") or []})}
+          for v in vars_ or []}
+    if vs: e["variants"] = vs
+    return e
+
+
+def keep_list(lib, cutj):
+    """Add this write's parts to _builder/cut_only.json (a part written again takes its new list). Returns whether the
+    page is in cut-only mode ("on", Josh's switch; a new list starts off)."""
+    p = lib + "/_builder/cut_only.json"
+    d = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"on": False, "about": "the parts and joints the cuts made (write_joints.py); "
+        "'on': true shows only these on the Squad Builder (Josh, Nov 19), false shows everything"}
+    d.setdefault("parts", {}).update({rel.replace("/", "\\") + ".stl": e for rel, e in cutj.items()})
+    tmp = p + ".tmp"; json.dump(d, open(tmp, "w", encoding="utf-8"), indent=1, sort_keys=True); os.replace(tmp, p)
+    return bool(d.get("on"))
+
+
 def main(A):
     lib = opt(A, "--lib", "D:/Kitbash Library"); res = [a for a in A if a.endswith(".json") and not a.startswith("--")]
     skip_path = opt(A, "--skip", os.path.join(HERE, "marfil_write_skip.txt")); skip = skips(skip_path)
@@ -130,7 +153,7 @@ def main(A):
     task = "connectors-joints-" + time.strftime("%Y-%m-%d"); k = 1
     while os.path.exists(lib + "/_backups/" + task): k += 1; task = "connectors-joints-%s-%d" % (time.strftime("%Y-%m-%d"), k)
     T = lib + "/_backups/" + task
-    W, plan, cnt = [], {}, collections.Counter()
+    W, plan, cnt, cutj = [], {}, collections.Counter(), {}
     w = W.append
     for rel, r in sorted(by.items()):
         path = lib + "/" + rel + SC.SUFFIX
@@ -155,6 +178,7 @@ def main(A):
         cnt["replaced anchors"] += len(replaced) + len(vrep)
         if bad: cnt["refused"] += 1; w("  REFUSED     %s: %s" % (rel, bad[:2])); continue
         plan[rel] = (merged, style)
+        cutj[rel] = cut_made(new, vars_, kept)
         cnt[r["cat"]] += 1; cnt["fits"] += len(new.get("fits") or {}); cnt["sockets"] += len(new.get("sockets") or []); cnt["near"] += len(check)
         cnt["variants"] += len(vars_)
         extra = [x for x in (["kept: " + ", ".join(kept)] if kept else []) + (["replaced " + ", ".join(replaced)] if replaced else []) + (["not found: " + ", ".join(none)] if none else []) +
@@ -179,13 +203,21 @@ def main(A):
         path = lib + "/" + rel + SC.SUFFIX; b = B + "/" + rel + SC.SUFFIX
         os.makedirs(os.path.dirname(b), exist_ok=True); shutil.copyfile(path, b)
         SC.save(path, merged, style); wrote[rel] = md5(path)
-    ip = lib + "/_builder/index.json"; note = ""
+    ip = lib + "/_builder/index.json"; cl = lib + "/_builder/cut_only.json"; note = ""
+    os.makedirs(B + "/_builder", exist_ok=True)
+    for f in (ip, cl):
+        if os.path.exists(f): shutil.copyfile(f, B + "/_builder/" + os.path.basename(f))
+    on = keep_list(lib, {r: cutj[r] for r in wrote})
     try:
-        idx = Index.load(ip); os.makedirs(B + "/_builder", exist_ok=True); shutil.copyfile(ip, B + "/_builder/index.json"); n = 0
-        for rel in wrote:
-            kk = rel.replace("/", "\\") + ".stl"
-            if kk in idx.by_path: idx.update_part(kk, SC.load(lib + "/" + rel + SC.SUFFIX)[0]); n += 1
-        open(ip, "wb").write(idx.dumps()); note = "page index: %d parts refreshed" % n
+        if on:                                      # the page shows only what the cuts made: the whole index again
+            sys.path.insert(0, os.path.join(REPO, "squad-builder")); import build_index
+            build_index.build(lib, previews=False); note = "page index rebuilt (cut-only)"
+        else:
+            idx = Index.load(ip); n = 0
+            for rel in wrote:
+                kk = rel.replace("/", "\\") + ".stl"
+                if kk in idx.by_path: idx.update_part(kk, SC.load(lib + "/" + rel + SC.SUFFIX)[0]); n += 1
+            open(ip, "wb").write(idx.dumps()); note = "page index: %d parts refreshed" % n
     except (ValueError, OSError) as ex: note = "page index NOT refreshed (%s): run Prepare" % ex
     json.dump({"wrote": wrote, "index": md5(ip) if os.path.exists(ip) else None}, open(T + "/written.json", "w", encoding="utf-8"), indent=1)
     print("wrote %d sidecars (backups in %s); %s" % (len(wrote), B.replace("/", "\\"), note))

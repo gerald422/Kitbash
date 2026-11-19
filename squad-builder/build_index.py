@@ -134,6 +134,33 @@ SLOT_FITS = {"Legs": ("Waist", "Flat Waist"), "Arms": ("Shoulder",), "Two-Handed
              "Two-Handed Held": ("Hand",), "Hand-less Weapons": ("Grip",), "Bases": ("Base",)}
 
 
+CUT_ONLY = "cut_only.json"   # in _builder: {"on": true, "parts": {library path: {"fits": [..], "sockets": [..], "variants": {"name|side": {..}}}}}
+
+
+def cut_only(lib):
+    """Josh, Nov 19: while the cuts are proved, the page shows only what the cuts made: the parts the write step
+    (kits/connectors/write_joints.py) wrote, with only their cut-made joints (and fits he corrected by hand). The write
+    step keeps the list; "on": false (or no file) shows everything again. None when off."""
+    try:
+        d = json.load(open(os.path.join(lib, "_builder", CUT_ONLY), encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return (d.get("parts") or {}) if d.get("on") else None
+
+
+def keep_cut(e, c):
+    """Only the joints the cuts made (c: one part's entry in cut_only.json), and fits corrected by hand."""
+    fits = set(c.get("fits") or []) | set(e.get("exact") or [])
+    e["fits"] = {k: v for k, v in (e.get("fits") or {}).items() if k in fits}
+    e["sockets"] = [s for s in e.get("sockets") or [] if s["t"] in set(c.get("sockets") or [])]
+    for k in ("exact", "check"):
+        if k in e:
+            e[k] = [t for t in e[k] if t in e["fits"]]
+            if not e[k]:
+                del e[k]
+    return e
+
+
 def has_slot_fit(e):
     """Has the part (or one of its maker's copies) a fit for its step?"""
     want = SLOT_FITS.get(e.get("type"))
@@ -226,10 +253,13 @@ def build(lib, budget=1e9, target=6000, previews=True, preview_fn=None):
     fcache = {}
     ad = os.path.join(outdir, "anchors_done.txt")      # parts prepare_builder.py has worked out anchors for
     anchored = set(open(ad, encoding="utf-8").read().splitlines()) if os.path.isfile(ad) else set()
+    cut = cut_only(lib)                                # only what the cuts made (Josh, Nov 19), or None
     for r in rows:
         rel = r["library path"]
         stl = os.path.join(lib, native(rel))
         if not os.path.isfile(stl):
+            continue
+        if cut is not None and rel not in cut:
             continue
         try:
             d = json.load(open(os.path.splitext(stl)[0] + SIDECAR, encoding="utf-8"))
@@ -247,8 +277,11 @@ def build(lib, budget=1e9, target=6000, previews=True, preview_fn=None):
         oname, ofolder = str(orig.get("name") or stem), str(orig.get("folder") or (parts_[-2] if len(parts_) > 1 else ""))
         pid = hashlib.sha1(rel.lower().encode("utf-8")).hexdigest()[:12]
         base = part_data(d)
-        for k, f in folder_fits(os.path.dirname(stl), fcache).items():     # the folder's own fits, where the part has none
-            base["fits"].setdefault(k, f)
+        if cut is not None:
+            keep_cut(base, cut[rel])
+        else:
+            for k, f in folder_fits(os.path.dirname(stl), fcache).items():     # the folder's own fits, where the part has none
+                base["fits"].setdefault(k, f)
         e = {"id": pid, "path": rel, "name": stem, "orig": oname, "folder": ofolder,
              "type": base.pop("category", None) or r.get("type") or parts_[-2],
              "maker": MAKERS.get(parts_[0].split(" - ")[0], parts_[0].split(" - ")[0]),   # a new maker: its own name, without the mark
@@ -264,9 +297,16 @@ def build(lib, budget=1e9, target=6000, previews=True, preview_fn=None):
                   "name": str(v.get("title") or v.get("name") or stem), "orig": str(v.get("name") or "")}
             ve.update(part_data(v["sidecar"]))
             ve.pop("category", None)
+            if cut is not None:
+                cv = (cut[rel].get("variants") or {}).get("%s|%s" % (v.get("name"), v.get("side")))
+                if not cv:
+                    continue
+                keep_cut(ve, cv)
             vs.append(ve)
         if vs:
             e["variants"] = vs
+        if cut is not None and not has_slot_fit(e):
+            continue                               # no cut fit for its step: not on the page while cut-only is on
         if rel in anchored:
             e["anchored"] = True
         e["prev"] = "previews/" + pid + ".bin"
