@@ -36,6 +36,7 @@ TINY = 50            # triangles: a smaller object in a parts collection is a st
 GAP = 0.3            # mm: a placed pad's inside = its triangles within this of the spot cut
 SKIP_COLLS = ("parts put back (under cuts)",)   # Claude's copies put under cuts (Nov 19), not Josh's placement: never read
 ON_CUT = 0.8         # a part is under its cut when this share of the cut's corners are its corners; else it was moved after cutting
+DECLARED = 3.0       # mm: a pair shown together in a fit check is used up to this apart (and noted when over SEAT)
 SEAT = 0.5           # mm: a cut takes its joint from a part under a cut of the other side within this (median), never further
 M4 = lambda a: np.array(a, float).reshape(4, 4)
 
@@ -144,7 +145,7 @@ def read(blend, lib, pool=()):
         if any(c.lower().endswith(" cuts") for c in cn):
             f, kind = cut_name(o.name)
             if not f: notes.append("cut %r: not one of the fixed names, left out" % o.name); continue
-            cuts[o.name] = {"fixed": f.replace("legs backplate", "legs back plate"), "kind": kind, "world": tf(T, W), "coll": cn[0]}; continue
+            cuts[o.name] = {"fixed": f.replace("legs backplate", "legs back plate"), "kind": kind, "world": tf(T, W), "coll": cn[0], "parent": o.parent.name if o.parent else None}; continue
         if len(T) < TINY: notes.append("object %r: %d triangles, a stray bit, left out" % (o.name, len(T))); continue
         # which file: its name (the library's, the maker's file name, or a shortened one), else, when the name says
         # otherwise (a renamed copy), the mesh against the files the reference is built from (pool)
@@ -161,7 +162,21 @@ def read(blend, lib, pool=()):
         k = _keys(c["world"]); sh = sorted(((len(k & pk), pn) for pn, pk in keys.items()), reverse=True)
         if not sh or sh[0][0] < 3: notes.append("cut %r: shares no points with a part, left out" % n); c["part"] = None; continue
         c["part"] = sh[0][1]
+        if c.get("parent") in parts and c["parent"] != c["part"]:          # parented to its part (the new reference, Nov 20): that is its part
+            notes.append("cut %r: on %s, the part it is parented to (its points match %s best)" % (n, c["parent"], c["part"])); c["part"] = c["parent"]
+        elif c.get("parent") in parts: c["part"] = c["parent"]
     cuts = {n: c for n, c in cuts.items() if c["part"]}
+    # the fit checks (the new reference, Nov 20): joint -> the sets of parts shown together in one fit folder. Where they
+    # exist, a cut takes its joint from the other part in its fit, so the reader uses exactly the pairs Josh looks at.
+    fitsets = {}
+    froot = next((c for c in bpy.data.collections if c.name.lower().startswith("fit checks")), None)
+    for jc in (froot.children if froot else []):
+        for fc in jc.children:
+            names = set()
+            for e in fc.objects:
+                ic = e.instance_collection if e.instance_type == "COLLECTION" else None
+                if ic: names |= {o.name for o in ic.objects if o.name in parts}
+            if len(names) >= 2: fitsets.setdefault(jc.name.strip().lower(), []).append((fc.name, names))
     # a cut whose part was moved after it was cut (reused for another match, Nov 19): the cut is where Josh put it, so its
     # file is found under the cut itself (its triangles are the file's) and that copy, in memory, is the cut's part.
     # Josh's file is not changed.
@@ -253,9 +268,12 @@ def read(blend, lib, pool=()):
                     if sd != "R": continue
                     for pn in inst[rel]:
                         if pn == x["obj"] or (parts[pn].get("virtual") and pn not in mine_v["kid" if role == "host" else "host"]): continue
+                        if fitsets.get(jn) and not any(x["obj"] in ns and pn in ns for _, ns in fitsets[jn]): continue   # not its partner in a fit check
                         d = float(np.median(surf(pn).dist(X)[1]))
                         if best is None or d < best[0]: best = (d, pn, J)
-                if best and best[0] <= SEAT:
+                declared = bool(fitsets.get(jn)) and best is not None and best[0] <= DECLARED
+                if best and (best[0] <= SEAT or declared):
+                    if best[0] > SEAT: notes.append("joint %s: %r is paired with %s by its fit check, but they are %.2f mm apart (seated parts touch)" % (jn, x["cut"], best[1], best[0]))
                     Jw = parts[best[1]]["Wm"] @ best[2] @ (MX if mirrored(best[1]) else np.eye(4))
                     x["joint_from"] = best[1]; setJ(role, x, Jw); done.append((role, x))
             if not done:
