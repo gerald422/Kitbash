@@ -6,50 +6,50 @@
    "type": "Hand R",
    "name": "112-Arm-8-R-B_socket_Hand R",
    "matrix": [
-    -0.950764,
-    -0.171837,
-    -0.257915,
-    4.034736,
-    0.166304,
-    -0.985124,
-    0.043291,
-    5.920378,
-    -0.261517,
-    -0.001732,
-    0.965197,
-    -5.748125,
+    -0.970964,
+    -0.171828,
+    -0.16644,
+    4.040436,
+    0.168531,
+    -0.985115,
+    0.033845,
+    5.921237,
+    -0.169779,
+    0.004813,
+    0.98547,
+    -5.724928,
     0.0,
     0.0,
     0.0,
     1.0
    ],
    "props": {
-    "tiow_from": "cut Assault arm wrist b, sure (write_joints Nov 19)"
+    "tiow_from": "cut Assault arm wrist b, sure (write_joints Nov 20)"
    }
   },
   {
    "type": "Pad R",
    "name": "112-Arm-8-R-B_socket_Pad R",
    "matrix": [
-    0.956731,
-    -0.027606,
-    -0.289659,
-    0.14457,
-    0.047544,
-    0.996941,
-    0.062022,
-    -0.078992,
-    0.287062,
-    -0.07311,
-    0.955118,
-    3.740357,
+    0.960465,
+    -0.034093,
+    -0.276305,
+    0.149288,
+    0.054538,
+    0.996284,
+    0.06665,
+    -0.070016,
+    0.273006,
+    -0.079084,
+    0.958756,
+    3.76427,
     0.0,
     0.0,
     0.0,
     1.0
    ],
    "props": {
-    "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 19)"
+    "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 20)"
    }
   },
   {
@@ -81,17 +81,17 @@
  "fits": {
   "Shoulder R": [
    0.999995,
-   -0.002273,
-   0.002124,
-   0.000112,
-   0.002273,
+   -0.002249,
+   0.002119,
+   5.6e-05,
+   0.002249,
    0.999997,
-   -0.000206,
-   -0.027225,
-   -0.002124,
-   0.000211,
-   0.999997,
-   0.012081,
+   -0.000168,
+   -0.026981,
+   -0.002119,
+   0.000173,
+   0.999998,
+   0.012238,
    0.0,
    0.0,
    0.0,
@@ -131,67 +131,67 @@
       "type": "Hand L",
       "name": "113-Arm-8-L-A_socket_Hand L",
       "matrix": [
-       -0.950764,
-       0.171837,
-       0.257915,
-       -4.034736,
-       -0.166304,
-       -0.985124,
-       0.043291,
-       5.920378,
-       0.261517,
-       -0.001732,
-       0.965197,
-       -5.748125,
+       -0.970964,
+       0.171828,
+       0.16644,
+       -4.040436,
+       -0.168531,
+       -0.985115,
+       0.033845,
+       5.921237,
+       0.169779,
+       0.004813,
+       0.98547,
+       -5.724928,
        0.0,
        0.0,
        0.0,
        1.0
       ],
       "props": {
-       "tiow_from": "cut Assault arm wrist b, sure (write_joints Nov 19)"
+       "tiow_from": "cut Assault arm wrist b, sure (write_joints Nov 20)"
       }
      },
      {
       "type": "Pad L",
       "name": "MarFil Assault - Arm 8A L_socket_Pad L",
       "matrix": [
-       0.956731,
-       0.027606,
-       0.289659,
-       -0.14457,
-       -0.047544,
-       0.996941,
-       0.062022,
-       -0.078992,
-       -0.287062,
-       -0.07311,
-       0.955118,
-       3.740357,
+       0.960465,
+       0.034093,
+       0.276305,
+       -0.149288,
+       -0.054538,
+       0.996284,
+       0.06665,
+       -0.070016,
+       -0.273006,
+       -0.079084,
+       0.958756,
+       3.76427,
        0.0,
        0.0,
        0.0,
        1.0
       ],
       "props": {
-       "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 19)"
+       "tiow_from": "cut Assault Arm Pad spot, sure (write_joints Nov 20)"
       }
      }
     ],
     "fits": {
      "Shoulder L": [
       0.999995,
-      0.002273,
-      -0.002124,
-      -0.000112,
-      -0.002273,
+      0.002249,
+      -0.002119,
+      -5.6e-05,
+      -0.002249,
       0.999997,
-      -0.000206,
-      -0.027225,
-      0.002124,
-      0.000211,
-      0.999997,
-      0.012081,
+      -0.000168,
+      -0.026981,
+      0.002119,
+      0.000173,
+      0.999998,
+      0.012238,
       0.0,
       0.0,
       0.0,
@@ -222,7 +222,7 @@
      "by": "origins.py Nov 15"
     },
     "notes": {
-     "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 99% on), write_joints Nov 19 (mirrored)"
+     "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 99% on), write_joints Nov 20 (mirrored)"
     }
    },
    "title": "MarFil Assault - Arm 8A L"
@@ -234,7 +234,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\Arms\\112-Arm-8-R-B.stl"
  },
  "notes": {
-  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 99% on), write_joints Nov 19"
+  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 99% on), write_joints Nov 20"
  },
  "origin": {
   "from_file": [

@@ -11,6 +11,8 @@ is the record).
 - **Mar Fil joints written Nov 19** (notes 116): `Run checks.bat` will show the Mar Fil changes; `Run checks.bat
   record` once they look right. 124 near fits show "check it" in the Squad Builder until corrected. Undo:
   `Write joints.bat restore`.
+- **New reference** (notes 117): TO CUT fits in the main file and the Turtle Ninja / Springles / Marta setup files;
+  check Jump Chaplain Legs D and Intercessor Legs 22's shin spots (moved in run 26).
 - **Squad Builder is cut-only** (notes 116): only the parts and joints the cuts made are on the page (`_builder\cut_only.json`,
   `"on": false` + Prepare shows everything again).
 - **Springles arms** (notes 114): 14 arms in `arms.blend` have the shoulder flat 0.2-0.4 mm off the origin (use the
