@@ -39,3 +39,9 @@ moved (Assault Legs 4A's left shin was on the right; Jump Chaplain Legs D and In
 backpack, hip plate, plate hang, buckle, backpack topper), and three setup files (Turtle Ninja per armour mark 74
 fits, Springles 11, Marta 10: `Kitbash reference - <maker> setup (TO CUT 2026-11-20).blend`, built by
 `build_maker_setup.py`, scratchpad). Read with the main file via `--ref "main;setup"`.
+
+**Two-armed parts (Nov 20).** Josh: ~60% of the two-armed trial came out turned round: the shoulder disc fits either
+shoulder. prove.py now finds the disc on both shoulders and takes as the right one the disc that, on Torso 2's
+Shoulder R, brings the other onto Shoulder L; a tie (both within 0.15 mm) goes the way that keeps the file's front
+forward. Run 29: 157 Mar Fil two-handed guns / melee / heavy weapons, all sure, one still turned (Desolator 3, a
+raised gun); written Nov 20 (`connectors-joints-2026-11-20-2`), page 877 parts.

@@ -145,10 +145,14 @@ def two_shoulders(ref, con_, surf, f):
     def miss(R_, O_):                   # R_ put on Shoulder R: how far the other disc lands from Shoulder L
         T = SR @ np.linalg.inv(R_); return float(np.linalg.norm((T @ np.append(O_[:3, 3], 1))[:3] - SL[:3, 3]))
     ma, mb = miss(A, B), miss(B, A)
+    if abs(ma - mb) < 0.15:            # a tie (both ways put the discs on the sockets): the file's frame decides, its front kept forward
+        face = lambda X: abs(float(np.degrees(np.arctan2(*(np.linalg.inv(X)[:3, :3] @ np.array([0, 1.0, 0]))[:2]))))
+        ma, mb = face(A), face(B); tie = " (a tie: the way that keeps the file's front forward, %.0f deg against %.0f)"
+    else: tie = ""
     if mb < ma:
         for k in ("cut", "kind", "J", "rg", "_c"): g[k] = f[k]
-        g["two_shoulders"] = "the other disc is the right shoulder (%.1f mm against %.1f)" % (mb, ma); return g
-    f["two_shoulders"] = "the right shoulder (%.1f mm against %.1f)" % (ma, mb); return f
+        g["two_shoulders"] = ("the other disc is the right shoulder" + (tie % (mb, ma) if tie else " (%.1f mm against %.1f)" % (mb, ma))); return g
+    f["two_shoulders"] = "the right shoulder" + (tie % (ma, mb) if tie else " (%.1f mm against %.1f)" % (ma, mb)); return f
 
 
 def to_left(r):
