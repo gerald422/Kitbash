@@ -40,6 +40,8 @@ HOSTED = {"Chests": [], "Arms": ["shoulder:child", "pad:host", "wrist:host"], "L
           "Jump Packs": ["back:child"], "Backpacks": ["back:child"], "Melee": ["wrist:child"], "Pistols": ["wrist:child"], "Hands": ["wrist:child"],
           "Shields": ["wrist:child"], "Shoulder Pads": ["pad:child"], "Knee Pads": ["shin:child"]}
 HOSTED["Chests"] = ["shoulder:host", "neck:host", "waist:host", "back:host"]
+TWOH = ("Two-Handed Guns", "Two-Handed Melee", "Heavy Weapons")     # two-armed parts: both arms in one, on the right shoulder (Nov 20)
+for t in TWOH: HOSTED[t] = ["shoulder:child"]
 def status(r):
     """'ok' / 'flag' / 'none' (nothing of it placed) and a short reason"""
     ks = HOSTED[r["cat"]]; why = []; placed = False
@@ -82,7 +84,8 @@ def marine(r, W, coll):
         Sx, F = mat(host, jn + ":host"), mat(child, jn + ":child")
         if child is None or Sx is None or F is None: return None
         Wc = Wh @ Sx @ F; placed.append(put(child["rel"], Wc, coll)); return Wc
-    placed = []; Wa = hang(pick("Arms"), "shoulder", W, torso); arm_objs = placed[:]
+    placed = []; Wa = hang(r if cat in TWOH else pick("Arms"), "shoulder", W, torso); arm_objs = placed[:]
+    if cat in TWOH: Wa = None                                    # it is both arms: no pad, weapon or mirrored left arm
     if cat in ("Chests", "Legs", "Knee Pads") or True: Wl = hang(pick("Legs"), "waist", W, torso)
     hang(pick("Heads"), "neck", W, torso)
     pack = r if cat in ("Jump Packs", "Backpacks") else REF.get("Backpacks"); hang(pack, "back", W, torso)
@@ -117,7 +120,7 @@ lines = []; COLS = 8; DX, DZ = 46.0, 78.0
 def spread(xs, n):
     if len(xs) <= n: return xs
     return [xs[int(round(i * (len(xs) - 1) / (n - 1)))] for i in range(n)]
-for cat in ["Chests", "Arms", "Legs", "Heads", "Jump Packs", "Backpacks", "Shoulder Pads", "Knee Pads", "Melee", "Pistols", "Hands", "Shields"]:
+for cat in ["Chests", "Arms", "Legs", "Heads", "Jump Packs", "Backpacks", "Shoulder Pads", "Knee Pads", "Melee", "Pistols", "Hands", "Shields"] + list(TWOH):
     if TYPES and cat not in TYPES: continue
     xs = sorted(by.get(cat, []), key=lambda r: r["rel"]); st = {r["rel"]: status(r) for r in xs}
     cnt = collections.Counter(s for s, _ in st.values())

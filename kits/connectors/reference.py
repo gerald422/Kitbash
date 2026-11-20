@@ -21,15 +21,26 @@ from kb import origin as OG, connect as C
 
 FIXED = ["torso shoulder", "torso neck", "torso waist", "torso back", "arm shoulder disc", "arm pad spot", "arm wrist armour", "arm wrist",
          "legs waist", "legs shin spot", "legs buckle", "legs ankle ball", "legs back plate", "legs backplate", "head neck", "jump pack mount",
-         "backpack mount", "weapon wrist", "shin pad inside", "pad inside"]
+         "backpack mount", "weapon wrist", "shin pad inside", "pad inside",
+         "legs plate spot", "hip plate inside", "hip plate hang spot", "plate accessory inside", "legs belt front", "buckle inside",
+         "backpack top", "topper inside"]                       # Nov 20: hip plate, plate hang, buckle, backpack topper
 # joint: (host cut, child cuts, socket on the host, fit on the child, host types, child types)
-JOINTS = {"shoulder": ("torso shoulder", ["arm shoulder disc"], "Shoulder R", "Shoulder R", ["Chests"], ["Arms"]),
+JOINTS = {"shoulder": ("torso shoulder", ["arm shoulder disc"], "Shoulder R", "Shoulder R", ["Chests"], ["Arms", "Two-Handed Guns", "Two-Handed Melee", "Heavy Weapons"]),
           "neck": ("torso neck", ["head neck"], "Neck", "Neck", ["Chests"], ["Heads"]),
           "waist": ("torso waist", ["legs waist"], "Waist", "Waist", ["Chests"], ["Legs"]),
           "back": ("torso back", ["jump pack mount", "backpack mount"], "Back", "Back", ["Chests"], ["Jump Packs", "Backpacks"]),
           "wrist": ("arm wrist", ["weapon wrist"], "Hand R", "Hand R", ["Arms"], ["Melee", "Pistols", "Hands", "Shields"]),
           "pad": ("arm pad spot", ["pad inside"], "Pad R", "Pad R", ["Arms"], ["Shoulder Pads"]),
-          "shin": ("legs shin spot", ["shin pad inside"], "Shin R", "Shin R", ["Legs"], ["Knee Pads"])}
+          "shin": ("legs shin spot", ["shin pad inside"], "Shin R", "Shin R", ["Legs"], ["Knee Pads"]),
+          # Nov 20 (Josh): the legs' hip plate, the plate's hanging accessory, the belt buckle, the backpack topper. Their
+          # reference pieces are left ones / fronts, so the joint is named for that side (the other side = mirror).
+          "plate": ("legs plate spot", ["hip plate inside"], "Plate L", "Plate L", ["Legs"], ["Hip Plates"]),
+          "hang": ("hip plate hang spot", ["plate accessory inside"], "Plate Hang L", "Plate Hang L", ["Hip Plates"], ["Plate Accessories"]),
+          "buckle": ("legs belt front", ["buckle inside"], "Buckle", "Buckle", ["Legs"], ["Buckles"]),
+          "top": ("backpack top", ["topper inside"], "Back Top", "Back Top", ["Backpacks"], ["Backpack Toppers"])}
+PLACED = ("pad", "shin", "wrist", "plate", "hang", "buckle", "top")
+FOLDER = {"hip plate": "plate", "plate hang": "hang", "backpack top": "top"}   # fit-check folder name -> joint   # joints whose child can be a placed part (no cut of its own)
+base = lambda name: re.sub(r"\.\d{3}$", "", name)                  # a collection name without Blender's .001 (files read together)
 MX = np.diag([-1.0, 1, 1, 1])
 EXCLUDE = ("VeteranBladeSquad/Arms/",)   # parts left out of the reference for now (Josh, Nov 17: Bladeguard arms are a bad example of a normal fit)
 TINY = 50            # triangles: a smaller object in a parts collection is a stray bit, not a part
@@ -99,14 +110,29 @@ def frame_of(obj_tri, file_tri):
 
 
 def read(blend, lib, pool=()):
+    """blend: one reference file, or several joined by ';' (the main reference first, then setup files such as Turtle
+    Ninja's): the others' top collections are appended, so their parts and fit checks are read with the main one's"""
     import bpy
-    bpy.ops.wm.open_mainfile(filepath=blend, load_ui=False)
+    files = [b for b in str(blend).split(";") if b.strip()]
+    bpy.ops.wm.open_mainfile(filepath=files[0], load_ui=False)
+    for extra in files[1:]:
+        with bpy.data.libraries.load(extra, link=False) as (src, dst):
+            dst.collections = [c for c in src.collections if c in ("PARTS - edit here", "FIT CHECKS - show one")]
+        for c in dst.collections:
+            if c is not None: bpy.context.scene.collection.children.link(c)
     idx = json.load(open(lib + "/_builder/index.json", encoding="utf-8"))
     norm = lambda s: re.sub(r"\s+", " ", s).strip().lower()
     byname = {norm(e["name"]): e for e in idx["parts"]}; bystem = {}
     for r in list(csv.reader(open(lib + "/_sources.csv", encoding="utf-8-sig")))[1:]:
         if len(r) > 1: bystem.setdefault(norm(os.path.splitext(os.path.basename(r[1].replace("\\", "/")))[0]), []).append(r[0])
     cat = {e["path"][:-4].replace("\\", "/"): e["type"] for e in idx["parts"]}
+    # the page index can be cut-only (Nov 19-20): every library file is in _sources.csv, its type in its sidecar
+    for r in csv.DictReader(open(lib + "/_sources.csv", encoding="utf-8-sig")):
+        lp = r.get("library path") or ""; k = norm(os.path.splitext(os.path.basename(lp.replace("\\", "/")))[0]); rel = lp[:-4].replace("\\", "/")
+        if lp and k not in byname: byname[k] = {"name": k, "path": lp}
+        if lp and rel not in cat:
+            try: cat[rel] = json.load(open(lib + "/" + rel + ".sockets.json", encoding="utf-8-sig")).get("category") or r.get("type")
+            except (OSError, ValueError): cat[rel] = r.get("type")
 
     def resolve(name):
         """the library files the object's name can be (the library's name, else the maker's file name, e.g. both the
@@ -142,7 +168,7 @@ def read(blend, lib, pool=()):
         if o.type != "MESH" or not cn or any(c.startswith("ND.") for c in cn): continue
         if any(c.lower() in SKIP_COLLS for c in cn): notes.append("object %r: in %r (Claude's put-back copies), not read" % (o.name, cn[0])); continue
         T = tris(o); W = np.array(o.matrix_world)
-        if any(c.lower().endswith(" cuts") for c in cn):
+        if any(base(c).lower().endswith(" cuts") for c in cn):
             f, kind = cut_name(o.name)
             if not f: notes.append("cut %r: not one of the fixed names, left out" % o.name); continue
             cuts[o.name] = {"fixed": f.replace("legs backplate", "legs back plate"), "kind": kind, "world": tf(T, W), "coll": cn[0], "parent": o.parent.name if o.parent else None}; continue
@@ -169,14 +195,15 @@ def read(blend, lib, pool=()):
     # the fit checks (the new reference, Nov 20): joint -> the sets of parts shown together in one fit folder. Where they
     # exist, a cut takes its joint from the other part in its fit, so the reader uses exactly the pairs Josh looks at.
     fitsets = {}
-    froot = next((c for c in bpy.data.collections if c.name.lower().startswith("fit checks")), None)
-    for jc in (froot.children if froot else []):
+    froots = [c for c in bpy.data.collections if c.name.lower().startswith("fit checks")]   # one per file read together
+    for jc in [j for fr in froots for j in fr.children]:
         for fc in jc.children:
             names = set()
             for e in fc.objects:
                 ic = e.instance_collection if e.instance_type == "COLLECTION" else None
                 if ic: names |= {o.name for o in ic.objects if o.name in parts}
-            if len(names) >= 2: fitsets.setdefault(jc.name.strip().lower(), []).append((fc.name, names))
+            if len(names) >= 2:
+                jk = base(jc.name).strip().lower(); fitsets.setdefault(FOLDER.get(jk, jk), []).append((fc.name, names))
     # a cut whose part was moved after it was cut (reused for another match, Nov 19): the cut is where Josh put it, so its
     # file is found under the cut itself (its triangles are the file's) and that copy, in memory, is the cut's part.
     # Josh's file is not changed.
@@ -213,7 +240,7 @@ def read(blend, lib, pool=()):
             for h in hosts: h["side"] = "R" if h["tri"].reshape(-1, 3).mean(0)[0] > 0 else "L"   # waist frame; Nov 19: the legs need not sit on a torso)
         right = [h for h in hosts if h.get("side", "R") == "R"] or hosts
         kids = [side(n, c) for n, c in sorted(cuts.items()) if c["fixed"] in ccs]
-        if jn in ("pad", "shin", "wrist"):   # a placed pad / weapon with no cut of its own: its inside = what of it rests on a (right) spot cut, on any copy of that part
+        if jn in PLACED:   # a placed pad / weapon with no cut of its own: its inside = what of it rests on a (right) spot cut, on any copy of that part
             have = {k["part"] for k in kids}; spots_w = []
             for h in right[:1]:              # the joint's main (frame) host cut only: a copy seated on another host is that host's partner, not a source (Nov 19)
                 for pn in inst[h["part"]]: spots_w.append(tf(h["tri"], parts[pn]["Wm"]))
