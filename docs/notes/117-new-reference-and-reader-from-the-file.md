@@ -45,3 +45,11 @@ shoulder. prove.py now finds the disc on both shoulders and takes as the right o
 Shoulder R, brings the other onto Shoulder L; a tie (both within 0.15 mm) goes the way that keeps the file's front
 forward. Run 29: 157 Mar Fil two-handed guns / melee / heavy weapons, all sure, one still turned (Desolator 3, a
 raised gun); written Nov 20 (`connectors-joints-2026-11-20-2`), page 877 parts.
+
+**Mirror option (Nov 20, TIOW Inbox 1.17.11).** Josh: a mirror option, not doubled parts on the page, for almost
+everything. The Squad Builder's Mirror tick box (by Hide parts) on the two-handed slot and every middle slot (legs,
+torso, head, pack, base, buckle, loincloth, tabard): the request carries `"mirror": true` (a two-handed piece goes
+to Shoulder L); TIOW Inbox brings the part as its plain mirror image (mesh, sockets, fits; `mirror_in_place`, or
+`mirror_for_side` for the two-handed types, now sided) on the same spot, and a sided two-handed piece's spans swap
+(on Shoulder L it clears Shoulder R). Left / right parts mirror by going on the other side, as before. Tested
+headless: mirrored legs and two-handed piece exactly A's mirrored across the torso's middle (0.000 mm), helmet 0.02 mm.

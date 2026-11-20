@@ -73,7 +73,7 @@
 bl_info = {
     "name": "TIOW Inbox",
     "author": "Josh",
-    "version": (1, 17, 10),
+    "version": (1, 17, 11),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Sockets > TIOW Inbox",
     "description": "Imports STLs sent from TIOW-FTRP (Send to Blender) into "
@@ -463,6 +463,13 @@ def import_request(job, prefs):
         except Exception as exc:          # never let the side choice stop an import
             print("[TIOW Inbox] mirror choice failed:", repr(exc))
             vi = None
+    if vi is None and job.get("mirror"):
+        # 1.17.11 (Josh, Nov 20): the Squad Builder's Mirror - the part as its mirror image, on the same spot
+        try:
+            vi = mirror_in_place(path, job, data)
+        except Exception as exc:
+            print("[TIOW Inbox] mirror failed:", repr(exc))
+            vi = None
     vrec = None
     if isinstance(vi, dict):              # a mirror made on the spot (Mirror)
         vrec, vi = vi, int(vi.get("_index", -1))
@@ -553,7 +560,9 @@ def import_request(job, prefs):
 # settle only closes a gap and never pushes a part off the model.
 # "spans": other sockets the part also covers (a two-handed weapon comes
 # with both arms: it snaps to Shoulder R and clears Shoulder L, and an arm
-# later snapped onto Shoulder L replaces it). "mirrorSides": the part has a
+# later snapped onto Shoulder L replaces it). 1.17.11 (Josh, Nov 20): a
+# two-handed piece sent to Shoulder L comes in as its mirror image (the Squad
+# Builder's Mirror) and clears Shoulder R: a sided part's spans swap sides. "mirrorSides": the part has a
 # fit for one side only (Mar Fil's jump-pack fins are left pieces); on the
 # other side it is mirrored. Your library's _library.json "joints" replaces
 # this table. "Hands" are bare hands (Intercessors V2), on the arm's Hand
@@ -580,10 +589,10 @@ BIKE = ["Bike Front", "Front Wing", "Front Wheel", "Rear Wheel", "Exhaust R", "E
         "Handle R", "Handle L", "Bike Guns"]
 DEFAULT_JOINTS = {
     "Arms": {"socket": "Shoulder", "sided": True, "mirror": True},
-    "Two-Handed Guns": {"socket": "Shoulder R", "spans": ["Shoulder L"]},
-    "Two-Handed Melee": {"socket": "Shoulder R", "spans": ["Shoulder L"]},
+    "Two-Handed Guns": {"socket": "Shoulder", "sided": True, "mirror": True, "spans": ["Shoulder L"]},
+    "Two-Handed Melee": {"socket": "Shoulder", "sided": True, "mirror": True, "spans": ["Shoulder L"]},
     "Two-Handed Held": {"socket": "Hand R"},
-    "Heavy Weapons": {"socket": "Shoulder R", "spans": ["Shoulder L"]},
+    "Heavy Weapons": {"socket": "Shoulder", "sided": True, "mirror": True, "spans": ["Shoulder L"]},
     "Pistols": {"socket": "Hand", "sided": True, "mirror": True},
     "Melee": {"socket": "Hand", "sided": True, "mirror": True},
     "Shields": {"socket": "Hand", "sided": True, "mirror": True},
@@ -1578,7 +1587,8 @@ def auto_snap(part, job, prefs, focus):
                     if o is not part and o is not old and o not in extra_out:
                         extra_out.append(o)
     spanned = []
-    for n in spec.get("spans") or []:
+    on_left = bool(spec.get("sided")) and str(sock.get("ws_type") or "").endswith(" L")
+    for n in [(_swap_side(x) if on_left else x) for x in (spec.get("spans") or [])]:
         wanted = wanted_sockets({"socket": n}, None, aliases)
         for s2 in members:
             if s2 is not sock and s2.get("ws_type") in wanted:
@@ -2738,6 +2748,33 @@ def mirror_for_side(path, job, data, spec, want):
     orig = (data or {}).get("original") if isinstance((data or {}).get("original"), dict) else {}
     stem = os.path.splitext(os.path.basename(path))[0]
     return {"side": want, "mirror": True, "synth": True, "align": _flat(MXM), "_index": -1,
+            "name": _mirror_name(orig.get("name") or stem),
+            "folder": str(orig.get("folder") or os.path.basename(os.path.dirname(path))),
+            "title": _mirror_name(job.get("name") or stem), "sidecar": sc}
+
+
+def mirror_in_place(path, job, data):
+    """1.17.11 (Josh, Nov 20): a request with "mirror" (the Squad Builder's
+    Mirror) comes in as its plain mirror image - mesh, sockets and fits
+    mirrored, R and L swapped, as the Mirror button makes it (not saved) - and
+    snaps where the part would: legs, a torso, a head or a pack mirrored across
+    the model's middle on the same socket. A record for import_request."""
+    fits = dict((data or {}).get("fits") or {})
+    og = (data or {}).get("origin") if isinstance((data or {}).get("origin"), dict) else {}
+    jn = og.get("joint")
+    if isinstance(jn, str) and jn and jn not in fits:
+        fits[jn] = _flat(Matrix.Identity(4))       # a file moved onto its joint (notes 101)
+    ff = {}
+    for t, e in read_folder_fits(path).items():
+        m = e.get("m") if isinstance(e, dict) else e
+        if isinstance(m, list) and len(m) == 16:
+            ff[t] = m
+    sc = mirrored_sidecar(dict(data or {}, fits=fits), ff)
+    if og:
+        sc["origin"] = dict(og, joint=_swap_side(jn)) if isinstance(jn, str) else dict(og)
+    orig = (data or {}).get("original") if isinstance((data or {}).get("original"), dict) else {}
+    stem = os.path.splitext(os.path.basename(path))[0]
+    return {"side": None, "mirror": True, "synth": True, "align": _flat(MXM), "_index": -1,
             "name": _mirror_name(orig.get("name") or stem),
             "folder": str(orig.get("folder") or os.path.basename(os.path.dirname(path))),
             "title": _mirror_name(job.get("name") or stem), "sidecar": sc}

@@ -236,10 +236,15 @@
     return o;
   }
   /* {data, v, mirror, align, name} for this part in this slot, or null if it can't go there */
-  function asFor(p, sl) {
+  function mirrorable(sl) { return sl.k === "arm2" || (!sl.side && !STEPS[sl.step].byFit); }   // Josh, Nov 20: the middle parts can be mirrored where they are
+  function mirOf(m, k) { return !!((m || {}).mir || {})[k] && mirrorable(SLOT[k]); }
+  function asFor(p, sl, mirror2) {
     var side = sl.side, sp = spec(p), base = {data: p, v: null, mirror: false, align: null, name: p.name};
     if (STEPS[sl.step].byFit) return p.fits[sl.sock] ? base : null;   // belt bits: wherever they have a fit for
-    if (sl.k === "arm2") return sp.spans ? base : null;           // the Two-handed tab: pieces with both arms, on Shoulder R
+    if (sl.k === "arm2") return !sp.spans ? null : !mirror2 ? base :   // the Two-handed tab: pieces with both arms, on Shoulder R
+      {data: plainMirror(p), v: null, mirror: true, align: MX.clone(), name: p.name + " (mirrored)"};   // or mirrored, on Shoulder L (Josh, Nov 20)
+    if (mirror2 && mirrorable(sl) && !sp.spans)            // a middle part mirrored where it is (legs, torso, head, pack...)
+      return {data: plainMirror(p), v: null, mirror: true, align: MX.clone(), name: p.name + " (mirrored)"};
     if (sp.spans) return null;                                    // ...and nowhere else
     if (!side) return base;
     var mine = p.side || sideOfFits(p);
@@ -431,7 +436,7 @@
       if (!pk) return;
       var p = S.byId[pk.id];
       if (!p) return;
-      var sl = SLOT[k], as = asFor(p, sl);
+      var sl = SLOT[k], as = asFor(p, sl, mirOf(picks, k));
       if (!as) return;
       as.pid = p.id;
       var inst = {slot: k, part: p, as: as, W: null, note: ""};
@@ -473,7 +478,7 @@
         }
         if (!host) { inst.note = "needs " + (SLOT[hk] ? STEPS[SLOT[hk].step].label.toLowerCase() : hk); inst.nospot = true; out.push(inst); return; }
         var sock = sl.sock;
-        if (spec(p).spans) sock = "Shoulder R";
+        if (spec(p).spans) sock = as.mirror ? "Shoulder L" : "Shoulder R";
         var hs = socketsOf(host)[sock];
         var via = (spec(p).adaptor || {})[sock];
         if (!hs && via) {               // a wing: its connector goes on the pack's Wing Mount first, the wing on the connector
@@ -673,7 +678,7 @@
         var pk = pickOf(m, sl.k), p = pk && S.byId[pk.id], txt = "—", flag = false;
         if (covered(mdl, sl.k)) txt = covered(mdl, sl.k);
         else if (p) {
-          var as = asFor(p, sl); txt = as ? as.name : p.name;
+          var as = asFor(p, sl, mirOf(mdl, sl.k)); txt = as ? as.name : p.name;
           var inst = layout(m).filter(function (x) { return x.slot === sl.k; })[0];
           if (inst && (!inst.W || inst.nofit)) { flag = true; txt += " · " + inst.note; }
           else if (inst && nearFit(as)) { flag = true; txt += " · " + nearFit(as); }
@@ -732,11 +737,12 @@
     $("pnote").textContent = note;
     $("pcount").textContent = list.length + " of " + all.length + (nhid ? " · " + nhid + " hidden" : "");
     $("showhid").checked = S.showHidden;
+    $("mirror2wrap").hidden = !mirrorable(sl); $("mirror2").checked = mirOf(S.models[S.cur], sl.k);
     var chosen = pickOf(S.cur, S.slot);
     var html = list.slice(0, 400).map(function (p) {
-      var as = asFor(p, sl);
+      var as = asFor(p, sl, mirOf(S.models[S.cur], sl.k));
       var tag = as.v != null ? (as.data.mirror ? "mirrored" : "maker's left copy") : as.mirror ? "mirrored" : sl.k === "arm2" ? p.kit + " · " + p.type.replace("Two-Handed ", "") : p.type === st.types[0] ? p.kit : p.type;
-      var fitName = spec(p).spans ? "Shoulder R" : sl.sock;
+      var fitName = spec(p).spans ? (as.mirror ? "Shoulder L" : "Shoulder R") : sl.sock;
       var nofit = sl.k === "legs" ? !(as.data.fits["Waist"] || as.data.fits["Flat Waist"]) : fitName ? !fitMatrix(as, fitName) : false;
       if (nofit) tag = "no fit yet";
       var hid = hiddenBy(p);
@@ -864,7 +870,8 @@
           category: p.type, tags: [], itemId: "", sentAt: new Date().toISOString(), model: id};
         if (k === "torso") req.at = [-i * SPACING, 0, 0];
         else if (k === "legs") { if (inst.sock) req.socket = inst.sock; }
-        else req.socket = spec(p).spans ? "Shoulder R" : sl.sock;
+        else req.socket = spec(p).spans ? (mirOf(m, k) ? "Shoulder L" : "Shoulder R") : sl.sock;   // mirrored two-handed: TIOW Inbox 1.17.11 brings its mirror image
+        if (mirOf(m, k)) req.mirror = true;            // TIOW Inbox 1.17.11: comes in as its mirror image
         out.push(req);
       });
     });
@@ -1246,6 +1253,11 @@
     $("cards").addEventListener("click", function (e) {
       var h = e.target.closest(".hide"); if (h) { e.stopPropagation(); toggleHide(S.byId[h.getAttribute("data-hide")]); return; }
       var c = e.target.closest(".card"); if (c) choose(c.getAttribute("data-id"));
+    });
+    $("mirror2").addEventListener("change", function () {      // the two-handed piece mirrored, onto the left shoulder (Josh, Nov 20)
+      var m = S.models[S.cur]; if (!m) return;
+      m.mir = m.mir || {}; if ($("mirror2").checked) m.mir[S.slot] = true; else delete m.mir[S.slot];
+      renderAll();
     });
     $("showhid").addEventListener("change", function () {
       S.showHidden = $("showhid").checked;      // hiding mode: Hide / Unhide on the cards, hidden parts shown dimmed
