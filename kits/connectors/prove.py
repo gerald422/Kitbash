@@ -326,7 +326,7 @@ def place_joint(ref, pj, obj):
 def run(A):
     import bpy
     from mathutils import Matrix
-    lib = opt(A, "--lib", "D:/Kitbash Library"); blend = opt(A, "--ref", os.path.expanduser("~/Desktop/mar fil connectors/Kitbash reference.blend"))
+    lib = opt(A, "--lib", "D:/Kitbash Library"); blend = opt(A, "--ref", os.path.expanduser("~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend"))
     out = opt(A, "--out", os.path.expanduser("~/Desktop/mar fil connectors/proving")); maker = opt(A, "--maker", "Mar Fil - Tacticus")
     os.makedirs(out, exist_ok=True); work = tempfile.mkdtemp(prefix="kitbash-prove-"); t0 = time.time()
     import add_reference_parts as AR, make_reference as MR     # the files the reference is built from: a renamed object is known by its mesh

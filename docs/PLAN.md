@@ -85,7 +85,11 @@ Open items that are not part of the plan: `docs/OPEN.md`. How the plan was reach
 
 ## The reference file (agreed Nov 16)
 
-One blend holds every cut and every reference placement: **`~\Desktop\mar fil connectors\Kitbash reference.blend`**,
+(Superseded Nov 19-20: the main reference is now **`~\Desktop\mar fil connectors\Kitbash reference NEW (starter
+2026-11-19).blend`**, see note 117; the files below went to the folder's `_archive` on Nov 20, apart from the five
+older cut blends that `Seat connectors.bat` still reads.)
+
+One blend held every cut and every reference placement: **`~\Desktop\mar fil connectors\Kitbash reference.blend`**,
 started by `kits/connectors/make_reference.py` (Mar Fil Torso 2 at the centre; Arm 2B R, Legs 1A, Bladeguard Helmet
 3A, Jump Pack 1, Chain Sword 1 R, Shoulder Pad 1, Shin Pad 1 and Intercessor Back Pack 1, each
 straight from the library at the library's position of Nov 16, no cuts). Josh redoes the cuts there from scratch;
