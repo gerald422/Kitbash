@@ -91,11 +91,14 @@ def search(work, i, n):
                     best = None
                     for c in j[key]:
                         rg = region(c, jn, placeF) if role == "host" else None
-                        f = C.find(con(c), surf, region=rg); f["cut"] = c["cut"]; f["kind"] = c.get("kind"); f["J"] = c["J"]; f["rg"] = rg
+                        f = C.find(con(c), surf, region=rg); f["cut"] = c["cut"]; f["kind"] = c.get("kind"); f["J"] = c["J"]; f["rg"] = rg; f["_c"] = c
                         rank = ({"sure": 0, "look": 1, "none": 2}[f["level"]], f["match"])
                         if best is None or rank < best[0]: best = (rank, f)
-                    f = best[1]; d = {"role": role, "cut": f["cut"], "kind": f["kind"], "level": f["level"], "match": f["match"], "cover": f["cover"],
+                    f = best[1]
+                    if jn == "shoulder" and role == "child" and cat in TWOH: f = two_shoulders(ref, con(f["_c"]), surf, f)
+                    d = {"role": role, "cut": f["cut"], "kind": f["kind"], "level": f["level"], "match": f["match"], "cover": f["cover"],
                                       "turned": f.get("turned"), "round": f.get("round"), "ambiguous": bool(f.get("ambiguous"))}
+                    if f.get("two_shoulders"): d["two_shoulders"] = f["two_shoulders"]
                     near_ok = role == "child" or (HOST_NEAR_IN_REGION and f["rg"] is not None and placeSure.get(PLACE[jn], False))
                     if f["rg"] is not None: d["region"] = "%.1f-%.1f mm from its %s" % (f["rg"][1], f["rg"][2], PLACE[jn])
                     if role == "host" and f["level"] == "look":
@@ -122,6 +125,30 @@ def search(work, i, n):
 
 
 def S_tf(V, M): return V @ M[:3, :3].T + M[:3, 3]
+
+
+TWOH = ("Two-Handed Guns", "Two-Handed Melee", "Heavy Weapons")
+
+
+def two_shoulders(ref, con_, surf, f):
+    """a two-armed part has a shoulder disc on each side, and the right disc's cut fits the left one too (a disc is the
+    same shape mirrored): Josh, Nov 20, ~60% came out turned round. Find the disc on the other shoulder as well, then
+    take as the right one the disc that, put on the torso's Shoulder R, brings the other onto its Shoulder L."""
+    sh, wa = ref["joints"]["shoulder"], ref["joints"].get("waist")
+    if not wa: return f
+    SR = M4(sh["hosts"][0]["J"]); Sw = M4(wa["hosts"][0]["J"]); SL = Sw @ MX @ np.linalg.inv(Sw) @ SR
+    D = float(np.linalg.norm(SR[:3, 3] - SL[:3, 3]))
+    J = M4(f["J"]); A = f["M"] @ J
+    g = C.find(con_, surf, region=(A[:3, 3], 0.4 * D, 2.0 * D))
+    if g["level"] == "none": f["two_shoulders"] = "the other shoulder's disc not found"; return f
+    B = g["M"] @ J
+    def miss(R_, O_):                   # R_ put on Shoulder R: how far the other disc lands from Shoulder L
+        T = SR @ np.linalg.inv(R_); return float(np.linalg.norm((T @ np.append(O_[:3, 3], 1))[:3] - SL[:3, 3]))
+    ma, mb = miss(A, B), miss(B, A)
+    if mb < ma:
+        for k in ("cut", "kind", "J", "rg", "_c"): g[k] = f[k]
+        g["two_shoulders"] = "the other disc is the right shoulder (%.1f mm against %.1f)" % (mb, ma); return g
+    f["two_shoulders"] = "the right shoulder (%.1f mm against %.1f)" % (ma, mb); return f
 
 
 def to_left(r):
