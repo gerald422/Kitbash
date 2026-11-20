@@ -336,6 +336,13 @@ def import_request(job, prefs):
         except Exception as exc:          # never let the side choice stop an import
             print("[TIOW Inbox] mirror choice failed:", repr(exc))
             vi = None
+    if vi is None and job.get("mirror"):
+        # 1.17.11 (Josh, Nov 20): the Squad Builder's Mirror - the part as its mirror image, on the same spot
+        try:
+            vi = mirror_in_place(path, job, data)
+        except Exception as exc:
+            print("[TIOW Inbox] mirror failed:", repr(exc))
+            vi = None
     vrec = None
     if isinstance(vi, dict):              # a mirror made on the spot (Mirror)
         vrec, vi = vi, int(vi.get("_index", -1))

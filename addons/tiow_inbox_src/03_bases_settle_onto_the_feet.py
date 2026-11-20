@@ -771,7 +771,8 @@ def auto_snap(part, job, prefs, focus):
                     if o is not part and o is not old and o not in extra_out:
                         extra_out.append(o)
     spanned = []
-    for n in spec.get("spans") or []:
+    on_left = bool(spec.get("sided")) and str(sock.get("ws_type") or "").endswith(" L")
+    for n in [(_swap_side(x) if on_left else x) for x in (spec.get("spans") or [])]:
         wanted = wanted_sockets({"socket": n}, None, aliases)
         for s2 in members:
             if s2 is not sock and s2.get("ws_type") in wanted:

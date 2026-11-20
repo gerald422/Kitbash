@@ -213,6 +213,33 @@ def mirror_for_side(path, job, data, spec, want):
             "title": _mirror_name(job.get("name") or stem), "sidecar": sc}
 
 
+def mirror_in_place(path, job, data):
+    """1.17.11 (Josh, Nov 20): a request with "mirror" (the Squad Builder's
+    Mirror) comes in as its plain mirror image - mesh, sockets and fits
+    mirrored, R and L swapped, as the Mirror button makes it (not saved) - and
+    snaps where the part would: legs, a torso, a head or a pack mirrored across
+    the model's middle on the same socket. A record for import_request."""
+    fits = dict((data or {}).get("fits") or {})
+    og = (data or {}).get("origin") if isinstance((data or {}).get("origin"), dict) else {}
+    jn = og.get("joint")
+    if isinstance(jn, str) and jn and jn not in fits:
+        fits[jn] = _flat(Matrix.Identity(4))       # a file moved onto its joint (notes 101)
+    ff = {}
+    for t, e in read_folder_fits(path).items():
+        m = e.get("m") if isinstance(e, dict) else e
+        if isinstance(m, list) and len(m) == 16:
+            ff[t] = m
+    sc = mirrored_sidecar(dict(data or {}, fits=fits), ff)
+    if og:
+        sc["origin"] = dict(og, joint=_swap_side(jn)) if isinstance(jn, str) else dict(og)
+    orig = (data or {}).get("original") if isinstance((data or {}).get("original"), dict) else {}
+    stem = os.path.splitext(os.path.basename(path))[0]
+    return {"side": None, "mirror": True, "synth": True, "align": _flat(MXM), "_index": -1,
+            "name": _mirror_name(orig.get("name") or stem),
+            "folder": str(orig.get("folder") or os.path.basename(os.path.dirname(path))),
+            "title": _mirror_name(job.get("name") or stem), "sidecar": sc}
+
+
 def _counterpart(part, whole, other):
     """What the Mirror button turns `part` into, as import_request's _variant:
     -1 (the file itself) for a variant; for the file itself, the maker's copy

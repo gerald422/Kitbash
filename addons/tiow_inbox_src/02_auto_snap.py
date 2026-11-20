@@ -19,7 +19,9 @@
 # settle only closes a gap and never pushes a part off the model.
 # "spans": other sockets the part also covers (a two-handed weapon comes
 # with both arms: it snaps to Shoulder R and clears Shoulder L, and an arm
-# later snapped onto Shoulder L replaces it). "mirrorSides": the part has a
+# later snapped onto Shoulder L replaces it). 1.17.11 (Josh, Nov 20): a
+# two-handed piece sent to Shoulder L comes in as its mirror image (the Squad
+# Builder's Mirror) and clears Shoulder R: a sided part's spans swap sides. "mirrorSides": the part has a
 # fit for one side only (Mar Fil's jump-pack fins are left pieces); on the
 # other side it is mirrored. Your library's _library.json "joints" replaces
 # this table. "Hands" are bare hands (Intercessors V2), on the arm's Hand
@@ -46,10 +48,10 @@ BIKE = ["Bike Front", "Front Wing", "Front Wheel", "Rear Wheel", "Exhaust R", "E
         "Handle R", "Handle L", "Bike Guns"]
 DEFAULT_JOINTS = {
     "Arms": {"socket": "Shoulder", "sided": True, "mirror": True},
-    "Two-Handed Guns": {"socket": "Shoulder R", "spans": ["Shoulder L"]},
-    "Two-Handed Melee": {"socket": "Shoulder R", "spans": ["Shoulder L"]},
+    "Two-Handed Guns": {"socket": "Shoulder", "sided": True, "mirror": True, "spans": ["Shoulder L"]},
+    "Two-Handed Melee": {"socket": "Shoulder", "sided": True, "mirror": True, "spans": ["Shoulder L"]},
     "Two-Handed Held": {"socket": "Hand R"},
-    "Heavy Weapons": {"socket": "Shoulder R", "spans": ["Shoulder L"]},
+    "Heavy Weapons": {"socket": "Shoulder", "sided": True, "mirror": True, "spans": ["Shoulder L"]},
     "Pistols": {"socket": "Hand", "sided": True, "mirror": True},
     "Melee": {"socket": "Hand", "sided": True, "mirror": True},
     "Shields": {"socket": "Hand", "sided": True, "mirror": True},

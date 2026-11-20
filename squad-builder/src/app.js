@@ -9,9 +9,9 @@
   var JOINTS = {
     // mirror: a part fitted for one side only goes on the other as its mirror image (Josh, Nov 15: right parts, mirrored)
     "Arms": {socket: "Shoulder", sided: true, mirror: true},
-    "Two-Handed Guns": {socket: "Shoulder R", spans: ["Shoulder L"]},
-    "Two-Handed Melee": {socket: "Shoulder R", spans: ["Shoulder L"]},
-    "Heavy Weapons": {socket: "Shoulder R", spans: ["Shoulder L"]},
+    "Two-Handed Guns": {socket: "Shoulder", sided: true, mirror: true, spans: ["Shoulder L"]},
+    "Two-Handed Melee": {socket: "Shoulder", sided: true, mirror: true, spans: ["Shoulder L"]},
+    "Heavy Weapons": {socket: "Shoulder", sided: true, mirror: true, spans: ["Shoulder L"]},
     "Two-Handed Held": {socket: "Hand R"},     // held in both hands, no arms of its own: right hand, the other hand meets the left arm
     "Pistols": {socket: "Hand", sided: true, mirror: true}, "Melee": {socket: "Hand", sided: true, mirror: true},
     "Shields": {socket: "Hand", sided: true, mirror: true}, "Hands": {socket: "Hand", sided: true, mirror: true},
