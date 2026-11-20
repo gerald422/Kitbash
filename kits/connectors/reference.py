@@ -228,6 +228,7 @@ def read(blend, lib, pool=()):
                 return None if on_cut >= 0.8 * t[top] else top
             for pn, p in parts.items():
                 if p["cat"] not in ctypes or p["rel"] in have or mirrored(pn): continue
+                if fitsets.get(jn) and not any(right[0]["obj"] in ns and pn in ns for _, ns in fitsets[jn]): continue   # the copy in a fit with the main host only
                 keep = p["world"][spot.dist(p["world"].mean(1))[1] < GAP]
                 other = rests_on(pn) if len(keep) >= 20 else None
                 if other: notes.append("%s: sits on %s, which has no %s cut: not used" % (pn, other, hc)); continue
