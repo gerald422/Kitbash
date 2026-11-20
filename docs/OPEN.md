@@ -55,6 +55,12 @@ is the record).
 
 ## Outside the plan, to do
 
+- Waist adapters (Josh, Nov 20): the Bits adapters `Bits/Adapters/lower_body_(torso)_1..6` (flat-topped waist
+  spacers: fit Waist, socket Flat Waist) are all options, #3 the default. Rule for the page / TIOW Inbox: a Mar Fil
+  torso on flat-topped legs (every Turtle Ninja and Marta legs) goes on the adapter; a non-Mar Fil torso (flat
+  bottomed) on flat-topped legs needs none; a non-Mar Fil torso on Mar Fil legs sinks further down onto the legs'
+  waist, into its solid bottom. Their cuts come from the maker setup files (adapter #3 + Torso 2, and each TN /
+  Marta legs on #3), then this needs building.
 - Finalise: export step, a peg test piece (pegs have never been printed).
 - Housekeeping: retire the TIOW-FTRP bridge (he no longer uses TIOW-FTRP: `bridge/`, the bridge template, the
   bridge's installed files: deletes on the PC, ask first).
