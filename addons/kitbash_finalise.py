@@ -25,7 +25,7 @@
 bl_info = {
     "name": "Kitbash Finalise",
     "author": "gerald422, Claude",
-    "version": (0, 3, 3),
+    "version": (0, 3, 4),
     "blender": (5, 1, 0),
     "location": "View3D > Sidebar > Finalise",
     "description": "Boolean a socketed kitbash into print pieces with push-fit pegs and ID letters",
@@ -376,6 +376,217 @@ def bake_solid(ctx, name, pieces):
             bpy.data.meshes.remove(me)
     out.name = name
     return out
+
+
+# ------------------------------------------------------------------ shoulder pad plug
+# A pad that prints on its arm but doesn't touch it would print loose. Placement is
+# left alone: a small plug fills the gap between the arm's top and the pad's inside,
+# under the crown (inside the rim, so it can't be seen), and is unioned into the pad
+# before the pad goes onto the arm (that order closes cleanly).
+PLUG_STEP = 0.1        # grid step across the pad (mm)
+PLUG_INSET = 0.5       # kept this far in from the pad's inside edge
+PLUG_SINK = 0.35       # sunk this far into the arm and the pad
+PLUG_CROWN = 2.5       # only within this radius of the pad's axis (the crown)
+PLUG_CORE = 2.5        # round the point where the arm comes closest to the pad
+PLUG_MAXGAP = 1.5      # columns no taller than this (a bigger gap is reported, not filled)
+PLUG_VOXEL = 0.06
+
+
+def pad_frame(r):
+    """The pad's inside: centre of a sphere fitted to the faces looking inwards, the
+    axis out through the crown, and two directions across it."""
+    import numpy as np
+    V, N = r.co, r.nr
+
+    def fit(P):
+        A = np.c_[2 * P, np.ones(len(P))]
+        return np.linalg.lstsq(A, (P ** 2).sum(1), rcond=None)[0][:3]
+    c = fit(V)
+    m = np.ones(len(V), bool)
+    for _ in range(8):
+        d = c - V
+        m2 = (N * d).sum(1) / np.maximum(np.linalg.norm(d, axis=1), 1e-9) > 0.6
+        if m2.sum() < 30:
+            break
+        m = m2
+        c = fit(V[m])
+    ax = (V[m] - c).mean(0)
+    ax /= max(np.linalg.norm(ax), 1e-9)
+    ref = np.array([0, 1.0, 0]) if abs(ax[1]) < 0.9 else np.array([1.0, 0, 0])
+    x = np.cross(ref, ax)
+    x /= np.linalg.norm(x)
+    return c, ax, x, np.cross(ax, x)
+
+
+def pad_plug(ctx, pad, under, name):
+    """(mesh in world space, note) for a pad (Ray) over the parts under it (Rays),
+    or (None, why not)."""
+    import numpy as np
+    c, ax, x, y = pad_frame(pad)
+    G = np.arange(-(PLUG_CROWN + PLUG_INSET + 0.3), PLUG_CROWN + PLUG_INSET + 0.3 + 1e-6, PLUG_STEP)
+    n = len(G)
+    ceil = np.full((n, n), np.nan)
+    floor = np.full((n, n), np.nan)
+    up, down = Vector(ax), Vector(-ax)
+    for i, u in enumerate(G):
+        for j, v in enumerate(G):
+            p = c + u * x + v * y
+            hit = pad.cast(Vector(p - ax * 25), up, 60.0)
+            if hit is not None and np.dot(np.array(hit[1]), ax) < 0:      # the pad's underside
+                ceil[i, j] = np.dot(np.array(hit[0]) - c, ax)
+            for r in under:                                             # the highest part below
+                hit = r.cast(Vector(p + ax * 25), down, 60.0)
+                if hit is not None:
+                    h = np.dot(np.array(hit[0]) - c, ax)
+                    if np.isnan(floor[i, j]) or h > floor[i, j]:
+                        floor[i, j] = h
+    inner = ~np.isnan(ceil)
+    for _ in range(int(math.ceil(PLUG_INSET / PLUG_STEP))):           # in from the inside edge
+        e = inner.copy()
+        e[1:, :] &= inner[:-1, :]
+        e[:-1, :] &= inner[1:, :]
+        e[:, 1:] &= inner[:, :-1]
+        e[:, :-1] &= inner[:, 1:]
+        inner = e
+    with np.errstate(invalid="ignore"):
+        gap = ceil - floor
+        ok = inner & ~np.isnan(gap) & (gap > -PLUG_SINK)
+    U, W = np.meshgrid(G, G, indexing="ij")
+    crown = np.hypot(U, W) < PLUG_CROWN
+    gg = np.where(ok & crown, gap, np.inf)
+    if not np.isfinite(gg).any():
+        return None, "no arm under the pad's crown: no plug, check it"
+    i0, j0 = np.unravel_index(np.argmin(gg), gg.shape)
+    if gg[i0, j0] >= PLUG_MAXGAP:
+        return None, f"the pad is {gg[i0, j0]:.1f} mm over the arm at its crown: too far for a plug, check it"
+    with np.errstate(invalid="ignore"):
+        fill = ok & crown & (np.hypot(U - G[i0], W - G[j0]) < PLUG_CORE) & (gap < PLUG_MAXGAP)
+    F = np.c_[x, y, ax]
+    bm = bmesh.new()
+    for i, j in zip(*np.nonzero(fill)):
+        top, bot = ceil[i, j] + PLUG_SINK, floor[i, j] - PLUG_SINK
+        for v in bmesh.ops.create_cube(bm, size=1.0)["verts"]:
+            lu, lv, lz = v.co
+            v.co = Vector(c + F @ np.array([G[i] + lu * PLUG_STEP * 1.1, G[j] + lv * PLUG_STEP * 1.1,
+                                            (top + bot) / 2 + lz * (top - bot)]))
+    raw = bpy.data.meshes.new(name + "_raw")
+    bm.to_mesh(raw)
+    bm.free()
+    tmp = bpy.data.objects.new(name + "_tmp", raw)
+    ctx.scene.collection.objects.link(tmp)
+    md = tmp.modifiers.new("r", 'REMESH')
+    md.mode, md.voxel_size = 'VOXEL', PLUG_VOXEL
+    deps = ctx.evaluated_depsgraph_get()
+    deps.update()
+    me = bpy.data.meshes.new_from_object(tmp.evaluated_get(deps))
+    bpy.data.objects.remove(tmp)
+    bpy.data.meshes.remove(raw)
+    me.name = name
+    gm = gap[fill]
+    return me, (f"plug under the crown ({int(fill.sum())} columns, gap {float(np.median(gm)):.2f}-"
+                f"{float(gm.max()):.2f} mm)")
+
+
+def shells_of(bm):
+    """Connected pieces of a bmesh: (shell index per vertex, how many)."""
+    import numpy as np
+    bm.verts.ensure_lookup_table()
+    shell = np.full(len(bm.verts), -1, np.int64)
+    k = 0
+    for v in bm.verts:
+        if shell[v.index] >= 0:
+            continue
+        st = [v]
+        shell[v.index] = k
+        while st:
+            q = st.pop()
+            for e in q.link_edges:
+                w = e.other_vert(q)
+                if shell[w.index] < 0:
+                    shell[w.index] = k
+                    st.append(w)
+        k += 1
+    return shell, k
+
+
+def merge_shells(ctx, ob):
+    """A part made of several overlapping shells (some makers' STLs) is unioned
+    into one solid on Finalise's copy, so the Manifold booleans don't leave the
+    shells that only overlap each other as separate pieces. Returns how many
+    shells it had (1 = nothing done)."""
+    bm = bmesh.new()
+    bm.from_mesh(ob.data)
+    shell, k = shells_of(bm)
+    if k < 2:
+        bm.free()
+        return k
+    pieces = []
+    for g in range(k):
+        b2 = bm.copy()
+        b2.verts.ensure_lookup_table()
+        bmesh.ops.delete(b2, geom=[v for v in b2.verts if shell[v.index] != g], context='VERTS')
+        me = bpy.data.meshes.new(f"{ob.name}_shell{g}")
+        b2.to_mesh(me)
+        b2.free()
+        pieces.append((me, Matrix.Identity(4)))
+    bm.free()
+    pieces.sort(key=lambda t: -len(t[0].vertices))
+    out = bake_solid(ctx, ob.data.name, pieces)             # (it frees the shell meshes)
+    old = ob.data
+    ob.data = out
+    if old.users == 0:
+        bpy.data.meshes.remove(old)
+    return k
+
+
+def fill_pockets(ob):
+    """After the booleans: shells sealed inside the piece (pockets that would hold
+    resin) are filled, and boolean slivers under 0.15 mm dropped. Returns
+    (pockets, slivers, separate shells left)."""
+    import numpy as np
+    bm = bmesh.new()
+    bm.from_mesh(ob.data)
+    shell, k = shells_of(bm)
+    if k < 2:
+        bm.free()
+        return 0, 0, k
+    co = np.array([tuple(v.co) for v in bm.verts])
+    sizes = np.bincount(shell, minlength=k)
+    big = int(np.argmax(sizes))
+    bm.faces.ensure_lookup_table()
+    fshell = np.array([shell[f.verts[0].index] for f in bm.faces])
+    tree = BVHTree.FromBMesh(bm)
+    dirs = [Vector((0.577, 0.577, 0.577)), Vector((-0.6, 0.48, -0.64)), Vector((0.36, -0.8, 0.48))]
+    pockets = slivers = 0
+    kill = np.zeros(k, bool)
+    for g in range(k):
+        if g == big:
+            continue
+        P = co[shell == g]
+        if np.ptp(P, 0).max() < 0.15:
+            kill[g] = True
+            slivers += 1
+            continue
+        votes = 0
+        for d in dirs:
+            q, hits = Vector(P.mean(0)), 0
+            for _ in range(500):
+                loc, _n, idx, _d = tree.ray_cast(q, d, 1.0e4)
+                if loc is None:
+                    break
+                if fshell[idx] != g:
+                    hits += 1
+                q = loc + d * 1e-4
+            votes += hits % 2
+        if votes >= 2:
+            kill[g] = True
+            pockets += 1
+    if kill.any():
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if kill[shell[v.index]]], context='VERTS')
+        bm.to_mesh(ob.data)
+        ob.data.update()
+    bm.free()
+    return pockets, slivers, int(k - kill.sum())
 
 
 # ------------------------------------------------------------------ connectors
@@ -1353,6 +1564,23 @@ def build(ctx, root, parts, splits, exact, opts, log):
             else:
                 log.append(f"Letter {ident}: no room on the body")
         bpy.data.meshes.remove(unit)
+
+    # shoulder pads printed on their arm that don't touch it: a hidden plug under the crown
+    plugs = {}
+    if opts.get("pad_plug", True):
+        for q in order:
+            p = parent_part(q, members)
+            if p is None or joint_base(joint_type(q)) != "Pad" or piece_root(q) is not piece_root(p):
+                continue
+            if ray(q).tree.overlap(ray(p).tree):
+                continue                                   # it touches: it joins as it is
+            try:
+                me, note = pad_plug(ctx, ray(q), [ray(p)], f"FA_plug_{q.name}"[:63])
+            except Exception as exc:                       # never stop a build over a plug
+                me, note = None, f"plug failed ({exc}), check it"
+            if me is not None:
+                plugs[q] = me
+            log.append(f"{q.name}: doesn't touch {p.name}: {note}")
     rays.clear()
 
     # ---- B. copies of the parts as they look (modifiers applied), originals hidden
@@ -1374,6 +1602,28 @@ def build(ctx, root, parts, splits, exact, opts, log):
                 log.append(f"{p.name}: made manifold (3D Print Toolbox) - Manifold solver")
             else:
                 log.append(f"{p.name}: still not manifold after Make Manifold ({left}) - Exact for it")
+    for p in order:
+        if p in exact:
+            continue                                       # Exact joins its shells itself
+        try:
+            k = merge_shells(ctx, copies[p])
+        except Exception as exc:
+            k = 0
+            log.append(f"{p.name}: couldn't join its shells ({exc})")
+        if k > 1:
+            log.append(f"{p.name}: {k} overlapping shells in the file, joined into one")
+    for q, me in plugs.items():
+        # the plug goes into the pad's copy first (live), then the pad onto the arm as usual
+        pg = link(bpy.data.objects.new(me.name, me), "plug")
+        pg.display_type = 'WIRE'
+        pg.hide_render = True
+        pg["fa_host"] = copies[q].name
+        m = copies[q].modifiers.new("FA Union plug", 'BOOLEAN')
+        m.operation, m.object = 'UNION', pg
+        m.solver = 'EXACT' if q in exact else 'MANIFOLD'
+        if m.solver == 'EXACT':
+            m.use_hole_tolerant = True
+        m.show_expanded = False
     hidden = []
     for o in [root] + list(descendants(root)):
         if o.name in vl.objects and o.visible_get() and not o.get(TAG):
@@ -1482,7 +1732,7 @@ def build(ctx, root, parts, splits, exact, opts, log):
         if role in {"host", "member"}:
             o.display_type = 'TEXTURED'
             o.hide_set(False)
-        elif role in {"peg", "cavity", "letter"}:
+        elif role in {"peg", "cavity", "letter", "plug"}:
             o.display_type = 'WIRE'
             o.hide_set(False)
         elif role == "ctrl":
@@ -1548,6 +1798,9 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
     letters: BoolProperty(name="ID letter", default=True,
                           description="Deboss the model's letter into every piece's face where it plugs in, "
                                       "and once into the body - all hidden once assembled")
+    pad_plug: BoolProperty(name="Plug shoulder pads that don't touch their arm", default=True,
+                           description="A pad printed on its arm that doesn't touch it gets a small plug under its "
+                                       "crown (hidden inside the rim) so it prints as one piece; the pad isn't moved")
     ident: StringProperty(name="Letter", default="A", maxlen=3,
                           description="The model's ID letter: the same on every piece of this model, "
                                       "so a squad's pieces don't get mixed up")
@@ -1608,6 +1861,7 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
             box.prop(self, "use_exact")
             if not self.use_exact and not (self.make_manifold and toolbox_ready()):
                 box.label(text="Fix them (e.g. 3D Print Toolbox) or tick one of the above to carry on")
+        lay.prop(self, "pad_plug")
         lay.prop(self, "subassemblies")
         if self.subassemblies:
             box = lay.box()
@@ -1648,7 +1902,7 @@ push-fit pegs and ID letters where pieces come off. The originals are kept
         opts = dict(use_hops=prefs.use_hops if prefs else True, carve=self.carve and bool(splits),
                     peg_side=ctx.scene.fa_peg_side, nopeg=nopeg,
                     letters=self.letters, ident=self.ident, letter_size=ctx.scene.fa_letter_size,
-                    letter_depth=ctx.scene.fa_letter_depth, make_manifold=fixing)
+                    letter_depth=ctx.scene.fa_letter_depth, make_manifold=fixing, pad_plug=self.pad_plug)
         log = []
         try:
             col, how = build(ctx, root, parts, splits, set(bad), opts, log)
@@ -1724,7 +1978,7 @@ the cutters and part copies, and check each piece is manifold"""
         vl = ctx.view_layer
         hosts = [o for o in build_objects(bid) if o.get(ROLE) == "host"]
         ident = col.get("fa_letter")
-        report, failed = [], []
+        report, failed, problems = [], [], []
         for h in hosts:
             h.hide_set(False)
             for m in list(h.modifiers):
@@ -1742,8 +1996,19 @@ the cutters and part copies, and check each piece is manifold"""
             h.pop("fa_preview", None)
             what = "Body" if h.get("fa_kind") == "body" else h.get("fa_src", h.name)
             h.name = (f"{bid} - {what}" + (f" [{ident}]" if ident else ""))[:63]
+            try:
+                pockets, slivers, left = fill_pockets(h)
+            except Exception as exc:
+                pockets, slivers, left = 0, 0, 1
+                print("[Kitbash Finalise] pocket check failed on", h.name, repr(exc))
             bad = manifold_report(h, ctx.evaluated_depsgraph_get())
-            report.append(f"{h.name}: {'manifold' if not bad else bad}")
+            if left > 1:
+                bad = ", ".join(x for x in (bad, f"{left} separate shells (a part doesn't touch)") if x)
+            notes = [f"{pockets} sealed pocket(s) filled"] if pockets else []
+            notes += [f"{slivers} sliver(s) dropped"] if slivers else []
+            report.append(f"{h.name}: {'manifold' if not bad else bad}" + (f" ({', '.join(notes)})" if notes else ""))
+            if bad:
+                problems.append(h.name)
         for o in [o for o in build_objects(bid) if o.get(ROLE) != "host"]:
             data = o.data
             bpy.data.objects.remove(o, do_unlink=True)
@@ -1761,7 +2026,7 @@ the cutters and part copies, and check each piece is manifold"""
         for line in report:
             print("[Kitbash Finalise]", line)
         ctx.scene.fa_last_log = "\n".join(report)
-        bad = [r for r in report if not r.endswith("manifold")]
+        bad = problems + failed
         self.report({'WARNING'} if bad else {'INFO'},
                     f"{len(hosts)} piece(s) baked" + (f"; problems: {len(bad)} (see panel)" if bad else ", all manifold"))
         return {'FINISHED'}

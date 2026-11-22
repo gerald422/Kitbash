@@ -62,6 +62,9 @@ is the record).
   waist, into its solid bottom. Their cuts come from the maker setup files (adapter #3 + Torso 2, and each TN /
   Marta legs on #3), then this needs building.
 - Finalise: export step, a peg test piece (pegs have never been printed).
+- Pauldrons (Nov 22, notes 118): the print fix is in Finalise 0.3.4. Placement: Josh's 15 pads placed on Arm 2B R
+  (`~\Desktop\mar fil connectors\Pauldron adapter - place the pads (2026-11-22).blend`) are not written to the
+  library yet, and neither the placements nor the plug are checked on other arms (Marta, TN, Springles).
 - Housekeeping: retire the TIOW-FTRP bridge (he no longer uses TIOW-FTRP: `bridge/`, the bridge template, the
   bridge's installed files: deletes on the PC, ask first).
 - Recipes per main maker for `add_creator.py` (only `wargame-exclusive.json` exists): the plan's intake needs them.

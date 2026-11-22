@@ -1,5 +1,24 @@
-Kitbash Finalise 0.3.3
+Kitbash Finalise 0.3.4
 ======================
+0.3.4: shoulder pads print joined to their arm.
+  - A pad that prints on its arm (not ticked as its own piece) but doesn't
+    touch it gets a small plug under its crown: the gap between the arm's top
+    and the pad's inside is filled within 2.5 mm of the pad's middle, kept
+    0.5 mm in from its inside edge, so it's hidden inside the rim. The pad
+    isn't moved: placement still comes from the fit, the plug only fixes the
+    print. The plug is unioned into the pad first, then the pad onto the arm.
+    A gap over 1.5 mm at the crown is reported, not filled. Tick "Plug
+    shoulder pads that don't touch their arm" in the dialog (on by default);
+    the plug shows as a wire in the draft.
+  - A part made of several overlapping shells (some makers' STLs, e.g. Turtle
+    Ninja's starter pauldrons) is unioned into one solid first, on
+    Finalise's copy, so no shell is left loose.
+  - Apply Booleans fills pockets sealed inside a piece (they would trap
+    resin) and drops boolean slivers under 0.15 mm, and reports a piece left
+    in separate shells (a part that doesn't touch).
+  Tested on 15 pads from every maker placed on a Mar Fil arm: all one
+  manifold solid.
+
 0.3.3: parts that aren't manifold can be fixed from the dialog. Tick
 "Make them manifold first (3D Print Toolbox)" (on by default): Finalise runs
 the 3D Print Toolbox's Make Manifold on its own copies of those parts - your
