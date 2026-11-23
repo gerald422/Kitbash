@@ -12,6 +12,11 @@ they sit exactly as Josh placed them: the anchor is his placement, never a libra
 convention (it cancels between the two sides): the reference host's own socket where it has one, so the hosts' socket
 axes stay as the add-on expects them; else the host cut's middle with the world's axes.
 
+The pad joint (Nov 23): when the files read hold pad spot cuts the method took from Josh's guide seats (auto cut
+collections, kb_adapter_in_arm on each cut; the seat file's arms with the pauldron adapter and its pad), the joint's
+frame is the guide: an arm's J = where its guide sits, a pad's J = the guide it sits in. Those replace the hand pad
+spot cuts and placed pads. Every other joint reads as before.
+
 Which library file an object is: its name (the library's, or the maker's original file name from _sources.csv). How
 its mesh lies (the file as it is, the maker's export, or moved by an applied transform) is read from the file itself:
 one triangle of the object found in the file by its edge lengths, checked on the object's other corners."""
@@ -50,6 +55,18 @@ ON_CUT = 0.8         # a part is under its cut when this share of the cut's corn
 DECLARED = 3.0       # mm: a pair shown together in a fit check is used up to this apart (and noted when over SEAT)
 SEAT = 0.5           # mm: a cut takes its joint from a part under a cut of the other side within this (median), never further
 M4 = lambda a: np.array(a, float).reshape(4, 4)
+# Nov 23 (Josh): pads are placed by the pauldron adapter ("the guide"): a shared inside shell, origin on its crown, +Z out,
+# +Y front. Josh seats a guide on each arm with its pad in it (the seat file, ~\Desktop\mar fil connectors\Pauldron
+# adapter - seat and cut (2026-11-23).blend); the arm's pad spot cut is taken from that seat automatically and keeps the
+# guide's pose on the arm (kb_adapter_in_arm). So the pad joint's frame IS the guide: an arm's socket = where its guide
+# sits, a pad's fit = its pose in the guide. Read from the auto cut collections and the seat file's arms collection.
+AUTO_COLLS = ("cuts (auto", "auto cuts")      # cuts taken by the method (setup files: "AUTO CUTS (...)"; seat file: "CUTS (auto, ...)")
+SEAT_COLLS = ("arms + adapters",)             # the seat file's arms, each with its guide and the pad in it
+GUIDE = "pauldron adapter"                    # the guide's mesh name (shared by every copy)
+PAD_CUT = "pad (pauldron adapter)"            # kb_joint of an auto pad spot cut
+CROWN = 4.04                                  # mm: the guide's dome centre below its crown (origin)
+NAME_FIX = ((r"\s*\(in adapter.*$", ""),       # 'Shoulder Pad 1 (in adapter, <arm>)': the pad's own name
+            (r"^torso 2 - .*$", "marfil assault - torso 2"))   # the seat file's Torso 2 copy on each arm
 
 
 ALIAS = {"belt buckle": "buckle"}   # Josh's wording -> the fixed name's ("Intercessor Legs belt buckle")
@@ -117,14 +134,22 @@ def read(blend, lib, pool=()):
     bpy.ops.wm.open_mainfile(filepath=files[0], load_ui=False)
     for extra in files[1:]:
         with bpy.data.libraries.load(extra, link=False) as (src, dst):
-            dst.collections = [c for c in src.collections if c in ("PARTS - edit here", "FIT CHECKS - show one")]
+            dst.collections = [c for c in src.collections if c in ("PARTS - edit here", "FIT CHECKS - show one")
+                               or base(c).lower().startswith(AUTO_COLLS + SEAT_COLLS)]
+            dst.objects = [o for o in src.objects if o.startswith("Torso 2 - ")]   # the pad seat file's torso copies (the arm's shoulder region)
         for c in dst.collections:
             if c is not None: bpy.context.scene.collection.children.link(c)
+        if any(o is not None for o in dst.objects):
+            tc = bpy.data.collections.new("torso copies (%s)" % os.path.basename(extra)[:40]); bpy.context.scene.collection.children.link(tc)
+            for o in dst.objects:
+                if o is not None and not o.users_collection: tc.objects.link(o)
     idx = json.load(open(lib + "/_builder/index.json", encoding="utf-8"))
     norm = lambda s: re.sub(r"\s+", " ", s).strip().lower()
     byname = {norm(e["name"]): e for e in idx["parts"]}; bystem = {}
     for r in list(csv.reader(open(lib + "/_sources.csv", encoding="utf-8-sig")))[1:]:
-        if len(r) > 1: bystem.setdefault(norm(os.path.splitext(os.path.basename(r[1].replace("\\", "/")))[0]), []).append(r[0])
+        if len(r) > 1:
+            k = norm(os.path.splitext(os.path.basename(r[1].replace("\\", "/")))[0]); bystem.setdefault(k, []).append(r[0])
+            if "_" in k: bystem.setdefault(norm(k.replace("_", " ")), []).append(r[0])   # 'Mk10_2.0_Arm_Right_A_1' as typed: 'TN Mk10 2.0 Arm Right A 1'
     cat = {e["path"][:-4].replace("\\", "/"): e["type"] for e in idx["parts"]}
     # the page index can be cut-only (Nov 19-20): every library file is in _sources.csv, its type in its sidecar
     for r in csv.DictReader(open(lib + "/_sources.csv", encoding="utf-8-sig")):
@@ -138,8 +163,9 @@ def read(blend, lib, pool=()):
         """the library files the object's name can be (the library's name, else the maker's file name, e.g. both the
         L and R copies of '176-ChainSword-2'); the one whose mesh lines up with the object is kept below"""
         n = norm(re.sub(r"\.\d{3}$", "", name))
+        for a, b in NAME_FIX: n = re.sub(a, b, n)
         if n in byname: return [byname[n]["path"][:-4].replace("\\", "/")]
-        hits = bystem.get(n) or [p for s, ps in bystem.items() if s.startswith(n + "-") for p in ps]
+        hits = bystem.get(n) or [p for s, ps in bystem.items() if s.startswith(n + "-") for p in ps] or bystem.get(re.sub(r"^tn ", "", n), [])   # 'TN <maker file>' (the setup files)
         if not hits:                  # a copy lettered by hand: 'Forearm 2 a', 'Forearm 2.b' (CyberBrush forearm armour)
             m = re.sub(r"[ .][a-z]$", "", n); hits = bystem.get(m, []) if m != n else []
         return [h[:-4].replace("\\", "/") for h in sorted(set(hits))]
@@ -147,6 +173,7 @@ def read(blend, lib, pool=()):
     toks = lambda s: set(re.findall(r"[a-z0-9]+", re.sub(r"#\d+|\.\d{3}$", "", s.lower()))) - {"marfil"}
     def like(name):
         """library files whose name holds every word of the object's (a shortened name: 'Bladeguard Axe 1A')"""
+        for a, b in NAME_FIX: name = re.sub(a, b, name, flags=re.I)
         t = toks(name)
         return [e["path"][:-4].replace("\\", "/") for e in idx["parts"] if t and t <= toks(e["name"])][:12]
 
@@ -162,12 +189,21 @@ def read(blend, lib, pool=()):
         i = np.empty(n * 3, np.int64); me.loop_triangles.foreach_get("vertices", i)
         co = np.empty(len(me.vertices) * 3); me.vertices.foreach_get("co", co); return co.reshape(-1, 3)[i.reshape(-1, 3)]
 
-    notes, parts, cuts = [], {}, {}
+    notes, parts, cuts, guides = [], {}, {}, {}
     for o in bpy.data.objects:
         cn = [c.name for c in o.users_collection]
         if o.type != "MESH" or not cn or any(c.startswith("ND.") for c in cn): continue
         if any(c.lower() in SKIP_COLLS for c in cn): notes.append("object %r: in %r (Claude's put-back copies), not read" % (o.name, cn[0])); continue
+        if base(o.data.name).lower().startswith(GUIDE) or base(o.name).startswith("Adapter - "):   # a pauldron adapter (guide): the pad joint's frame
+            G = np.array(o.matrix_world); G[:3, :3] /= np.linalg.norm(G[:3, :3], axis=0); guides[o.name] = G; continue
         T = tris(o); W = np.array(o.matrix_world)
+        if any(base(c).lower().startswith(AUTO_COLLS) for c in cn):   # a cut the method took from a seat (Nov 23)
+            if str(o.get("kb_joint", "")).lower().startswith(PAD_CUT) and "kb_adapter_in_arm" in o and o.parent is not None:
+                Jw = np.array(o.parent.matrix_world) @ M4(list(o["kb_adapter_in_arm"])); Jw[:3, :3] /= np.linalg.norm(Jw[:3, :3], axis=0)
+                cuts[o.name] = {"fixed": "arm pad spot", "kind": str(o.get("kb_cut_of") or base(o.parent.name)), "world": tf(T, W), "coll": cn[0],
+                                "parent": o.parent.name, "Jw": Jw}
+            else: notes.append("auto cut %r: only the pad spot cuts (from the pauldron adapter seats) are read so far" % o.name)
+            continue
         if any(base(c).lower().endswith(" cuts") for c in cn):
             f, kind = cut_name(o.name)
             if not f: notes.append("cut %r: not one of the fixed names, left out" % o.name); continue
@@ -182,7 +218,8 @@ def read(blend, lib, pool=()):
         if O2M is None: notes.append("part %r: its mesh is none of %s, left out" % (o.name, " / ".join(os.path.basename(r) for r in named) or "the reference's files")); continue
         if rel not in named: notes.append("part %r is %s (by its mesh; the name says otherwise)" % (o.name, os.path.basename(rel)))
         if any(x in rel for x in EXCLUDE): notes.append("part %r (%s): left out for now" % (o.name, os.path.basename(rel))); continue
-        parts[o.name] = {"rel": rel, "cat": cat.get(rel), "Wm": W @ np.linalg.inv(O2M), "world": tf(T, W), "sc": OG.maker_view(sc), "maker_tri": mk}
+        parts[o.name] = {"rel": rel, "cat": cat.get(rel), "Wm": W @ np.linalg.inv(O2M), "world": tf(T, W), "sc": OG.maker_view(sc), "maker_tri": mk,
+                         "guide": o.parent.name if o.parent is not None else None}
     keys = {n: _keys(p["world"]) for n, p in parts.items()}
     for n, c in cuts.items():                                    # the part a cut was taken from: the corner points they share
         k = _keys(c["world"]); sh = sorted(((len(k & pk), pn) for pn, pk in keys.items()), reverse=True)
@@ -234,6 +271,28 @@ def read(blend, lib, pool=()):
     world = lambda x: tf(x["tri"], parts[x["obj"]]["Wm"])
     mirrored = lambda pn: np.linalg.det(parts[pn]["Wm"][:3, :3]) < 0
     for jn, (hc, ccs, sock, fit, htypes, ctypes) in JOINTS.items():
+        seats = [(n, c) for n, c in sorted(cuts.items()) if c["fixed"] == hc and "Jw" in c]
+        if seats:                     # the pad from the guides (Nov 23): they replace the hand pad spot cuts and placed pads
+            hosts, kh = [], {}
+            for n, c in seats:
+                x = side(n, c); x["J"] = np.linalg.inv(parts[x["obj"]]["Wm"]) @ c["Jw"]; x["joint_from"] = "its pauldron adapter (guide)"
+                hosts.append(x); kh.setdefault("%s|R" % x["part"], x["J"])
+            kids, seen = [], {}
+            for pn, p in sorted(parts.items()):
+                if p.get("guide") not in guides: continue
+                if p["cat"] not in ctypes: notes.append("joint %s: %s is in a guide but is a %s, not used" % (jn, pn, p["cat"])); continue
+                Gw = guides[p["guide"]]; J = np.linalg.inv(p["Wm"]) @ Gw
+                if p["rel"] in seen:
+                    if np.abs(seen[p["rel"]] - J).max() > 0.01: notes.append("joint %s: %s sits differently in its guide than another copy: the first is used" % (jn, pn))
+                    continue
+                seen[p["rel"]] = J; Tw = p["world"]; c0 = Gw[:3, 3] - CROWN * Gw[:3, 2]
+                inward = np.einsum("ij,ij->i", np.cross(Tw[:, 1] - Tw[:, 0], Tw[:, 2] - Tw[:, 0]), c0 - Tw.mean(1)) > 0   # its inside: faces looking at the dome
+                kids.append({"cut": "pad inside (its pose in the guide)", "part": p["rel"], "obj": pn, "tri": tf(Tw[inward], np.linalg.inv(p["Wm"])), "J": J})
+            if not kids: notes.append("joint %s: no pad in a guide" % jn); continue
+            notes.append("joint %s: from %d guide seats on arms and %d pads in guides (the reference's hand pad spot cuts and placed pads not used)" % (jn, len(hosts), len(kids)))
+            joints[jn] = {"socket": sock, "fit": fit, "host_types": htypes, "child_types": ctypes, "hosts": hosts, "children": kids,
+                          "frame": "the pauldron adapter (guide): origin on its crown, +Z out, +Y front", "Jw": seats[0][1]["Jw"], "host_J": kh}
+            continue
         hosts = [side(n, c) for n, c in sorted(cuts.items()) if c["fixed"] == hc]
         if not hosts: notes.append("joint %s: no %r cut" % (jn, hc)); continue
         if jn == "shin":                                      # each shin spot's side, in its legs' own file frame (+X = the right, as the

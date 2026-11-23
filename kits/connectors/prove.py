@@ -75,7 +75,8 @@ def search(work, i, n):
         F = placeF.get(PLACE.get(jn, ""))
         if F is None or "Jplace" not in c: return None
         d = float(np.linalg.norm(S_tf(con(c).c[None], np.linalg.inv(M4(c["Jplace"])))[0]))
-        return (np.linalg.inv(F)[:3, 3], max(0.0, d - TOL[jn]), d + TOL[jn])
+        tol = TOL[jn] + c.get("reach", 0.0)   # a guide seat's cut covers the whole dome (Nov 23): the shell takes in all of it
+        return (np.linalg.inv(F)[:3, 3], max(0.0, d - tol), d + tol)
     out = open("%s/res_%d.jsonl" % (work, i), "a", encoding="utf-8")
     for cat, rel in jobs:
         t0 = time.time(); r = {"cat": cat, "rel": rel, "joints": {}}
@@ -310,6 +311,18 @@ def shins(j, con, tri, Fw, region=lambda c: None, place_sure=False, balls=()):
     return out
 
 
+def shoulder_on(ref, lib, rel):
+    """an arm's shoulder joint in its own file coordinates, found as on the parts proved: a shoulder disc cut, sure (None if
+    none is): the centre of the region its pad spot is looked for in"""
+    sh = ref["joints"].get("shoulder")
+    if not sh: return None
+    sc, G, back = S.maker(lib + "/" + rel + S.SC.SUFFIX); surf = C.Surface(S.unmoved(C.soup(lib + "/" + rel + ".stl", sc.get("scale", 1.0)), back)); best = None
+    for c in sh["children"]:
+        f = C.find(C.Connector(c["tri"], c["cut"]), surf)
+        if f["level"] == "sure" and (best is None or f["match"] < best[0]): best = (f["match"], f["M"] @ M4(c["J"]))
+    return best[1] if best else None
+
+
 def place_joint(ref, pj, obj):
     """the placing joint (shoulder / waist) of a part in the reference's world: from the nearest torso (a copy of a torso
     with that joint known) within 40 mm; None = the part sits on no torso, no region for its spots"""
@@ -342,7 +355,11 @@ def run(A):
             for c in j[key]:
                 k += 1; np.save("%s/cut%02d.npy" % (work, k), c["tri"]); e = {"cut": c["cut"], "kind": c.get("kind"), "part": c["part"], "npy": "cut%02d.npy" % k, "J": flat(c["J"])}
                 if "side" in c: e["side"] = c["side"]
-                if key == "hosts" and jn in PLACE and PLACE[jn] in ref["joints"]:   # the placing joint in the cut's part coordinates
+                if str(c.get("joint_from", "")).startswith("its pauldron adapter"):   # a guide seat (Nov 23): the seat file's
+                    P = np.asarray(c["tri"]).reshape(-1, 3); e["reach"] = round(float(np.linalg.norm(P - P.mean(0), axis=1).max()), 3)   # cut's reach round its middle,
+                    Jp = shoulder_on(ref, lib, c["part"])   # and the arm's shoulder found on it as on the parts proved (its torso copies don't sit on it)
+                    if Jp is not None: e["Jplace"] = flat(Jp)
+                elif key == "hosts" and jn in PLACE and PLACE[jn] in ref["joints"]:   # the placing joint in the cut's part coordinates
                     Jp = place_joint(ref, PLACE[jn], c["obj"])
                     if Jp is not None: e["Jplace"] = flat(np.linalg.inv(ref["parts"][c["obj"]]["Wm"]) @ Jp)
                 d[key].append(e)
