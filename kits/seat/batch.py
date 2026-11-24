@@ -4,6 +4,7 @@
     BL kits/seat/batch.py -- read BATCH.blend [--json OUT.json]
     BL kits/seat/batch.py -- compare A.blend B.blend
     BL kits/seat/batch.py -- write BATCH.blend [--check] [--spec SPEC.json] [--lib LIB]   (see write())
+    BL kits/seat/batch.py -- apply BATCH.blend FROM_ID OUT.blend   (Josh's move of FROM_ID, on every piece of its kind)
   BL = blender --background --factory-startup --python   (Blender 5.1 on the PC)
 
 build: one Blender file per batch, from a spec (kits/seat/batches/*.json). Every object is one of
@@ -505,11 +506,36 @@ def write(A):
     print("\n".join(W), flush=True)
 
 
+def apply(A):
+    """apply BATCH.blend FROM_ID OUT.blend: Josh's change to piece FROM_ID (e.g. t1_legs), in the frame it sits on (its
+    socket, so the same on every torso: they stand on the same sockets), put on every other piece of the same kind
+    (same id suffix, reference column left alone). Josh's file is not touched: the result is saved as OUT, a new file,
+    for him to check; read / write treat the applied moves like his own (notes 129)."""
+    src, fid, out = A[1], A[2], A[3]
+    if os.path.exists(out): raise SystemExit("%s exists: never overwritten" % out)
+    bpy.ops.wm.open_mainfile(filepath=src, load_ui=False); bpy.context.view_layer.update()
+    by = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}
+    def in_frame(o):                                 # the piece's pivot in the frame it sits on (the parent's frame)
+        par = by[o["kb_parent"]]; return np.linalg.inv(own(par) @ G.M4(o["kb_on_frame"])) @ np.array(o.matrix_world)
+    D = in_frame(by[fid]); kind = fid.split("_", 1)[1]
+    print("%s: %.3f mm %.2f deg in its socket frame" % ((fid,) + tuple(G.off(D, np.eye(4)))))
+    done = []
+    for i, o in by.items():
+        if i == fid or i.split("_", 1)[-1] != kind or "_" not in i or i.startswith("ref"): continue
+        par = by[o["kb_parent"]]; o.rotation_mode = 'QUATERNION'
+        o.matrix_world = G.mat(own(par) @ G.M4(o["kb_on_frame"]) @ D); o["kb_applied"] = "%s's change (%s)" % (fid, os.path.basename(src))
+        done.append(i)
+    bpy.context.view_layer.update()
+    worst = max([sum(G.off(in_frame(by[i]), D)) for i in done] or [0])
+    print("applied to %d: %s (worst %.5f mm+deg off)" % (len(done), " ".join(done), worst))
+    bpy.ops.wm.save_as_mainfile(filepath=out); print("SAVED", out)
+
+
 if __name__ == "__main__":
     A = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     sys.stdout.reconfigure(encoding="utf-8")
     try:
-        {"build": build, "read": read, "compare": compare, "write": write}[A[0]](A)
+        {"build": build, "read": read, "compare": compare, "write": write, "apply": apply}[A[0]](A)
     except SystemExit as e:
         print("STOPPED:", e, flush=True)
     sys.stdout.flush(); os._exit(0)
