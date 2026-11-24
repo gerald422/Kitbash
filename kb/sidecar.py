@@ -39,9 +39,11 @@ def save(path, d, style=None):
 
 
 def protected(sock):
-    """A socket that must survive a merge: clicked / copied / auto anchors, corrected sockets, held spots."""
+    """A socket that must survive a merge: clicked / copied / auto anchors, corrected sockets, held spots, and Josh's
+    fixes written from a batch file (props.kb_josh, docs/PLAN.md Rule 1)."""
     p = sock.get("props") or {}
-    return p.get("tiow_anchor") in KEEP_ANCHORS or bool(p.get("tiow_corrected")) or bool(p.get("tiow_holds"))
+    return (p.get("tiow_anchor") in KEEP_ANCHORS or bool(p.get("tiow_corrected")) or bool(p.get("tiow_holds"))
+            or bool(p.get("kb_josh")))
 
 
 def _skey(s):

@@ -3,6 +3,7 @@
     BL kits/seat/batch.py -- build SPEC.json [--lib LIB] [--out BLEND] [--then SCRIPT.py]
     BL kits/seat/batch.py -- read BATCH.blend [--json OUT.json]
     BL kits/seat/batch.py -- compare A.blend B.blend
+    BL kits/seat/batch.py -- write BATCH.blend [--check] [--spec SPEC.json] [--lib LIB]   (see write())
   BL = blender --background --factory-startup --python   (Blender 5.1 on the PC)
 
 build: one Blender file per batch, from a spec (kits/seat/batches/*.json). Every object is one of
@@ -342,11 +343,139 @@ def compare(A):
     print("\n".join(W), flush=True)
 
 
+# ---- write (PLAN Method 5 and Rule 1): Josh's placements in a batch file -> the library, backup first
+
+MX = np.diag([-1.0, 1, 1, 1])          # the left side: the right one conjugated by the X = 0 mirror (as the batch shows it)
+
+
+def own(o): return np.array(o.matrix_world) @ G.M4(o["kb_own_in_obj"])
+
+
+def joint_of(objs, part, host):
+    """A part's joint on its host, collapsing the connectors in between (TIOW places part = socket . fit; a printed
+    connector has no library file): socket = host own -> the frame the part sits on; fit = that frame -> part own;
+    each connector's own frame in the socket frame."""
+    o = objs[part]; J = own(o.parent) @ G.M4(o["kb_on_frame"]); c = o.parent; conns = []
+    while c["kb_id"] != host:
+        if not c["kb_rel"].startswith("connector"): raise SystemExit("%s: %s sits between it and %s and is not a connector" % (part, c.name, host))
+        conns.append(c); c = c.parent
+        if c is None: raise SystemExit("%s does not hang on %s" % (part, host))
+    S = np.linalg.inv(own(objs[host])) @ J; F = np.linalg.inv(J) @ own(o)
+    con = [(c["kb_rel"].split(": ", 1)[1], c.name, np.linalg.inv(J) @ own(c)) for c in conns]
+    return S, F, con
+
+
+def _socket(old_socks, typ, M, props, stem):
+    old = next((s for s in old_socks or [] if s.get("type") == typ), None)
+    s = {k: v for k, v in (old or {}).items() if k not in ("matrix", "props", "points")}
+    s.setdefault("type", typ); s.setdefault("name", "%s_socket_%s" % (stem, typ))
+    s["matrix"] = G.flat16(M); s["props"] = props; return s
+
+
+def _mirror_variant(d):
+    return next((v for v in d.get("variants") or [] if v.get("side") == "L" and v.get("mirror")), None)
+
+
+def _diff(old, new):
+    if old is None: return "new"
+    A, B = G.M4(old), G.M4(new); return "%.3f mm %.2f deg from the old one" % (np.linalg.norm(A[:3, 3] - B[:3, 3]), G.ang(A, B))
+
+
+def write(A):
+    """write BATCH.blend [--check]: every spec part with "write": {"host", "socket", "mirror"} gets its joint written:
+    the host's socket (and the mirror socket: top level if the host has one, else in its mirrored L variant), the part's
+    fit (and the mirror fit in its mirrored L variant). Sockets are marked props.kb_josh (kb.sidecar keeps them from then
+    on) and fits go in "exact" (merge keeps those). Backs up first, writes the library and the repo's mirror, then
+    places every written joint the way TIOW does (socket . fit) and checks it against Josh's file."""
+    from kb import sidecar as SC
+    blend = A[1]; check = "--check" in A
+    res = read(["read", blend])                       # opens the file
+    meta = json.loads(bpy.context.scene.get("kb_batch", "{}"))
+    spec = json.load(open(opt(A, "--spec", os.path.join(HERE, "batches", meta["spec"])), encoding="utf-8"))
+    lib = opt(A, "--lib", meta.get("lib", "D:/Kitbash Library")); objs = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}
+    bad = [r["name"] for r in res["rows"] if r.get("warning")]
+    if bad: raise SystemExit("locked pieces moved, nothing written: " + ", ".join(bad))
+    tag = "Josh's fix in batch '%s' (kits/seat/batch.py write, %s)" % (os.path.splitext(os.path.basename(blend))[0], time.strftime("%Y-%m-%d"))
+    new, olds, W, checks = {}, {}, [""], []
+
+    def get(rel):
+        if rel not in olds: olds[rel] = SC.load(os.path.join(lib, rel + SC.SUFFIX)); new[rel] = {}
+        return olds[rel][0], new[rel]
+
+    for e in spec["objects"]:
+        w = e.get("write")
+        if not w: continue
+        S, F, con = joint_of(objs, e["id"], w["host"]); h = entry(spec, w["host"]); hrel, prel = h["rel"], e["rel"]
+        props = lambda M, cn: {"tiow_from": tag, "kb_josh": os.path.basename(blend),
+                               "kb_connectors": [{"kind": k, "name": n, "own_in_socket": G.flat16(M @ C @ M)} for k, n, C in cn]}
+        hd, hn = get(hrel); pd, pn = get(prel); stem = hd.get("part") or os.path.basename(hrel)
+        old = next((s["matrix"] for s in hd.get("sockets") or [] if s["type"] == w["socket"]), None)
+        hn.setdefault("sockets", []).append(_socket(hd.get("sockets"), w["socket"], S, props(np.eye(4), con), stem))
+        W.append("%-12s socket %-10s %s" % (os.path.basename(hrel)[-12:], w["socket"], _diff(old, G.flat16(S))))
+        m = w.get("mirror"); SL = MX @ S @ MX; FL = MX @ F @ MX
+        if m and any(s["type"] == m for s in hd.get("sockets") or []):
+            old = next(s["matrix"] for s in hd["sockets"] if s["type"] == m)
+            hn["sockets"].append(_socket(hd["sockets"], m, SL, props(MX, con), stem))
+            W.append("%-12s socket %-10s %s (mirror)" % (os.path.basename(hrel)[-12:], m, _diff(old, G.flat16(SL))))
+        elif m and _mirror_variant(hd):
+            v = _mirror_variant(hd); vs = (v.get("sidecar") or {}).get("sockets") or []
+            old = next((s["matrix"] for s in vs if s["type"] == m), None)
+            hn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"sockets": [_socket(vs, m, SL, props(MX, con), v["name"])]}})
+            W.append("%-12s socket %-10s %s (mirror, in variant %s)" % (os.path.basename(hrel)[-12:], m, _diff(old, G.flat16(SL)), v["name"]))
+        oldf = (pd.get("fits") or {}).get(w["socket"])
+        pn.setdefault("fits", {})[w["socket"]] = G.flat16(F); pn.setdefault("exact", []).append(w["socket"])
+        pn.setdefault("notes", {})[w["socket"]] = tag
+        W.append("%-12s fit    %-10s %s" % (os.path.basename(prel)[-12:], w["socket"], _diff(oldf, G.flat16(F))))
+        others = [t for t in pd.get("fits") or {} if t != w["socket"]]
+        if others: W.append("             (its other fits stay: %s)" % ", ".join(others))
+        if m and _mirror_variant(pd):
+            v = _mirror_variant(pd); oldf = ((v.get("sidecar") or {}).get("fits") or {}).get(m)
+            pn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"fits": {m: G.flat16(FL)}, "exact": [m], "notes": {m: tag}}})
+            W.append("%-12s fit    %-10s %s (mirror, in variant %s)" % (os.path.basename(prel)[-12:], m, _diff(oldf, G.flat16(FL)), v["name"]))
+        checks.append((e["id"], w, hrel, prel, np.linalg.inv(own(objs[w["host"]])) @ own(objs[e["id"]])))
+    out, types = {}, set(json.load(open(os.path.join(REPO, "joints.json"), encoding="utf-8"))["partTypes"])
+    for n in new.values():                           # one entry per variant (an arm is host of Pad L and part on Shoulder L)
+        vs = {}
+        for v in n.get("variants") or []:
+            k = (v["name"], v["side"])
+            if k not in vs: vs[k] = v; continue
+            a, b = vs[k]["sidecar"], v["sidecar"]
+            a.setdefault("sockets", []).extend(b.get("sockets") or []); a.setdefault("fits", {}).update(b.get("fits") or {})
+            a.setdefault("exact", []).extend(b.get("exact") or []); a.setdefault("notes", {}).update(b.get("notes") or {})
+        if "variants" in n: n["variants"] = list(vs.values())
+    for rel, n in new.items():
+        merged, kept = SC.merge(n, olds[rel][0])
+        if kept: raise SystemExit("%s: already Josh's / protected, not written (Rule 1): %s" % (rel, kept))
+        p = [x for x in SC.problems(merged, types) if x not in SC.problems(olds[rel][0], types)]   # only new problems
+        if p: raise SystemExit("%s: %s" % (rel, p))
+        out[rel] = merged
+    print("\n".join(W), flush=True)
+    if check: print("\n--check: nothing written", flush=True); return
+    task = "batch write %s" % time.strftime("%Y-%m-%d %H%M"); B = os.path.join(lib, "_backups", task, "before", "lib")
+    for rel, d in out.items():
+        src = os.path.join(lib, rel + SC.SUFFIX); dst = os.path.join(B, rel + SC.SUFFIX); os.makedirs(os.path.dirname(dst), exist_ok=True)
+        open(dst, "wb").write(open(src, "rb").read())
+    for rel, d in out.items():
+        repo_p = os.path.join(REPO, "library", rel + SC.SUFFIX); src = os.path.join(lib, rel + SC.SUFFIX)
+        in_step = os.path.exists(repo_p) and open(repo_p, "rb").read() == open(src, "rb").read()
+        data = SC.save(src, d, olds[rel][1])
+        if in_step: open(repo_p, "wb").write(data)
+        else: print("NOTE: the repo copy of %s was not the same as the library's, so it was left alone" % rel)
+    print("\nwritten %d sidecar(s); old copies in %s" % (len(out), B), flush=True)
+    # placed the TIOW way from what is now on disk, against Josh's file
+    W = ["", "Check: each written joint placed from the library (socket . fit) against Josh's file:"]
+    for i, w, hrel, prel, want in checks:
+        hd = SC.load(os.path.join(lib, hrel + SC.SUFFIX))[0]; pd = SC.load(os.path.join(lib, prel + SC.SUFFIX))[0]
+        S = G.M4(next(s["matrix"] for s in hd["sockets"] if s["type"] == w["socket"])); F = G.M4(pd["fits"][w["socket"]])
+        got = S @ F; W.append("%-8s on %-10s %.4f mm %.3f deg" % (i, w["socket"], np.linalg.norm(got[:3, 3] - want[:3, 3]), G.ang(got, want)))
+    print("\n".join(W), flush=True)
+
+
 if __name__ == "__main__":
     A = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     sys.stdout.reconfigure(encoding="utf-8")
     try:
-        {"build": build, "read": read, "compare": compare}[A[0]](A)
+        {"build": build, "read": read, "compare": compare, "write": write}[A[0]](A)
     except SystemExit as e:
         print("STOPPED:", e, flush=True)
     sys.stdout.flush(); os._exit(0)

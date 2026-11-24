@@ -192,5 +192,5 @@ redone, one plan updated the same day.
 | Stage | State |
 |---|---|
 | 0. Tools | done Nov 24 (notes 121): `kits/seat/`, the batch builder and reader; the trial batch is the stage 1 file |
-| 1. The reference marine | with Josh: `~\Desktop\mar fil connectors\batches\01 Stage 1 - reference marine (2026-11-24 b).blend` |
+| 1. The reference marine | done Nov 24 (notes 122): Josh's fix (spacer 2.085 mm into the torso) written: Torso 2 Shoulder R/L, Arm 2B R on it and its Pad R/L (the guide), Shoulder Pad 1 in the guide. Other pads and arms stay in the old pad frame until stages 4-5 |
 | 2-11 | not started |

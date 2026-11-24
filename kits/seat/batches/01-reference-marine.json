@@ -22,6 +22,7 @@
   {"id": "arm", "role": "part", "name": "MarFil Assault - Arm 2B R (on the spacer)",
    "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
    "parent": "spacer", "on": "arm seat", "joint": "Arm on the spacer", "mirror": true,
+   "write": {"host": "torso", "socket": "Shoulder R", "mirror": "Shoulder L"},
    "pose": {"from": "ref", "obj": "MarFil Assault - Arm 2B R", "carry": ["torso", "Shoulder R"]},
    "note": "your reference pose, moved out by the spacer (2.1 mm); turns about the spacer's arm seat"},
 
@@ -34,6 +35,7 @@
   {"id": "pad", "role": "part", "name": "MarFil Assault - Shoulder Pad 1 (in the guide)",
    "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
    "parent": "guide", "on": "crown", "joint": "Pad in the guide", "mirror": true,
+   "write": {"host": "arm", "socket": "Pad R", "mirror": "Pad L"},
    "pose": {"from": "seat", "child_of": "Adapter - MarFil Assault - Arm 2B R", "relative_to": ["Adapter - MarFil Assault - Arm 2B R", "guide"]},
    "note": "your pad in that guide; turns about the guide's crown"},
 
