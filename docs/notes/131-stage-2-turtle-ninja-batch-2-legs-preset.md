@@ -43,3 +43,8 @@ checked). 17 sidecars, backup `batch write 2026-11-24 2144`. All 68 joints read 
 - Every Neck: 0.39 mm, no turn (his helmet raise).
 - Every Waist: 0.62 mm / 18.47 deg (his legs change).
 - Shoulders and Back as they were, marked as Josh's.
+
+**Clean-up as we go (Josh, Nov 24: "remove/archive/delete unneeded files as we go").** From now on, once a batch is
+written and reads back exactly, its files go to the Recycle Bin: the `.blend`, the `.blend1`, any copies or backups,
+and the check renders. The library's own `_backups` keep the before-state. Josh's reference, setup and working files
+are never included. This time: both Turtle Ninja batches' files, 10 items, 2.4 GB. `batches\` is empty.
