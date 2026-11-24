@@ -1,0 +1,5033 @@
+{
+ "name": "Stage 2 - Turtle Ninja torsos 2",
+ "stage": "2 (torsos' sockets)",
+ "out": "~/Desktop/mar fil connectors/batches/02 Stage 2 - Turtle Ninja torsos 2 (2026-11-24).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each torso: move the spacer (the arm, guide and pad ride on it), the helmet, the backpack and the legs to where they belong on that torso. Each move is that torso's socket. The left column is the reference (Torso 2 as you placed it), locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Torso 2"
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ]
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ]
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ]
+   }
+  },
+  {
+   "id": "t1",
+   "role": "host",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Assault Intercessors Addon 1/Chests/TN Mk7-8 Assault - Mk7 Torso Jump Pack A9",
+   "at": [
+    80.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     -1.0000000523333408,
+     0.00042953683977347494,
+     -0.00019180236073480846,
+     6.681319701179383,
+     -0.00019262803337371465,
+     -0.002796026185607472,
+     0.9999961942560183,
+     -7.086231455384002,
+     0.0004289305976440615,
+     0.9999962561608152,
+     0.002796011461999463,
+     24.76288341109911,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.0,
+    -2.5e-05,
+    -0.000133,
+    6.739701,
+    -0.000133,
+    -0.00279,
+    0.999996,
+    6.826732,
+    -2.5e-05,
+    0.999996,
+    0.00279,
+    6.9188305,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t1_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    -0.999168,
+    -0.000199,
+    -0.040793,
+    0.538322,
+    -0.040792,
+    -0.002787,
+    0.999164,
+    6.827786,
+    -0.000312,
+    0.999996,
+    0.002777,
+    6.91883,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t1",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t1_arm",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t1_guide",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t1_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t1_pad",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t1_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t1_head",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t1",
+   "on": "Neck",
+   "on_matrix": [
+    0.99999,
+    -0.004177,
+    0.001837,
+    6.736391,
+    -0.000157,
+    0.370727,
+    0.928742,
+    7.617382,
+    -0.00456,
+    -0.928733,
+    0.370722,
+    6.895173,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t1",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t1_pack",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t1",
+   "on": "Back",
+   "on_matrix": [
+    -1.0,
+    -0.000118,
+    -0.000137,
+    6.767348,
+    -0.000142,
+    0.035751,
+    0.999361,
+    6.147208,
+    -0.000113,
+    0.999361,
+    -0.035751,
+    1.584111,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t1",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t1_legs",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk7 Torso Jump Pack A9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t1",
+   "on": "Waist",
+   "on_matrix": [
+    -1.0,
+    -2.5e-05,
+    -0.000133,
+    6.681034,
+    -0.000133,
+    -0.00279,
+    0.999996,
+    4.520844,
+    -2.5e-05,
+    0.999996,
+    0.00279,
+    7.670503,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t1",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t2",
+   "role": "host",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Assault Intercessors Addon 1/Chests/TN Mk7-8 Assault - Mk8 Torso Jump Pack A9",
+   "at": [
+    160.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     -1.0000000572962344,
+     0.0004354010513391767,
+     -0.00015386928893163654,
+     6.681643465190322,
+     -0.0001546693386769737,
+     -0.0026040176781653816,
+     0.9999962367614837,
+     -7.152554131720606,
+     0.0004350343230643959,
+     0.9999962900656673,
+     0.002603992518121957,
+     24.764548304194633,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.0,
+    1.3e-05,
+    -0.000127,
+    6.7397,
+    -0.000127,
+    -0.002598,
+    0.999997,
+    6.829050499999999,
+    1.3e-05,
+    0.999997,
+    0.002598,
+    6.9178145,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t2_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    -0.999168,
+    -0.000213,
+    -0.040785,
+    0.538324,
+    -0.040784,
+    -0.002595,
+    0.999165,
+    6.829197,
+    -0.000318,
+    0.999997,
+    0.002584,
+    6.918851,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t2",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t2_arm",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t2_guide",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t2_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t2_pad",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t2_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t2_head",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t2",
+   "on": "Neck",
+   "on_matrix": [
+    0.999989,
+    -0.004386,
+    0.001763,
+    6.736269,
+    -1.2e-05,
+    0.370547,
+    0.928814,
+    7.619695,
+    -0.004727,
+    -0.928803,
+    0.370543,
+    6.894006,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t2",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t2_pack",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t2",
+   "on": "Back",
+   "on_matrix": [
+    -1.0,
+    -8e-05,
+    -0.000133,
+    6.770751,
+    -0.000135,
+    0.035689,
+    0.999363,
+    6.15025,
+    -7.6e-05,
+    0.999363,
+    -0.035689,
+    1.584092,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t2",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t2_legs",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk8 Torso Jump Pack A9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t2",
+   "on": "Waist",
+   "on_matrix": [
+    -1.0,
+    1.3e-05,
+    -0.000127,
+    6.681665,
+    -0.000127,
+    -0.002598,
+    0.999997,
+    4.520441,
+    1.3e-05,
+    0.999997,
+    0.002598,
+    7.735703,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t2",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t3",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso A1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso A1",
+   "at": [
+    240.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00015108889104714025,
+     0.00044830805422980957,
+     -1.0000000535245406,
+     6.320808063255531,
+     -0.9999978571023878,
+     -0.002039017023028043,
+     -0.0001517675863457366,
+     7.6775384787071,
+     -0.002038992651949878,
+     0.9999979057994964,
+     0.00044803286262128865,
+     24.742448215721765,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.6e-05,
+    -0.999998,
+    -0.002033,
+    8.1083525,
+    -0.000114,
+    -0.002033,
+    0.999998,
+    6.684796,
+    -1.0,
+    1.6e-05,
+    -0.000114,
+    6.3788425,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t3_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso A1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000238,
+    -0.999998,
+    -0.002022,
+    8.107993,
+    -0.040813,
+    -0.00203,
+    0.999165,
+    6.685525,
+    -0.999167,
+    -0.000155,
+    -0.040813,
+    0.00674,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t3",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t3_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso A1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t3_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso A1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t3_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t3_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso A1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t3_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t3_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso A1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t3",
+   "on": "Neck",
+   "on_matrix": [
+    0.004617,
+    0.929012,
+    -0.370021,
+    8.132607,
+    -0.000105,
+    0.370025,
+    0.929022,
+    7.475427,
+    0.999989,
+    -0.00425,
+    0.001806,
+    6.375486,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t3",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t3_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso A1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t3",
+   "on": "Back",
+   "on_matrix": [
+    7.2e-05,
+    -0.999363,
+    0.035701,
+    13.582109,
+    -0.000122,
+    0.035701,
+    0.999363,
+    5.994997,
+    -1.0,
+    -7.7e-05,
+    -0.00012,
+    6.405787,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t3",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t3_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso A1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t3",
+   "on": "Waist",
+   "on_matrix": [
+    -1.6e-05,
+    -0.999998,
+    -0.002033,
+    7.096946,
+    -0.000114,
+    -0.002033,
+    0.999998,
+    4.577222,
+    -1.0,
+    1.6e-05,
+    -0.000114,
+    6.323176,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t3",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t4",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso B1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso B1",
+   "at": [
+    320.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00015191151113328353,
+     0.0004803458210165057,
+     -1.00000004166703,
+     6.3212531674420545,
+     -0.9999978493619397,
+     -0.0022730144742658357,
+     -0.0001528136450726811,
+     7.845128040408918,
+     -0.002272994827114261,
+     0.9999978864771963,
+     0.00048003426823127666,
+     24.744193836490957,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.5e-05,
+    -0.999997,
+    -0.002267,
+    8.2329125,
+    -8.2e-05,
+    -0.002267,
+    0.999997,
+    6.6849805,
+    -1.0,
+    1.5e-05,
+    -8.2e-05,
+    6.3788735,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t4_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso B1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000158,
+    -0.999997,
+    -0.002259,
+    8.231409,
+    -0.040774,
+    -0.002264,
+    0.999166,
+    6.68532,
+    -0.999168,
+    -6.6e-05,
+    -0.040775,
+    0.006771,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t4",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t4_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso B1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t4_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso B1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t4_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t4_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso B1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t4_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t4_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso B1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t4",
+   "on": "Neck",
+   "on_matrix": [
+    0.004796,
+    0.928924,
+    -0.37024,
+    8.256979,
+    -4.3e-05,
+    0.370245,
+    0.928934,
+    7.475617,
+    0.999988,
+    -0.004439,
+    0.001816,
+    6.375465,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t4",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t4_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso B1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t4",
+   "on": "Back",
+   "on_matrix": [
+    7.3e-05,
+    -0.999362,
+    0.035709,
+    13.704848,
+    -9.1e-05,
+    0.035709,
+    0.999362,
+    5.993952,
+    -1.0,
+    -7.7e-05,
+    -8.8e-05,
+    6.409279,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t4",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t4_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso B1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t4",
+   "on": "Waist",
+   "on_matrix": [
+    -1.5e-05,
+    -0.999997,
+    -0.002267,
+    7.263458,
+    -8.2e-05,
+    -0.002267,
+    0.999997,
+    4.577313,
+    -1.0,
+    1.5e-05,
+    -8.2e-05,
+    6.323799,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t4",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t5",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso C1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso C1",
+   "at": [
+    400.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.0001497182356490742,
+     0.0006053183128499408,
+     -0.9999999765165226,
+     6.359862074726205,
+     -0.9999975039475215,
+     -0.002123992464416693,
+     -0.00015109137410886203,
+     7.722782988489379,
+     -0.0021239886151999954,
+     0.9999974753705158,
+     0.0006050359992473906,
+     24.742393852000895,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.7e-05,
+    -0.999998,
+    -0.002118,
+    8.110496999999999,
+    4.3e-05,
+    -0.002118,
+    0.999998,
+    6.6855139999999995,
+    -1.0,
+    1.7e-05,
+    4.3e-05,
+    6.378862499999999,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t5_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso C1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000179,
+    -0.999998,
+    -0.00211,
+    8.110887,
+    -0.040848,
+    -0.002115,
+    0.999163,
+    6.686123,
+    -0.999165,
+    -9.3e-05,
+    -0.040848,
+    0.006763,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t5",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t5_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso C1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t5_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso C1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t5_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t5_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso C1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t5_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t5_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso C1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t5",
+   "on": "Neck",
+   "on_matrix": [
+    0.004499,
+    0.92898,
+    -0.370102,
+    8.134683,
+    -8.6e-05,
+    0.370106,
+    0.928989,
+    7.476147,
+    0.99999,
+    -0.004148,
+    0.001745,
+    6.375495,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t5",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t5_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso C1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t5",
+   "on": "Back",
+   "on_matrix": [
+    7.1e-05,
+    -0.999364,
+    0.03566,
+    13.583413,
+    3.5e-05,
+    0.03566,
+    0.999364,
+    5.994574,
+    -1.0,
+    -7e-05,
+    3.7e-05,
+    6.405501,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t5",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t5_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso C1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t5",
+   "on": "Waist",
+   "on_matrix": [
+    -1.7e-05,
+    -0.999998,
+    -0.002118,
+    7.141803,
+    4.3e-05,
+    -0.002118,
+    0.999998,
+    4.57696,
+    -1.0,
+    1.7e-05,
+    4.3e-05,
+    6.362946,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t5",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t6",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso D1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso D1",
+   "at": [
+    480.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.0001697789837234649,
+     0.0005433832931188056,
+     -1.0000000098149457,
+     6.354758197195046,
+     -0.9999979324768713,
+     -0.0022540053624102796,
+     -0.00017095716769554482,
+     7.776297886350959,
+     -0.002254003767552537,
+     0.9999979433102326,
+     0.000542993277065803,
+     24.7432278600368,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    3e-06,
+    -0.999997,
+    -0.002248,
+    8.108609,
+    -1.9e-05,
+    -0.002248,
+    0.999997,
+    6.685375499999999,
+    -1.0,
+    -3e-06,
+    -1.9e-05,
+    6.3788765,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t6_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso D1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000173,
+    -0.999997,
+    -0.002239,
+    8.108068,
+    -0.040759,
+    -0.002245,
+    0.999166,
+    6.684944,
+    -0.999169,
+    -8.2e-05,
+    -0.04076,
+    0.006775,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t6",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t6_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso D1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t6_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso D1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t6_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t6_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso D1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t6_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t6_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso D1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t6",
+   "on": "Neck",
+   "on_matrix": [
+    0.004645,
+    0.928931,
+    -0.370223,
+    8.132691,
+    7.8e-05,
+    0.370227,
+    0.928941,
+    7.476011,
+    0.999989,
+    -0.004344,
+    0.001647,
+    6.375376,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t6",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t6_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso D1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t6",
+   "on": "Back",
+   "on_matrix": [
+    9.1e-05,
+    -0.999363,
+    0.035684,
+    13.581756,
+    -2.7e-05,
+    0.035684,
+    0.999363,
+    5.998099,
+    -1.0,
+    -9.2e-05,
+    -2.4e-05,
+    6.40919,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t6",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t6_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso D1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t6",
+   "on": "Waist",
+   "on_matrix": [
+    3e-06,
+    -0.999997,
+    -0.002248,
+    7.194593,
+    -1.9e-05,
+    -0.002248,
+    0.999997,
+    4.577569,
+    -1.0,
+    -3e-06,
+    -1.9e-05,
+    6.357711,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t6",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t7",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso E1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso E1",
+   "at": [
+    560.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.0001659910409901058,
+     0.00048734473938160587,
+     -1.0000000367168465,
+     6.367327329955688,
+     -0.999997698670594,
+     -0.002077011901287583,
+     -0.0001668442264087328,
+     7.732620674473839,
+     -0.002076998976296182,
+     0.9999977350557587,
+     0.0004870022468697943,
+     24.74237435020787,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1e-06,
+    -0.999998,
+    -0.002071,
+    8.1110945,
+    -7.5e-05,
+    -0.002071,
+    0.999998,
+    6.6852705,
+    -1.0,
+    1e-06,
+    -7.5e-05,
+    6.3788535,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t7_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso E1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000172,
+    -0.999998,
+    -0.002063,
+    8.111052,
+    -0.040863,
+    -0.002068,
+    0.999163,
+    6.68486,
+    -0.999165,
+    -8.8e-05,
+    -0.040864,
+    0.00675,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t7",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t7_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso E1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t7_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso E1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t7_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t7_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso E1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t7_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t7_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso E1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t7",
+   "on": "Neck",
+   "on_matrix": [
+    0.004567,
+    0.928997,
+    -0.370058,
+    8.135317,
+    7.4e-05,
+    0.370062,
+    0.929007,
+    7.475902,
+    0.99999,
+    -0.00427,
+    0.001621,
+    6.375358,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t7",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t7_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso E1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t7",
+   "on": "Back",
+   "on_matrix": [
+    8.8e-05,
+    -0.999363,
+    0.03568,
+    13.583599,
+    -8.3e-05,
+    0.03568,
+    0.999363,
+    5.996079,
+    -1.0,
+    -9.1e-05,
+    -8e-05,
+    6.407188,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t7",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t7_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso E1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t7",
+   "on": "Waist",
+   "on_matrix": [
+    -1e-06,
+    -0.999998,
+    -0.002071,
+    7.151752,
+    -7.5e-05,
+    -0.002071,
+    0.999998,
+    4.577411,
+    -1.0,
+    1e-06,
+    -7.5e-05,
+    6.369989,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t7",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t8",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso F1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso F1",
+   "at": [
+    0.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00014966047762464993,
+     0.0005963380755096745,
+     -0.999999982418394,
+     6.393896882978704,
+     -0.9999979400608019,
+     -0.0022529970277019797,
+     -0.00015007663897784743,
+     7.752305701439171,
+     -0.002252991946360673,
+     0.9999979172554719,
+     0.0005960404830417205,
+     24.742721297937578,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.8e-05,
+    -0.999997,
+    -0.002247,
+    8.1102125,
+    3.4e-05,
+    -0.002247,
+    0.999997,
+    6.6848045,
+    -1.0,
+    1.7e-05,
+    3.4e-05,
+    6.3788789999999995,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t8_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso F1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000131,
+    -0.999997,
+    -0.002241,
+    8.112474,
+    -0.040957,
+    -0.002244,
+    0.999158,
+    6.685989,
+    -0.999161,
+    -3.9e-05,
+    -0.040958,
+    0.006777,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t8",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t8_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso F1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t8_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso F1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t8_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t8_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso F1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t8_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t8_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso F1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t8",
+   "on": "Neck",
+   "on_matrix": [
+    0.004205,
+    0.928933,
+    -0.370223,
+    8.134296,
+    -0.000176,
+    0.370227,
+    0.928941,
+    7.475441,
+    0.999991,
+    -0.003841,
+    0.00172,
+    6.375589,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t8",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t8_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso F1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t8",
+   "on": "Back",
+   "on_matrix": [
+    7.1e-05,
+    -0.999363,
+    0.035697,
+    13.581589,
+    2.6e-05,
+    0.035697,
+    0.999363,
+    5.991817,
+    -1.0,
+    -7e-05,
+    2.8e-05,
+    6.411309,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t8",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t8_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso F1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t8",
+   "on": "Waist",
+   "on_matrix": [
+    -1.8e-05,
+    -0.999997,
+    -0.002247,
+    7.170732,
+    3.4e-05,
+    -0.002247,
+    0.999997,
+    4.577654,
+    -1.0,
+    1.7e-05,
+    3.4e-05,
+    6.396944,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t8",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t9",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso G1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso G1",
+   "at": [
+    80.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.0001809135642943897,
+     0.0005353683249502693,
+     -1.0000000119221548,
+     6.337590571965836,
+     -0.9999978643590608,
+     -0.002036004649173137,
+     -0.00018194499797549916,
+     7.700346586376038,
+     -0.0020360072607471334,
+     0.9999978813452552,
+     0.0005349715531020277,
+     24.741958175631947,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    1.4e-05,
+    -0.999998,
+    -0.00203,
+    8.10907,
+    -2.7e-05,
+    -0.00203,
+    0.999998,
+    6.6852395,
+    -1.0,
+    -1.4e-05,
+    -2.7e-05,
+    6.378878,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t9_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso G1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000181,
+    -0.999998,
+    -0.002021,
+    8.108632,
+    -0.040872,
+    -0.002027,
+    0.999162,
+    6.685397,
+    -0.999164,
+    -9.8e-05,
+    -0.040873,
+    0.006776,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t9",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t9_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso G1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t9_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso G1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t9_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t9_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso G1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t9_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t9_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso G1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t9",
+   "on": "Neck",
+   "on_matrix": [
+    0.004629,
+    0.929012,
+    -0.37002,
+    8.133325,
+    -1.6e-05,
+    0.370024,
+    0.929022,
+    7.47587,
+    0.999989,
+    -0.004295,
+    0.001727,
+    6.375451,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t9",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t9_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso G1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t9",
+   "on": "Back",
+   "on_matrix": [
+    0.000102,
+    -0.999362,
+    0.035714,
+    13.581739,
+    -3.5e-05,
+    0.035714,
+    0.999362,
+    5.993404,
+    -1.0,
+    -0.000103,
+    -3.2e-05,
+    6.407848,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t9",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t9_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso G1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t9",
+   "on": "Waist",
+   "on_matrix": [
+    1.4e-05,
+    -0.999998,
+    -0.00203,
+    7.119574,
+    -2.7e-05,
+    -0.00203,
+    0.999998,
+    4.577178,
+    -1.0,
+    -1.4e-05,
+    -2.7e-05,
+    6.340573,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t9",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t10",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso H1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso H1",
+   "at": [
+    160.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.0001692268290221738,
+     0.0007553995825900911,
+     -0.9999998538694269,
+     6.392321372274788,
+     -0.9999974723636519,
+     -0.0023539682293325544,
+     -0.0001704543108129885,
+     8.049433278379027,
+     -0.002354003050974564,
+     0.9999973270788257,
+     0.0007549947761201115,
+     24.7430340506548,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    2e-06,
+    -0.999997,
+    -0.002348,
+    8.391188,
+    0.000193,
+    -0.002348,
+    0.999997,
+    6.6855575,
+    -1.0,
+    -3e-06,
+    0.000193,
+    6.378907,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t10_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso H1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000265,
+    -0.999997,
+    -0.002336,
+    8.390775,
+    -0.0408,
+    -0.002345,
+    0.999165,
+    6.686378,
+    -0.999167,
+    -0.000169,
+    -0.040801,
+    0.006806,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t10",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t10_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso H1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t10_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso H1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t10_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t10_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso H1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t10_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t10_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso H1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t10",
+   "on": "Neck",
+   "on_matrix": [
+    0.004625,
+    0.928896,
+    -0.370312,
+    8.415194,
+    -0.000118,
+    0.370317,
+    0.928906,
+    7.476196,
+    0.999989,
+    -0.004252,
+    0.001822,
+    6.375562,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t10",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t10_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso H1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t10",
+   "on": "Back",
+   "on_matrix": [
+    9.1e-05,
+    -0.999363,
+    0.035684,
+    13.863839,
+    0.000184,
+    0.035684,
+    0.999363,
+    5.996521,
+    -1.0,
+    -8.4e-05,
+    0.000187,
+    6.403929,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t10",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t10_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso H1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t10",
+   "on": "Waist",
+   "on_matrix": [
+    2e-06,
+    -0.999997,
+    -0.002348,
+    7.467271,
+    0.000193,
+    -0.002348,
+    0.999997,
+    4.57775,
+    -1.0,
+    -3e-06,
+    0.000193,
+    6.396288,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t10",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t11",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso Short A1",
+   "at": [
+    240.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00024845217872335613,
+     0.000610631904206841,
+     -0.999999949705958,
+     6.393565127345842,
+     -0.9999965330008135,
+     -0.0025419868276854393,
+     -0.00025012427306062327,
+     8.124530148598463,
+     -0.002542048895994229,
+     0.9999965240355854,
+     0.000610791381668272,
+     24.746121991661497,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    8.2e-05,
+    -0.999997,
+    -0.002536,
+    8.3914095,
+    4.9e-05,
+    -0.002536,
+    0.999997,
+    6.685266,
+    -1.0,
+    -8.2e-05,
+    4.8e-05,
+    6.378917,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t11_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000293,
+    -0.999997,
+    -0.002523,
+    8.391741,
+    -0.040767,
+    -0.002533,
+    0.999165,
+    6.68511,
+    -0.999169,
+    -0.00019,
+    -0.040767,
+    0.006816,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t11",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t11_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t11_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t11_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t11_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t11_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t11_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t11",
+   "on": "Neck",
+   "on_matrix": [
+    0.004508,
+    0.928827,
+    -0.370487,
+    8.415267,
+    3.6e-05,
+    0.370491,
+    0.928836,
+    7.475909,
+    0.99999,
+    -0.004201,
+    0.001637,
+    6.375454,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t11",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t11_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t11",
+   "on": "Back",
+   "on_matrix": [
+    0.00017,
+    -0.999362,
+    0.035712,
+    13.865567,
+    4e-05,
+    0.035713,
+    0.999362,
+    5.99141,
+    -1.0,
+    -0.000168,
+    4.6e-05,
+    6.412548,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t11",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t11_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short A1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t11",
+   "on": "Waist",
+   "on_matrix": [
+    8.2e-05,
+    -0.999997,
+    -0.002536,
+    7.541006,
+    4.9e-05,
+    -0.002536,
+    0.999997,
+    4.577179,
+    -1.0,
+    -8.2e-05,
+    4.8e-05,
+    6.397478,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t11",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t12",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso Short B1",
+   "at": [
+    320.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00014386025998220446,
+     0.0005473007553502792,
+     -1.0000000115182972,
+     6.35143105403751,
+     -0.99999765193954,
+     -0.0020890014615237698,
+     -0.0001449687189834677,
+     7.587288317162061,
+     -0.0020889867150688237,
+     0.9999976568417074,
+     0.000547048081841821,
+     24.74207417860166,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -2.3e-05,
+    -0.999998,
+    -0.002083,
+    7.961765,
+    -1.5e-05,
+    -0.002083,
+    0.999998,
+    6.685096,
+    -1.0,
+    2.3e-05,
+    -1.5e-05,
+    6.378862499999999,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t12_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000122,
+    -0.999998,
+    -0.002077,
+    7.962101,
+    -0.040956,
+    -0.00208,
+    0.999159,
+    6.684789,
+    -0.999161,
+    -3.7e-05,
+    -0.040956,
+    0.006763,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t12",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t12_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t12_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t12_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t12_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t12_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t12_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t12",
+   "on": "Neck",
+   "on_matrix": [
+    0.004507,
+    0.928993,
+    -0.370071,
+    7.985977,
+    5.8e-05,
+    0.370074,
+    0.929002,
+    7.475728,
+    0.99999,
+    -0.004209,
+    0.001615,
+    6.375381,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t12",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t12_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t12",
+   "on": "Back",
+   "on_matrix": [
+    6.5e-05,
+    -0.999362,
+    0.035708,
+    13.434857,
+    -2.4e-05,
+    0.035708,
+    0.999362,
+    5.99526,
+    -1.0,
+    -6.6e-05,
+    -2.2e-05,
+    6.4084,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t12",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t12_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short B1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t12",
+   "on": "Waist",
+   "on_matrix": [
+    -2.3e-05,
+    -0.999998,
+    -0.002083,
+    7.006507,
+    -1.5e-05,
+    -0.002083,
+    0.999998,
+    4.57712,
+    -1.0,
+    2.3e-05,
+    -1.5e-05,
+    6.354188,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t12",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t13",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso Short C1",
+   "at": [
+    400.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00012780120038246966,
+     0.0005442826343436472,
+     -1.0000000147813342,
+     6.360598725396035,
+     -0.9999971385957711,
+     -0.002209000435613648,
+     -0.00012896034958692385,
+     7.5762350627378865,
+     -0.0022089769055279613,
+     0.9999971434117154,
+     0.0005440862015179046,
+     24.74262774231557,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -3.9e-05,
+    -0.999998,
+    -0.002203,
+    7.9612735,
+    -1.8e-05,
+    -0.002203,
+    0.999998,
+    6.6856285,
+    -1.0,
+    3.9e-05,
+    -1.8e-05,
+    6.378859,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t13_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000159,
+    -0.999998,
+    -0.002196,
+    7.961366,
+    -0.040822,
+    -0.0022,
+    0.999164,
+    6.685294,
+    -0.999166,
+    -6.9e-05,
+    -0.040822,
+    0.006759,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t13",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t13_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t13_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t13_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t13_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t13_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t13_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t13",
+   "on": "Neck",
+   "on_matrix": [
+    0.004546,
+    0.928948,
+    -0.370182,
+    7.985391,
+    6.2e-05,
+    0.370186,
+    0.928958,
+    7.476263,
+    0.99999,
+    -0.004246,
+    0.001625,
+    6.375373,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t13",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t13_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t13",
+   "on": "Back",
+   "on_matrix": [
+    4.9e-05,
+    -0.999363,
+    0.035692,
+    13.434461,
+    -2.6e-05,
+    0.035692,
+    0.999363,
+    5.993375,
+    -1.0,
+    -5e-05,
+    -2.5e-05,
+    6.408456,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t13",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t13_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short C1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t13",
+   "on": "Waist",
+   "on_matrix": [
+    -3.9e-05,
+    -0.999998,
+    -0.002203,
+    6.995008,
+    -1.8e-05,
+    -0.002203,
+    0.999998,
+    4.577398,
+    -1.0,
+    3.9e-05,
+    -1.8e-05,
+    6.363228,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t13",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t14",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso Short D1",
+   "at": [
+    480.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00016781983201716685,
+     0.0005173845159700594,
+     -1.0000000231144834,
+     6.342305066204026,
+     -0.999997778586999,
+     -0.0022880093951303986,
+     -0.00016889703735580613,
+     7.635094706786994,
+     -0.002288002365253136,
+     0.9999978020369101,
+     0.0005169978109059738,
+     24.74324051086148,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    1e-06,
+    -0.999997,
+    -0.002282,
+    7.9633215,
+    -4.5e-05,
+    -0.002282,
+    0.999997,
+    6.6857665,
+    -1.0,
+    -1e-06,
+    -4.5e-05,
+    6.378867499999999,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t14_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000189,
+    -0.999997,
+    -0.002273,
+    7.964041,
+    -0.040815,
+    -0.002279,
+    0.999164,
+    6.685606,
+    -0.999167,
+    -9.6e-05,
+    -0.040815,
+    0.006768,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t14",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t14_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t14_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t14_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t14_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t14_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t14_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t14",
+   "on": "Neck",
+   "on_matrix": [
+    0.004447,
+    0.928919,
+    -0.370255,
+    7.987377,
+    3.5e-05,
+    0.370259,
+    0.928929,
+    7.476403,
+    0.99999,
+    -0.004144,
+    0.001614,
+    6.375405,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t14",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t14_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t14",
+   "on": "Back",
+   "on_matrix": [
+    8.9e-05,
+    -0.999363,
+    0.035685,
+    13.436488,
+    -5.3e-05,
+    0.035685,
+    0.999363,
+    5.996365,
+    -1.0,
+    -9.1e-05,
+    -5e-05,
+    6.409356,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t14",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t14_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short D1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t14",
+   "on": "Waist",
+   "on_matrix": [
+    1e-06,
+    -0.999997,
+    -0.002282,
+    7.05325,
+    -4.5e-05,
+    -0.002282,
+    0.999997,
+    4.57765,
+    -1.0,
+    -1e-06,
+    -4.5e-05,
+    6.345101,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t14",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t15",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso Short E1",
+   "at": [
+    560.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00014953921487215812,
+     0.0006523369197969389,
+     -0.9999999438318439,
+     6.38920422981882,
+     -0.9999979715499188,
+     -0.002245988586041965,
+     -0.00015120217345639516,
+     7.847745001193995,
+     -0.002245990972377817,
+     0.9999979102905332,
+     0.0006520379937726784,
+     24.74305621341123,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.7e-05,
+    -0.999997,
+    -0.00224,
+    8.232811,
+    9e-05,
+    -0.00224,
+    0.999997,
+    6.6850245,
+    -1.0,
+    1.7e-05,
+    9e-05,
+    6.378857,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t15_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000187,
+    -0.999997,
+    -0.002231,
+    8.234061,
+    -0.040758,
+    -0.002237,
+    0.999167,
+    6.684682,
+    -0.999169,
+    -9.6e-05,
+    -0.040758,
+    0.006757,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t15",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t15_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t15_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t15_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t15_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t15_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t15_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t15_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t15",
+   "on": "Neck",
+   "on_matrix": [
+    0.004364,
+    0.928935,
+    -0.370216,
+    8.2569,
+    6.4e-05,
+    0.37022,
+    0.928944,
+    7.47566,
+    0.99999,
+    -0.004078,
+    0.001556,
+    6.375374,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t15",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t15_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t15",
+   "on": "Back",
+   "on_matrix": [
+    7.1e-05,
+    -0.999362,
+    0.035707,
+    13.705308,
+    8.1e-05,
+    0.035707,
+    0.999362,
+    5.994501,
+    -1.0,
+    -6.8e-05,
+    8.4e-05,
+    6.406356,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t15",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t15_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short E1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t15",
+   "on": "Waist",
+   "on_matrix": [
+    -1.7e-05,
+    -0.999997,
+    -0.00224,
+    7.266198,
+    9e-05,
+    -0.00224,
+    0.999997,
+    4.577128,
+    -1.0,
+    1.7e-05,
+    9e-05,
+    6.392521,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t15",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t16",
+   "role": "host",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Mk8 Torso Short F1",
+   "at": [
+    0.0,
+    0,
+    -240.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00017011696701427207,
+     0.00039737895404114675,
+     -1.0000000650571765,
+     6.361167082760846,
+     -0.9999970443573009,
+     -0.002229026041971667,
+     -0.00017063220183614658,
+     7.619383819079404,
+     -0.002228999225472197,
+     0.999997110432918,
+     0.00039699378978089216,
+     24.743496237322425,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    3e-06,
+    -0.999998,
+    -0.002223,
+    7.961588,
+    -0.000165,
+    -0.002223,
+    0.999998,
+    6.6857050000000005,
+    -1.0,
+    -3e-06,
+    -0.000165,
+    6.378836000000001,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t16_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000189,
+    -0.999998,
+    -0.002214,
+    7.961481,
+    -0.040828,
+    -0.00222,
+    0.999164,
+    6.685848,
+    -0.999166,
+    -9.9e-05,
+    -0.040828,
+    0.006738,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t16",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t16_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t16_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t16_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t16_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t16_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t16_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t16_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t16",
+   "on": "Neck",
+   "on_matrix": [
+    0.004577,
+    0.928941,
+    -0.3702,
+    7.98569,
+    -1.2e-05,
+    0.370204,
+    0.92895,
+    7.476341,
+    0.99999,
+    -0.004247,
+    0.001706,
+    6.375409,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t16",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t16_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t16",
+   "on": "Back",
+   "on_matrix": [
+    9.1e-05,
+    -0.999363,
+    0.035694,
+    13.434963,
+    -0.000173,
+    0.035694,
+    0.999363,
+    5.995898,
+    -1.0,
+    -9.8e-05,
+    -0.00017,
+    6.406902,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t16",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t16_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Mk8 Torso Short F1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t16",
+   "on": "Waist",
+   "on_matrix": [
+    3e-06,
+    -0.999998,
+    -0.002223,
+    7.0378,
+    -0.000165,
+    -0.002223,
+    0.999998,
+    4.577701,
+    -1.0,
+    -3e-06,
+    -0.000165,
+    6.363427,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t16",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t17",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper 1 L",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper 1 L",
+   "at": [
+    80.0,
+    0,
+    -240.0
+   ],
+   "pose": {
+    "matrix": [
+     0.00016804182434697587,
+     0.0004103937674267816,
+     -1.0000000622118108,
+     6.342904307421996,
+     -0.9999975288491336,
+     -0.002342026887361673,
+     -0.00016864400944197015,
+     7.625357597421306,
+     -0.0023420018095050856,
+     0.9999975913962468,
+     0.00040999802410596095,
+     24.783583978276816,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    1e-06,
+    -0.999997,
+    -0.002336,
+    7.9495735,
+    -0.000152,
+    -0.002336,
+    0.999997,
+    6.646631,
+    -1.0,
+    -1e-06,
+    -0.000152,
+    6.378865,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t17_spacer",
+   "role": "part",
+   "name": "TN Mk7-8 - Upper 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t17",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   },
+   "on_matrix": [
+    0.000185,
+    -0.999997,
+    -0.002328,
+    7.950037,
+    -0.040819,
+    -0.002333,
+    0.999164,
+    6.646434,
+    -0.999167,
+    -9e-05,
+    -0.04082,
+    0.006769,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "note": "starts where your Torso 2 shoulder cut fits this torso; move it (the arm rides) to where the arm belongs",
+   "write": {
+    "host": "t17",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t17_arm",
+   "role": "check",
+   "name": "TN Mk7-8 - Upper 1 L Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t17_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t17_guide",
+   "role": "check",
+   "name": "TN Mk7-8 - Upper 1 L Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t17_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t17_pad",
+   "role": "check",
+   "name": "TN Mk7-8 - Upper 1 L Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t17_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t17_head",
+   "role": "part",
+   "name": "TN Mk7-8 - Upper 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t17",
+   "on": "Neck",
+   "on_matrix": [
+    0.004487,
+    0.928899,
+    -0.370305,
+    7.973586,
+    4.1e-05,
+    0.370309,
+    0.928909,
+    7.437269,
+    0.99999,
+    -0.004184,
+    0.001623,
+    6.375397,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Helmet on the Neck",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Helmet 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Neck"
+    ]
+   },
+   "note": "starts where your Torso 2 Neck cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t17",
+    "socket": "Neck",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t17_pack",
+   "role": "part",
+   "name": "TN Mk7-8 - Upper 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t17",
+   "on": "Back",
+   "on_matrix": [
+    8.9e-05,
+    -0.999363,
+    0.035682,
+    13.422454,
+    -0.000161,
+    0.035682,
+    0.999363,
+    5.959465,
+    -1.0,
+    -9.5e-05,
+    -0.000158,
+    6.409328,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Backpack on the Back",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Intercessor - Back Pack 1",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Back"
+    ]
+   },
+   "note": "starts where your Torso 2 Back cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t17",
+    "socket": "Back",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "t17_legs",
+   "role": "part",
+   "name": "TN Mk7-8 - Upper 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t17",
+   "on": "Waist",
+   "on_matrix": [
+    1e-06,
+    -0.999997,
+    -0.002336,
+    7.043361,
+    -0.000152,
+    -0.002336,
+    0.999997,
+    4.538344,
+    -1.0,
+    -1e-06,
+    -0.000152,
+    6.345194,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "joint": "Legs on the Waist",
+   "pose": {
+    "from": "ref",
+    "obj": "MarFil Assault - Legs 1A",
+    "relative_to": [
+     "MarFil Assault - Torso 2",
+     "ref"
+    ],
+    "carry": [
+     "ref",
+     "Waist"
+    ]
+   },
+   "note": "starts where your Torso 2 Waist cut fits this torso; move it to where it belongs on this torso",
+   "write": {
+    "host": "t17",
+    "socket": "Waist",
+    "half": "socket"
+   },
+   "preset": [
+    0.954451747,
+    0.262968785,
+    0.140957667,
+    0.371448012,
+    -0.245848683,
+    0.960840319,
+    -0.127844297,
+    0.453484888,
+    -0.169056261,
+    0.0873672475,
+    0.981726449,
+    0.190648912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  }
+ ]
+}

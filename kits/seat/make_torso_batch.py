@@ -1,6 +1,8 @@
 """Stage 2 (torsos' sockets): write the batch spec for a set of torsos (docs/PLAN.md, the stage table).
 
-    BL kits/seat/make_torso_batch.py -- SPEC_OUT.json BATCH_OUT.blend NAME TORSO_REL [TORSO_REL ...]
+    BL kits/seat/make_torso_batch.py -- SPEC_OUT.json BATCH_OUT.blend NAME TORSO_REL [TORSO_REL ...] [--preset SOCKET=16 numbers]
+  --preset: a repeated fix of Josh's (a 4x4 in the socket's axes, row-major, comma separated) put on every piece on
+  that socket, shown "pre-set" (e.g. his Turtle Ninja legs change on the Waist, notes 131)
   BL = blender --background --factory-startup --python
 
 Each torso gets its own column (80 mm apart, rows of 8 stacked 120 mm down), stood on its waist as Torso 2 is,
@@ -58,6 +60,10 @@ def carried(cut_P, rel, S_t2, old):
 
 
 def main(A):
+    pre = {}
+    while "--preset" in A:
+        k = A.index("--preset"); sock, nums = A[k + 1].split("=", 1); pre[sock] = [float(x) for x in nums.split(",")]
+        assert len(pre[sock]) == 16, "--preset needs 16 numbers"; A = A[:k] + A[k + 2:]
     spec_out, blend_out, name, torsos = A[0], A[1], A[2], A[3:]
     bpy.ops.wm.open_mainfile(filepath=os.path.expanduser(SRC["ref"]), load_ui=False); bpy.context.view_layer.update()
     Wt = B.own_world(bpy.data.objects["MarFil Assault - Torso 2"], T2, LIB, B.sidecar(LIB, T2)); Ti = np.linalg.inv(Wt)
@@ -89,11 +95,12 @@ def main(A):
         for sock, pid, ref_obj, prel, c, joint in PIECES:
             S, why = starts[sock]; log.append("%-28s %-11s %s" % (short, sock, why))
             if S is None: continue
+            extra = {"preset": pre[sock]} if sock in pre else {}
             mine.append({"id": "%s_%s" % (tid, pid), "role": "part", "name": "%s %s" % (short, ref_obj.split(" - ")[-1]), "rel": prel,
                          "parent": tid, "on": sock, "on_matrix": G.flat16(S), "joint": joint,
                          "pose": {"from": "ref", "obj": ref_obj, "relative_to": ["MarFil Assault - Torso 2", "ref"], "carry": ["ref", sock]},
                          "note": "starts where your Torso 2 %s cut fits this torso; move it to where it belongs on this torso" % sock,
-                         "write": {"host": tid, "socket": sock, "half": "socket"}})
+                         "write": {"host": tid, "socket": sock, "half": "socket"}, **extra})
         if len(mine) > 1: objs += mine
         else: log.append("%-28s left out: nothing lands on it" % short)
     spec = {"name": name, "stage": "2 (torsos' sockets)", "out": blend_out, "sources": SRC,
