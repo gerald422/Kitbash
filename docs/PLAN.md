@@ -193,5 +193,5 @@ redone, one plan updated the same day.
 |---|---|
 | 0. Tools | done Nov 24 (notes 121): `kits/seat/`, the batch builder and reader; the trial batch is the stage 1 file |
 | 1. The reference marine | done Nov 24 (notes 122): Josh's fix (spacer 2.085 mm into the torso) written: Torso 2 Shoulder R/L, Arm 2B R on it and its Pad R/L (the guide), Shoulder Pad 1 in the guide. Other pads and arms stay in the old pad frame until stages 4-5 |
-| 2. Torsos | every Mar Fil torso written but the Bike Chaplain; the Redwarden torso and 21 Turtle Ninja straight torsos written (notes 123-130). Batches of about 20-25 parts (Josh). With Josh: `~\Desktop\mar fil connectors\batches\02 Stage 2 - Turtle Ninja torsos 2 (2026-11-24).blend` (17 Mk7-8 torsos, his TN legs change pre-set; notes 131). Then Turtle Ninja batch 3 (Uppers A-Q, 16), the Bike Chaplain, and the new sockets |
+| 2. Torsos | every Mar Fil torso written but the Bike Chaplain; the Redwarden torso and 38 Turtle Ninja straight torsos written (notes 123-131). Batches of about 20-25 parts (Josh). TN batch 2 written (17 Mk7-8; notes 131). Then Turtle Ninja batch 3 (Uppers A-Q, 16), the Bike Chaplain, and the new sockets |
 | 3-11 | not started |

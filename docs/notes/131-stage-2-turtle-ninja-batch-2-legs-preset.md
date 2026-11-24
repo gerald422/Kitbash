@@ -36,3 +36,10 @@ drives, so it was done live in his session, with no on-disk edit or reload:
 
 `read` from disk: 17 of 17 helmets changed, "the SAME change", and the legs as pre-set. `write --check`: 17 Waist and
 17 Neck socket changes, nothing else.
+
+**Written** (Josh: "all done ready to write to library"; his Blender was closed, and the file on disk was the same as
+checked). 17 sidecars, backup `batch write 2026-11-24 2144`. All 68 joints read back from the library at
+0.0000 mm / 0.000 deg.
+- Every Neck: 0.39 mm, no turn (his helmet raise).
+- Every Waist: 0.62 mm / 18.47 deg (his legs change).
+- Shoulders and Back as they were, marked as Josh's.
