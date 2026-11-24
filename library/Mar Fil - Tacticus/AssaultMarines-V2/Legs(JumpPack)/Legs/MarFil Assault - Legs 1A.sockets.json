@@ -325,18 +325,18 @@
  ],
  "fits": {
   "Waist": [
-   0.993758,
-   0.108725,
-   0.024971,
-   -0.255015,
-   -0.110954,
-   0.986533,
-   0.120184,
-   0.212123,
-   -0.011566,
-   -0.122204,
-   0.992437,
-   0.58115,
+   0.9999995148529314,
+   0.00016790713226374338,
+   -0.0005619132013800105,
+   -0.0007535675149889665,
+   -0.00016791999672412505,
+   0.9999998911468402,
+   6.489224306582316e-06,
+   0.0009657711230356414,
+   0.0005619328853735874,
+   -6.230579395588783e-06,
+   0.9999996125727024,
+   -0.0007224669067191769,
    0.0,
    0.0,
    0.0,
@@ -617,7 +617,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\Legs(JumpPack)\\Legs\\33-Legs-1-A.stl"
  },
  "notes": {
-  "Waist": "cut Intercessor Legs Waist, look (0.0137 mm, 80% on), write_joints Nov 20: NEAR, check by eye (the buckle turned the legs 4.7 deg from the waist's own turn: flagged)"
+  "Waist": "Josh's fix in batch '02 Stage 2 - Assault torsos (2026-11-24)' (kits/seat/batch.py write, 2026-11-24)"
  },
  "origin": {
   "from_file": [
@@ -642,6 +642,9 @@
   "by": "origins.py Nov 15"
  },
  "check": [
+  "Waist"
+ ],
+ "exact": [
   "Waist"
  ]
 }
