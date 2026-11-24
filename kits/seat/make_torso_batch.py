@@ -3,7 +3,7 @@
     BL kits/seat/make_torso_batch.py -- SPEC_OUT.json BATCH_OUT.blend NAME TORSO_REL [TORSO_REL ...]
   BL = blender --background --factory-startup --python
 
-Each torso gets its own column (80 mm apart), next to the reference column (Torso 2, all locked, as Josh placed it):
+Each torso gets its own column (80 mm apart, rows of 8 stacked 120 mm down), next to the reference column (Torso 2, all locked, as Josh placed it):
 - the spacer on Shoulder R (Josh moves it; its move is the socket), with Arm 2B R on it by its written fit and the
   guide and Shoulder Pad 1 on the arm by theirs (locked, riding); the left side is the live mirror;
 - the reference helmet, backpack and legs on Neck, Back and Waist (Josh moves them; each move is that socket), each
@@ -38,7 +38,8 @@ PIECES = [   # socket, id, ref object, library path, cut on Torso 2 in the refer
     ("Back", "pack", "MarFil Intercessor - Back Pack 1", MF + "Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1", "Assault torso back", "Backpack on the Back"),
     ("Waist", "legs", "MarFil Assault - Legs 1A", MF + "AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A", "Assault Torso waist", "Legs on the Waist")]
 SHOULDER_CUT = "Assault Torso Shoulder"
-GAP = 80.0
+GAP = 80.0                  # mm between columns
+PER_ROW, ROW_GAP = 8, 120.0   # columns per row (the reference takes the first slot), mm between rows
 GUIDE = {"kind": "guide", "from": "seat", "obj": "Adapter - MarFil Assault - Arm 2B R"}
 
 
@@ -50,7 +51,7 @@ def carried(cut_P, rel, S_t2, old):
     T = B.stl_tris(LIB, rel, B.sidecar(LIB, rel)); V = T.reshape(-1, 3)
     b = BVHTree.FromPolygons([tuple(v) for v in V], [(3 * k, 3 * k + 1, 3 * k + 2) for k in range(len(T))])
     R, t, rms = G.icp(b, cut_P, np.eye(3), np.zeros(3), iters=40, keep=0.8, lim=3.0)
-    if rms >= 0.3: return (old, "the cut didn't land (rms %.1f mm): the torso's old socket" % min(rms, 9)) if old is not None else (S_t2, "the cut didn't land: Torso 2's socket")
+    if rms >= 0.3: return (old, "the cut didn't land (rms %.1f mm): the torso's old socket" % min(rms, 9)) if old is not None else (None, "the cut didn't land (rms %.1f mm) and there is no old socket: left out" % min(rms, 9))
     M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t; S = M @ S_t2
     return S, "cut fitted, rms %.3f mm; %s from the old socket" % (rms, "n/a" if old is None else "%.2f mm %.1f deg" % tuple(G.off(S, old)))
 
@@ -75,16 +76,20 @@ def main(A):
         objs.append(o)
     for k, rel in enumerate(torsos, 1):
         tid = "t%d" % k; short = os.path.basename(rel).replace("MarFil ", ""); old = sockets(rel)
-        objs.append({"id": tid, "role": "host", "name": short, "rel": rel, "pose": {"place": True}, "at": [GAP * k, 0, 0]})
+        mine = [{"id": tid, "role": "host", "name": short, "rel": rel, "pose": {"place": True},
+                 "at": [GAP * (k % PER_ROW), 0, -ROW_GAP * (k // PER_ROW)]}]
         S, why = carried(cut[SHOULDER_CUT], rel, S2["Shoulder R"], old.get("Shoulder R")); log.append("%-28s Shoulder R  %s" % (short, why))
-        objs += column(tid, short + " ", S)
+        if S is not None: mine += column(tid, short + " ", S)
         for sock, pid, ref_obj, prel, c, joint in PIECES:
             S, why = carried(cut[c], rel, S2[sock], old.get(sock)); log.append("%-28s %-11s %s" % (short, sock, why))
-            objs.append({"id": "%s_%s" % (tid, pid), "role": "part", "name": "%s %s" % (short, ref_obj.split(" - ")[-1]), "rel": prel,
+            if S is None: continue
+            mine.append({"id": "%s_%s" % (tid, pid), "role": "part", "name": "%s %s" % (short, ref_obj.split(" - ")[-1]), "rel": prel,
                          "parent": tid, "on": sock, "on_matrix": G.flat16(S), "joint": joint,
                          "pose": {"from": "ref", "obj": ref_obj, "relative_to": ["MarFil Assault - Torso 2", "ref"], "carry": ["ref", sock]},
                          "note": "starts where your Torso 2 %s cut fits this torso; move it to where it belongs on this torso" % sock,
                          "write": {"host": tid, "socket": sock, "half": "socket"}})
+        if len(mine) > 1: objs += mine
+        else: log.append("%-28s left out: nothing lands on it" % short)
     spec = {"name": name, "stage": "2 (torsos' sockets)", "out": blend_out, "sources": SRC,
             "about": "Each torso: move the spacer (the arm, guide and pad ride on it), the helmet, the backpack and the legs to where they belong on that torso. Each move is that torso's socket. The left column is the reference (Torso 2 as you placed it), locked.",
             "objects": objs}
