@@ -49,12 +49,22 @@ GUIDE = {"kind": "guide", "from": "seat", "obj": "Adapter - MarFil Assault - Arm
 def sockets(rel): return {s["type"]: G.M4(s["matrix"]) for s in B.sidecar(LIB, rel).get("sockets") or []}
 
 
+T2_CENTRE = None                                     # Torso 2's bounding-box centre (own coordinates), set in main
+
+
 def carried(cut_P, rel, S_t2, old):
-    """Torso 2's socket carried onto torso rel by fitting the cut points (Torso 2 own coordinates) onto it"""
+    """Torso 2's socket carried onto torso rel by fitting the cut points (Torso 2 own coordinates) onto it. A torso with
+    no socket at all starts the fit from the offset of the two bounding-box centres (a file lying elsewhere, e.g. the
+    Bike Chaplain's chest, 31 mm down); if the cut still doesn't land, Torso 2's socket moved by that offset is a rough
+    start for Josh to place by eye (Nov 24: "Batch, I place by eye")."""
     T = B.stl_tris(LIB, rel, B.sidecar(LIB, rel)); V = T.reshape(-1, 3)
     b = BVHTree.FromPolygons([tuple(v) for v in V], [(3 * k, 3 * k + 1, 3 * k + 2) for k in range(len(T))])
-    R, t, rms = G.icp(b, cut_P, np.eye(3), np.zeros(3), iters=40, keep=0.8, lim=3.0)
-    if rms >= 0.3: return (old, "the cut didn't land (rms %.1f mm): the torso's old socket" % min(rms, 9)) if old is not None else (None, "the cut didn't land (rms %.1f mm) and there is no old socket: left out" % min(rms, 9))
+    t0 = np.zeros(3) if old is not None else (V.min(0) + V.max(0)) / 2 - T2_CENTRE
+    R, t, rms = G.icp(b, cut_P, np.eye(3), t0, iters=40, keep=0.8, lim=3.0)
+    if rms >= 0.3:
+        if old is not None: return old, "the cut didn't land (rms %.1f mm): the torso's old socket" % min(rms, 9)
+        M0 = np.eye(4); M0[:3, 3] = t0
+        return M0 @ S_t2, "the cut didn't land (rms %.1f mm), no old socket: a rough start (Torso 2's, moved %.1f mm), place by eye" % (min(rms, 9), np.linalg.norm(t0))
     M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t; S = M @ S_t2
     return S, "cut fitted, rms %.3f mm; %s from the old socket" % (rms, "n/a" if old is None else "%.2f mm %.1f deg" % tuple(G.off(S, old)))
 
@@ -64,6 +74,8 @@ def main(A):
     while "--preset" in A:
         k = A.index("--preset"); sock, nums = A[k + 1].split("=", 1); pre[sock] = [float(x) for x in nums.split(",")]
         assert len(pre[sock]) == 16, "--preset needs 16 numbers"; A = A[:k] + A[k + 2:]
+    cloak_ref = None
+    if "--cloak-ref" in A: k = A.index("--cloak-ref"); cloak_ref = A[k + 1]; A = A[:k] + A[k + 2:]
     spec_out, blend_out, name, torsos = A[0], A[1], A[2], A[3:]
     bpy.ops.wm.open_mainfile(filepath=os.path.expanduser(SRC["ref"]), load_ui=False); bpy.context.view_layer.update()
     Wt = B.own_world(bpy.data.objects["MarFil Assault - Torso 2"], T2, LIB, B.sidecar(LIB, T2)); Ti = np.linalg.inv(Wt)
@@ -72,6 +84,7 @@ def main(A):
         P = G.verts_world(bpy.data.objects[c]) @ Ti[:3, :3].T + Ti[:3, 3]
         cut[c] = P[np.linspace(0, len(P) - 1, min(len(P), 1500)).astype(int)]
     S2 = sockets(T2); objs = []; log = []
+    global T2_CENTRE; V2 = B.stl_tris(LIB, T2, B.sidecar(LIB, T2)).reshape(-1, 3); T2_CENTRE = (V2.min(0) + V2.max(0)) / 2
     # the reference column: Torso 2 and Josh's pieces, locked
     objs.append({"id": "ref", "role": "host", "name": "REFERENCE Torso 2 (locked)", "rel": T2, "pose": {"from": "ref", "obj": "MarFil Assault - Torso 2"}, "at": [0, 0, 0]})
     objs += column("ref", "REF ", None, locked=True)
@@ -81,6 +94,12 @@ def main(A):
              "pose": {"from": "ref", "obj": ref_obj, "relative_to": ["MarFil Assault - Torso 2", "ref"]}}
         if sock not in josh: o["write"] = {"host": "ref", "socket": sock, "half": "both"}   # written once (batch 02, notes 124)
         objs.append(o)
+    if cloak_ref:                                    # the reference cloak, once (notes 133): Torso 2's Cloak socket starts on its
+        objs.append({"id": "ref_cloak", "role": "part", "name": "REF " + os.path.basename(cloak_ref).split(" - ")[-1], "rel": cloak_ref,
+                     "parent": "ref", "on": "Cloak", "on_matrix": G.flat16(S2["Back"]), "joint": "Cloak on the Cloak socket",
+                     "pose": {"matrix": G.flat16(Wt)},       # Back frame; the cloak starts in its rig frame (Mar Fil's own)
+                     "note": "the reference cloak: move it to where it belongs on Torso 2 (its fit); the socket stays Torso 2's Back frame",
+                     "write": {"host": "ref", "socket": "Cloak", "half": "both"}})
     for k, rel in enumerate(torsos, 1):
         tid = "t%d" % k; short = os.path.basename(rel).replace("MarFil ", ""); old = sockets(rel)
         starts = {sock: carried(cut[c], rel, S2[sock], old.get(sock)) for sock, pid, ref_obj, prel, c, joint in PIECES}

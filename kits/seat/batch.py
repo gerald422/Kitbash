@@ -444,9 +444,9 @@ def write(A):
             W.append("%-24s socket %-10s %s" % (os.path.basename(hrel)[-24:], w["socket"], _diff(old, G.flat16(S))))
             Fm = G.M4(h["mirror_frame"]) if h.get("mirror_frame") else np.eye(4)      # the host's mirror plane (as the batch shows it)
             SL = Fm @ MX @ np.linalg.inv(Fm) @ S @ MX
-            if m and any(s["type"] == m for s in hd.get("sockets") or []):
-                old = next(s["matrix"] for s in hd["sockets"] if s["type"] == m)
-                hn["sockets"].append(_socket(hd["sockets"], m, SL, props(MX, con), stem))
+            if m and (any(s["type"] == m for s in hd.get("sockets") or []) or not _mirror_variant(hd)):   # top level (also a
+                old = next((s["matrix"] for s in hd.get("sockets") or [] if s["type"] == m), None)        # host with none yet)
+                hn.setdefault("sockets", []).append(_socket(hd.get("sockets"), m, SL, props(MX, con), stem))
                 W.append("%-24s socket %-10s %s (mirror)" % (os.path.basename(hrel)[-24:], m, _diff(old, G.flat16(SL))))
             elif m and _mirror_variant(hd):
                 v = _mirror_variant(hd); vs = (v.get("sidecar") or {}).get("sockets") or []
