@@ -3,7 +3,8 @@
     BL kits/seat/make_torso_batch.py -- SPEC_OUT.json BATCH_OUT.blend NAME TORSO_REL [TORSO_REL ...]
   BL = blender --background --factory-startup --python
 
-Each torso gets its own column (80 mm apart, rows of 8 stacked 120 mm down), next to the reference column (Torso 2, all locked, as Josh placed it):
+Each torso gets its own column (80 mm apart, rows of 8 stacked 120 mm down), stood on its waist as Torso 2 is,
+with its mirror plane (mirror_frame), next to the reference column (Torso 2, all locked, as Josh placed it):
 - the spacer on Shoulder R (Josh moves it; its move is the socket), with Arm 2B R on it by its written fit and the
   guide and Shoulder Pad 1 on the arm by theirs (locked, riding); the left side is the live mirror;
 - the reference helmet, backpack and legs on Neck, Back and Waist (Josh moves them; each move is that socket), each
@@ -76,12 +77,17 @@ def main(A):
         objs.append(o)
     for k, rel in enumerate(torsos, 1):
         tid = "t%d" % k; short = os.path.basename(rel).replace("MarFil ", ""); old = sockets(rel)
-        mine = [{"id": tid, "role": "host", "name": short, "rel": rel, "pose": {"place": True},
-                 "at": [GAP * (k % PER_ROW), 0, -ROW_GAP * (k // PER_ROW)]}]
+        starts = {sock: carried(cut[c], rel, S2[sock], old.get(sock)) for sock, pid, ref_obj, prel, c, joint in PIECES}
+        Sw = starts["Waist"][0] if starts["Waist"][0] is not None else old.get("Waist")
+        host = {"id": tid, "role": "host", "name": short, "rel": rel, "at": [GAP * (k % PER_ROW), 0, -ROW_GAP * (k // PER_ROW)],
+                "pose": {"place": True} if Sw is None else {"matrix": G.flat16(Wt @ S2["Waist"] @ np.linalg.inv(Sw))}}   # stood on its waist as Torso 2
+        F = mirror_frame(old, Sw)
+        if F is not None: host["mirror_frame"] = G.flat16(F)
+        mine = [host]
         S, why = carried(cut[SHOULDER_CUT], rel, S2["Shoulder R"], old.get("Shoulder R")); log.append("%-28s Shoulder R  %s" % (short, why))
         if S is not None: mine += column(tid, short + " ", S)
         for sock, pid, ref_obj, prel, c, joint in PIECES:
-            S, why = carried(cut[c], rel, S2[sock], old.get(sock)); log.append("%-28s %-11s %s" % (short, sock, why))
+            S, why = starts[sock]; log.append("%-28s %-11s %s" % (short, sock, why))
             if S is None: continue
             mine.append({"id": "%s_%s" % (tid, pid), "role": "part", "name": "%s %s" % (short, ref_obj.split(" - ")[-1]), "rel": prel,
                          "parent": tid, "on": sock, "on_matrix": G.flat16(S), "joint": joint,
@@ -95,6 +101,16 @@ def main(A):
             "objects": objs}
     json.dump(spec, open(spec_out, "w", encoding="utf-8"), indent=1)
     print("\n".join(log)); print("SPEC", spec_out, flush=True)
+
+
+def mirror_frame(old, Sw):
+    """the torso's mirror plane, as a frame whose YZ plane it is (own coordinates): the waist's turn, through the middle
+    of the old shoulders. Torso files lie every which way (Turtle Ninja: Y up, the plane at z = 6.4), so X = 0 is only
+    Mar Fil's. Straight torsos' old shoulders mirror across it to 0.05 mm / 1 deg (Mar Fil: 0.007 mm, = X = 0)."""
+    if Sw is None: return None
+    F = np.array(Sw, dtype=float).copy()
+    if "Shoulder R" in old and "Shoulder L" in old: F[:3, 3] = (old["Shoulder R"][:3, 3] + old["Shoulder L"][:3, 3]) / 2
+    return F
 
 
 def column(tid, pre, S_sh, locked=False):
@@ -115,4 +131,5 @@ if __name__ == "__main__":
     A = sys.argv[sys.argv.index("--") + 1:]
     sys.stdout.reconfigure(encoding="utf-8")
     try: main(A)
+    except BaseException: import traceback; traceback.print_exc(); sys.stdout.flush(); os._exit(1)
     finally: sys.stdout.flush(); os._exit(0)

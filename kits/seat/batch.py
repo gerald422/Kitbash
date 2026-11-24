@@ -25,7 +25,8 @@ Parts hang in a chain (spec "parent"): moving a part moves what sits on it. Ever
       {"carry": [ID, FRAME], "from": ..., "obj": ...}   kept relative to frame FRAME of ID, carried onto the pivot
       {"at_pivot": true}                                its own origin on the pivot
   preset: a change (4x4, the pivot's axes) applied after the pose: a repeated fix, shown to Josh marked "pre-set"
-  mirror: true shows the left copy live (a Mirror modifier across the host torso's X = 0 plane)
+  mirror: true shows the left copy live (a Mirror modifier across the host torso's X = 0 plane, or across the YZ plane
+          of the host's "mirror_frame" (own coordinates) when it has one: write mirrors the socket the same way)
   note: one line shown to Josh
 --then SCRIPT runs a seat method (kits/seat modules) in the built scene before the seats are recorded; the script
 gets `objs` (id -> object) and `spec`. The file is never written over: a batch Josh has touched is never
@@ -196,6 +197,7 @@ def build(A):
                 W = W @ G.M4(s3["props"]["kb_connectors"][0]["own_in_socket"])
         elif "fit" in pose: W = piv_parent @ G.M4(sc["fits"][pose["fit"]])      # the part's own library fit on the pivot
         elif pose.get("place"): W = np.eye(4)                                     # its library frame
+        elif "matrix" in pose: W = G.M4(pose["matrix"])                           # given own -> world (e.g. stood on its waist)
         elif "obj" in pose or "child_of" in pose:
             so = S.child_of(pose["from"], pose["child_of"]) if "child_of" in pose else S.obj(pose["from"], pose["obj"])
             W = own_world(so, rel, lib, sc, conn); e["_src"] = so.name
@@ -211,6 +213,7 @@ def build(A):
         if e.get("preset"): D = G.M4(e["preset"]); W = P @ D @ np.linalg.inv(P) @ W; P = P @ D
         K = np.linalg.inv(P) @ W
         o = make_mesh(e.get("name", i)[:63], own_tris, K); colls[role].objects.link(o)
+        o.rotation_mode = 'QUATERNION'     # Euler near gimbal lock (a file lying Y up, stood up) lost up to 0.5 deg (Nov 24)
         if par: o.parent = objs[par]; o.matrix_parent_inverse = Matrix.Identity(4); o.matrix_basis = G.mat(np.linalg.inv(info[par]["P"]) @ P)
         else: o.matrix_world = G.mat(P)
         bpy.context.view_layer.update()
@@ -228,10 +231,16 @@ def build(A):
     def host_of(i):                                  # the host this hangs from (its own column's torso)
         while entry(spec, i)["role"] != "host" and entry(spec, i).get("parent"): i = entry(spec, i)["parent"]
         return objs[i] if entry(spec, i)["role"] == "host" else None
+    planes = {}                                      # a host's mirror plane: its "mirror_frame" (own coordinates; YZ plane), else X = 0
+    for e in spec["objects"]:
+        if e["role"] == "host" and e.get("mirror_frame"):
+            m = bpy.data.objects.new(e.get("name", e["id"])[:50] + " mirror plane", None); colls["host"].objects.link(m)
+            m.rotation_mode = 'QUATERNION'; m.parent = objs[e["id"]]; m.matrix_parent_inverse = Matrix.Identity(4); m.matrix_basis = G.mat(G.M4(e["mirror_frame"]))
+            m.empty_display_size = 3; m.hide_select = True; lock(m, True); planes[e["id"]] = m
     for e in spec["objects"]:
         torso = host_of(e["id"])
         if e.get("mirror") and torso is not None:
-            import mirror; mirror.mirror_live(objs[e["id"]], torso)
+            import mirror; mirror.mirror_live(objs[e["id"]], planes.get(torso["kb_id"], torso))
     S.done()
     for e in spec["objects"]: objs[e["id"]].name = e.get("name", e["id"])[:63]     # the source copies held the names
     then = opt(A, "--then")
@@ -432,7 +441,8 @@ def write(A):
             old = next((s["matrix"] for s in hd.get("sockets") or [] if s["type"] == w["socket"]), None)
             hn.setdefault("sockets", []).append(_socket(hd.get("sockets"), w["socket"], S, props(np.eye(4), con), stem))
             W.append("%-24s socket %-10s %s" % (os.path.basename(hrel)[-24:], w["socket"], _diff(old, G.flat16(S))))
-            SL = MX @ S @ MX
+            Fm = G.M4(h["mirror_frame"]) if h.get("mirror_frame") else np.eye(4)      # the host's mirror plane (as the batch shows it)
+            SL = Fm @ MX @ np.linalg.inv(Fm) @ S @ MX
             if m and any(s["type"] == m for s in hd.get("sockets") or []):
                 old = next(s["matrix"] for s in hd["sockets"] if s["type"] == m)
                 hn["sockets"].append(_socket(hd["sockets"], m, SL, props(MX, con), stem))
