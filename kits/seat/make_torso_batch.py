@@ -14,7 +14,7 @@ Where each piece starts (Claude's seat, the skill kitbash-seat-by-shape): Josh's
 Torso 2's socket carried by that fit. Only the cut's shape is matched (CLAUDE.md). The torso's own old socket is used
 instead if the cut doesn't land, and every start is reported.
 
-The reference column's pieces are written too ("both" halves: Torso 2's socket as it is and each piece's fit = Josh's
+The reference column's pieces are written once (batch 02; later batches skip a socket that is already Josh's) ("both" halves: Torso 2's socket as it is and each piece's fit = Josh's
 reference placement), so every torso's sockets are judged with the fits that will be in the library."""
 import os, sys, json
 import numpy as np
@@ -23,6 +23,7 @@ for p in (REPO, HERE, os.path.join(REPO, "kits", "connectors")): sys.path.insert
 import bpy
 from mathutils.bvhtree import BVHTree
 import geom as G, batch as B
+import kb.sidecar as SC
 
 LIB = "D:/Kitbash Library"
 MF = "Mar Fil - Tacticus/"
@@ -66,10 +67,12 @@ def main(A):
     # the reference column: Torso 2 and Josh's pieces, locked
     objs.append({"id": "ref", "role": "host", "name": "REFERENCE Torso 2 (locked)", "rel": T2, "pose": {"from": "ref", "obj": "MarFil Assault - Torso 2"}, "at": [0, 0, 0]})
     objs += column("ref", "REF ", None, locked=True)
+    josh = {s["type"] for s in B.sidecar(LIB, T2).get("sockets") or [] if SC.protected(s)}
     for sock, pid, ref_obj, rel, c, joint in PIECES:
-        objs.append({"id": "ref_" + pid, "role": "check", "name": "REF %s" % ref_obj.split(" - ")[-1], "rel": rel, "parent": "ref", "on": sock,
-                     "pose": {"from": "ref", "obj": ref_obj, "relative_to": ["MarFil Assault - Torso 2", "ref"]},
-                     "write": {"host": "ref", "socket": sock, "half": "both"}})
+        o = {"id": "ref_" + pid, "role": "check", "name": "REF %s" % ref_obj.split(" - ")[-1], "rel": rel, "parent": "ref", "on": sock,
+             "pose": {"from": "ref", "obj": ref_obj, "relative_to": ["MarFil Assault - Torso 2", "ref"]}}
+        if sock not in josh: o["write"] = {"host": "ref", "socket": sock, "half": "both"}   # written once (batch 02, notes 124)
+        objs.append(o)
     for k, rel in enumerate(torsos, 1):
         tid = "t%d" % k; short = os.path.basename(rel).replace("MarFil ", ""); old = sockets(rel)
         objs.append({"id": tid, "role": "host", "name": short, "rel": rel, "pose": {"place": True}, "at": [GAP * k, 0, 0]})
