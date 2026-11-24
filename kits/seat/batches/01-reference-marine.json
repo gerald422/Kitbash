@@ -1,0 +1,65 @@
+{
+ "name": "Stage 1 - the reference marine",
+ "stage": "1 (and the stage 0 trial)",
+ "about": "Place the spacer on Torso 2's right shoulder, then Arm 2B R on the spacer; check the guide and pad on the arm. The left side is shown live (mirrored). Faint: Arm 2B R where it was before the spacer.",
+ "out": "~/Desktop/mar fil connectors/batches/01 Stage 1 - reference marine (2026-11-24).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "objects": [
+  {"id": "torso", "role": "host", "name": "MarFil Assault - Torso 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {"from": "ref", "obj": "MarFil Assault - Torso 2"}},
+
+  {"id": "spacer", "role": "part", "name": "Springles Spacer (on Torso 2 Shoulder R)",
+   "connector": {"kind": "spacer", "from": "arms", "obj": "Springles Spacer"},
+   "parent": "torso", "on": "Shoulder R", "joint": "Spacer on the torso (Shoulder R)", "mirror": true,
+   "pose": {"at_pivot": true},
+   "note": "starts with its torso face centred on Torso 2's Shoulder R socket (the Mar Fil arm's), axis straight out; turns about that point"},
+
+  {"id": "arm", "role": "part", "name": "MarFil Assault - Arm 2B R (on the spacer)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "spacer", "on": "arm seat", "joint": "Arm on the spacer", "mirror": true,
+   "pose": {"from": "ref", "obj": "MarFil Assault - Arm 2B R", "carry": ["torso", "Shoulder R"]},
+   "note": "your reference pose, moved out by the spacer (2.1 mm); turns about the spacer's arm seat"},
+
+  {"id": "guide", "role": "part", "name": "Pauldron guide (on Arm 2B R)",
+   "connector": {"kind": "guide", "from": "seat", "obj": "Adapter - MarFil Assault - Arm 2B R"},
+   "parent": "arm", "on": "self", "joint": "Guide on the arm (Pad R)", "mirror": true,
+   "pose": {"from": "seat", "obj": "Adapter - MarFil Assault - Arm 2B R", "relative_to": ["MarFil Assault - Arm 2B R", "arm"]},
+   "note": "your Nov 23 guide seat on this arm; turns about its crown"},
+
+  {"id": "pad", "role": "part", "name": "MarFil Assault - Shoulder Pad 1 (in the guide)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "guide", "on": "crown", "joint": "Pad in the guide", "mirror": true,
+   "pose": {"from": "seat", "child_of": "Adapter - MarFil Assault - Arm 2B R", "relative_to": ["Adapter - MarFil Assault - Arm 2B R", "guide"]},
+   "note": "your pad in that guide; turns about the guide's crown"},
+
+  {"id": "sword", "role": "check", "name": "MarFil Assault - Chain Sword 2 R (rides with the arm)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 2 R",
+   "parent": "arm", "mirror": true,
+   "pose": {"from": "ref", "obj": "MarFil Assault - Chain Sword 2 R", "relative_to": ["MarFil Assault - Arm 2B R", "arm"]}},
+
+  {"id": "head", "role": "check", "name": "MarFil Intercessor - Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "pose": {"from": "ref", "obj": "MarFil Intercessor - Helmet 1"}},
+  {"id": "pack", "role": "check", "name": "MarFil Intercessor - Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "pose": {"from": "ref", "obj": "MarFil Intercessor - Back Pack 1"}},
+  {"id": "legs", "role": "check", "name": "MarFil Assault - Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "pose": {"from": "ref", "obj": "MarFil Assault - Legs 1A"}},
+  {"id": "shin_r", "role": "check", "name": "MarFil Assault - Shin Pad 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Knee Pads/MarFil Assault - Shin Pad 1",
+   "pose": {"from": "ref", "obj": "MarFil Assault - Shin Pad 1.001"}},
+  {"id": "shin_l", "role": "check", "name": "MarFil Assault - Shin Pad 1 L (mirrored)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Knee Pads/MarFil Assault - Shin Pad 1",
+   "pose": {"from": "ref", "obj": "MarFil Assault - Shin Pad 1"}},
+
+  {"id": "ghost", "role": "neighbour", "name": "Arm 2B R before the spacer (faint)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "pose": {"from": "ref", "obj": "MarFil Assault - Arm 2B R"}}
+ ]
+}

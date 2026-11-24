@@ -85,20 +85,21 @@ Pads don't sit flush. The inside top **rests** on the shoulder (0-0.6 mm), and t
   - Some raw Mar Fil arm files are in no marine frame (Intercessor Arm 5 R): start from all six sides.
 - Searches match the shape of Josh's mating surfaces only, never whole meshes (`CLAUDE.md`).
 
-## Scripts
+## Scripts (`kits/seat/`, run inside Blender)
 
-The scripts from Nov 23 are kept outside the repo (they hold local paths), in
-`~\Desktop\mar fil connectors\_method scripts (2026-11-23)\`:
+Moved into the repo in stage 0 (Nov 24): the same code as the Nov 23 scripts, with objects and paths as arguments.
+The old copies stay in `~\Desktop\mar fil connectors\_method scripts (2026-11-23)\` as history (one-off probes too).
 
-| Script(s) | What it does |
-|---|---|
-| `seat_live6.py` | outline ICP seat |
-| `seat_rest.py`, `profile.py`, `render_cmp.py` | rest step, gap profile, comparison renders |
-| `joint_seat.py`, `swing.py`, `joint_run.py`, `joint_run2.py`, `joint_apply.py` | pads carried by the joint |
-| `legs_seat.py`, `legs_rest.py`, `legs_check2.py`, `render_legs2.py` | legs on adapter 3 |
-| `belt_sym.py`, `render_belt.py`, `buckle_apply.py` | belt symmetry, buckle renders, apply the turn |
-| `tmpl_core.py`, `tn_tmpl.py` | buckle template |
-| `cut_take_arms.py`, `cut_take.py` | cuts taken from seats |
-| `cloth_flip.py` | mirror a left arm into the right slot |
+| Module | What it does | From |
+|---|---|---|
+| `geom.py` | shared geometry: world vertices, BVH, probe, ICP, flats, sphere fit, the pad inside, angles | `seat_shape2`, `flats`, `legs_core` |
+| `pads.py` | the guide on an arm: `outline_seat` (outline ICP), `rest_cost` / `nudge_rest` / `profile`, `joint_seat` and `joint_seat_held` (pads carried by the joint), `swing_fit` | `seat_live6`, `seat_rest`, `profile`, `swing`, `joint_seat`, `joint_run2` |
+| `legs.py` | legs on adapter 3: `Known` (Josh's seat), `seat`, `rest`, `clash` | `legs_seat`, `legs_rest`, `legs_check2` |
+| `buckle.py` | the buckle template (`template`, `find_buckle`), belt symmetry, `turn_legs` | `tmpl_core`, `tn_tmpl`, `belt_sym`, `buckle_core`, `buckle_apply` |
+| `cuts.py` | cuts taken from seats: `pad_spot_cut`, `legs_waist_cut` | `cut_take`, `cut_take_arms` |
+| `mirror.py` | `twist_check` / `twist` (a left arm in a right slot), `mirror_live` (the left side shown live) | `cloth_flip` |
+| `render.py` | check renders from a part's own axes: `pad_views`, `belt_views`, `shoot` | `render_cmp`, `render_belt`, `buckle_apply` |
+| `batch.py` | **batch files**: `build` a batch from a spec (`kits/seat/batches/*.json`), `read` what Josh changed, `compare` two files (docstring) | new |
 
-Moving them into `kits/seat/` (local paths removed) is a step in the plan.
+A seat method runs on a batch with `batch.py -- build SPEC --then SCRIPT.py`: the script gets `objs` (id -> object)
+and moves the parts before their seats are recorded.

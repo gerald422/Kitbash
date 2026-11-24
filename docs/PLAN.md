@@ -191,5 +191,6 @@ redone, one plan updated the same day.
 
 | Stage | State |
 |---|---|
-| 0. Tools | next |
-| 1-11 | not started |
+| 0. Tools | done Nov 24 (notes 121): `kits/seat/`, the batch builder and reader; the trial batch is the stage 1 file |
+| 1. The reference marine | with Josh: `~\Desktop\mar fil connectors\batches\01 Stage 1 - reference marine (2026-11-24).blend` |
+| 2-11 | not started |
