@@ -140,8 +140,9 @@ def own_world(src_obj, rel=None, lib=None, sc=None, conn=None):
 
 
 def make_mesh(name, tris_own, K):
-    """a mesh object from triangles in own coordinates, stored as K^-1 @ own (so own -> object = K)"""
-    Ki = np.linalg.inv(K); V = tris_own.reshape(-1, 3) @ Ki[:3, :3].T + Ki[:3, 3]
+    """a mesh object from triangles in own coordinates, stored as K @ own (own -> object = K, so own -> world =
+    matrix_world @ K). Was K^-1 until Nov 24: right only when K is its own inverse (the arm), the pad sat 2.7 mm off."""
+    V = tris_own.reshape(-1, 3) @ K[:3, :3].T + K[:3, 3]
     key = np.round(V, 6); uniq, inv = np.unique(key, axis=0, return_inverse=True)
     me = bpy.data.meshes.new(name); me.from_pydata(uniq.tolist(), [], inv.reshape(-1, 3).tolist()); me.update()
     return bpy.data.objects.new(name, me)

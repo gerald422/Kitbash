@@ -37,7 +37,7 @@ as the plan says.
   - the pauldron guide: its own mesh frame (crown, +Z out, +Y front).
 
 **The trial batch is the stage 1 file (Josh's choice).** It is
-`~\Desktop\mar fil connectors\batches\01 Stage 1 - reference marine (2026-11-24).blend`, built in 8 s.
+`~\Desktop\mar fil connectors\batches\01 Stage 1 - reference marine (2026-11-24 b).blend`, built in 8 s.
 - Torso 2 is locked.
 - The spacer starts on Torso 2's `Shoulder R` socket.
 - Arm 2B R is in Josh's reference pose, moved out 2.085 mm by the spacer.
@@ -51,6 +51,13 @@ Checked independently:
 - the spacer face is on the socket (0.00 mm);
 - the arm moved 2.085 mm with no turn;
 - the guide in the arm and the pad in the guide match the seat file (0.00 mm, 0.0 deg).
+
+**Fix, same day: the first build's pad was 2.7 mm off (Josh: "the pauldrons here are wrong").** `make_mesh` stored the
+mesh as K^-1 @ own instead of K @ own. That is only right when K is its own inverse (the arm's was, so it read true);
+the pad's K is not. The check above compared the recorded matrices, so it could not see a wrong mesh. The new check is
+the library STL placed by `matrix_world @ kb_own_in_obj` against the mesh itself (0.000 mm on every piece), plus the pad
+and guide by their meshes against the seat file (the same to 0.01 mm). Rebuilt as `... (2026-11-24 b).blend`; the first
+file was never touched by Josh and is left as it is (his to delete).
 
 The reader was tested on a copy with made-up fixes: a 3 deg turn on the spacer, and the same move and turn on the
 guide and the pad.
