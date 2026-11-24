@@ -17,3 +17,17 @@ Two of Josh's repeated fixes are pre-set (`make_torso_batch --preset`), shown pi
 - The 16 pre-set legs and 16 pre-set helmets are exact (0.00000).
 - `write --check`: 16 Waist and 16 Neck changes, nothing else.
 - Renders `02t3 check - ...png` beside the batch.
+
+**Written** (Josh: "all done ready to write to library"). The file was untouched since the build, so every pre-set was
+approved. 16 sidecars, backup `batch write 2026-11-24 2152`. All 64 joints read back from the library at
+0.0000 mm / 0.000 deg.
+- Every Neck: 0.387 mm, no turn.
+- Every Waist: 0.616 mm / 18.47 deg.
+
+The batch file and its check renders went to the Recycle Bin (6 items, 0.32 GB).
+
+**The stage 2 torsos are done** except:
+- the Bike Chaplain (3 parts, no sockets: needs Josh's placement or a cut);
+- the new sockets: Chest Insert, Neck Guard and cloak.
+
+The 55 straight Turtle Ninja torsos and the Redwarden torso are all written.
