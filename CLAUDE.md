@@ -32,10 +32,15 @@ Do not read `addons/tiow_inbox.py` whole (226 KB): `grep -n "^def \|^class "` an
 - Never overwrite what Josh or Prepare made: merge sidecars with `kb.sidecar.merge` (it keeps clicked / copied / auto
   anchors, `tiow_corrected`, `tiow_holds`, `exact`). Back up first.
 - Parts without a fit are still filed under their type and logged, never dropped.
-- Placing follows `docs/PLAN.md` (Nov 16), and only it. In short: Mar Fil base body; Terminators and Gravis not part of
-  this system for now (they would need their own base fits); plain arms Mar Fil and Springles; every placement from
-  Josh's cuts of the mating surface, each sat against a Mar Fil part; roll from the file; no old library fits used
-  as anchors. Don't drift back to the archived methods (`docs/archive/`).
+- Placing follows `docs/PLAN.md` (agreed Nov 24), and only it. In short:
+  - Claude seats parts in small batches (skill `kitbash-seat-by-shape`), on a real marine with locked hosts and
+    known-good check pieces; Josh fixes them by eye; repeated fixes are applied across a kit for him to check.
+  - Only his fixed placements are written (new fits only, old ones removed per batch), and a written fix is never
+    changed again.
+  - Every shoulder goes through the one spacer, every pad through the pauldron guide.
+  - Stages run in order: tools, reference marine, torsos, arms, arm sockets, pads and weapons, heads and packs, legs,
+    shin pads, wings and cables, accessories, bases.
+  - No search-only library runs. Don't drift back to the archived plans (`docs/archive/`).
 - **Searches match the shape of Josh's cut surface, never the geometry**: no triangle counts, no whole-mesh comparison,
   no "what touches", no sculpt detail. Only the mating surfaces and the roll matter. This has slipped back several
   times; check any new search against it.

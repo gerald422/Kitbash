@@ -38,10 +38,27 @@ def flat(M): return [round(float(x), 6) for x in np.asarray(M).reshape(-1)]
 LEFT_TYPES = ("Arms", "Melee", "Pistols", "Hands", "Shields", "Shoulder Pads", "Knee Pads")
 
 
-def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None, left=False):
+def source_parts(lib):
+    """every library file as the page index lists parts (path, type, name, side), from _sources.csv and the sidecars:
+    the page index can be cut-only (Nov 19-20), so a run over a maker not written yet picks from here (--sources)"""
+    import csv
+    sys.path.insert(0, os.path.join(REPO, "squad-builder")); import build_index as BI
+    out = []
+    for r in csv.DictReader(open(lib + "/_sources.csv", encoding="utf-8-sig")):
+        lp = r.get("library path") or ""
+        if not lp.lower().endswith(".stl"): continue
+        try: fits = json.load(open(lib + "/" + lp[:-4] + ".sockets.json", encoding="utf-8-sig")).get("fits") or {}
+        except (OSError, ValueError): fits = {}
+        name = os.path.basename(lp)[:-4]; folder = os.path.basename(os.path.dirname(lp))
+        out.append({"path": lp, "type": r.get("type") or "", "name": name, "side": BI.side_of(name, folder, fits)})
+    return out
+
+
+def pick(lib, maker, per, ref_rels, every=(), types=None, only_kits=None, left=False, parts=None):
     """a small spread of the maker's right / unsided parts per type, one kit after another; the reference's parts first.
-    left: the left files of the sided types too (searched mirrored: left = right mirrored, notes 106)"""
-    idx = json.load(open(lib + "/_builder/index.json", encoding="utf-8")); hidden = set()
+    left: the left files of the sided types too (searched mirrored: left = right mirrored, notes 106). parts: the
+    library's parts (source_parts) instead of the page index's"""
+    idx = {"parts": parts} if parts is not None else json.load(open(lib + "/_builder/index.json", encoding="utf-8")); hidden = set()
     try: hidden = {l.strip().lower() for l in open(lib + "/_hidden.txt", encoding="utf-8-sig") if l.strip() and not l.startswith("#")}
     except OSError: pass
     types = [t for t in sorted({t for j in RF.JOINTS.values() for t in j[4] + j[5]}) if types is None or t in types]; out = []
@@ -391,9 +408,10 @@ def run(A):
         ref["notes"].append("ankle balls on %s %s: radius %.3f, %.3f mm apart (%.2f / %.2f mm from the cuts' centres)" % (os.path.basename(rel), sd, r_ball,
                             float(np.linalg.norm(pr[0] - pr[1])), float(np.linalg.norm(pr[0] - co)), float(np.linalg.norm(pr[1] - ci))))
     json.dump(dump, open(work + "/ref.json", "w", encoding="utf-8"))
+    src = source_parts(lib) if "--sources" in A else None
     jobs = pick(lib, maker, int(opt(A, "--per", 4)), {p["rel"] for p in ref["parts"].values()}, (opt(A, "--all") or "").split(","),
-                opt(A, "--types").split(",") if opt(A, "--types") else None, opt(A, "--kits").split(",") if opt(A, "--kits") else None, "--left" in A)
-    side_of = {e["path"][:-4].replace("\\", "/"): e.get("side") for e in json.load(open(lib + "/_builder/index.json", encoding="utf-8"))["parts"]}
+                opt(A, "--types").split(",") if opt(A, "--types") else None, opt(A, "--kits").split(",") if opt(A, "--kits") else None, "--left" in A, src)
+    side_of = {e["path"][:-4].replace("\\", "/"): e.get("side") for e in (src if src is not None else json.load(open(lib + "/_builder/index.json", encoding="utf-8"))["parts"])}
     dump["left"] = [rel for _, rel in jobs if side_of.get(rel) == "L"]; json.dump(dump, open(work + "/ref.json", "w", encoding="utf-8"))
     json.dump(jobs, open(work + "/jobs.json", "w", encoding="utf-8")); n = 0 if "--reuse" in A else min(int(opt(A, "--workers", 8)), len(jobs))
     if "--reuse" in A:                      # the report and test marines again from DIR/results.json, no search

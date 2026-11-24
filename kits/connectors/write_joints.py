@@ -1,7 +1,7 @@
 """Write a proving run's joints into the library (docs/PLAN.md, the write step): the numbers prove.py found from Josh's
 cuts become each part's sockets (hosts) and fits (children), so the Squad Builder and TIOW Inbox use them.
 
-    PY kits/connectors/write_joints.py RESULTS.json [MORE.json ...] [--lib LIB] [--skip FILE] [--dry] [--yes]
+    PY kits/connectors/write_joints.py RESULTS.json [MORE.json ...] [--lib LIB] [--skip FILE] [--dry] [--yes] [--drop-old MAKER,MAKER]
     PY kits/connectors/seat.py -- restore          (undo: puts back what the last write changed; Josh's later saves stay)
   PY = Blender's own python (numpy), e.g. "C:/Program Files/Blender Foundation/Blender 4.5/4.5/python/bin/python.exe"
 
@@ -15,6 +15,9 @@ cuts become each part's sockets (hosts) and fits (children), so the Squad Builde
 - Not touched: parts the run found nothing on (they keep what they have, listed), fits Josh corrected by hand
   ("exact"), protected sockets (clicked / copied anchors: kb.sidecar.merge), the SKIP list (default
   kits/connectors/marfil_write_skip.txt: what the sheets showed wrong).
+- --drop-old MAKERS (Nov 24, Josh): the makers' arms and pads keep only new-method joints (strip_old): every other
+  shoulder fit, wrist (Hand) socket, pad socket and pad fit is removed, hand corrections included, even where the
+  run gives nothing new (listed in the report as left without).
 - Backups in _backups/connectors-joints-DATE/before (sidecars and the page index), as seat.py's, so its restore works."""
 import sys, os, json, time, shutil, hashlib, collections
 import numpy as np
@@ -144,6 +147,76 @@ def keep_list(lib, cutj):
     return bool(d.get("on"))
 
 
+DROP_SOCK = ("Hand R", "Hand L", "Pad R", "Pad L")          # --drop-old: the arm and pad joints the new method makes
+DROP_FIT = ("Shoulder R", "Shoulder L", "Pad R", "Pad L")
+DROP_CATS = ("Arms", "Shoulder Pads")
+
+
+def new_method(t, text):
+    """made by the new method: a pad joint from the guide seats (the auto pad spot cuts, the pad's pose in the guide);
+    a shoulder / wrist from a cut write (write_joints). The Nov 20 pad joints were cut-made but in the old pad frame."""
+    text = str(text or "")
+    return ("guide" in text or "(auto)" in text) if t.startswith("Pad") else "write_joints" in text
+
+
+def strip_old(d):
+    """--drop-old (Nov 24, Josh: "remove all of the old fits ... this is the method we want to use going forward"): takes
+    out of a sidecar (and its mirror copies) every arm / pad joint the new method didn't make, hand corrections
+    ("exact") included (they were in the old pad frame). Returns what it removed, as 'socket T' / 'fit T (exact)'."""
+    out = []
+    def one(x, pre):
+        keep = []
+        for sk in x.get("sockets") or []:
+            t = sk.get("type")
+            if t in DROP_SOCK and not new_method(t, (sk.get("props") or {}).get("tiow_from")): out.append(pre + "socket " + t); continue
+            keep.append(sk)
+        if "sockets" in x: x["sockets"] = keep
+        ex = x.get("exact") or []
+        for t in list((x.get("fits") or {})):
+            if t in DROP_FIT and not new_method(t, (x.get("notes") or {}).get(t)):
+                x["fits"].pop(t); (x.get("notes") or {}).pop(t, None); out.append(pre + "fit " + t + (" (exact)" if t in ex else ""))
+        if ex: x["exact"] = [t for t in ex if t in (x.get("fits") or {})]
+        if x.get("check"): x["check"] = [t for t in x["check"] if t in (x.get("fits") or {}) or any(sk.get("type") == t for sk in x.get("sockets") or [])]
+    one(d, "")
+    for v in d.get("variants") or []:
+        if isinstance(v.get("sidecar"), dict): one(v["sidecar"], "copy %s: " % v.get("name"))
+    return out
+
+
+def in_scope(rel, d, makers): return rel.split("/")[0] in makers and d.get("category") in DROP_CATS
+
+
+def drop_rest(lib, makers, plan, w):
+    """the in-scope sidecars this write doesn't otherwise touch: their old arm / pad joints removed (added to the plan,
+    so backed up and restorable with the rest). Returns the report lines."""
+    cnt = collections.Counter(); exact = []; bare = collections.Counter()
+    for mk in makers:
+        for root, _dirs, files in os.walk(lib + "/" + mk):
+            if "_backups" in root.replace("\\", "/").split("/"): continue
+            for f in files:
+                if not f.endswith(SC.SUFFIX): continue
+                rel = os.path.relpath(os.path.join(root, f), lib).replace("\\", "/")[:-len(SC.SUFFIX)]
+                if rel in plan: d = plan[rel][0]; gone = plan[rel][2] if len(plan[rel]) > 2 else []
+                else:
+                    d, style = SC.load(lib + "/" + rel + SC.SUFFIX)
+                    if not in_scope(rel, d, makers): continue
+                    gone = strip_old(d)
+                    if gone: plan[rel] = (d, style); w("  drop old   %-70s %s" % (rel.split("/", 1)[1][:70], ", ".join(gone)))
+                if not in_scope(rel, d, makers): continue
+                for g in gone: cnt[(mk.split(" -")[0], g.split(": ")[-1].replace(" (exact)", "").rsplit(" ", 1)[0])] += 1
+                exact += [rel.split("/")[-1] + " " + g for g in gone if "(exact)" in g]
+                fl = d.get("fits") or {}; sk = {x.get("type") for x in d.get("sockets") or []}
+                if d.get("category") == "Arms":
+                    if not any(t in fl for t in ("Shoulder R", "Shoulder L")): bare[(mk.split(" -")[0], "arms with no shoulder fit")] += 1
+                    if not sk & {"Pad R", "Pad L"}: bare[(mk.split(" -")[0], "arms with no pad socket")] += 1
+                    if not sk & {"Hand R", "Hand L"}: bare[(mk.split(" -")[0], "arms with no wrist socket")] += 1
+                elif not any(t in fl for t in ("Pad R", "Pad L")): bare[(mk.split(" -")[0], "pads with no fit")] += 1
+    out = ["", "Old arm / pad joints removed (--drop-old): " + ", ".join("%s %s %d" % (m, j, n) for (m, j), n in sorted(cnt.items()))]
+    if exact: out.append("Hand corrections removed (old pad frame): " + "; ".join(exact))
+    out.append("Left without (until their cuts are fixed): " + ", ".join("%s %s %d" % (m, j, n) for (m, j), n in sorted(bare.items())))
+    return out
+
+
 def main(A):
     lib = opt(A, "--lib", "D:/Kitbash Library"); res = [a for a in A if a.endswith(".json") and not a.startswith("--")]
     skip_path = opt(A, "--skip", os.path.join(HERE, "marfil_write_skip.txt")); skip = skips(skip_path)
@@ -153,7 +226,8 @@ def main(A):
     task = "connectors-joints-" + time.strftime("%Y-%m-%d"); k = 1
     while os.path.exists(lib + "/_backups/" + task): k += 1; task = "connectors-joints-%s-%d" % (time.strftime("%Y-%m-%d"), k)
     T = lib + "/_backups/" + task
-    W, plan, cnt, cutj = [], {}, collections.Counter(), {}
+    W, plan, cnt, cutj, made = [], {}, collections.Counter(), {}, {}
+    makers = [m for m in (opt(A, "--drop-old") or "").split(",") if m]
     w = W.append
     for rel, r in sorted(by.items()):
         path = lib + "/" + rel + SC.SUFFIX
@@ -170,6 +244,7 @@ def main(A):
         if not (new.get("fits") or new.get("sockets")):
             cnt["nothing to write"] += 1; w("  nothing     %-70s %s" % (rel.split("/", 1)[1][:70], ", ".join(none + hostnear + left_out))); continue
         old2, replaced = unprotect(old, {s["type"] for s in new.get("sockets") or []})
+        gone = strip_old(old2) if makers and in_scope(rel, old, makers) else []   # before the merge: no old exact fit outlives it
         vrep = []
         for v in old2.get("variants") or []:
             if isinstance(v.get("sidecar"), dict) and any(x["name"] == v.get("name") and x["side"] == v.get("side") for x in vars_):
@@ -177,18 +252,20 @@ def main(A):
         merged, kept = SC.merge(new, old2); was = SC.problems(old); bad = [x for x in SC.problems(merged) if x not in was]
         cnt["replaced anchors"] += len(replaced) + len(vrep)
         if bad: cnt["refused"] += 1; w("  REFUSED     %s: %s" % (rel, bad[:2])); continue
-        plan[rel] = (merged, style)
+        plan[rel] = (merged, style, gone); made[rel] = (written, kept or [])
         cutj[rel] = cut_made(new, vars_, kept)
         cnt[r["cat"]] += 1; cnt["fits"] += len(new.get("fits") or {}); cnt["sockets"] += len(new.get("sockets") or []); cnt["near"] += len(check)
         cnt["variants"] += len(vars_)
         extra = [x for x in (["kept: " + ", ".join(kept)] if kept else []) + (["replaced " + ", ".join(replaced)] if replaced else []) + (["not found: " + ", ".join(none)] if none else []) +
-                 (["host near only, not written: " + ", ".join(hostnear)] if hostnear else []) + (["left out: " + ", ".join(left_out)] if left_out else []) + vnotes]
+                 (["host near only, not written: " + ", ".join(hostnear)] if hostnear else []) + (["left out: " + ", ".join(left_out)] if left_out else []) + vnotes +
+                 (["old dropped: " + ", ".join(gone)] if gone else [])]
         w("  %-11s %-70s %s%s" % ("NEAR" if check else "write", rel.split("/", 1)[1][:70], ", ".join(sorted(written)), ("   [" + "; ".join(extra) + "]") if extra else ""))
+    conv = drop_rest(lib, makers, plan, w) if makers else None
     head = ["Write joints: %s  (%d parts in %s)" % (task, len(by), ", ".join(os.path.basename(os.path.dirname(f)) for f in res)), "",
             "Will write %d parts: %d fits, %d sockets (%d near, flagged), %d mirror copies inside sidecars; %d copied / auto anchors replaced." % (len(plan), cnt["fits"], cnt["sockets"], cnt["near"], cnt["variants"], cnt["replaced anchors"]),
             "By type: " + ", ".join("%s %d" % (t, cnt[t]) for t in sorted({r["cat"] for r in by.values()}) if cnt[t]),
             "Left as they are: %d parts with nothing found, %d unreadable, %d refused (the merge would break the sidecar)." % (cnt["nothing to write"], cnt["unreadable"], cnt["refused"]),
-            "Skip list: %s (%d lines)" % (skip_path, len(skip)), ""]
+            "Skip list: %s (%d lines)" % (skip_path, len(skip))] + (conv or []) + [""]
     text = "\r\n".join(head + W) + "\r\n"
     os.makedirs(T, exist_ok=True); open(T + "/report.txt", "wb").write(text.encode("utf-8"))
     print("\n".join(head)); print("The full list: %s/report.txt" % T)
@@ -199,7 +276,7 @@ def main(A):
         if input("Write these %d parts into the library? [y/N] " % len(plan)).strip().lstrip(chr(0xfeff)).lower() not in ("y", "yes"): print("nothing written"); return
     from kb.index import Index
     B = T + "/before"; wrote = {}
-    for rel, (merged, style) in plan.items():
+    for rel, (merged, style, *_g) in plan.items():
         path = lib + "/" + rel + SC.SUFFIX; b = B + "/" + rel + SC.SUFFIX
         os.makedirs(os.path.dirname(b), exist_ok=True); shutil.copyfile(path, b)
         SC.save(path, merged, style); wrote[rel] = md5(path)
@@ -207,7 +284,7 @@ def main(A):
     os.makedirs(B + "/_builder", exist_ok=True)
     for f in (ip, cl):
         if os.path.exists(f): shutil.copyfile(f, B + "/_builder/" + os.path.basename(f))
-    on = keep_list(lib, {r: cutj[r] for r in wrote})
+    on = keep_list(lib, {r: cutj[r] for r in wrote if r in cutj})   # a part only stripped (--drop-old) keeps its list
     try:
         if on:                                      # the page shows only what the cuts made: the whole index again
             sys.path.insert(0, os.path.join(REPO, "squad-builder")); import build_index

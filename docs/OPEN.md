@@ -1,6 +1,7 @@
 # Open items
 
-**The plan is `docs/PLAN.md`: read it first.** This file holds only what is open outside the plan. The list before
+**The plan is `docs/PLAN.md` (agreed Nov 24, replaces the Nov 16 plan): read it first; where an item below is
+covered by its stages, the plan wins.** This file holds only what is open outside the plan. The list before
 Nov 16 is in `docs/archive/` (history, not to be followed). When an item is done, delete its line (the notes entry
 is the record).
 

@@ -143,6 +143,9 @@ def read(blend, lib, pool=()):
             tc = bpy.data.collections.new("torso copies (%s)" % os.path.basename(extra)[:40]); bpy.context.scene.collection.children.link(tc)
             for o in dst.objects:
                 if o is not None and not o.users_collection: tc.objects.link(o)
+    # appended objects' matrix_world is stale until the scene is evaluated (Nov 24: the seat file's arms and guides read
+    # 30-250 mm off, so every guide seat's pad joint was wrong); evaluate before reading any pose
+    bpy.context.view_layer.update()
     idx = json.load(open(lib + "/_builder/index.json", encoding="utf-8"))
     norm = lambda s: re.sub(r"\s+", " ", s).strip().lower()
     byname = {norm(e["name"]): e for e in idx["parts"]}; bystem = {}
