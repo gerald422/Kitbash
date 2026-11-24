@@ -169,6 +169,8 @@ def build(A):
         c = bpy.data.collections.new({"host": "HOST (locked)", "check": "CHECK PIECES (locked)", "neighbour": "NEIGHBOURS (context, never edited)", "part": "FIX THESE (move by eye, then save)"}[r])
         root.children.link(c); colls[r] = c
     log = []
+    ids = [e["id"] for e in spec["objects"]]
+    if len(ids) != len(set(ids)): raise SystemExit("ids used twice: %s" % sorted({i for i in ids if ids.count(i) > 1}))
     for e in spec["objects"]:
         i, role = e["id"], e["role"]; assert role in ROLES, role
         pose = e.get("pose", {}); conn = entry_conn(e)
@@ -185,8 +187,15 @@ def build(A):
         par = e.get("parent"); Wp = info[par]["W"] if par else None
         on = e.get("on", "self" if role != "part" or not par else None)
         if on is None: raise SystemExit("%s: a part with a parent needs 'on' (the parent's frame it sits on)" % i)
-        piv_parent = (Wp @ frames[par][on]) if (par and on != "self") else None
-        if pose.get("at_pivot"): W = piv_parent.copy()
+        on_M = G.M4(e["on_matrix"]) if e.get("on_matrix") else (frames[par][on] if par and on != "self" else None)
+        piv_parent = (Wp @ on_M) if (par and on != "self") else None
+        if pose.get("at_pivot"):
+            W = piv_parent.copy()
+            if pose.get("shift_from"):                   # a connector's own frame in a written socket (props.kb_connectors)
+                r3, t3 = pose["shift_from"]; s3 = next(s for s in sidecar(lib, r3)["sockets"] if s["type"] == t3)
+                W = W @ G.M4(s3["props"]["kb_connectors"][0]["own_in_socket"])
+        elif "fit" in pose: W = piv_parent @ G.M4(sc["fits"][pose["fit"]])      # the part's own library fit on the pivot
+        elif pose.get("place"): W = np.eye(4)                                     # its library frame
         elif "obj" in pose or "child_of" in pose:
             so = S.child_of(pose["from"], pose["child_of"]) if "child_of" in pose else S.obj(pose["from"], pose["obj"])
             W = own_world(so, rel, lib, sc, conn); e["_src"] = so.name
@@ -197,6 +206,7 @@ def build(A):
             if "carry" in pose:                          # kept relative to a frame of i3, carried onto the pivot
                 i3, f3 = pose["carry"]; W = piv_parent @ np.linalg.inv(info[i3]["W"] @ frames[i3][f3]) @ W
         else: raise SystemExit("%s: no pose" % i)
+        if e.get("at") and not par: T = np.eye(4); T[:3, 3] = e["at"]; W = T @ W            # a column of its own
         P = piv_parent if piv_parent is not None else W.copy()                           # the pivot (object origin)
         if e.get("preset"): D = G.M4(e["preset"]); W = P @ D @ np.linalg.inv(P) @ W; P = P @ D
         K = np.linalg.inv(P) @ W
@@ -209,14 +219,17 @@ def build(A):
         if "colour" in e: o.color = tuple(e["colour"])
         lock(o, role != "part")
         o["kb_id"] = i; o["kb_role"] = role; o["kb_rel"] = rel or "connector: " + e["connector"]["kind"]
-        o["kb_parent"] = par or ""; o["kb_on"] = on; o["kb_on_frame"] = G.flat16(frames[par][on]) if par and on != "self" else G.flat16(np.eye(4))
+        o["kb_parent"] = par or ""; o["kb_on"] = on; o["kb_on_frame"] = G.flat16(on_M) if par and on != "self" else G.flat16(np.eye(4))
         o["kb_own_in_obj"] = G.flat16(K); o["kb_frames"] = json.dumps({k: G.flat16(v) for k, v in fr.items() if k != "self"})
         o["kb_joint"] = e.get("joint", ""); o["kb_note"] = e.get("note", ""); o["kb_preset"] = bool(e.get("preset"))
         o["kb_from"] = json.dumps(pose)
         objs[i] = o; info[i] = dict(W=W, P=P)
         log.append("%-10s %-9s %s%s" % (i, role, o.name, "  (pre-set)" if e.get("preset") else ""))
-    torso = next((objs[e["id"]] for e in spec["objects"] if e["role"] == "host"), None)
+    def host_of(i):                                  # the host this hangs from (its own column's torso)
+        while entry(spec, i)["role"] != "host" and entry(spec, i).get("parent"): i = entry(spec, i)["parent"]
+        return objs[i] if entry(spec, i)["role"] == "host" else None
     for e in spec["objects"]:
+        torso = host_of(e["id"])
         if e.get("mirror") and torso is not None:
             import mirror; mirror.mirror_live(objs[e["id"]], torso)
     S.done()
@@ -405,34 +418,43 @@ def write(A):
     for e in spec["objects"]:
         w = e.get("write")
         if not w: continue
-        S, F, con = joint_of(objs, e["id"], w["host"]); h = entry(spec, w["host"]); hrel, prel = h["rel"], e["rel"]
+        half = w.get("half", "both")      # "socket": the part and its fit are known-good, so its move is the host's socket;
+        o = objs[e["id"]]; h = entry(spec, w["host"]); hrel = h["rel"]   # "fit": the socket is, so its move is the fit
+        S, F, con = joint_of(objs, e["id"], w["host"])
+        if half == "socket":
+            if o.parent is not objs[w["host"]]: raise SystemExit("%s: a socket write needs it straight on %s" % (e["id"], w["host"]))
+            S = np.linalg.inv(own(objs[w["host"]])) @ np.array(o.matrix_world)            # its pivot = the socket
+            con = [(e["connector"]["kind"], o.name, np.linalg.inv(np.array(o.matrix_world)) @ own(o))] if e.get("connector") else []
         props = lambda M, cn: {"tiow_from": tag, "kb_josh": os.path.basename(blend),
                                "kb_connectors": [{"kind": k, "name": n, "own_in_socket": G.flat16(M @ C @ M)} for k, n, C in cn]}
-        hd, hn = get(hrel); pd, pn = get(prel); stem = hd.get("part") or os.path.basename(hrel)
-        old = next((s["matrix"] for s in hd.get("sockets") or [] if s["type"] == w["socket"]), None)
-        hn.setdefault("sockets", []).append(_socket(hd.get("sockets"), w["socket"], S, props(np.eye(4), con), stem))
-        W.append("%-12s socket %-10s %s" % (os.path.basename(hrel)[-12:], w["socket"], _diff(old, G.flat16(S))))
-        m = w.get("mirror"); SL = MX @ S @ MX; FL = MX @ F @ MX
-        if m and any(s["type"] == m for s in hd.get("sockets") or []):
-            old = next(s["matrix"] for s in hd["sockets"] if s["type"] == m)
-            hn["sockets"].append(_socket(hd["sockets"], m, SL, props(MX, con), stem))
-            W.append("%-12s socket %-10s %s (mirror)" % (os.path.basename(hrel)[-12:], m, _diff(old, G.flat16(SL))))
-        elif m and _mirror_variant(hd):
-            v = _mirror_variant(hd); vs = (v.get("sidecar") or {}).get("sockets") or []
-            old = next((s["matrix"] for s in vs if s["type"] == m), None)
-            hn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"sockets": [_socket(vs, m, SL, props(MX, con), v["name"])]}})
-            W.append("%-12s socket %-10s %s (mirror, in variant %s)" % (os.path.basename(hrel)[-12:], m, _diff(old, G.flat16(SL)), v["name"]))
-        oldf = (pd.get("fits") or {}).get(w["socket"])
-        pn.setdefault("fits", {})[w["socket"]] = G.flat16(F); pn.setdefault("exact", []).append(w["socket"])
-        pn.setdefault("notes", {})[w["socket"]] = tag
-        W.append("%-12s fit    %-10s %s" % (os.path.basename(prel)[-12:], w["socket"], _diff(oldf, G.flat16(F))))
-        others = [t for t in pd.get("fits") or {} if t != w["socket"]]
-        if others: W.append("             (its other fits stay: %s)" % ", ".join(others))
-        if m and _mirror_variant(pd):
-            v = _mirror_variant(pd); oldf = ((v.get("sidecar") or {}).get("fits") or {}).get(m)
-            pn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"fits": {m: G.flat16(FL)}, "exact": [m], "notes": {m: tag}}})
-            W.append("%-12s fit    %-10s %s (mirror, in variant %s)" % (os.path.basename(prel)[-12:], m, _diff(oldf, G.flat16(FL)), v["name"]))
-        checks.append((e["id"], w, hrel, prel, np.linalg.inv(own(objs[w["host"]])) @ own(objs[e["id"]])))
+        hd, hn = get(hrel); stem = hd.get("part") or os.path.basename(hrel); m = w.get("mirror")
+        if half != "fit":
+            old = next((s["matrix"] for s in hd.get("sockets") or [] if s["type"] == w["socket"]), None)
+            hn.setdefault("sockets", []).append(_socket(hd.get("sockets"), w["socket"], S, props(np.eye(4), con), stem))
+            W.append("%-24s socket %-10s %s" % (os.path.basename(hrel)[-24:], w["socket"], _diff(old, G.flat16(S))))
+            SL = MX @ S @ MX
+            if m and any(s["type"] == m for s in hd.get("sockets") or []):
+                old = next(s["matrix"] for s in hd["sockets"] if s["type"] == m)
+                hn["sockets"].append(_socket(hd["sockets"], m, SL, props(MX, con), stem))
+                W.append("%-24s socket %-10s %s (mirror)" % (os.path.basename(hrel)[-24:], m, _diff(old, G.flat16(SL))))
+            elif m and _mirror_variant(hd):
+                v = _mirror_variant(hd); vs = (v.get("sidecar") or {}).get("sockets") or []
+                old = next((s["matrix"] for s in vs if s["type"] == m), None)
+                hn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"sockets": [_socket(vs, m, SL, props(MX, con), v["name"])]}})
+                W.append("%-24s socket %-10s %s (mirror, in variant %s)" % (os.path.basename(hrel)[-24:], m, _diff(old, G.flat16(SL)), v["name"]))
+        if half != "socket":
+            prel = e["rel"]; pd, pn = get(prel); FL = MX @ F @ MX
+            oldf = (pd.get("fits") or {}).get(w["socket"])
+            pn.setdefault("fits", {})[w["socket"]] = G.flat16(F); pn.setdefault("exact", []).append(w["socket"])
+            pn.setdefault("notes", {})[w["socket"]] = tag
+            W.append("%-24s fit    %-10s %s" % (os.path.basename(prel)[-24:], w["socket"], _diff(oldf, G.flat16(F))))
+            others = [t for t in pd.get("fits") or {} if t != w["socket"]]
+            if others: W.append("             (its other fits stay: %s)" % ", ".join(others))
+            if m and _mirror_variant(pd):
+                v = _mirror_variant(pd); oldf = ((v.get("sidecar") or {}).get("fits") or {}).get(m)
+                pn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"fits": {m: G.flat16(FL)}, "exact": [m], "notes": {m: tag}}})
+                W.append("%-24s fit    %-10s %s (mirror, in variant %s)" % (os.path.basename(prel)[-24:], m, _diff(oldf, G.flat16(FL)), v["name"]))
+        checks.append((e["id"], w, hrel, e.get("rel"), np.linalg.inv(own(objs[w["host"]])) @ own(o)))
     out, types = {}, set(json.load(open(os.path.join(REPO, "joints.json"), encoding="utf-8"))["partTypes"])
     for n in new.values():                           # one entry per variant (an arm is host of Pad L and part on Shoulder L)
         vs = {}
@@ -465,8 +487,10 @@ def write(A):
     # placed the TIOW way from what is now on disk, against Josh's file
     W = ["", "Check: each written joint placed from the library (socket . fit) against Josh's file:"]
     for i, w, hrel, prel, want in checks:
-        hd = SC.load(os.path.join(lib, hrel + SC.SUFFIX))[0]; pd = SC.load(os.path.join(lib, prel + SC.SUFFIX))[0]
-        S = G.M4(next(s["matrix"] for s in hd["sockets"] if s["type"] == w["socket"])); F = G.M4(pd["fits"][w["socket"]])
+        hd = SC.load(os.path.join(lib, hrel + SC.SUFFIX))[0]; s = next(s for s in hd["sockets"] if s["type"] == w["socket"])
+        S = G.M4(s["matrix"])
+        if prel: F = G.M4(SC.load(os.path.join(lib, prel + SC.SUFFIX))[0]["fits"][w["socket"]])
+        else: F = G.M4(s["props"]["kb_connectors"][0]["own_in_socket"])        # a connector straight on the socket
         got = S @ F; W.append("%-8s on %-10s %.4f mm %.3f deg" % (i, w["socket"], np.linalg.norm(got[:3, 3] - want[:3, 3]), G.ang(got, want)))
     print("\n".join(W), flush=True)
 
