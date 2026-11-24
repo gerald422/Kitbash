@@ -4,7 +4,7 @@
     BL kits/seat/batch.py -- read BATCH.blend [--json OUT.json]
     BL kits/seat/batch.py -- compare A.blend B.blend
     BL kits/seat/batch.py -- write BATCH.blend [--check] [--spec SPEC.json] [--lib LIB]   (see write())
-    BL kits/seat/batch.py -- apply BATCH.blend FROM_ID OUT.blend   (Josh's move of FROM_ID, on every piece of its kind)
+    BL kits/seat/batch.py -- apply BATCH.blend FROM_ID OUT.blend [--skip ID,ID]   (Josh's move of FROM_ID, on every piece of its kind)
   BL = blender --background --factory-startup --python   (Blender 5.1 on the PC)
 
 build: one Blender file per batch, from a spec (kits/seat/batches/*.json). Every object is one of
@@ -517,11 +517,11 @@ def apply(A):
     by = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}
     def in_frame(o):                                 # the piece's pivot in the frame it sits on (the parent's frame)
         par = by[o["kb_parent"]]; return np.linalg.inv(own(par) @ G.M4(o["kb_on_frame"])) @ np.array(o.matrix_world)
-    D = in_frame(by[fid]); kind = fid.split("_", 1)[1]
+    D = in_frame(by[fid]); kind = fid.split("_", 1)[1]; skip = set((opt(A, "--skip", "") or "").split(","))
     print("%s: %.3f mm %.2f deg in its socket frame" % ((fid,) + tuple(G.off(D, np.eye(4)))))
     done = []
     for i, o in by.items():
-        if i == fid or i.split("_", 1)[-1] != kind or "_" not in i or i.startswith("ref"): continue
+        if i == fid or i in skip or i.split("_", 1)[-1] != kind or "_" not in i or i.startswith("ref"): continue
         par = by[o["kb_parent"]]; o.rotation_mode = 'QUATERNION'
         o.matrix_world = G.mat(own(par) @ G.M4(o["kb_on_frame"]) @ D); o["kb_applied"] = "%s's change (%s)" % (fid, os.path.basename(src))
         done.append(i)

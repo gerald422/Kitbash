@@ -24,3 +24,15 @@ Josh's file: every piece matches (0.000).
 
 Renders `02t b check - ...png` beside the batch: on each torso tried (Mk2 A1, Mk6, Mk10 and the Redwarden) the legs
 take the same turned stance under the waist.
+
+**Then (Josh): the Mk2 A1 legs on every Turtle Ninja torso, in his own file.** Josh kept working in the original file,
+not the "b" copy. There he set TN Mk2 Upper A1's legs (0.62 mm / 18.5 deg from the start; his Redwarden fix is a
+different one). He asked for that change on all TN legs, done in his own file because the copies were piling up.
+
+His Blender instance isn't the one the MCP add-on drives, so it was done on disk:
+1. backup `batches\_backups\<file> - before Mk2 A1 legs applied\` (the `.blend` and the `.blend1`);
+2. `batch.py apply <file> t2_legs <file> (applying).blend --skip t1_legs` (new option `--skip`);
+3. a check: 21 TN legs carry his change exactly, and the Redwarden keeps its own helmet and legs;
+4. the copy moved over his file, after checking it hadn't been saved since. He reloads it with File > Revert.
+
+The "b" file is obsolete.
