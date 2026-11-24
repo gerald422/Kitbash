@@ -27,3 +27,12 @@ If Josh leaves a pre-set piece alone, `read` lists it as changed by D, and `writ
 - `write --check`: the 17 Waists move by `D`; nothing else moves beyond the mirrored left shoulders' usual
   0.05 mm.
 - Renders `02t2 check - ...png` beside the batch.
+
+**Josh's one fix: raise the helmet.** On the Mk7 Jump Pack torso (t1) he raised Helmet 1 by 0.39 mm (0.36 up,
+0.14 forward, no turn) and asked for it on the rest of the batch. His Blender now is the instance the MCP add-on
+drives, so it was done live in his session, with no on-disk edit or reload:
+- each other helmet got `own(torso) . start . D`, to 0.00004 mm;
+- then the session was saved (the previous save is the `.blend1`).
+
+`read` from disk: 17 of 17 helmets changed, "the SAME change", and the legs as pre-set. `write --check`: 17 Waist and
+17 Neck socket changes, nothing else.
