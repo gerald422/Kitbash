@@ -56,6 +56,8 @@ is the record).
 
 ## Outside the plan, to do
 
+- For the weapons stage: parts filed as arms that Josh says are weapons are listed in `kits/seat/not_arms.txt`
+  (notes 151; so far Marta Deathwatch `DW Weapon T Ua 1`). Pick them up there; the arm batches skip them.
 - Waist adapters (Josh, Nov 20): the Bits adapters `Bits/Adapters/lower_body_(torso)_1..6` (flat-topped waist
   spacers: fit Waist, socket Flat Waist) are all options, #3 the default. Rule for the page / TIOW Inbox: a Mar Fil
   torso on flat-topped legs (every Turtle Ninja and Marta legs) goes on the adapter; a non-Mar Fil torso (flat

@@ -45,6 +45,10 @@ def main(A):
     checks = lambda tid, pre: [{"id": "%s_%s" % (tid, pid), "role": "check", "name": pre + ref_obj.split(" - ")[-1], "rel": prel,
                                 "parent": tid, "on": sock, "pose": {"fit": sock}} for sock, pid, ref_obj, prel, c, joint in MT.PIECES]
     objs += checks("ref", "REF ")
+    skip = {l.split(" | ")[0].strip() for l in open(os.path.join(HERE, "not_arms.txt"), encoding="utf-8")
+            if l.strip() and not l.startswith("#")}       # Josh: not arms, for the weapons stage (notes 151)
+    for r in [r for r in arms if r in skip]: log.append("%-34s left out: not an arm (not_arms.txt), for the weapons stage" % os.path.basename(r))
+    arms = [r for r in arms if r not in skip]
     for k, rel in enumerate(arms, 1):
         tid = "a%d" % k; short = os.path.basename(rel).replace("MarFil ", ""); sc = B.sidecar(MT.LIB, rel)
         at = np.eye(4); at[:3, 3] = [MT.GAP * (k % MT.PER_ROW), 0, -MT.ROW_GAP * (k // MT.PER_ROW)]
