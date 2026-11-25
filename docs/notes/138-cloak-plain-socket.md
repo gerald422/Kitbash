@@ -36,3 +36,13 @@ The old sidecars are in `_backups\cloak plain 2026-11-25 0924`. Read back: 0 wro
 
   Redwarden stays separate. The Mk2 Upper A1 change went on the other 20 TN torsos' circles cloaks (exactly), in
   `Redwarden and TN torsos 1 (2026-11-25 d)`. The no-circles cloaks keep his TN 2 change.
+
+## Written: Redwarden and TN torsos 1 (d)
+
+Josh: "all good". All 22 torsos got both sockets: the circles cloak's move is `Cloak`, the no-circles cloak's move is
+`Cloak Plain`.
+- The old sidecars are in `_backups\batch write 2026-11-25 0945`.
+- All 44 joints matched the file: 0.0000 mm.
+- The c and d files went to the Recycle Bin.
+
+Left with Josh: `TN torsos 3 (c)`, the last cloak batch.
