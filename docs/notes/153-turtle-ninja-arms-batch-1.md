@@ -21,3 +21,14 @@ hidden, none in Rigging Required, nothing on `not_arms.txt`. The 28 two-handed p
 
 **Renders:** all 25 sit at the shoulder. "Mk4 Tactical - Merged Bolter D1 Arm D2 R" is an arm and bolter sculpted as
 one piece, and its live mirror crosses in front of the chest. It may be one for `not_arms.txt` if Josh removes it.
+
+## Marta's offset on every TN arm (Josh, Nov 25)
+
+Josh: "can you give all TN arms the same offset that the marta arms got please".
+
+His TN file had no saved change (read: all 25 unchanged). So it was left alone, because he may have it open (notes
+148), and a new file was built instead: `03 Stage 3 - Turtle Ninja right arms 1 (2026-11-25 b).blend`. It has the
+same 25 arms with `make_arm_batch --shift 0.32,0,0`, Marta's 0.32 mm outward on the spacer (notes 150-152).
+
+A dry-run write gives every fit 0.307-0.334 mm from its old one. Every later TN arm file (69 right, 71 left) gets the
+same `--shift`.
