@@ -5,18 +5,18 @@
  "scale": 0.9,
  "fits": {
   "Shoulder L": [
-   -0.999101,
-   0.042132,
-   0.004771,
-   -30.772757,
-   0.004775,
-   6e-06,
-   0.999989,
-   -44.553005,
-   0.042131,
-   0.999112,
-   -0.000207,
-   -36.64286,
+   -0.9990608743174719,
+   0.043047902578428346,
+   0.005056846990159149,
+   -31.134211205362963,
+   0.00505169767212711,
+   -0.00022035837483639666,
+   0.9999873873213221,
+   -44.54275287508876,
+   0.04304812291281767,
+   0.9990714989908975,
+   2.6856716227616026e-06,
+   -36.62107420146519,
    0.0,
    0.0,
    0.0,
@@ -24,7 +24,7 @@
   ]
  },
  "notes": {
-  "Shoulder L": "Marta single arm: shoulder face (30.2 mm2) on the socket, face flat on the chest, her Y up kept; 90% as her two-armed sets (Josh, 30 Oct)"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Marta left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "sockets": [
   {
@@ -104,5 +104,8 @@
   "name": "set_arms_2.2",
   "folder": "Arms",
   "path": "Marta PunkGirl - Tacticus\\Captain with Relic Shield\\Arms\\set_arms_2.2.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

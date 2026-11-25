@@ -25,3 +25,19 @@ cloak sculpted on. It is an arm, so it stays in for Josh to judge.
 
 **Still to look at:** DW Weapon T Ua 2 and 3 are in the right-arms file. If Josh removes them as weapons, add them to
 `not_arms.txt`.
+
+## Josh's answer, and what was written (Nov 25)
+
+Josh: "belive i made one or two changes on right arm the rest on right and left arm are goof to go".
+
+**Left arms: written.**
+- The Shoulder L fit of all 60, each the left image of its pre-set placement.
+- 61 sidecars, with Torso 2 unchanged.
+- Every joint read back at 0.0000 mm.
+- Backup: `_backups\batch write 2026-11-25 1505`.
+- The file went to the Recycle Bin.
+
+**Right arms: held.** The saved file (15:02) has no change at all: every one of its 482 objects is exactly where it
+was built (0.0000 mm), and nothing was removed. His "one or two changes" are not in it, so they are probably unsaved
+in his Blender. A write would lock the fits as exact (Rule 1), so it waits until he has saved, or he confirms there
+are none.
