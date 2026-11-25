@@ -11,9 +11,11 @@ exactly as Josh placed it on Torso 2. The torsos differ in shape, so Josh moves 
 that move is the torso's Cloak socket (half "socket"), and all 17 cloaks share it.
 
 Each column is the torso stood on its waist (Torso 2's frame), with its written pieces locked so the clearance shows:
-the spacer, Arm 2B R, the guide and Shoulder Pad 1 (the left side mirrored), Helmet 1, Back Pack 1 and Legs 1A. On top:
-- CyberBrush Bug Hunters Cloak 1 (circles on the straps), the part Josh moves;
-- Marta 49 March 2026 Cloak 2 (no circles), riding on it by the two written fits, in its own collection to hide.
+the spacer, Arm 2B R, the guide and Shoulder Pad 1 (the left side mirrored), Helmet 1, Back Pack 1 and Legs 1A. On top,
+both movable and each in its own collection so Josh can show one at a time (Nov 25; at first the second rode, locked,
+on the first):
+- CyberBrush Bug Hunters Cloak 1 (circles on the straps): its move is the torso's Cloak socket;
+- Marta 49 March 2026 Cloak 2 (no circles): its move is compared with the first one's at the write.
 The first column is Torso 2 as written, all locked: the target."""
 import os, sys, json
 import numpy as np
@@ -23,7 +25,7 @@ import geom as G, batch as B, make_torso_batch as MT
 
 CB = "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1"
 M49 = "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2"
-OTHER = "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+CIRCLES, PLAIN = "CLOAK 1 - circles on the straps", "CLOAK 2 - no circles"     # a collection each, to show one at a time
 
 
 def fit(rel, sock): return G.M4(B.sidecar(MT.LIB, rel)["fits"][sock])
@@ -38,14 +40,14 @@ def pieces(tid, pre, rel, cloak_on, live):
     for sock, pid, ref_obj, prel, c, joint in MT.PIECES:
         out.append({"id": "%s_%s" % (tid, pid), "role": "check", "name": "%s%s" % (pre, ref_obj.split(" - ")[-1]), "rel": prel,
                     "parent": tid, "on": sock, "pose": {"fit": sock}})
-    cl = {"id": tid + "_cloak", "role": "part" if live else "check", "name": pre + "Cloak (circles)", "rel": CB,
-          "parent": tid, "on": "Cloak", "pose": {"fit": "Cloak"}, "joint": "Cloak on the Cloak socket"}
-    if live:
-        cl.update(on_matrix=G.flat16(cloak_on), write={"host": tid, "socket": "Cloak", "half": "socket"},
-                  note="starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)")
-    out.append(cl)
-    out.append({"id": tid + "_cloak2", "role": "check", "name": pre + "Cloak (no circles)", "rel": M49, "parent": tid + "_cloak",
-                "on": "Cloak pivot", "on_matrix": G.flat16(np.linalg.inv(fit(CB, "Cloak"))), "pose": {"fit": "Cloak"}, "collection": OTHER})
+    for cid, rel_c, nm, coll in (("_cloak", CB, "Cloak (circles)", CIRCLES), ("_cloak2", M49, "Cloak (no circles)", PLAIN)):
+        cl = {"id": tid + cid, "role": "part" if live else "check", "name": pre + nm, "rel": rel_c, "parent": tid, "on": "Cloak",
+              "pose": {"fit": "Cloak"}, "joint": "Cloak on the Cloak socket", "collection": coll + ("" if live else " (reference)")}
+        if live:                         # both movable, each its own (Josh, Nov 25); the circles one writes the socket,
+            cl.update(on_matrix=G.flat16(cloak_on),          # the other is compared with it at the write
+                      note="starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso")
+            if cid == "_cloak": cl["write"] = {"host": tid, "socket": "Cloak", "half": "socket"}
+        out.append(cl)
     return out
 
 

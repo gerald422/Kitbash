@@ -1,7 +1,7 @@
 {
- "name": "Stage 2 - cloaks on TN torsos 3",
+ "name": "Stage 2 - cloaks on TN torsos 3 (b)",
  "stage": "2 (the Cloak socket)",
- "out": "~/Desktop/mar fil connectors/batches/02 Stage 2 - cloaks on TN torsos 3 (2026-11-25).blend",
+ "out": "~/Desktop/mar fil connectors/batches/02 Stage 2 - cloaks on TN torsos 3 (2026-11-25 b).blend",
  "sources": {
   "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
   "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
@@ -127,37 +127,21 @@
    "pose": {
     "fit": "Cloak"
    },
-   "joint": "Cloak on the Cloak socket"
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps (reference)"
   },
   {
    "id": "ref_cloak2",
    "role": "check",
    "name": "REF Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "ref_cloak",
-   "on": "Cloak pivot",
-   "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
-    0.0,
-    0.0,
-    0.0,
-    1.0
-   ],
+   "parent": "ref",
+   "on": "Cloak",
    "pose": {
     "fit": "Cloak"
    },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles (reference)"
   },
   {
    "id": "t1",
@@ -313,6 +297,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     0.00010533481621440293,
     -0.9993620260605182,
@@ -331,42 +316,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t1",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t1_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper A1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t1_cloak",
-   "on": "Cloak pivot",
+   "parent": "t1",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    0.00010533481621440293,
+    -0.9993620260605182,
+    0.035707900446096945,
+    13.863845628839808,
+    0.00018101359161064063,
+    0.03570784117241226,
+    0.9993620878675562,
+    5.954831668985186,
+    -0.9999999636823405,
+    -9.888062806673998e-05,
+    0.00018458545388551513,
+    6.408885592223896,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t2",
@@ -522,6 +509,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     8.713229329479289e-05,
     -0.9993629040838693,
@@ -540,42 +528,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t2",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t2_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper B1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t2_cloak",
-   "on": "Cloak pivot",
+   "parent": "t2",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    8.713229329479289e-05,
+    -0.9993629040838693,
+    0.03568276505678098,
+    13.86537014838495,
+    6.086138258576401e-05,
+    0.03568279464211183,
+    0.9993629436321088,
+    5.957789816396524,
+    -1.0000000067370005,
+    -8.488220360083857e-05,
+    6.395373386226767e-05,
+    6.407335694058588,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t3",
@@ -731,6 +721,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     0.00010869082909881432,
     -0.9993641020835056,
@@ -749,42 +740,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t3",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t3_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper C1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t3_cloak",
-   "on": "Cloak pivot",
+   "parent": "t3",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    0.00010869082909881432,
+    -0.9993641020835056,
+    0.03566121040892638,
+    13.704553077278973,
+    0.00012521695743966362,
+    0.03566115360327508,
+    0.9993641524014637,
+    5.9570353070186,
+    -0.9999999520233164,
+    -0.0001042292706487663,
+    0.00012894298732028147,
+    6.407626442439579,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t4",
@@ -940,6 +933,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     7.609517370837587e-05,
     -0.9993619536162324,
@@ -958,42 +952,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t4",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t4_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper D1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t4_cloak",
-   "on": "Cloak pivot",
+   "parent": "t4",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    7.609517370837587e-05,
+    -0.9993619536162324,
+    0.03570999958387774,
+    13.704263158202355,
+    -2.598058478109279e-05,
+    0.0357099501360088,
+    0.9993619840099243,
+    5.955080302091066,
+    -1.000000002406936,
+    -7.701933132750354e-05,
+    -2.3290010815464005e-05,
+    6.4069176141748585,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t5",
@@ -1149,6 +1145,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     8.942150265378328e-05,
     -0.9993630422508738,
@@ -1167,42 +1164,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t5",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t5_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper E9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t5_cloak",
-   "on": "Cloak pivot",
+   "parent": "t5",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    8.942150265378328e-05,
+    -0.9993630422508738,
+    0.03568327255392883,
+    13.421423646231903,
+    0.0001162896848576374,
+    0.035683204112335457,
+    0.9993630322833367,
+    5.964766381894062,
+    -1.000000143620045,
+    -8.529298998615711e-05,
+    0.00011933108893470723,
+    6.405822045009415,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t6",
@@ -1358,6 +1357,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     0.0001237973011010312,
     -0.9993609691354434,
@@ -1376,42 +1376,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t6",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t6_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper F1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t6_cloak",
-   "on": "Cloak pivot",
+   "parent": "t6",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    0.0001237973011010312,
+    -0.9993609691354434,
+    0.03572944738166868,
+    13.02310672617638,
+    -2.248181709773266e-05,
+    0.03572937539767196,
+    0.9993620216313713,
+    5.955389925677064,
+    -0.9999999873130504,
+    -0.00012455827964927708,
+    -1.807973367633491e-05,
+    6.4092834845980065,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t7",
@@ -1567,6 +1569,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     8.761775328010055e-05,
     -0.9993630843663165,
@@ -1585,42 +1588,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t7",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t7_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper G9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t7_cloak",
-   "on": "Cloak pivot",
+   "parent": "t7",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    8.761775328010055e-05,
+    -0.9993630843663165,
+    0.03567907620178353,
+    13.421137687211703,
+    1.4171856071330574e-05,
+    0.03567892405238124,
+    0.9993630916095948,
+    5.964922751766437,
+    -1.0000000367597297,
+    -8.720490174716901e-05,
+    1.7145533710761552e-05,
+    6.407940866727358,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t8",
@@ -1776,6 +1781,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     8.946914050384058e-05,
     -0.9993631211256014,
@@ -1794,42 +1800,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t8",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t8_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper H1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t8_cloak",
-   "on": "Cloak pivot",
+   "parent": "t8",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    8.946914050384058e-05,
+    -0.9993631211256014,
+    0.035682164003014376,
+    13.024664967099328,
+    0.0002891990898585918,
+    0.03568208513690743,
+    0.9993630624871367,
+    5.964615266598798,
+    -1.0000000938327493,
+    -7.919858304909525e-05,
+    0.00029210535590535767,
+    6.408604906055167,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t9",
@@ -1985,6 +1993,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     8.785116910711714e-05,
     -0.9993630332243443,
@@ -2003,42 +2012,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t9",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t9_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper I9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t9_cloak",
-   "on": "Cloak pivot",
+   "parent": "t9",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    8.785116910711714e-05,
+    -0.9993630332243443,
+    0.035684149718094985,
+    12.978962286770466,
+    -0.00011113985008674043,
+    0.035684079099032116,
+    0.9993630360853617,
+    5.964825123699299,
+    -1.0000000363828194,
+    -9.18244469959987e-05,
+    -0.00010799530643267253,
+    6.407590624069627,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t10",
@@ -2194,6 +2205,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     0.00010716436347103409,
     -0.9993618955556786,
@@ -2212,42 +2224,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t10",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t10_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper J9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t10_cloak",
-   "on": "Cloak pivot",
+   "parent": "t10",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    0.00010716436347103409,
+    -0.9993618955556786,
+    0.03570886615395199,
+    12.98081530559595,
+    -5.979869464267217e-05,
+    0.03570889354995528,
+    0.9993619455625957,
+    5.954885129545659,
+    -0.9999999511805009,
+    -0.00010919865115910225,
+    -5.590233342130221e-05,
+    6.408899305356925,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t11",
@@ -2403,6 +2417,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     7.023413138360974e-05,
     -0.9993619791657297,
@@ -2421,42 +2436,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t11",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t11_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper K9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t11_cloak",
-   "on": "Cloak pivot",
+   "parent": "t11",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    7.023413138360974e-05,
+    -0.9993619791657297,
+    0.03570291230801758,
+    13.42364646284651,
+    -0.0003628141759855247,
+    0.03570287009365891,
+    0.9993620099731739,
+    5.9568310091623715,
+    -0.9999999459573997,
+    -8.315328274063588e-05,
+    -0.0003600851958670383,
+    6.406450531605515,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t12",
@@ -2612,6 +2629,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     7.398602405105011e-05,
     -0.9993620009269064,
@@ -2630,42 +2648,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t12",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t12_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper M1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t12_cloak",
-   "on": "Cloak pivot",
+   "parent": "t12",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    7.398602405105011e-05,
+    -0.9993620009269064,
+    0.035710744511447894,
+    13.419871727194568,
+    -8.981923853400151e-05,
+    0.0357107100643569,
+    0.999361995692504,
+    5.954989344632452,
+    -0.9999999723941281,
+    -7.717656483912271e-05,
+    -8.714899476707725e-05,
+    6.409964741905469,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t13",
@@ -2821,6 +2841,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     0.00012392297935910515,
     -0.9993619437016609,
@@ -2839,42 +2860,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t13",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t13_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper N9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t13_cloak",
-   "on": "Cloak pivot",
+   "parent": "t13",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    0.00012392297935910515,
+    -0.9993619437016609,
+    0.035721624034062226,
+    13.421475187681796,
+    6.35411161627389e-05,
+    0.03572167109972264,
+    0.9993619905717066,
+    5.955990498681572,
+    -0.9999999344998559,
+    -0.00012153196931472296,
+    6.796795587045868e-05,
+    6.406896937937461,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t14",
@@ -3030,6 +3053,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     0.00010645564128287272,
     -0.9993619550596525,
@@ -3048,42 +3072,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t14",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t14_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper O9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t14_cloak",
-   "on": "Cloak pivot",
+   "parent": "t14",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    0.00010645564128287272,
+    -0.9993619550596525,
+    0.03570334339766495,
+    12.969079604080836,
+    -8.250247992189186e-06,
+    0.035703322312787215,
+    0.999361975538465,
+    5.995884241542967,
+    -0.9999999849958849,
+    -0.00010669920100984407,
+    -4.460459617061283e-06,
+    6.408146181271206,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t15",
@@ -3239,6 +3265,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     9.288738545152906e-05,
     -0.999363123422136,
@@ -3257,42 +3284,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t15",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t15_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper P1 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t15_cloak",
-   "on": "Cloak pivot",
+   "parent": "t15",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    9.288738545152906e-05,
+    -0.999363123422136,
+    0.035697299106262875,
+    12.979268427060811,
+    -4.640147677463589e-05,
+    0.0356971531392573,
+    0.9993631619856441,
+    5.955038348677334,
+    -1.0000001276909813,
+    -9.463115109248657e-05,
+    -4.31974681401675e-05,
+    6.408231015414344,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   },
   {
    "id": "t16",
@@ -3448,6 +3477,7 @@
     "fit": "Cloak"
    },
    "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 1 - circles on the straps",
    "on_matrix": [
     8.831400425974242e-05,
     -0.9993629672018406,
@@ -3466,42 +3496,44 @@
     0.0,
     1.0
    ],
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso",
    "write": {
     "host": "t16",
     "socket": "Cloak",
     "half": "socket"
-   },
-   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+   }
   },
   {
    "id": "t16_cloak2",
-   "role": "check",
+   "role": "part",
    "name": "Upper Q9 Cloak (no circles)",
    "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
-   "parent": "t16_cloak",
-   "on": "Cloak pivot",
+   "parent": "t16",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "collection": "CLOAK 2 - no circles",
    "on_matrix": [
-    1.0000000000051885,
-    0.0005617359747755203,
-    0.0004037730350261185,
-    -0.008610313496011025,
-    -0.00053173252690532,
-    0.9973462346877139,
-    -0.07279963284114502,
-    -4.2411517818460505,
-    -0.00044466888988716364,
-    0.07279985635317153,
-    0.9973461750507088,
-    11.37475953928505,
+    8.831400425974242e-05,
+    -0.9993629672018406,
+    0.03568053816535466,
+    12.981358193631028,
+    -5.481223902267926e-06,
+    0.03568051263225207,
+    0.9993629850719888,
+    5.958802412373245,
+    -0.9999999883745595,
+    -8.847905167053222e-05,
+    -2.351475669450055e-06,
+    6.408302779866589,
     0.0,
     0.0,
     0.0,
     1.0
    ],
-   "pose": {
-    "fit": "Cloak"
-   },
-   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso"
   }
  ]
 }

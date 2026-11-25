@@ -86,3 +86,18 @@ Josh: "also good", with the file unchanged. So each torso's Cloak socket is its 
 - Written with `batch.py write`; the old sidecars are in `_backups\batch write 2026-11-25 0854`.
 - Every joint matched the file: 0.0000 mm.
 - Every Mar Fil torso now has a Cloak socket.
+
+## TN cloak files redone as "b" (Nov 25)
+
+Josh: the no-circles cloak was locked, so he couldn't adjust it. He asked for each cloak in its own collection, to show
+one at a time.
+
+The three TN files are rebuilt as `(2026-11-25 b)`. Neither had been saved since it was built, so nothing of his was
+lost. The old copies went to the Recycle Bin.
+
+In the new files:
+- both cloaks are movable, and both pivot on the torso's Cloak start (its Back);
+- they sit in collections `CLOAK 1 - circles on the straps` and `CLOAK 2 - no circles`;
+- the circles cloak's move is written as the torso's Cloak socket;
+- the no-circles cloak's move is compared with it at the write. If the two moves differ on a torso, Josh decides
+  there (one socket can't hold two different moves).
