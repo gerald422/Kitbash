@@ -18,3 +18,9 @@ off to the side (its old fit was off): one for Josh by eye.
 
 **Turtle Ninja two-armed: out.** Josh, on the TN file: "I think the TN arms are so badly scaled here we would leave
 out these parts specifically". The 28 Mk4 bolters are not written; PLAN.md's scope table lists them as out.
+
+The Turtle Ninja two-armed file went to the Recycle Bin (Josh: "yes recycle it").
+
+**CyberBrush:** Josh moved 2 Hand Sword (1) 0.45 mm out along X in its seat frame, no turn, and asked for it on all.
+`batch.py apply ... a1_arm ... --delta`: `03 Stage 3 - Two-armed CyberBrush (2026-11-25 b).blend`; read back, all 8
+carry exactly that move. For him to recheck.
