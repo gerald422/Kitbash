@@ -78,18 +78,18 @@
  "category": "Arms",
  "fits": {
   "Shoulder L": [
-   0.999117,
-   0.042007,
-   0.000141,
-   -10.733568,
-   0.000141,
-   6e-06,
-   -1.0,
-   4.549453,
-   -0.042007,
-   0.999117,
-   0.0,
-   -10.086781,
+   0.9990783941640031,
+   0.04292290717923219,
+   -0.00014504057369497435,
+   -11.056635161273228,
+   -0.0001357302844105048,
+   -0.0002203236981769653,
+   -0.9999997477155785,
+   4.548263419440029,
+   -0.04292308548454306,
+   0.9990766136070391,
+   -0.00021419196255111978,
+   -10.072940356683528,
    0.0,
    0.0,
    0.0,
@@ -97,11 +97,15 @@
   ]
  },
  "notes": {
-  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Turtle Ninja left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "original": {
   "name": "Mk10 Left Arm Straight B 2",
   "folder": "Arms",
   "path": "Turtle Ninja - Tacticus\\Mk10 Assault Intercessor + Jumppack Addon\\Arms\\Mk10 Left Arm Straight B 2.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

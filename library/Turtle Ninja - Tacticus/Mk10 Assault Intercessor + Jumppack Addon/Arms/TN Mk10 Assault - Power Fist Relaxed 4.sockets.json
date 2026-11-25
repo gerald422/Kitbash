@@ -50,19 +50,19 @@
  ],
  "category": "Arms",
  "fits": {
-  "Shoulder R": [
-   0.855239,
-   -0.171119,
-   0.489167,
-   -3.774566,
-   0.496492,
-   1.2e-05,
-   -0.868041,
-   -3.220852,
-   0.148532,
-   0.98525,
-   0.08497,
-   -6.292846,
+  "Shoulder L": [
+   -0.8604862512166012,
+   0.2706165267704795,
+   -0.4316554606011391,
+   2.7826685611721715,
+   -0.4585160903730735,
+   -0.04201165786963028,
+   0.8876920048342158,
+   3.732725437101478,
+   0.22209028909492087,
+   0.9617693232060965,
+   0.16023292611892595,
+   -6.292073399505551,
    0.0,
    0.0,
    0.0,
@@ -70,11 +70,15 @@
   ]
  },
  "notes": {
-  "Shoulder": "tilted shoulder disc (posed arm): disc on the socket, turned flat with the file up kept as up - check the swing"
+  "Shoulder": "tilted shoulder disc (posed arm): disc on the socket, turned flat with the file up kept as up - check the swing",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Turtle Ninja left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "original": {
   "name": "Mk10_Powerfist_Relaxed_4",
   "folder": "Arms",
   "path": "Turtle Ninja - Tacticus\\Mk10 Assault Intercessor + Jumppack Addon\\Arms\\Mk10_Powerfist_Relaxed_4.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

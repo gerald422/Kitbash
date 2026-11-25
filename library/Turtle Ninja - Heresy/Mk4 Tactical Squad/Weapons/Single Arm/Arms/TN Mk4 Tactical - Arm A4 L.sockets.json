@@ -51,18 +51,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.99923,
-   0.039218,
-   0.000156,
-   -7.301067,
-   0.000156,
-   6e-06,
-   -1.0,
-   5.618,
-   -0.039218,
-   0.99923,
-   -0.0,
-   -8.633222,
+   0.9991939551731158,
+   0.04013401115244539,
+   -0.00013004057575901113,
+   -7.622504107271949,
+   -0.00012136084481028514,
+   -0.00021955030143084269,
+   -0.9999997520054775,
+   5.615516649101625,
+   -0.04013419110697258,
+   0.9991921709196983,
+   -0.00021420571760935264,
+   -8.62227243608529,
    0.0,
    0.0,
    0.0,
@@ -70,11 +70,15 @@
   ]
  },
  "notes": {
-  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Turtle Ninja left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "original": {
   "name": "Mk4_L_Arm_A_4",
   "folder": "Arms",
   "path": "Turtle Ninja - Heresy\\Mk4 Tactical Squad\\Weapons\\Single Arm\\Arms\\Mk4_L_Arm_A_4.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

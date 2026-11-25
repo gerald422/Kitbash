@@ -78,18 +78,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999231,
-   0.039202,
-   0.000138,
-   -8.402238,
-   0.000138,
-   6e-06,
-   -1.0,
-   9.784547,
-   -0.039202,
-   0.999231,
-   0.0,
-   -7.622573,
+   0.9991949646917796,
+   0.04011801207136774,
+   -0.00014804057328216696,
+   -8.721549042073708,
+   -0.00013936455752665974,
+   -0.00021954594003821255,
+   -0.999999746857599,
+   9.782160574185776,
+   -0.04011819590700435,
+   0.9991931855898913,
+   -0.0002141892115394732,
+   -7.609723644570625,
    0.0,
    0.0,
    0.0,
@@ -97,11 +97,15 @@
   ]
  },
  "notes": {
-  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Turtle Ninja left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "original": {
   "name": "Mk6_Arm_B_1",
   "folder": "Arms",
   "path": "Turtle Ninja - Heresy\\Mk6 Addon 1\\Arms\\Mk6_Arm_B_1.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

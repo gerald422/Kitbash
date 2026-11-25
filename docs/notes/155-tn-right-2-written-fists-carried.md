@@ -35,3 +35,21 @@ Renders: all twelve Mk10 fists now hold the fist forward the same way.
 
 So 6 and Relaxed 6, filed with a "proper" left fit, were the wrong way round as well. The whole Mk10 fist set was
 filed wrongly: fists 1-5 with a right fit, and 6 with a left fit that was turned wrong.
+
+## TN left arms written (Josh: "i have made some amends to the fists. They are ready to go now")
+
+His amends were in the c file (saved 17:14). The twelve Mk10 fists moved from where they were built: 7-8 mm and
+161-179 deg for fists 1-5 and Relaxed 1-5, and about 0.5-0.8 mm with the 161 deg turn for 6 and Relaxed 6. He fine-
+tuned 3, 5 and Relaxed 2-5 on top of the carried change. The other 69 arms were unchanged.
+
+**Written:**
+- The Shoulder L fit of all 81, each the left image of its placement.
+- The 10 wrong-side Shoulder R fits dropped (fists 1-5, Relaxed 1-5).
+- 82 sidecars, with Torso 2 unchanged.
+- Every joint read back at 0.0000 mm.
+- In the library, Power Fist 1, 6 and Relaxed 3 now have only `Shoulder L`, in `exact`.
+- Backup: `_backups\batch write 2026-11-25 1715`.
+- Every TN left-arms file (original, b, c, .blend1s) went to the Recycle Bin.
+
+**Every Turtle Ninja plain arm is now on the spacer:** 84 right (23 + 61) and 81 left. The 28 two-handed parts wait
+for the two-armed stage.

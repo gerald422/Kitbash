@@ -77,18 +77,18 @@
  "category": "Arms",
  "fits": {
   "Shoulder L": [
-   0.999117,
-   0.042001,
-   0.000146,
-   -7.876216,
-   0.000146,
-   6e-06,
-   -1.0,
-   8.650276,
-   -0.042001,
-   0.999117,
-   0.0,
-   -7.289534,
+   0.9990784010945302,
+   0.0429169071800578,
+   -0.00014004057438298662,
+   -8.195546258518647,
+   -0.00013073157286983762,
+   -0.00022032198221746117,
+   -0.999999749145545,
+   8.647668028363848,
+   -0.04291708442544219,
+   0.9990766191090623,
+   -0.0002141965475705307,
+   -7.277440953802891,
    0.0,
    0.0,
    0.0,
@@ -96,7 +96,8 @@
   ]
  },
  "notes": {
-  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule"
+  "Shoulder": "shoulder disc centre on the socket, face flat on the chest (the Mar Fil arms rule); wrist found on import by the wrist rule",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Turtle Ninja left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "variants": [
   {
@@ -159,5 +160,8 @@
   "name": "Mk10 Left Arm Bent A 1",
   "folder": "Arms",
   "path": "Turtle Ninja - Tacticus\\Mk10 Assault Intercessor + Jumppack Addon\\Arms\\Mk10 Left Arm Bent A 1.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

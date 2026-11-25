@@ -61,18 +61,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999226,
-   0.039323,
-   0.000418,
-   3.866359,
-   0.000419,
-   6e-06,
-   -1.0,
-   9.516235,
-   -0.039323,
-   0.999227,
-   -1.1e-05,
-   -8.444505,
+   0.9991899341466579,
+   0.04023900838783501,
+   0.00013194930426136222,
+   3.5462084101066593,
+   0.00014166274464142074,
+   -0.00021957968722402212,
+   -0.999999824576216,
+   9.510516220008034,
+   -0.040239130944257885,
+   0.9991890746398968,
+   -0.00022544595207028828,
+   -8.442965709869817,
    0.0,
    0.0,
    0.0,
@@ -80,11 +80,15 @@
   ]
  },
  "notes": {
-  "Shoulder": "shoulder disc rule; the kit body has its socket where this arm sits"
+  "Shoulder": "shoulder disc rule; the kit body has its socket where this arm sits",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Turtle Ninja left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "original": {
   "name": "LM_L_Arm",
   "folder": "Arms",
   "path": "Turtle Ninja - Heresy\\Legion Moritat\\Arms\\LM_L_Arm.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }
