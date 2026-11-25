@@ -78,3 +78,11 @@ Josh: "are all good", with the file unchanged. So each of the 27 torsos' Cloak s
 - Written with `batch.py write`; the old sidecars are in `_backups\batch write 2026-11-25 0853`.
 - Every joint placed from the library matched the file: 0.0000 mm.
 - The batch file went to the Recycle Bin.
+
+## Written: the 7 Mar Fil torsos (Nov 25)
+
+Josh: "also good", with the file unchanged. So each torso's Cloak socket is its Back socket, as built: Torso 2 Insert, Intercessor Chest 5, Veteran Chest E, Techmarine, Jump Chaplain, Outrider Torso B and the Bike Chaplain chest.
+
+- Written with `batch.py write`; the old sidecars are in `_backups\batch write 2026-11-25 0854`.
+- Every joint matched the file: 0.0000 mm.
+- Every Mar Fil torso now has a Cloak socket.
