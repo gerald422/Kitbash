@@ -70,3 +70,11 @@ Checked by renders on Torso 2: CyberBrush Cloak 1 and Marta Aug 2025 Cloak 5 (sc
 
 It works once cloaks snap. Cloaks are still under `noJoint` in `joints.json`; the Cloak joint goes on when the cloak
 batches are written (stage 6 in the plan).
+
+## Written: the Mar Fil hidden torsos (Nov 25)
+
+Josh: "are all good", with the file unchanged. So each of the 27 torsos' Cloak socket is its Back socket, as built.
+
+- Written with `batch.py write`; the old sidecars are in `_backups\batch write 2026-11-25 0853`.
+- Every joint placed from the library matched the file: 0.0000 mm.
+- The batch file went to the Recycle Bin.
