@@ -23,3 +23,16 @@ They can go with the Chaplain arms (Bike Chaplain 1-2 R, Jump Chaplain A-D R) in
 
 Lesson from the Intercessors (notes 144): an old seat can be turned right round (the grenade bolter arms), so every
 column is worth a look.
+
+## Written (Nov 25)
+
+Josh: "all good to go". The file was unchanged, so every start (the old seat) is approved.
+
+**Written:**
+- The Shoulder R fit of all 27 arms.
+- The mirrored Shoulder L fit in the ten Bladeguard B arms' mirror variants.
+- Each new fit is 0.006 mm / 0.04 deg from the old one.
+- 28 sidecars, because Torso 2 was loaded and saved unchanged.
+- Every joint placed from the library matched the file at 0.0000 mm.
+- The old sidecars are in `_backups\batch write 2026-11-25 1312`.
+- The file went to the Recycle Bin.
