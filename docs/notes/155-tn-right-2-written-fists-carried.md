@@ -24,3 +24,14 @@ from the start it had been given at Power Fist 6's seat (notes 154).
 **Open:** Power Fist 6 and Relaxed 6, filed with a proper left fit, still look the way Power Fist 1 did before his
 fix. Fist 1 started from 6's seat and needed the 161 deg turn, so 6 and Relaxed 6 are probably the wrong way round
 too. They are unchanged until Josh says.
+
+## Power Fist 6 and Relaxed 6 too (Josh: "Yes, add them")
+
+The same change C, taken from his file, plus the 0.32 mm outward, now also goes on Power Fist 6 and Power Fist Relaxed
+6. They are in a new file, `03 Stage 3 - Turtle Ninja left arms (2026-11-25 c).blend`, built from b. The b file and
+his original are left alone in case either is open.
+
+Renders: all twelve Mk10 fists now hold the fist forward the same way.
+
+So 6 and Relaxed 6, filed with a "proper" left fit, were the wrong way round as well. The whole Mk10 fist set was
+filed wrongly: fists 1-5 with a right fit, and 6 with a left fit that was turned wrong.
