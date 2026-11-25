@@ -10,7 +10,7 @@ written Back socket (Josh checked every one in the torso batches). So each cloak
 exactly as Josh placed it on Torso 2. The torsos differ in shape, so Josh moves the cloak to sit right on each one;
 that move is the torso's Cloak socket (half "socket"), and all 17 cloaks share it.
 
-Each column is the torso stood on its waist (Torso 2's frame), with its written pieces locked so the clearance shows:
+Each column is the torso stood by its upright as TIOW stands it (notes 141), with its written pieces locked so the clearance shows:
 the spacer, Arm 2B R, the guide and Shoulder Pad 1 (the left side mirrored), Helmet 1, Back Pack 1 and Legs 1A. On top,
 both movable and each in its own collection so Josh can show one at a time (Nov 25; at first the second rode, locked,
 on the first):
@@ -64,8 +64,8 @@ def main(A):
         tid = "t%d" % k; short = os.path.basename(rel); old = MT.sockets(rel)
         if "Back" not in old or "Waist" not in old: log.append("%-40s left out: no written Back / Waist socket" % short[-40:]); continue
         host = {"id": tid, "role": "host", "name": short, "rel": rel, "at": [MT.GAP * (k % MT.PER_ROW), 0, -MT.ROW_GAP * (k // MT.PER_ROW)],
-                "pose": {"matrix": G.flat16(S2["Waist"] @ np.linalg.inv(old["Waist"]))}}      # stood on its waist as Torso 2
-        F = MT.mirror_frame(old, old["Waist"])
+                "pose": {"matrix": G.flat16(MT.upright(rel))}}      # stood as TIOW stands it (notes 141)
+        F = MT.upright_mirror(rel, old)
         if F is not None: host["mirror_frame"] = G.flat16(F)
         objs += [host] + pieces(tid, short.split(" - ")[-1][:30] + " ", rel, old["Back"], live=True)
         log.append("%-40s Cloak starts on its Back socket%s" % (short[-40:], "" if "Cloak" not in old else " (it already had a Cloak socket)"))

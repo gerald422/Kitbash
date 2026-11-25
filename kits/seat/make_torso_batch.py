@@ -139,6 +139,21 @@ def mirror_frame(old, Sw):
     return F
 
 
+def upright(rel):
+    """the torso's own -> Mar Fil kit frame, as TIOW Inbox stands it (sidecar "upright"; Mar Fil: none, its file frame).
+    Use this, not the Waist, to stand a written torso: the TN Waist sockets carry Josh's legs change (18.5 deg: 5
+    forward, 9.7 sideways, 14.5 twist), so a torso stood on its Waist leans and twists (Nov 25, notes 141)."""
+    u = B.sidecar(LIB, rel).get("upright"); return G.M4(u) if u else np.eye(4)
+
+
+def upright_mirror(rel, old):
+    """the torso's mirror plane (own coordinates; a frame whose YZ plane it is): the upright's axes through the middle of
+    its shoulders. Its written Shoulder L is Shoulder R mirrored across this to 0.00 mm (notes 141)."""
+    F = np.linalg.inv(upright(rel)); F[:3, 3] = 0
+    if "Shoulder R" in old and "Shoulder L" in old: F[:3, 3] = (old["Shoulder R"][:3, 3] + old["Shoulder L"][:3, 3]) / 2
+    return F
+
+
 def column(tid, pre, S_sh, locked=False):
     """the spacer on Shoulder R with Arm 2B R, the guide and Shoulder Pad 1 riding on it"""
     sp = {"id": tid + "_spacer", "role": "check" if locked else "part", "name": pre + "Spacer", "connector": {"kind": "spacer", "from": "arms", "obj": "Springles Spacer"},

@@ -6,7 +6,7 @@ look for roll-backs (Josh, Nov 25; notes 140).
   BL = blender --background --factory-startup --python
 
 Approved = written from Josh's batches: a torso socket marked props.kb_josh, a part fit in "exact". Each marine:
-- a torso with Josh's sockets (makers taken in turn: Mar Fil, Turtle Ninja, Redwarden), stood on its waist;
+- a torso with Josh's sockets (makers taken in turn: Mar Fil, Turtle Ninja, Redwarden), stood by its upright as TIOW does;
 - the spacer on its Shoulder R, and a right arm with an exact Shoulder R fit on it; the left side is its mirror;
 - the guide and pad only on an arm whose Pad R socket is Josh's (so far only Arm 2B R);
 - Helmet 1, Back Pack 1 and Legs 1A (the reference pieces; the only approved ones);
@@ -55,8 +55,8 @@ def main(A):
         arm = MT.ARM if k == 0 else rng.choice(arms); cl, csock = rng.choice(cloaks)
         tid = "m%d" % (k + 1); old = MT.sockets(rel); short = os.path.basename(rel)
         host = {"id": tid, "role": "host", "name": "%d %s" % (k + 1, short), "rel": rel, "at": [MT.GAP * k, 0, 0],
-                "pose": {"matrix": G.flat16(S2["Waist"] @ np.linalg.inv(old["Waist"]))}}
-        F = MT.mirror_frame(old, old["Waist"])
+                "pose": {"matrix": G.flat16(MT.upright(rel))}}      # stood as TIOW stands it (notes 141)
+        F = MT.upright_mirror(rel, old)
         if F is not None: host["mirror_frame"] = G.flat16(F)
         col = MT.column(tid, "%d " % (k + 1), None, locked=True); col[0]["pose"]["shift_from"] = [rel, "Shoulder R"]
         col[1]["rel"] = arm; col[1]["name"] = "%d %s" % (k + 1, os.path.basename(arm))
