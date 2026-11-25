@@ -419,6 +419,7 @@ def write(A):
     places every written joint the way TIOW does (socket . fit) and checks it against Josh's file."""
     from kb import sidecar as SC
     blend = A[1]; check = "--check" in A
+    skip_ids = set((opt(A, "--skip", "") or "").split(",")) - {""}     # held back by Josh (Nov 25: wrong-side TN fists)
     res = read(["read", blend])                       # opens the file
     meta = json.loads(bpy.context.scene.get("kb_batch", "{}"))
     spec = json.load(open(opt(A, "--spec", os.path.join(HERE, "batches", meta["spec"])), encoding="utf-8"))
@@ -435,6 +436,7 @@ def write(A):
     for e in spec["objects"]:
         w = e.get("write")
         if not w: continue
+        if e["id"] in skip_ids: W.append("%-24s (held back: --skip, not written)" % e["name"][-24:]); continue
         if e["id"] not in objs:              # Josh removed it from the file (Nov 25: cloaks he isn't keeping): nothing written
             W.append("%-24s (removed from the file by Josh: not written)" % e["name"][-24:]); continue
         half = w.get("half", "both")      # "socket": the part and its fit are known-good, so its move is the host's socket;
@@ -481,6 +483,7 @@ def write(A):
                 pn.setdefault("notes", {})[w["left"]] = tag + "; fixed as its mirror image on %s" % w["socket"]
                 W.append("%-24s fit    %-10s %s (fixed as its mirror image)" % (os.path.basename(prel)[-24:], w["left"], _diff(oldf, G.flat16(F2))))
                 want = Pm @ np.linalg.inv(own(objs[w["host"]])) @ own(o) @ np.diag([1 / k, 1 / k, 1 / k, 1]) @ MX
+                if w.get("drop"): pn.setdefault("_drop_fits", []).append(w["drop"])
                 checks.append((e["id"], dict(w, socket=w["left"]), hrel, prel, want)); continue
             FL = MX @ F @ MX
             oldf = (pd.get("fits") or {}).get(w["socket"])
@@ -517,7 +520,13 @@ def write(A):
                 if s.get("type") in redo[rel] and p.get("kb_josh"):
                     W.append("%-24s socket %-10s redo: Josh's earlier fix (%s) replaced" % (os.path.basename(rel)[-24:], s["type"], p["kb_josh"]))
                     del p["kb_josh"]
+        drop = n.pop("_drop_fits", [])
         merged, kept = SC.merge(n, base)
+        for t in drop:                       # a left sculpt that had a wrong-side fit (notes 154): that fit goes
+            if t in (merged.get("fits") or {}):
+                del merged["fits"][t]; merged["exact"] = [x for x in merged.get("exact") or [] if x != t]
+                (merged.get("notes") or {}).pop(t, None)
+                W.append("%-24s fit    %-10s dropped (a left sculpt: its wrong-side fit)" % (os.path.basename(rel)[-24:], t))
         if kept: raise SystemExit("%s: already Josh's / protected, not written (Rule 1): %s" % (rel, kept))
         p = [x for x in SC.problems(merged, types) if x not in SC.problems(olds[rel][0], types)]   # only new problems
         if p: raise SystemExit("%s: %s" % (rel, p))

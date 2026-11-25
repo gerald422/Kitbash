@@ -58,8 +58,11 @@ def main(A):
         tid = "a%d" % k; short = os.path.basename(rel).replace("MarFil ", ""); sc = B.sidecar(MT.LIB, rel)
         at = np.eye(4); at[:3, 3] = [MT.GAP * (k % MT.PER_ROW), 0, -MT.ROW_GAP * (k // MT.PER_ROW)]
         F_old = (sc.get("fits") or {}).get("Shoulder L" if left else "Shoulder R")
+        wrong = left and F_old is None and "Shoulder R" in (sc.get("fits") or {})   # a left sculpt filed with a right fit
+        if wrong: F_old = sc["fits"]["Shoulder R"]                                     # (Josh, Nov 25: TN Mk10 fists; notes 154)
         if F_old is None: log.append("%-34s left out: no old %s fit to start from" % (short, "Shoulder L" if left else "Shoulder R")); continue
-        was = (B.MX @ S_old_L @ G.M4(F_old) @ B.MX) if left else S_old @ G.M4(F_old)   # left: the mirror of its old left seat
+        if wrong: was = S_old @ G.M4(F_old)      # its mirror image at the seat its wrong right fit gave the sculpt
+        else: was = (B.MX @ S_old_L @ G.M4(F_old) @ B.MX) if left else S_old @ G.M4(F_old)   # left: the mirror of its old left seat
         start = T @ delta @ was                    # T: Josh's repeated move (--shift), in Torso 2's own axes
         log.append("%-34s starts %.2f mm %.1f deg from its old seat%s" % (short, *G.off(start, was),
                    "; mirrored in %s" % B._mirror_variant(sc)["name"] if B._mirror_variant(sc) else ""))
@@ -72,7 +75,9 @@ def main(A):
                   "write": {"host": tid, "socket": "Shoulder R", "mirror": "Shoulder L", "half": "fit"}}]
         if left:
             objs[-1]["mirror_mesh"] = True; objs[-1]["write"] = {"host": tid, "socket": "Shoulder R", "left": "Shoulder L", "half": "fit"}
+            if wrong: objs[-1]["write"]["drop"] = "Shoulder R"; log.append("%-34s a left sculpt with a right fit: starts at that seat, mirrored; the right fit is dropped on the write" % short)
             objs[-1]["note"] = "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left)"
+        if left and wrong: objs[-1]["note"] = "a left sculpt that was filed with a right fit: its mirror image, at that old seat; set its depth and turn"
         if T[:3, 3].any(): objs[-1]["note"] += "; your repeated move (%.2f, %.2f, %.2f mm) is already on it" % tuple(T[:3, 3])
         objs += checks(tid, short + " ")
     spec = {"name": name, "stage": "3 (arms on the spacer)", "out": blend_out, "sources": MT.SRC,
