@@ -428,6 +428,8 @@ def write(A):
     for e in spec["objects"]:
         w = e.get("write")
         if not w: continue
+        if e["id"] not in objs:              # Josh removed it from the file (Nov 25: cloaks he isn't keeping): nothing written
+            W.append("%-24s (removed from the file by Josh: not written)" % e["name"][-24:]); continue
         half = w.get("half", "both")      # "socket": the part and its fit are known-good, so its move is the host's socket;
         o = objs[e["id"]]; h = entry(spec, w["host"]); hrel = h["rel"]   # "fit": the socket is, so its move is the fit
         S, F, con = joint_of(objs, e["id"], w["host"])
@@ -453,8 +455,16 @@ def write(A):
                 old = next((s["matrix"] for s in vs if s["type"] == m), None)
                 hn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"sockets": [_socket(vs, m, SL, props(MX, con), v["name"])]}})
                 W.append("%-24s socket %-10s %s (mirror, in variant %s)" % (os.path.basename(hrel)[-24:], m, _diff(old, G.flat16(SL)), v["name"]))
+        k = 1.0
         if half != "socket":
-            prel = e["rel"]; pd, pn = get(prel); FL = MX @ F @ MX
+            prel = e["rel"]; pd, pn = get(prel)
+            sv = np.linalg.svd(F[:3, :3], compute_uv=False); k = float(np.cbrt(np.linalg.det(F[:3, :3])))
+            if abs(k - 1) > 1e-4:            # Josh scaled the part (Nov 25, two cloaks): the part's own scale, the fit rigid
+                if sv.max() - sv.min() > 1e-4 * k: raise SystemExit("%s: scaled unevenly %s, not written" % (e["id"], np.round(sv, 4)))
+                if m: raise SystemExit("%s: a scaled part with a mirror fit is not handled, not written" % e["id"])
+                k0 = float(pd.get("scale") or 1.0); F = F @ np.diag([1 / k, 1 / k, 1 / k, 1]); pn["scale"] = round(k0 * k, 6)
+                W.append("%-24s scale  %.4f -> %.4f (Josh scaled it %.2f%%)" % (os.path.basename(prel)[-24:], k0, k0 * k, 100 * k))
+            FL = MX @ F @ MX
             oldf = (pd.get("fits") or {}).get(w["socket"])
             pn.setdefault("fits", {})[w["socket"]] = G.flat16(F); pn.setdefault("exact", []).append(w["socket"])
             pn.setdefault("notes", {})[w["socket"]] = tag
@@ -465,7 +475,7 @@ def write(A):
                 v = _mirror_variant(pd); oldf = ((v.get("sidecar") or {}).get("fits") or {}).get(m)
                 pn.setdefault("variants", []).append({"name": v["name"], "side": "L", "sidecar": {"fits": {m: G.flat16(FL)}, "exact": [m], "notes": {m: tag}}})
                 W.append("%-24s fit    %-10s %s (mirror, in variant %s)" % (os.path.basename(prel)[-24:], m, _diff(oldf, G.flat16(FL)), v["name"]))
-        checks.append((e["id"], w, hrel, e.get("rel"), np.linalg.inv(own(objs[w["host"]])) @ own(o)))
+        checks.append((e["id"], w, hrel, e.get("rel"), np.linalg.inv(own(objs[w["host"]])) @ own(o) @ np.diag([1 / k, 1 / k, 1 / k, 1])))
     out, types = {}, set(json.load(open(os.path.join(REPO, "joints.json"), encoding="utf-8"))["partTypes"])
     for n in new.values():                           # one entry per variant (an arm is host of Pad L and part on Shoulder L)
         vs = {}
