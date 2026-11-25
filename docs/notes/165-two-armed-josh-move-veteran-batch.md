@@ -13,3 +13,7 @@ pre-set), no turn. `batch.py apply ... a1_arm ... --delta` put it on the other 2
 
 Left after this: Mar Fil 105 (Intercessor dual bolters 61, Blade Squad melee 27, Intercessor heavy 15, Techmarine 2),
 Marta 36, Turtle Ninja 28, CyberBrush 8.
+
+**Written** (Josh: "both are good to go, write them"; backup `batch write 2026-11-25 2228`): the 24 Assault melee
+from the b file and the 40 Veteran guns and heavy as built. All 64 read back at 0.0000 mm. The batch files went to the
+Recycle Bin. Two-armed left: 177.

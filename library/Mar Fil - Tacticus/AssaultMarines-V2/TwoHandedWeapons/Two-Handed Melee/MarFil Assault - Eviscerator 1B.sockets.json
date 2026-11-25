@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Shoulder R": [
-   0.999999,
-   0.000725,
-   -0.001231,
-   -0.000421,
-   -0.000717,
-   0.999985,
-   0.005322,
-   -0.001484,
-   0.001235,
-   -0.005321,
-   0.999985,
-   0.006698,
+   1.0000001498151854,
+   0.00010186600722271501,
+   -0.0010270341359068906,
+   0.08939592996165402,
+   -9.511575487280231e-05,
+   0.9999861034601627,
+   0.005107380581677816,
+   -0.006050746713906763,
+   0.0010278966349324212,
+   -0.0051070186071890825,
+   0.999985304239658,
+   0.003565817046894182,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\TwoHandedWeapons\\Two-Handed Melee\\141-Eviscerator-1-B.stl"
  },
  "notes": {
-  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0005 mm, 100% on), write_joints Nov 20"
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - Two-armed Mar Fil Assault melee (2026-11-25 b)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Shoulder R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }

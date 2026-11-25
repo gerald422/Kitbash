@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Shoulder R": [
-   0.999999,
-   0.001262,
-   8.8e-05,
-   -0.000501,
-   -0.001261,
-   0.999998,
-   0.001814,
-   0.000207,
-   -8.6e-05,
-   -0.001814,
-   0.999999,
-   0.009516,
+   1.0000002143884188,
+   0.0006395850922221453,
+   0.000294151475504513,
+   0.0892348957639797,
+   -0.0006388329893802093,
+   0.9999986875610652,
+   0.0016001999049755887,
+   -0.004360396080730883,
+   -0.00029321841110351075,
+   -0.0016001307780292213,
+   0.9999982800950894,
+   0.006384191816867002,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\VeteranSquad\\Weapons\\Two-Handed Guns\\109-CombiWeapon-1-B.stl"
  },
  "notes": {
-  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 100% on), write_joints Nov 20"
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - Two-armed Mar Fil Veteran guns and heavy (2026-11-25)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Shoulder R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }

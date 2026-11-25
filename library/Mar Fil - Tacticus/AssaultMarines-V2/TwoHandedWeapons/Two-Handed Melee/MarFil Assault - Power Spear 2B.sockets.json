@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Shoulder R": [
-   0.999998,
-   0.001421,
-   0.00152,
-   -0.000584,
-   -0.001431,
-   0.999975,
-   0.00693,
-   -0.003727,
-   -0.001511,
-   -0.006933,
-   0.999975,
-   0.020145,
+   0.999999024760856,
+   0.0007975384039130036,
+   0.0017229647817867538,
+   0.0892371124203919,
+   -0.0008085287867873988,
+   0.9999768812133978,
+   0.006717093470377234,
+   -0.008296722732226341,
+   -0.00171825305263092,
+   -0.006719163027489187,
+   0.9999750792538763,
+   0.01701235582962113,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\TwoHandedWeapons\\Two-Handed Melee\\159-PowerSpear-2-B.stl"
  },
  "notes": {
-  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 98% on), write_joints Nov 20"
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - Two-armed Mar Fil Assault melee (2026-11-25 b)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Shoulder R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }
