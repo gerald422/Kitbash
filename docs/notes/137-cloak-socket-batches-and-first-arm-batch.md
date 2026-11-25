@@ -54,3 +54,19 @@ The file is `03 Stage 3 - Mar Fil Assault right arms (2026-11-25).blend`: the 23
 - **No pads on these arms:** each arm's Pad R socket is still the old frame until stage 4.
 
 Only one arm batch for now: Josh's fixes on it may show a repeated correction to pre-set in the next ones.
+
+## Mirrored cloaks (Josh: "They all bend in one direction or another so a mirrored version for all would be preferred")
+
+Nothing needs adding to the library for this:
+- The Mirror button (Squad Builder and TIOW Inbox 1.17.11, `mirror_in_place` / `mirrored_sidecar`) already makes any
+  part's mirror image. It puts the mirror on the same socket with the fit mirrored (MX . F . MX) and keeps the part's
+  `scale`.
+- A cloak's socket is centred: Torso 2's Cloak socket is at x = -0.001 mm, square to the torso. So the mirrored cloak
+  hangs from the same spot and sweeps the other way.
+- The other torsos' Cloak sockets start from Torso 2's, so the same holds for them. A socket Josh moves a little
+  off-centre mirrors about where he put it.
+
+Checked by renders on Torso 2: CyberBrush Cloak 1 and Marta Aug 2025 Cloak 5 (scaled), as placed and mirrored.
+
+It works once cloaks snap. Cloaks are still under `noJoint` in `joints.json`; the Cloak joint goes on when the cloak
+batches are written (stage 6 in the plan).
