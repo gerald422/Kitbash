@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Shoulder R": [
-   0.999999,
-   0.000343,
-   0.001342,
-   -0.000946,
-   -0.000328,
-   0.999931,
-   -0.011795,
-   0.002326,
-   -0.001347,
-   0.011794,
-   0.99993,
-   0.018711,
+   0.9999993726443237,
+   -0.00027655297601500005,
+   0.0015566030867876777,
+   0.08879048340031659,
+   0.00029443622774434923,
+   0.9999282057113617,
+   -0.01200799855722347,
+   -0.0022436403548534434,
+   -0.0015540172542472682,
+   0.012008030226778788,
+   0.999926106577233,
+   0.015579727624412953,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Bolter-Dual\\Two-Handed Guns\\81-Bolter-3-B.stl"
  },
  "notes": {
-  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0004 mm, 100% on), write_joints Nov 20"
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - Two-armed Mar Fil Intercessor bolters and heavy (2026-11-25)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Shoulder R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }

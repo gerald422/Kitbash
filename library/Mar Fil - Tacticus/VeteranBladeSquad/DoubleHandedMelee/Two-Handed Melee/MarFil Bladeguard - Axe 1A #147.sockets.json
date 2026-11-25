@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Shoulder R": [
-   0.999995,
-   0.00075,
-   -0.00332,
-   -0.000437,
-   -0.000732,
-   0.999985,
-   0.005548,
-   0.004258,
-   0.003324,
-   -0.005545,
-   0.999979,
-   -0.018214,
+   0.9999965921519776,
+   0.00012681958769260475,
+   -0.0031161768962870862,
+   0.0892906280307102,
+   -0.00011056497756068555,
+   0.9999861669172143,
+   0.005332082086588574,
+   -0.000303428053737842,
+   0.003116891973525046,
+   -0.005331023536718635,
+   0.9999797849551415,
+   -0.02134492376275432,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\DoubleHandedMelee\\Two-Handed Melee\\147-Axe-1-A.stl"
  },
  "notes": {
-  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 100% on), write_joints Nov 20"
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - Two-armed Mar Fil Blade Squad and Techmarine melee (2026-11-25)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Shoulder R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }

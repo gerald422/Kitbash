@@ -12,3 +12,7 @@ The 105 Mar Fil two-armed weapons left, one file per kit (so a fix carries acros
 Renders, 5 columns each: both arms at the shoulders (one heavy weapon is carried up on the shoulder, as sculpted).
 
 Left after these: Marta 36, Turtle Ninja 28, CyberBrush 8.
+
+**Written** (Josh: "all updates done good to write"; backup `batch write 2026-11-25 2240`): 76 Intercessor (3 he
+changed: ) and 29 Blade Squad and Techmarine. All 105 read back at 0.0000 mm; the files went to the Recycle Bin.
+Every Mar Fil two-armed weapon is now on the spacer (169).

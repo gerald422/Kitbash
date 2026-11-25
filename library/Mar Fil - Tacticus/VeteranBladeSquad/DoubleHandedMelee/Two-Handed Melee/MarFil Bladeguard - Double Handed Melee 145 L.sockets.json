@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Shoulder R": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   1.0000004478216125,
+   -0.0006220407110443914,
+   0.00020728002522607094,
+   0.08973405227408193,
+   0.0006221486290647353,
+   0.999999514477047,
+   -0.00021385417721930935,
+   -0.004565049247414049,
+   -0.00020694869533313255,
+   0.00021412884199661063,
+   0.999998909875765,
+   -0.0031319458154541735,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\DoubleHandedMelee\\Two-Handed Melee\\145-Mirrored.stl"
  },
  "notes": {
-  "Shoulder R": "connector shoulder disc, sure (0.0018 mm, 100% on), seat.py Nov 15"
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - Two-armed Mar Fil Blade Squad and Techmarine melee (2026-11-25)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Shoulder R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }
