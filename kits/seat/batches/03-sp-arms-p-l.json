@@ -1,0 +1,2536 @@
+{
+ "name": "Stage 3 - Springles pattern P left arms as right (Josh's move pre-set)",
+ "stage": "3 (arms on the spacer)",
+ "out": "~/Desktop/mar fil connectors/batches/03 Stage 3 - Springles pattern P left arms (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a1",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Duel Melee Arm 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a1_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a1_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Duel Melee Arm 1 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/2 handed melee/Arms/Springles Pattern P - Duel Melee Arm 1 L",
+   "parent": "a1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     -772.4032004730556,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     1826.0236228583253,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     26.522204182439836,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a1",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a1_head",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a1_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a1_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a2",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Duel Melee Arm 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a2_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a2_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Duel Melee Arm 2 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/2 handed melee/Arms/Springles Pattern P - Duel Melee Arm 2 L",
+   "parent": "a2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     469.1192555264911,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     157.70184271097358,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     22.986167868618537,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a2",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a2_head",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a2_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a2_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a3",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Duel Melee Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a3_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a3_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Duel Melee Arm 3 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/2 handed melee/Arms/Springles Pattern P - Duel Melee Arm 3 L",
+   "parent": "a3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     322.53787717496584,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -323.78534075659707,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     23.333811761773134,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a3",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a3_head",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a3_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a3_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a4",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Duel Melee Arm 4 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a4_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 4 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a4_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Duel Melee Arm 4 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/2 handed melee/Arms/Springles Pattern P - Duel Melee Arm 4 L",
+   "parent": "a4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     151.6467056817201,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -725.4621353623937,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     27.095849496671867,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a4",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a4_head",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 4 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a4_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 4 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a4_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 4 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a5",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Duel Melee Arm 5 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a5_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 5 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a5_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Duel Melee Arm 5 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/2 handed melee/Arms/Springles Pattern P - Duel Melee Arm 5 L",
+   "parent": "a5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     568.0452655232743,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -454.0629187461712,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     23.244191613457133,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a5",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a5_head",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 5 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a5_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 5 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a5_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 5 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a6",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Heavy Arm 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a6_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a6_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Heavy Arm 1 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/heavy weapons/Arms/Springles Pattern P - Heavy Arm 1 L",
+   "parent": "a6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     559.4981851503811,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     163.667989081168,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     24.979110741758618,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a6",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a6_head",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a6_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a6_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a7",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Heavy Arm 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a7_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a7_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Heavy Arm 2 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/heavy weapons/Arms/Springles Pattern P - Heavy Arm 2 L",
+   "parent": "a7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     502.22649004594643,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -0.4827225400916283,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     23.173641180094272,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a7",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a7_head",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a7_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a7_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a8",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Heavy Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a8_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a8_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Heavy Arm 3 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/heavy weapons/Arms/Springles Pattern P - Heavy Arm 3 L",
+   "parent": "a8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     -15.94203815629888,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -113.62387815401038,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -95.75998626578695,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a8",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a8_head",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a8_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a8_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a9",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Heavy Arm 4 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a9_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 4 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a9_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Heavy Arm 4 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/heavy weapons/Arms/Springles Pattern P - Heavy Arm 4 L",
+   "parent": "a9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     449.038263290278,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -123.55306107717065,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -92.8117384921023,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a9",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a9_head",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 4 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a9_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 4 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a9_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 4 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a10",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Heavy Arm 5 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a10_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 5 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a10_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Heavy Arm 5 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/heavy weapons/Arms/Springles Pattern P - Heavy Arm 5 L",
+   "parent": "a10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     1060.3851137004008,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     561.0979219453269,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -96.0968426521346,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a10",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a10_head",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 5 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a10_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 5 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a10_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Heavy Arm 5 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a11",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Melee Arm 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a11_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a11_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Melee Arm 1 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/melee arms/Arms/Springles Pattern P - Melee Arm 1 L",
+   "parent": "a11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     437.7494105443642,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -40.698725191685845,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -98.6239717775197,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a11",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a11_head",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a11_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a11_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a12",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Melee Arm 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a12_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a12_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Melee Arm 2 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/melee arms/Arms/Springles Pattern P - Melee Arm 2 L",
+   "parent": "a12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     501.1961733727426,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     111.52023041610072,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -95.03311823419551,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a12",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a12_head",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a12_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a12_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a13",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Melee Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a13_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a13_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Melee Arm 3 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/melee arms/Arms/Springles Pattern P - Melee Arm 3 L",
+   "parent": "a13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     578.346785401115,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -298.826861360144,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -99.25866743935379,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a13",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a13_head",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a13_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a13_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a14",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Melee Arm 4 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a14_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 4 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a14_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Melee Arm 4 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/melee arms/Arms/Springles Pattern P - Melee Arm 4 L",
+   "parent": "a14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     529.8129309124535,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -95.76571781392514,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -97.92760245552667,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a14",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a14_head",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 4 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a14_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 4 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a14_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 4 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a15",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Melee Arm 5 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a15_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 5 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a15_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Melee Arm 5 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/melee arms/Arms/Springles Pattern P - Melee Arm 5 L",
+   "parent": "a15_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     480.8795847765547,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -126.95052513986067,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -97.3577448229447,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a15",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a15_head",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 5 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a15",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a15_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 5 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a15",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a15_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Melee Arm 5 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a15",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a16",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Ranged Arm 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a16_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a16_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Ranged Arm 1 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/tactical arms/Arms/Springles Pattern P - Ranged Arm 1 L",
+   "parent": "a16_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     24.986535893067465,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -46.09040333670302,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -215.3416126267434,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a16",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a16_head",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a16",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a16_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a16",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a16_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a16",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a17",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Ranged Arm 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a17_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a17",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a17_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Ranged Arm 2 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/tactical arms/Arms/Springles Pattern P - Ranged Arm 2 L",
+   "parent": "a17_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     143.30844898928126,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     63.819046928137666,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -216.9558054083302,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a17",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a17_head",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a17",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a17_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a17",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a17_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a17",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a18",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Ranged Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a18_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a18",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a18_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Ranged Arm 3 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/tactical arms/Arms/Springles Pattern P - Ranged Arm 3 L",
+   "parent": "a18_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     176.0820983954413,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     137.27094704059442,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -215.1706340435856,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a18",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a18_head",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a18",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a18_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a18",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a18_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a18",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a19",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Ranged Arm 4 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a19_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 4 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a19",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a19_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Ranged Arm 4 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/tactical arms/Arms/Springles Pattern P - Ranged Arm 4 L",
+   "parent": "a19_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     393.436105017519,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     11.215569776355613,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -214.37747072022378,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a19",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a19_head",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 4 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a19",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a19_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 4 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a19",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a19_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 4 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a19",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a20",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Ranged Arm 5 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a20_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 5 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a20",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a20_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Ranged Arm 5 L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/tactical arms/Arms/Springles Pattern P - Ranged Arm 5 L",
+   "parent": "a20_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     292.25944386999265,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -85.05617647186612,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -215.1750191034366,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a20",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a20_head",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 5 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a20",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a20_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 5 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a20",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a20_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 5 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a20",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a21",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Helmet Hold Arm",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a21_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Helmet Hold Arm Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a21",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a21_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Helmet Hold Arm (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/unique/Arms/Springles Pattern P - Helmet Hold Arm",
+   "parent": "a21_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     762.096522865814,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -134.4835725249106,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -218.09703593497792,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a21",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a21_head",
+   "role": "check",
+   "name": "Springles Pattern P - Helmet Hold Arm Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a21",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a21_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Helmet Hold Arm Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a21",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a21_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Helmet Hold Arm Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a21",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a22",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Sarge Arm L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a22_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Sarge Arm L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a22",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a22_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Sarge Arm L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/unique/Arms/Springles Pattern P - Sarge Arm L",
+   "parent": "a22_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     708.0793747170062,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     131.13363295391065,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -213.7006205486329,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a22",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a22_head",
+   "role": "check",
+   "name": "Springles Pattern P - Sarge Arm L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a22",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a22_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Sarge Arm L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a22",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a22_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Sarge Arm L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a22",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a23",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Unsheathing Arm L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a23_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Unsheathing Arm L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a23",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a23_arm",
+   "role": "part",
+   "name": "Springles Pattern P - Unsheathing Arm L (mirrored, as a right arm)",
+   "rel": "Springles - Heresy/patternP arms/unique/Arms/Springles Pattern P - Unsheathing Arm L",
+   "parent": "a23_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.028454096518019768,
+     -0.9995944741870711,
+     -0.0009067086080680965,
+     768.8338774032704,
+     0.9995942905278026,
+     0.02845420535912896,
+     -0.00029054299832952357,
+     -19.809797550966767,
+     0.00031605686815135836,
+     -0.0008983006149281765,
+     0.9999981241181708,
+     -219.13045293622605,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.62, 0.52, 0.56 mm) is already on it",
+   "write": {
+    "host": "a23",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a23_head",
+   "role": "check",
+   "name": "Springles Pattern P - Unsheathing Arm L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a23",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a23_pack",
+   "role": "check",
+   "name": "Springles Pattern P - Unsheathing Arm L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a23",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a23_legs",
+   "role": "check",
+   "name": "Springles Pattern P - Unsheathing Arm L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a23",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  }
+ ]
+}

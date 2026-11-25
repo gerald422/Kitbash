@@ -10,15 +10,15 @@
     -0.959299,
     0.004168,
     -0.282283,
-    -4.683554,
+    -5.151909,
     0.022859,
     -0.99544,
     -0.092391,
-    1.511259,
+    1.662385,
     -0.281387,
     -0.095084,
     0.954868,
-    18.542683,
+    20.396951,
     0.0,
     0.0,
     0.0,
@@ -37,15 +37,15 @@
    -0.999574,
    0.02967,
    0.000406,
-   -4.133891,
+   -4.54728,
    -0.02967,
    -0.999575,
    1.2e-05,
-   1.364813,
+   1.501294,
    0.000406,
    -0.0,
    1.0,
-   -15.497971,
+   -17.047768,
    0.0,
    0.0,
    0.0,
@@ -55,7 +55,8 @@
  "notes": {
   "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
   "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
-  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket"
+  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket",
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
  },
  "noPad": false,
  "noHand": true,
@@ -63,5 +64,6 @@
   "name": "LArm1",
   "folder": "Arms",
   "path": "BBoosty - Heresy\\Medusas Mortals\\Arms\\LArm1.stl"
- }
+ },
+ "scale": 1.1
 }

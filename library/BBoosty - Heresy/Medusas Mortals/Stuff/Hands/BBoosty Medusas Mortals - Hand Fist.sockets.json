@@ -7,15 +7,15 @@
    -0.999979,
    -0.006502,
    -0.000856,
-   0.420783,
+   0.462861,
    0.006327,
    -0.990887,
    0.134554,
-   -2.320118,
+   -2.55213,
    -0.001723,
    0.134546,
    0.990906,
-   -1.829886,
+   -2.012875,
    0.0,
    0.0,
    0.0,
@@ -25,15 +25,15 @@
    -0.999202,
    -0.03995,
    -0.0,
-   0.357067,
+   0.392774,
    0.039851,
    -0.99674,
    0.070158,
-   -2.204216,
+   -2.424638,
    -0.002803,
    0.070102,
    0.997536,
-   -1.950694,
+   -2.145763,
    0.0,
    0.0,
    0.0,
@@ -42,12 +42,14 @@
  },
  "notes": {
   "Hand": "BBoosty wrist ball (r 1.07) seated in the wrist socket; back of the hand (file +Z) to the torso's up+forward",
-  "Hand R": "connector bboosty-hand 9, sure (0.0005 mm, 100% on), seat.py Nov 15"
+  "Hand R": "connector bboosty-hand 9, sure (0.0005 mm, 100% on), seat.py Nov 15",
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
  },
  "sockets": [],
  "original": {
   "name": "Hand_Fist",
   "folder": "Hands",
   "path": "BBoosty - Heresy\\Medusas Mortals\\Stuff\\Hands\\Hand_Fist.stl"
- }
+ },
+ "scale": 1.1
 }

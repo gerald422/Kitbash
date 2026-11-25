@@ -10,15 +10,15 @@
     -0.957293,
     0.077314,
     -0.278506,
-    -3.929225,
+    -4.322148,
     -0.182315,
     -0.909197,
     0.374269,
-    5.165496,
+    5.682046,
     -0.224286,
     0.409079,
     0.884503,
-    14.053856,
+    15.459242,
     0.0,
     0.0,
     0.0,
@@ -37,15 +37,15 @@
    -0.981493,
    -0.191468,
    0.006465,
-   -2.687799,
+   -2.956579,
    0.191469,
    -0.981514,
    -0.000531,
-   3.924897,
+   4.317387,
    0.006447,
    0.000717,
    0.999979,
-   -11.471888,
+   -12.619077,
    0.0,
    0.0,
    0.0,
@@ -55,7 +55,8 @@
  "notes": {
   "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
   "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
-  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket"
+  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket",
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
  },
  "noPad": false,
  "noHand": true,
@@ -63,5 +64,6 @@
   "name": "LArm2_Sh",
   "folder": "Arms",
   "path": "BBoosty - Heresy\\Medusas Mortals\\Arms for connecting ranged weapon with shield_ Also can be used with melee\\Arms\\LArm2_Sh.stl"
- }
+ },
+ "scale": 1.1
 }
