@@ -15,7 +15,8 @@ the spacer, Arm 2B R, the guide and Shoulder Pad 1 (the left side mirrored), Hel
 both movable and each in its own collection so Josh can show one at a time (Nov 25; at first the second rode, locked,
 on the first):
 - CyberBrush Bug Hunters Cloak 1 (circles on the straps): its move is the torso's Cloak socket;
-- Marta 49 March 2026 Cloak 2 (no circles): its move is compared with the first one's at the write.
+- Marta 49 March 2026 Cloak 2 (no circles): its move is the torso's "Cloak Plain" socket (Josh: the no-circles style
+  needs its own socket; notes 138).
 The first column is Torso 2 as written, all locked: the target."""
 import os, sys, json
 import numpy as np
@@ -46,7 +47,7 @@ def pieces(tid, pre, rel, cloak_on, live):
         if live:                         # both movable, each its own (Josh, Nov 25); the circles one writes the socket,
             cl.update(on_matrix=G.flat16(cloak_on),          # the other is compared with it at the write
                       note="starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso")
-            if cid == "_cloak": cl["write"] = {"host": tid, "socket": "Cloak", "half": "socket"}
+            cl["write"] = {"host": tid, "socket": "Cloak" if cid == "_cloak" else "Cloak Plain", "half": "socket"}   # notes 138
         out.append(cl)
     return out
 
