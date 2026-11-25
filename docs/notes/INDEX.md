@@ -164,3 +164,4 @@ Add a new entry as the next number and append its line here.
 | `156-cyberbrush-arms-batches.md` | Nov 25 | CyberBrush arms: 38 right and 35 left (as mirror images) in two files with the 0.32 mm pre-set; dry runs within rounding; a stalled render stopped |
 | `157-cyberbrush-josh-pattern-carried.md` | Nov 25 | CyberBrush: Josh's repeated claw change (3.4 deg tilt, 0.58 mm lift; fist spins vary, not copied) carried to the 16 untouched left and all 38 right arms in b files; 0.32 mm already on |
 | `158-cyberbrush-wrong-way-fists-glaive.md` | Nov 25 | CyberBrush right b: Fist 4 (1), 4 (4) and Spear Arm 2 (the glaive) still face the wrong way; carrying Fist 4 (3)'s change and a 180 deg turn didn't fix them; left to Josh by eye |
+| `159-cyberbrush-arms-written.md` | Nov 25 | CyberBrush arms written: 37 right (Spear Arm 1, the two-handed glaive, held back to `not_arms.txt`) and 35 left as mirror images; all 72 read back at 0.0000 mm; batch files recycled |

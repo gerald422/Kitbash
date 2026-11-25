@@ -34,18 +34,18 @@
  ],
  "fits": {
   "Shoulder R": [
-   -0.999602,
-   -0.028567,
-   -0.002985,
-   5.257987,
-   0.028567,
-   -0.999607,
-   8.6e-05,
-   12.386889,
-   -0.002986,
-   0.0,
-   0.999996,
-   -9.84964,
+   -0.9976819573495165,
+   -0.027878793738593578,
+   -0.062320507934812724,
+   6.144622913874059,
+   0.02794110707340291,
+   -0.9996244169902516,
+   -0.00012699983927795468,
+   12.387727183056091,
+   -0.06229352505015909,
+   -0.0018688511065793074,
+   0.9980555945321519,
+   -8.925803340950438,
    0.0,
    0.0,
    0.0,
@@ -55,7 +55,8 @@
  "notes": {
   "Shoulder": "CyberBrush arm in the model's own axes (front -Y), round shoulder face on the heresy shoulder point (as Springles / BBoosty); own shoulder face",
   "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
-  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket"
+  "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket",
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - CyberBrush right arms (2026-11-25 b)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "noPad": false,
  "noHand": true,
@@ -63,5 +64,8 @@
   "name": "5",
   "folder": "Arms",
   "path": "CyberBrush - Tacticus\\Space Bugs Hunters\\Space Bug Hunters Hammer\\Arms\\5.stl"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }
