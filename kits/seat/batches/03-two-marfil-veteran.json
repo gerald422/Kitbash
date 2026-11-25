@@ -1,0 +1,4281 @@
+{
+ "name": "Stage 3 - Two-armed weapons: Mar Fil Veteran guns and heavy (0.32 mm pre-set and Josh's 0.23 mm back in)",
+ "stage": "3 (arms on the spacer)",
+ "out": "~/Desktop/mar fil connectors/batches/03 Stage 3 - Two-armed Mar Fil Veteran guns and heavy (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a1",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Heavy Flamer A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a1_spacer",
+   "role": "check",
+   "name": "Veteran - Heavy Flamer A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a1_arm",
+   "role": "part",
+   "name": "Veteran - Heavy Flamer A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/HeavyWeapons/Heavy Weapons/MarFil Veteran - Heavy Flamer A",
+   "parent": "a1_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999904199559805,
+     -0.0020514856554824873,
+     -0.0040950923592051715,
+     85.57903201791548,
+     0.0020599086699517716,
+     0.9999961416666795,
+     0.0017672691114308465,
+     0.177785564845993,
+     0.0040915013802746755,
+     -0.001775563780912451,
+     0.9999894242953454,
+     31.91523057551177,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a1",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a1_head",
+   "role": "neighbour",
+   "name": "Veteran - Heavy Flamer A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a1_pack",
+   "role": "check",
+   "name": "Veteran - Heavy Flamer A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a1_legs",
+   "role": "check",
+   "name": "Veteran - Heavy Flamer A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a2",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Heavy Flamer B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a2_spacer",
+   "role": "check",
+   "name": "Veteran - Heavy Flamer B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a2_arm",
+   "role": "part",
+   "name": "Veteran - Heavy Flamer B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/HeavyWeapons/Heavy Weapons/MarFil Veteran - Heavy Flamer B",
+   "parent": "a2_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999983396147442,
+     0.00208609055369345,
+     -0.00013542544605750956,
+     165.5782510393252,
+     -0.002083941091471481,
+     0.9999904904432239,
+     0.0037629217049200045,
+     0.21793978544786397,
+     0.00014330184327053438,
+     -0.00376246172125917,
+     0.9999921433923129,
+     31.947149358197684,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a2",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a2_head",
+   "role": "neighbour",
+   "name": "Veteran - Heavy Flamer B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a2_pack",
+   "role": "check",
+   "name": "Veteran - Heavy Flamer B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a2_legs",
+   "role": "check",
+   "name": "Veteran - Heavy Flamer B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a3",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Heavy Gun A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a3_spacer",
+   "role": "check",
+   "name": "Veteran - Heavy Gun A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a3_arm",
+   "role": "part",
+   "name": "Veteran - Heavy Gun A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/HeavyWeapons/Heavy Weapons/MarFil Veteran - Heavy Gun A",
+   "parent": "a3_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999947142925825,
+     -0.002646401810892675,
+     0.0019601653890574007,
+     245.57782830407956,
+     0.002643667386339966,
+     0.9999956307490583,
+     0.0013933245514149567,
+     0.18047428183330186,
+     -0.001963324350738435,
+     -0.001388435154625413,
+     0.9999970012872132,
+     31.961702571118924,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a3",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a3_head",
+   "role": "neighbour",
+   "name": "Veteran - Heavy Gun A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a3_pack",
+   "role": "check",
+   "name": "Veteran - Heavy Gun A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a3_legs",
+   "role": "check",
+   "name": "Veteran - Heavy Gun A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a4",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Heavy Gun B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a4_spacer",
+   "role": "check",
+   "name": "Veteran - Heavy Gun B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a4_arm",
+   "role": "part",
+   "name": "Veteran - Heavy Gun B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/HeavyWeapons/Heavy Weapons/MarFil Veteran - Heavy Gun B",
+   "parent": "a4_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999973644872049,
+     -0.0015325286807645767,
+     -0.002226225625865782,
+     325.5787879606748,
+     0.0015374550675683423,
+     0.9999965471611256,
+     0.001970519802907084,
+     0.18887355998193334,
+     0.0022233501918198775,
+     -0.0019746761312190515,
+     0.9999950775106806,
+     31.935373824220985,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a4",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a4_head",
+   "role": "neighbour",
+   "name": "Veteran - Heavy Gun B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a4_pack",
+   "role": "check",
+   "name": "Veteran - Heavy Gun B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a4_legs",
+   "role": "check",
+   "name": "Veteran - Heavy Gun B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a5",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a5_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a5_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 1A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 1A",
+   "parent": "a5_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999965552875576,
+     -0.0012773135100169932,
+     0.002310444053203356,
+     405.5780170776808,
+     0.0012757696494862824,
+     0.9999994284974867,
+     0.0009775596200928202,
+     0.1903668707547066,
+     -0.0023117210869347425,
+     -0.0009757316775503191,
+     0.9999958046771958,
+     31.963556397079902,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a5",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a5_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 1A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a5_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a5_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a6",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 1B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a6_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a6_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 1B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 1B",
+   "parent": "a6_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     1.0000002421194405,
+     0.0005915695312834151,
+     0.000304076472599685,
+     485.5779487821019,
+     -0.0005908103145140358,
+     0.9999988398709418,
+     0.0015242143985522724,
+     0.19711419480252917,
+     -0.0003032651400064355,
+     -0.0015241370357272751,
+     0.999998398769683,
+     31.95538437655048,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a6",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a6_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 1B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a6_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a6_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a7",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 1C",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a7_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1C Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a7_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 1C",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 1C",
+   "parent": "a7_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999838828085323,
+     0.00568850248083324,
+     -0.0007281828086216984,
+     565.506019808741,
+     -0.005686123606060603,
+     0.9999823658520324,
+     0.0019095228731464534,
+     0.2540609938542919,
+     0.0007392598016086831,
+     -0.0019052479544403738,
+     0.9999977346033808,
+     31.95194050928417,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a7",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a7_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 1C Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a7_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1C Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a7_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 1C Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a8",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 2A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a8_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a8_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 2A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 2A",
+   "parent": "a8_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999991061940805,
+     0.0007604144913311434,
+     0.0014645952161673088,
+     5.505756541438198,
+     -0.0007634749636208131,
+     0.9999971618174582,
+     0.002242992947640572,
+     0.2088269185376649,
+     -0.0014623138318138988,
+     -0.002244173473945059,
+     0.9999953552696998,
+     -88.04151155740112,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a8",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a8_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 2A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a8_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a8_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a9",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 2B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a9_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a9_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 2B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 2B",
+   "parent": "a9_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     1.000000416931262,
+     0.0005992849546036493,
+     -0.00048081096582679563,
+     85.57675854688486,
+     -0.0005970381286305818,
+     0.9999952284080242,
+     0.0028466891555337767,
+     0.19515079587299228,
+     0.0004827322479405927,
+     -0.0028461384660946483,
+     0.9999959526712386,
+     -88.04254193644951,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a9",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a9_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 2B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a9_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a9_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a10",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 2C",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a10_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2C Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a10_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 2C",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 2C",
+   "parent": "a10_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.999998806507275,
+     -0.0010768880187396507,
+     0.0017846541996605412,
+     165.50600157534546,
+     0.0010706192206007342,
+     0.9999923367982291,
+     0.003646208773835806,
+     0.18883656607492189,
+     -0.0017877815792900547,
+     -0.003644774636998284,
+     0.9999906927102445,
+     -88.0431784059747,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a10",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a10_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 2C Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a10_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2C Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a10_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 2C Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a11",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 3A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a11_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a11_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 3A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 3A",
+   "parent": "a11_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999973686832977,
+     -0.0017065259283319033,
+     0.0018477818633549255,
+     245.50587225052686,
+     0.0017036364740642199,
+     0.9999964267844869,
+     0.0019652494786992947,
+     0.19098632466397533,
+     -0.0018505976369378604,
+     -0.0019616384050999466,
+     0.9999961915384452,
+     -88.04264475501154,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a11",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a11_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 3A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a11_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a11_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a12",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 3B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a12_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a12_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 3B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 3B",
+   "parent": "a12_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.999988554789969,
+     -0.0021222966772051137,
+     0.0043184904872271565,
+     325.57744214092526,
+     0.0021183465172335074,
+     0.9999978401806607,
+     0.0009089070872074561,
+     0.1750547412125714,
+     -0.004319473048980906,
+     -0.0008995487717727918,
+     0.9999893488399982,
+     -88.02353193109045,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a12",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a12_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 3B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a12_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a12_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a13",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Combi Weapon 3C",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a13_spacer",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3C Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a13_arm",
+   "role": "part",
+   "name": "Veteran - Combi Weapon 3C",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Combi Weapon 3C",
+   "parent": "a13_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999987445979154,
+     0.000354803003566115,
+     0.0018688007642688794,
+     405.50596153342946,
+     -0.0003553575039120505,
+     0.9999993685896367,
+     0.0004452631104220886,
+     0.20392145041710702,
+     -0.001868195006596822,
+     -0.00044608653529748445,
+     0.9999977461926396,
+     -88.04287202311204,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a13",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a13_head",
+   "role": "neighbour",
+   "name": "Veteran - Combi Weapon 3C Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a13_pack",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3C Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a13_legs",
+   "role": "check",
+   "name": "Veteran - Combi Weapon 3C Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a14",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a14_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a14_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1A",
+   "parent": "a14_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.999994810019967,
+     0.0018623958824212088,
+     -0.003009479425063657,
+     485.57948374258075,
+     -0.001855776035720313,
+     0.9999949284554757,
+     0.002346996022842769,
+     0.22982706249927418,
+     0.00301436596948482,
+     -0.002341413260181248,
+     0.999991356728488,
+     -88.0681994472213,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a14",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a14_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a14_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a14_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a15",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a15_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a15_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1B",
+   "parent": "a15_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999987298649118,
+     0.0015544622093870992,
+     0.0010387393144964021,
+     565.5060261702887,
+     -0.0015555992659046895,
+     0.9999966316123695,
+     0.002027707281915282,
+     0.21440061362035273,
+     -0.0010345438764575382,
+     -0.0020293462206727748,
+     0.9999963852887364,
+     -88.0398370012552,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a15",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a15_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a15",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a15_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a15",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a15_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a15",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a16",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1C",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a16_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1C Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a16_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1C",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1C",
+   "parent": "a16_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     1.0000007618263735,
+     -0.0001793351990036351,
+     0.00013837323046957226,
+     5.578194749047859,
+     0.00017914241187663778,
+     0.999999194772533,
+     0.0010811033867254485,
+     0.1934636716230804,
+     -0.00013904213454071844,
+     -0.0010809700070500215,
+     0.9999983062450944,
+     -208.05603672430257,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a16",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a16_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1C Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a16",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a16_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1C Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a16",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a16_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1C Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a16",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a17",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1D",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a17_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1D Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a17",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a17_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1D",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1D",
+   "parent": "a17_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999993846146263,
+     -0.00037007063481938685,
+     0.0012861920413865919,
+     85.50589816734156,
+     0.0003704740911206659,
+     0.999999712871129,
+     -0.00013912757498965827,
+     0.1988870600898933,
+     -0.0012859852304145367,
+     0.00014007035749025615,
+     0.9999987032050007,
+     -208.04167247045194,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a17",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a17_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1D Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a17",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a17_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1D Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a17",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a17_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1D Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a17",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a18",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1E",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a18_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1E Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a18",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a18_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1E",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1E",
+   "parent": "a18_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.999995846612229,
+     -0.0025264037166149358,
+     0.0017181592580688067,
+     165.5062240223639,
+     0.002524597977547525,
+     0.9999957137774245,
+     0.0014021623667584673,
+     0.18191663348175474,
+     -0.001721359361978907,
+     -0.0013974611726003667,
+     0.9999970563881317,
+     -208.0394484646245,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a18",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a18_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1E Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a18",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a18_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1E Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a18",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a18_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1E Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a18",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a19",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1F",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a19_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1F Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a19",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a19_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1F",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1F",
+   "parent": "a19_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999786107249585,
+     0.00651007589419978,
+     -0.0015494281036499663,
+     245.50663130540624,
+     -0.006511360802618379,
+     0.9999781552191847,
+     -0.0007100275698896831,
+     0.271276696168682,
+     0.0015450208480054274,
+     0.0007195699007735564,
+     0.9999981532463875,
+     -208.05251662672688,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a19",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a19_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1F Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a19",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a19_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1F Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a19",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a19_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1F Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a19",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a20",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1G",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a20_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1G Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a20",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a20_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1G",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1G",
+   "parent": "a20_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9997000078611603,
+     -0.02251839079469985,
+     0.009697235611732012,
+     325.49772409239785,
+     0.023946374400002836,
+     0.8118607269539542,
+     -0.5833590196885519,
+     0.510511148239896,
+     0.005262910143677865,
+     0.5834157501647571,
+     0.8121559327072557,
+     -207.8539595114035,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a20",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a20_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1G Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a20",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a20_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1G Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a20",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a20_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1G Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a20",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a21",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1H",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a21_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1H Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a21",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a21_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1H",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1H",
+   "parent": "a21_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999957260345307,
+     -0.0028330766205482663,
+     0.001321170614721397,
+     405.506502771564,
+     0.0028344815853300624,
+     0.9999960706618647,
+     -0.00010710413623606148,
+     0.18295656054697795,
+     -0.0013202698645362653,
+     0.00011160403305905247,
+     0.9999987048978433,
+     -208.042001221076,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a21",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a21_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1H Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a21",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a21_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1H Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a21",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a21_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1H Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a21",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a22",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 1I",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a22_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 1I Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a22",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a22_arm",
+   "role": "part",
+   "name": "Veteran - Gun 1I",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 1I",
+   "parent": "a22_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999966062158484,
+     0.0028006457238586506,
+     0.0008453004903429203,
+     485.50600978265436,
+     -0.0028006568442055005,
+     0.9999952243292206,
+     0.0011905771352594375,
+     0.22488908257406193,
+     -0.0008409046591980602,
+     -0.001193617984498402,
+     0.9999981845218266,
+     -208.0414919545267,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a22",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a22_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 1I Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a22",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a22_pack",
+   "role": "check",
+   "name": "Veteran - Gun 1I Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a22",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a22_legs",
+   "role": "check",
+   "name": "Veteran - Gun 1I Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a22",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a23",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a23_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a23",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a23_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2A",
+   "parent": "a23_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999874462222911,
+     0.00513388263767716,
+     -0.0004349976251208665,
+     565.5059198158624,
+     -0.005133033106860704,
+     0.9999864820436031,
+     0.00014171892153401337,
+     0.2527917175750245,
+     0.000435419715778391,
+     -0.00013912808201272994,
+     0.9999991583073417,
+     -208.0473378377909,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a23",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a23_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a23",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a23_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a23",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a23_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a23",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a24",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a24_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a24",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a24_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2B",
+   "parent": "a24_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999379199629079,
+     -0.004042085108680106,
+     0.010518111330230954,
+     5.575898845825947,
+     0.004042110069828988,
+     0.9999922737670858,
+     -2.392531016133371e-05,
+     0.14871027884160457,
+     -0.010517898126549447,
+     6.5865445248279e-05,
+     0.9999437324714616,
+     -327.9772262809382,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a24",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a24_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a24",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a24_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a24",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a24_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a24",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a25",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2C",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a25_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2C Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a25",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a25_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2C",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2C",
+   "parent": "a25_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999982468503673,
+     -0.0003810197930421729,
+     0.0018833495313490892,
+     85.50570555309537,
+     0.00038264645138516557,
+     0.9999996376758435,
+     -0.00037372707184594,
+     0.2025321600872331,
+     -0.0018829808701473856,
+     0.0003740724840085522,
+     0.9999975055352665,
+     -328.04246237082117,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a25",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a25_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2C Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a25",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a25_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2C Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a25",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a25_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2C Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a25",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a26",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2D",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a26_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2D Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a26",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a26_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2D",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2D",
+   "parent": "a26_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999990826836302,
+     -0.0007709951839391364,
+     0.001439425278299274,
+     165.506262793037,
+     0.0007715182240439667,
+     0.9999993432693829,
+     -0.00048702485476568387,
+     0.19479545993155498,
+     -0.0014388687165820427,
+     0.0004881569484860457,
+     0.9999985690522923,
+     -328.0422087356101,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a26",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a26_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2D Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a26",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a26_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2D Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a26",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a26_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2D Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a26",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a27",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2E",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a27_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2E Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a27",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a27_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2E",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2E",
+   "parent": "a27_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999958240650849,
+     -0.0025810287114817203,
+     0.0016503186126913616,
+     245.50629213356805,
+     0.0025815770784822977,
+     0.9999961757777255,
+     -0.0003278832446908321,
+     0.18249968029715974,
+     -0.0016493429040773972,
+     0.0003315491305030345,
+     0.9999975694190933,
+     -328.04634930358947,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a27",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a27_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2E Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a27",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a27_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2E Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a27",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a27_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2E Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a27",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a28",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2F",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a28_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2F Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a28",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a28_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2F",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2F",
+   "parent": "a28_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999958401492518,
+     -0.002498300726675309,
+     0.001832478913685208,
+     325.5062369708871,
+     0.0024976307442630616,
+     0.9999965942859652,
+     0.000925239019140334,
+     0.17638565438988904,
+     -0.001834367070376149,
+     -0.0009204674843841434,
+     0.9999968932670588,
+     -328.04293906795436,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a28",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a28_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2F Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a28",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a28_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2F Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a28",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a28_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2F Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a28",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a29",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2G",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a29_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2G Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a29",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a29_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2G",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2G",
+   "parent": "a29_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.999999251480063,
+     -0.0005005191434608352,
+     0.0015028045011709083,
+     405.5057103990531,
+     0.0004985372090393391,
+     0.9999982257276493,
+     0.0019310182899338235,
+     0.1994184846104995,
+     -0.0015039478514590977,
+     -0.0019298997313426252,
+     0.9999962565042055,
+     -328.04357027372606,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a29",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a29_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2G Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a29",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a29_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2G Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a29",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a29_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2G Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a29",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a30",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2H",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a30_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2H Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a30",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a30_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2H",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2H",
+   "parent": "a30_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999978417698174,
+     -0.0009372818430980593,
+     0.0020415393040408973,
+     485.50607337037206,
+     0.0009356922425603323,
+     0.9999986151962021,
+     0.0008353791314238332,
+     0.19393266962030678,
+     -0.0020418202491045067,
+     -0.0008338058709465943,
+     0.9999968218228706,
+     -328.04681794018404,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a30",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a30_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2H Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a30",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a30_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2H Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a30",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a30_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2H Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a30",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a31",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 2I",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a31_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 2I Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a31",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a31_arm",
+   "role": "part",
+   "name": "Veteran - Gun 2I",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 2I",
+   "parent": "a31_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999882686716958,
+     0.0050365025897723395,
+     9.282825343369994e-05,
+     565.5056340699956,
+     -0.00503588234912556,
+     0.9999849257147317,
+     0.0018940730869197902,
+     0.24743663654279144,
+     -8.255178382396815e-05,
+     -0.0018941056776937684,
+     0.999997551886652,
+     -328.04427033167605,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a31",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a31_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 2I Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a31",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a31_pack",
+   "role": "check",
+   "name": "Veteran - Gun 2I Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a31",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a31_legs",
+   "role": "check",
+   "name": "Veteran - Gun 2I Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a31",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a32",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a32_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a32",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a32_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3A",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3A",
+   "parent": "a32_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999976917338033,
+     -0.0011931626743631764,
+     0.0019389086695257877,
+     5.505874112831751,
+     0.0011926625418470877,
+     0.9999992836396587,
+     0.0002843101075516311,
+     0.19349559957088686,
+     -0.0019397457974042655,
+     -0.000281750666380059,
+     0.9999976842978912,
+     -448.0401400301983,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a32",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a32_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a32",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a32_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a32",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a32_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a32",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a33",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a33_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a33",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a33_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3B",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3B",
+   "parent": "a33_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999958239061795,
+     -0.0025060645334869735,
+     0.0018822074828420568,
+     85.50616248116474,
+     0.0025066443621415318,
+     0.9999962738643262,
+     -0.00016172785472153413,
+     0.1789806073289685,
+     -0.0018813644070616664,
+     0.00016653304592784745,
+     0.9999975672608415,
+     -448.04639729589263,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a33",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a33_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a33",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a33_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a33",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a33_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a33",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a34",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3C",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a34_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3C Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a34",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a34_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3C",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3C",
+   "parent": "a34_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999845950481716,
+     -0.0007469013536066868,
+     -0.005521392970533049,
+     165.57961819697945,
+     0.0007684910579176629,
+     0.9999925759229213,
+     0.003702316865336621,
+     0.19251722632952156,
+     0.00551812675219212,
+     -0.0037068461451396574,
+     0.9999772950935388,
+     -448.089144275431,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a34",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a34_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3C Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a34",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a34_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3C Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a34",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a34_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3C Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a34",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a35",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3D",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a35_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3D Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a35",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a35_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3D",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3D",
+   "parent": "a35_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999807358027539,
+     -0.0012445274926899332,
+     0.006215775965762687,
+     245.57650510953448,
+     0.001232892040530364,
+     0.9999977378492932,
+     0.0019741816825215083,
+     0.17260832931798523,
+     -0.006218726268679671,
+     -0.001966738317033788,
+     0.9999782458806841,
+     -448.0035864565933,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a35",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a35_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3D Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a35",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a35_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3D Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a35",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a35_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3D Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a35",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a36",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3E",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a36_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3E Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a36",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a36_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3E",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3E",
+   "parent": "a36_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.99998894444095,
+     0.00012493328782159596,
+     0.004909094532723779,
+     325.5772023054427,
+     -0.00014648223067503287,
+     0.999989384937741,
+     0.004481306363808812,
+     0.19168316256871387,
+     -0.004909129335570878,
+     -0.004482035583076177,
+     0.999977256596103,
+     -448.00829707183163,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a36",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a36_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3E Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a36",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a36_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3E Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a36",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a36_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3E Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a36",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a37",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3F",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a37_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3F Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a37",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a37_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3F",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3F",
+   "parent": "a37_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999960023769872,
+     -0.0021431202447515286,
+     0.0021790378694130034,
+     405.50620204496505,
+     0.0021437309286148625,
+     0.9999975907539528,
+     9.147133954700312e-05,
+     0.18077094978391384,
+     -0.0021794693958434577,
+     -8.754511694246235e-05,
+     0.9999965762469923,
+     -448.04748678423516,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a37",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a37_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3F Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a37",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a37_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3F Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a37",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a37_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3F Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a37",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a38",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3G",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a38_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3G Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a38",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a38_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3G",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3G",
+   "parent": "a38_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999962943177481,
+     -0.0016471191874641068,
+     0.0023690426386990446,
+     485.505869036371,
+     0.0016467859733446987,
+     0.9999989211262341,
+     8.459867457273235e-05,
+     0.19089768790411407,
+     -0.002368613383571245,
+     -8.06524167638162e-05,
+     0.9999965330051231,
+     -448.0439047787862,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a38",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a38_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3G Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a38",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a38_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3G Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a38",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a38_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3G Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a38",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a39",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3H",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a39_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3H Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a39",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a39_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3H",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3H",
+   "parent": "a39_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999978462239804,
+     -0.00094553778019823,
+     0.0020007455276328653,
+     565.5055741711627,
+     0.0009416809354582496,
+     0.9999969530111268,
+     0.002019352275041907,
+     0.1903368119406553,
+     -0.0020028185515224757,
+     -0.002017803403616027,
+     0.9999951740212202,
+     -448.04501387633746,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a39",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a39_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3H Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a39",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a39_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3H Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a39",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a39_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3H Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a39",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a40",
+   "role": "host",
+   "name": "Torso 2 for Veteran - Gun 3I",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a40_spacer",
+   "role": "check",
+   "name": "Veteran - Gun 3I Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a40",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a40_arm",
+   "role": "part",
+   "name": "Veteran - Gun 3I",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Weapons/Two-Handed Guns/MarFil Veteran - Gun 3I",
+   "parent": "a40_spacer",
+   "on": "arm seat",
+   "mirror": false,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999994769949357,
+     -0.0001279890496358376,
+     0.001603443890281585,
+     5.505635320758809,
+     0.00012956638961012797,
+     0.9999997663595374,
+     -0.0005149146430150258,
+     0.2036094590045784,
+     -0.001604054800525481,
+     0.000515017452120463,
+     0.9999975253580804,
+     -568.040207045372,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands); your repeated move (0.09, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a40",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a40_head",
+   "role": "neighbour",
+   "name": "Veteran - Gun 3I Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a40",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a40_pack",
+   "role": "check",
+   "name": "Veteran - Gun 3I Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a40",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a40_legs",
+   "role": "check",
+   "name": "Veteran - Gun 3I Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a40",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  }
+ ]
+}

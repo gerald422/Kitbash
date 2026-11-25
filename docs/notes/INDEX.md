@@ -170,3 +170,4 @@ Add a new entry as the next number and append its line here.
 | `162-springles-arms-written-bboosty-left-lift.md` | Nov 25 | Every Springles arm written (75 right, 69 left as mirror images; 144 read back at 0.0000 mm); Josh's 0.52 mm BBoosty left lift carried to the other 11 left arms in a c file |
 | `163-bboosty-arms-written-skull-r.md` | Nov 25 | BBoosty arms written (23 right, 14 left; read back 0.0000 mm); the Skull Paragon Blade R arm faces the wrong way, its STL not a mirror of the L one: a one-arm file for Josh |
 | `164-two-armed-weapons-start.md` | Nov 25 | Skull Paragon Blade R written (every plain arm done); two-armed weapons: 241 in scope, `make_arm_batch.py --two`, batch 1 = 24 Mar Fil Assault melee |
+| `165-two-armed-josh-move-veteran-batch.md` | Nov 25 | Two-armed: Josh's 0.23 mm back-in move carried to all 24 Assault melee (b file); batch 2 = 40 Mar Fil Veteran guns and heavy with it pre-set (shift 0.09) |
