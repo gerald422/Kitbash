@@ -15,3 +15,6 @@ files were rebuilt before they were handed over (the first copies went to the Re
 
 Renders, 5 columns each: the arms sit at the shoulders, except Marta column 8 (Marta Deathwatch - DW Frag Cannon), which starts well
 off to the side (its old fit was off): one for Josh by eye.
+
+**Turtle Ninja two-armed: out.** Josh, on the TN file: "I think the TN arms are so badly scaled here we would leave
+out these parts specifically". The 28 Mk4 bolters are not written; PLAN.md's scope table lists them as out.
