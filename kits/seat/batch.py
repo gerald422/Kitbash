@@ -59,6 +59,8 @@ RZ = np.array([[0, 1.0, 0, 0], [-1.0, 0, 0, 0], [0, 0, 1.0, 0], [0, 0, 0, 1.0]])
 
 def opt(A, n, d=None): return A[A.index(n) + 1] if n in A else d
 def home(p): return os.path.expanduser(p) if isinstance(p, str) else p
+def lp(p):                                           # Windows long path (Nov 25: Marta Combo Weapons backups > 260 chars)
+    return "\\\\?\\" + os.path.abspath(p) if os.name == "nt" and not p.startswith("\\\\?\\") else p
 
 
 # ---- connectors: printed parts with no library file, each in its own frame (docs/PLAN.md, Physical connectors)
@@ -535,10 +537,10 @@ def write(A):
     if check: print("\n--check: nothing written", flush=True); return
     task = "batch write %s" % time.strftime("%Y-%m-%d %H%M"); B = os.path.join(lib, "_backups", task, "before", "lib")
     for rel, d in out.items():
-        src = os.path.join(lib, rel + SC.SUFFIX); dst = os.path.join(B, rel + SC.SUFFIX); os.makedirs(os.path.dirname(dst), exist_ok=True)
+        src = lp(os.path.join(lib, rel + SC.SUFFIX)); dst = lp(os.path.join(B, rel + SC.SUFFIX)); os.makedirs(os.path.dirname(dst), exist_ok=True)
         open(dst, "wb").write(open(src, "rb").read())
     for rel, d in out.items():
-        repo_p = os.path.join(REPO, "library", rel + SC.SUFFIX); src = os.path.join(lib, rel + SC.SUFFIX)
+        repo_p = lp(os.path.join(REPO, "library", rel + SC.SUFFIX)); src = lp(os.path.join(lib, rel + SC.SUFFIX))
         in_step = os.path.exists(repo_p) and open(repo_p, "rb").read() == open(src, "rb").read()
         data = SC.save(src, d, olds[rel][1])
         if in_step: open(repo_p, "wb").write(data)
