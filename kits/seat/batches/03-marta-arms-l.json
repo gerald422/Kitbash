@@ -1,0 +1,6421 @@
+{
+ "name": "Stage 3 - Marta left arms as right (your 0.32 mm pre-set)",
+ "stage": "3 (arms on the spacer)",
+ "out": "~/Desktop/mar fil connectors/batches/03 Stage 3 - Marta left arms (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a1",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2025 - Arm 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a1_spacer",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a1_arm",
+   "role": "part",
+   "name": "Marta Jul 2025 - Arm 2 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/07 July 2025/ARMS and WEAPONS/Arms/Marta Jul 2025 - Arm 2 L",
+   "parent": "a1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990869625082968,
+     -0.04272991129663502,
+     -0.00025403530655002186,
+     73.55577719268214,
+     -0.0002414801040629294,
+     -0.00029825480967598475,
+     0.9999997049773077,
+     -13.540247391196466,
+     -0.04273013213266853,
+     0.9990851919841515,
+     0.0002871383072035862,
+     16.062074705704237,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a1",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a1_head",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a1_pack",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a1_legs",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a2",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2025 - Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a2_spacer",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a2_arm",
+   "role": "part",
+   "name": "Marta Jul 2025 - Arm 3 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/07 July 2025/ARMS and WEAPONS/Arms/Marta Jul 2025 - Arm 3 L",
+   "parent": "a2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990788117566967,
+     -0.0429109040172355,
+     -0.00021403712565357035,
+     156.71273983970852,
+     -0.00020142485729310468,
+     -0.00029831292556370035,
+     0.9999997177531791,
+     -2.4916451933249313,
+     -0.0429111129342848,
+     0.9990770278271912,
+     0.0002891745845495754,
+     23.48494483260125,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a2",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a2_head",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a2_pack",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a2_legs",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a3",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2025 - Arm 6 Bionic L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a3_spacer",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 6 Bionic L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a3_arm",
+   "role": "part",
+   "name": "Marta Jul 2025 - Arm 6 Bionic L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/07 July 2025/ARMS and WEAPONS/Arms/Marta Jul 2025 - Arm 6 Bionic L",
+   "parent": "a3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990788052186875,
+     -0.04292290401552959,
+     -0.0002010371275016283,
+     197.73200274633484,
+     -0.00018842137497103188,
+     -0.0002983169326508851,
+     0.9999997220941902,
+     -2.557245804526735,
+     -0.04292310914091959,
+     0.9990770169428619,
+     0.0002891863759063451,
+     -2.235949145189067,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a3",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a3_head",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 6 Bionic L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a3_pack",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 6 Bionic L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a3_legs",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 6 Bionic L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a4",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2025 - Arm 7 Bionic L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a4_spacer",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 7 Bionic L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a4_arm",
+   "role": "part",
+   "name": "Marta Jul 2025 - Arm 7 Bionic L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/07 July 2025/ARMS and WEAPONS/Arms/Marta Jul 2025 - Arm 7 Bionic L",
+   "parent": "a4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990879922384898,
+     -0.042701912207324055,
+     -0.00024103621510668792,
+     317.3430791760199,
+     -0.00022848857738472177,
+     -0.00029824575034888544,
+     0.9999997090277758,
+     7.3032197323324874,
+     -0.04270212932136605,
+     0.999086217379044,
+     0.00028815009668447405,
+     10.05637364787579,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a4",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a4_head",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 7 Bionic L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a4_pack",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 7 Bionic L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a4_legs",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 7 Bionic L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a5",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2025 - Arm 8 Bionic L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a5_spacer",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 8 Bionic L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a5_arm",
+   "role": "part",
+   "name": "Marta Jul 2025 - Arm 8 Bionic L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/07 July 2025/ARMS and WEAPONS/Arms/Marta Jul 2025 - Arm 8 Bionic L",
+   "parent": "a5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990849434194028,
+     -0.04276790947781578,
+     -0.00020803712650652019,
+     396.08517091874137,
+     -0.00019546841042110752,
+     -0.0002982669176994062,
+     0.9999997197567225,
+     -11.581312343738674,
+     -0.042768116904306125,
+     0.9990831575208604,
+     0.00028918002671423834,
+     39.380645906388104,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a5",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a5_head",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 8 Bionic L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a5_pack",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 8 Bionic L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a5_legs",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 8 Bionic L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a6",
+   "role": "host",
+   "name": "Torso 2 for Marta Monster Hunter - MH Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a6_spacer",
+   "role": "check",
+   "name": "Marta Monster Hunter - MH Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a6_arm",
+   "role": "part",
+   "name": "Marta Monster Hunter - MH Arm 3 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/2023.09 Monster Hunter/Monster Hunter character/Arms/Marta Monster Hunter - MH Arm 3 L",
+   "parent": "a6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9981256006480236,
+     -0.03457319138843361,
+     -0.050505072789766375,
+     489.69277314211416,
+     -0.0505255281491356,
+     -0.0002966204790830734,
+     0.9987224163035122,
+     -10.225622716395486,
+     -0.03454486910840465,
+     0.9994005897391733,
+     -0.0014508051418361371,
+     12.33304293412304,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a6",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a6_head",
+   "role": "check",
+   "name": "Marta Monster Hunter - MH Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a6_pack",
+   "role": "check",
+   "name": "Marta Monster Hunter - MH Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a6_legs",
+   "role": "check",
+   "name": "Marta Monster Hunter - MH Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a7",
+   "role": "host",
+   "name": "Torso 2 for Marta Jan 2026 - Arm 5",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a7_spacer",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arm 5 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a7_arm",
+   "role": "part",
+   "name": "Marta Jan 2026 - Arm 5 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/47 January Asian theme 2026/arms and weapons/Arms/Marta Jan 2026 - Arm 5",
+   "parent": "a7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990818752258728,
+     -0.042840906747312404,
+     -0.00021303712579572856,
+     558.4468175834404,
+     -0.000201446197074784,
+     -0.00029829042251745136,
+     0.9999997180871029,
+     -1.9141075633470568,
+     -0.04284111578667885,
+     0.9990800913134845,
+     0.00028917549157701924,
+     41.53825672417104,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a7",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a7_head",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arm 5 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a7_pack",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arm 5 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a7_legs",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arm 5 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a8",
+   "role": "host",
+   "name": "Torso 2 for Marta Jan 2026 - Arms 4 With Sword L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a8_spacer",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arms 4 With Sword L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a8_arm",
+   "role": "part",
+   "name": "Marta Jan 2026 - Arms 4 With Sword L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/47 January Asian theme 2026/arms and weapons/Arms/Marta Jan 2026 - Arms 4 With Sword L",
+   "parent": "a8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990818603366752,
+     -0.04285990674461139,
+     -0.00020703712664867858,
+     -7.825095420806124,
+     -0.0001944406790160734,
+     -0.0002982967670721605,
+     0.9999997200906465,
+     -13.475285361595454,
+     -0.04286011372057692,
+     0.9990800740799631,
+     0.00028918093374168217,
+     -100.99039764492287,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a8",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a8_head",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arms 4 With Sword L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a8_pack",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arms 4 With Sword L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a8_legs",
+   "role": "check",
+   "name": "Marta Jan 2026 - Arms 4 With Sword L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a9",
+   "role": "host",
+   "name": "Torso 2 for Marta Jan 2026 - Set Arms 1 Asian L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a9_spacer",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a9_arm",
+   "role": "part",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/47 January Asian theme 2026/arms and weapons/Arms/Marta Jan 2026 - Set Arms 1 Asian L",
+   "parent": "a9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9913320045892471,
+     -0.1212591057391398,
+     0.050579813548683364,
+     72.21780239071806,
+     0.050993846811950155,
+     -0.00031062150707705913,
+     0.9986988925968584,
+     -10.722932230251068,
+     -0.12108514582181985,
+     0.992618974060904,
+     0.006490857397226757,
+     -92.70466557184614,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a9",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a9_head",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a9_pack",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a9_legs",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a10",
+   "role": "host",
+   "name": "Torso 2 for Marta Jan 2026 - Set Arms 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a10_spacer",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a10_arm",
+   "role": "part",
+   "name": "Marta Jan 2026 - Set Arms 1 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/47 January Asian theme 2026/arms and weapons/Arms/Marta Jan 2026 - Set Arms 1 L",
+   "parent": "a10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.991330989175581,
+     -0.1212691048310096,
+     0.0505618141239128,
+     152.22111261964713,
+     0.05097485005743363,
+     -0.0003106245557733814,
+     0.9986998868764481,
+     -10.575799230776848,
+     -0.12109515040728262,
+     0.9926179649925054,
+     0.0064898413626743885,
+     -92.77671577699317,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a10",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a10_head",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a10_pack",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a10_legs",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a11",
+   "role": "host",
+   "name": "Torso 2 for Marta Mar 2026 - Set Arms 5 With Katana",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a11_spacer",
+   "role": "check",
+   "name": "Marta Mar 2026 - Set Arms 5 With Katana Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a11_arm",
+   "role": "part",
+   "name": "Marta Mar 2026 - Set Arms 5 With Katana (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/arms & weapons/Arms/Marta Mar 2026 - Set Arms 5 With Katana",
+   "parent": "a11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9929953779087343,
+     -0.04282090765686417,
+     -0.11012181773285272,
+     242.5346123581366,
+     -0.11020947036647837,
+     -0.00029828403458180856,
+     0.9939083564855916,
+     -1.276893314852124,
+     -0.042592538918500476,
+     0.9990811094521576,
+     -0.004423268418337321,
+     -93.96695087112491,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a11",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a11_head",
+   "role": "check",
+   "name": "Marta Mar 2026 - Set Arms 5 With Katana Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a11_pack",
+   "role": "check",
+   "name": "Marta Mar 2026 - Set Arms 5 With Katana Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a11_legs",
+   "role": "check",
+   "name": "Marta Mar 2026 - Set Arms 5 With Katana Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a12",
+   "role": "host",
+   "name": "Torso 2 for Marta May 2026 - Arm 1 With Sword Handle",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a12_spacer",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 1 With Sword Handle Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a12_arm",
+   "role": "part",
+   "name": "Marta May 2026 - Arm 1 With Sword Handle (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/51 May 2026/amrs and weapons/Arms/Marta May 2026 - Arm 1 With Sword Handle",
+   "parent": "a12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.999028775629294,
+     -0.04310489673598791,
+     0.009171617515150434,
+     330.1947512212533,
+     0.009192645594349206,
+     -0.0002983753824625328,
+     0.9999577369226954,
+     1.7659801113297189,
+     -0.04310033962410522,
+     0.9990688518788742,
+     0.0006936741483298184,
+     -93.8494312075588,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a12",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a12_head",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 1 With Sword Handle Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a12_pack",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 1 With Sword Handle Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a12_legs",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 1 With Sword Handle Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a13",
+   "role": "host",
+   "name": "Torso 2 for Marta May 2026 - Arm 3",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a13_spacer",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 3 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a13_arm",
+   "role": "part",
+   "name": "Marta May 2026 - Arm 3 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/51 May 2026/amrs and weapons/Arms/Marta May 2026 - Arm 3",
+   "parent": "a13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.999078823161811,
+     -0.04290790492437057,
+     -0.00018803803605829442,
+     389.35862302076066,
+     -0.00017542573730991386,
+     -0.00029831221433490254,
+     0.9999997261446584,
+     -0.9043502293642145,
+     -0.04290810539820321,
+     0.9990780305463975,
+     0.000290198165387233,
+     -102.92634873237282,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a13",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a13_head",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 3 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a13_pack",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 3 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a13_legs",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 3 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a14",
+   "role": "host",
+   "name": "Torso 2 for Marta Jun 2026 - Arm 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a14_spacer",
+   "role": "check",
+   "name": "Marta Jun 2026 - Arm 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a14_arm",
+   "role": "part",
+   "name": "Marta Jun 2026 - Arm 1 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/52 June 2026/weapons and arms/Arms/Marta Jun 2026 - Arm 1",
+   "parent": "a14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9876756548874225,
+     0.10689456480350229,
+     -0.11432503968416673,
+     471.73900307019437,
+     -0.11501186418053957,
+     -0.0002688543349365142,
+     0.9933640227318149,
+     -2.138812548284961,
+     0.10615374707487459,
+     0.9942689043382166,
+     0.01255974502975553,
+     -91.2327106738455,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a14",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a14_head",
+   "role": "check",
+   "name": "Marta Jun 2026 - Arm 1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a14_pack",
+   "role": "check",
+   "name": "Marta Jun 2026 - Arm 1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a14_legs",
+   "role": "check",
+   "name": "Marta Jun 2026 - Arm 1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a15",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2026 - Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a15_spacer",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a15_arm",
+   "role": "part",
+   "name": "Marta Jul 2026 - Arm 2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/53 July 2026/weapons and arms/Arms/Marta Jul 2026 - Arm 2",
+   "parent": "a15_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9876786588476306,
+     0.10689156480392875,
+     -0.11430403763510227,
+     553.9767608389207,
+     -0.11499186431713451,
+     -0.00026885533670831035,
+     0.9933660306152011,
+     -2.122233016176419,
+     0.10615075016073468,
+     0.9942689016171343,
+     0.012556764663090974,
+     -92.74078390505429,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a15",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a15_head",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a15",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a15_pack",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a15",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a15_legs",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a15",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a16",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2026 - Arm 4",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a16_spacer",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 4 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a16_arm",
+   "role": "part",
+   "name": "Marta Jul 2026 - Arm 4 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/53 July 2026/weapons and arms/Arms/Marta Jul 2026 - Arm 4",
+   "parent": "a16_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.987678673068514,
+     0.10690356570893148,
+     -0.11429403797056187,
+     -6.023356422795981,
+     -0.1149818678068766,
+     -0.0002688510390781273,
+     0.9933670339541179,
+     -2.1117062961322657,
+     0.10616275303888151,
+     0.9942679125033396,
+     0.012556774023431153,
+     -212.7399589555683,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a16",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a16_head",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 4 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a16",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a16_pack",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 4 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a16",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a16_legs",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 4 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a16",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a17",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2026 - Bionic Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a17_spacer",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a17",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a17_arm",
+   "role": "part",
+   "name": "Marta Jul 2026 - Bionic Arm 2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/53 July 2026/weapons and arms/Arms/Marta Jul 2026 - Bionic Arm 2",
+   "parent": "a17_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990191077872521,
+     -0.043947863974638575,
+     -0.005488826210420259,
+     86.09088124761585,
+     -0.005481102827168224,
+     -0.000298646420789317,
+     0.999985022261892,
+     -2.401002202675868,
+     -0.043949590835534964,
+     0.9990320873222708,
+     5.738666975397427e-05,
+     -214.44762051946188,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a17",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a17_head",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a17",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a17_pack",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a17",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a17_legs",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a17",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a18",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2026 - Bionic Arm 4",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a18_spacer",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 4 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a18",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a18_arm",
+   "role": "part",
+   "name": "Marta Jul 2026 - Bionic Arm 4 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/53 July 2026/weapons and arms/Arms/Marta Jul 2026 - Bionic Arm 4",
+   "parent": "a18_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9993061951025713,
+     -0.03711211033042754,
+     0.003151853781619469,
+     165.92944252114322,
+     0.003165815399803451,
+     -0.0002974424536197147,
+     0.9999948062968242,
+     -3.640608802581795,
+     -0.03711134703411263,
+     0.999309286963447,
+     0.000414225669673463,
+     -212.2880109698203,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a18",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a18_head",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 4 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a18",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a18_pack",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 4 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a18",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a18_legs",
+   "role": "check",
+   "name": "Marta Jul 2026 - Bionic Arm 4 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a18",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a19",
+   "role": "host",
+   "name": "Torso 2 for Marta Blood Angels 2 - BA Arms (Spear) L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a19_spacer",
+   "role": "check",
+   "name": "Marta Blood Angels 2 - BA Arms (Spear) L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a19",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a19_arm",
+   "role": "part",
+   "name": "Marta Blood Angels 2 - BA Arms (Spear) L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Blood Angels Pt2/Arms/Marta Blood Angels 2 - BA Arms (Spear) L",
+   "parent": "a19_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990808869166315,
+     -0.042861905837618466,
+     -0.00012204076556656699,
+     239.36762222006118,
+     -0.00010943979142784472,
+     -0.0002982971443770263,
+     0.9999997473120088,
+     -0.35466502491563545,
+     -0.04286208815420987,
+     0.9990790722677841,
+     0.00029325802357087975,
+     -211.96783226518508,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a19",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a19_head",
+   "role": "check",
+   "name": "Marta Blood Angels 2 - BA Arms (Spear) L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a19",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a19_pack",
+   "role": "check",
+   "name": "Marta Blood Angels 2 - BA Arms (Spear) L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a19",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a19_legs",
+   "role": "check",
+   "name": "Marta Blood Angels 2 - BA Arms (Spear) L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a19",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a20",
+   "role": "host",
+   "name": "Torso 2 for Marta Deathwatch 2 - DW Arms 1 (Shotgun) L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a20_spacer",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 1 (Shotgun) L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a20",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a20_arm",
+   "role": "part",
+   "name": "Marta Deathwatch 2 - DW Arms 1 (Shotgun) L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Death Watch Pt2/Arms/Marta Deathwatch 2 - DW Arms 1 (Shotgun) L",
+   "parent": "a20_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.999077862911525,
+     -0.04293590310697292,
+     6.95468255197079e-06,
+     305.6141034574704,
+     1.958266890936534e-05,
+     -0.00029832098311900345,
+     0.999999788935481,
+     -2.776047850254056,
+     -0.0429360478758319,
+     0.9990760051533809,
+     0.00029837502073172377,
+     -227.66900964159834,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a20",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a20_head",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 1 (Shotgun) L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a20",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a20_pack",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 1 (Shotgun) L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a20",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a20_legs",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 1 (Shotgun) L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a20",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a21",
+   "role": "host",
+   "name": "Torso 2 for Marta Deathwatch 2 - DW Arms 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a21_spacer",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a21",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a21_arm",
+   "role": "part",
+   "name": "Marta Deathwatch 2 - DW Arms 2 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Death Watch Pt2/Arms/Marta Deathwatch 2 - DW Arms 2 L",
+   "parent": "a21_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990259154888541,
+     -0.04356487944313154,
+     -0.007104761890835538,
+     386.3228289645468,
+     -0.0070992162111669825,
+     -0.00029852346715431076,
+     0.9999745021104246,
+     -3.1306721979140586,
+     -0.04356606723143201,
+     0.9990494346818917,
+     -1.10818615685544e-05,
+     -240.06479683410575,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a21",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a21_head",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a21",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a21_pack",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a21",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a21_legs",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a21",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a22",
+   "role": "host",
+   "name": "Torso 2 for Marta Relic Captain - Set Arms 2.2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a22_spacer",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 2.2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a22",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a22_arm",
+   "role": "part",
+   "name": "Marta Relic Captain - Set Arms 2.2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Captain with Relic Shield/Arms/Marta Relic Captain - Set Arms 2.2",
+   "parent": "a22_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990610623976016,
+     -0.043037899465638345,
+     -0.005104845973965851,
+     516.6247016932007,
+     -0.005096381326925087,
+     -0.00029835388118808,
+     0.9999871443866338,
+     -44.337004435146454,
+     -0.043038518057278846,
+     0.9990719126440852,
+     7.873550903036254e-05,
+     -244.67577305686126,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a22",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a22_head",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 2.2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a22",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a22_pack",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 2.2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a22",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a22_legs",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 2.2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a22",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a23",
+   "role": "host",
+   "name": "Torso 2 for Marta Relic Captain - Set Arms 3.2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a23_spacer",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 3.2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a23",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a23_arm",
+   "role": "part",
+   "name": "Marta Relic Captain - Set Arms 3.2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Captain with Relic Shield/Arms/Marta Relic Captain - Set Arms 3.2",
+   "parent": "a23_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990692207378608,
+     -0.04281990765700632,
+     -0.005218841996887356,
+     531.1068668096258,
+     -0.0052114470090472344,
+     -0.00029828370065787654,
+     0.9999861074818001,
+     4.447297373689022,
+     -0.042821559078124787,
+     0.9990811103591849,
+     7.463182533955465e-05,
+     -213.17508032283018,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a23",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a23_head",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 3.2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a23",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a23_pack",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 3.2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a23",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a23_legs",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 3.2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a23",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a24",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a24_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a24",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a24_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arm 2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/04.23 DA Lion Knights/Arms/Marta Gurls - Arm 2",
+   "parent": "a24_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9933672738408288,
+     -0.11146813920418251,
+     -0.02821607441609214,
+     -3.5096265518719836,
+     -0.028358625010379283,
+     -0.0003096826517642383,
+     0.9995972722536381,
+     -2.7563257856575714,
+     -0.11143204253030045,
+     0.993766852956873,
+     -0.00285433515591645,
+     -336.2762399249964,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a24",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a24_head",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a24",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a24_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a24",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a24_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a24",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a25",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arm 2 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a25_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a25",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a25_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arm 2 3 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/04.23 DA Lion Knights/update bolters/Arms/Marta Gurls - Arm 2 3 L",
+   "parent": "a25_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990798184851365,
+     -0.04290790492437057,
+     -0.00020203712735947005,
+     69.65836201524199,
+     -0.00018942606671733063,
+     -0.00029831221433490254,
+     0.9999997217602661,
+     2.4594900218593576,
+     -0.042908110366151,
+     0.9990780305463975,
+     0.00028918546887890127,
+     -334.30766648769077,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a25",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a25_head",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a25",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a25_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a25",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a25_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a25",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a26",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arms Set 1 Cloth L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a26_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 Cloth L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a26",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a26_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arms Set 1 Cloth L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls/Arms/Marta Gurls - Arms Set 1 Cloth L",
+   "parent": "a26_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990821480875854,
+     -0.04282990765558475,
+     0.0005729328410837742,
+     155.50198882073482,
+     0.0005855503530595528,
+     -0.0002982870398971971,
+     0.9999999709633945,
+     -2.6808753672118395,
+     -0.042829887525576656,
+     0.9990811012889107,
+     0.00032288835324376347,
+     -334.1184905049554,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a26",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a26_head",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 Cloth L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a26",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a26_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 Cloth L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a26",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a26_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 Cloth L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a26",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a27",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arms Set 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a27_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a27",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a27_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arms Set 1 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls/Arms/Marta Gurls - Arms Set 1 L",
+   "parent": "a27_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990821418360306,
+     -0.04283790674773887,
+     0.0005759328406572993,
+     235.46807431300118,
+     0.0005885526764357147,
+     -0.0002982894207456552,
+     0.9999999719651663,
+     -2.6977903481813623,
+     -0.042837886640372386,
+     0.9990800940345669,
+     0.00032289107432609493,
+     -333.3375889315246,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a27",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a27_head",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a27",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a27_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a27",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a27_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a27",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a28",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arms Set 2 Cloth L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a28_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 Cloth L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a28",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a28_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arms Set 2 Cloth L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls/Arms/Marta Gurls - Arms Set 2 Cloth L",
+   "parent": "a28_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990831687982762,
+     -0.04281590765757496,
+     0.000595931931105525,
+     315.38746568347517,
+     0.0006095459437910465,
+     -0.0002982823649621483,
+     0.999999978353102,
+     -2.5709134373006077,
+     -0.04281588149728871,
+     0.9990811139872948,
+     0.00032390921299908955,
+     -331.0149134480279,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a28",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a28_head",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 Cloth L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a28",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a28_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 Cloth L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a28",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a28_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 Cloth L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a28",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a29",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arms Set 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a29_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a29",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a29_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arms Set 2 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls/Arms/Marta Gurls - Arms Set 2 L",
+   "parent": "a29_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990831234164519,
+     -0.04282690765601121,
+     0.0004899364797173462,
+     395.7452589312458,
+     0.0005035491739605012,
+     -0.00029828603812540093,
+     0.9999999444098802,
+     -2.4568725438390095,
+     -0.04282691222362237,
+     0.999081104009993,
+     0.0003188130774694535,
+     -330.5164923231848,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a29",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a29_head",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a29",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a29_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a29",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a29_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a29",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a30",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arms Set 3 Cloth L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a30_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 Cloth L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a30",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a30_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arms Set 3 Cloth L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls/Arms/Marta Gurls - Arms Set 3 Cloth L",
+   "parent": "a30_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990739074312236,
+     -0.04303489946606481,
+     0.0004079392115001518,
+     477.0242024009231,
+     0.0004216126386734174,
+     -0.0002983528794162838,
+     0.9999999178997468,
+     -2.7906108823914497,
+     -0.04303492745558259,
+     0.9990719153651675,
+     0.00031573870684670555,
+     -336.15392785258433,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a30",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a30_head",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 Cloth L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a30",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a30_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 Cloth L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a30",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a30_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 Cloth L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a30",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a31",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arms Set 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a31_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a31",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a31_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arms Set 3 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls/Arms/Marta Gurls - Arms Set 3 L",
+   "parent": "a31_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990739099605386,
+     -0.04302989946677562,
+     0.0004029392122109433,
+     557.3679644244049,
+     0.00041561118789407533,
+     -0.0002983512097966235,
+     0.9999999162301272,
+     -1.8410652123248512,
+     -0.043029929205356435,
+     0.9990719199003049,
+     0.00031573417170948644,
+     -336.956398587541,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a31",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a31_head",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a31",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a31_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a31",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a31_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a31",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a32",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arm 1 L (Update Arms)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a32_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arm 1 L (Update Arms) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a32",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a32_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arm 1 L (Update Arms) (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/DEATHgirls/update ARMS/Arms/Marta Gurls - Arm 1 L (Update Arms)",
+   "parent": "a32_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990696116618281,
+     -0.04312789582600967,
+     -0.0002240362175233791,
+     -19.977302076654105,
+     -0.00021135880092099644,
+     -0.00029838277216997177,
+     0.9999997147044828,
+     -15.265178253098526,
+     -0.04312810726462883,
+     0.9990678310191189,
+     0.000288165516151019,
+     -461.3108022828082,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a32",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a32_head",
+   "role": "check",
+   "name": "Marta Gurls - Arm 1 L (Update Arms) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a32",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a32_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arm 1 L (Update Arms) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a32",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a32_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arm 1 L (Update Arms) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a32",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a33",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arm 2 For Shotgun L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a33_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 For Shotgun L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a33",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a33_arm",
+   "role": "part",
+   "name": "Marta Gurls - Arm 2 For Shotgun L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/DEATHgirls/update ARMS/Arms/Marta Gurls - Arm 2 For Shotgun L",
+   "parent": "a33_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9952054033127562,
+     -0.042925904015103114,
+     0.08788989574644132,
+     65.89896010941048,
+     0.08798380699856528,
+     -0.00029831793442268125,
+     0.9961220632534358,
+     -14.673618899261804,
+     -0.04273399392664054,
+     0.9990770142217795,
+     0.0040729491975948166,
+     -460.3965840311056,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a33",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a33_head",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 For Shotgun L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a33",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a33_pack",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 For Shotgun L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a33",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a33_legs",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 For Shotgun L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a33",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a34",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Dragon Arms 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a34_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a34",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a34_arm",
+   "role": "part",
+   "name": "Marta Gurls - Dragon Arms 1 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls/02.24 Salamanders/Arms/Marta Gurls - Dragon Arms 1 L",
+   "parent": "a34_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9995727004719103,
+     -0.02919734323897621,
+     -0.0018469948508750653,
+     157.85007421471636,
+     -0.0018395697881655898,
+     -0.00029587382438244804,
+     0.9999981858206984,
+     -3.865729580460326,
+     -0.029198049814774266,
+     0.9995724653153734,
+     0.0002416932049586378,
+     -454.0700350443403,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a34",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a34_head",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a34",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a34_pack",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a34",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a34_legs",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a34",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a35",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Dragon Arms 2 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a35_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 2 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a35",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a35_arm",
+   "role": "part",
+   "name": "Marta Gurls - Dragon Arms 2 R (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls/02.24 Salamanders/Arms/Marta Gurls - Dragon Arms 2 R",
+   "parent": "a35_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990777864644033,
+     -0.0429399031064043,
+     -0.0002110371260800452,
+     238.17786719853171,
+     -0.00019841609859004586,
+     -0.00029832231881473173,
+     0.9999997187549509,
+     -2.1571538540478934,
+     -0.04294011110265956,
+     0.9990760015252711,
+     0.0002891773056319069,
+     -455.31175943755204,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a35",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a35_head",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 2 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a35",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a35_pack",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 2 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a35",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a35_legs",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 2 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a35",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a36",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Dragon Arms 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a36_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a36",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a36_arm",
+   "role": "part",
+   "name": "Marta Gurls - Dragon Arms 3 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls/02.24 Salamanders/Arms/Marta Gurls - Dragon Arms 3 L",
+   "parent": "a36_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9995644455932372,
+     -0.029456335948488344,
+     -0.0019079930287861926,
+     317.8348623251717,
+     -0.001899491846781072,
+     -0.00029595798633686414,
+     0.9999981660324248,
+     -3.528770782278361,
+     -0.029457059476645685,
+     0.9995642304102724,
+     0.00023963788003632827,
+     -453.6769973790019,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a36",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a36_head",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a36",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a36_pack",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a36",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a36_legs",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a36",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a37",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Dragon Arms 4 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a37_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 4 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a37",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a37_arm",
+   "role": "part",
+   "name": "Marta Gurls - Dragon Arms 4 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls/02.24 Salamanders/Arms/Marta Gurls - Dragon Arms 4 L",
+   "parent": "a37_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9995654668770745,
+     -0.029427336859319544,
+     -0.0019219921200873678,
+     397.8277675434022,
+     -0.001914500601612832,
+     -0.00029594859308583276,
+     0.9999981616480327,
+     -3.6654816363280713,
+     -0.029428064789059797,
+     0.9995652567121923,
+     0.00023862518352799658,
+     -453.513338668703,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a37",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a37_head",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 4 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a37",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a37_pack",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 4 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a37",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a37_legs",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 4 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a37",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a38",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Dragon Arms 5 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a38_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 5 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a38",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a38_arm",
+   "role": "part",
+   "name": "Marta Gurls - Dragon Arms 5 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls/02.24 Salamanders/Arms/Marta Gurls - Dragon Arms 5 L",
+   "parent": "a38_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9995480524610764,
+     -0.03002732135997822,
+     -0.0015340021490394804,
+     477.82592937548634,
+     -0.001526320724278985,
+     -0.00029614400821409534,
+     0.9999982880145452,
+     -3.7205097776968037,
+     -0.030027935698557273,
+     0.9995477125276162,
+     0.00024997708954149967,
+     -453.45981736613794,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a38",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a38_head",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 5 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a38",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a38_pack",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 5 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a38",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a38_legs",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 5 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a38",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a39",
+   "role": "host",
+   "name": "Torso 2 for Marta Sharks - Arm 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a39_spacer",
+   "role": "check",
+   "name": "Marta Sharks - Arm 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a39",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a39_arm",
+   "role": "part",
+   "name": "Marta Sharks - Arm 1 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Regular sharks May25/shark ARMS and WEAPONS/Arms/Marta Sharks - Arm 1",
+   "parent": "a39_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990788212529883,
+     -0.04290890401751981,
+     -0.00019003803577397787,
+     577.5804380688471,
+     -0.00017842544579909077,
+     -0.0002983122577158363,
+     0.9999997254768104,
+     2.486778112712295,
+     -0.04290910626652455,
+     0.999077029641246,
+     0.0002901963513323454,
+     -456.7845487534305,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a39",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a39_head",
+   "role": "check",
+   "name": "Marta Sharks - Arm 1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a39",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a39_pack",
+   "role": "check",
+   "name": "Marta Sharks - Arm 1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a39",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a39_legs",
+   "role": "check",
+   "name": "Marta Sharks - Arm 1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a39",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a40",
+   "role": "host",
+   "name": "Torso 2 for Marta Sharks - Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a40_spacer",
+   "role": "check",
+   "name": "Marta Sharks - Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a40",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a40_arm",
+   "role": "part",
+   "name": "Marta Sharks - Arm 2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Regular sharks May25/shark ARMS and WEAPONS/Arms/Marta Sharks - Arm 2",
+   "parent": "a40_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990788168148507,
+     -0.04291490401666685,
+     -0.00018803803605829442,
+     -9.018383309237164,
+     -0.00017542370350892556,
+     -0.00029831426125942863,
+     0.9999997261446584,
+     -0.8524083582456323,
+     -0.04291510538507204,
+     0.9990770241990814,
+     0.000290198165387233,
+     -595.4590345593584,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a40",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a40_head",
+   "role": "check",
+   "name": "Marta Sharks - Arm 2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a40",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a40_pack",
+   "role": "check",
+   "name": "Marta Sharks - Arm 2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a40",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a40_legs",
+   "role": "check",
+   "name": "Marta Sharks - Arm 2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a40",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a41",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a41_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a41",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a41_arm",
+   "role": "part",
+   "name": "Marta Aug 2025 - Arm 3 L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/Pagan ARMS_Soulder pad/Arms/Marta Aug 2025 - Arm 3 L",
+   "parent": "a41_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9878037381277763,
+     0.09916083294821916,
+     -0.12004752310495267,
+     30.54891922907691,
+     -0.12066965668446158,
+     -0.00027067132776836914,
+     0.9926922054561446,
+     -8.965335157450323,
+     0.09840299557623819,
+     0.9950698890693468,
+     0.012232360371683097,
+     -596.314412159869,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a41",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a41_head",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a41",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a41_pack",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a41",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a41_legs",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a41",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a42",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Arm 1 (Character 2) L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a42_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 1 (Character 2) L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a42",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a42_arm",
+   "role": "part",
+   "name": "Marta Aug 2025 - Arm 1 (Character 2) L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/character 2/Arms/Marta Aug 2025 - Arm 1 (Character 2) L",
+   "parent": "a42_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990808396257466,
+     -0.042880905834917445,
+     -0.0002120371259378869,
+     156.77344319534922,
+     -0.00019943424207613522,
+     -0.00029830348893173536,
+     0.9999997184210269,
+     -6.351044136779228,
+     -0.04288111422448465,
+     0.9990790550342626,
+     0.00028917639860446306,
+     -570.7036033961098,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a42",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a42_head",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 1 (Character 2) L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a42",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a42_pack",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 1 (Character 2) L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a42",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a42_legs",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 1 (Character 2) L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a42",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a43",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Arm 4 Clow With Cloak L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a43_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a43",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a43_arm",
+   "role": "part",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/character 3/Arms/Marta Aug 2025 - Arm 4 Clow With Cloak L",
+   "parent": "a43_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990818633430175,
+     -0.04285990674461139,
+     -0.00019803712792810333,
+     199.53228400567662,
+     -0.0001854406819195475,
+     -0.0002982967670721605,
+     0.999999723095962,
+     -29.38515371760152,
+     -0.04286011110998526,
+     0.9990800740799631,
+     0.0002891890969886766,
+     -596.1722012848892,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a43",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a43_head",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a43",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a43_pack",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a43",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a43_legs",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a43",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a44",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Arm 4 Clow \u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a44_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow \u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a44",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a44_arm",
+   "role": "part",
+   "name": "Marta Aug 2025 - Arm 4 Clow \u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/character 3/Arms/Marta Aug 2025 - Arm 4 Clow \u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae L",
+   "parent": "a44_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990788176739755,
+     -0.04290990401737765,
+     -0.00019903712778594502,
+     298.5599305119306,
+     -0.00018642515267522665,
+     -0.00029831259163976833,
+     0.999999722762038,
+     -17.26700717396772,
+     -0.042910108585174585,
+     0.9990770287342187,
+     0.00028918818996123273,
+     -581.2441802463966,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a44",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a44_head",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow \u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a44",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a44_pack",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow \u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a44",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a44_legs",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow \u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a44",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a45",
+   "role": "host",
+   "name": "Torso 2 for Marta Space Wolves - Wolf Arm 4",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a45_spacer",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 4 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a45",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a45_arm",
+   "role": "part",
+   "name": "Marta Space Wolves - Wolf Arm 4 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/SW Bits 10 October 2024/10 October 2024/wolf arms/Arms/Marta Space Wolves - Wolf Arm 4",
+   "parent": "a45_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990778475457762,
+     -0.04293590310697292,
+     -3.904349749153081e-05,
+     380.43687330532185,
+     -2.6417316250655744e-05,
+     -0.00029832098311900345,
+     0.9999997741560661,
+     -0.7546367046495503,
+     -0.04293606121885591,
+     0.9990760051533809,
+     0.0002963333012210716,
+     -573.5895387251678,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a45",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a45_head",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 4 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a45",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a45_pack",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 4 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a45",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a45_legs",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 4 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a45",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a46",
+   "role": "host",
+   "name": "Torso 2 for Marta Space Wolves - Wolf Arm 6",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a46_spacer",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 6 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a46",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a46_arm",
+   "role": "part",
+   "name": "Marta Space Wolves - Wolf Arm 6 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/SW Bits 10 October 2024/10 October 2024/wolf arms/Arms/Marta Space Wolves - Wolf Arm 6",
+   "parent": "a46_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990971993959785,
+     -0.04248192039897636,
+     -0.00021803712508493712,
+     462.6645879700494,
+     -0.00020555550957973212,
+     -0.00029817490197081787,
+     0.9999997164174833,
+     -8.310960897443833,
+     -0.04248213122579504,
+     0.9990954169081986,
+     0.00028917095643980013,
+     -569.1462427697938,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a46",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a46_head",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 6 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a46",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a46_pack",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 6 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a46",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a46_legs",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 6 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a46",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a47",
+   "role": "host",
+   "name": "Torso 2 for Marta Space Wolves - Wolf Arm HJ L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -600.0
+   ]
+  },
+  {
+   "id": "a47_spacer",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm HJ L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a47",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a47_arm",
+   "role": "part",
+   "name": "Marta Space Wolves - Wolf Arm HJ L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/SW Bits 10 October 2024/10 October 2024/wolf arms/Arms/Marta Space Wolves - Wolf Arm HJ L",
+   "parent": "a47_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990788142379521,
+     -0.0429159040165247,
+     -0.00019303803534750284,
+     551.5069062837163,
+     -0.00018042341135288598,
+     -0.00029831459518336065,
+     0.9999997244750386,
+     -16.26582050174971,
+     -0.042916106833524856,
+     0.999077023292054,
+     0.00029019363025001386,
+     -587.3807605651724,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a47",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a47_head",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm HJ L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a47",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a47_pack",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm HJ L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a47",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a47_legs",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm HJ L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a47",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a48",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Arm 4 L (Character 2)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a48_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 4 L (Character 2) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a48",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a48_arm",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Arm 4 L (Character 2) (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/02 Feb 2025/character 2/Arms/Marta Techmarine V2 - Arm 4 L (Character 2)",
+   "parent": "a48_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990787761573804,
+     -0.04292290401552959,
+     -0.0002880343950080313,
+     -45.256128456077995,
+     -0.00027542134690411533,
+     -0.0002983169326508851,
+     0.9999996939144371,
+     -2.235532140523578,
+     -0.042923134376638916,
+     0.9990770169428619,
+     0.00028610747014637806,
+     -722.3369006619375,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a48",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a48_head",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 4 L (Character 2) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a48",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a48_pack",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 4 L (Character 2) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a48",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a48_legs",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 4 L (Character 2) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a48",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a49",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Arm 3 R (Character 3)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a49_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 3) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a49",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a49_arm",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 3) (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/02 Feb 2025/character 3/Arms/Marta Techmarine V2 - Arm 3 R (Character 3)",
+   "parent": "a49_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9872143498546221,
+     -0.03403120778623836,
+     0.15572335214667327,
+     76.89282423669414,
+     0.15582280915955243,
+     -0.00029644472208586846,
+     0.9877842916141933,
+     -7.833401615217937,
+     -0.033570057122724636,
+     0.9994190813142819,
+     0.005595046989167858,
+     -714.1167258645241,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a49",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a49_head",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 3) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a49",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a49_pack",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 3) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a49",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a49_legs",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 3) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a49",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a50",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Iron Father Arm L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a50_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Iron Father Arm L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a50",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a50_arm",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Iron Father Arm L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/Arms/Marta Techmarine V2 - Iron Father Arm L",
+   "parent": "a50_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990912919684243,
+     -0.042618915845957624,
+     0.0004309383015219024,
+     172.8555176032583,
+     0.0004434860889818861,
+     -0.00029821919683451804,
+     0.9999999252894543,
+     -3.8748706163543587,
+     -0.04261893727396971,
+     0.9990902926548182,
+     0.00031675956660203163,
+     -693.8885809653386,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a50",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a50_head",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Iron Father Arm L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a50",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a50_pack",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Iron Father Arm L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a50",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a50_legs",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Iron Father Arm L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a50",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a51",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Mithraism Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a51_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a51",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a51_arm",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Mithraism Arm 2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/SALE June 2025 Mithraism/Mithraism ARMS/Arms/Marta Techmarine V2 - Mithraism Arm 2",
+   "parent": "a51_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990788163375856,
+     -0.04291690401638254,
+     -0.00018403803662692762,
+     239.113598805203,
+     -0.0001714231237133618,
+     -0.0002983149291072927,
+     0.9999997274803539,
+     -0.22199813255273615,
+     -0.04291710422105732,
+     0.9990770223850265,
+     0.00029020179349700825,
+     -696.1154281048233,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a51",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a51_head",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a51",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a51_pack",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a51",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a51_legs",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a51",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a52",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Mithraism Arm 6",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a52_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 6 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a52",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a52_arm",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Mithraism Arm 6 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/SALE June 2025 Mithraism/Mithraism ARMS/Arms/Marta Techmarine V2 - Mithraism Arm 6",
+   "parent": "a52_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9872183675111984,
+     -0.034006208696500916,
+     0.15570835477352601,
+     315.411280081342,
+     0.15580780056512084,
+     -0.00029643666453056536,
+     0.9877872877665385,
+     -2.8025820276864732,
+     -0.03354506514871755,
+     0.9994201039880922,
+     0.005591034261456946,
+     -698.1311542223576,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a52",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a52_head",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 6 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a52",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a52_pack",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 6 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a52",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a52_legs",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm 6 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a52",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a53",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Mithraism Arm L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a53_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a53",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a53_arm",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Mithraism Arm L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/SALE June 2025 Mithraism/Mithraism Character 3/Arms/Marta Techmarine V2 - Mithraism Arm L",
+   "parent": "a53_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9957510892074438,
+     0.0432981733005422,
+     0.08126933418355357,
+     394.53626961761876,
+     0.0813336904804383,
+     -0.00028249836206925235,
+     0.9966869734454963,
+     -7.686993239691492,
+     0.043177496920426,
+     0.9990612181615739,
+     -0.0032408840771882387,
+     -700.1590791133551,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a53",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a53_head",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a53",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a53_pack",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a53",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a53_legs",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Mithraism Arm L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a53",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a54",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine - Arms 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a54_spacer",
+   "role": "check",
+   "name": "Marta Techmarine - Arms 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a54",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a54_arm",
+   "role": "part",
+   "name": "Marta Techmarine - Arms 2 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine/Arms/Marta Techmarine - Arms 2",
+   "parent": "a54_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990464519641514,
+     -0.04317989400520022,
+     -0.006544786881020062,
+     530.5370828862774,
+     -0.0065383349296832,
+     -0.0002983995551284421,
+     0.9999786815524184,
+     60.88028256511857,
+     -0.04318092336731559,
+     0.9990657838574435,
+     1.542718529001628e-05,
+     -670.5827140619231,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a54",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a54_head",
+   "role": "check",
+   "name": "Marta Techmarine - Arms 2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a54",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a54_pack",
+   "role": "check",
+   "name": "Marta Techmarine - Arms 2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a54",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a54_legs",
+   "role": "check",
+   "name": "Marta Techmarine - Arms 2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a54",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a55",
+   "role": "host",
+   "name": "Torso 2 for Marta Bionics - Amrs Arm 1 Primary",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -720.0
+   ]
+  },
+  {
+   "id": "a55_spacer",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Arm 1 Primary Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a55",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a55_arm",
+   "role": "part",
+   "name": "Marta Bionics - Amrs Arm 1 Primary (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/bionics-for-bois-and-gurls-september-23/Arms/Marta Bionics - Amrs Arm 1 Primary",
+   "parent": "a55_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990800659126143,
+     -0.04288590492749806,
+     0.0004789364812810876,
+     565.5999621929316,
+     0.0004915673216404973,
+     -0.00029830486800839725,
+     0.9999999407367169,
+     -2.756656875080068,
+     -0.042885912872651887,
+     0.9990780505010013,
+     0.0003188031001675715,
+     -696.7089908288143,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a55",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a55_head",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Arm 1 Primary Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a55",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a55_pack",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Arm 1 Primary Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a55",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a55_legs",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Arm 1 Primary Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a55",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a56",
+   "role": "host",
+   "name": "Torso 2 for Marta Bionics - Amrs Bionic Arm 7",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -840.0
+   ]
+  },
+  {
+   "id": "a56_spacer",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Bionic Arm 7 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a56",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a56_arm",
+   "role": "part",
+   "name": "Marta Bionics - Amrs Bionic Arm 7 (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/bionics-for-bois-and-gurls-september-23/Arms/Marta Bionics - Amrs Bionic Arm 7",
+   "parent": "a56_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.999087210555315,
+     -0.04273191129635069,
+     0.000492936479290871,
+     -2.2982192275000886,
+     0.0005065202357121068,
+     -0.0002982554775238488,
+     0.9999999454116519,
+     2.787297874044829,
+     -0.04273191515974371,
+     0.9990851901700966,
+     0.000318815798551785,
+     -800.0397973010349,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a56",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a56_head",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Bionic Arm 7 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a56",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a56_pack",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Bionic Arm 7 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a56",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a56_legs",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Bionic Arm 7 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a56",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a57",
+   "role": "host",
+   "name": "Torso 2 for Marta Bionics - Arms For Shield Bionic Arm Boarding Shield L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -840.0
+   ]
+  },
+  {
+   "id": "a57_spacer",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Boarding Shield L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a57",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a57_arm",
+   "role": "part",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Boarding Shield L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/bionics-for-bois-and-gurls-september-23/Arms/Marta Bionics - Arms For Shield Bionic Arm Boarding Shield L",
+   "parent": "a57_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990526234378925,
+     -0.04351388126379883,
+     0.0008579213473947663,
+     80.7597564398443,
+     0.0008717586759984848,
+     -0.00029850701811977244,
+     0.9999990623549789,
+     2.181584033632255,
+     -0.04351377697987615,
+     0.9990514809365395,
+     0.0003361465416130498,
+     -807.1240799411044,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a57",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a57_head",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Boarding Shield L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a57",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a57_pack",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Boarding Shield L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a57",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a57_legs",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Boarding Shield L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a57",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a58",
+   "role": "host",
+   "name": "Torso 2 for Marta Bionics - Arms For Shield Bionic Arm Empty Shield L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -840.0
+   ]
+  },
+  {
+   "id": "a58_spacer",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Empty Shield L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a58",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a58_arm",
+   "role": "part",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Empty Shield L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/bionics-for-bois-and-gurls-september-23/Arms/Marta Bionics - Arms For Shield Bionic Arm Empty Shield L",
+   "parent": "a58_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9990546406655478,
+     -0.04348088217519866,
+     0.0008199231662139986,
+     161.43015940007604,
+     0.0008337484324907882,
+     -0.00029849628917301294,
+     0.9999990502469555,
+     2.1860190866039577,
+     -0.04348078987833324,
+     0.9990525108665693,
+     0.00033411207832194817,
+     -822.5285887137524,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a58",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a58_head",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Empty Shield L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a58",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a58_pack",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Empty Shield L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a58",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a58_legs",
+   "role": "check",
+   "name": "Marta Bionics - Arms For Shield Bionic Arm Empty Shield L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a58",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a59",
+   "role": "host",
+   "name": "Torso 2 for Marta Executions - Arm With Zerg",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -840.0
+   ]
+  },
+  {
+   "id": "a59_spacer",
+   "role": "check",
+   "name": "Marta Executions - Arm With Zerg Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a59",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a59_arm",
+   "role": "part",
+   "name": "Marta Executions - Arm With Zerg (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/d2420251125-1-bd6hiy/marta_PunkGirl/d24/EXECUTIONS 1/Arms/Marta Executions - Arm With Zerg",
+   "parent": "a59_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9912273059571679,
+     0.08815788633367341,
+     -0.09847236712532725,
+     242.07295554311312,
+     -0.09888169660176974,
+     -0.0002726487769473306,
+     0.9950993570460833,
+     -8.7855784463822,
+     0.08769822755935641,
+     0.9961049085732449,
+     0.00898762966719163,
+     -835.215518258066,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a59",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a59_head",
+   "role": "check",
+   "name": "Marta Executions - Arm With Zerg Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a59",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a59_pack",
+   "role": "check",
+   "name": "Marta Executions - Arm With Zerg Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a59",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a59_legs",
+   "role": "check",
+   "name": "Marta Executions - Arm With Zerg Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a59",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a60",
+   "role": "host",
+   "name": "Torso 2 for Marta Executions - Arm Extend L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -840.0
+   ]
+  },
+  {
+   "id": "a60_spacer",
+   "role": "check",
+   "name": "Marta Executions - Arm Extend L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a60",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a60_arm",
+   "role": "part",
+   "name": "Marta Executions - Arm Extend L (mirrored, as a right arm)",
+   "rel": "Marta PunkGirl - Tacticus/d2420251125-1-bd6hiy/marta_PunkGirl/d24/EXECUTIONS 6/Arms/Marta Executions - Arm Extend L",
+   "parent": "a60_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9912402041650854,
+     0.08803687637707987,
+     -0.09845335510218377,
+     322.31993560604866,
+     -0.09886066608439582,
+     -0.0002726923777160911,
+     0.9951013674575947,
+     -0.4267302966789731,
+     0.08757822208448601,
+     0.9961157988022895,
+     0.008973647507106887,
+     -805.8077476150621,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a60",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a60_head",
+   "role": "check",
+   "name": "Marta Executions - Arm Extend L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a60",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a60_pack",
+   "role": "check",
+   "name": "Marta Executions - Arm Extend L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a60",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a60_legs",
+   "role": "check",
+   "name": "Marta Executions - Arm Extend L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a60",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  }
+ ]
+}

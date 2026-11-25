@@ -5,6 +5,8 @@
   on the right spacer, so Josh fixes it like every right arm; the original sculpt shows live on the left. It starts at
   the mirror of its old left seat, and the write gives the arm its own Shoulder L fit (that left image). TIOW makes
   the right version itself by mirroring (mirror_for_side), so nothing more is written.
+  --shift X,Y,Z: a repeated move of Josh's, in Torso 2's own axes (mm), put on every arm's start and shown in its note
+  (Nov 25: his Marta arm change, 0.32 mm outward, notes 150-152)
   BL = blender --background --factory-startup --python
 
 Each column is Torso 2 (locked, as written), the spacer on its Shoulder R socket (locked; the left side its mirror),
@@ -34,6 +36,9 @@ def old(rel, key, typ):
 
 def main(A):
     left = "--left" in A; A = [a for a in A if a != "--left"]
+    T = np.eye(4)
+    if "--shift" in A:
+        k = A.index("--shift"); T[:3, 3] = [float(x) for x in A[k + 1].split(",")]; A = A[:k] + A[k + 2:]
     spec_out, blend_out, name, arms = A[0], A[1], A[2], A[3:]
     S_old_L = old(MT.T2, "socket", "Shoulder L")
     S2 = MT.sockets(MT.T2); S_old = old(MT.T2, "socket", "Shoulder R")
@@ -55,7 +60,7 @@ def main(A):
         F_old = (sc.get("fits") or {}).get("Shoulder L" if left else "Shoulder R")
         if F_old is None: log.append("%-34s left out: no old %s fit to start from" % (short, "Shoulder L" if left else "Shoulder R")); continue
         was = (B.MX @ S_old_L @ G.M4(F_old) @ B.MX) if left else S_old @ G.M4(F_old)   # left: the mirror of its old left seat
-        start = delta @ was
+        start = T @ delta @ was                    # T: Josh's repeated move (--shift), in Torso 2's own axes
         log.append("%-34s starts %.2f mm %.1f deg from its old seat%s" % (short, *G.off(start, was),
                    "; mirrored in %s" % B._mirror_variant(sc)["name"] if B._mirror_variant(sc) else ""))
         objs += [{"id": tid, "role": "host", "name": "Torso 2 for " + short, "rel": MT.T2, "pose": {"place": True}, "at": list(at[:3, 3])},
@@ -68,6 +73,7 @@ def main(A):
         if left:
             objs[-1]["mirror_mesh"] = True; objs[-1]["write"] = {"host": tid, "socket": "Shoulder R", "left": "Shoulder L", "half": "fit"}
             objs[-1]["note"] = "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left)"
+        if T[:3, 3].any(): objs[-1]["note"] += "; your repeated move (%.2f, %.2f, %.2f mm) is already on it" % tuple(T[:3, 3])
         objs += checks(tid, short + " ")
     spec = {"name": name, "stage": "3 (arms on the spacer)", "out": blend_out, "sources": MT.SRC,
             "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
