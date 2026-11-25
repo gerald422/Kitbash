@@ -1,0 +1,3449 @@
+{
+ "name": "Stage 3 - Mar Fil Intercessor arms",
+ "stage": "3 (arms on the spacer)",
+ "out": "~/Desktop/mar fil connectors/batches/03 Stage 3 - Mar Fil Intercessor arms (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a1",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a1_spacer",
+   "role": "check",
+   "name": "Intercessor - Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a1_arm",
+   "role": "part",
+   "name": "Intercessor - Arm 1 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Arms/MarFil Intercessor - Arm 1 R",
+   "parent": "a1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999988305196245,
+     -0.0006302515118179313,
+     -0.001575369734962198,
+     85.48912391379332,
+     0.000631644328104414,
+     0.9999987806484809,
+     0.0006949552188601397,
+     0.18522510656170188,
+     0.0015740878317575355,
+     -0.0006948726131957341,
+     0.9999975663100276,
+     31.937713690985102,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a1",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a1_head",
+   "role": "check",
+   "name": "Intercessor - Arm 1 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a1_pack",
+   "role": "check",
+   "name": "Intercessor - Arm 1 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a1_legs",
+   "role": "check",
+   "name": "Intercessor - Arm 1 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a2",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Arm 2 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a2_spacer",
+   "role": "check",
+   "name": "Intercessor - Arm 2 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a2_arm",
+   "role": "part",
+   "name": "Intercessor - Arm 2 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Arms/MarFil Intercessor - Arm 2 R",
+   "parent": "a2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999974576271147,
+     -0.0017244251304441888,
+     0.001377096132663126,
+     165.48896772801967,
+     0.0017234999469535777,
+     0.9999972793638876,
+     0.0014959337906002056,
+     0.18875675296290417,
+     -0.0013795923563124114,
+     -0.0014946347284180098,
+     0.999997157623607,
+     31.95236573471673,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a2",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a2_head",
+   "role": "check",
+   "name": "Intercessor - Arm 2 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a2_pack",
+   "role": "check",
+   "name": "Intercessor - Arm 2 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a2_legs",
+   "role": "check",
+   "name": "Intercessor - Arm 2 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a3",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Arm 3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a3_spacer",
+   "role": "check",
+   "name": "Intercessor - Arm 3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a3_arm",
+   "role": "part",
+   "name": "Intercessor - Arm 3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Arms/MarFil Intercessor - Arm 3 R",
+   "parent": "a3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999955866641561,
+     -0.0010135443272417475,
+     0.0029917247340113724,
+     245.48868238662726,
+     0.0010079667953457664,
+     0.9999969161352401,
+     0.0020510169715242384,
+     0.19845901181147163,
+     -0.002993797870322481,
+     -0.0020477886211903045,
+     0.9999929680701349,
+     31.95771060499985,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a3",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a3_head",
+   "role": "check",
+   "name": "Intercessor - Arm 3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a3_pack",
+   "role": "check",
+   "name": "Intercessor - Arm 3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a3_legs",
+   "role": "check",
+   "name": "Intercessor - Arm 3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a4",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Arm 4 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a4_spacer",
+   "role": "check",
+   "name": "Intercessor - Arm 4 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a4_arm",
+   "role": "part",
+   "name": "Intercessor - Arm 4 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Arms/MarFil Intercessor - Arm 4 R",
+   "parent": "a4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999942031346831,
+     -0.001501280339322551,
+     0.003243543389584085,
+     325.48870516433925,
+     0.0014990386149577029,
+     0.9999982349045271,
+     0.0008301852523414727,
+     0.18184449492633556,
+     -0.0032446549187888332,
+     -0.0008256835484444901,
+     0.9999945593709666,
+     31.96989077010447,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a4",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a4_head",
+   "role": "check",
+   "name": "Intercessor - Arm 4 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a4_pack",
+   "role": "check",
+   "name": "Intercessor - Arm 4 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a4_legs",
+   "role": "check",
+   "name": "Intercessor - Arm 4 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a5",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Arm 5 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a5_spacer",
+   "role": "check",
+   "name": "Intercessor - Arm 5 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a5_arm",
+   "role": "part",
+   "name": "Intercessor - Arm 5 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Arms/MarFil Intercessor - Arm 5 R",
+   "parent": "a5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999889802787648,
+     0.004843371641176292,
+     0.0008015154000959685,
+     405.4869892351387,
+     -0.004841670485897751,
+     0.9999856345870364,
+     -0.0021154516448245128,
+     0.24420985605840137,
+     -0.0008114949064231296,
+     0.0021119325406483394,
+     0.9999962353131432,
+     31.978474219580416,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a5",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a5_head",
+   "role": "check",
+   "name": "Intercessor - Arm 5 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a5_pack",
+   "role": "check",
+   "name": "Intercessor - Arm 5 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a5_legs",
+   "role": "check",
+   "name": "Intercessor - Arm 5 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a6",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Arm 6 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a6_spacer",
+   "role": "check",
+   "name": "Intercessor - Arm 6 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a6_arm",
+   "role": "part",
+   "name": "Intercessor - Arm 6 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Arms/MarFil Intercessor - Arm 6 R",
+   "parent": "a6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999791306247195,
+     -0.0002752696348758599,
+     -0.0064774319499512545,
+     485.4907449774171,
+     0.0002802090462313807,
+     1.0000000420337944,
+     0.0007746761138077699,
+     0.196810783213932,
+     0.006477985403470614,
+     -0.000775949232631096,
+     0.9999776536563301,
+     31.890848744592596,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a6",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a6_head",
+   "role": "check",
+   "name": "Intercessor - Arm 6 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a6_pack",
+   "role": "check",
+   "name": "Intercessor - Arm 6 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a6_legs",
+   "role": "check",
+   "name": "Intercessor - Arm 6 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a7",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter A Grenade 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a7_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a7_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter A Grenade 1 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter A Grenade 1 R",
+   "parent": "a7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9997327919350358,
+     -0.008135906440799902,
+     -0.02167633452669457,
+     565.4902837145586,
+     0.008631692265625926,
+     0.9997022252458452,
+     0.022839628880279,
+     0.13638985595304176,
+     0.02148444606603456,
+     -0.023020307361311658,
+     0.9995033523321083,
+     31.799873412154433,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a7",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a7_head",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 1 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a7_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 1 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a7_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 1 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a8",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter A Grenade 2 Individual R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a8_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 2 Individual R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a8_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter A Grenade 2 Individual R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter A Grenade 2 Individual R",
+   "parent": "a8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999979771524194,
+     -0.0017873415244317103,
+     -0.0010798680069428242,
+     5.489956826818022,
+     0.0017597738683094192,
+     0.999672401708839,
+     -0.025527618620282463,
+     0.1813392600719286,
+     0.0011254156020259385,
+     0.025525258314467177,
+     0.9996728547664494,
+     -88.07468460457697,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a8",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a8_head",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 2 Individual R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a8_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 2 Individual R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a8_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 2 Individual R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a9",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter A Grenade 3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a9_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a9_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter A Grenade 3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter A Grenade 3 R",
+   "parent": "a9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.8457249934485971,
+     0.4753420890751305,
+     0.2424838818175053,
+     86.9492854053017,
+     0.4894040475967294,
+     -0.8720532575599726,
+     0.002568823035062147,
+     15.614009921828488,
+     0.21267911269255493,
+     0.11649980528066094,
+     -0.9701519488177799,
+     -108.98831665495993,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a9",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a9_head",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a9_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a9_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter A Grenade 3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a10",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter A1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a10_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter A1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a10_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter A1 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter A1 R",
+   "parent": "a10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.999815644366865,
+     -0.004589020249277605,
+     -0.01870039966663781,
+     165.4889774967781,
+     0.004936580945652558,
+     0.9998163204799583,
+     0.018512579525367473,
+     0.16805863141848987,
+     0.01861135934070993,
+     -0.018601048601326553,
+     0.9996534513255926,
+     -88.18168013866409,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a10",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a10_head",
+   "role": "check",
+   "name": "Intercessor - Bolter A1 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a10_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter A1 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a10_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter A1 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a11",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter A2 Individual R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a11_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter A2 Individual R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a11_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter A2 Individual R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter A2 Individual R",
+   "parent": "a11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999993504718419,
+     0.00015565077292461089,
+     -0.0014298920565857867,
+     245.48901029602936,
+     -0.00019231233691455914,
+     0.9996757134027504,
+     -0.025491853486931473,
+     0.20457856872253755,
+     0.0014258489243529333,
+     0.02549183749540992,
+     0.9996739411250674,
+     -88.07448766011059,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a11",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a11_head",
+   "role": "check",
+   "name": "Intercessor - Bolter A2 Individual R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a11_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter A2 Individual R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a11_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter A2 Individual R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a12",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter A3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a12_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter A3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a12_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter A3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter A3 R",
+   "parent": "a12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     1.0000000620471385,
+     6.947505551798361e-05,
+     -0.00044639117020976737,
+     325.4154658804311,
+     -8.002709958400365e-05,
+     0.9996938740114691,
+     -0.02473920024149145,
+     0.18514910680714006,
+     0.0004438822911001168,
+     0.024738862205872073,
+     0.9996939458554166,
+     -88.06697133575463,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a12",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a12_head",
+   "role": "check",
+   "name": "Intercessor - Bolter A3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a12_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter A3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a12_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter A3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a13",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter B Grenade 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a13_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a13_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter B Grenade 1 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter B Grenade 1 R",
+   "parent": "a13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9998261130241434,
+     -0.003720610991785519,
+     -0.018314360615524657,
+     405.4893613628282,
+     0.004113698515378536,
+     0.999761741401313,
+     0.021422853074060996,
+     0.17968601078286978,
+     0.018230118812713438,
+     -0.021494250127901567,
+     0.9996022115198002,
+     -88.17865285313096,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a13",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a13_head",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 1 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a13_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 1 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a13_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 1 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a14",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter B Grenade 2 Individual R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a14_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 2 Individual R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a14_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter B Grenade 2 Individual R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter B Grenade 2 Individual R",
+   "parent": "a14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9997622216528222,
+     -0.013149923793357287,
+     -0.017442557365993254,
+     485.4943354351265,
+     0.012746797659245395,
+     0.9996525693026084,
+     -0.023058556679388456,
+     0.11282865923016573,
+     0.01774063667595605,
+     0.02282972194646641,
+     0.9995811231025273,
+     -88.18663731314912,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a14",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a14_head",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 2 Individual R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a14_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 2 Individual R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a14_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 2 Individual R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a15",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter B Grenade 3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a15_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a15_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter B Grenade 3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter B Grenade 3 R",
+   "parent": "a15_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.8326105601722784,
+     0.5003043600620082,
+     0.23760498640588684,
+     566.0281617120953,
+     0.1437408236961096,
+     -0.6094874036414278,
+     0.7796562346225894,
+     25.534426400436214,
+     0.5348814059332015,
+     -0.6149957575091514,
+     -0.5793789237491017,
+     -87.71760664684237,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a15",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a15_head",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a15",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a15_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a15",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a15_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter B Grenade 3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a15",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a16",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter B1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a16_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter B1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a16_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter B1 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter B1 R",
+   "parent": "a16_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9998470544391462,
+     -0.0061937191621466575,
+     -0.01641770971363905,
+     5.490776800999069,
+     0.006553278697601095,
+     0.9997372475680532,
+     0.021953118008640804,
+     0.13711575025597456,
+     0.016277823628726772,
+     -0.02205771978315679,
+     0.9996229535195506,
+     -208.1882774959687,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a16",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a16_head",
+   "role": "check",
+   "name": "Intercessor - Bolter B1 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a16",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a16_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter B1 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a16",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a16_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter B1 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a16",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a17",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter B2 Individual R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a17_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter B2 Individual R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a17",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a17_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter B2 Individual R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter B2 Individual R",
+   "parent": "a17_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999994207305419,
+     -0.00016656399360707333,
+     0.0016476352558960387,
+     85.48783955018948,
+     0.00020057794561868613,
+     0.9997950129413563,
+     -0.020266825687723866,
+     0.19618725367914078,
+     -0.001644034156583958,
+     0.0202659471488974,
+     0.9997927881030971,
+     -208.0347258782043,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a17",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a17_head",
+   "role": "check",
+   "name": "Intercessor - Bolter B2 Individual R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a17",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a17_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter B2 Individual R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a17",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a17_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter B2 Individual R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a17",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a18",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter B3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a18_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter B3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a18",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a18_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter B3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter B3 R",
+   "parent": "a18_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999776144407274,
+     -0.00013099809236890688,
+     -0.006772888892944825,
+     165.48127994205268,
+     -0.0003488751448869072,
+     0.9974773263781181,
+     -0.07099278982776772,
+     0.19351975064362253,
+     0.006764803024065524,
+     0.0709932177492679,
+     0.9974529084010292,
+     -208.11022015392726,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a18",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a18_head",
+   "role": "check",
+   "name": "Intercessor - Bolter B3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a18",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a18_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter B3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a18",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a18_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter B3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a18",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a19",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter C Grenade 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a19_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a19",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a19_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter C Grenade 1 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter C Grenade 1 R",
+   "parent": "a19_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.08655827038772033,
+     -0.597589000409049,
+     -0.7971177378469905,
+     253.44164966775165,
+     -0.7115562009276726,
+     0.5229222953325463,
+     -0.46929696784760616,
+     -1.1830074991772481,
+     0.6972751829669962,
+     0.6078147814072912,
+     -0.37995367071687913,
+     -215.5259832354547,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a19",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a19_head",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 1 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a19",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a19_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 1 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a19",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a19_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 1 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a19",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a20",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter C Grenade 2 Individual R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a20_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 2 Individual R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a20",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a20_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter C Grenade 2 Individual R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter C Grenade 2 Individual R",
+   "parent": "a20_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999956575258371,
+     -0.0032981514792478637,
+     0.00025881595574698613,
+     325.4886420576032,
+     0.0033041526524681154,
+     0.9997513986646732,
+     -0.022042745548826632,
+     0.17801369555590985,
+     -0.00018613475794542297,
+     0.022044612612049364,
+     0.9997555746444537,
+     -208.05163730605204,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a20",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a20_head",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 2 Individual R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a20",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a20_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 2 Individual R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a20",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a20_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 2 Individual R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a20",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a21",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter C Grenade 3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a21_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a21",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a21_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter C Grenade 3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter C Grenade 3 R",
+   "parent": "a21_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.8253230743401099,
+     0.37779389770676053,
+     0.41966153556978614,
+     405.9901055397203,
+     0.13672217668710007,
+     -0.8547936606916869,
+     0.500633777521,
+     26.20121183142923,
+     0.5478599399809748,
+     -0.35580655092231983,
+     -0.7571331872260404,
+     -206.76561295412108,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a21",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a21_head",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a21",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a21_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a21",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a21_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter C Grenade 3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a21",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a22",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter C1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a22_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter C1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a22",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a22_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter C1 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter C1 R",
+   "parent": "a22_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9997146346261083,
+     -0.009933410062511779,
+     -0.021753685017045145,
+     485.4909909399417,
+     0.010378662263545963,
+     0.9997383231948235,
+     0.02039456216527638,
+     0.11932960680998408,
+     0.021545956552013336,
+     -0.020614909016527263,
+     0.9995546600288233,
+     -208.20108168775235,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a22",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a22_head",
+   "role": "check",
+   "name": "Intercessor - Bolter C1 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a22",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a22_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter C1 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a22",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a22_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter C1 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a22",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a23",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter C2 Individual R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a23_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter C2 Individual R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a23",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a23_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter C2 Individual R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter C2 Individual R",
+   "parent": "a23_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999992862921822,
+     -0.0006417790931407057,
+     0.000850887357760599,
+     565.4894958599642,
+     0.0006633432157462678,
+     0.999720711990604,
+     -0.023652338480953352,
+     0.21142068135100192,
+     -0.0008349007206938151,
+     0.023654025457801646,
+     0.9997199793778204,
+     -208.04616680905363,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a23",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a23_head",
+   "role": "check",
+   "name": "Intercessor - Bolter C2 Individual R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a23",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a23_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter C2 Individual R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a23",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a23_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter C2 Individual R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a23",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a24",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter C3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a24_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter C3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a24",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a24_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter C3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter C3 R",
+   "parent": "a24_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999984105985649,
+     0.002106249338367678,
+     -0.0004220448096111406,
+     5.415581232197903,
+     -0.002116007158868037,
+     0.9997155234633165,
+     -0.02375619067639897,
+     0.20209523937573318,
+     0.00037129230621566454,
+     0.023757427271498148,
+     0.9997172256103941,
+     -328.06371344976753,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a24",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a24_head",
+   "role": "check",
+   "name": "Intercessor - Bolter C3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a24",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a24_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter C3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a24",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a24_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter C3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a24",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a25",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Bolter D3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a25_spacer",
+   "role": "check",
+   "name": "Intercessor - Bolter D3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a25",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a25_arm",
+   "role": "part",
+   "name": "Intercessor - Bolter D3 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Bolter-Individual/Arms/MarFil Intercessor - Bolter D3 R",
+   "parent": "a25_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999968288844676,
+     0.002767499372802331,
+     -0.00032420160401640464,
+     85.41554222432379,
+     -0.0027739780056028986,
+     0.9997849070400064,
+     -0.02051414596246523,
+     0.2080602275306842,
+     0.00026710194629180496,
+     0.020514307007868358,
+     0.9997891444602515,
+     -328.06376271146263,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a25",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a25_head",
+   "role": "check",
+   "name": "Intercessor - Bolter D3 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a25",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a25_pack",
+   "role": "check",
+   "name": "Intercessor - Bolter D3 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a25",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a25_legs",
+   "role": "check",
+   "name": "Intercessor - Bolter D3 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a25",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a26",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Desolator 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a26_spacer",
+   "role": "check",
+   "name": "Intercessor - Desolator 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a26",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a26_arm",
+   "role": "part",
+   "name": "Intercessor - Desolator 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Desolator/Arms/MarFil Intercessor - Desolator 1",
+   "parent": "a26_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999992133780465,
+     -0.0006338701328371653,
+     0.0014522377486569306,
+     165.48864056441468,
+     0.0005625307984475964,
+     0.9988146862199017,
+     0.048655327369066644,
+     0.18398068385470231,
+     -0.001481929307188279,
+     -0.04865516833539207,
+     0.9988138182309432,
+     -328.04470358213536,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a26",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a26_head",
+   "role": "check",
+   "name": "Intercessor - Desolator 1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a26",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a26_pack",
+   "role": "check",
+   "name": "Intercessor - Desolator 1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a26",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a26_legs",
+   "role": "check",
+   "name": "Intercessor - Desolator 1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a26",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a27",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Plasma Incinerator 4A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a27_spacer",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a27",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a27_arm",
+   "role": "part",
+   "name": "Intercessor - Plasma Incinerator 4A R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/PlasmaIncinerator/Arms/MarFil Intercessor - Plasma Incinerator 4A R",
+   "parent": "a27_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999686916332189,
+     -0.0025807771255790973,
+     -0.007529903843234966,
+     245.49084808762584,
+     0.0027489144667863876,
+     0.9997477410402045,
+     0.022287044984398926,
+     0.17291072582396944,
+     0.007469702601053017,
+     -0.022307500844295444,
+     0.9997221207683921,
+     -328.10871520900145,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a27",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a27_head",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a27",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a27_pack",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a27",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a27_legs",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a27",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a28",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Plasma Incinerator 4B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a28_spacer",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a28",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a28_arm",
+   "role": "part",
+   "name": "Intercessor - Plasma Incinerator 4B R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/PlasmaIncinerator/Arms/MarFil Intercessor - Plasma Incinerator 4B R",
+   "parent": "a28_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999565707606243,
+     -0.0018022732304958482,
+     -0.009197234368310348,
+     325.4905985408173,
+     0.0019844163246355447,
+     0.9998015424274262,
+     0.019805916494008678,
+     0.19687354767498955,
+     0.009159481884128363,
+     -0.019823656678262528,
+     0.9997607631951335,
+     -328.11557419913913,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a28",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a28_head",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a28",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a28_pack",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a28",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a28_legs",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 4B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a28",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a29",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Plasma Incinerator 5 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a29_spacer",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 5 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a29",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a29_arm",
+   "role": "part",
+   "name": "Intercessor - Plasma Incinerator 5 R",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/PlasmaIncinerator/Arms/MarFil Intercessor - Plasma Incinerator 5 R",
+   "parent": "a29_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.999997577977792,
+     0.0003413045746436231,
+     -0.002347124434992365,
+     405.4873213539706,
+     -0.00022858495199618142,
+     0.9988610659934424,
+     0.047712768489607676,
+     0.19667840705750395,
+     0.0023618378757738682,
+     -0.04771136751264837,
+     0.9988583696734742,
+     -328.0571426013711,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a29",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a29_head",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 5 R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a29",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a29_pack",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 5 R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a29",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a29_legs",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 5 R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a29",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a30",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Plasma Incinerator 6",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a30_spacer",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 6 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a30",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a30_arm",
+   "role": "part",
+   "name": "Intercessor - Plasma Incinerator 6",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/PlasmaIncinerator/Arms/MarFil Intercessor - Plasma Incinerator 6",
+   "parent": "a30_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999943658866904,
+     0.0034875994962010885,
+     -0.0005279806946053711,
+     485.4886276786534,
+     -0.0034840613746023926,
+     0.9999751010118854,
+     0.006079661916781819,
+     0.2091863333849476,
+     0.0005488962883724044,
+     -0.006077768180725245,
+     0.9999809004567546,
+     -328.04007627446754,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a30",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a30_head",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 6 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a30",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a30_pack",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 6 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a30",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a30_legs",
+   "role": "check",
+   "name": "Intercessor - Plasma Incinerator 6 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a30",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a31",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Pyreblaster 7",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a31_spacer",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 7 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a31",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a31_arm",
+   "role": "part",
+   "name": "Intercessor - Pyreblaster 7",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Pyreblaster/Arms/MarFil Intercessor - Pyreblaster 7",
+   "parent": "a31_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999310291691093,
+     -0.003961459086664147,
+     0.011046767245138426,
+     565.4856806730925,
+     0.0036762870155436214,
+     0.9996618020176684,
+     0.025750526603225986,
+     0.15454048030992742,
+     -0.011144002103868402,
+     -0.02570822270465422,
+     0.9996070923718109,
+     -327.96463155518063,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a31",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a31_head",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 7 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a31",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a31_pack",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 7 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a31",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a31_legs",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 7 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a31",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a32",
+   "role": "host",
+   "name": "Torso 2 for Intercessor - Pyreblaster 9A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a32_spacer",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 9A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a32",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a32_arm",
+   "role": "part",
+   "name": "Intercessor - Pyreblaster 9A",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Pyreblaster/Arms/MarFil Intercessor - Pyreblaster 9A",
+   "parent": "a32_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.9999917342574136,
+     -0.003779444407134934,
+     -0.0015728560641409747,
+     5.488828551808707,
+     0.0037686317735378142,
+     0.9999642835599677,
+     -0.007542035166295322,
+     0.17107470012722642,
+     0.0016009990417498753,
+     0.007535793010819365,
+     0.9999701771442919,
+     -448.06156734907586,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
+   "write": {
+    "host": "a32",
+    "socket": "Shoulder R",
+    "mirror": "Shoulder L",
+    "half": "fit"
+   }
+  },
+  {
+   "id": "a32_head",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 9A Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a32",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a32_pack",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 9A Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a32",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a32_legs",
+   "role": "check",
+   "name": "Intercessor - Pyreblaster 9A Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a32",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  }
+ ]
+}
