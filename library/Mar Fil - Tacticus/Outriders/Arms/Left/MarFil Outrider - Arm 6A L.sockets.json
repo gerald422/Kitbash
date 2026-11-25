@@ -57,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999968,
-   -0.003744,
-   0.007109,
-   -0.001589,
-   0.002163,
-   0.977608,
-   0.210426,
-   -0.033862,
-   -0.007737,
-   -0.210404,
-   0.977584,
-   -0.058818,
+   0.9999613884395546,
+   -0.0036572456543853913,
+   0.008065360887719303,
+   0.003224188585305265,
+   0.0018786748498936085,
+   0.9776539162291097,
+   0.2102142141385696,
+   -0.04025514497588929,
+   -0.008653497062041642,
+   -0.2101909041721574,
+   0.9776206985141838,
+   -0.05582168000652743,
    0.0,
    0.0,
    0.0,
@@ -82,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Outriders\\Arms\\Left\\18-Arm-6-Mirrored-A.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -105,5 +105,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

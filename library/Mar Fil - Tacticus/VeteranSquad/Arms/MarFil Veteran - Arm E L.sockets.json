@@ -76,18 +76,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999981,
-   0.000769,
-   -0.006027,
-   0.001817,
-   -0.000768,
-   1.0,
-   0.000404,
-   -0.022652,
-   0.006026,
-   -0.000399,
-   0.999983,
-   0.0577,
+   0.9999861668800007,
+   0.0010546746769143948,
+   -0.005110178486898187,
+   0.006740209094677094,
+   -0.0010552801653595267,
+   0.9999995730469736,
+   0.00019122782870406848,
+   -0.029071115387916114,
+   0.005108837879694377,
+   -0.00018564176535227738,
+   0.9999867445501233,
+   0.06069537857873186,
    0.0,
    0.0,
    0.0,
@@ -101,7 +101,7 @@
   "path": "Mar Fil - Tacticus\\VeteranSquad\\Arms\\146-Arm-E-Mirrored.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -124,5 +124,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

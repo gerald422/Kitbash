@@ -80,18 +80,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999981,
-   -0.005646,
-   0.00226,
-   -0.000443,
-   0.005508,
-   0.998363,
-   0.056925,
-   0.020115,
-   -0.002578,
-   -0.056912,
-   0.998377,
-   -0.000963,
+   0.9999800746055507,
+   -0.005412599326104105,
+   0.003191515417503018,
+   0.004438665182207509,
+   0.005222563550896646,
+   0.9983765301761909,
+   0.05671018575006152,
+   0.01370910364940775,
+   -0.003493802584334984,
+   -0.0566930039976241,
+   0.9983852473760454,
+   0.00207041833178323,
    0.0,
    0.0,
    0.0,
@@ -105,7 +105,7 @@
   "path": "Mar Fil - Tacticus\\ChaplainWithJumpPack\\Arms\\19-Arm-Left-C.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -128,5 +128,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

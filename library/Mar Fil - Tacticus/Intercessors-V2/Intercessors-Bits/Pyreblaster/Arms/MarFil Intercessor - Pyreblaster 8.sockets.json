@@ -57,18 +57,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999996,
-   -0.002997,
-   0.000104,
-   0.00103,
-   0.002996,
-   0.999994,
-   0.001681,
-   -0.009006,
-   -0.000109,
-   -0.001681,
-   0.999999,
-   0.015895,
+   0.9999966194530415,
+   -0.0027125017570652906,
+   0.001021200610780333,
+   0.0059187893083163376,
+   0.0027100303970614484,
+   0.9999949250875176,
+   0.0014664705984317246,
+   -0.0154159248382153,
+   -0.0010253586787400003,
+   -0.0014641872173763774,
+   0.9999973957274448,
+   0.018924617060189775,
    0.0,
    0.0,
    0.0,
@@ -82,7 +82,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Pyreblaster\\Arms\\202-Pyreblaster-8.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -105,5 +105,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

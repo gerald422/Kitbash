@@ -49,18 +49,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999992,
-   -0.000548,
-   -0.003913,
-   0.002273,
-   0.000584,
-   0.999956,
-   0.009403,
-   -0.015313,
-   0.003908,
-   -0.009406,
-   0.999948,
-   0.034327,
+   0.9999956119908576,
+   -0.0002705946310612776,
+   -0.002993636784066455,
+   0.007171636561713832,
+   0.0002971706027954446,
+   0.9999578817088833,
+   0.009189628113257832,
+   -0.021727234706037796,
+   0.00299112116337743,
+   -0.009191426658207233,
+   0.9999517324192447,
+   0.037323575160840505,
    0.0,
    0.0,
    0.0,
@@ -74,7 +74,7 @@
   "path": "Mar Fil - Tacticus\\VeteranBladeSquad\\Additional\\Arms\\160-SwordHandled-B.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0004 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -97,5 +97,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

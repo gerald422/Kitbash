@@ -30,18 +30,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999993,
-   0.002139,
-   -0.003086,
-   0.000312,
-   -0.002201,
-   0.999799,
-   -0.019939,
-   -0.015355,
-   0.003043,
-   0.019945,
-   0.999797,
-   0.020134,
+   0.9999950224043642,
+   0.0024432667603238485,
+   -0.002175168324634602,
+   0.005197614105965206,
+   -0.0024876433263159602,
+   0.9997938175196298,
+   -0.020152567428006918,
+   -0.021765627151927452,
+   0.0021255256983162478,
+   0.020157020894977853,
+   0.9997936933124982,
+   0.023162908515878655,
    0.0,
    0.0,
    0.0,
@@ -55,7 +55,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\PlasmaIncinerator\\Arms\\189-PlasmaIncinerator-4-B-L.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 99% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -78,5 +78,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

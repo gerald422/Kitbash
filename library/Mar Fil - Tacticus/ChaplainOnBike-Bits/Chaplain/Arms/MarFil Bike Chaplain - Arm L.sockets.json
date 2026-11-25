@@ -5,18 +5,18 @@
  "sockets": [],
  "fits": {
   "Shoulder L": [
-   0.999982,
-   -0.00192,
-   0.005706,
-   -0.000654,
-   0.00174,
-   0.999512,
-   0.031194,
-   -0.019919,
-   -0.005763,
-   -0.031183,
-   0.999497,
-   -0.035747,
+   0.9999770770491507,
+   -0.0016626848711270938,
+   0.006631181561015012,
+   0.0041843266505032445,
+   0.0014552475479840212,
+   0.9995189453745592,
+   0.03097796750714731,
+   -0.026317363145223843,
+   -0.006679604137506631,
+   -0.03096722287703642,
+   0.9994965772412393,
+   -0.03272189296268735,
    0.0,
    0.0,
    0.0,
@@ -25,7 +25,7 @@
  },
  "notes": {
   "category": "filed without a fit so it is not missed (Nov 6, Josh): type from the file name; no fit yet",
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0006 mm, 97% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "original": {
   "name": "7-Arm-L",
@@ -53,5 +53,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

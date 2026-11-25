@@ -30,18 +30,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.99983,
-   -0.018395,
-   0.000855,
-   -0.00104,
-   0.017065,
-   0.94303,
-   0.332273,
-   0.036372,
-   -0.006918,
-   -0.332203,
-   0.943183,
-   -0.021003,
+   0.9998284018291438,
+   -0.018429790014128034,
+   0.0018146788226404622,
+   0.0038279440755878695,
+   0.016780534281502946,
+   0.943106242244169,
+   0.33207034607997543,
+   0.029970566168594115,
+   -0.007831182084174463,
+   -0.3319836433957939,
+   0.9432515806367149,
+   -0.01799221963123543,
    0.0,
    0.0,
    0.0,
@@ -55,7 +55,7 @@
   "path": "Mar Fil - Tacticus\\Outriders\\Arms(WithHandles)\\Arms\\10-ArmWightHandle-Left-D-2.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0002 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -78,5 +78,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

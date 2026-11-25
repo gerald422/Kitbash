@@ -49,18 +49,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   -0.861738,
-   0.418031,
-   0.287502,
-   -1.017407,
-   -0.478055,
-   -0.479245,
-   -0.736062,
-   -2.455464,
-   -0.169914,
-   -0.771735,
-   0.612826,
-   25.018274,
+   0.9968098556856497,
+   0.059011305772709736,
+   0.05372937279963159,
+   -0.0710295570427952,
+   -0.04399951841873766,
+   0.9680397327254533,
+   -0.24690378604928723,
+   -0.255567734555476,
+   -0.06658324520615838,
+   0.2437527081619999,
+   0.967548891135687,
+   -0.7908697024158933,
    0.0,
    0.0,
    0.0,
@@ -74,7 +74,7 @@
   "path": "Mar Fil - Tacticus\\Intercessors-V2\\Intercessors-Bits\\Bolter-Individual\\Arms\\140-Bolter-B-Grenade-3-L.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, look (0.0030 mm, 86% on), write_joints Nov 20: NEAR, check by eye"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -99,6 +99,9 @@
   "by": "origins.py Nov 15"
  },
  "check": [
+  "Shoulder L"
+ ],
+ "exact": [
   "Shoulder L"
  ]
 }

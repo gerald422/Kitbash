@@ -82,18 +82,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999994,
-   -0.001845,
-   0.00307,
-   -8.6e-05,
-   0.00184,
-   0.999998,
-   0.001445,
-   0.011911,
-   -0.003073,
-   -0.00144,
-   0.999995,
-   -0.009872,
+   0.9999915716302586,
+   -0.0015602798417305576,
+   0.003987129030197816,
+   0.004785151391552278,
+   0.001554667083469464,
+   0.9999985439277714,
+   0.0012296232695035484,
+   0.005506914925369699,
+   -0.003989598762211734,
+   -0.001224243199965635,
+   0.9999906253826165,
+   -0.006840648560057616,
    0.0,
    0.0,
    0.0,
@@ -107,7 +107,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\Arms\\130-Arm-11-L-C.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0005 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil Assault left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -130,5 +130,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

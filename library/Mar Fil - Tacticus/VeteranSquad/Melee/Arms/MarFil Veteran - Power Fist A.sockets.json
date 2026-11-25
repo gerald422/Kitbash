@@ -30,18 +30,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.999999,
-   -0.001475,
-   -0.000347,
-   0.001526,
-   0.001475,
-   0.999992,
-   0.003742,
-   -0.002583,
-   0.000342,
-   -0.003743,
-   0.999993,
-   0.009382,
+   0.9999995978259848,
+   -0.0011923928166764845,
+   0.0005707847020971914,
+   0.006405410362706889,
+   0.001188933244919917,
+   0.9999929321040987,
+   0.0035276002653159525,
+   -0.008991674106941738,
+   -0.0005746878618692748,
+   -0.0035275794720574724,
+   0.999992250490561,
+   0.012382031796292381,
    0.0,
    0.0,
    0.0,
@@ -55,7 +55,7 @@
   "path": "Mar Fil - Tacticus\\VeteranSquad\\Melee\\Arms\\139-PowerFist-A.stl"
  },
  "notes": {
-  "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0002 mm, 100% on), write_joints Nov 20"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -78,5 +78,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }

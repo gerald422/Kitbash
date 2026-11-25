@@ -104,18 +104,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
-   0.0,
-   0.0,
-   0.0,
-   1.0,
-   0.0,
+   0.9999998623975477,
+   0.0002860405542930287,
+   0.0009167207076399294,
+   0.004876793950427202,
+   -0.0002859932506861006,
+   0.9999997073905303,
+   -0.00021449938089306602,
+   -0.006406225752091876,
+   -0.0009170038821931245,
+   0.00021406266500373052,
+   0.99999813125464,
+   0.0030020015482996603,
    0.0,
    0.0,
    0.0,
@@ -129,7 +129,7 @@
   "path": "Mar Fil - Tacticus\\Techmarine\\Arms\\14-Arm-2-L.stl"
  },
  "notes": {
-  "Shoulder L": "connector shoulder disc, sure (0.0041 mm, 98% on), seat.py Nov 15"
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil other left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "origin": {
   "from_file": [
@@ -152,5 +152,8 @@
   ],
   "joint": "Shoulder L",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }
