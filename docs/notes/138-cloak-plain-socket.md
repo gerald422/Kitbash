@@ -46,3 +46,14 @@ Josh: "all good". All 22 torsos got both sockets: the circles cloak's move is `C
 - The c and d files went to the Recycle Bin.
 
 Left with Josh: `TN torsos 3 (c)`, the last cloak batch.
+
+## Written: TN torsos 3 (c). The cloaks are done
+
+Josh: "also all good". All 16 torsos got both sockets.
+- The old sidecars are in `_backups\batch write 2026-11-25 0946`.
+- All 32 joints matched the file: 0.0000 mm.
+- The file went to the Recycle Bin.
+
+All 90 torsos written in stage 2 now have both `Cloak` and `Cloak Plain`: Torso 2, the 34 other Mar Fil torsos, and
+Redwarden with the 54 TN torsos. Still to do: chest inserts and collars (certain torsos only, later), and the Cloak
+joint in `joints.json` (stage 6).
