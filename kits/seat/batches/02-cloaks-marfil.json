@@ -1,0 +1,1626 @@
+{
+ "name": "Stage 2 - cloaks on Mar Fil torsos",
+ "stage": "2 (the Cloak socket)",
+ "out": "~/Desktop/mar fil connectors/batches/02 Stage 2 - cloaks on Mar Fil torsos (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each torso: move the circles cloak to sit right on that torso (the other cloak rides on it; its collection can be hidden). Each move is that torso's Cloak socket, shared by every cloak. The left column is Torso 2 as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "ref_cloak",
+   "role": "check",
+   "name": "REF Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "ref",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket"
+  },
+  {
+   "id": "ref_cloak2",
+   "role": "check",
+   "name": "REF Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "ref_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t1",
+   "role": "host",
+   "name": "MarFil Assault - Torso 2 Insert",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2 Insert",
+   "at": [
+    80.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     1.000000045063568,
+     0.00016448062971832024,
+     8.399984986347817e-05,
+     -0.0023032031302222147,
+     -0.00016448854727371678,
+     1.0000000016703225,
+     5.3999161381186e-05,
+     -0.0014845426450212917,
+     -8.399197674504661e-05,
+     -5.4107394424869165e-05,
+     1.0000000369068593,
+     -1.64155446000791e-05,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.9999999403953552,
+    -0.00033248565159738064,
+    0.00047800998436287045,
+    0.0,
+    0.000332514347974211,
+    0.9999999403953552,
+    -5.9920534113189206e-05,
+    0.2013009935617447,
+    -0.00047799001913517714,
+    6.0079462855355814e-05,
+    1.0,
+    31.949016571044922,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t1_spacer",
+   "role": "check",
+   "name": "Torso 2 Insert Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2 Insert",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t1_arm",
+   "role": "check",
+   "name": "Torso 2 Insert Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t1_guide",
+   "role": "check",
+   "name": "Torso 2 Insert Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t1_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t1_pad",
+   "role": "check",
+   "name": "Torso 2 Insert Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t1_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t1_head",
+   "role": "check",
+   "name": "Torso 2 Insert Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t1_pack",
+   "role": "check",
+   "name": "Torso 2 Insert Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t1_legs",
+   "role": "check",
+   "name": "Torso 2 Insert Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t1_cloak",
+   "role": "part",
+   "name": "Torso 2 Insert Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t1",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    1.0,
+    0.0003270477754995227,
+    0.0002931473427452147,
+    0.0001983642578125,
+    -0.00034495219006203115,
+    0.997992992401123,
+    0.06331394612789154,
+    -5.650214195251465,
+    -0.0002718526520766318,
+    -0.0633140429854393,
+    0.997992992401123,
+    33.3392219543457,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t1",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t1_cloak2",
+   "role": "check",
+   "name": "Torso 2 Insert Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t1_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t2",
+   "role": "host",
+   "name": "MarFil Intercessor - Chest 5",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Chests/MarFil Intercessor - Chest 5",
+   "at": [
+    160.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     1.0000000449722515,
+     1.7497564209153294e-05,
+     -1.9573472883057958e-05,
+     0.0005567885176433269,
+     -1.749144401967005e-05,
+     0.9999998754060433,
+     0.00048742856550633093,
+     -0.014236158236017205,
+     1.9580986099742063e-05,
+     -0.00048752261590103005,
+     0.9999999268733575,
+     -0.0020930491765547288,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.9999999403953552,
+    -0.000185487893759273,
+    0.0005815820768475533,
+    0.0,
+    0.00018577490118332207,
+    0.9999998807907104,
+    -0.0004934183671139181,
+    0.20191121101379395,
+    -0.0005814904579892755,
+    0.0004935262259095907,
+    0.9999998211860657,
+    31.951702117919922,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t2_spacer",
+   "role": "check",
+   "name": "Chest 5 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Chests/MarFil Intercessor - Chest 5",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t2_arm",
+   "role": "check",
+   "name": "Chest 5 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t2_guide",
+   "role": "check",
+   "name": "Chest 5 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t2_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t2_pad",
+   "role": "check",
+   "name": "Chest 5 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t2_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t2_head",
+   "role": "check",
+   "name": "Chest 5 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t2_pack",
+   "role": "check",
+   "name": "Chest 5 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t2_legs",
+   "role": "check",
+   "name": "Chest 5 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t2_cloak",
+   "role": "part",
+   "name": "Chest 5 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t2",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.9999999403953552,
+    0.0005477128433994949,
+    0.000525236944667995,
+    -0.00128173828125,
+    -0.000579728395678103,
+    0.9980113506317139,
+    0.06302708387374878,
+    -5.64784049987793,
+    -0.0004896721220575273,
+    -0.06302736699581146,
+    0.9980112910270691,
+    33.34021759033203,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t2",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t2_cloak2",
+   "role": "check",
+   "name": "Chest 5 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t2_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t3",
+   "role": "host",
+   "name": "MarFil Veteran - Chest E",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Chests/MarFil Veteran - Chest E",
+   "at": [
+    240.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     1.0000000528600455,
+     2.5119816819231374e-05,
+     -3.3500238357096106e-06,
+     0.00013794353913043655,
+     -2.5123373592144467e-05,
+     0.9999999937476391,
+     -4.059511347874845e-05,
+     0.0009039601225490079,
+     3.3479713617013676e-06,
+     4.05007838734404e-05,
+     1.0000000563101712,
+     0.0003676986119316439,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.9999999403953552,
+    -0.00019311992218717933,
+    0.0005653491243720055,
+    0.0,
+    0.00019310042262077332,
+    1.0,
+    3.460931475274265e-05,
+    0.14488351345062256,
+    -0.0005653557600453496,
+    -3.450013537076302e-05,
+    0.9999999403953552,
+    31.93910789489746,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t3_spacer",
+   "role": "check",
+   "name": "Chest E Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/VeteranSquad/Chests/MarFil Veteran - Chest E",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t3_arm",
+   "role": "check",
+   "name": "Chest E Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t3_guide",
+   "role": "check",
+   "name": "Chest E Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t3_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t3_pad",
+   "role": "check",
+   "name": "Chest E Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t3_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t3_head",
+   "role": "check",
+   "name": "Chest E Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t3_pack",
+   "role": "check",
+   "name": "Chest E Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t3_legs",
+   "role": "check",
+   "name": "Chest E Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t3_cloak",
+   "role": "part",
+   "name": "Chest E Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t3",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.999988317489624,
+    0.004837113432586193,
+    0.0006848907796666026,
+    -0.0008544921875,
+    -0.004878644365817308,
+    0.996100127696991,
+    0.08809234946966171,
+    -6.02390718460083,
+    -0.0002561073051765561,
+    -0.08809464424848557,
+    0.9961117506027222,
+    33.408355712890625,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t3",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t3_cloak2",
+   "role": "check",
+   "name": "Chest E Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t3_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t4",
+   "role": "host",
+   "name": "MarFil Techmarine - Chest",
+   "rel": "Mar Fil - Tacticus/Techmarine/Chests/MarFil Techmarine - Chest",
+   "at": [
+    320.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     1.0000000507044933,
+     6.605767058699535e-05,
+     1.1923284121363753e-05,
+     -0.0002521723665906344,
+     -6.60602583200884e-05,
+     0.9999999803111995,
+     -6.813245172619966e-05,
+     0.0010362662984889637,
+     -1.1928755018903218e-05,
+     6.803725059099275e-05,
+     1.0000000619365361,
+     0.001150964364331486,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.9999999403953552,
+    -0.00023405691899824888,
+    0.0005500725819729269,
+    0.0,
+    0.00023402278020512313,
+    1.0,
+    6.216878682607785e-05,
+    0.610876739025116,
+    -0.0005500871338881552,
+    -6.204003875609487e-05,
+    0.9999999403953552,
+    31.889373779296875,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t4_spacer",
+   "role": "check",
+   "name": "Chest Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/Techmarine/Chests/MarFil Techmarine - Chest",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t4_arm",
+   "role": "check",
+   "name": "Chest Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t4_guide",
+   "role": "check",
+   "name": "Chest Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t4_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t4_pad",
+   "role": "check",
+   "name": "Chest Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t4_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t4_head",
+   "role": "check",
+   "name": "Chest Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t4_pack",
+   "role": "check",
+   "name": "Chest Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t4_legs",
+   "role": "check",
+   "name": "Chest Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t4_cloak",
+   "role": "part",
+   "name": "Chest Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t4",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.9999998807907104,
+    -0.0003766272566281259,
+    -0.0007743275491520762,
+    0.0038538158405572176,
+    0.00044659042032435536,
+    0.9957183599472046,
+    0.09243538230657578,
+    -6.354786396026611,
+    0.0007361990283243358,
+    -0.09243570268154144,
+    0.9957180619239807,
+    33.36943054199219,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t4",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t4_cloak2",
+   "role": "check",
+   "name": "Chest Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t4_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t5",
+   "role": "host",
+   "name": "MarFil Jump Chaplain - Chest Chaplain",
+   "rel": "Mar Fil - Tacticus/ChaplainWithJumpPack/Chests/MarFil Jump Chaplain - Chest Chaplain",
+   "at": [
+    400.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     1.0000000492670436,
+     7.90340890493281e-05,
+     1.6834984589814595e-05,
+     -0.00036236306032341183,
+     -7.903432970917054e-05,
+     1.000000005327479,
+     -0.00018949288472755053,
+     0.004504639153740109,
+     -1.6850922751614813e-05,
+     0.00018939713491277212,
+     1.0000000340297508,
+     0.0015707192132090597,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.9999999403953552,
+    -0.00024703098461031914,
+    0.0005451504839584231,
+    0.0,
+    0.00024693101295270026,
+    0.9999999403953552,
+    0.00018353595805820078,
+    0.2657746970653534,
+    -0.0005451958277262747,
+    -0.00018340128008276224,
+    0.9999999403953552,
+    31.991607666015625,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t5_spacer",
+   "role": "check",
+   "name": "Chest Chaplain Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/ChaplainWithJumpPack/Chests/MarFil Jump Chaplain - Chest Chaplain",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t5_arm",
+   "role": "check",
+   "name": "Chest Chaplain Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t5_guide",
+   "role": "check",
+   "name": "Chest Chaplain Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t5_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t5_pad",
+   "role": "check",
+   "name": "Chest Chaplain Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t5_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t5_head",
+   "role": "check",
+   "name": "Chest Chaplain Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t5_pack",
+   "role": "check",
+   "name": "Chest Chaplain Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t5_legs",
+   "role": "check",
+   "name": "Chest Chaplain Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t5_cloak",
+   "role": "part",
+   "name": "Chest Chaplain Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t5",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.9999999403953552,
+    0.0007026828243397176,
+    0.0003682534152176231,
+    -0.0017852783203125,
+    -0.0007247540052048862,
+    0.99796062707901,
+    0.06382416933774948,
+    -5.652787208557129,
+    -0.0003226545813959092,
+    -0.06382442265748978,
+    0.9979607462882996,
+    33.34130859375,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t5",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t5_cloak2",
+   "role": "check",
+   "name": "Chest Chaplain Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t5_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t6",
+   "role": "host",
+   "name": "MarFil Outrider - Torso B",
+   "rel": "Mar Fil - Tacticus/Outriders/Chests/MarFil Outrider - Torso B",
+   "at": [
+    480.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     1.0000000618521059,
+     -1.1136437551767005e-05,
+     8.921328522191931e-07,
+     -5.725625119479933e-05,
+     1.1133049090996767e-05,
+     1.0000000017016675,
+     -1.0394720385246538e-05,
+     0.0006219737120818358,
+     -8.930604204034553e-07,
+     1.0300316281765985e-05,
+     1.000000060060549,
+     -0.00030372251826449315,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.9999999403953552,
+    -0.00015686354890931398,
+    0.0005611078813672066,
+    0.0,
+    0.00015686111873947084,
+    1.0,
+    4.3884729166165926e-06,
+    0.2003999948501587,
+    -0.0005611085216514766,
+    -4.3004561121051665e-06,
+    0.9999999403953552,
+    31.94879913330078,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t6_spacer",
+   "role": "check",
+   "name": "Torso B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/Outriders/Chests/MarFil Outrider - Torso B",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t6_arm",
+   "role": "check",
+   "name": "Torso B Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t6_guide",
+   "role": "check",
+   "name": "Torso B Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t6_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t6_pad",
+   "role": "check",
+   "name": "Torso B Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t6_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t6_head",
+   "role": "check",
+   "name": "Torso B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t6_pack",
+   "role": "check",
+   "name": "Torso B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t6_legs",
+   "role": "check",
+   "name": "Torso B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t6_cloak",
+   "role": "part",
+   "name": "Torso B Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t6",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.9999850988388062,
+    0.005429376848042011,
+    0.0008778920164331794,
+    -0.00128173828125,
+    -0.005486501846462488,
+    0.9958924651145935,
+    0.09037511050701141,
+    -6.015951156616211,
+    -0.00038360580219887197,
+    -0.09037856757640839,
+    0.9959070682525635,
+    33.41321563720703,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t6",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t6_cloak2",
+   "role": "check",
+   "name": "Torso B Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t6_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t7",
+   "role": "host",
+   "name": "MarFil Bike Chaplain - Chest",
+   "rel": "Mar Fil - Tacticus/ChaplainOnBike-Bits/Chaplain/Chests/MarFil Bike Chaplain - Chest",
+   "at": [
+    560.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     1.0000000000001805,
+     0.00021343300690029922,
+     -0.0002626254379855218,
+     -0.0005257391192969551,
+     -0.00021956375649553528,
+     0.9997225391232597,
+     -0.02355645405218925,
+     0.5261758352766596,
+     0.00025752382659352015,
+     0.023556414964774598,
+     0.9997225414053128,
+     30.73261224397185,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.9999997038585103,
+    -0.00038755869848247084,
+    0.0008195260521305335,
+    0.0032021445277301552,
+    0.00036815106178967087,
+    0.9997225369231533,
+    0.023550629147206015,
+    -0.2774160162637805,
+    -0.0008284259234037805,
+    -0.023550313360649416,
+    0.9997224021324148,
+    1.2200218029299388,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t7_spacer",
+   "role": "check",
+   "name": "Chest Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/ChaplainOnBike-Bits/Chaplain/Chests/MarFil Bike Chaplain - Chest",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t7_arm",
+   "role": "check",
+   "name": "Chest Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t7_guide",
+   "role": "check",
+   "name": "Chest Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t7_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t7_pad",
+   "role": "check",
+   "name": "Chest Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t7_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t7_head",
+   "role": "check",
+   "name": "Chest Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t7_pack",
+   "role": "check",
+   "name": "Chest Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t7_legs",
+   "role": "check",
+   "name": "Chest Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t7_cloak",
+   "role": "part",
+   "name": "Chest Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t7",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.9999984360572298,
+    -0.0018651777771694384,
+    0.000513280445159023,
+    0.0004866582790583607,
+    0.001838170608563856,
+    0.9988277022107898,
+    0.04836651351875504,
+    -6.193906478304578,
+    -0.0006028914587613377,
+    -0.048365489408134746,
+    0.9988291451269626,
+    2.600336663548088,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t7",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t7_cloak2",
+   "role": "check",
+   "name": "Chest Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t7_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  }
+ ]
+}

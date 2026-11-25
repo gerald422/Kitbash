@@ -213,7 +213,11 @@ def build(A):
         P = piv_parent if piv_parent is not None else W.copy()                           # the pivot (object origin)
         if e.get("preset"): D = G.M4(e["preset"]); W = P @ D @ np.linalg.inv(P) @ W; P = P @ D
         K = np.linalg.inv(P) @ W
-        o = make_mesh(e.get("name", i)[:63], own_tris, K); colls[role].objects.link(o)
+        o = make_mesh(e.get("name", i)[:63], own_tris, K)
+        if e.get("collection"):                      # its own collection Josh can hide (e.g. the second cloak style)
+            if e["collection"] not in colls: c = bpy.data.collections.new(e["collection"][:60]); root.children.link(c); colls[e["collection"]] = c
+            colls[e["collection"]].objects.link(o)
+        else: colls[role].objects.link(o)
         o.rotation_mode = 'QUATERNION'     # Euler near gimbal lock (a file lying Y up, stood up) lost up to 0.5 deg (Nov 24)
         if par: o.parent = objs[par]; o.matrix_parent_inverse = Matrix.Identity(4); o.matrix_basis = G.mat(np.linalg.inv(info[par]["P"]) @ P)
         else: o.matrix_world = G.mat(P)

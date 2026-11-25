@@ -1,0 +1,3507 @@
+{
+ "name": "Stage 2 - cloaks on TN torsos 3",
+ "stage": "2 (the Cloak socket)",
+ "out": "~/Desktop/mar fil connectors/batches/02 Stage 2 - cloaks on TN torsos 3 (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each torso: move the circles cloak to sit right on that torso (the other cloak rides on it; its collection can be hidden). Each move is that torso's Cloak socket, shared by every cloak. The left column is Torso 2 as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "ref_cloak",
+   "role": "check",
+   "name": "REF Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "ref",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket"
+  },
+  {
+   "id": "ref_cloak2",
+   "role": "check",
+   "name": "REF Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "ref_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t1",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper A1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper A1",
+   "at": [
+    80.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24647401586564377,
+     -0.16778885378416059,
+     -0.9545146985607496,
+     4.840175955753466,
+     -0.9609873906576383,
+     0.0852386590484712,
+     -0.26312902043537045,
+     8.511743091953715,
+     0.12551182536116107,
+     0.9821315365928625,
+     -0.14023393190094854,
+     24.631907493272266,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24624181877386359,
+    -0.9610287301649701,
+    0.1256558751777334,
+    8.390545931461126,
+    -0.16832637592280436,
+    0.08527288962971069,
+    0.982035631251362,
+    6.645230437434249,
+    -0.9544792780548601,
+    -0.2629697073018697,
+    -0.14076862826031272,
+    6.378857250751957,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t1_spacer",
+   "role": "check",
+   "name": "Upper A1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper A1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t1_arm",
+   "role": "check",
+   "name": "Upper A1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t1_guide",
+   "role": "check",
+   "name": "Upper A1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t1_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t1_pad",
+   "role": "check",
+   "name": "Upper A1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t1_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t1_head",
+   "role": "check",
+   "name": "Upper A1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t1_pack",
+   "role": "check",
+   "name": "Upper A1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t1_legs",
+   "role": "check",
+   "name": "Upper A1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t1_cloak",
+   "role": "part",
+   "name": "Upper A1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t1",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.00010533481621440293,
+    -0.9993620260605182,
+    0.035707900446096945,
+    13.863845628839808,
+    0.00018101359161064063,
+    0.03570784117241226,
+    0.9993620878675562,
+    5.954831668985186,
+    -0.9999999636823405,
+    -9.888062806673998e-05,
+    0.00018458545388551513,
+    6.408885592223896,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t1",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t1_cloak2",
+   "role": "check",
+   "name": "Upper A1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t1_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t2",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper B1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper B1",
+   "at": [
+    160.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24650299860043445,
+     -0.16783583391550347,
+     -0.9544987934537111,
+     4.7676434927274896,
+     -0.9610163288725526,
+     0.08493967470622305,
+     -0.26312174111233244,
+     8.543284588299082,
+     0.12523611659139108,
+     0.9821489234473932,
+     -0.14035504047785194,
+     24.619469730701432,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24627108447218163,
+    -0.9610568176222481,
+    0.12538032102324745,
+    8.391721717670592,
+    -0.16837345673430656,
+    0.08497383679867805,
+    0.9820539710663588,
+    6.644542510589025,
+    -0.9544635843826963,
+    -0.2629621366216565,
+    -0.14088988169345457,
+    6.378863438087666,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t2_spacer",
+   "role": "check",
+   "name": "Upper B1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper B1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t2_arm",
+   "role": "check",
+   "name": "Upper B1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t2_guide",
+   "role": "check",
+   "name": "Upper B1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t2_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t2_pad",
+   "role": "check",
+   "name": "Upper B1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t2_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t2_head",
+   "role": "check",
+   "name": "Upper B1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t2_pack",
+   "role": "check",
+   "name": "Upper B1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t2_legs",
+   "role": "check",
+   "name": "Upper B1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t2_cloak",
+   "role": "part",
+   "name": "Upper B1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t2",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    8.713229329479289e-05,
+    -0.9993629040838693,
+    0.03568276505678098,
+    13.86537014838495,
+    6.086138258576401e-05,
+    0.03568279464211183,
+    0.9993629436321088,
+    5.957789816396524,
+    -1.0000000067370005,
+    -8.488220360083857e-05,
+    6.395373386226767e-05,
+    6.407335694058588,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t2",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t2_cloak2",
+   "role": "check",
+   "name": "Upper B1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t2_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t3",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper C1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper C1",
+   "at": [
+    240.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.2465033882927842,
+     -0.16780397319769927,
+     -0.9545041286267519,
+     4.844935147423818,
+     -0.9610004862779801,
+     0.08507388679793138,
+     -0.26313711204994805,
+     8.348014501762895,
+     0.12535873985850324,
+     0.9821427765598678,
+     -0.1402885126812641,
+     24.648598341081467,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.2462713044112255,
+    -0.9610404944432668,
+    0.1255030684583365,
+    8.230904306709903,
+    -0.16834145522385227,
+    0.08510788324504898,
+    0.9820478240497773,
+    6.645688435892396,
+    -0.9544693382244741,
+    -0.2629775729592039,
+    -0.14082348216028365,
+    6.378828980193192,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t3_spacer",
+   "role": "check",
+   "name": "Upper C1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper C1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t3_arm",
+   "role": "check",
+   "name": "Upper C1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t3_guide",
+   "role": "check",
+   "name": "Upper C1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t3_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t3_pad",
+   "role": "check",
+   "name": "Upper C1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t3_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t3_head",
+   "role": "check",
+   "name": "Upper C1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t3_pack",
+   "role": "check",
+   "name": "Upper C1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t3_legs",
+   "role": "check",
+   "name": "Upper C1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t3_cloak",
+   "role": "part",
+   "name": "Upper C1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t3",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.00010869082909881432,
+    -0.9993641020835056,
+    0.03566121040892638,
+    13.704553077278973,
+    0.00012521695743966362,
+    0.03566115360327508,
+    0.9993641524014637,
+    5.9570353070186,
+    -0.9999999520233164,
+    -0.0001042292706487663,
+    0.00012894298732028147,
+    6.407626442439579,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t3",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t3_cloak2",
+   "role": "check",
+   "name": "Upper C1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t3_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t4",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper D1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper D1",
+   "at": [
+    320.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24647963571593146,
+     -0.16793692516738815,
+     -0.9544870424183399,
+     4.9043029479810185,
+     -0.9610126989892247,
+     0.0849911668091657,
+     -0.2631183799634549,
+     8.262954307499443,
+     0.1253102167316709,
+     0.9821272153579581,
+     -0.14044080164970318,
+     24.667511915368323,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.2462475137966301,
+    -0.9610531408731704,
+    0.12545449272922526,
+    8.23041643434199,
+    -0.1684744197433592,
+    0.08502525010909631,
+    0.9820321784864827,
+    6.645986822171899,
+    -0.954451853190384,
+    -0.26295894650917045,
+    -0.1409757082324533,
+    6.378853498491546,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t4_spacer",
+   "role": "check",
+   "name": "Upper D1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper D1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t4_arm",
+   "role": "check",
+   "name": "Upper D1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t4_guide",
+   "role": "check",
+   "name": "Upper D1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t4_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t4_pad",
+   "role": "check",
+   "name": "Upper D1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t4_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t4_head",
+   "role": "check",
+   "name": "Upper D1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t4_pack",
+   "role": "check",
+   "name": "Upper D1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t4_legs",
+   "role": "check",
+   "name": "Upper D1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t4_cloak",
+   "role": "part",
+   "name": "Upper D1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t4",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    7.609517370837587e-05,
+    -0.9993619536162324,
+    0.03570999958387774,
+    13.704263158202355,
+    -2.598058478109279e-05,
+    0.0357099501360088,
+    0.9993619840099243,
+    5.955080302091066,
+    -1.000000002406936,
+    -7.701933132750354e-05,
+    -2.3290010815464005e-05,
+    6.4069176141748585,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t4",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t4_cloak2",
+   "role": "check",
+   "name": "Upper D1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t4_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t5",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper E9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper E9",
+   "at": [
+    400.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24643028223548766,
+     -0.1678931793091687,
+     -0.9545076573282949,
+     4.9419718647124595,
+     -0.9609774468534359,
+     0.08538395055005574,
+     -0.26311915304166184,
+     8.07216960657502,
+     0.1256755500868127,
+     0.9821005375040207,
+     -0.14030026177661603,
+     24.674874118895012,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24619792249959915,
+    -0.9610182954569496,
+    0.12581976721485427,
+    7.948667444982702,
+    -0.16843057680292822,
+    0.08541811455341361,
+    0.9820056930794238,
+    6.6536480728197045,
+    -0.9544722082066692,
+    -0.2629597852660939,
+    -0.14083517940706558,
+    6.378890379327821,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t5_spacer",
+   "role": "check",
+   "name": "Upper E9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper E9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t5_arm",
+   "role": "check",
+   "name": "Upper E9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t5_guide",
+   "role": "check",
+   "name": "Upper E9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t5_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t5_pad",
+   "role": "check",
+   "name": "Upper E9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t5_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t5_head",
+   "role": "check",
+   "name": "Upper E9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t5_pack",
+   "role": "check",
+   "name": "Upper E9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t5_legs",
+   "role": "check",
+   "name": "Upper E9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t5_cloak",
+   "role": "part",
+   "name": "Upper E9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t5",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    8.942150265378328e-05,
+    -0.9993630422508738,
+    0.03568327255392883,
+    13.421423646231903,
+    0.0001162896848576374,
+    0.035683204112335457,
+    0.9993630322833367,
+    5.964766381894062,
+    -1.000000143620045,
+    -8.529298998615711e-05,
+    0.00011933108893470723,
+    6.405822045009415,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t5",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t5_cloak2",
+   "role": "check",
+   "name": "Upper E9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t5_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t6",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper F1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper F1",
+   "at": [
+    480.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24652346286634141,
+     -0.1679367815064232,
+     -0.9544760062678775,
+     5.0057184544581945,
+     -0.960998913089913,
+     0.08500512524132102,
+     -0.2631646122581387,
+     7.728271230537005,
+     0.12533039044982977,
+     0.9821260822089044,
+     -0.14043122456902882,
+     24.730559204966777,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24629136296691664,
+    -0.9610391959112873,
+    0.1254745760136182,
+    7.550125855809036,
+    -0.1684743089389717,
+    0.08503929265236555,
+    0.9820309312533649,
+    6.646661995756335,
+    -0.954440301416987,
+    -0.263004972348674,
+    -0.14096602331575098,
+    6.378857981784601,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t6_spacer",
+   "role": "check",
+   "name": "Upper F1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper F1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t6_arm",
+   "role": "check",
+   "name": "Upper F1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t6_guide",
+   "role": "check",
+   "name": "Upper F1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t6_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t6_pad",
+   "role": "check",
+   "name": "Upper F1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t6_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t6_head",
+   "role": "check",
+   "name": "Upper F1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t6_pack",
+   "role": "check",
+   "name": "Upper F1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t6_legs",
+   "role": "check",
+   "name": "Upper F1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t6_cloak",
+   "role": "part",
+   "name": "Upper F1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t6",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.0001237973011010312,
+    -0.9993609691354434,
+    0.03572944738166868,
+    13.02310672617638,
+    -2.248181709773266e-05,
+    0.03572937539767196,
+    0.9993620216313713,
+    5.955389925677064,
+    -0.9999999873130504,
+    -0.00012455827964927708,
+    -1.807973367633491e-05,
+    6.4092834845980065,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t6",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t6_cloak2",
+   "role": "check",
+   "name": "Upper F1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t6_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t7",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper G9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper G9",
+   "at": [
+    560.0,
+    0,
+    -0.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24647459350383452,
+     -0.16792176935619108,
+     -0.9544914117520915,
+     4.898650092731646,
+     -0.961001592745633,
+     0.08509416651104511,
+     -0.2631262453506164,
+     7.955980131588932,
+     0.12540636851001244,
+     0.982121246950278,
+     -0.14039950324920453,
+     24.6846789528328,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24624243562433365,
+    -0.9610417759029495,
+    0.12555038973580618,
+    7.947863899671148,
+    -0.16845928040701502,
+    0.08512837897689968,
+    0.982025482189106,
+    6.654626843541687,
+    -0.9544554347255868,
+    -0.2629665243560093,
+    -0.1409341913310157,
+    6.378863502438944,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t7_spacer",
+   "role": "check",
+   "name": "Upper G9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper G9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t7_arm",
+   "role": "check",
+   "name": "Upper G9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t7_guide",
+   "role": "check",
+   "name": "Upper G9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t7_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t7_pad",
+   "role": "check",
+   "name": "Upper G9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t7_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t7_head",
+   "role": "check",
+   "name": "Upper G9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t7_pack",
+   "role": "check",
+   "name": "Upper G9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t7_legs",
+   "role": "check",
+   "name": "Upper G9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t7_cloak",
+   "role": "part",
+   "name": "Upper G9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t7",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    8.761775328010055e-05,
+    -0.9993630843663165,
+    0.03567907620178353,
+    13.421137687211703,
+    1.4171856071330574e-05,
+    0.03567892405238124,
+    0.9993630916095948,
+    5.964922751766437,
+    -1.0000000367597297,
+    -8.720490174716901e-05,
+    1.7145533710761552e-05,
+    6.407940866727358,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t7",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t7_cloak2",
+   "role": "check",
+   "name": "Upper G9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t7_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t8",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper H1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper H1",
+   "at": [
+    0.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.2464731113282631,
+     -0.1676642138458662,
+     -0.9545367128737623,
+     5.052405083183147,
+     -0.9609998018833996,
+     0.08518357794887292,
+     -0.2631043694389939,
+     7.743465166529159,
+     0.12542400739858153,
+     0.982157358954596,
+     -0.14012966740672672,
+     24.72286214178797,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.2462409669591525,
+    -0.9610396943928162,
+    0.1255681997892033,
+    7.550244435947654,
+    -0.16820168287634096,
+    0.08521760108977389,
+    0.9820620373745041,
+    6.652719731001454,
+    -0.9545016001187357,
+    -0.26294471683951004,
+    -0.1406645472588431,
+    6.378850962808585,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t8_spacer",
+   "role": "check",
+   "name": "Upper H1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper H1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t8_arm",
+   "role": "check",
+   "name": "Upper H1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t8_guide",
+   "role": "check",
+   "name": "Upper H1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t8_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t8_pad",
+   "role": "check",
+   "name": "Upper H1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t8_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t8_head",
+   "role": "check",
+   "name": "Upper H1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t8_pack",
+   "role": "check",
+   "name": "Upper H1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t8_legs",
+   "role": "check",
+   "name": "Upper H1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t8_cloak",
+   "role": "part",
+   "name": "Upper H1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t8",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    8.946914050384058e-05,
+    -0.9993631211256014,
+    0.035682164003014376,
+    13.024664967099328,
+    0.0002891990898585918,
+    0.03568208513690743,
+    0.9993630624871367,
+    5.964615266598798,
+    -1.0000000938327493,
+    -7.919858304909525e-05,
+    0.00029210535590535767,
+    6.408604906055167,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t8",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t8_cloak2",
+   "role": "check",
+   "name": "Upper H1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t8_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t9",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper I9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper I9",
+   "at": [
+    80.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24643961998115543,
+     -0.16809467049755028,
+     -0.9544696719522968,
+     4.934850538441348,
+     -0.9609831428012515,
+     0.08526345455444857,
+     -0.2631373449103857,
+     7.762396197629909,
+     0.12561337913948198,
+     0.982076433823243,
+     -0.14052375981111598,
+     24.70195565664862,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24620738582201815,
+    -0.9610240433235332,
+    0.12575762229207088,
+    7.506687761210423,
+    -0.16863212570782432,
+    0.08529766480579326,
+    0.9819816785245699,
+    6.655481321969808,
+    -0.9544342901246625,
+    -0.2629779554710568,
+    -0.1410586737276197,
+    6.378878874353811,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t9_spacer",
+   "role": "check",
+   "name": "Upper I9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper I9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t9_arm",
+   "role": "check",
+   "name": "Upper I9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t9_guide",
+   "role": "check",
+   "name": "Upper I9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t9_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t9_pad",
+   "role": "check",
+   "name": "Upper I9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t9_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t9_head",
+   "role": "check",
+   "name": "Upper I9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t9_pack",
+   "role": "check",
+   "name": "Upper I9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t9_legs",
+   "role": "check",
+   "name": "Upper I9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t9_cloak",
+   "role": "part",
+   "name": "Upper I9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t9",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    8.785116910711714e-05,
+    -0.9993630332243443,
+    0.035684149718094985,
+    12.978962286770466,
+    -0.00011113985008674043,
+    0.035684079099032116,
+    0.9993630360853617,
+    5.964825123699299,
+    -1.0000000363828194,
+    -9.18244469959987e-05,
+    -0.00010799530643267253,
+    6.407590624069627,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t9",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t9_cloak2",
+   "role": "check",
+   "name": "Upper I9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t9_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t10",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper J9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper J9",
+   "at": [
+    160.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24646803114128593,
+     -0.16802850094287763,
+     -0.9544739579397463,
+     4.9891234218059415,
+     -0.9609839681704483,
+     0.08521272548819427,
+     -0.26315022972086094,
+     7.65644856299884,
+     0.12555014175111423,
+     0.9820920595030324,
+     -0.14047043561944692,
+     24.732740105302497,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24623592249984272,
+    -0.9610251592259098,
+    0.1256943696135011,
+    7.510046275220054,
+    -0.1685660359189219,
+    0.08524700578254957,
+    0.9819975253027441,
+    6.646066052773376,
+    -0.9544386319625225,
+    -0.2629908373875273,
+    -0.1410053435009979,
+    6.378880493019637,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t10_spacer",
+   "role": "check",
+   "name": "Upper J9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper J9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t10_arm",
+   "role": "check",
+   "name": "Upper J9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t10_guide",
+   "role": "check",
+   "name": "Upper J9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t10_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t10_pad",
+   "role": "check",
+   "name": "Upper J9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t10_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t10_head",
+   "role": "check",
+   "name": "Upper J9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t10_pack",
+   "role": "check",
+   "name": "Upper J9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t10_legs",
+   "role": "check",
+   "name": "Upper J9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t10_cloak",
+   "role": "part",
+   "name": "Upper J9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t10",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.00010716436347103409,
+    -0.9993618955556786,
+    0.03570886615395199,
+    12.98081530559595,
+    -5.979869464267217e-05,
+    0.03570889354995528,
+    0.9993619455625957,
+    5.954885129545659,
+    -0.9999999511805009,
+    -0.00010919865115910225,
+    -5.590233342130221e-05,
+    6.408899305356925,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t10",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t10_cloak2",
+   "role": "check",
+   "name": "Upper J9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t10_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t11",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper K9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper K9",
+   "at": [
+    240.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24643686661793035,
+     -0.16831336113346357,
+     -0.9544316043421834,
+     4.853661979229847,
+     -0.9609949932766445,
+     0.08511439133902904,
+     -0.2631412684849575,
+     8.017537915954883,
+     0.12552610042445256,
+     0.9820525029322922,
+     -0.1407729462123545,
+     24.68090880417936,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24620470648727558,
+    -0.9610364125188255,
+    0.1256703003218983,
+    7.950149544753321,
+    -0.16885078138400872,
+    0.08514858933981823,
+    0.9819564475761319,
+    6.646320161597026,
+    -0.9543965611551101,
+    -0.2629821208062656,
+    -0.14130776320311206,
+    6.378825820759444,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t11_spacer",
+   "role": "check",
+   "name": "Upper K9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper K9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t11_arm",
+   "role": "check",
+   "name": "Upper K9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t11_guide",
+   "role": "check",
+   "name": "Upper K9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t11_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t11_pad",
+   "role": "check",
+   "name": "Upper K9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t11_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t11_head",
+   "role": "check",
+   "name": "Upper K9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t11_pack",
+   "role": "check",
+   "name": "Upper K9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t11_legs",
+   "role": "check",
+   "name": "Upper K9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t11_cloak",
+   "role": "part",
+   "name": "Upper K9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t11",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    7.023413138360974e-05,
+    -0.9993619791657297,
+    0.03570291230801758,
+    13.42364646284651,
+    -0.0003628141759855247,
+    0.03570287009365891,
+    0.9993620099731739,
+    5.9568310091623715,
+    -0.9999999459573997,
+    -8.315328274063588e-05,
+    -0.0003600851958670383,
+    6.406450531605515,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t11",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t11_cloak2",
+   "role": "check",
+   "name": "Upper K9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t11_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t12",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper M1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper M1",
+   "at": [
+    320.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24640958880203565,
+     -0.16809696146570513,
+     -0.9544769896874757,
+     4.962387361241916,
+     -0.9609791034994776,
+     0.08535939049427897,
+     -0.2631210771682773,
+     8.027021314707323,
+     0.12570340554035964,
+     0.9820678409103203,
+     -0.14050417832556691,
+     24.695174503318395,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.2461772609251322,
+    -0.9610199436287951,
+    0.12584765192678374,
+    7.9482164278333585,
+    -0.1686343448925193,
+    0.08539354790802632,
+    0.9819728309527777,
+    6.645614765428414,
+    -0.954441700774914,
+    -0.2629617348391229,
+    -0.14103910562174585,
+    6.378874448538064,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t12_spacer",
+   "role": "check",
+   "name": "Upper M1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper M1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t12_arm",
+   "role": "check",
+   "name": "Upper M1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t12_guide",
+   "role": "check",
+   "name": "Upper M1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t12_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t12_pad",
+   "role": "check",
+   "name": "Upper M1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t12_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t12_head",
+   "role": "check",
+   "name": "Upper M1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t12_pack",
+   "role": "check",
+   "name": "Upper M1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t12_legs",
+   "role": "check",
+   "name": "Upper M1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t12_cloak",
+   "role": "part",
+   "name": "Upper M1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t12",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    7.398602405105011e-05,
+    -0.9993620009269064,
+    0.035710744511447894,
+    13.419871727194568,
+    -8.981923853400151e-05,
+    0.0357107100643569,
+    0.999361995692504,
+    5.954989344632452,
+    -0.9999999723941281,
+    -7.717656483912271e-05,
+    -8.714899476707725e-05,
+    6.409964741905469,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t12",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t12_cloak2",
+   "role": "check",
+   "name": "Upper M1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t12_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t13",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper N9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper N9",
+   "at": [
+    400.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.2464925469210125,
+     -0.16789942910270805,
+     -0.9544902398353484,
+     4.8878007209586265,
+     -0.9609839162818764,
+     0.08520303322274302,
+     -0.26315695512005777,
+     8.094548879707482,
+     0.1255093033976011,
+     0.9821156694058473,
+     -0.1403466087498461,
+     24.67694016620438,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24626031274690435,
+    -0.9610233528195539,
+    0.12565349860902214,
+    7.9480277176408345,
+    -0.16843689737483747,
+    0.08523700178014297,
+    0.9820198577876604,
+    6.643807749858342,
+    -0.9544552383830939,
+    -0.2629972810069573,
+    -0.1408814013767111,
+    6.378822386014043,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t13_spacer",
+   "role": "check",
+   "name": "Upper N9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper N9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t13_arm",
+   "role": "check",
+   "name": "Upper N9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t13_guide",
+   "role": "check",
+   "name": "Upper N9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t13_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t13_pad",
+   "role": "check",
+   "name": "Upper N9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t13_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t13_head",
+   "role": "check",
+   "name": "Upper N9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t13_pack",
+   "role": "check",
+   "name": "Upper N9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t13_legs",
+   "role": "check",
+   "name": "Upper N9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t13_cloak",
+   "role": "part",
+   "name": "Upper N9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t13",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.00012392297935910515,
+    -0.9993619437016609,
+    0.035721624034062226,
+    13.421475187681796,
+    6.35411161627389e-05,
+    0.03572167109972264,
+    0.9993619905717066,
+    5.955990498681572,
+    -0.9999999344998559,
+    -0.00012153196931472296,
+    6.796795587045868e-05,
+    6.406896937937461,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t13",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t13_cloak2",
+   "role": "check",
+   "name": "Upper N9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t13_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t14",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper O9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper O9",
+   "at": [
+    480.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.2464579764376544,
+     -0.1679936427168351,
+     -0.9544827609176672,
+     5.0689750571905705,
+     -0.9609790345481848,
+     0.0852840725774887,
+     -0.2631459162676851,
+     7.559478470103219,
+     0.1256091289153269,
+     0.982091983298205,
+     -0.14041942240119112,
+     24.714210899302074,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24622585360402097,
+    -0.9610198387779748,
+    0.12575326056736186,
+    7.495230077245632,
+    -0.16853121450053635,
+    0.0853183547163298,
+    0.9819971520310246,
+    6.685045316107482,
+    -0.9544473080507149,
+    -0.2629863589571067,
+    -0.1409542320576135,
+    6.37885100037395,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t14_spacer",
+   "role": "check",
+   "name": "Upper O9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper O9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t14_arm",
+   "role": "check",
+   "name": "Upper O9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t14_guide",
+   "role": "check",
+   "name": "Upper O9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t14_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t14_pad",
+   "role": "check",
+   "name": "Upper O9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t14_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t14_head",
+   "role": "check",
+   "name": "Upper O9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t14_pack",
+   "role": "check",
+   "name": "Upper O9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t14_legs",
+   "role": "check",
+   "name": "Upper O9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t14_cloak",
+   "role": "part",
+   "name": "Upper O9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t14",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    0.00010645564128287272,
+    -0.9993619550596525,
+    0.03570334339766495,
+    12.969079604080836,
+    -8.250247992189186e-06,
+    0.035703322312787215,
+    0.999361975538465,
+    5.995884241542967,
+    -0.9999999849958849,
+    -0.00010669920100984407,
+    -4.460459617061283e-06,
+    6.408146181271206,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t14",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t14_cloak2",
+   "role": "check",
+   "name": "Upper O9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t14_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t15",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper P1",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper P1",
+   "at": [
+    560.0,
+    0,
+    -120.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24646645576601123,
+     -0.16799876022516635,
+     -0.954479539524298,
+     5.0091066177731305,
+     -0.9609943206332613,
+     0.08514903253664831,
+     -0.26313570245481965,
+     7.640800339985218,
+     0.12547943061507214,
+     0.9821032653096714,
+     -0.1404593233030816,
+     24.737914845768497,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.24623423678994116,
+    -0.9610341276104049,
+    0.12562363179123603,
+    7.5063451830137495,
+    -0.16853619354198524,
+    0.08518306617317091,
+    0.9820076023235598,
+    6.645816135161496,
+    -0.9544443972639197,
+    -0.26297611883507355,
+    -0.14099416788030583,
+    6.378830007968567,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t15_spacer",
+   "role": "check",
+   "name": "Upper P1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper P1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t15_arm",
+   "role": "check",
+   "name": "Upper P1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t15_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t15_guide",
+   "role": "check",
+   "name": "Upper P1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t15_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t15_pad",
+   "role": "check",
+   "name": "Upper P1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t15_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t15_head",
+   "role": "check",
+   "name": "Upper P1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t15",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t15_pack",
+   "role": "check",
+   "name": "Upper P1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t15",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t15_legs",
+   "role": "check",
+   "name": "Upper P1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t15",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t15_cloak",
+   "role": "part",
+   "name": "Upper P1 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t15",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    9.288738545152906e-05,
+    -0.999363123422136,
+    0.035697299106262875,
+    12.979268427060811,
+    -4.640147677463589e-05,
+    0.0356971531392573,
+    0.9993631619856441,
+    5.955038348677334,
+    -1.0000001276909813,
+    -9.463115109248657e-05,
+    -4.31974681401675e-05,
+    6.408231015414344,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t15",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t15_cloak2",
+   "role": "check",
+   "name": "Upper P1 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t15_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  },
+  {
+   "id": "t16",
+   "role": "host",
+   "name": "TN Mk7-8 - Upper Q9",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper Q9",
+   "at": [
+    0.0,
+    0,
+    -240.0
+   ],
+   "pose": {
+    "matrix": [
+     0.24644708644004762,
+     -0.16798243813193636,
+     -0.9544874751635136,
+     5.012177011728402,
+     -0.9609871275417272,
+     0.08524800572421956,
+     -0.26312833543235625,
+     7.643976716222136,
+     0.12556919273608097,
+     0.9820969075708719,
+     -0.14041979715764072,
+     24.737181692659266,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    0.2462149659120456,
+    -0.9610277696623902,
+    0.12571334422347452,
+    7.5081646627287455,
+    -0.16852002310046507,
+    0.08528227326831564,
+    0.9820023304578565,
+    6.645942125339262,
+    -0.9544521624052829,
+    -0.26296879167672677,
+    -0.14095466081207203,
+    6.378844999739557,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t16_spacer",
+   "role": "check",
+   "name": "Upper Q9 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk7-8 Builder/Mk7-8/Chests/TN Mk7-8 - Upper Q9",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t16_arm",
+   "role": "check",
+   "name": "Upper Q9 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t16_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t16_guide",
+   "role": "check",
+   "name": "Upper Q9 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t16_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t16_pad",
+   "role": "check",
+   "name": "Upper Q9 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t16_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t16_head",
+   "role": "check",
+   "name": "Upper Q9 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t16",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t16_pack",
+   "role": "check",
+   "name": "Upper Q9 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t16",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t16_legs",
+   "role": "check",
+   "name": "Upper Q9 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t16",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t16_cloak",
+   "role": "part",
+   "name": "Upper Q9 Cloak (circles)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Cloaks/Cloaks/CyberBrush Bug Hunters - Cloak 1",
+   "parent": "t16",
+   "on": "Cloak",
+   "pose": {
+    "fit": "Cloak"
+   },
+   "joint": "Cloak on the Cloak socket",
+   "on_matrix": [
+    8.831400425974242e-05,
+    -0.9993629672018406,
+    0.03568053816535466,
+    12.981358193631028,
+    -5.481223902267926e-06,
+    0.03568051263225207,
+    0.9993629850719888,
+    5.958802412373245,
+    -0.9999999883745595,
+    -8.847905167053222e-05,
+    -2.351475669450055e-06,
+    6.408302779866589,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "write": {
+    "host": "t16",
+    "socket": "Cloak",
+    "half": "socket"
+   },
+   "note": "starts on this torso's backpack socket as on Torso 2; move it to sit right on this torso (every cloak follows)"
+  },
+  {
+   "id": "t16_cloak2",
+   "role": "check",
+   "name": "Upper Q9 Cloak (no circles)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/Cloaks/Marta 49 March 2026 - Cloak 2",
+   "parent": "t16_cloak",
+   "on": "Cloak pivot",
+   "on_matrix": [
+    1.0000000000051885,
+    0.0005617359747755203,
+    0.0004037730350261185,
+    -0.008610313496011025,
+    -0.00053173252690532,
+    0.9973462346877139,
+    -0.07279963284114502,
+    -4.2411517818460505,
+    -0.00044466888988716364,
+    0.07279985635317153,
+    0.9973461750507088,
+    11.37475953928505,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Cloak"
+   },
+   "collection": "NO-CIRCLES CLOAK (rides on the circles one; hide to see)"
+  }
+ ]
+}
