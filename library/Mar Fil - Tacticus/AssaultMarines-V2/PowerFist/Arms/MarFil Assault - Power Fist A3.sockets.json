@@ -30,18 +30,18 @@
  ],
  "fits": {
   "Shoulder R": [
-   0.999981,
-   -0.002108,
-   -0.005599,
-   0.00166,
-   0.002116,
-   0.999997,
-   0.00118,
-   -0.015676,
-   0.005596,
-   -0.001191,
-   0.999984,
-   -0.022565,
+   0.9999812915139803,
+   -0.0027302866594402617,
+   -0.005392459806646572,
+   0.0013991270702717884,
+   0.0027369390528984953,
+   0.9999954576895187,
+   0.0009626652613563078,
+   -0.02023086328434137,
+   0.005389502232986526,
+   -0.0009764342542021892,
+   0.9999843212709855,
+   -0.02570152159947625,
    0.0,
    0.0,
    0.0,
@@ -105,18 +105,18 @@
     ],
     "fits": {
      "Shoulder L": [
-      0.999981,
-      0.002108,
-      0.005599,
-      -0.00166,
-      -0.002116,
-      0.999997,
-      0.00118,
-      -0.015676,
-      -0.005596,
-      -0.001191,
-      0.999984,
-      -0.022565,
+      0.9999812915139803,
+      0.0027302866594402617,
+      0.005392459806646572,
+      -0.0013991270702717884,
+      -0.0027369390528984953,
+      0.9999954576895187,
+      0.0009626652613563078,
+      -0.02023086328434137,
+      -0.005389502232986526,
+      -0.0009764342542021892,
+      0.9999843212709855,
+      -0.02570152159947625,
       0.0,
       0.0,
       0.0,
@@ -147,8 +147,11 @@
      "by": "origins.py Nov 15"
     },
     "notes": {
-     "Shoulder L": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 100% on), write_joints Nov 20 (mirrored)"
-    }
+     "Shoulder L": "Josh's fix in batch '03 Stage 3 - Mar Fil Power Fists, Outrider and Techmarine arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25)"
+    },
+    "exact": [
+     "Shoulder L"
+    ]
    },
    "title": "MarFil Assault - Power Fist A3 L"
   }
@@ -159,7 +162,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\PowerFist\\Arms\\166-PowerFist-A-3.stl"
  },
  "notes": {
-  "Shoulder R": "cut Assault Arm Shoulder disc, sure (0.0003 mm, 100% on), write_joints Nov 20"
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - Mar Fil Power Fists, Outrider and Techmarine arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -182,5 +185,8 @@
   ],
   "joint": "Shoulder R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Shoulder R"
+ ]
 }

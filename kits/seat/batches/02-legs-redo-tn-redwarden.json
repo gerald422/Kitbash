@@ -1,0 +1,423 @@
+{
+ "name": "TN and Redwarden legs redo",
+ "stage": "2 (the Waist on TN / Redwarden torsos, redone)",
+ "out": "~/Desktop/mar fil connectors/batches/02 Stage 2 - TN and Redwarden legs redo (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Move each torso's legs so they sit right on the torso and stand flat on the floor, as on Torso 2 (left, locked). The TN move is carried to every TN torso; Redwarden's stays its own.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "t1",
+   "role": "host",
+   "name": "TN Mk2 - Upper A1",
+   "rel": "Turtle Ninja - Heresy/Mk2-6 Builder/Mk2/Chests/TN Mk2 - Upper A1",
+   "at": [
+    80.0,
+    0,
+    0
+   ],
+   "pose": {
+    "matrix": [
+     -0.000147,
+     -0.000103,
+     -1.0,
+     6.43305,
+     -0.999999,
+     -0.001192,
+     0.000147,
+     8.078609,
+     -0.001192,
+     0.999999,
+     -0.000102,
+     21.612293,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -0.00014687834934537362,
+    -0.999999557525615,
+    -0.0011920157930563086,
+    7.006899504681275,
+    -0.00010217517789185118,
+    -0.001191985658039824,
+    0.999999568628621,
+    9.989370571645136,
+    -0.9999999678848391,
+    0.00014712270947904346,
+    -0.00010282472924716866,
+    6.378910145025086,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t1_spacer",
+   "role": "check",
+   "name": "Upper A1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Turtle Ninja - Heresy/Mk2-6 Builder/Mk2/Chests/TN Mk2 - Upper A1",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t1_arm",
+   "role": "check",
+   "name": "Upper A1 Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t1_guide",
+   "role": "check",
+   "name": "Upper A1 Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t1_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t1_pad",
+   "role": "check",
+   "name": "Upper A1 Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t1_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t1_head",
+   "role": "check",
+   "name": "Upper A1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t1_pack",
+   "role": "check",
+   "name": "Upper A1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t1_legs",
+   "role": "part",
+   "name": "Upper A1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   },
+   "joint": "Legs on the Waist",
+   "write": {
+    "host": "t1",
+    "socket": "Waist",
+    "half": "socket",
+    "redo": true
+   },
+   "note": "starts at its written seat (your TN legs change); move it so the legs sit right AND stand flat on the floor"
+  },
+  {
+   "id": "t2",
+   "role": "host",
+   "name": "Redwarden Techmarine - Prime Techmarine Torso (Flat Bottom)",
+   "rel": "Redwarden - Tacticus/Techmarine Conversion Kit/Chests/Redwarden Techmarine - Prime Techmarine Torso (Flat Bottom)",
+   "at": [
+    160.0,
+    0,
+    0
+   ],
+   "pose": {
+    "matrix": [
+     -1.0,
+     -0.0,
+     0.0,
+     0.0,
+     0.0,
+     -1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "mirror_frame": [
+    -1.0,
+    0.0,
+    0.0,
+    -0.00194300000000025,
+    0.0,
+    -1.0,
+    0.0,
+    0.046465009353021225,
+    0.0,
+    0.0,
+    1.0,
+    13.682067892741536,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t2_spacer",
+   "role": "check",
+   "name": "Prime Techmarine Torso (Flat B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Redwarden - Tacticus/Techmarine Conversion Kit/Chests/Redwarden Techmarine - Prime Techmarine Torso (Flat Bottom)",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t2_arm",
+   "role": "check",
+   "name": "Prime Techmarine Torso (Flat B Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "t2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t2_guide",
+   "role": "check",
+   "name": "Prime Techmarine Torso (Flat B Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "t2_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "t2_pad",
+   "role": "check",
+   "name": "Prime Techmarine Torso (Flat B Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t2_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t2_head",
+   "role": "check",
+   "name": "Prime Techmarine Torso (Flat B Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "t2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "t2_pack",
+   "role": "check",
+   "name": "Prime Techmarine Torso (Flat B Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "t2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "t2_legs",
+   "role": "part",
+   "name": "Prime Techmarine Torso (Flat B Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "t2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   },
+   "joint": "Legs on the Waist",
+   "write": {
+    "host": "t2",
+    "socket": "Waist",
+    "half": "socket",
+    "redo": true
+   },
+   "note": "starts at its written seat (your TN legs change); move it so the legs sit right AND stand flat on the floor"
+  }
+ ]
+}

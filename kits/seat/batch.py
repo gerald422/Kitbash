@@ -490,8 +490,20 @@ def write(A):
             a.setdefault("sockets", []).extend(b.get("sockets") or []); a.setdefault("fits", {}).update(b.get("fits") or {})
             a.setdefault("exact", []).extend(b.get("exact") or []); a.setdefault("notes", {}).update(b.get("notes") or {})
         if "variants" in n: n["variants"] = list(vs.values())
+    redo = {}                                        # Josh redoing his own written socket (Nov 25, the TN legs; notes 142):
+    for e in spec["objects"]:                        # only a write marked "redo" in the spec may replace a kb_josh socket
+        w = e.get("write") or {}
+        if w.get("redo") and e["id"] in objs: redo.setdefault(entry(spec, w["host"])["rel"], set()).add(w["socket"])
     for rel, n in new.items():
-        merged, kept = SC.merge(n, olds[rel][0])
+        base = olds[rel][0]
+        if rel in redo:
+            base = json.loads(json.dumps(base))
+            for s in base.get("sockets") or []:
+                p = s.get("props") or {}
+                if s.get("type") in redo[rel] and p.get("kb_josh"):
+                    W.append("%-24s socket %-10s redo: Josh's earlier fix (%s) replaced" % (os.path.basename(rel)[-24:], s["type"], p["kb_josh"]))
+                    del p["kb_josh"]
+        merged, kept = SC.merge(n, base)
         if kept: raise SystemExit("%s: already Josh's / protected, not written (Rule 1): %s" % (rel, kept))
         p = [x for x in SC.problems(merged, types) if x not in SC.problems(olds[rel][0], types)]   # only new problems
         if p: raise SystemExit("%s: %s" % (rel, p))
