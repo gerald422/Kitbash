@@ -5,18 +5,18 @@
  "sockets": [],
  "fits": {
   "Shoulder R": [
-   -0.091059,
-   -0.715211,
-   -0.692973,
-   18.776806,
-   0.634453,
-   -0.578028,
-   0.513208,
-   -28.217798,
-   -0.767587,
-   -0.392915,
-   0.506387,
-   29.388468,
+   -0.09161280182615564,
+   -0.7149332067699313,
+   -0.6931875826873858,
+   19.12018753989429,
+   0.6345601914128213,
+   -0.5783886603832383,
+   0.5126683256485677,
+   -28.21692386583875,
+   -0.7674314640073694,
+   -0.39289033215678,
+   0.5066397504682536,
+   29.893673522648328,
    0.0,
    0.0,
    0.0,
@@ -27,7 +27,8 @@
   "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
   "Pad": "pad built in",
   "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket",
-  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh",
+  "Shoulder R": "Josh's fix in batch '03 Stage 3 - BBoosty right arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25)"
  },
  "noPad": true,
  "noHand": true,
@@ -36,5 +37,8 @@
   "folder": "Arms",
   "path": "BBoosty - Heresy\\Praetor with Paragon Blade\\Arms\\LArm_ParagonBlade_Gear_ShoulderBolts_RightVersion.stl"
  },
- "scale": 1.1
+ "scale": 1.1,
+ "exact": [
+  "Shoulder R"
+ ]
 }

@@ -34,18 +34,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   -0.981493,
-   -0.191468,
-   0.006465,
-   -2.956579,
-   0.191469,
-   -0.981514,
-   -0.000531,
-   4.317387,
-   0.006447,
-   0.000717,
-   0.999979,
-   -12.619077,
+   -0.9814321869468643,
+   -0.19174806917339265,
+   0.007381548679370886,
+   -3.2819993199847746,
+   0.19174826147044446,
+   -0.9814591080400427,
+   -0.0007473436673961243,
+   4.314555906153858,
+   0.00738800720794964,
+   0.0006824700568468586,
+   0.9999710891965102,
+   -12.094087027926612,
    0.0,
    0.0,
    0.0,
@@ -56,7 +56,8 @@
   "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
   "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
   "Hand": "hand built in (holding its weapon, a shield grip or a claw): no wrist socket",
-  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - BBoosty left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "noPad": false,
  "noHand": true,
@@ -65,5 +66,8 @@
   "folder": "Arms",
   "path": "BBoosty - Heresy\\Medusas Mortals\\Arms for connecting ranged weapon with shield_ Also can be used with melee\\Arms\\LArm2_Sh.stl"
  },
- "scale": 1.1
+ "scale": 1.1,
+ "exact": [
+  "Shoulder L"
+ ]
 }

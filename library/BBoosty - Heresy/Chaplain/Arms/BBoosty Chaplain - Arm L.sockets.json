@@ -61,18 +61,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   -0.975848,
-   0.218518,
-   7.6e-05,
-   -3.026815,
-   -0.218518,
-   -0.975848,
-   1e-05,
-   -1.655424,
-   7.6e-05,
-   -7e-06,
-   1.0,
-   -4.894912,
+   -0.9759103010599913,
+   0.21823883141151662,
+   0.000992723557587686,
+   -3.3469010214563504,
+   -0.21823886641982135,
+   -0.975910207629292,
+   -0.0002045211193062129,
+   -1.659890104465745,
+   0.0009240797169744637,
+   -0.00041627446476642,
+   0.9999980637029718,
+   -4.371150611196999,
    0.0,
    0.0,
    0.0,
@@ -83,7 +83,8 @@
   "Shoulder": "BBoosty arms come in the model's own axes: the round flat shoulder face on the heresy shoulder point (Josh's HeresyArms_r, as Springles), square to the side, turned 180 deg (BBoosty front = -Y)",
   "Hand": "ball socket at the wrist (r 1.65)",
   "Pad": "Pad anchor on the shoulder dome: Mar Fil pads sit as on the heresy arms, this maker's pads with their shell on the dome",
-  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - BBoosty left arms (2026-11-25 c)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "noPad": false,
  "original": {
@@ -91,5 +92,8 @@
   "folder": "Arms",
   "path": "BBoosty - Heresy\\Chaplain\\Arms\\LArm.stl"
  },
- "scale": 1.1
+ "scale": 1.1,
+ "exact": [
+  "Shoulder L"
+ ]
 }
