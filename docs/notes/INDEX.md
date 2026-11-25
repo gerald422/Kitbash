@@ -172,3 +172,4 @@ Add a new entry as the next number and append its line here.
 | `164-two-armed-weapons-start.md` | Nov 25 | Skull Paragon Blade R written (every plain arm done); two-armed weapons: 241 in scope, `make_arm_batch.py --two`, batch 1 = 24 Mar Fil Assault melee |
 | `165-two-armed-josh-move-veteran-batch.md` | Nov 25 | Two-armed: Josh's 0.23 mm back-in move carried to all 24 Assault melee (b file); batch 2 = 40 Mar Fil Veteran guns and heavy with it pre-set (shift 0.09) |
 | `166-two-armed-marfil-rest.md` | Nov 25 | Two-armed: the last 105 Mar Fil in two files (Intercessor bolters and heavy 76, Blade Squad and Techmarine melee 29), Josh's move pre-set |
+| `167-two-armed-marta-tn-cyberbrush.md` | Nov 25 | Two-armed: Marta 36, Turtle Ninja 28, CyberBrush 8 in three files (0.32 mm only); `--two` takes the not_arms parts; TN stays unscaled (Josh) |

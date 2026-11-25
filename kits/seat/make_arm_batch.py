@@ -56,6 +56,7 @@ def main(A):
     objs += checks("ref", "REF ")
     skip = {l.split(" | ")[0].strip() for l in open(os.path.join(HERE, "not_arms.txt"), encoding="utf-8")
             if l.strip() and not l.startswith("#")}       # Josh: not arms, for the weapons stage (notes 151)
+    if two: skip = set()                            # two-armed: not_arms.txt holds exactly these (notes 167)
     for r in [r for r in arms if r in skip]: log.append("%-34s left out: not an arm (not_arms.txt), for the weapons stage" % os.path.basename(r))
     arms = [r for r in arms if r not in skip]
     for k, rel in enumerate(arms, 1):
