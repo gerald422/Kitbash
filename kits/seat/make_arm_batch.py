@@ -7,6 +7,10 @@
   the right version itself by mirroring (mirror_for_side), so nothing more is written.
   --shift X,Y,Z: a repeated move of Josh's, in Torso 2's own axes (mm), put on every arm's start and shown in its note
   (Nov 25: his Marta arm change, 0.32 mm outward, notes 150-152)
+  --two: two-armed weapons (docs/PLAN.md stage 3, Nov 25): both arms and the weapon in one piece, seated by its right
+  shoulder on the spacer. No live mirror of the part (it would sit on the weapon's own left arm; the left spacer shows
+  where that shoulder should land), and the head is faint. The write is the same: its Shoulder R fit; TIOW mirrors it
+  for the left-handed version.
   BL = blender --background --factory-startup --python
 
 Each column is Torso 2 (locked, as written), the spacer on its Shoulder R socket (locked; the left side its mirror),
@@ -35,7 +39,7 @@ def old(rel, key, typ):
 
 
 def main(A):
-    left = "--left" in A; A = [a for a in A if a != "--left"]
+    left = "--left" in A; two = "--two" in A; A = [a for a in A if a not in ("--left", "--two")]
     T = np.eye(4)
     if "--shift" in A:
         k = A.index("--shift"); T[:3, 3] = [float(x) for x in A[k + 1].split(",")]; A = A[:k] + A[k + 2:]
@@ -79,7 +83,13 @@ def main(A):
             objs[-1]["note"] = "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left)"
         if left and wrong: objs[-1]["note"] = "a left sculpt that was filed with a right fit: its mirror image, at that old seat; set its depth and turn"
         if T[:3, 3].any(): objs[-1]["note"] += "; your repeated move (%.2f, %.2f, %.2f mm) is already on it" % tuple(T[:3, 3])
+        if two:
+            objs[-1]["mirror"] = False
+            objs[-1]["note"] = objs[-1]["note"].replace("set its depth on the spacer and its turn", "set its depth on the spacer and its turn so both arms meet the shoulders (the left spacer shows where the left one lands)")
         objs += checks(tid, short + " ")
+        if two:
+            for o in objs[-len(MT.PIECES):]:
+                if o["id"].endswith("_head"): o["role"] = "neighbour"
     spec = {"name": name, "stage": "3 (arms on the spacer)", "out": blend_out, "sources": MT.SRC,
             "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
             "objects": objs}
