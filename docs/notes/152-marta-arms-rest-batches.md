@@ -41,3 +41,21 @@ Josh: "belive i made one or two changes on right arm the rest on right and left 
 was built (0.0000 mm), and nothing was removed. His "one or two changes" are not in it, so they are probably unsaved
 in his Blender. A write would lock the fits as exact (Rule 1), so it waits until he has saved, or he confirms there
 are none.
+
+**Right arms: written.** Josh: "It's saved and closed if there are no changes that's fine go ahead and write it".
+
+What happened before that:
+- His save at 15:06 went to the left-arms file, which was still open; it was unchanged.
+- The right-arms file was last saved at 15:02, also unchanged.
+- His "one or two changes" were in neither file. He confirmed writing as it is.
+
+**Written:**
+- The Shoulder R fit of all 79 right arms, with the 0.32 mm pre-set.
+- 80 sidecars, with Torso 2 unchanged.
+- Every joint read back at 0.0000 mm.
+- Backup: `_backups\batch write 2026-11-25 1511`.
+- The right file, its .blend1 and the re-saved left file went to the Recycle Bin.
+
+**Every Marta plain arm is now on the spacer:** 106 right (27 + 79) and 60 left. DW Weapon T Ua 1 is on
+`not_arms.txt` for the weapons stage. Ua 2 and Ua 3 were written as arms. Josh didn't remove them, so they stay
+unless he says otherwise.
