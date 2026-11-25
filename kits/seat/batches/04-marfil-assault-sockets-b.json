@@ -1,0 +1,4244 @@
+{
+ "name": "Stage 4 - Mar Fil Assault arms: Pad R (guide, from your pad spot cut) and Hand R (Chain Sword 1 R; faint = the wrist cut's start)",
+ "stage": "4 (arms' sockets)",
+ "out": "~/Desktop/mar fil connectors/batches/04 Stage 4 - Mar Fil Assault arm sockets (2026-11-25 b).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each column: move the guide (Pad R) and the chain sword (Hand R) on the locked arm. The first two columns are the references (Arm 2B R with its guide and pad, Arm 2A R with its sword), locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a1",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 2A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a1_spacer",
+   "role": "check",
+   "name": "Assault - Arm 2A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a1_arm",
+   "role": "check",
+   "name": "REF Assault - Arm 2A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2A R",
+   "parent": "a1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a1_guide",
+   "role": "check",
+   "name": "REF Assault - Arm 2A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a1_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9392963002233826,
+    -0.09122363503110105,
+    0.33075799039016646,
+    2.6333044654506383,
+    -0.0007118266846345596,
+    0.9634872559965865,
+    0.2677529638509152,
+    1.2604707617229018,
+    -0.34310652686448617,
+    -0.2517347553289141,
+    0.9049350449495558,
+    3.880523237961841,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   }
+  },
+  {
+   "id": "a1_pad",
+   "role": "check",
+   "name": "REF Assault - Arm 2A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a1_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a1_hand",
+   "role": "check",
+   "name": "REF Assault - Arm 2A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a1_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.649776,
+    -0.743914,
+    0.156149,
+    8.451636,
+    0.115721,
+    0.106219,
+    0.987586,
+    -0.73201,
+    -0.751265,
+    0.65978,
+    0.017068,
+    -8.229206,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   }
+  },
+  {
+   "id": "a1_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 2A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a1_pack",
+   "role": "check",
+   "name": "Assault - Arm 2A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a1_legs",
+   "role": "check",
+   "name": "Assault - Arm 2A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a2",
+   "role": "host",
+   "name": "Torso 2 for Assault - A Rm 3B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a2_spacer",
+   "role": "check",
+   "name": "Assault - A Rm 3B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a2_arm",
+   "role": "check",
+   "name": "Assault - A Rm 3B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - A Rm 3B R",
+   "parent": "a2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a2_guide",
+   "role": "part",
+   "name": "Assault - A Rm 3B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a2_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9436010575960876,
+    -0.0890280377897953,
+    0.31888656954903527,
+    2.643549038752141,
+    0.0006345080098048768,
+    0.9636514239178924,
+    0.2671589527721125,
+    1.2574327874286562,
+    -0.3310820041636169,
+    -0.25189056302944224,
+    0.9093606798206162,
+    3.9061426802481525,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.290 mm (no match: placed by the torso, by eye); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a2_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a2_pad",
+   "role": "check",
+   "name": "Assault - A Rm 3B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a2_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a2_hand",
+   "role": "part",
+   "name": "Assault - A Rm 3B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a2_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.195222,
+    -0.817488,
+    -0.541851,
+    10.119729,
+    0.911389,
+    -0.355302,
+    0.207679,
+    4.83956,
+    -0.362295,
+    -0.453293,
+    0.814412,
+    4.456231,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.290 mm (no match: placed by the torso, by eye); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a2_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a2_head",
+   "role": "neighbour",
+   "name": "Assault - A Rm 3B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a2_pack",
+   "role": "check",
+   "name": "Assault - A Rm 3B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a2_legs",
+   "role": "check",
+   "name": "Assault - A Rm 3B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a3",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 1A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a3_spacer",
+   "role": "check",
+   "name": "Assault - Arm 1A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a3_arm",
+   "role": "check",
+   "name": "Assault - Arm 1A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 1A R",
+   "parent": "a3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a3_guide",
+   "role": "part",
+   "name": "Assault - Arm 1A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a3_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9804092048833948,
+    -0.033957617392137,
+    0.1940227195785655,
+    2.716114751469849,
+    -0.04863422703759704,
+    0.9127965532934986,
+    0.40550835747403413,
+    1.2499370534948646,
+    -0.1908733559927491,
+    -0.4070002009989361,
+    0.8932626096181312,
+    3.9584313561439517,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.056 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.22 mm)]",
+   "write": {
+    "host": "a3_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a3_pad",
+   "role": "check",
+   "name": "Assault - Arm 1A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a3_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a3_hand",
+   "role": "part",
+   "name": "Assault - Arm 1A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a3_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.375252,
+    -0.760784,
+    0.529522,
+    8.976725,
+    0.150173,
+    0.513823,
+    0.844651,
+    -5.917354,
+    -0.914677,
+    0.396477,
+    -0.078563,
+    -5.618283,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.056 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.22 mm)]",
+   "write": {
+    "host": "a3_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a3_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 1A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a3_pack",
+   "role": "check",
+   "name": "Assault - Arm 1A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a3_legs",
+   "role": "check",
+   "name": "Assault - Arm 1A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a4",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 1B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a4_spacer",
+   "role": "check",
+   "name": "Assault - Arm 1B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a4_arm",
+   "role": "check",
+   "name": "Assault - Arm 1B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 1B R",
+   "parent": "a4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a4_guide",
+   "role": "part",
+   "name": "Assault - Arm 1B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a4_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9804096512365592,
+    -0.03399391519359678,
+    0.1940141077452358,
+    2.716014539620229,
+    -0.0486058685167291,
+    0.9127791665584529,
+    0.4055508924556189,
+    1.25009163346507,
+    -0.19087828686238473,
+    -0.40703616291833145,
+    0.8932451696259036,
+    3.9584258297143515,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.056 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.17 mm)]",
+   "write": {
+    "host": "a4_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a4_pad",
+   "role": "check",
+   "name": "Assault - Arm 1B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a4_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a4_hand",
+   "role": "part",
+   "name": "Assault - Arm 1B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a4_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.494461,
+    -0.772331,
+    0.398764,
+    9.005953,
+    -0.080477,
+    0.49748,
+    0.863734,
+    -5.975535,
+    -0.865466,
+    0.394992,
+    -0.308139,
+    -5.61812,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.056 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.17 mm)]",
+   "write": {
+    "host": "a4_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a4_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 1B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a4_pack",
+   "role": "check",
+   "name": "Assault - Arm 1B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a4_legs",
+   "role": "check",
+   "name": "Assault - Arm 1B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a5",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 3A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a5_spacer",
+   "role": "check",
+   "name": "Assault - Arm 3A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a5_arm",
+   "role": "check",
+   "name": "Assault - Arm 3A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 3A R",
+   "parent": "a5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a5_guide",
+   "role": "part",
+   "name": "Assault - Arm 3A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a5_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9461488640133106,
+    -0.08605087753273381,
+    0.3120824166969338,
+    2.6161940305435984,
+    -0.0002895384592891723,
+    0.9638002900474113,
+    0.2666253514154999,
+    1.2730376530622913,
+    -0.3237291293202815,
+    -0.25235813098034504,
+    0.9118750605412065,
+    3.8617678036566265,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.291 mm (no match: placed by the torso, by eye); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a5_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a5_pad",
+   "role": "check",
+   "name": "Assault - Arm 3A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a5_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a5_hand",
+   "role": "part",
+   "name": "Assault - Arm 3A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a5_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.087645,
+    -0.806566,
+    -0.584611,
+    10.064502,
+    0.859197,
+    -0.358182,
+    0.365358,
+    4.871685,
+    -0.504083,
+    -0.470274,
+    0.724392,
+    4.386428,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.291 mm (no match: placed by the torso, by eye); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a5_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a5_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 3A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a5_pack",
+   "role": "check",
+   "name": "Assault - Arm 3A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a5_legs",
+   "role": "check",
+   "name": "Assault - Arm 3A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a6",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 4A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a6_spacer",
+   "role": "check",
+   "name": "Assault - Arm 4A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a6_arm",
+   "role": "check",
+   "name": "Assault - Arm 4A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 4A R",
+   "parent": "a6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a6_guide",
+   "role": "part",
+   "name": "Assault - Arm 4A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a6_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9534276774770785,
+    -0.2524247411250589,
+    0.1650940045830847,
+    2.2194887116100452,
+    0.17190864339467718,
+    0.9045312256549256,
+    0.390219418660626,
+    0.9501615596293806,
+    -0.24783480545732273,
+    -0.34366521702315145,
+    0.9058003563833915,
+    3.552323691585548,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.066 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a6_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a6_pad",
+   "role": "check",
+   "name": "Assault - Arm 4A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a6_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a6_hand",
+   "role": "part",
+   "name": "Assault - Arm 4A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a6_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.536072,
+    -0.40693,
+    -0.739619,
+    5.811752,
+    -0.293865,
+    -0.73139,
+    0.615395,
+    6.283789,
+    -0.791373,
+    0.547245,
+    0.272496,
+    -7.282653,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.066 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a6_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a6_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 4A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a6_pack",
+   "role": "check",
+   "name": "Assault - Arm 4A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a6_legs",
+   "role": "check",
+   "name": "Assault - Arm 4A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a7",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 4B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a7_spacer",
+   "role": "check",
+   "name": "Assault - Arm 4B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a7_arm",
+   "role": "check",
+   "name": "Assault - Arm 4B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 4B R",
+   "parent": "a7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a7_guide",
+   "role": "part",
+   "name": "Assault - Arm 4B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a7_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9552681967878419,
+    -0.24949287164583647,
+    0.15879581776959392,
+    2.195384736479968,
+    0.17050933954791475,
+    0.903345976103519,
+    0.393563821817949,
+    0.9614006819050029,
+    -0.24163892985240631,
+    -0.3488827676342252,
+    0.9054785142954441,
+    3.524928097220963,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.066 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (0.21 mm)]",
+   "write": {
+    "host": "a7_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a7_pad",
+   "role": "check",
+   "name": "Assault - Arm 4B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a7_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a7_hand",
+   "role": "part",
+   "name": "Assault - Arm 4B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a7_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.471974,
+    -0.405538,
+    -0.782802,
+    5.884431,
+    -0.341371,
+    -0.734589,
+    0.586383,
+    6.316998,
+    -0.812838,
+    0.543985,
+    0.208268,
+    -7.306184,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.066 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (0.21 mm)]",
+   "write": {
+    "host": "a7_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a7_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 4B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a7_pack",
+   "role": "check",
+   "name": "Assault - Arm 4B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a7_legs",
+   "role": "check",
+   "name": "Assault - Arm 4B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a8",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 5A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a8_spacer",
+   "role": "check",
+   "name": "Assault - Arm 5A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a8_arm",
+   "role": "check",
+   "name": "Assault - Arm 5A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 5A R",
+   "parent": "a8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a8_guide",
+   "role": "part",
+   "name": "Assault - Arm 5A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a8_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9663203421599045,
+    -0.2514923661645028,
+    0.05455928526627468,
+    1.815787908078695,
+    0.20370452079527632,
+    0.8770765495052522,
+    0.43501847420569817,
+    0.860963722957431,
+    -0.1572564772055542,
+    -0.4092531577954709,
+    0.8987670137064028,
+    2.8662970193578596,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.089 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a8_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a8_pad",
+   "role": "check",
+   "name": "Assault - Arm 5A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a8_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a8_hand",
+   "role": "part",
+   "name": "Assault - Arm 5A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a8_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.753188,
+    0.267084,
+    -0.601144,
+    2.16654,
+    -0.372221,
+    -0.92653,
+    0.054713,
+    7.507089,
+    -0.542365,
+    0.264968,
+    0.797266,
+    -5.197548,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.089 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a8_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a8_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 5A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a8_pack",
+   "role": "check",
+   "name": "Assault - Arm 5A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a8_legs",
+   "role": "check",
+   "name": "Assault - Arm 5A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a9",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 5B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a9_spacer",
+   "role": "check",
+   "name": "Assault - Arm 5B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a9_arm",
+   "role": "check",
+   "name": "Assault - Arm 5B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 5B R",
+   "parent": "a9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a9_guide",
+   "role": "part",
+   "name": "Assault - Arm 5B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a9_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9661441607579156,
+    -0.25187298983711626,
+    0.05590695095337017,
+    1.818029129827679,
+    0.20358192617103996,
+    0.8773543331489349,
+    0.43451542175400604,
+    0.8677543363572799,
+    -0.1584928864569369,
+    -0.40842282280979636,
+    0.8989275246251972,
+    2.86846993658763,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.089 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a9_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a9_pad",
+   "role": "check",
+   "name": "Assault - Arm 5B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a9_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a9_hand",
+   "role": "part",
+   "name": "Assault - Arm 5B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a9_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.754729,
+    0.266515,
+    -0.59946,
+    2.170668,
+    -0.372613,
+    -0.926214,
+    0.057338,
+    7.57357,
+    -0.539947,
+    0.266643,
+    0.798348,
+    -5.180271,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.089 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a9_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a9_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 5B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a9_pack",
+   "role": "check",
+   "name": "Assault - Arm 5B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a9_legs",
+   "role": "check",
+   "name": "Assault - Arm 5B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a10",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 6A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a10_spacer",
+   "role": "check",
+   "name": "Assault - Arm 6A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a10_arm",
+   "role": "check",
+   "name": "Assault - Arm 6A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 6A R",
+   "parent": "a10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a10_guide",
+   "role": "part",
+   "name": "Assault - Arm 6A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a10_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9734479408896831,
+    -0.21924770614677558,
+    0.06578683311649267,
+    1.9457875151989952,
+    0.1632873835365952,
+    0.866521190813205,
+    0.47167525436996227,
+    0.9537258182141126,
+    -0.160420144903532,
+    -0.4484098099206223,
+    0.8793151631105242,
+    2.862113335011566,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.069 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a10_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a10_pad",
+   "role": "check",
+   "name": "Assault - Arm 6A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a10_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a10_hand",
+   "role": "part",
+   "name": "Assault - Arm 6A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a10_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.637658689,
+    -0.021593106,
+    -0.770016321,
+    4.514081484,
+    -0.381122336,
+    -0.859845137,
+    0.339723573,
+    6.386377312,
+    -0.669430476,
+    0.510098106,
+    0.540058108,
+    -6.524647612,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.069 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a10_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a10_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 6A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a10_pack",
+   "role": "check",
+   "name": "Assault - Arm 6A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a10_legs",
+   "role": "check",
+   "name": "Assault - Arm 6A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a11",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 6B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a11_spacer",
+   "role": "check",
+   "name": "Assault - Arm 6B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a11_arm",
+   "role": "check",
+   "name": "Assault - Arm 6B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 6B R",
+   "parent": "a11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a11_guide",
+   "role": "part",
+   "name": "Assault - Arm 6B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a11_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9728277059651863,
+    -0.22100582894877896,
+    0.0690131262425735,
+    1.9565211408262777,
+    0.16294675983347057,
+    0.8652913413994583,
+    0.4740454906572452,
+    0.957594733590059,
+    -0.16448326071018676,
+    -0.44991904734785315,
+    0.8777915439496458,
+    2.892930633295774,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.069 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (0.22 mm)]",
+   "write": {
+    "host": "a11_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a11_pad",
+   "role": "check",
+   "name": "Assault - Arm 6B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a11_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a11_hand",
+   "role": "part",
+   "name": "Assault - Arm 6B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a11_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.874144,
+    -0.098077,
+    -0.47566,
+    4.473521,
+    -0.155732,
+    -0.871076,
+    0.465805,
+    6.281929,
+    -0.460021,
+    0.481258,
+    0.746172,
+    -6.416384,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.069 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (0.22 mm)]",
+   "write": {
+    "host": "a11_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a11_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 6B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a11_pack",
+   "role": "check",
+   "name": "Assault - Arm 6B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a11_legs",
+   "role": "check",
+   "name": "Assault - Arm 6B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a12",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 7A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a12_spacer",
+   "role": "check",
+   "name": "Assault - Arm 7A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a12_arm",
+   "role": "check",
+   "name": "Assault - Arm 7A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 7A R",
+   "parent": "a12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a12_guide",
+   "role": "part",
+   "name": "Assault - Arm 7A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a12_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9578566957977193,
+    0.020708132940795508,
+    0.2864996625294833,
+    2.643861058363501,
+    -0.09102796767956835,
+    0.9678752882956143,
+    0.23437366696801046,
+    1.3957184132110432,
+    -0.2724432893018324,
+    -0.2505752230089955,
+    0.9289705528980899,
+    3.8368703603287897,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.027 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.078 mm (0.2 mm 21 deg from the old)]",
+   "write": {
+    "host": "a12_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a12_pad",
+   "role": "check",
+   "name": "Assault - Arm 7A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a12_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a12_hand",
+   "role": "part",
+   "name": "Assault - Arm 7A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a12_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.593846,
+    -0.766582,
+    0.244335,
+    8.31276,
+    0.501805,
+    -0.115503,
+    0.857235,
+    -0.182588,
+    -0.62892,
+    0.631674,
+    0.453266,
+    -7.335466,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.027 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.078 mm (0.2 mm 21 deg from the old)]",
+   "write": {
+    "host": "a12_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a12_handcut",
+   "role": "neighbour",
+   "name": "Assault - Arm 7A R Chain Sword 1 R (wrist cut start, compare)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a12_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.6081631046243309,
+    -0.7908464062516581,
+    0.06854969127742781,
+    8.37170146991467,
+    0.17034872331812886,
+    -0.045678559256094514,
+    0.9843244827791412,
+    -0.28195537671423,
+    -0.7753181610665237,
+    0.6103077868585058,
+    0.16249980507172915,
+    -7.5437373581527645,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Hand R"
+   }
+  },
+  {
+   "id": "a12_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 7A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a12_pack",
+   "role": "check",
+   "name": "Assault - Arm 7A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a12_legs",
+   "role": "check",
+   "name": "Assault - Arm 7A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a13",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 7B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a13_spacer",
+   "role": "check",
+   "name": "Assault - Arm 7B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a13_arm",
+   "role": "check",
+   "name": "Assault - Arm 7B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 7B R",
+   "parent": "a13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a13_guide",
+   "role": "part",
+   "name": "Assault - Arm 7B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a13_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9558530525026812,
+    0.019167371438133622,
+    0.2932195335834215,
+    2.6723839864297307,
+    -0.09052029609423837,
+    0.9685497100049223,
+    0.23177011301170852,
+    1.3775874449279377,
+    -0.2795552773672686,
+    -0.2480804349765532,
+    0.9275262008565593,
+    3.8542012944063417,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.027 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.124 mm (0.8 mm 34 deg from the old)]",
+   "write": {
+    "host": "a13_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a13_pad",
+   "role": "check",
+   "name": "Assault - Arm 7B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a13_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a13_hand",
+   "role": "part",
+   "name": "Assault - Arm 7B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a13_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.548004,
+    -0.759694,
+    0.350079,
+    8.368844,
+    0.637121,
+    -0.107904,
+    0.763173,
+    -0.171926,
+    -0.542004,
+    0.641266,
+    0.543149,
+    -7.313478,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.027 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.124 mm (0.8 mm 34 deg from the old)]",
+   "write": {
+    "host": "a13_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a13_handcut",
+   "role": "neighbour",
+   "name": "Assault - Arm 7B R Chain Sword 1 R (wrist cut start, compare)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a13_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.6251260703684508,
+    -0.7622522116281004,
+    0.1678939883513087,
+    8.51604823934065,
+    0.14611468205408282,
+    0.09701684351874848,
+    0.984498935907625,
+    -0.8408056305142668,
+    -0.7667249807303368,
+    0.639968328668481,
+    0.05072857274995271,
+    -7.760682292534464,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Hand R"
+   }
+  },
+  {
+   "id": "a13_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 7B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a13_pack",
+   "role": "check",
+   "name": "Assault - Arm 7B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a13_legs",
+   "role": "check",
+   "name": "Assault - Arm 7B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a14",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 8A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a14_spacer",
+   "role": "check",
+   "name": "Assault - Arm 8A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a14_arm",
+   "role": "check",
+   "name": "Assault - Arm 8A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 8A R",
+   "parent": "a14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a14_guide",
+   "role": "part",
+   "name": "Assault - Arm 8A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a14_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9637521825251221,
+    -0.19878064964672232,
+    0.17795506915144754,
+    2.081255341566815,
+    0.1083688908314609,
+    0.9011594909929401,
+    0.41972267107024963,
+    1.1023250362218437,
+    -0.24379851220433096,
+    -0.38522298912789843,
+    0.8900371095765032,
+    3.2317446089862627,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.028 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.105 mm (6.4 mm 131 deg from the old)]",
+   "write": {
+    "host": "a14_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a14_pad",
+   "role": "check",
+   "name": "Assault - Arm 8A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a14_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a14_hand",
+   "role": "part",
+   "name": "Assault - Arm 8A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a14_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.922016,
+    -0.170051,
+    -0.347806,
+    3.982864,
+    0.162659,
+    -0.985386,
+    0.050582,
+    5.895122,
+    -0.351324,
+    -0.009936,
+    0.936202,
+    -5.772939,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.028 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.105 mm (6.4 mm 131 deg from the old)]",
+   "write": {
+    "host": "a14_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a14_handcut",
+   "role": "neighbour",
+   "name": "Assault - Arm 8A R Chain Sword 1 R (wrist cut start, compare)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a14_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    0.07980082631426982,
+    -0.9375999615579339,
+    0.3384351206026786,
+    5.402789632696844,
+    -0.3794742129743591,
+    0.2853779189857411,
+    0.8800904267623193,
+    -0.3513057852883539,
+    -0.9217540619148816,
+    -0.19866052382604665,
+    -0.33301968009799604,
+    -5.470423348760975,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Hand R"
+   }
+  },
+  {
+   "id": "a14_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 8A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a14_pack",
+   "role": "check",
+   "name": "Assault - Arm 8A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a14_legs",
+   "role": "check",
+   "name": "Assault - Arm 8A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a15",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 8B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a15_spacer",
+   "role": "check",
+   "name": "Assault - Arm 8B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a15_arm",
+   "role": "check",
+   "name": "Assault - Arm 8B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 8B R",
+   "parent": "a15_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a15_guide",
+   "role": "part",
+   "name": "Assault - Arm 8B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a15_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.963674052417403,
+    -0.1982990559670928,
+    0.1789132280298545,
+    2.085404736844381,
+    0.10732286973317742,
+    0.9009313881659451,
+    0.42048103775506485,
+    1.110629221205183,
+    -0.2445695349327605,
+    -0.38600511566112367,
+    0.8894861927877843,
+    3.2267756272785255,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.027 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.19 mm)]",
+   "write": {
+    "host": "a15_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a15_pad",
+   "role": "check",
+   "name": "Assault - Arm 8B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a15_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a15_hand",
+   "role": "part",
+   "name": "Assault - Arm 8B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a15_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.970964,
+    -0.171828,
+    -0.16644,
+    4.040436,
+    0.168531,
+    -0.985115,
+    0.033845,
+    5.921237,
+    -0.169779,
+    0.004813,
+    0.98547,
+    -5.724928,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.027 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.19 mm)]",
+   "write": {
+    "host": "a15_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a15_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 8B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a15",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a15_pack",
+   "role": "check",
+   "name": "Assault - Arm 8B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a15",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a15_legs",
+   "role": "check",
+   "name": "Assault - Arm 8B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a15",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a16",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 9A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a16_spacer",
+   "role": "check",
+   "name": "Assault - Arm 9A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a16_arm",
+   "role": "check",
+   "name": "Assault - Arm 9A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 9A R",
+   "parent": "a16_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a16_guide",
+   "role": "part",
+   "name": "Assault - Arm 9A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a16_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9588244050587728,
+    -0.2167216197101985,
+    0.18354191907031578,
+    2.0642160024531253,
+    0.13617449542227592,
+    0.9179707302618699,
+    0.3725400768785423,
+    1.1238248459078954,
+    -0.24922359869754257,
+    -0.3322067263456571,
+    0.9096846643200388,
+    3.2378350387286985,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.050 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.140 mm (7.0 mm 130 deg from the old)]",
+   "write": {
+    "host": "a16_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a16_pad",
+   "role": "check",
+   "name": "Assault - Arm 9A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a16_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a16_hand",
+   "role": "part",
+   "name": "Assault - Arm 9A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a16_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.753314,
+    0.283933,
+    -0.593212,
+    2.36983,
+    -0.301511,
+    -0.950727,
+    -0.072167,
+    6.485908,
+    -0.584473,
+    0.124495,
+    0.801806,
+    -5.964201,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.050 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.140 mm (7.0 mm 130 deg from the old)]",
+   "write": {
+    "host": "a16_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a16_handcut",
+   "role": "neighbour",
+   "name": "Assault - Arm 9A R Chain Sword 1 R (wrist cut start, compare)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a16_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.45633065178153737,
+    -0.7136788302959125,
+    0.5314371681610366,
+    5.623105065745834,
+    0.18794960744220512,
+    0.5064636190598494,
+    0.8415288624425924,
+    0.32879899332826135,
+    -0.869734029509619,
+    0.4838984837380444,
+    -0.09697814954872999,
+    -6.051487948387108,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Hand R"
+   }
+  },
+  {
+   "id": "a16_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 9A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a16",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a16_pack",
+   "role": "check",
+   "name": "Assault - Arm 9A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a16",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a16_legs",
+   "role": "check",
+   "name": "Assault - Arm 9A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a16",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a17",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 9B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a17_spacer",
+   "role": "check",
+   "name": "Assault - Arm 9B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a17",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a17_arm",
+   "role": "check",
+   "name": "Assault - Arm 9B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 9B R",
+   "parent": "a17_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a17_guide",
+   "role": "part",
+   "name": "Assault - Arm 9B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a17_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9589998576424914,
+    -0.21666089335327887,
+    0.1826945186351393,
+    2.060305465089076,
+    0.13657092712657648,
+    0.9181481590830913,
+    0.3719566480955872,
+    1.12357683804601,
+    -0.24832916495413732,
+    -0.33175600830534646,
+    0.9100939903785,
+    3.2242597653338776,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.051 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.140 mm (7.0 mm 130 deg from the old)]",
+   "write": {
+    "host": "a17_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a17_pad",
+   "role": "check",
+   "name": "Assault - Arm 9B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a17_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a17_hand",
+   "role": "part",
+   "name": "Assault - Arm 9B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a17_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.707559,
+    0.28527,
+    -0.646515,
+    2.389988,
+    -0.291482,
+    -0.951258,
+    -0.100731,
+    6.569409,
+    -0.643737,
+    0.117175,
+    0.756222,
+    -5.936095,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.051 mm (same shape); Hand R: its old Hand R; faint sword = wrist a cut start, 0.140 mm (7.0 mm 130 deg from the old)]",
+   "write": {
+    "host": "a17_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a17_handcut",
+   "role": "neighbour",
+   "name": "Assault - Arm 9B R Chain Sword 1 R (wrist cut start, compare)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a17_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.45369256953448056,
+    -0.717448673642856,
+    0.5286136096387516,
+    5.642968531563229,
+    0.18723423561074098,
+    0.5031939869174074,
+    0.8436458245130736,
+    0.3560346396953582,
+    -0.8712666364276205,
+    0.48172951621475335,
+    -0.09396434119955373,
+    -6.050012539165284,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "pose": {
+    "fit": "Hand R"
+   }
+  },
+  {
+   "id": "a17_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 9B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a17",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a17_pack",
+   "role": "check",
+   "name": "Assault - Arm 9B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a17",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a17_legs",
+   "role": "check",
+   "name": "Assault - Arm 9B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a17",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a18",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 10A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a18_spacer",
+   "role": "check",
+   "name": "Assault - Arm 10A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a18",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a18_arm",
+   "role": "check",
+   "name": "Assault - Arm 10A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 10A R",
+   "parent": "a18_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a18_guide",
+   "role": "part",
+   "name": "Assault - Arm 10A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a18_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.92053984763995,
+    -0.2638578272005341,
+    0.28807214892246613,
+    2.028592354837389,
+    0.12214825996976025,
+    0.894857820934864,
+    0.4293124184847121,
+    1.0570382917035641,
+    -0.37106108200800514,
+    -0.3600116087480233,
+    0.8559820195458212,
+    3.315586955522936,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.048 mm (same shape); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a18_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a18_pad",
+   "role": "check",
+   "name": "Assault - Arm 10A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a18_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a18_hand",
+   "role": "part",
+   "name": "Assault - Arm 10A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a18_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.846453,
+    0.156933,
+    -0.508812,
+    2.797809,
+    -0.391113,
+    -0.831677,
+    0.394136,
+    6.099337,
+    -0.361315,
+    0.53262,
+    0.765355,
+    -7.699066,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.048 mm (same shape); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a18_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a18_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 10A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a18",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a18_pack",
+   "role": "check",
+   "name": "Assault - Arm 10A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a18",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a18_legs",
+   "role": "check",
+   "name": "Assault - Arm 10A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a18",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a19",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 10B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a19_spacer",
+   "role": "check",
+   "name": "Assault - Arm 10B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a19",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a19_arm",
+   "role": "check",
+   "name": "Assault - Arm 10B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 10B R",
+   "parent": "a19_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a19_guide",
+   "role": "part",
+   "name": "Assault - Arm 10B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a19_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9176755124978355,
+    -0.2688308891523115,
+    0.2925777381429772,
+    2.0446597445071344,
+    0.1245600426496368,
+    0.8938834053824637,
+    0.4306473307354743,
+    1.0492727289160968,
+    -0.3773017156395251,
+    -0.35875094664132084,
+    0.8537804618924557,
+    3.3447879323248912,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.048 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.21 mm)]",
+   "write": {
+    "host": "a19_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a19_pad",
+   "role": "check",
+   "name": "Assault - Arm 10B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a19_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a19_hand",
+   "role": "part",
+   "name": "Assault - Arm 10B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a19_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.616133,
+    0.170692,
+    -0.768924,
+    2.773148,
+    -0.495962,
+    -0.84247,
+    0.210394,
+    6.128142,
+    -0.611883,
+    0.510989,
+    0.60373,
+    -7.728445,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.048 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.21 mm)]",
+   "write": {
+    "host": "a19_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a19_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 10B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a19",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a19_pack",
+   "role": "check",
+   "name": "Assault - Arm 10B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a19",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a19_legs",
+   "role": "check",
+   "name": "Assault - Arm 10B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a19",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a20",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 11A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a20_spacer",
+   "role": "check",
+   "name": "Assault - Arm 11A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a20",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a20_arm",
+   "role": "check",
+   "name": "Assault - Arm 11A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 11A R",
+   "parent": "a20_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a20_guide",
+   "role": "part",
+   "name": "Assault - Arm 11A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a20_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9589200982770637,
+    -0.2828546877683439,
+    0.02157763732754736,
+    2.2317807072987805,
+    0.24709265636330768,
+    0.8701986634296475,
+    0.42626211226217986,
+    0.779290176256374,
+    -0.1393470465392106,
+    -0.40341956183277,
+    0.904342275166262,
+    3.48367873394254,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.131 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a20_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a20_pad",
+   "role": "check",
+   "name": "Assault - Arm 11A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a20_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a20_hand",
+   "role": "part",
+   "name": "Assault - Arm 11A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a20_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.768254,
+    -0.639772,
+    -0.021828,
+    7.535063,
+    0.639263,
+    -0.76854,
+    0.026258,
+    8.405467,
+    -0.033575,
+    0.006219,
+    0.999417,
+    -1.562585,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.131 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a20_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a20_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 11A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a20",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a20_pack",
+   "role": "check",
+   "name": "Assault - Arm 11A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a20",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a20_legs",
+   "role": "check",
+   "name": "Assault - Arm 11A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a20",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a21",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 11B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a21_spacer",
+   "role": "check",
+   "name": "Assault - Arm 11B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a21",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a21_arm",
+   "role": "check",
+   "name": "Assault - Arm 11B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 11B R",
+   "parent": "a21_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a21_guide",
+   "role": "part",
+   "name": "Assault - Arm 11B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a21_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.958167690963281,
+    -0.2855040783771385,
+    0.020014917437922414,
+    2.2256877267667563,
+    0.25050834624265733,
+    0.870433710722187,
+    0.4237800924463711,
+    0.7828653791189459,
+    -0.13841245804068106,
+    -0.4010387343769585,
+    0.9055441051627633,
+    3.4753552151121205,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.130 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a21_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a21_pad",
+   "role": "check",
+   "name": "Assault - Arm 11B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a21_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a21_hand",
+   "role": "part",
+   "name": "Assault - Arm 11B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a21_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    -0.768242,
+    -0.639593,
+    -0.026921,
+    7.595591,
+    0.639077,
+    -0.76871,
+    0.025808,
+    8.434881,
+    -0.037201,
+    0.002623,
+    0.999304,
+    -1.536859,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.130 mm (near, check it); Hand R: its old Hand R; wrist cut: no match (9.00 mm)]",
+   "write": {
+    "host": "a21_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a21_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 11B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a21",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a21_pack",
+   "role": "check",
+   "name": "Assault - Arm 11B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a21",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a21_legs",
+   "role": "check",
+   "name": "Assault - Arm 11B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a21",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a22",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 12A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a22_spacer",
+   "role": "check",
+   "name": "Assault - Arm 12A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a22",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a22_arm",
+   "role": "check",
+   "name": "Assault - Arm 12A R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 12A R",
+   "parent": "a22_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a22_guide",
+   "role": "part",
+   "name": "Assault - Arm 12A R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a22_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9842546896783334,
+    -0.14218844504081402,
+    0.10499660415457562,
+    2.6381823909116573,
+    0.07001884229808751,
+    0.8590852084316768,
+    0.5070213234872147,
+    1.1216245109534237,
+    -0.16229410279096076,
+    -0.49168582666835164,
+    0.8555148709150948,
+    4.156252407271601,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.039 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.20 mm)]",
+   "write": {
+    "host": "a22_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a22_pad",
+   "role": "check",
+   "name": "Assault - Arm 12A R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a22_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a22_hand",
+   "role": "part",
+   "name": "Assault - Arm 12A R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a22_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    0.075534,
+    -0.98468,
+    -0.157164,
+    11.665598,
+    0.985518,
+    0.097718,
+    -0.138587,
+    -0.568548,
+    0.151821,
+    -0.144419,
+    0.977801,
+    -1.463384,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.039 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.20 mm)]",
+   "write": {
+    "host": "a22_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a22_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 12A R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a22",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a22_pack",
+   "role": "check",
+   "name": "Assault - Arm 12A R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a22",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a22_legs",
+   "role": "check",
+   "name": "Assault - Arm 12A R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a22",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a23",
+   "role": "host",
+   "name": "Torso 2 for Assault - Arm 12B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a23_spacer",
+   "role": "check",
+   "name": "Assault - Arm 12B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a23",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a23_arm",
+   "role": "check",
+   "name": "Assault - Arm 12B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 12B R",
+   "parent": "a23_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "a23_guide",
+   "role": "part",
+   "name": "Assault - Arm 12B R Guide (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "a23_arm",
+   "on": "Pad R",
+   "on_matrix": [
+    0.9839039213709894,
+    -0.14318600823627559,
+    0.10690963904772424,
+    2.645877924141292,
+    0.07026890294377897,
+    0.8601055163336759,
+    0.5052543585891425,
+    1.1135707147702825,
+    -0.16429923379665634,
+    -0.4896101175728913,
+    0.85632308952811,
+    4.154582298477232,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Guide on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+     "Pad R"
+    ]
+   },
+   "note": "move the guide (it turns about its crown) so the pad sits right; its place is this arm's Pad R [Pad R: pad spot 0.039 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.16 mm)]",
+   "write": {
+    "host": "a23_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a23_pad",
+   "role": "check",
+   "name": "Assault - Arm 12B R Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "a23_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "a23_hand",
+   "role": "part",
+   "name": "Assault - Arm 12B R Chain Sword 1 R (Hand R)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Melee/MarFil Assault - Chain Sword 1 R",
+   "parent": "a23_arm",
+   "on": "Hand R",
+   "on_matrix": [
+    0.094982,
+    -0.983492,
+    -0.154026,
+    11.714787,
+    0.994304,
+    0.101242,
+    -0.033301,
+    -0.604147,
+    0.048346,
+    -0.149985,
+    0.987505,
+    -1.472629,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "mirror": true,
+   "joint": "Weapon in the hand (Hand R)",
+   "pose": {
+    "fit": "Hand R"
+   },
+   "note": "move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it) [Pad R: pad spot 0.039 mm (same shape); Hand R: its old Hand R; wrist cut: no match (0.16 mm)]",
+   "write": {
+    "host": "a23_arm",
+    "socket": "Hand R",
+    "mirror": "Hand L",
+    "half": "socket"
+   }
+  },
+  {
+   "id": "a23_head",
+   "role": "neighbour",
+   "name": "Assault - Arm 12B R Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a23",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a23_pack",
+   "role": "check",
+   "name": "Assault - Arm 12B R Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a23",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a23_legs",
+   "role": "check",
+   "name": "Assault - Arm 12B R Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a23",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  }
+ ]
+}

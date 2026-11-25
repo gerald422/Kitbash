@@ -19,6 +19,8 @@ import os, sys, json
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 for p in (REPO, HERE, os.path.join(REPO, "kits", "connectors")): sys.path.insert(0, p)
+import bpy
+from mathutils.bvhtree import BVHTree
 import geom as G, batch as B, make_torso_batch as MT
 
 A2 = "Mar Fil - Tacticus/AssaultMarines-V2/"
@@ -29,12 +31,39 @@ SWORD = A2 + "Melee/MarFil Assault - Chain Sword 1 R"
 def sockets(rel): return {s["type"]: G.M4(s["matrix"]) for s in B.sidecar(MT.LIB, rel).get("sockets") or []}
 
 
+SAME, NEAR = 0.06, 0.15        # trimmed rms, mm: the same sculpt / close (skill: same sculpt carries exactly)
+
+
+def carry(bvh, cut, S_ref, starts):
+    """Josh's socket S_ref (on the cut's own arm) carried onto another arm by fitting the cut's points onto it (trimmed
+    ICP from each start, an own -> own guess); only the cut's shape is matched (CLAUDE.md). (S, rms)"""
+    best = (None, 9.0)
+    for M0 in starts:
+        R, t, rms = G.icp(bvh, cut, M0[:3, :3], M0[:3, 3], iters=40, keep=0.8, lim=3.0)
+        if rms < best[1]: M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t; best = (M @ S_ref, rms)
+    return best
+
+
 def main(A):
     spec_out, blend_out, name, arms = A[0], A[1], A[2], A[3:]
     S_sh = sockets(MT.T2)["Shoulder R"]
     on_torso = lambda rel: S_sh @ G.M4(B.sidecar(MT.LIB, rel)["fits"]["Shoulder R"])     # arm own -> Torso 2 own
     A_2b, A_2a = on_torso(MT.ARM), on_torso(ARM_2A)
     pad_2b, hand_2a = sockets(MT.ARM)["Pad R"], sockets(ARM_2A)["Hand R"]
+    # Josh's cuts in the reference file, in their arm's own coordinates (Nov 25: starts from the cut, notes 170)
+    bpy.ops.wm.open_mainfile(filepath=os.path.expanduser(MT.SRC["ref"]), load_ui=False); bpy.context.view_layer.update()
+    ob = bpy.data.objects
+    W2a = B.own_world(ob["MarFil Assault - Arm 2A R"], ARM_2A, MT.LIB, B.sidecar(MT.LIB, ARM_2A))
+    W2b = B.own_world(ob["MarFil Assault - Arm 2B R"], MT.ARM, MT.LIB, B.sidecar(MT.LIB, MT.ARM))
+    def pts(name, W):
+        Wi = np.linalg.inv(W); P = G.verts_world(ob[name]) @ Wi[:3, :3].T + Wi[:3, 3]
+        return P[np.linspace(0, len(P) - 1, min(len(P), 1500)).astype(int)]
+    SHIELD = A2 + "Melee/Shields/MarFil Assault - Shield R"
+    F_sh = G.M4(B.sidecar(MT.LIB, SHIELD)["fits"]["Hand R"])
+    hand_2b = np.linalg.inv(W2b) @ B.own_world(ob["MarFil Assault - Shield R"], SHIELD, MT.LIB, B.sidecar(MT.LIB, SHIELD)) @ np.linalg.inv(F_sh)
+    hand_cuts = [("wrist a", pts("Assault arm wrist a", W2a), hand_2a, A_2a), ("wrist b", pts("Assault arm wrist b", W2b), hand_2b, A_2b)]
+    pad_cut = pts("Assault Arm Pad spot", W2b)
+    print("Arm 2B R's Hand R from Shield R (Josh's, on 2B R): %.2f mm %.1f deg from its library Hand R" % tuple(G.off(hand_2b, sockets(MT.ARM)["Hand R"])))
     objs = [{"id": "ref", "role": "host", "name": "REFERENCE Torso 2 (locked)", "rel": MT.T2, "pose": {"place": True}, "at": [0, 0, 0]}]
     objs += MT.column("ref", "REF ", None, locked=True)
     log = []
@@ -48,9 +77,14 @@ def main(A):
               "parent": tid, "on": "Shoulder R", "mirror": True, "pose": {"at_pivot": True, "shift_from": [MT.T2, "Shoulder R"]}},
              {"id": tid + "_arm", "role": "check", "name": pre + " (locked)", "rel": rel, "parent": tid + "_spacer", "on": "arm seat", "mirror": True, "pose": {"fit": "Shoulder R"}}]
         A_x = on_torso(rel); own = sockets(rel); said = []
+        T = B.stl_tris(MT.LIB, rel, sc); V = T.reshape(-1, 3)
+        bvh = BVHTree.FromPolygons([tuple(v) for v in V], [(3 * k, 3 * k + 1, 3 * k + 2) for k in range(len(T))])
+        grade = lambda rms: "same shape" if rms < SAME else "near, check it" if rms < NEAR else "no match: placed by the torso, by eye"
         if not sc.get("noPad"):
-            S_pad = np.linalg.inv(A_x) @ A_2b @ pad_2b
-            said.append("Pad R starts where Arm 2B R's guide sits on the torso (%s)" % ("old Pad R %.1f mm %.0f deg away" % tuple(G.off(S_pad, own["Pad R"])) if "Pad R" in own else "no old Pad R"))
+            by_torso = np.linalg.inv(A_x) @ A_2b @ pad_2b
+            S_pad, rms = carry(bvh, pad_cut, pad_2b, [np.eye(4), np.linalg.inv(A_x) @ A_2b])
+            if rms >= NEAR: S_pad = by_torso
+            said.append("Pad R: pad spot %.3f mm (%s)" % (rms, grade(rms)))
             g = {"id": tid + "_guide", "role": role, "name": pre + " Guide (Pad R)", "connector": MT.GUIDE, "parent": tid + "_arm", "on": "Pad R",
                  "on_matrix": G.flat16(S_pad), "mirror": True, "joint": "Guide on the arm (Pad R)", "pose": {"at_pivot": True, "shift_from": [MT.ARM, "Pad R"]}}
             if not locked:
@@ -58,18 +92,38 @@ def main(A):
                          write={"host": tid + "_arm", "socket": "Pad R", "mirror": "Pad L", "half": "socket"})
             o += [g, {"id": tid + "_pad", "role": "check", "name": pre + " Shoulder Pad 1", "rel": MT.PAD, "parent": tid + "_guide", "on": "crown", "mirror": True, "pose": {"fit": "Pad R"}}]
         if not sc.get("noHand"):
-            S_hand = own["Hand R"] if "Hand R" in own else np.linalg.inv(A_x) @ A_2a @ hand_2a
-            said.append("Hand R starts on %s" % ("its old Hand R" if "Hand R" in own else "Arm 2A R's place on the torso (no old Hand R)"))
+            ghost = None
+            if "Hand R" in own:                      # Josh (Nov 25): "the wrists are mostly fine": the old Hand R
+                S_hand = own["Hand R"]; said.append("Hand R: its old Hand R")
+                got = []                             # and the wrist cut's start beside it, faint, to compare (he asked)
+                for cname, P, S_ref, A_ref in hand_cuts:
+                    S, rms = carry(bvh, P, S_ref, [np.eye(4), np.linalg.inv(A_x) @ A_ref]); got.append((rms, cname, S))
+                rms, cname, S_cut = min(got, key=lambda g: g[0])
+                if rms < NEAR and not locked:
+                    said.append("faint sword = %s cut start, %.3f mm (%.1f mm %.0f deg from the old)" % (cname, rms, *G.off(S_cut, S_hand)))
+                    ghost = {"id": tid + "_handcut", "role": "neighbour", "name": pre + " Chain Sword 1 R (wrist cut start, compare)", "rel": SWORD,
+                             "parent": tid + "_arm", "on": "Hand R", "on_matrix": G.flat16(S_cut), "pose": {"fit": "Hand R"}}
+                else: said.append("wrist cut: no match (%.2f mm)" % rms)
+            else:
+                got = []
+                for cname, P, S_ref, A_ref in hand_cuts:
+                    S, rms = carry(bvh, P, S_ref, [np.eye(4), np.linalg.inv(A_x) @ A_ref]); got.append((rms, cname, S))
+                rms, cname, S_hand = min(got, key=lambda g: g[0])
+                if rms >= NEAR: S_hand = np.linalg.inv(A_x) @ A_2a @ hand_2a
+                said.append("Hand R: no old one; %s %.3f mm (%s)" % (cname, rms, grade(rms) if rms < NEAR else "no match: by the torso, by eye"))
             h = {"id": tid + "_hand", "role": role, "name": pre + " Chain Sword 1 R (Hand R)", "rel": SWORD, "parent": tid + "_arm", "on": "Hand R",
                  "on_matrix": G.flat16(S_hand), "mirror": True, "joint": "Weapon in the hand (Hand R)", "pose": {"fit": "Hand R"}}
             if not locked:
                 h.update(note="move the sword so its hand sits right on the wrist; its pivot is this arm's Hand R (Chain Swords 2 / 3 R and Shield R share it)",
                          write={"host": tid + "_arm", "socket": "Hand R", "mirror": "Hand L", "half": "socket"})
             o.append(h)
+            if ghost: o.append(ghost)
         else: said.append("hand sculpted (noHand): no Hand piece")
         for sock, pid, ref_obj, prel, c, joint in MT.PIECES:
             o.append({"id": "%s_%s" % (tid, pid), "role": "neighbour" if pid == "head" else "check", "name": short + " " + ref_obj.split(" - ")[-1],
                       "rel": prel, "parent": tid, "on": sock, "pose": {"fit": sock}})
+        for x in o:
+            if x.get("note"): x["note"] += " [" + "; ".join(said) + "]"
         log.append("%-34s %s%s" % (short[:34], "; ".join(said), " (reference, locked)" if locked else ""))
         return o
 
