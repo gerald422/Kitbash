@@ -63,18 +63,18 @@
  ],
  "fits": {
   "Shoulder L": [
-   0.028788,
-   0.999585,
-   0.0,
-   -160.444329,
-   -0.999585,
-   0.028788,
-   0.0,
-   30.134563,
-   0.0,
-   -0.0,
-   1.0,
-   -6.453076,
+   0.028502074191237604,
+   0.9995930969901297,
+   0.0009167207076399294,
+   -161.0604456296249,
+   -0.999592940685664,
+   0.028502117012871524,
+   -0.00021449938089306602,
+   30.6992307686575,
+   -0.0002403725367583296,
+   -0.0009104608895818872,
+   0.99999813125464,
+   -5.736286238111451,
    0.0,
    0.0,
    0.0,
@@ -84,11 +84,15 @@
  "notes": {
   "Shoulder": "heresy scale (Josh's working file); shoulder disc centre on Josh's HeresyArms_r point, file axes",
   "Hand": "cup at the wrist; hands with the Springles dome wrist seat in it",
-  "Scale": "x1.03 on Nov 18 (Josh: about an outstretched Mar Fil Assault arm's length); sockets and fits moved with it"
+  "Scale": "x1.03 on Nov 18 (Josh: about an outstretched Mar Fil Assault arm's length); sockets and fits moved with it",
+  "Shoulder L": "Josh's fix in batch '03 Stage 3 - Springles pattern C left arms (2026-11-25)' (kits/seat/batch.py write, 2026-11-25); fixed as its mirror image on Shoulder R"
  },
  "original": {
   "name": "patternC sarge Larm",
   "folder": "Arms",
   "path": "Springles - Heresy\\patternC arms\\unique\\Arms\\patternC sarge Larm.stl"
- }
+ },
+ "exact": [
+  "Shoulder L"
+ ]
 }
