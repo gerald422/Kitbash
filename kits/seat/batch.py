@@ -521,26 +521,34 @@ def write(A):
 
 
 def apply(A):
-    """apply BATCH.blend FROM_ID OUT.blend: Josh's change to piece FROM_ID (e.g. t1_legs), in the frame it sits on (its
+    """apply BATCH.blend FROM_ID[,FROM_ID...] OUT.blend [--into OTHER.blend] [--skip ID,ID]: Josh's change to piece FROM_ID (e.g. t1_legs), in the frame it sits on (its
     socket, so the same on every torso: they stand on the same sockets), put on every other piece of the same kind
     (same id suffix, reference column left alone). Josh's file is not touched: the result is saved as OUT, a new file,
     for him to check; read / write treat the applied moves like his own (notes 129)."""
-    src, fid, out = A[1], A[2], A[3]
+    src, fids, out = A[1], A[2].split(","), A[3]      # several FROM_IDs: one per kind (e.g. t1_cloak,t1_cloak2, Nov 25)
+    into = opt(A, "--into")                          # another batch file of the same kind to apply them in (Nov 25)
     if os.path.exists(out): raise SystemExit("%s exists: never overwritten" % out)
-    bpy.ops.wm.open_mainfile(filepath=src, load_ui=False); bpy.context.view_layer.update()
-    by = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}
+    def load(p):
+        bpy.ops.wm.open_mainfile(filepath=p, load_ui=False); bpy.context.view_layer.update()
+        return {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}
+    by = load(src)
     def in_frame(o):                                 # the piece's pivot in the frame it sits on (the parent's frame)
         par = by[o["kb_parent"]]; return np.linalg.inv(own(par) @ G.M4(o["kb_on_frame"])) @ np.array(o.matrix_world)
-    D = in_frame(by[fid]); kind = fid.split("_", 1)[1]; skip = set((opt(A, "--skip", "") or "").split(","))
-    print("%s: %.3f mm %.2f deg in its socket frame" % ((fid,) + tuple(G.off(D, np.eye(4)))))
-    done = []
+    Ds = {}
+    for fid in fids:
+        Ds[fid.split("_", 1)[1]] = (fid, in_frame(by[fid]))
+        print("%s: %.3f mm %.2f deg in its socket frame" % ((fid,) + tuple(G.off(Ds[fid.split("_", 1)[1]][1], np.eye(4)))))
+    if into: by = load(into)
+    skip = set((opt(A, "--skip", "") or "").split(",")); done = []
     for i, o in by.items():
-        if i == fid or i in skip or i.split("_", 1)[-1] != kind or "_" not in i or i.startswith("ref"): continue
+        if "_" not in i or i.startswith("ref") or i in skip or i.split("_", 1)[1] not in Ds: continue
+        fid, D = Ds[i.split("_", 1)[1]]
+        if i == fid and not into: continue
         par = by[o["kb_parent"]]; o.rotation_mode = 'QUATERNION'
         o.matrix_world = G.mat(own(par) @ G.M4(o["kb_on_frame"]) @ D); o["kb_applied"] = "%s's change (%s)" % (fid, os.path.basename(src))
         done.append(i)
     bpy.context.view_layer.update()
-    worst = max([sum(G.off(in_frame(by[i]), D)) for i in done] or [0])
+    worst = max([sum(G.off(in_frame(by[i]), Ds[i.split("_", 1)[1]][1])) for i in done] or [0])
     print("applied to %d: %s (worst %.5f mm+deg off)" % (len(done), " ".join(done), worst))
     bpy.ops.wm.save_as_mainfile(filepath=out); print("SAVED", out)
 

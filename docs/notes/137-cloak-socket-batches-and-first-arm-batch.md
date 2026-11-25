@@ -101,3 +101,20 @@ In the new files:
 - the circles cloak's move is written as the torso's Cloak socket;
 - the no-circles cloak's move is compared with it at the write. If the two moves differ on a torso, Josh decides
   there (one socket can't hold two different moves).
+
+## Josh's cloak change applied to every TN torso (Nov 25)
+
+In `TN torsos 2 (b)` Josh moved both cloaks on Mk7 Torso Jump Pack A9, each in the frame it sits on:
+- circles: 1.45 mm, 6.6 deg;
+- no circles: 0.73 mm, 10.8 deg.
+
+He asked for it on all the other torsos, so he can review.
+
+`batch.py apply` now takes several FROM_IDs (one per kind) and `--into` (apply them in another batch file). Each
+cloak got its own style's change, exactly (0.00000 off), in new files:
+- `TN torsos 2 (2026-11-25 c)`: 32 cloaks;
+- `Redwarden and TN torsos 1 (2026-11-25 c)`: 44 cloaks;
+- `TN torsos 3 (2026-11-25 c)`: 32 cloaks.
+
+Renders: an applied torso looks like his. His `b` file is kept. My untouched `b` files of TN 1 and 3, and the
+`.blend1`, went to the Recycle Bin.
