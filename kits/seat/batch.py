@@ -550,7 +550,10 @@ def apply(A):
     """apply BATCH.blend FROM_ID[,FROM_ID...] OUT.blend [--into OTHER.blend] [--skip ID,ID]: Josh's change to piece FROM_ID (e.g. t1_legs), in the frame it sits on (its
     socket, so the same on every torso: they stand on the same sockets), put on every other piece of the same kind
     (same id suffix, reference column left alone). Josh's file is not touched: the result is saved as OUT, a new file,
-    for him to check; read / write treat the applied moves like his own (notes 129)."""
+    for him to check; read / write treat the applied moves like his own (notes 129).
+    --delta (Nov 25, Marta arms; notes 150): pieces that differ (one arm each) keep their own seat and take only Josh's
+    move of FROM_ID, from where it was built (kb_seated) to where he put it, in the frame it sits on: new = C . old."""
+    delta = "--delta" in A; A = [a for a in A if a != "--delta"]
     src, fids, out = A[1], A[2].split(","), A[3]      # several FROM_IDs: one per kind (e.g. t1_cloak,t1_cloak2, Nov 25)
     into = opt(A, "--into")                          # another batch file of the same kind to apply them in (Nov 25)
     if os.path.exists(out): raise SystemExit("%s exists: never overwritten" % out)
@@ -562,7 +565,11 @@ def apply(A):
         par = by[o["kb_parent"]]; return np.linalg.inv(own(par) @ G.M4(o["kb_on_frame"])) @ np.array(o.matrix_world)
     Ds = {}
     for fid in fids:
-        Ds[fid.split("_", 1)[1]] = (fid, in_frame(by[fid]))
+        D = in_frame(by[fid])
+        if delta:                                    # his move only: now in its frame . (as built in its frame)^-1
+            o = by[fid]; on = own(by[o["kb_parent"]]) @ G.M4(o["kb_on_frame"])
+            D = D @ np.linalg.inv(np.linalg.inv(on) @ G.M4(o["kb_seated"]))
+        Ds[fid.split("_", 1)[1]] = (fid, D)
         print("%s: %.3f mm %.2f deg in its socket frame" % ((fid,) + tuple(G.off(Ds[fid.split("_", 1)[1]][1], np.eye(4)))))
     if into: by = load(into)
     skip = set((opt(A, "--skip", "") or "").split(",")); done = []
@@ -571,10 +578,11 @@ def apply(A):
         fid, D = Ds[i.split("_", 1)[1]]
         if i == fid and not into: continue
         par = by[o["kb_parent"]]; o.rotation_mode = 'QUATERNION'
-        o.matrix_world = G.mat(own(par) @ G.M4(o["kb_on_frame"]) @ D); o["kb_applied"] = "%s's change (%s)" % (fid, os.path.basename(src))
+        on = own(par) @ G.M4(o["kb_on_frame"])
+        o.matrix_world = G.mat(on @ D @ np.linalg.inv(on) @ np.array(o.matrix_world) if delta else on @ D); o["kb_applied"] = "%s's change (%s)" % (fid, os.path.basename(src))
         done.append(i)
     bpy.context.view_layer.update()
-    worst = max([sum(G.off(in_frame(by[i]), Ds[i.split("_", 1)[1]][1])) for i in done] or [0])
+    worst = 0 if delta else max([sum(G.off(in_frame(by[i]), Ds[i.split("_", 1)[1]][1])) for i in done] or [0])
     print("applied to %d: %s (worst %.5f mm+deg off)" % (len(done), " ".join(done), worst))
     bpy.ops.wm.save_as_mainfile(filepath=out); print("SAVED", out)
 
