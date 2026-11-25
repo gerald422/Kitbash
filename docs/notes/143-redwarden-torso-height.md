@@ -16,3 +16,12 @@ never affected how parts seat on it.
 
 The legs file was rebuilt as `02 Stage 2 - TN and Redwarden legs redo (2026-11-25 b).blend`. The three floors now sit
 within 1.4 mm of each other (-0.58, 0.78, 0.62). The first build (unsaved by Josh) went to the Recycle Bin.
+
+## The legs: no change (Nov 25)
+
+Josh, on the b file: "they look good now". The file was unchanged, so the legs as they started, his Nov 24 TN change
+and Redwarden's own fix, are approved as written. Nothing was written, and no carry-across to the other TN torsos is
+needed. The uneven base he saw came from how the torsos were stood: on the Waist in my files (notes 141), then
+Redwarden 18 mm low. The b file went to the Recycle Bin.
+
+The `redo` flag in `batch.py write` stays for a later case where Josh wants to redo one of his own sockets.
