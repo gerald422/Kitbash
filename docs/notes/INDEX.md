@@ -174,3 +174,4 @@ Add a new entry as the next number and append its line here.
 | `166-two-armed-marfil-rest.md` | Nov 25 | Two-armed: the last 105 Mar Fil in two files (Intercessor bolters and heavy 76, Blade Squad and Techmarine melee 29), Josh's move pre-set |
 | `167-two-armed-marta-tn-cyberbrush.md` | Nov 25 | Two-armed: Marta 36, Turtle Ninja 28, CyberBrush 8 in three files (0.32 mm only); `--two` takes the not_arms parts; TN stays unscaled (Josh) |
 | `168-two-armed-weapons-written.md` | Nov 25 | Two-armed done: 212 written (Mar Fil 169, Marta 35, CyberBrush 8), TN out; `batch.py write` uses Windows long paths (a Marta backup path > 260 chars) |
+| `169-stage-4-start-hand-fits-and-socket-batch.md` | Nov 25 | Stage 4: the four reference hand fits (Chain Sword 1-3 R, Shield R) from Josh's Arm 2A R placements; `make_socket_batch.py` (guide = Pad R, Chain Sword 1 R = Hand R); batch 1 = 21 Mar Fil Assault arms |

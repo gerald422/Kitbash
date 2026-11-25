@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Hand R": [
-   0.992998,
-   -0.114729,
-   0.028111,
-   -0.045248,
-   0.114177,
-   0.993248,
-   0.020515,
-   -0.076721,
-   -0.030276,
-   -0.017162,
-   0.999394,
-   -0.288997,
+   0.9818380503118214,
+   -0.15045759844598905,
+   0.1155735743215745,
+   -0.021939510399459294,
+   0.14901027540978423,
+   0.9886101221465349,
+   0.02111481891294982,
+   -0.10516501808024614,
+   -0.1174340609679433,
+   -0.0035097825218743696,
+   0.9930744384902527,
+   -0.2980692502859015,
    0.0,
    0.0,
    0.0,
@@ -29,7 +29,7 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\Melee\\176-ChainSword-2-R.stl"
  },
  "notes": {
-  "Hand R": "cut Assault weapon wrist 1, sure (0.0013 mm, 97% on), write_joints Nov 20"
+  "Hand R": "Josh's placement on Arm 2A R (reference file, cut 'Assault weapon wrist 2'), against 2A R's Hand R socket (kits/seat/ref_hand_fits.py, 2026-11-25)"
  },
  "origin": {
   "from_file": [
@@ -52,5 +52,8 @@
   ],
   "joint": "Hand R",
   "by": "origins.py Nov 15"
- }
+ },
+ "exact": [
+  "Hand R"
+ ]
 }
