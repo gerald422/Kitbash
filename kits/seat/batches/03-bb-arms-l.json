@@ -1,0 +1,1591 @@
+{
+ "name": "Stage 3 - BBoosty left arms as right (0.32 mm pre-set)",
+ "stage": "3 (arms on the spacer)",
+ "out": "~/Desktop/mar fil connectors/batches/03 Stage 3 - BBoosty left arms (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a1",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Chaplain - Arm L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a1_spacer",
+   "role": "check",
+   "name": "BBoosty Chaplain - Arm L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a1_arm",
+   "role": "part",
+   "name": "BBoosty Chaplain - Arm L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Chaplain/Arms/BBoosty Chaplain - Arm L",
+   "parent": "a1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9759207856842722,
+     -0.2181919922597328,
+     -0.000982711937644218,
+     88.5600293676153,
+     0.2181920925843115,
+     -0.9759206515393826,
+     -0.0002805683797744423,
+     -1.3076546743523372,
+     -0.0008977361891944894,
+     -0.0004882618814809829,
+     0.9999980580847425,
+     27.504177411346,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a1",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a1_head",
+   "role": "check",
+   "name": "BBoosty Chaplain - Arm L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a1_pack",
+   "role": "check",
+   "name": "BBoosty Chaplain - Arm L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a1_legs",
+   "role": "check",
+   "name": "BBoosty Chaplain - Arm L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a2",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 1 Sh L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a2_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 Sh L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a2_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 1 Sh L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms for connecting ranged weapon with shield_ Also can be used with melee/Arms/BBoosty Medusas Mortals - Arm 1 Sh L",
+   "parent": "a2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9966130198136941,
+     0.0824018807403957,
+     -0.0013757041989016505,
+     165.09086337448468,
+     -0.08240163983131064,
+     -0.9966132812263433,
+     -0.0003036996044597512,
+     5.599228938841978,
+     -0.0013957852658913635,
+     -0.0001886526220477028,
+     0.9999976949514451,
+     18.39848948598851,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a2",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a2_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 Sh L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a2_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 Sh L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a2_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 Sh L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a3",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 2 Bionic Sh L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a3_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic Sh L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a3_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic Sh L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms for connecting ranged weapon with shield_ Also can be used with melee/Arms/BBoosty Medusas Mortals - Arm 2 Bionic Sh L",
+   "parent": "a3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9804201299104391,
+     0.19336000613861476,
+     -0.03767106709696694,
+     248.70666020810035,
+     -0.1933727039666093,
+     -0.9811344173773898,
+     -0.0033526212018785482,
+     4.83966207346544,
+     -0.037608286891088416,
+     0.003997469322050472,
+     0.9992828929241417,
+     20.6046420730861,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a3",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a3_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic Sh L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a3_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic Sh L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a3_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic Sh L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a4",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 2 Sh L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a4_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Sh L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a4_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 2 Sh L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms for connecting ranged weapon with shield_ Also can be used with melee/Arms/BBoosty Medusas Mortals - Arm 2 Sh L",
+   "parent": "a4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9814230569974666,
+     0.19179518565971318,
+     -0.007371511273947734,
+     328.50073148655486,
+     -0.19179480910165983,
+     -0.9814499559274067,
+     -0.0008236955438423335,
+     4.1241904362003385,
+     -0.0073927675901631,
+     0.0006059618014843148,
+     0.9999711062002323,
+     20.48373967619239,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a4",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a4_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Sh L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a4_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Sh L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a4_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Sh L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a5",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 1 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a5_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a5_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 1 L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms/BBoosty Medusas Mortals - Arm 1 L",
+   "parent": "a5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9995834006864694,
+     -0.02933609973301629,
+     -0.0013127125588080068,
+     409.95132893047213,
+     0.029336326708209067,
+     -0.9995845850519367,
+     -0.0002786785753172375,
+     1.5657598970576216,
+     -0.0013040340380361382,
+     -0.00031685396569941613,
+     0.9999977593458176,
+     16.458233281120286,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a5",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a5_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a5_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a5_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a6",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 2 Bionic L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a6_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a6_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms/BBoosty Medusas Mortals - Arm 2 Bionic L",
+   "parent": "a6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996111048247824,
+     -0.028431091176681165,
+     -0.00020270202738723994,
+     485.2392589486054,
+     0.028430995481495205,
+     -0.9996102828423905,
+     -0.00031030790942919076,
+     5.706614055756208,
+     -0.00019432311950009094,
+     -0.00031604064757198054,
+     0.9999987568641765,
+     18.351843297132927,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a6",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a6_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a6_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a6_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 Bionic L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a7",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 2 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a7_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a7_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 2 L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms/BBoosty Medusas Mortals - Arm 2 L",
+   "parent": "a7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9995562087609164,
+     -0.030189111016869476,
+     0.0025723307435303712,
+     507.7017956859195,
+     0.030187207734897234,
+     -0.9995588707690677,
+     -0.00039237950048325916,
+     10.16506802976835,
+     0.002582233926147785,
+     -0.00031462012402741843,
+     0.9999952498011321,
+     57.81625210815238,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a7",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a7_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a7_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a7_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 2 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a8",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 3 L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a8_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 3 L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a8_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 3 L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms/BBoosty Medusas Mortals - Arm 3 L",
+   "parent": "a8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9867478337215332,
+     -0.15622752660047062,
+     -0.044168194702661236,
+     12.59560080839444,
+     0.15621605272393138,
+     -0.9877301501730007,
+     0.003731284088989343,
+     1.8305686643347918,
+     -0.044208509528037676,
+     -0.0032174908241759804,
+     0.9990160576800803,
+     -96.88562910427427,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a8",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a8_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 3 L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a8_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 3 L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a8_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 3 L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a9",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 4 Shoulder Bolts L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a9_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Bolts L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a9_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Bolts L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms/BBoosty Medusas Mortals - Arm 4 Shoulder Bolts L",
+   "parent": "a9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9651930580572794,
+     0.26005597388447843,
+     0.02835549111102999,
+     87.21131564464923,
+     -0.2598921767242651,
+     -0.9656074590755138,
+     0.00937936417707077,
+     2.589250188523171,
+     0.029818142473407975,
+     0.001684468785596343,
+     0.9995524712024008,
+     -98.72541320128803,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a9",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a9_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Bolts L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a9_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Bolts L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a9_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Bolts L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a10",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 4 Shoulder Studs L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a10_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Studs L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a10_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Studs L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms/BBoosty Medusas Mortals - Arm 4 Shoulder Studs L",
+   "parent": "a10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9635551218711895,
+     0.2659910485302784,
+     0.028993493577805153,
+     167.1400377401754,
+     -0.26600834260038836,
+     -0.9639796792260947,
+     0.003327572403713638,
+     2.6113440564982486,
+     0.028832852978894437,
+     -0.004505669851937222,
+     0.9995722925546066,
+     -98.76569339104901,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a10",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a10_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Studs L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a10_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Studs L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a10_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 4 Shoulder Studs L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a11",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm Bionic For Holding Shield L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a11_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm Bionic For Holding Shield L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a11_arm",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm Bionic For Holding Shield L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms/BBoosty Medusas Mortals - Arm Bionic For Holding Shield L",
+   "parent": "a11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9915584254751033,
+     -0.12837689300715932,
+     -0.018990034104860942,
+     250.5404764007159,
+     0.12837912569146448,
+     -0.9917393949821661,
+     0.0011334661334720377,
+     4.076123705226383,
+     -0.018977979840966178,
+     -0.0013133982136367454,
+     0.999817137444432,
+     -93.1822255109272,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a11",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a11_head",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm Bionic For Holding Shield L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a11_pack",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm Bionic For Holding Shield L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a11_legs",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm Bionic For Holding Shield L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a12",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Praetor - Arm L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a12_spacer",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a12_arm",
+   "role": "part",
+   "name": "BBoosty Praetor - Arm L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Praetor with Paragon Blade/Arms/BBoosty Praetor - Arm L",
+   "parent": "a12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.8620682745724343,
+     -0.5022195478120302,
+     -0.06814988928228864,
+     304.7799379338457,
+     0.5021846962293963,
+     -0.8645715158011072,
+     0.018876709349133373,
+     16.740015646146375,
+     -0.06839895167320297,
+     -0.017950506147185366,
+     0.9974947071635073,
+     -96.52562711161976,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a12",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a12_head",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a12_pack",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a12_legs",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a13",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Praetor - Arm Paragon Blade Gear Shoulder Bolts L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a13_spacer",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Gear Shoulder Bolts L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a13_arm",
+   "role": "part",
+   "name": "BBoosty Praetor - Arm Paragon Blade Gear Shoulder Bolts L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Praetor with Paragon Blade/Arms/BBoosty Praetor - Arm Paragon Blade Gear Shoulder Bolts L",
+   "parent": "a13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9864797595402732,
+     -0.1639734741004265,
+     -0.0008887079425509153,
+     492.53559570280754,
+     0.16397355085004578,
+     -0.9864795467655227,
+     -0.0002925369870535301,
+     -6.236630408139772,
+     -0.0008290559088612036,
+     -0.00043415542894661963,
+     0.9999981398645332,
+     -83.19689973765011,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a13",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a13_head",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Gear Shoulder Bolts L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a13_pack",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Gear Shoulder Bolts L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a13_legs",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Gear Shoulder Bolts L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a14",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Praetor - Arm Paragon Blade Skull Shoulder Bolts L",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a14_spacer",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Skull Shoulder Bolts L Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a14_arm",
+   "role": "part",
+   "name": "BBoosty Praetor - Arm Paragon Blade Skull Shoulder Bolts L (mirrored, as a right arm)",
+   "rel": "BBoosty - Heresy/Praetor with Paragon Blade/Arms/BBoosty Praetor - Arm Paragon Blade Skull Shoulder Bolts L",
+   "parent": "a14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9865896129802082,
+     -0.16330944289088958,
+     -0.0008057052820459326,
+     578.5288077855478,
+     0.16330949021755628,
+     -0.986589326747803,
+     -0.00030050926878630346,
+     -7.205325626721059,
+     -0.0007463484412291646,
+     -0.0004275850812105442,
+     0.9999982128272854,
+     -117.77098907492427,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a14",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a14_head",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Skull Shoulder Bolts L Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a14_pack",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Skull Shoulder Bolts L Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a14_legs",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm Paragon Blade Skull Shoulder Bolts L Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  }
+ ]
+}
