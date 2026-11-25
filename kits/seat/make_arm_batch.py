@@ -1,6 +1,10 @@
 """Stage 3 (arms on the spacer: depth and turn): one batch of right arms, each on the spacer on Torso 2 (notes 137).
 
-    BL kits/seat/make_arm_batch.py -- SPEC_OUT.json BATCH_OUT.blend NAME ARM_REL [ARM_REL ...]
+    BL kits/seat/make_arm_batch.py -- SPEC_OUT.json BATCH_OUT.blend NAME ARM_REL [ARM_REL ...] [--left]
+  --left: the arms are left-only sculpts (a Shoulder L fit, no right one; notes 147). Each is shown as its mirror image
+  on the right spacer, so Josh fixes it like every right arm; the original sculpt shows live on the left. It starts at
+  the mirror of its old left seat, and the write gives the arm its own Shoulder L fit (that left image). TIOW makes
+  the right version itself by mirroring (mirror_for_side), so nothing more is written.
   BL = blender --background --factory-startup --python
 
 Each column is Torso 2 (locked, as written), the spacer on its Shoulder R socket (locked; the left side its mirror),
@@ -29,7 +33,9 @@ def old(rel, key, typ):
 
 
 def main(A):
+    left = "--left" in A; A = [a for a in A if a != "--left"]
     spec_out, blend_out, name, arms = A[0], A[1], A[2], A[3:]
+    S_old_L = old(MT.T2, "socket", "Shoulder L")
     S2 = MT.sockets(MT.T2); S_old = old(MT.T2, "socket", "Shoulder R")
     now_2b = S2["Shoulder R"] @ G.M4(B.sidecar(MT.LIB, MT.ARM)["fits"]["Shoulder R"])
     delta = now_2b @ np.linalg.inv(S_old @ old(MT.ARM, "fit", "Shoulder R"))          # Josh's stage 1 change to Arm 2B R
@@ -42,18 +48,22 @@ def main(A):
     for k, rel in enumerate(arms, 1):
         tid = "a%d" % k; short = os.path.basename(rel).replace("MarFil ", ""); sc = B.sidecar(MT.LIB, rel)
         at = np.eye(4); at[:3, 3] = [MT.GAP * (k % MT.PER_ROW), 0, -MT.ROW_GAP * (k // MT.PER_ROW)]
-        F_old = (sc.get("fits") or {}).get("Shoulder R")
-        if F_old is None: log.append("%-34s left out: no old Shoulder R fit to start from" % short); continue
-        start = delta @ S_old @ G.M4(F_old)
-        log.append("%-34s starts %.2f mm %.1f deg from its old seat%s" % (short, *G.off(start, S_old @ G.M4(F_old)),
+        F_old = (sc.get("fits") or {}).get("Shoulder L" if left else "Shoulder R")
+        if F_old is None: log.append("%-34s left out: no old %s fit to start from" % (short, "Shoulder L" if left else "Shoulder R")); continue
+        was = (B.MX @ S_old_L @ G.M4(F_old) @ B.MX) if left else S_old @ G.M4(F_old)   # left: the mirror of its old left seat
+        start = delta @ was
+        log.append("%-34s starts %.2f mm %.1f deg from its old seat%s" % (short, *G.off(start, was),
                    "; mirrored in %s" % B._mirror_variant(sc)["name"] if B._mirror_variant(sc) else ""))
         objs += [{"id": tid, "role": "host", "name": "Torso 2 for " + short, "rel": MT.T2, "pose": {"place": True}, "at": list(at[:3, 3])},
                  {"id": tid + "_spacer", "role": "check", "name": short + " Spacer", "connector": {"kind": "spacer", "from": "arms", "obj": "Springles Spacer"},
                   "parent": tid, "on": "Shoulder R", "mirror": True, "pose": {"at_pivot": True, "shift_from": [MT.T2, "Shoulder R"]}},
-                 {"id": tid + "_arm", "role": "part", "name": short, "rel": rel, "parent": tid + "_spacer", "on": "arm seat", "mirror": True,
+                 {"id": tid + "_arm", "role": "part", "name": short + (" (mirrored, as a right arm)" if left else ""), "rel": rel, "parent": tid + "_spacer", "on": "arm seat", "mirror": True,
                   "joint": "Arm on the spacer", "pose": {"matrix": G.flat16(at @ start)},
                   "note": "starts at its old seat moved the way you moved Arm 2B R onto the spacer; set its depth on the spacer and its turn",
                   "write": {"host": tid, "socket": "Shoulder R", "mirror": "Shoulder L", "half": "fit"}}]
+        if left:
+            objs[-1]["mirror_mesh"] = True; objs[-1]["write"] = {"host": tid, "socket": "Shoulder R", "left": "Shoulder L", "half": "fit"}
+            objs[-1]["note"] = "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left)"
         objs += checks(tid, short + " ")
     spec = {"name": name, "stage": "3 (arms on the spacer)", "out": blend_out, "sources": MT.SRC,
             "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",

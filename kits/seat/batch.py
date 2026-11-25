@@ -184,6 +184,9 @@ def build(A):
         else:
             own_tris = stl_tris(lib, rel, sc)
             fr = {s["type"]: G.M4(s["matrix"]) for s in sc.get("sockets") or []}
+            if e.get("mirror_mesh"):                 # a left-only sculpt shown as its mirror image, fixed on the right
+                own_tris = own_tris[:, ::-1] * np.array([-1.0, 1.0, 1.0])    # (notes 147); its own frames don't apply
+                fr = {}
         fr["self"] = np.eye(4); frames[i] = fr
         # where it starts (own -> world)
         par = e.get("parent"); Wp = info[par]["W"] if par else None
@@ -468,6 +471,17 @@ def write(A):
                 if m: raise SystemExit("%s: a scaled part with a mirror fit is not handled, not written" % e["id"])
                 k0 = float(pd.get("scale") or 1.0); F = F @ np.diag([1 / k, 1 / k, 1 / k, 1]); pn["scale"] = round(k0 * k, 6)
                 W.append("%-24s scale  %.4f -> %.4f (Josh scaled it %.2f%%)" % (os.path.basename(prel)[-24:], k0, k0 * k, 100 * k))
+            if w.get("left"):                # a left-only sculpt fixed as its mirror image on the right (notes 147): its own
+                if m: raise SystemExit("%s: a left write has no mirror variant" % e["id"])    # fit is the left image's
+                Fm = G.M4(h["mirror_frame"]) if h.get("mirror_frame") else np.eye(4); Pm = Fm @ MX @ np.linalg.inv(Fm)
+                SLib = G.M4(next(s["matrix"] for s in hd.get("sockets") or [] if s["type"] == w["left"]))
+                F2 = np.linalg.inv(SLib) @ Pm @ S @ F @ MX
+                oldf = (pd.get("fits") or {}).get(w["left"])
+                pn.setdefault("fits", {})[w["left"]] = G.flat16(F2); pn.setdefault("exact", []).append(w["left"])
+                pn.setdefault("notes", {})[w["left"]] = tag + "; fixed as its mirror image on %s" % w["socket"]
+                W.append("%-24s fit    %-10s %s (fixed as its mirror image)" % (os.path.basename(prel)[-24:], w["left"], _diff(oldf, G.flat16(F2))))
+                want = Pm @ np.linalg.inv(own(objs[w["host"]])) @ own(o) @ np.diag([1 / k, 1 / k, 1 / k, 1]) @ MX
+                checks.append((e["id"], dict(w, socket=w["left"]), hrel, prel, want)); continue
             FL = MX @ F @ MX
             oldf = (pd.get("fits") or {}).get(w["socket"])
             pn.setdefault("fits", {})[w["socket"]] = G.flat16(F); pn.setdefault("exact", []).append(w["socket"])
