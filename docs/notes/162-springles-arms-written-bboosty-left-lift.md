@@ -15,3 +15,7 @@ a1_arm ... --delta --skip a2_arm,a3_arm` put Chaplain Arm L's 0.52 mm lift (in i
 `03 Stage 3 - BBoosty left arms (2026-11-25 c).blend`. His three stay as he set them.
 
 **Recycled:** the first BBoosty files (old size), the first Springles file, and all six written Springles files.
+
+**BBoosty right (Josh: "Yes, lift them"):** the same 0.52 mm lift on all 24 right arms (`apply ... a1_arm ... --delta
+--into` the right b file, which had no changes of his): `03 Stage 3 - BBoosty right arms (2026-11-25 c).blend`. Read
+back: all 24 moved 0.52 mm straight up in the seat frame, no turn.
