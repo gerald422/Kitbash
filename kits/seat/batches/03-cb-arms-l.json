@@ -1,0 +1,3796 @@
+{
+ "name": "Stage 3 - CyberBrush left arms as right (0.32 mm pre-set)",
+ "stage": "3 (arms on the spacer)",
+ "out": "~/Desktop/mar fil connectors/batches/03 Stage 3 - CyberBrush left arms (2026-11-25).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend"
+ },
+ "about": "Each column: move the arm on the spacer (its depth into the spacer and its turn) so it sits right on Torso 2. Its mirror shows on the left. Each placement is that arm's fit. The left column is Torso 2 with Arm 2B R as written, locked.",
+ "objects": [
+  {
+   "id": "ref",
+   "role": "host",
+   "name": "REFERENCE Torso 2 (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ref_spacer",
+   "role": "check",
+   "name": "REF Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "ref",
+   "on": "Shoulder R",
+   "mirror": true,
+   "joint": "Spacer on Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "ref_arm",
+   "role": "check",
+   "name": "REF Arm 2B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 2B R",
+   "parent": "ref_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "ref_guide",
+   "role": "check",
+   "name": "REF Guide",
+   "connector": {
+    "kind": "guide",
+    "from": "seat",
+    "obj": "Adapter - MarFil Assault - Arm 2B R"
+   },
+   "parent": "ref_arm",
+   "on": "Pad R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true
+   }
+  },
+  {
+   "id": "ref_pad",
+   "role": "check",
+   "name": "REF Shoulder Pad 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "ref_guide",
+   "on": "crown",
+   "mirror": true,
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "ref_head",
+   "role": "check",
+   "name": "REF Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "ref",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "ref_pack",
+   "role": "check",
+   "name": "REF Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "ref",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "ref_legs",
+   "role": "check",
+   "name": "REF Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "ref",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a1",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 1 (1)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a1_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (1) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a1",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a1_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 1 (1) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 1 (1)",
+   "parent": "a1_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994532004540608,
+     -0.03299415246874871,
+     0.0059393824231113645,
+     92.73219315827227,
+     0.032991263720480495,
+     -0.9994698112317908,
+     -0.0005012502038861459,
+     5.828478729890715,
+     0.005952138292637354,
+     -0.0003041382544772605,
+     0.9999812718871942,
+     14.80428169914023,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a1",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a1_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (1) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a1",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a1_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (1) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a1",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a1_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (1) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a1",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a2",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 1 (2)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a2_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (2) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a2",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a2_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 1 (2) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 1 (2)",
+   "parent": "a2_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994386013120442,
+     -0.033377158570213485,
+     0.006240388440827691,
+     169.8124920601052,
+     0.03337418115233801,
+     -0.9994569397099367,
+     -0.0005111488179275194,
+     7.782024048255853,
+     0.006253262428586763,
+     -0.00030248187888539627,
+     0.9999785420074249,
+     12.715349003982107,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a2",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a2_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (2) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a2",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a2_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (2) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a2",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a2_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (2) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a2",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a3",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 1 (3)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a3_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (3) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a3",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a3_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 1 (3) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 1 (3)",
+   "parent": "a3_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.999395329228149,
+     -0.03506317317119643,
+     0.003114341164886182,
+     240.32741916028488,
+     0.03506110282725752,
+     -0.9993995012716824,
+     -0.0004181979242382735,
+     24.15347816215999,
+     0.003126794533431034,
+     -0.00030899429396338807,
+     0.9999937338720492,
+     21.942245513807357,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a3",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a3_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (3) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a3",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a3_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (3) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a3",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a3_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (3) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a3",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a4",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 1 (4)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a4_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (4) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a4",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a4_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 1 (4) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 1 (4)",
+   "parent": "a4_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994179490000197,
+     -0.03414416623945785,
+     0.005238372883245633,
+     330.9981779345285,
+     0.03414147870746047,
+     -0.9994311955474372,
+     -0.0004834854525414593,
+     8.797277204765777,
+     0.005251504929191336,
+     -0.0003041700253497025,
+     0.9999846412746357,
+     19.957465118915632,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a4",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a4_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (4) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a4",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a4_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (4) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a4",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a4_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 1 (4) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a4",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a5",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 2 (1)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a5_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (1) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a5",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a5_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 2 (1) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 2 (1)",
+   "parent": "a5_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996967445377578,
+     -0.024572066052402565,
+     -0.005793740791817148,
+     427.45899874623836,
+     0.024573591012428297,
+     -0.9997129971018154,
+     -0.0001611714403311848,
+     0.03296306875120763,
+     -0.005788515437906122,
+     -0.00030257061426198275,
+     0.9999817294961751,
+     12.829736978149665,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a5",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a5_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (1) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a5",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a5_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (1) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a5",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a5_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (1) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a5",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a6",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 2 (2)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a6_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (2) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a6",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a6_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 2 (2) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 2 (2)",
+   "parent": "a6_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994421915685929,
+     -0.03351515625991326,
+     0.004634362327476497,
+     479.60174302928766,
+     0.03351364604993113,
+     -0.9994529846305579,
+     -0.000462688311543188,
+     6.492986707759334,
+     0.004647301225253536,
+     -0.000306605880906159,
+     0.9999880995139366,
+     3.4203062662986836,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a6",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a6_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (2) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a6",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a6_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (2) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a6",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a6_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (2) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a6",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a7",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 2 (3)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -0.0
+   ]
+  },
+  {
+   "id": "a7_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (3) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a7",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a7_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 2 (3) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 2 (3)",
+   "parent": "a7_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994252487823945,
+     -0.034051163437147314,
+     0.004501361344269505,
+     570.7433814881906,
+     0.034048690486804346,
+     -0.9994341639104578,
+     -0.00045973272439397625,
+     6.751138221905429,
+     0.004513472081258813,
+     -0.0003060865382428815,
+     0.9999879797494838,
+     16.601947152689718,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a7",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a7_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (3) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a7",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a7_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (3) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a7",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a7_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (3) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a7",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a8",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Claw 2 (4)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a8_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (4) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a8",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a8_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Claw 2 (4) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Claw/Arms/CyberBrush Bug Hunters - Claw 2 (4)",
+   "parent": "a8_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994545969667515,
+     -0.0330631513135986,
+     0.005248371879710003,
+     -0.5903178230190984,
+     0.033060463795584506,
+     -0.9994678336921013,
+     -0.00048048211426996346,
+     6.461520461798909,
+     0.005261157789352827,
+     -0.00030620025548764186,
+     0.9999846512151074,
+     -149.22480041704222,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a8",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a8_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (4) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a8",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a8_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (4) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a8",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a8_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Claw 2 (4) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a8",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a9",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 1 (1)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a9_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (1) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a9",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a9_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 1 (1) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 1 (1)",
+   "parent": "a9_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.0744029701463506,
+     -0.9575329747193484,
+     -0.27861241399149783,
+     108.7964156516974,
+     0.945574059020892,
+     0.021025476353941596,
+     -0.3247733942691525,
+     -64.14866123056005,
+     0.3168287799883298,
+     -0.2876040329154509,
+     0.9038251374975949,
+     -166.91248153256174,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a9",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a9_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (1) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a9",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a9_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (1) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a9",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a9_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (1) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a9",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a10",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 1 (2)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a10_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (2) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a10",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a10_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 1 (2) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 1 (2)",
+   "parent": "a10_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9759305976806515,
+     -0.07181373617246914,
+     -0.20599283320380962,
+     172.2315062779271,
+     0.07127168865379778,
+     -0.9974204622806052,
+     0.01006315780853674,
+     -0.618920663961961,
+     -0.2061782072710575,
+     -0.004859745474578175,
+     0.9785011522826745,
+     -108.72076609842084,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a10",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a10_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (2) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a10",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a10_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (2) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a10",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a10_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (2) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a10",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a11",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 1 (4)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a11_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (4) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a11",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a11_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 1 (4) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 1 (4)",
+   "parent": "a11_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.02909803194760174,
+     -0.9991492057181345,
+     0.029750142444895683,
+     248.8390507168362,
+     0.9267454358315863,
+     -0.0381197433253008,
+     -0.3737900741033773,
+     -34.79115849178982,
+     0.37459434522760127,
+     0.01669375514775995,
+     0.9270365457867215,
+     -182.7026876808962,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a11",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a11_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (4) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a11",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a11_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (4) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a11",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a11_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (4) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a11",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a12",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 1 (5)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a12_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (5) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a12",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a12_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 1 (5) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 1 (5)",
+   "parent": "a12_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.03103029349103892,
+     -0.9990549483487864,
+     0.030917667963576263,
+     329.47370431419876,
+     0.9280978113828797,
+     -0.04028286028720772,
+     -0.37019109220527047,
+     -42.14299551876896,
+     0.3710749888977294,
+     0.017206212033818013,
+     0.9284416483235644,
+     -164.64507334097175,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a12",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a12_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (5) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a12",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a12_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (5) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a12",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a12_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 1 (5) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a12",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a13",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 2 (1)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a13_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (1) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a13",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a13_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 2 (1) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 2 (1)",
+   "parent": "a13_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.06827197122144234,
+     -0.9568039011935624,
+     -0.28265704266824226,
+     416.68207959161896,
+     0.9452524315680987,
+     0.028601231645218658,
+     -0.3251293439709749,
+     -77.92528832707673,
+     0.31915924473498364,
+     -0.2893701702190062,
+     0.9024403672818124,
+     -129.40088806783496,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a13",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a13_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (1) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a13",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a13_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (1) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a13",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a13_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (1) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a13",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a14",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 2 (2)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a14_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (2) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a14",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a14_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 2 (2) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 2 (2)",
+   "parent": "a14_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9758070226071986,
+     -0.07174472907183632,
+     -0.20659972507573007,
+     492.2854189402884,
+     0.07119790610991442,
+     -0.9974254374949829,
+     0.010086992298471171,
+     -0.04512619643182038,
+     -0.20678511603288638,
+     -0.004865684328757957,
+     0.9783726089187068,
+     -108.70878760277677,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a14",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a14_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (2) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a14",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a14_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (2) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a14",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a14_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (2) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a14",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a15",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 2 (4)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -120.0
+   ]
+  },
+  {
+   "id": "a15_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (4) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a15",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a15_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 2 (4) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 2 (4)",
+   "parent": "a15_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.027223270191204744,
+     -0.99924245659601,
+     0.028344453080481138,
+     570.053579855801,
+     0.9272093551946387,
+     -0.03583761125016743,
+     -0.3728636653030759,
+     -51.15695831950681,
+     0.3735851811939848,
+     0.016130333782222294,
+     0.9274545395181086,
+     -142.32658544051907,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a15",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a15_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (4) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a15",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a15_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (4) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a15",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a15_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (4) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a15",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a16",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 2 (5)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a16_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (5) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a16",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a16_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 2 (5) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 2 (5)",
+   "parent": "a16_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.0290393769153323,
+     -0.9991493698314408,
+     0.02979664615712632,
+     10.678981159606902,
+     0.9276110775103827,
+     -0.038043787802897765,
+     -0.3716453086340018,
+     -58.152001796403084,
+     0.3724506518569208,
+     0.016846776905746225,
+     0.9278972099017914,
+     -245.39799079574013,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a16",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a16_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (5) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a16",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a16_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (5) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a16",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a16_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (5) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a16",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a17",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 3 (1)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a17_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (1) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a17",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a17_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 3 (1) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 3 (1)",
+   "parent": "a17_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.06446595339545133,
+     -0.9568046450298874,
+     -0.2835478225925332,
+     83.81965696343612,
+     0.9451383759927346,
+     0.032657106027697294,
+     -0.32507956568160623,
+     -92.65212500829766,
+     0.3202876623205353,
+     -0.2889399936100931,
+     0.9021785741132521,
+     -209.61633818078312,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a17",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a17_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (1) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a17",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a17_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (1) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a17",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a17_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (1) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a17",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a18",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 3 (3)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a18_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (3) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a18",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a18_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 3 (3) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 3 (3)",
+   "parent": "a18_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.029133859534425998,
+     -0.9990826388151378,
+     0.0318499018127176,
+     171.44661957268605,
+     0.9263101125319461,
+     -0.03896026947374935,
+     -0.37478223574039876,
+     -67.54717455067845,
+     0.37566718529022286,
+     0.018583569624988402,
+     0.9265661624874629,
+     -223.3215440642184,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a18",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a18_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (3) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a18",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a18_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (3) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a18",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a18_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (3) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a18",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a19",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 3 (4)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a19_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (4) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a19",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a19_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 3 (4) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 3 (4)",
+   "parent": "a19_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.03126869180211258,
+     -0.9990887341146639,
+     0.02955592459351561,
+     252.12480957029484,
+     0.9273622057255688,
+     -0.04003045599826901,
+     -0.37205534365269227,
+     -74.46536362527739,
+     0.37288755733293305,
+     0.01577425607068658,
+     0.9277408726738617,
+     -205.00710157072857,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a19",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a19_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (4) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a19",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a19_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (4) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a19",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a19_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 3 (4) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a19",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a20",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 4 (2)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a20_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (2) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a20",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a20_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 4 (2) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 4 (2)",
+   "parent": "a20_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     0.011328232787659355,
+     0.8787782276174729,
+     0.4771266351211222,
+     326.73291783663143,
+     0.8978919380309901,
+     -0.21894837747509582,
+     0.3819441276828422,
+     36.06484587166022,
+     0.44009656743248093,
+     0.4240680048073812,
+     -0.7915036069483901,
+     -192.4672022473096,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a20",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a20_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (2) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a20",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a20_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (2) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a20",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a20_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (2) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a20",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a21",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 4 (5)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a21_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (5) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a21",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a21_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 4 (5) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 4 (5)",
+   "parent": "a21_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.0863138742821463,
+     0.07057047569298526,
+     -0.9937810773250348,
+     428.0374029037859,
+     -0.4069267311198246,
+     0.9080065994905977,
+     0.09982229032081202,
+     24.03187940124411,
+     0.9093756789317924,
+     0.4129992593355398,
+     -0.049655257923166565,
+     -182.04590264040408,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a21",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a21_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (5) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a21",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a21_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (5) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a21",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a21_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 4 (5) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a21",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a22",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - 4 (Bayonet)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a22_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 4 (Bayonet) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a22",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a22_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - 4 (Bayonet) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Guns/Arms/CyberBrush Bug Hunters - 4 (Bayonet)",
+   "parent": "a22_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996086932740502,
+     -0.028491091836227694,
+     -0.0006787063022140838,
+     491.6142413283717,
+     0.028491134428453784,
+     -0.9996083028784717,
+     -0.00029746686141475694,
+     4.305679608030846,
+     -0.0006703030085810899,
+     -0.00031609448908713115,
+     0.9999983288899679,
+     -213.6649055559564,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a22",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a22_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 4 (Bayonet) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a22",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a22_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 4 (Bayonet) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a22",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a22_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 4 (Bayonet) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a22",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a23",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - 5 (Bayonet)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -240.0
+   ]
+  },
+  {
+   "id": "a23_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 5 (Bayonet) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a23",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a23_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - 5 (Bayonet) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Guns/Arms/CyberBrush Bug Hunters - 5 (Bayonet)",
+   "parent": "a23_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996066504194454,
+     -0.02856909249321538,
+     -0.0007547072935240981,
+     559.6731653412456,
+     0.02856915715240608,
+     -0.9996063289251835,
+     -0.00029449224060141795,
+     -0.3982540048690256,
+     -0.0007462784268315116,
+     -0.0003161646570962705,
+     0.9999982608260793,
+     -233.10170033253002,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a23",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a23_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 5 (Bayonet) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a23",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a23_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 5 (Bayonet) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a23",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a23_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 5 (Bayonet) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a23",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a24",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Gun Arm 4",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a24_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 4 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a24",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a24_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Gun Arm 4 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Guns/Arms/CyberBrush Bug Hunters - Gun Arm 4",
+   "parent": "a24_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996162406895154,
+     -0.028246089532790373,
+     1.529994585034049e-05,
+     11.564670158391728,
+     0.028245930533184437,
+     -0.99961522106485,
+     -0.00031623511207635297,
+     4.149514540806651,
+     2.3618274258665735e-05,
+     -0.0003158742978235702,
+     0.9999989528557649,
+     -333.67344685083765,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a24",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a24_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 4 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a24",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a24_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 4 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a24",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a24_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 4 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a24",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a25",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Gun Arm 5",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a25_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 5 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a25",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a25_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Gun Arm 5 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Guns/Arms/CyberBrush Bug Hunters - Gun Arm 5",
+   "parent": "a25_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996011125965828,
+     -0.028745094138385597,
+     -0.0014127135467062219,
+     79.61823643968978,
+     0.02874534994253959,
+     -0.9996013876974086,
+     -0.0002757119686782679,
+     -0.41914797923824143,
+     -0.0014042216057939178,
+     -0.0003163228435976864,
+     0.9999976695132703,
+     -303.24781353444996,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a25",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a25_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 5 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a25",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a25_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 5 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a25",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a25_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 5 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a25",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a26",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Gun Arm 7",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a26_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 7 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a26",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a26_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Gun Arm 7 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Guns/Arms/CyberBrush Bug Hunters - Gun Arm 7",
+   "parent": "a26_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.999375981392924,
+     -0.035419183810042526,
+     0.004804366550398345,
+     161.30913933082294,
+     0.03541661841660139,
+     -0.9993866221865971,
+     -0.00047263125070565756,
+     0.3561567385294474,
+     0.004817913672294402,
+     -0.0003023134380099498,
+     0.9999872508098205,
+     -324.2570675147728,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a26",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a26_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 7 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a26",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a26_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 7 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a26",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a26_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Gun Arm 7 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a26",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a27",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Knife Arm 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a27_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a27",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a27_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Knife Arm 1 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Knife/Arms/CyberBrush Bug Hunters - Knife Arm 1",
+   "parent": "a27_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9945087586287765,
+     -0.09190084110259251,
+     0.050362311062445174,
+     247.35052544275885,
+     0.09217916771315683,
+     -0.9957518664102841,
+     0.0032319596243020306,
+     -6.204677671441188,
+     0.049849766353480686,
+     0.007857509080508411,
+     0.9987246456666445,
+     -158.53869006845406,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a27",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a27_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 1 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a27",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a27_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 1 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a27",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a27_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 1 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a27",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a28",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Knife Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a28_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a28",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a28_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Knife Arm 2 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Knife/Arms/CyberBrush Bug Hunters - Knife Arm 2",
+   "parent": "a28_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996395619466892,
+     -0.027276081224328112,
+     -0.0025817231630310402,
+     318.939452630583,
+     0.027276676704258852,
+     -0.9996428974401459,
+     -0.00024410204553530768,
+     -7.4598657092824805,
+     -0.0025736818005569623,
+     -0.0003140026049196468,
+     0.999995618482168,
+     -140.43879634538416,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a28",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a28_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 2 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a28",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a28_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 2 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a28",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a28_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 2 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a28",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a29",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Knife Arm 3",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a29_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 3 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a29",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a29_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Knife Arm 3 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Knife/Arms/CyberBrush Bug Hunters - Knife Arm 3",
+   "parent": "a29_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996858359488331,
+     -0.02549206033790017,
+     0.0027883309514567536,
+     467.60102341398385,
+     0.025491102748542774,
+     -0.9996892999614305,
+     -0.000390307083016153,
+     3.036479513677611,
+     0.0027967525516500377,
+     -0.00031839808979432704,
+     0.9999944463010672,
+     -351.48692964362465,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a29",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a29_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 3 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a29",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a29_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 3 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a29",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a29_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 3 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a29",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a30",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Knife Arm 4",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a30_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 4 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a30",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a30_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Knife Arm 4 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Knife/Arms/CyberBrush Bug Hunters - Knife Arm 4",
+   "parent": "a30_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996259664412656,
+     -0.027897085335314865,
+     0.0009433106463710592,
+     479.6565888890532,
+     0.02789665772601387,
+     -0.9996251042316286,
+     -0.00034292464087098506,
+     -7.492882915995167,
+     0.0009525071353744083,
+     -0.0003165606440271881,
+     0.9999977867492094,
+     -93.00273751395923,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a30",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a30_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 4 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a30",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a30_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 4 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a30",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a30_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 4 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a30",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a31",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Knife Arm 5",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0.0,
+    -360.0
+   ]
+  },
+  {
+   "id": "a31_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 5 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a31",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a31_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Knife Arm 5 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Knife/Arms/CyberBrush Bug Hunters - Knife Arm 5",
+   "parent": "a31_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9996096981419651,
+     -0.02845409150744954,
+     -0.0006597063049150917,
+     627.9870962109003,
+     0.028454128586149388,
+     -0.9996092905229635,
+     -0.00029746051686004786,
+     -2.0570356402595134,
+     -0.0006513146836826456,
+     -0.00031606121913744904,
+     0.9999983461234893,
+     -351.01208096149566,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a31",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a31_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 5 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a31",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a31_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 5 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a31",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a31_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 5 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a31",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a32",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Knife Arm 6",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a32_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 6 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a32",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a32_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Knife Arm 6 (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Knife/Arms/CyberBrush Bug Hunters - Knife Arm 6",
+   "parent": "a32_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.995472761432327,
+     0.04372994246542861,
+     -0.08456144263207001,
+     74.27300805240351,
+     -0.09309643864220718,
+     -0.2614652091440716,
+     0.9607278954744796,
+     -2.8004034933894797,
+     0.019901122790738378,
+     0.9642218041336538,
+     0.26434401802307944,
+     -459.1956103736069,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a32",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a32_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 6 Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a32",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a32_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 6 Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a32",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a32_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Knife Arm 6 Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a32",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a33",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - 2A (Arm)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a33_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2A (Arm) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a33",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a33_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - 2A (Arm) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Shields/Arms/CyberBrush Bug Hunters - 2A (Arm)",
+   "parent": "a33_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994747517103938,
+     -0.032837139940374176,
+     0.0010923136315316082,
+     88.57086941498412,
+     0.03283666393178404,
+     -0.9994747553176044,
+     -0.00035187488330163443,
+     -16.914522577241964,
+     0.0011030785558194596,
+     -0.00031599727898669534,
+     0.9999979192857069,
+     -479.0823737415066,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a33",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a33_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2A (Arm) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a33",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a33_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2A (Arm) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a33",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a33_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2A (Arm) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a33",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a34",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - 2B (Arm)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a34_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2B (Arm) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a34",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a34_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - 2B (Arm) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Shields/Arms/CyberBrush Bug Hunters - 2B (Arm)",
+   "parent": "a34_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9994733998691511,
+     -0.03278214290695129,
+     0.0029303369439545495,
+     121.61552276341467,
+     0.032781130933268364,
+     -0.9994767381133148,
+     -0.0004082596600108527,
+     -13.04456012495006,
+     0.002941061875415323,
+     -0.0003119479801122911,
+     0.999994569877781,
+     -478.9370544475085,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a34",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a34_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2B (Arm) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a34",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a34_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2B (Arm) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a34",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a34_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 2B (Arm) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a34",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  },
+  {
+   "id": "a35",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - 3 (Arm)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0.0,
+    -480.0
+   ]
+  },
+  {
+   "id": "a35_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 3 (Arm) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "a35",
+   "on": "Shoulder R",
+   "mirror": true,
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "a35_arm",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - 3 (Arm) (mirrored, as a right arm)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Shields/Arms/CyberBrush Bug Hunters - 3 (Arm)",
+   "parent": "a35_spacer",
+   "on": "arm seat",
+   "mirror": true,
+   "joint": "Arm on the spacer",
+   "pose": {
+    "matrix": [
+     -0.9993978204269635,
+     -0.03493117333318845,
+     0.003704350147860894,
+     226.02066661172657,
+     0.034929930781302326,
+     -0.9994044577731962,
+     -0.0004370000313598084,
+     -17.12757656210188,
+     0.003716753613994008,
+     -0.000306876020421264,
+     0.9999912635126195,
+     -479.0547381216201,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "note": "the left sculpt's mirror image, at the mirror of its old left seat; set its depth on the spacer and its turn (the sculpt itself shows on the left); your repeated move (0.32, 0.00, 0.00 mm) is already on it",
+   "write": {
+    "host": "a35",
+    "socket": "Shoulder R",
+    "left": "Shoulder L",
+    "half": "fit"
+   },
+   "mirror_mesh": true
+  },
+  {
+   "id": "a35_head",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 3 (Arm) Helmet 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Helmets-Heads/Heads/MarFil Intercessor - Helmet 1",
+   "parent": "a35",
+   "on": "Neck",
+   "pose": {
+    "fit": "Neck"
+   }
+  },
+  {
+   "id": "a35_pack",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 3 (Arm) Back Pack 1",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Backpacks/MarFil Intercessor - Back Pack 1",
+   "parent": "a35",
+   "on": "Back",
+   "pose": {
+    "fit": "Back"
+   }
+  },
+  {
+   "id": "a35_legs",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - 3 (Arm) Legs 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Legs(JumpPack)/Legs/MarFil Assault - Legs 1A",
+   "parent": "a35",
+   "on": "Waist",
+   "pose": {
+    "fit": "Waist"
+   }
+  }
+ ]
+}
