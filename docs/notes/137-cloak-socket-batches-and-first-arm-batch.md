@@ -118,3 +118,14 @@ cloak got its own style's change, exactly (0.00000 off), in new files:
 
 Renders: an applied torso looks like his. His `b` file is kept. My untouched `b` files of TN 1 and 3, and the
 `.blend1`, went to the Recycle Bin.
+
+## Written: TN torsos 2 (Nov 25)
+
+Josh: "TN torsos 2 c is all good". The 17 Cloak sockets are written from the circles cloak's move. The old sidecars
+are in `_backups\batch write 2026-11-25 0919`. Every joint matched the file: 0.0000 mm. The b and c files went to the
+Recycle Bin.
+
+**The no-circles cloak can't follow that socket exactly.** From the library (socket . its Torso 2 fit), Marta 49 March
+Cloak 2 sits 1.28 mm and 6.2 deg from where Josh put it, on every TN torso alike. Its points are off by a median of
+1.8 mm, at most 3.2 mm. One socket holds one move, so this is asked: a second socket for the no-circles style, or
+accept it.
