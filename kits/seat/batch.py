@@ -175,6 +175,7 @@ def build(A):
     log = []
     ids = [e["id"] for e in spec["objects"]]
     if len(ids) != len(set(ids)): raise SystemExit("ids used twice: %s" % sorted({i for i in ids if ids.count(i) > 1}))
+    shared = {}                                          # (part, own -> object) -> mesh, for locked pieces
     for e in spec["objects"]:
         i, role = e["id"], e["role"]; assert role in ROLES, role
         pose = e.get("pose", {}); conn = entry_conn(e)
@@ -202,6 +203,7 @@ def build(A):
                 r3, t3 = pose["shift_from"]; s3 = next(s for s in sidecar(lib, r3)["sockets"] if s["type"] == t3)
                 W = W @ G.M4(s3["props"]["kb_connectors"][0]["own_in_socket"])
         elif "fit" in pose: W = piv_parent @ G.M4(sc["fits"][pose["fit"]])      # the part's own library fit on the pivot
+        elif "in_pivot" in pose: W = piv_parent @ G.M4(pose["in_pivot"])         # a given fit on the pivot (Nov 26: pad starts)
         elif pose.get("place"): W = np.eye(4)                                     # its library frame
         elif "matrix" in pose: W = G.M4(pose["matrix"])                           # given own -> world (e.g. stood on its waist)
         elif "obj" in pose or "child_of" in pose:
@@ -218,7 +220,11 @@ def build(A):
         P = piv_parent if piv_parent is not None else W.copy()                           # the pivot (object origin)
         if e.get("preset"): D = G.M4(e["preset"]); W = P @ D @ np.linalg.inv(P) @ W; P = P @ D
         K = np.linalg.inv(P) @ W
-        o = make_mesh(e.get("name", i)[:63], own_tris, K)
+        mkey = None if role == "part" or e.get("mirror_mesh") else (rel or "connector: %s/%s" % (e["connector"]["kind"], e["connector"]["obj"]), np.round(K, 5).tobytes())
+        if mkey in shared: o = bpy.data.objects.new(e.get("name", i)[:63], shared[mkey])    # locked pieces repeated column to column
+        else:                                                                               # share one mesh (Nov 26: ~300-column pad file)
+            o = make_mesh(e.get("name", i)[:63], own_tris, K)
+            if mkey: shared[mkey] = o.data
         if e.get("collection"):                      # its own collection Josh can hide (e.g. the second cloak style)
             if e["collection"] not in colls: c = bpy.data.collections.new(e["collection"][:60]); root.children.link(c); colls[e["collection"]] = c
             colls[e["collection"]].objects.link(o)
