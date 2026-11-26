@@ -48,3 +48,18 @@ Renders: in the arm-type file, 10 columns sit on the shoulder (raised arms are h
 not finished when this was written.
 
 `batch.py build` shares one mesh between repeated locked pieces (notes 172), so these files stay at about 1.3 GB.
+
+**By kit** (Josh: "In both the pauldron file and the arm file where possible can it be by kit in the order they are in
+the blender file. That should mean I can do a few and then ask you to apply the few to the rest of each kit"):
+- **Pauldrons:** each pack (folder) starts a row (rows of 20) in its own numbered collection: 51 packs.
+  `04 Stage 4 - Every pauldron on the shell, by kit (2026-11-26 d).blend`, spec `04-pauldrons-all-d.json`. Shoulder
+  Pad 1 now sits in its own pack's row.
+- **Arm types:** a row per maker, one collection each (7), the kits in order within it.
+  `04 Stage 4 - Arm types, shell on each, by kit (2026-11-26 b).blend`, spec `04-arm-types-b.json`.
+- **Render of 15 pauldrons from the d file:** all on the shoulder, on their shells.
+- **Carrying a fix:** `batch.py apply` still carries to every piece of a kind in the file. Limiting it to one
+  kit's collection is the next change, when he asks for a carry.
+
+The pauldron b and c files and the first arm-type file were never opened and went to the Recycle Bin. Still in the
+batches folder: the Nov 25-26 stage 4 files he looked at (Assault arm sockets and b, Pads by arm type, Every pauldron
+in the guide), replaced by these two and kept until he says.

@@ -59,10 +59,19 @@ def main(A):
     by_pack, by_maker = {}, {}
     for r, F in sorted(mine.items()): by_pack.setdefault(pack(r), (F, r)); by_maker.setdefault(maker(r), (F, r))
     objs, log = [], []
-    shown = sorted(pads, key=lambda t: (t[0] != MT.PAD, t[0]))
-    for k, (rel, left, done) in enumerate(shown):
+    shown = sorted(pads)                            # by path, so by pack (Shoulder Pad 1 sits in its own pack)
+    packs = []                                      # by kit (Josh, Nov 26): each pack starts a row, in its own numbered
+    for rel, left, done in shown:                   # collection, so he does a few and asks for them on the rest of the kit
+        if not packs or packs[-1][0] != pack(rel): packs.append((pack(rel), []))
+        packs[-1][1].append((rel, left, done))
+    lay = []; row = 0
+    for n, (pk, items) in enumerate(packs, 1):
+        coll = "%02d %s" % (n, pk.replace(" - Tacticus", "").replace(" - Heresy", "")[-55:])
+        for j, it in enumerate(items):
+            lay.append((it, [GAP * (j % PER_ROW), 0, -ROW_GAP * (row + j // PER_ROW)], coll))
+        row += (len(items) + PER_ROW - 1) // PER_ROW
+    for k, ((rel, left, done), at, coll) in enumerate(lay):
         tid = "p%d" % k; short = os.path.basename(rel)
-        at = [GAP * (k % PER_ROW), 0, -ROW_GAP * (k // PER_ROW)]
         objs += [{"id": tid, "role": "host", "name": "Torso 2 for " + short, "rel": MT.T2, "pose": {"place": True}, "at": at},
                  {"id": tid + "_spacer", "role": "check", "name": short + " Spacer", "connector": {"kind": "spacer", "from": "arms", "obj": "Springles Spacer"},
                   "parent": tid, "on": "Shoulder R", "pose": {"at_pivot": True, "shift_from": [MT.T2, "Shoulder R"]}},
@@ -89,6 +98,7 @@ def main(A):
             else: e["write"]["mirror"] = "Pad L"
             sh["note"] = "rotate the shell (the pauldron rides on it) until the pauldron sits right; nudge the pauldron itself only if it sits wrong in the shell"
             e["note"] = "its place against Arm 2B R's Pad R is its fit on every arm (starts from %s)" % how
+        sh["collection"] = e["collection"] = coll
         objs += [sh, e]; log.append("%-52s %s%s" % (short[:52], how, ", left-only: mirrored" if left else ""))
     srcs = dict(MT.SRC, pads=PADS)
     spec = {"name": name, "stage": "4 (arms' sockets): pauldrons on the shell", "out": blend_out, "sources": srcs,
