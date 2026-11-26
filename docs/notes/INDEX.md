@@ -176,3 +176,4 @@ Add a new entry as the next number and append its line here.
 | `168-two-armed-weapons-written.md` | Nov 25 | Two-armed done: 212 written (Mar Fil 169, Marta 35, CyberBrush 8), TN out; `batch.py write` uses Windows long paths (a Marta backup path > 260 chars) |
 | `169-stage-4-start-hand-fits-and-socket-batch.md` | Nov 25 | Stage 4: the four reference hand fits (Chain Sword 1-3 R, Shield R) from Josh's Arm 2A R placements; `make_socket_batch.py` (guide = Pad R, Chain Sword 1 R = Hand R); batch 1 = 21 Mar Fil Assault arms |
 | `170-stage-4-pad-starts-from-the-cut.md` | Nov 25 | Stage 4 b file: pads start from Josh's pad spot cut (19 of 21 match; 3A/3B R don't), hands keep old sockets with the wrist cut's start shown faint on 5 |
+| `171-pads-by-arm-type.md` | Nov 26 | Pads: Josh's two-guide split (general guide = how a pauldron sits, its fit; type guide = where on the arm, Pad R); `make_pad_batch.py` from his Nov 23 seat file: 19 arm types + 3 pauldrons |
