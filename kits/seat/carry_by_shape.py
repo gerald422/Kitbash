@@ -1,6 +1,8 @@
 """Carry Josh's seat of one pauldron to the rest of its kit by the inner surface (Nov 26, stage 4 pauldrons).
 
     BL kits/seat/carry_by_shape.py -- SRC.blend OUT.blend FROM_ID@KIT[,FROM_ID@KIT...] [--only ID,ID]
+
+Several FROM_IDs may share a KIT (Josh seats one per inner shape): each other pauldron takes the best of them.
   BL = blender --background --factory-startup --python
 
 Josh: "they by type all have the same internal shape. there is a certain curve that is shared across each type ...
@@ -55,48 +57,56 @@ def main(A):
     frame = lambda o: B.own(by[o["kb_parent"]]) @ G.M4(o["kb_on_frame"])      # the frame it sits on in the shell (world)
     starts = [G.rot_to(np.array([0, 0, 1.0]), dv) @ G.rot((0, 0, 1), s) for dv in G.fib(40) for s in range(0, 360, 45)]
     W, flagged = [], []
-    for fk in froms:
-        fid, _, kit = fk.partition("@"); j = by[fid]
-        Xj = np.linalg.inv(frame(j)) @ B.own(j)                               # his pauldron: own -> shell frame
-        Pj, bj, sh = inner(j)                                                  # his inner surface (his own coordinates)
-        Ps = Pj @ Xj[:3, :3].T + Xj[:3, 3]                                     # ... as he placed it (shell frame)
-        Pc, Pf = sub(Ps, 250), sub(Ps, 1500); cp = Ps.mean(0)
-        W.append("%s (%s): inner surface %.0f%% of its area" % (fk, j.name, 100 * sh)); print(W[-1], flush=True)
-        suf = fid.split("_", 1)[1]
+    kits = {}                                        # kit -> his pauldrons there (several per pack: each other one takes
+    for fk in froms:                                 # the one whose inner surface it matches best)
+        fid, _, kit = fk.partition("@"); kits.setdefault(kit, []).append(fid)
+    his = {f for fs in kits.values() for f in fs}
+    for kit, fids in kits.items():
+        refs = []
+        for fid in fids:
+            j = by[fid]; Xj = np.linalg.inv(frame(j)) @ B.own(j)               # his pauldron: own -> shell frame
+            Pj, bj, sh = inner(j); Ps = Pj @ Xj[:3, :3].T + Xj[:3, 3]          # its inner surface, as he placed it
+            refs.append((fid, j.name, Xj, bj, Ps))
+            W.append("%s@%s (%s): inner surface %.0f%% of its area" % (fid, kit, j.name, 100 * sh)); print(W[-1], flush=True)
+        suf = fids[0].split("_", 1)[1]
         for i, o in sorted(by.items(), key=lambda kv: int(kv[0].split("_")[0][1:]) if kv[0].split("_")[0][1:].isdigit() else 0):
-            if i == fid or "_" not in i or i.split("_", 1)[1] != suf or o["kb_role"] != "part": continue
+            if i in his or "_" not in i or i.split("_", 1)[1] != suf or o["kb_role"] != "part": continue
             if only and i not in only: continue
             if kit and not any(cl.name.startswith(kit) for cl in o.users_collection): continue
             Po, bo, sho = inner(o); Pt = sub(Po, 1500)
             Xo = np.linalg.inv(frame(o)) @ B.own(o)
-            cand = [(np.linalg.inv(X)[:3, :3], np.linalg.inv(X)[:3, 3]) for X in (Xj, Xo)] + [(R0, Po.mean(0) - R0 @ cp) for R0 in starts]
-            coarse = sorted((G.icp(bo, Pc, R0, t0, iters=8, keep=0.85, lim=10.0) for R0, t0 in cand), key=lambda f: f[2])
-            fits, seen = [], []
-            for R, t, _r in coarse:                  # M: his shell frame -> their own
-                M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t
-                if any(G.ang(M, S) < 5 and np.linalg.norm(M[:3, 3] - S[:3, 3]) < 1 for S in seen): continue
-                seen.append(M)
-                if len(seen) > 6: break
-                R, t, r1 = G.icp(bo, Pf, R, t, iters=40, keep=0.85, lim=3.0)
-                M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t
-                back = np.linalg.inv(Xj) @ np.linalg.inv(M)                    # their own -> his own: theirs onto his
-                Q = Pt @ back[:3, :3].T + back[:3, 3]
-                d = np.array([(bj.find_nearest(Vector(q), 3.0)[3] or 9.0) for q in Q])
-                r2 = float(np.sqrt(np.mean(np.sort(d)[: int(len(d) * 0.85)] ** 2)))
-                fits.append((max(r1, r2), np.linalg.inv(M), r1, r2))
+            fits = []
+            for fid, jname, Xj, bj, Ps in refs:
+                Pc, Pf = sub(Ps, 250), sub(Ps, 1500)
+                cand = [(np.linalg.inv(X)[:3, :3], np.linalg.inv(X)[:3, 3]) for X in (Xj, Xo)] + [(R0, Po.mean(0) - R0 @ Ps.mean(0)) for R0 in starts]
+                coarse = sorted((G.icp(bo, Pc, R0, t0, iters=8, keep=0.85, lim=10.0) for R0, t0 in cand), key=lambda f: f[2])
+                seen = []
+                for R, t, _r in coarse:              # M: his shell frame -> their own
+                    M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t
+                    if any(G.ang(M, S) < 5 and np.linalg.norm(M[:3, 3] - S[:3, 3]) < 1 for S in seen): continue
+                    seen.append(M)
+                    if len(seen) > 6: break
+                    R, t, r1 = G.icp(bo, Pf, R, t, iters=40, keep=0.85, lim=3.0)
+                    M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t
+                    back = np.linalg.inv(Xj) @ np.linalg.inv(M)                # their own -> his own: theirs onto his
+                    Q = Pt @ back[:3, :3].T + back[:3, 3]
+                    d = np.array([(bj.find_nearest(Vector(q), 3.0)[3] or 9.0) for q in Q])
+                    r2 = float(np.sqrt(np.mean(np.sort(d)[: int(len(d) * 0.85)] ** 2)))
+                    fits.append((max(r1, r2), np.linalg.inv(M), r1, r2, fid, jname))
+                if fits and min(f[0] for f in fits) < 0.03: break             # a sure match: no need to try his others
             fits.sort(key=lambda f: f[0]); best = fits[0]
-            rival = next((f for f in fits[1:] if f[0] - best[0] < TIE_MM and G.ang(f[1], best[1]) > TIE_DEG), None)
+            rival = next((f for f in fits[1:] if f[4] == best[4] and f[0] - best[0] < TIE_MM and G.ang(f[1], best[1]) > TIE_DEG), None)
             rms = best[0]; X = best[1] if rms <= GOOD else Xo
             o.rotation_mode = 'QUATERNION'
             o.matrix_world = G.mat(frame(o) @ X @ np.linalg.inv(G.M4(o["kb_own_in_obj"])))
-            o["kb_applied"] = "inner surface fit to %s (%s), %.3f mm" % (fid, os.path.basename(src), rms)
+            if rms <= GOOD: o["kb_applied"] = "inner surface fit to %s (%s), %.3f mm" % (best[4], os.path.basename(src), rms)
             flag = []
-            if rms > GOOD: flag.append("no match: left at its start")
+            if rms > GOOD: flag.append("no match: left where it was")
             elif rms > SURE: flag.append("loose")
             if rival and rms <= GOOD: flag.append("another spin fits nearly as well (%.3f mm, %.0f deg away)" % (rival[0], G.ang(rival[1], X)))
             if flag: flagged.append(i)
-            W.append("  %-9s %-50s inner %3.0f%%  %.3f mm (his on theirs %.3f, theirs on his %.3f)  %s"
-                     % (i, o.name[:50], 100 * sho, rms, best[2], best[3], "; ".join(flag) or "ok"))
+            W.append("  %-9s %-46s inner %3.0f%%  %.3f mm on %-8s (his on theirs %.3f, theirs on his %.3f)  %s"
+                     % (i, o.name[:46], 100 * sho, rms, best[4], best[2], best[3], "; ".join(flag) or "ok"))
             print(W[-1], flush=True)
     bpy.context.view_layer.update()
     print("flagged: %s" % (" ".join(flagged) or "none"), flush=True)
