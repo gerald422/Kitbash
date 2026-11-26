@@ -1,0 +1,6212 @@
+{
+ "name": "Stage 4 - Each arm type once: set the shell (Pad R), then take the shoulder cut",
+ "stage": "4 (arms' sockets): the shell per arm type",
+ "out": "~/Desktop/mar fil connectors/batches/04 Stage 4 - Arm types, shell on each (2026-11-26).blend",
+ "sources": {
+  "ref": "~/Desktop/mar fil connectors/Kitbash reference NEW (starter 2026-11-19).blend",
+  "seat": "~/Desktop/mar fil connectors/Pauldron adapter - seat and cut (2026-11-23).blend",
+  "arms": "~/Desktop/Operation Marine/arms.blend",
+  "pads": "~/Desktop/mar fil connectors/Pauldron adapter - part with pads (2026-11-23).blend"
+ },
+ "about": "Each arm type once: set the shell on the locked arm (its place is that type's Pad R), then take the shoulder cut under it (setup only). Shoulder Pad 1 rides on the shell for the look.",
+ "objects": [
+  {
+   "id": "t0",
+   "role": "host",
+   "name": "Torso 2 for MarFil Bike Chaplain - Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t0_spacer",
+   "role": "check",
+   "name": "MarFil Bike Chaplain - Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t0",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t0_arm",
+   "role": "check",
+   "name": "MarFil Bike Chaplain - Arm 1 R (locked)",
+   "rel": "Mar Fil - Tacticus/ChaplainOnBike-Bits/Chaplain/Arms/MarFil Bike Chaplain - Arm 1 R",
+   "parent": "t0_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t0_shell",
+   "role": "part",
+   "name": "MarFil Bike Chaplain - Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t0_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Bike Chaplain - Arm 1 R",
+    "relative_to": [
+     "MarFil Bike Chaplain - Arm 1 R",
+     "t0_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t0_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t0_pad",
+   "role": "check",
+   "name": "MarFil Bike Chaplain - Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t0_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t1",
+   "role": "host",
+   "name": "Torso 2 for MarFil Bladeguard - Arm 1A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t1_spacer",
+   "role": "check",
+   "name": "MarFil Bladeguard - Arm 1A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t1",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t1_arm",
+   "role": "check",
+   "name": "MarFil Bladeguard - Arm 1A (locked)",
+   "rel": "Mar Fil - Tacticus/VeteranBladeSquad/Arms/MarFil Bladeguard - Arm 1A",
+   "parent": "t1_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t1_shell",
+   "role": "part",
+   "name": "MarFil Bladeguard - Arm 1A Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t1_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Bladeguard - Arm 1A",
+    "relative_to": [
+     "MarFil Bladeguard - Arm 1A",
+     "t1_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t1_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t1_pad",
+   "role": "check",
+   "name": "MarFil Bladeguard - Arm 1A Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t1_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t2",
+   "role": "host",
+   "name": "Torso 2 for MarFil Captainwithjumppack - Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t2_spacer",
+   "role": "check",
+   "name": "MarFil Captainwithjumppack - Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t2",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t2_arm",
+   "role": "check",
+   "name": "MarFil Captainwithjumppack - Arm 1 R (locked)",
+   "rel": "Mar Fil - Tacticus/CaptainWithJumpPack/Arms/MarFil Captainwithjumppack - Arm 1 R",
+   "parent": "t2_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t2_shell",
+   "role": "part",
+   "name": "MarFil Captainwithjumppack - Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t2_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Captainwithjumppack - Arm 1 R",
+    "relative_to": [
+     "MarFil Captainwithjumppack - Arm 1 R",
+     "t2_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t2_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t2_pad",
+   "role": "check",
+   "name": "MarFil Captainwithjumppack - Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t2_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t3",
+   "role": "host",
+   "name": "Torso 2 for MarFil Intercessor - Arm 5 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t3_spacer",
+   "role": "check",
+   "name": "MarFil Intercessor - Arm 5 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t3",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t3_arm",
+   "role": "check",
+   "name": "MarFil Intercessor - Arm 5 R (locked)",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Arms/MarFil Intercessor - Arm 5 R",
+   "parent": "t3_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t3_shell",
+   "role": "part",
+   "name": "MarFil Intercessor - Arm 5 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t3_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Intercessor - Arm 5 R",
+    "relative_to": [
+     "MarFil Intercessor - Arm 5 R",
+     "t3_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t3_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t3_pad",
+   "role": "check",
+   "name": "MarFil Intercessor - Arm 5 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t3_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t4",
+   "role": "host",
+   "name": "Torso 2 for MarFil Jump Chaplain - Arm A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t4_spacer",
+   "role": "check",
+   "name": "MarFil Jump Chaplain - Arm A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t4",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t4_arm",
+   "role": "check",
+   "name": "MarFil Jump Chaplain - Arm A R (locked)",
+   "rel": "Mar Fil - Tacticus/ChaplainWithJumpPack/Arms/MarFil Jump Chaplain - Arm A R",
+   "parent": "t4_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t4_shell",
+   "role": "part",
+   "name": "MarFil Jump Chaplain - Arm A R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t4_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Jump Chaplain - Arm A R",
+    "relative_to": [
+     "MarFil Jump Chaplain - Arm A R",
+     "t4_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t4_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t4_pad",
+   "role": "check",
+   "name": "MarFil Jump Chaplain - Arm A R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t4_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t5",
+   "role": "host",
+   "name": "Torso 2 for MarFil Outrider - Arm 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t5_spacer",
+   "role": "check",
+   "name": "MarFil Outrider - Arm 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t5",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t5_arm",
+   "role": "check",
+   "name": "MarFil Outrider - Arm 1 (locked)",
+   "rel": "Mar Fil - Tacticus/Outriders/Arms/Right/MarFil Outrider - Arm 1",
+   "parent": "t5_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t5_shell",
+   "role": "part",
+   "name": "MarFil Outrider - Arm 1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t5_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Outrider - Arm 1",
+    "relative_to": [
+     "MarFil Outrider - Arm 1",
+     "t5_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t5_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t5_pad",
+   "role": "check",
+   "name": "MarFil Outrider - Arm 1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t5_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t6",
+   "role": "host",
+   "name": "Torso 2 for MarFil Techmarine - Arm 4 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t6_spacer",
+   "role": "check",
+   "name": "MarFil Techmarine - Arm 4 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t6",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t6_arm",
+   "role": "check",
+   "name": "MarFil Techmarine - Arm 4 R (locked)",
+   "rel": "Mar Fil - Tacticus/Techmarine/Arms/MarFil Techmarine - Arm 4 R",
+   "parent": "t6_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t6_shell",
+   "role": "part",
+   "name": "MarFil Techmarine - Arm 4 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t6_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Techmarine - Arm 4 R",
+    "relative_to": [
+     "MarFil Techmarine - Arm 4 R",
+     "t6_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t6_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t6_pad",
+   "role": "check",
+   "name": "MarFil Techmarine - Arm 4 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t6_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t7",
+   "role": "host",
+   "name": "Torso 2 for MarFil Veteran - Arm A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "id": "t7_spacer",
+   "role": "check",
+   "name": "MarFil Veteran - Arm A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t7",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t7_arm",
+   "role": "check",
+   "name": "MarFil Veteran - Arm A (locked)",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Arms/MarFil Veteran - Arm A",
+   "parent": "t7_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t7_shell",
+   "role": "part",
+   "name": "MarFil Veteran - Arm A Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t7_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - MarFil Veteran - Arm A",
+    "relative_to": [
+     "MarFil Veteran - Arm A",
+     "t7_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t7_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t7_pad",
+   "role": "check",
+   "name": "MarFil Veteran - Arm A Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t7_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t8",
+   "role": "host",
+   "name": "Torso 2 for Marta Apothecary - Apoth Arm With Gun Aim On Angle R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t8_spacer",
+   "role": "check",
+   "name": "Marta Apothecary - Apoth Arm With Gun Aim On Angle R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t8",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t8_arm",
+   "role": "check",
+   "name": "Marta Apothecary - Apoth Arm With Gun Aim On Angle R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Apothecary/Arms/Marta Apothecary - Apoth Arm With Gun Aim On Angle R",
+   "parent": "t8_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t8_shell",
+   "role": "part",
+   "name": "Marta Apothecary - Apoth Arm With Gun Aim On Angle R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t8_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - Marta Apothecary - Apoth Arm With Gun Aim On Angle R",
+    "relative_to": [
+     "Marta Apothecary - Apoth Arm With Gun Aim On Angle R",
+     "t8_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t8_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t8_pad",
+   "role": "check",
+   "name": "Marta Apothecary - Apoth Arm With Gun Aim On Angle R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t8_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t9",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t9_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t9",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t9_arm",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 1 R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/Pagan ARMS_Soulder pad/Arms/Marta Aug 2025 - Arm 1 R",
+   "parent": "t9_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t9_shell",
+   "role": "part",
+   "name": "Marta Aug 2025 - Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t9_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - Marta Aug 2025 - Arm 1 R",
+    "relative_to": [
+     "Marta Aug 2025 - Arm 1 R",
+     "t9_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t9_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t9_pad",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t9_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t10",
+   "role": "host",
+   "name": "Torso 2 for Marta Deathwatch 2 - DW Arms 2 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t10_spacer",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 2 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t10",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t10_arm",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 2 R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Death Watch Pt2/Arms/Marta Deathwatch 2 - DW Arms 2 R",
+   "parent": "t10_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t10_shell",
+   "role": "part",
+   "name": "Marta Deathwatch 2 - DW Arms 2 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t10_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - Marta Deathwatch 2 - DW Arms 2 R",
+    "relative_to": [
+     "Marta Deathwatch 2 - DW Arms 2 R",
+     "t10_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t10_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t10_pad",
+   "role": "check",
+   "name": "Marta Deathwatch 2 - DW Arms 2 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t10_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t11",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Dragon Arms 3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t11_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t11",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t11_arm",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 3 R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls/02.24 Salamanders/Arms/Marta Gurls - Dragon Arms 3 R",
+   "parent": "t11_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t11_shell",
+   "role": "part",
+   "name": "Marta Gurls - Dragon Arms 3 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t11_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - Marta Gurls - Dragon Arms 3 R",
+    "relative_to": [
+     "Marta Gurls - Dragon Arms 3 R",
+     "t11_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t11_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t11_pad",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 3 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t11_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t12",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Iron Father Arm R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t12_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Iron Father Arm R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t12",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t12_arm",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Iron Father Arm R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/Arms/Marta Techmarine V2 - Iron Father Arm R",
+   "parent": "t12_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t12_shell",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Iron Father Arm R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t12_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - Marta Techmarine V2 - Iron Father Arm R",
+    "relative_to": [
+     "Marta Techmarine V2 - Iron Father Arm R",
+     "t12_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t12_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t12_pad",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Iron Father Arm R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t12_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t13",
+   "role": "host",
+   "name": "Torso 2 for TN Mk10 Assault - Arm A1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t13_spacer",
+   "role": "check",
+   "name": "TN Mk10 Assault - Arm A1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t13",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t13_arm",
+   "role": "check",
+   "name": "TN Mk10 Assault - Arm A1 R (locked)",
+   "rel": "Turtle Ninja - Tacticus/Mk10 Assault Intercessor + Jumppack Addon/Arms/TN Mk10 Assault - Arm A1 R",
+   "parent": "t13_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t13_shell",
+   "role": "part",
+   "name": "TN Mk10 Assault - Arm A1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t13_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - TN Mk10 2.0 Arm Right A 1",
+    "relative_to": [
+     "TN Mk10 2.0 Arm Right A 1",
+     "t13_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t13_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t13_pad",
+   "role": "check",
+   "name": "TN Mk10 Assault - Arm A1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t13_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t14",
+   "role": "host",
+   "name": "Torso 2 for TN Mk7-8 Assault - Mk7 Arm Single A1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t14_spacer",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single A1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t14",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t14_arm",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single A1 (locked)",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Assault Intercessors Addon 1/Arms/TN Mk7-8 Assault - Mk7 Arm Single A1",
+   "parent": "t14_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t14_shell",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single A1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t14_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - TN Mk7 Arm Single A 1",
+    "relative_to": [
+     "TN Mk7 Arm Single A 1",
+     "t14_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t14_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t14_pad",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single A1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t14_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t15",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern C - Ranged Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -120.0
+   ]
+  },
+  {
+   "id": "t15_spacer",
+   "role": "check",
+   "name": "Springles Pattern C - Ranged Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t15",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t15_arm",
+   "role": "check",
+   "name": "Springles Pattern C - Ranged Arm 1 R (locked)",
+   "rel": "Springles - Heresy/patternC arms/tactical arms/Arms/Springles Pattern C - Ranged Arm 1 R",
+   "parent": "t15_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t15_shell",
+   "role": "part",
+   "name": "Springles Pattern C - Ranged Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t15_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - patternC ranged Rarm 1",
+    "relative_to": [
+     "patternC ranged Rarm 1",
+     "t15_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t15_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t15_pad",
+   "role": "check",
+   "name": "Springles Pattern C - Ranged Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t15_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t16",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Ranged Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t16_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t16",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t16_arm",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 1 R (locked)",
+   "rel": "Springles - Heresy/patternP arms/tactical arms/Arms/Springles Pattern P - Ranged Arm 1 R",
+   "parent": "t16_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t16_shell",
+   "role": "part",
+   "name": "Springles Pattern P - Ranged Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t16_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - patternP ranged Rarm 1",
+    "relative_to": [
+     "patternP ranged Rarm 1",
+     "t16_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t16_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t16_pad",
+   "role": "check",
+   "name": "Springles Pattern P - Ranged Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t16_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t17",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern S - Ranged Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t17_spacer",
+   "role": "check",
+   "name": "Springles Pattern S - Ranged Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t17",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t17_arm",
+   "role": "check",
+   "name": "Springles Pattern S - Ranged Arm 1 R (locked)",
+   "rel": "Springles - Heresy/patternS arms/tactical arms/Arms/Springles Pattern S - Ranged Arm 1 R",
+   "parent": "t17_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t17_shell",
+   "role": "part",
+   "name": "Springles Pattern S - Ranged Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t17_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "from": "seat",
+    "obj": "Adapter - patternS ranged Rarm 1",
+    "relative_to": [
+     "patternS ranged Rarm 1",
+     "t17_arm"
+    ]
+   },
+   "note": "your Nov 23 seat for this arm type: set the shell, then take the shoulder cut under it (setup only)",
+   "write": {
+    "host": "t17_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "self"
+  },
+  {
+   "id": "t17_pad",
+   "role": "check",
+   "name": "Springles Pattern S - Ranged Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t17_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t18",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Chaplain - Arm R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t18_spacer",
+   "role": "check",
+   "name": "BBoosty Chaplain - Arm R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t18",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t18_arm",
+   "role": "check",
+   "name": "BBoosty Chaplain - Arm R (locked)",
+   "rel": "BBoosty - Heresy/Chaplain/Arms/BBoosty Chaplain - Arm R",
+   "parent": "t18_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t18_shell",
+   "role": "part",
+   "name": "BBoosty Chaplain - Arm R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t18_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit BBoosty - Heresy/Chaplain, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t18_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9315741912235667,
+    -0.07033302554383365,
+    -0.3566409462454592,
+    -1.1086853109025996,
+    0.15392843406548676,
+    -0.9651125115497208,
+    -0.21174437058502876,
+    27.2245484243321,
+    -0.3293160162250485,
+    -0.2521605961390909,
+    0.9099274123837816,
+    11.001482358198327,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t18_pad",
+   "role": "check",
+   "name": "BBoosty Chaplain - Arm R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t18_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t19",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Consul - Arm Empty R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t19_spacer",
+   "role": "check",
+   "name": "BBoosty Consul - Arm Empty R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t19",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t19_arm",
+   "role": "check",
+   "name": "BBoosty Consul - Arm Empty R (locked)",
+   "rel": "BBoosty - Heresy/Consul/Arms/BBoosty Consul - Arm Empty R",
+   "parent": "t19_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t19_shell",
+   "role": "part",
+   "name": "BBoosty Consul - Arm Empty R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t19_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit BBoosty - Heresy/Consul, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t19_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9440529334049416,
+    0.11470152274857717,
+    -0.3091556707866688,
+    -8.695148331003603,
+    -0.026424995138103986,
+    -0.9608388764877077,
+    -0.27579303689101536,
+    28.245895767162814,
+    -0.32869301096788417,
+    -0.2522017255719367,
+    0.9101412826665106,
+    15.151443207522224,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t19_pad",
+   "role": "check",
+   "name": "BBoosty Consul - Arm Empty R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t19_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t20",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Medusas Mortals - Arm 1 Bionic 2 Sh R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t20_spacer",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 Bionic 2 Sh R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t20",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t20_arm",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 Bionic 2 Sh R (locked)",
+   "rel": "BBoosty - Heresy/Medusas Mortals/Arms for connecting ranged weapon with shield_ Also can be used with melee/Arms/BBoosty Medusas Mortals - Arm 1 Bionic 2 Sh R",
+   "parent": "t20_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t20_shell",
+   "role": "part",
+   "name": "BBoosty Medusas Mortals - Arm 1 Bionic 2 Sh R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t20_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit BBoosty - Heresy/Medusas Mortals, 19 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t20_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9376862388917965,
+    0.19938041226372225,
+    -0.28453574587817027,
+    -0.0010656446330417069,
+    -0.10968435654948157,
+    -0.9469377469613083,
+    -0.30207467758521983,
+    1.7299152504285247,
+    -0.3296755141205119,
+    -0.25204935361151953,
+    0.9098278112763466,
+    13.31708837075383,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t20_pad",
+   "role": "check",
+   "name": "BBoosty Medusas Mortals - Arm 1 Bionic 2 Sh R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t20_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t21",
+   "role": "host",
+   "name": "Torso 2 for BBoosty Praetor - Arm 2 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t21_spacer",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm 2 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t21",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t21_arm",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm 2 R (locked)",
+   "rel": "BBoosty - Heresy/Praetor with Paragon Blade/Arms/BBoosty Praetor - Arm 2 R",
+   "parent": "t21_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t21_shell",
+   "role": "part",
+   "name": "BBoosty Praetor - Arm 2 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t21_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit BBoosty - Heresy/Praetor with Paragon Blade, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t21_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.944193184181798,
+    0.11372591288662151,
+    -0.3090875637962538,
+    73.69910553124166,
+    -0.025554189019579086,
+    -0.9609443192478087,
+    -0.27550792622553877,
+    6.009540858680295,
+    -0.3283587266092125,
+    -0.252241706496288,
+    0.9102506802536026,
+    85.63058917651007,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t21_pad",
+   "role": "check",
+   "name": "BBoosty Praetor - Arm 2 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t21_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t22",
+   "role": "host",
+   "name": "Torso 2 for CyberBrush Bug Hunters - Fist 2 (3)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t22_spacer",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (3) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t22",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t22_arm",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (3) (locked)",
+   "rel": "CyberBrush - Tacticus/Space Bugs Hunters/Space Bug Hunters Fist/Arms/CyberBrush Bug Hunters - Fist 2 (3)",
+   "parent": "t22_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t22_shell",
+   "role": "part",
+   "name": "CyberBrush Bug Hunters - Fist 2 (3) Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t22_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit CyberBrush - Tacticus/Space Bugs Hunters, 38 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t22_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.8849227413876333,
+    -0.356475263061618,
+    -0.2996795494655601,
+    -24.464747395170082,
+    -0.44992200486945044,
+    0.48831138750394565,
+    0.7477438261899132,
+    8.628440880942552,
+    -0.12021633117835062,
+    0.7965335424476943,
+    -0.5924986440931709,
+    7.068707332117239,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t22_pad",
+   "role": "check",
+   "name": "CyberBrush Bug Hunters - Fist 2 (3) Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t22_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t23",
+   "role": "host",
+   "name": "Torso 2 for MarFil Assault - A Rm 3B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -240.0
+   ]
+  },
+  {
+   "id": "t23_spacer",
+   "role": "check",
+   "name": "MarFil Assault - A Rm 3B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t23",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t23_arm",
+   "role": "check",
+   "name": "MarFil Assault - A Rm 3B R (locked)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - A Rm 3B R",
+   "parent": "t23_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t23_shell",
+   "role": "part",
+   "name": "MarFil Assault - A Rm 3B R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t23_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/AssaultMarines-V2, 32 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t23_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9436010575960876,
+    -0.0890280377897953,
+    0.31888656954903527,
+    2.643549038752141,
+    0.0006345080098048768,
+    0.9636514239178924,
+    0.2671589527721125,
+    1.2574327874286562,
+    -0.3310820041636169,
+    -0.25189056302944224,
+    0.9093606798206162,
+    3.9061426802481525,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t23_pad",
+   "role": "check",
+   "name": "MarFil Assault - A Rm 3B R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t23_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t24",
+   "role": "host",
+   "name": "Torso 2 for MarFil Captainwithjumppack - Arm 2 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t24_spacer",
+   "role": "check",
+   "name": "MarFil Captainwithjumppack - Arm 2 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t24",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t24_arm",
+   "role": "check",
+   "name": "MarFil Captainwithjumppack - Arm 2 R (locked)",
+   "rel": "Mar Fil - Tacticus/CaptainWithJumpPack/Arms/MarFil Captainwithjumppack - Arm 2 R",
+   "parent": "t24_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t24_shell",
+   "role": "part",
+   "name": "MarFil Captainwithjumppack - Arm 2 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t24_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/CaptainWithJumpPack, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t24_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.944342403086588,
+    -0.08709967327826094,
+    0.3172218609223491,
+    2.6375938277492925,
+    -0.0007282169379940618,
+    0.9637556469749063,
+    0.26678625218123464,
+    1.2694757373583616,
+    -0.3289620660539046,
+    -0.25216903563795334,
+    0.9100531733003364,
+    3.890693169615254,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t24_pad",
+   "role": "check",
+   "name": "MarFil Captainwithjumppack - Arm 2 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t24_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t25",
+   "role": "host",
+   "name": "Torso 2 for MarFil Bike Chaplain - Arm 2 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t25_spacer",
+   "role": "check",
+   "name": "MarFil Bike Chaplain - Arm 2 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t25",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t25_arm",
+   "role": "check",
+   "name": "MarFil Bike Chaplain - Arm 2 R (locked)",
+   "rel": "Mar Fil - Tacticus/ChaplainOnBike-Bits/Chaplain/Arms/MarFil Bike Chaplain - Arm 2 R",
+   "parent": "t25_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t25_shell",
+   "role": "part",
+   "name": "MarFil Bike Chaplain - Arm 2 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t25_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/ChaplainOnBike-Bits, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t25_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9302102154317285,
+    -0.13333860309254725,
+    0.341949227438851,
+    2.7367951234252494,
+    0.3668485945268403,
+    0.30874649056681297,
+    -0.877552892598224,
+    -3.745501944258803,
+    0.01143517832231506,
+    0.9417518878685375,
+    0.3361138448783301,
+    1.6117735664138746,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t25_pad",
+   "role": "check",
+   "name": "MarFil Bike Chaplain - Arm 2 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t25_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t26",
+   "role": "host",
+   "name": "Torso 2 for MarFil Jump Chaplain - Arm B R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t26_spacer",
+   "role": "check",
+   "name": "MarFil Jump Chaplain - Arm B R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t26",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t26_arm",
+   "role": "check",
+   "name": "MarFil Jump Chaplain - Arm B R (locked)",
+   "rel": "Mar Fil - Tacticus/ChaplainWithJumpPack/Arms/MarFil Jump Chaplain - Arm B R",
+   "parent": "t26_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t26_shell",
+   "role": "part",
+   "name": "MarFil Jump Chaplain - Arm B R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t26_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/ChaplainWithJumpPack, 3 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t26_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9443482105539682,
+    -0.09609824106888505,
+    0.3145955383732846,
+    2.6254023309836474,
+    0.06994869844262598,
+    0.9931676790673332,
+    0.09340753917237957,
+    0.5297494655873287,
+    -0.32142294394037485,
+    -0.06620358303085058,
+    0.9446193577489179,
+    4.050267554413799,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t26_pad",
+   "role": "check",
+   "name": "MarFil Jump Chaplain - Arm B R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t26_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t27",
+   "role": "host",
+   "name": "Torso 2 for MarFil Intercessor - Desolator 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t27_spacer",
+   "role": "check",
+   "name": "MarFil Intercessor - Desolator 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t27",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t27_arm",
+   "role": "check",
+   "name": "MarFil Intercessor - Desolator 1 (locked)",
+   "rel": "Mar Fil - Tacticus/Intercessors-V2/Intercessors-Bits/Desolator/Arms/MarFil Intercessor - Desolator 1",
+   "parent": "t27_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t27_shell",
+   "role": "part",
+   "name": "MarFil Intercessor - Desolator 1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t27_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/Intercessors-V2, 27 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t27_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9447577881227622,
+    -0.08688491322581424,
+    0.3160423369337166,
+    2.6323649059596184,
+    0.015416808563636492,
+    0.9749392456215119,
+    0.22193947866887487,
+    1.091022752857046,
+    -0.32740493026817363,
+    -0.20480610619756995,
+    0.92242177835225,
+    3.9427185393885775,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t27_pad",
+   "role": "check",
+   "name": "MarFil Intercessor - Desolator 1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t27_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t28",
+   "role": "host",
+   "name": "Torso 2 for MarFil Outrider - Arm With Handle A R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t28_spacer",
+   "role": "check",
+   "name": "MarFil Outrider - Arm With Handle A R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t28",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t28_arm",
+   "role": "check",
+   "name": "MarFil Outrider - Arm With Handle A R (locked)",
+   "rel": "Mar Fil - Tacticus/Outriders/Arms(WithHandles)/Arms/MarFil Outrider - Arm With Handle A R",
+   "parent": "t28_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t28_shell",
+   "role": "part",
+   "name": "MarFil Outrider - Arm With Handle A R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t28_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/Outriders, 8 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t28_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9419906319218524,
+    -0.0900857456613196,
+    0.32332210727162397,
+    2.6617552855692392,
+    -0.0008622744885778172,
+    0.9626547192044148,
+    0.270730002495104,
+    1.2649028615621432,
+    -0.3356368429078212,
+    -0.25530548376717077,
+    0.9067346191631204,
+    3.9134121948998057,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t28_pad",
+   "role": "check",
+   "name": "MarFil Outrider - Arm With Handle A R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t28_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t29",
+   "role": "host",
+   "name": "Torso 2 for MarFil Bladeguard - Arm 10B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t29_spacer",
+   "role": "check",
+   "name": "MarFil Bladeguard - Arm 10B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t29",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t29_arm",
+   "role": "check",
+   "name": "MarFil Bladeguard - Arm 10B (locked)",
+   "rel": "Mar Fil - Tacticus/VeteranBladeSquad/Arms/MarFil Bladeguard - Arm 10B",
+   "parent": "t29_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t29_shell",
+   "role": "part",
+   "name": "MarFil Bladeguard - Arm 10B Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t29_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/VeteranBladeSquad, 18 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t29_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.944342403086588,
+    -0.08709967327826094,
+    0.3172218609223491,
+    2.6375938277492925,
+    -0.0007282169379940618,
+    0.9637556469749063,
+    0.26678625218123464,
+    1.2694757373583616,
+    -0.3289620660539046,
+    -0.25216903563795334,
+    0.9100531733003364,
+    3.890693169615254,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t29_pad",
+   "role": "check",
+   "name": "MarFil Bladeguard - Arm 10B Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t29_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t30",
+   "role": "host",
+   "name": "Torso 2 for MarFil Veteran - Arm B",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t30_spacer",
+   "role": "check",
+   "name": "MarFil Veteran - Arm B Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t30",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t30_arm",
+   "role": "check",
+   "name": "MarFil Veteran - Arm B (locked)",
+   "rel": "Mar Fil - Tacticus/VeteranSquad/Arms/MarFil Veteran - Arm B",
+   "parent": "t30_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t30_shell",
+   "role": "part",
+   "name": "MarFil Veteran - Arm B Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t30_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Mar Fil - Tacticus/VeteranSquad, 4 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t30_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.946186639867885,
+    -0.08395281000987477,
+    0.31253826211861113,
+    2.6197034316505174,
+    -0.0019512631479924052,
+    0.964266889571881,
+    0.2649277743668617,
+    1.292375670227035,
+    -0.3236120794088267,
+    -0.25128140173545593,
+    0.9122142527050626,
+    3.860120760901986,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t30_pad",
+   "role": "check",
+   "name": "MarFil Veteran - Arm B Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t30_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t31",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2025 - Arm 2 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -360.0
+   ]
+  },
+  {
+   "id": "t31_spacer",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 2 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t31",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t31_arm",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 2 R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/07 July 2025/ARMS and WEAPONS/Arms/Marta Jul 2025 - Arm 2 R",
+   "parent": "t31_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t31_shell",
+   "role": "part",
+   "name": "Marta Jul 2025 - Arm 2 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t31_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/07 July 2025/ARMS and WEAPONS, 7 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t31_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9295599544328822,
+    0.09777010157899835,
+    -0.3554696277288275,
+    -3.971158334208482,
+    -0.36867022114222164,
+    -0.2482503251569563,
+    0.8957995523981691,
+    18.581553210881548,
+    -0.0006629712904747664,
+    0.9637496455888728,
+    0.2668080921868907,
+    15.579068917977345,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t31_pad",
+   "role": "check",
+   "name": "Marta Jul 2025 - Arm 2 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t31_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t32",
+   "role": "host",
+   "name": "Torso 2 for Marta Monster Hunter - MH Arm 3 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t32_spacer",
+   "role": "check",
+   "name": "Marta Monster Hunter - MH Arm 3 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t32",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t32_arm",
+   "role": "check",
+   "name": "Marta Monster Hunter - MH Arm 3 R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/2023.09 Monster Hunter/Monster Hunter character/Arms/Marta Monster Hunter - MH Arm 3 R",
+   "parent": "t32_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t32_shell",
+   "role": "part",
+   "name": "Marta Monster Hunter - MH Arm 3 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t32_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/2023.09 Monster Hunter/Monster Hunter character, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t32_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9250106642278394,
+    0.1501577232087547,
+    -0.349007417498139,
+    -16.149403440183896,
+    -0.3769338924996293,
+    -0.24736971091394283,
+    0.8925985174768593,
+    23.091053282433013,
+    0.047697125283005036,
+    0.9572150538206925,
+    0.28541860780341727,
+    13.3184082155319,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t32_pad",
+   "role": "check",
+   "name": "Marta Monster Hunter - MH Arm 3 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t32_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t33",
+   "role": "host",
+   "name": "Torso 2 for Marta Jan 2026 - Set Arms 1 Asian R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t33_spacer",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t33",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t33_arm",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/47 January Asian theme 2026/arms and weapons/Arms/Marta Jan 2026 - Set Arms 1 Asian R",
+   "parent": "t33_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t33_shell",
+   "role": "part",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t33_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/47 January Asian theme 2026/arms and weapons, 3 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t33_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9543714678814127,
+    0.02859509440013327,
+    -0.29724678140371946,
+    0.15652225980046675,
+    -0.2944861597564417,
+    -0.25516577449837224,
+    0.9209613584552551,
+    6.976793618786787,
+    -0.049512419283629525,
+    0.9664748871093111,
+    0.2519436959477287,
+    12.149246866477093,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t33_pad",
+   "role": "check",
+   "name": "Marta Jan 2026 - Set Arms 1 Asian R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t33_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t34",
+   "role": "host",
+   "name": "Torso 2 for Marta Mar 2026 - Set Arms 5 For Katana",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t34_spacer",
+   "role": "check",
+   "name": "Marta Mar 2026 - Set Arms 5 For Katana Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t34",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t34_arm",
+   "role": "check",
+   "name": "Marta Mar 2026 - Set Arms 5 For Katana (locked)",
+   "rel": "Marta PunkGirl - Tacticus/49 March 2026/arms & weapons/Arms/Marta Mar 2026 - Set Arms 5 For Katana",
+   "parent": "t34_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t34_shell",
+   "role": "part",
+   "name": "Marta Mar 2026 - Set Arms 5 For Katana Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t34_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/49 March 2026/arms & weapons, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t34_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9239732309824906,
+    0.20332635310680186,
+    -0.32392899763299665,
+    -9.678935256508641,
+    -0.36867916903648684,
+    -0.2482494789641268,
+    0.8957956313615498,
+    8.818239461933295,
+    0.10172367954186236,
+    0.9471176349797389,
+    0.304337805534791,
+    3.691330251962574,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t34_pad",
+   "role": "check",
+   "name": "Marta Mar 2026 - Set Arms 5 For Katana Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t34_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t35",
+   "role": "host",
+   "name": "Torso 2 for Marta May 2026 - Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t35_spacer",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t35",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t35_arm",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 2 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/51 May 2026/amrs and weapons/Arms/Marta May 2026 - Arm 2",
+   "parent": "t35_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t35_shell",
+   "role": "part",
+   "name": "Marta May 2026 - Arm 2 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t35_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/51 May 2026/amrs and weapons, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t35_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9293939253329432,
+    0.10676992342500001,
+    -0.3533067324585694,
+    3.4705806386626294,
+    -0.36900279736670333,
+    -0.24821506895756368,
+    0.8956720145567353,
+    18.2035529532655,
+    0.007934758026316484,
+    0.9628031597973958,
+    0.2700878395033715,
+    2.0303380770094455,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t35_pad",
+   "role": "check",
+   "name": "Marta May 2026 - Arm 2 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t35_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t36",
+   "role": "host",
+   "name": "Torso 2 for Marta Jun 2026 - Arm 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t36_spacer",
+   "role": "check",
+   "name": "Marta Jun 2026 - Arm 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t36",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t36_arm",
+   "role": "check",
+   "name": "Marta Jun 2026 - Arm 2 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/52 June 2026/weapons and arms/Arms/Marta Jun 2026 - Arm 2",
+   "parent": "t36_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t36_shell",
+   "role": "part",
+   "name": "Marta Jun 2026 - Arm 2 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t36_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/52 June 2026/weapons and arms, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t36_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.8581401011428089,
+    0.243877896763065,
+    -0.4517939508782887,
+    0.0765763490595992,
+    -0.5038321211719937,
+    -0.23079062508697532,
+    0.8324004967805388,
+    6.6081027978154,
+    0.09873394543350791,
+    0.9419449055332251,
+    0.3209242340895435,
+    3.7243125213504165,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t36_pad",
+   "role": "check",
+   "name": "Marta Jun 2026 - Arm 2 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t36_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t37",
+   "role": "host",
+   "name": "Torso 2 for Marta Jul 2026 - Arm 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t37_spacer",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t37",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t37_arm",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 1 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/53 July 2026/weapons and arms/Arms/Marta Jul 2026 - Arm 1",
+   "parent": "t37_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t37_shell",
+   "role": "part",
+   "name": "Marta Jul 2026 - Arm 1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t37_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/53 July 2026/weapons and arms, 4 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t37_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.8581555659047665,
+    0.24384365159798171,
+    -0.4517835527911344,
+    -2.285408356493262,
+    -0.5038101133087028,
+    -0.23079358583331067,
+    0.8324126257723972,
+    7.862829223108543,
+    0.09870942302018897,
+    0.9419524458979665,
+    0.3209080922956833,
+    4.063566819879726,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t37_pad",
+   "role": "check",
+   "name": "Marta Jul 2026 - Arm 1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t37_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t38",
+   "role": "host",
+   "name": "Torso 2 for Marta Blood Angels 2 - BA Arms 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t38_spacer",
+   "role": "check",
+   "name": "Marta Blood Angels 2 - BA Arms 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t38",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t38_arm",
+   "role": "check",
+   "name": "Marta Blood Angels 2 - BA Arms 1 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Blood Angels Pt2/Arms/Marta Blood Angels 2 - BA Arms 1",
+   "parent": "t38_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t38_shell",
+   "role": "part",
+   "name": "Marta Blood Angels 2 - BA Arms 1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t38_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Bits Blood Angels Pt2/Arms, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t38_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9295542132370253,
+    0.09772432729826035,
+    -0.3554955646965113,
+    -7.142305592685377,
+    -0.368683004598711,
+    -0.24824896733208845,
+    0.8957940053430473,
+    6.898726540292985,
+    -0.0007103789131419995,
+    0.9637546326839174,
+    0.26678996371938324,
+    -1.0080839648148925,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t38_pad",
+   "role": "check",
+   "name": "Marta Blood Angels 2 - BA Arms 1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t38_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t39",
+   "role": "host",
+   "name": "Torso 2 for Marta Blood Angels - Chalice With Claw",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -480.0
+   ]
+  },
+  {
+   "id": "t39_spacer",
+   "role": "check",
+   "name": "Marta Blood Angels - Chalice With Claw Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t39",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t39_arm",
+   "role": "check",
+   "name": "Marta Blood Angels - Chalice With Claw (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Blood Angels/Arms/Marta Blood Angels - Chalice With Claw",
+   "parent": "t39_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t39_shell",
+   "role": "part",
+   "name": "Marta Blood Angels - Chalice With Claw Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t39_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Bits Blood Angels/Arms, 7 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t39_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9344559269315305,
+    0.092756669537122,
+    -0.3437842900466949,
+    15.190855470561205,
+    -0.35607122491960047,
+    -0.2495494011979614,
+    0.9005219708947555,
+    9.01915151302637,
+    -0.0022618836894494837,
+    0.9639094164345051,
+    0.2662202235532597,
+    4.801723317967014,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t39_pad",
+   "role": "check",
+   "name": "Marta Blood Angels - Chalice With Claw Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t39_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t40",
+   "role": "host",
+   "name": "Torso 2 for Marta Deathwatch - DW Weapon T Ua 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t40_spacer",
+   "role": "check",
+   "name": "Marta Deathwatch - DW Weapon T Ua 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t40",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t40_arm",
+   "role": "check",
+   "name": "Marta Deathwatch - DW Weapon T Ua 2 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Death Watch/Arms/Marta Deathwatch - DW Weapon T Ua 2",
+   "parent": "t40_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t40_shell",
+   "role": "part",
+   "name": "Marta Deathwatch - DW Weapon T Ua 2 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t40_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Bits Death Watch/Arms, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t40_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9295643788831042,
+    0.09783434628636788,
+    -0.3554390982257234,
+    -0.893679441175161,
+    -0.3686579427517901,
+    -0.24825151958286235,
+    0.8958037738549091,
+    8.783984242302182,
+    -0.0005979015155010553,
+    0.9637427927553315,
+    0.26683297080456647,
+    4.384702039353657,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t40_pad",
+   "role": "check",
+   "name": "Marta Deathwatch - DW Weapon T Ua 2 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t40_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t41",
+   "role": "host",
+   "name": "Torso 2 for Marta Imperial Fists 2 - Arm 1 Closed",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t41_spacer",
+   "role": "check",
+   "name": "Marta Imperial Fists 2 - Arm 1 Closed Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t41",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t41_arm",
+   "role": "check",
+   "name": "Marta Imperial Fists 2 - Arm 1 Closed (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Bits Imperial Fist Pt2/Arms/Marta Imperial Fists 2 - Arm 1 Closed",
+   "parent": "t41_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t41_shell",
+   "role": "part",
+   "name": "Marta Imperial Fists 2 - Arm 1 Closed Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t41_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Bits Imperial Fist Pt2/Arms, 8 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t41_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9345179065239683,
+    0.09334556393930349,
+    -0.3434556339516259,
+    9.65425242770313,
+    -0.35591130314470415,
+    -0.24956544747197618,
+    0.9005806542859943,
+    18.991365276130033,
+    -0.001648939771220406,
+    0.9638481848318456,
+    0.26644580376484983,
+    7.033227777776239,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t41_pad",
+   "role": "check",
+   "name": "Marta Imperial Fists 2 - Arm 1 Closed Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t41_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t42",
+   "role": "host",
+   "name": "Torso 2 for Marta Relic Captain - Set Arms 2.1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t42_spacer",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 2.1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t42",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t42_arm",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 2.1 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Captain with Relic Shield/Arms/Marta Relic Captain - Set Arms 2.1",
+   "parent": "t42_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t42_shell",
+   "role": "part",
+   "name": "Marta Relic Captain - Set Arms 2.1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t42_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Captain with Relic Shield/Arms, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t42_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.92950387222738,
+    0.10250053891906097,
+    -0.35427972659486096,
+    -27.38462106867353,
+    -0.36879050436211536,
+    -0.2482373411030291,
+    0.8957531052603398,
+    -20.643225281932175,
+    0.0038693325136735816,
+    0.9632610856550026,
+    0.26853870063433805,
+    24.978189284532473,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t42_pad",
+   "role": "check",
+   "name": "Marta Relic Captain - Set Arms 2.1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t42_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t43",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arm 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t43_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arm 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t43",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t43_arm",
+   "role": "check",
+   "name": "Marta Gurls - Arm 1 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/04.23 DA Lion Knights/Arms/Marta Gurls - Arm 1",
+   "parent": "t43_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t43_shell",
+   "role": "part",
+   "name": "Marta Gurls - Arm 1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t43_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/GURLS/04.23 DA Lion Knights, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t43_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9523356883316747,
+    0.10765785459291423,
+    -0.28542133140639514,
+    -2.965727945982585,
+    -0.30391995516471665,
+    -0.2543822061421287,
+    0.9181086599567996,
+    11.94332696768521,
+    0.02623565270568197,
+    0.961093496444025,
+    0.27497663397157235,
+    4.315974235328198,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t43_pad",
+   "role": "check",
+   "name": "Marta Gurls - Arm 1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t43_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t44",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arms Set 1 Cloth R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t44_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 Cloth R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t44",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t44_arm",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 Cloth R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls/Arms/Marta Gurls - Arms Set 1 Cloth R",
+   "parent": "t44_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t44_shell",
+   "role": "part",
+   "name": "Marta Gurls - Arms Set 1 Cloth R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t44_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/GURLS/06.23 Greek Themed Gurls, 5 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t44_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.929581304538686,
+    0.09848130804242011,
+    -0.3552176048234279,
+    -2.985458069539818,
+    -0.36861698694857997,
+    -0.24825590903519676,
+    0.8958192595654823,
+    9.662155477528932,
+    3.7004745297583875e-05,
+    0.9636754401074223,
+    0.26707555359462076,
+    4.001030229930787,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t44_pad",
+   "role": "check",
+   "name": "Marta Gurls - Arms Set 1 Cloth R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t44_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t45",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Arm 2 For Shotgun R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t45_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 For Shotgun R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t45",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t45_arm",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 For Shotgun R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/DEATHgirls/update ARMS/Arms/Marta Gurls - Arm 2 For Shotgun R",
+   "parent": "t45_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t45_shell",
+   "role": "part",
+   "name": "Marta Gurls - Arm 2 For Shotgun R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t45_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/GURLS/DEATHgirls, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t45_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9259928320252575,
+    0.013766858529516052,
+    -0.3772877874516353,
+    5.4760974363437835,
+    -0.36867556324982237,
+    -0.24824936772992412,
+    0.895797335388925,
+    15.595407400224111,
+    -0.08132909405200436,
+    0.9685988692672088,
+    0.2349528763611874,
+    15.751531238816153,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t45_pad",
+   "role": "check",
+   "name": "Marta Gurls - Arm 2 For Shotgun R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t45_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t46",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - DA Arms 2",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t46_spacer",
+   "role": "check",
+   "name": "Marta Gurls - DA Arms 2 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t46",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t46_arm",
+   "role": "check",
+   "name": "Marta Gurls - DA Arms 2 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Hooded models/arms/Marta Gurls - DA Arms 2",
+   "parent": "t46_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t46_shell",
+   "role": "part",
+   "name": "Marta Gurls - DA Arms 2 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t46_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/GURLS/Hooded models, 3 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t46_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9301223832826798,
+    0.09991003312832646,
+    -0.3533952569526083,
+    4.685218683302744,
+    -0.36724264237887083,
+    -0.24840026818177122,
+    0.896344008563337,
+    6.279637463150253,
+    0.001770270470128951,
+    0.9634919877047121,
+    0.2677335003481281,
+    4.297917710457845,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t46_pad",
+   "role": "check",
+   "name": "Marta Gurls - DA Arms 2 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t46_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t47",
+   "role": "host",
+   "name": "Torso 2 for Marta Gurls - Dragon Arms 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -600.0
+   ]
+  },
+  {
+   "id": "t47_spacer",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t47",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t47_arm",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 1 R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls/02.24 Salamanders/Arms/Marta Gurls - Dragon Arms 1 R",
+   "parent": "t47_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t47_shell",
+   "role": "part",
+   "name": "Marta Gurls - Dragon Arms 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t47_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/GURLS/Marta Feb 2024 Dragonborn Gurls, 3 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t47_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9344704572075234,
+    0.09282615113134775,
+    -0.3437241287040916,
+    53.975072832616505,
+    -0.3560320158769279,
+    -0.24955297532279846,
+    0.9005367175861878,
+    36.46519331265294,
+    -0.0021843465010953377,
+    0.9639018259522967,
+    0.2662488514400012,
+    4.291693669717153,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t47_pad",
+   "role": "check",
+   "name": "Marta Gurls - Dragon Arms 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t47_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t48",
+   "role": "host",
+   "name": "Torso 2 for Marta Sharks - Arm Fist 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t48_spacer",
+   "role": "check",
+   "name": "Marta Sharks - Arm Fist 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t48",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t48_arm",
+   "role": "check",
+   "name": "Marta Sharks - Arm Fist 1 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Regular sharks May25/shark ARMS and WEAPONS/Arms/Marta Sharks - Arm Fist 1",
+   "parent": "t48_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t48_shell",
+   "role": "part",
+   "name": "Marta Sharks - Arm Fist 1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t48_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Regular sharks May25/shark ARMS and WEAPONS, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t48_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.929555877177939,
+    0.09777254042651692,
+    -0.3554784270630421,
+    58.23686850024065,
+    -0.36867935218407233,
+    -0.2482492431478882,
+    0.8957956213352074,
+    40.7128917463054,
+    -0.0006629715444122318,
+    0.9637496454173462,
+    0.26680809280583795,
+    4.242648170110158,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t48_pad",
+   "role": "check",
+   "name": "Marta Sharks - Arm Fist 1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t48_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t49",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Arm 3 (Character 2) R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t49_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 3 (Character 2) R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t49",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t49_arm",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 3 (Character 2) R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/character 2/Arms/Marta Aug 2025 - Arm 3 (Character 2) R",
+   "parent": "t49_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t49_shell",
+   "role": "part",
+   "name": "Marta Aug 2025 - Arm 3 (Character 2) R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t49_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/SALE files August 2025/character 2, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t49_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.861604902701763,
+    0.24724730521101965,
+    -0.44328871633967604,
+    0.8207020132832699,
+    -0.4968123725835383,
+    -0.23186819856637597,
+    0.8363114871502053,
+    5.331778830542733,
+    0.103990523910987,
+    0.9408008239064143,
+    0.3226148653496628,
+    13.285305815568373,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t49_pad",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 3 (Character 2) R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t49_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t50",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Arm 4 Clow With Cloak R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t50_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t50",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t50_arm",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/character 3/Arms/Marta Aug 2025 - Arm 4 Clow With Cloak R",
+   "parent": "t50_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t50_shell",
+   "role": "part",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t50_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/SALE files August 2025/character 3, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t50_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9295432495144711,
+    0.09756423181534607,
+    -0.35557008889590985,
+    57.6559747347968,
+    -0.36871212672806614,
+    -0.24824551006653442,
+    0.8957837407582582,
+    29.176183048384775,
+    -0.0008721195485381349,
+    0.9637716117315995,
+    0.2667280958961446,
+    28.251951973373544,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t50_pad",
+   "role": "check",
+   "name": "Marta Aug 2025 - Arm 4 Clow With Cloak R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t50_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t51",
+   "role": "host",
+   "name": "Torso 2 for Marta Aug 2025 - Update Craw Arm 7",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t51_spacer",
+   "role": "check",
+   "name": "Marta Aug 2025 - Update Craw Arm 7 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t51",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t51_arm",
+   "role": "check",
+   "name": "Marta Aug 2025 - Update Craw Arm 7 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/SALE files August 2025/extra stls/crow general/craw arms/Arms/Marta Aug 2025 - Update Craw Arm 7",
+   "parent": "t51_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t51_shell",
+   "role": "part",
+   "name": "Marta Aug 2025 - Update Craw Arm 7 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t51_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/SALE files August 2025/extra stls, 7 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t51_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9344315380041837,
+    0.09272444671483816,
+    -0.34385912040891736,
+    7.90241479614749,
+    -0.3561348082673195,
+    -0.2495425938244633,
+    0.9004987523473506,
+    15.75377751424005,
+    -0.0023094995717181815,
+    0.9639140924624746,
+    0.2662025638954415,
+    1.017643468202377,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t51_pad",
+   "role": "check",
+   "name": "Marta Aug 2025 - Update Craw Arm 7 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t51_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t52",
+   "role": "host",
+   "name": "Torso 2 for Marta Space Wolves - Wolf Arm 3",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t52_spacer",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 3 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t52",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t52_arm",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 3 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/SW Bits 10 October 2024/10 October 2024/wolf arms/Arms/Marta Space Wolves - Wolf Arm 3",
+   "parent": "t52_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t52_shell",
+   "role": "part",
+   "name": "Marta Space Wolves - Wolf Arm 3 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t52_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/SW Bits 10 October 2024/10 October 2024, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t52_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9296252381931454,
+    0.09780875057668212,
+    -0.35528687932862507,
+    12.035278000116662,
+    -0.3685044146565919,
+    -0.24826701798207546,
+    0.8958626240891542,
+    7.997557644104148,
+    -0.0005830195128301549,
+    0.963741231419621,
+    0.26683863405965835,
+    1.42318918752407,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t52_pad",
+   "role": "check",
+   "name": "Marta Space Wolves - Wolf Arm 3 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t52_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t53",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Arm 3 R (Character 2)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t53_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 2) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t53",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t53_arm",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 2) (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/02 Feb 2025/character 2/Arms/Marta Techmarine V2 - Arm 3 R (Character 2)",
+   "parent": "t53_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t53_shell",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 2) Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t53_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Techmarine V2/02 Feb 2025, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t53_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9295181544488957,
+    0.0995694602727038,
+    -0.35507776366925115,
+    50.57698242318702,
+    -0.36877327622495776,
+    -0.24823919160261998,
+    0.8957594235179095,
+    35.009786753983676,
+    0.0010464121133473313,
+    0.9635683402989611,
+    0.26746158819922133,
+    4.53699281487384,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t53_pad",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Arm 3 R (Character 2) Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t53_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t54",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine V2 - Apolo Arm R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t54_spacer",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Apolo Arm R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t54",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t54_arm",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Apolo Arm R (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine V2/SALE June 2025 Mithraism/Mithraism Character 1/Arms/Marta Techmarine V2 - Apolo Arm R",
+   "parent": "t54_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t54_shell",
+   "role": "part",
+   "name": "Marta Techmarine V2 - Apolo Arm R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t54_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Techmarine V2/SALE June 2025 Mithraism, 5 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t54_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.8736891541909074,
+    0.2023842848055145,
+    -0.4423884986768513,
+    -15.003742956246908,
+    -0.4818018743113478,
+    -0.23410607198090105,
+    0.8444303061924674,
+    14.194263433915319,
+    0.06733335852000231,
+    0.9509126441064055,
+    0.30204507071536235,
+    17.39656916304328,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t54_pad",
+   "role": "check",
+   "name": "Marta Techmarine V2 - Apolo Arm R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t54_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t55",
+   "role": "host",
+   "name": "Torso 2 for Marta Techmarine - Arms 1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -720.0
+   ]
+  },
+  {
+   "id": "t55_spacer",
+   "role": "check",
+   "name": "Marta Techmarine - Arms 1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t55",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t55_arm",
+   "role": "check",
+   "name": "Marta Techmarine - Arms 1 (locked)",
+   "rel": "Marta PunkGirl - Tacticus/Techmarine/Arms/Marta Techmarine - Arms 1",
+   "parent": "t55_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t55_shell",
+   "role": "part",
+   "name": "Marta Techmarine - Arms 1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t55_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/Techmarine/Arms, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t55_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9345912666877778,
+    0.09260077170103848,
+    -0.34345774164035636,
+    31.560625239910557,
+    -0.35571499690413716,
+    -0.2495845211379235,
+    0.9006529285468746,
+    34.479304122709934,
+    -0.002320051346487575,
+    0.9639149017738291,
+    0.26619946508308745,
+    3.6711576706701465,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t55_pad",
+   "role": "check",
+   "name": "Marta Techmarine - Arms 1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t55_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t56",
+   "role": "host",
+   "name": "Torso 2 for Marta Bionics - Amrs Bionic Arm 2 Primary",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t56_spacer",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Bionic Arm 2 Primary Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t56",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t56_arm",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Bionic Arm 2 Primary (locked)",
+   "rel": "Marta PunkGirl - Tacticus/bionics-for-bois-and-gurls-september-23/Arms/Marta Bionics - Amrs Bionic Arm 2 Primary",
+   "parent": "t56_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t56_shell",
+   "role": "part",
+   "name": "Marta Bionics - Amrs Bionic Arm 2 Primary Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t56_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/bionics-for-bois-and-gurls-september-23/Arms, 15 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t56_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9298076951148732,
+    0.09852133082205199,
+    -0.3546125336440297,
+    -3.192417670222189,
+    -0.3680446587528477,
+    -0.24831611284999147,
+    0.896037702312936,
+    16.99278102348857,
+    0.00022222107491555674,
+    0.9636567653012407,
+    0.26714589061086885,
+    11.2554314031427,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t56_pad",
+   "role": "check",
+   "name": "Marta Bionics - Amrs Bionic Arm 2 Primary Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t56_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t57",
+   "role": "host",
+   "name": "Torso 2 for Marta Executions - Arm R (Executions 1)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t57_spacer",
+   "role": "check",
+   "name": "Marta Executions - Arm R (Executions 1) Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t57",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t57_arm",
+   "role": "check",
+   "name": "Marta Executions - Arm R (Executions 1) (locked)",
+   "rel": "Marta PunkGirl - Tacticus/d2420251125-1-bd6hiy/marta_PunkGirl/d24/EXECUTIONS 1/Arms/Marta Executions - Arm R (Executions 1)",
+   "parent": "t57_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t57_shell",
+   "role": "part",
+   "name": "Marta Executions - Arm R (Executions 1) Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t57_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Marta PunkGirl - Tacticus/d2420251125-1-bd6hiy/marta_PunkGirl, 2 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t57_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.8692091144565526,
+    0.22381393763378132,
+    -0.4408880456815212,
+    -7.193672722894619,
+    -0.4869971456002019,
+    -0.2333422880068074,
+    0.8416578420886363,
+    11.01994773223778,
+    0.08549705173179202,
+    0.9462872258238685,
+    0.31181917625141375,
+    -3.7635790957373665,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t57_pad",
+   "role": "check",
+   "name": "Marta Executions - Arm R (Executions 1) Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t57_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t58",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern C - Duel Melee Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t58_spacer",
+   "role": "check",
+   "name": "Springles Pattern C - Duel Melee Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t58",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t58_arm",
+   "role": "check",
+   "name": "Springles Pattern C - Duel Melee Arm 1 R (locked)",
+   "rel": "Springles - Heresy/patternC arms/2 handed melee/Arms/Springles Pattern C - Duel Melee Arm 1 R",
+   "parent": "t58_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t58_shell",
+   "role": "part",
+   "name": "Springles Pattern C - Duel Melee Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t58_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Springles - Heresy/patternC arms, 22 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t58_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.02645784291563305,
+    -0.9608492995810878,
+    -0.27580801636905006,
+    159.29576335616494,
+    0.9439724832852965,
+    -0.11480824833766146,
+    0.30941030502370176,
+    287.6908141393673,
+    -0.3289620660539046,
+    -0.25216903563795334,
+    0.9100531733003364,
+    11.206913117497827,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t58_pad",
+   "role": "check",
+   "name": "Springles Pattern C - Duel Melee Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t58_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t59",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern P - Duel Melee Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    240.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t59_spacer",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t59",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t59_arm",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 1 R (locked)",
+   "rel": "Springles - Heresy/patternP arms/2 handed melee/Arms/Springles Pattern P - Duel Melee Arm 1 R",
+   "parent": "t59_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t59_shell",
+   "role": "part",
+   "name": "Springles Pattern P - Duel Melee Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t59_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Springles - Heresy/patternP arms, 22 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t59_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.02645784291563305,
+    -0.9608492995810878,
+    -0.27580801636905006,
+    -272.6495935671763,
+    0.9439724832852965,
+    -0.11480824833766146,
+    0.30941030502370176,
+    892.2585368091663,
+    -0.3289620660539046,
+    -0.25216903563795334,
+    0.9100531733003364,
+    11.20585611749782,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t59_pad",
+   "role": "check",
+   "name": "Springles Pattern P - Duel Melee Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t59_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t60",
+   "role": "host",
+   "name": "Torso 2 for Springles Pattern S - Duel Melee Arm 1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    320.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t60_spacer",
+   "role": "check",
+   "name": "Springles Pattern S - Duel Melee Arm 1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t60",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t60_arm",
+   "role": "check",
+   "name": "Springles Pattern S - Duel Melee Arm 1 R (locked)",
+   "rel": "Springles - Heresy/patternS arms/2 handed melee/Arms/Springles Pattern S - Duel Melee Arm 1 R",
+   "parent": "t60_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t60_shell",
+   "role": "part",
+   "name": "Springles Pattern S - Duel Melee Arm 1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t60_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Springles - Heresy/patternS arms, 22 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t60_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.02645784291563305,
+    -0.9608492995810878,
+    -0.27580801636905006,
+    1796.5182477814005,
+    0.9439724832852965,
+    -0.11480824833766146,
+    0.30941030502370176,
+    -905.8510468513106,
+    -0.3289620660539046,
+    -0.25216903563795334,
+    0.9100531733003364,
+    11.772880117497824,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t60_pad",
+   "role": "check",
+   "name": "Springles Pattern S - Duel Melee Arm 1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t60_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t61",
+   "role": "host",
+   "name": "Torso 2 for TN Moritat - LM Arm R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    400.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t61_spacer",
+   "role": "check",
+   "name": "TN Moritat - LM Arm R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t61",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t61_arm",
+   "role": "check",
+   "name": "TN Moritat - LM Arm R (locked)",
+   "rel": "Turtle Ninja - Heresy/Legion Moritat/Arms/TN Moritat - LM Arm R",
+   "parent": "t61_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t61_shell",
+   "role": "part",
+   "name": "TN Moritat - LM Arm R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t61_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Turtle Ninja - Heresy/Legion Moritat, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t61_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9305468080990613,
+    -0.09728540701356302,
+    0.3530124363005103,
+    10.63447351964335,
+    -0.36617247663550984,
+    -0.24851126974681004,
+    0.8967502201535917,
+    12.124614812375283,
+    0.00048703734407459754,
+    -0.963731292873706,
+    -0.2668746391391397,
+    8.240187509812312,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t61_pad",
+   "role": "check",
+   "name": "TN Moritat - LM Arm R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t61_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t62",
+   "role": "host",
+   "name": "Torso 2 for TN Librarian - Arm R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    480.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t62_spacer",
+   "role": "check",
+   "name": "TN Librarian - Arm R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t62",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t62_arm",
+   "role": "check",
+   "name": "TN Librarian - Arm R (locked)",
+   "rel": "Turtle Ninja - Heresy/Librarian Custom/Arms/TN Librarian - Arm R",
+   "parent": "t62_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t62_shell",
+   "role": "part",
+   "name": "TN Librarian - Arm R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t62_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Turtle Ninja - Heresy/Librarian Custom, 1 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t62_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    -0.9101771716339481,
+    0.3381433326717192,
+    -0.23924078561504614,
+    10.16763794823085,
+    -0.3329653030894757,
+    -0.253698269509757,
+    0.9081703728004805,
+    15.835408101841269,
+    0.24639638102101727,
+    0.906254353032711,
+    0.34349986214366657,
+    26.44267244334515,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t62_pad",
+   "role": "check",
+   "name": "TN Librarian - Arm R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t62_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t63",
+   "role": "host",
+   "name": "Torso 2 for TN Mk4 Tactical - Lightning Power Fist A",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    560.0,
+    0,
+    -840.0
+   ]
+  },
+  {
+   "id": "t63_spacer",
+   "role": "check",
+   "name": "TN Mk4 Tactical - Lightning Power Fist A Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t63",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t63_arm",
+   "role": "check",
+   "name": "TN Mk4 Tactical - Lightning Power Fist A (locked)",
+   "rel": "Turtle Ninja - Heresy/Mk4 Tactical Squad/Weapons/Single Arm/Arms/TN Mk4 Tactical - Lightning Power Fist A",
+   "parent": "t63_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t63_shell",
+   "role": "part",
+   "name": "TN Mk4 Tactical - Lightning Power Fist A Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t63_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Turtle Ninja - Heresy/Mk4 Tactical Squad, 21 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t63_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9305693106132009,
+    -0.09704208942276271,
+    0.35301876710777613,
+    2.0747281369288397,
+    -0.36611397017372516,
+    -0.24851787228670053,
+    0.896772835099572,
+    17.427335122913895,
+    0.0007066460712500502,
+    -0.9637542576025558,
+    -0.2667913282756057,
+    10.83976546812229,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t63_pad",
+   "role": "check",
+   "name": "TN Mk4 Tactical - Lightning Power Fist A Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t63_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t64",
+   "role": "host",
+   "name": "Torso 2 for TN Mk6 Addon - Bolter B1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    0.0,
+    0,
+    -960.0
+   ]
+  },
+  {
+   "id": "t64_spacer",
+   "role": "check",
+   "name": "TN Mk6 Addon - Bolter B1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t64",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t64_arm",
+   "role": "check",
+   "name": "TN Mk6 Addon - Bolter B1 R (locked)",
+   "rel": "Turtle Ninja - Heresy/Mk6 Addon 1/Pose B - Low Ready/Arms/TN Mk6 Addon - Bolter B1 R",
+   "parent": "t64_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t64_shell",
+   "role": "part",
+   "name": "TN Mk6 Addon - Bolter B1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t64_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Turtle Ninja - Heresy/Mk6 Addon 1, 9 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t64_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9305828140379385,
+    -0.09708273733288013,
+    0.3529705861536476,
+    17.985847669997906,
+    -0.3660783814577655,
+    -0.24852138438650453,
+    0.8967858397246378,
+    10.780465911090648,
+    0.0006582555746108814,
+    -0.9637492084164969,
+    -0.26680968164709085,
+    12.353139218806097,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t64_pad",
+   "role": "check",
+   "name": "TN Mk6 Addon - Bolter B1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t64_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t65",
+   "role": "host",
+   "name": "Torso 2 for TN Mk7-8 Assault - Mk7 Arm Single B1",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    80.0,
+    0,
+    -960.0
+   ]
+  },
+  {
+   "id": "t65_spacer",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single B1 Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t65",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t65_arm",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single B1 (locked)",
+   "rel": "Turtle Ninja - Heresy/Mk7-8 Assault Intercessors Addon 1/Arms/TN Mk7-8 Assault - Mk7 Arm Single B1",
+   "parent": "t65_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t65_shell",
+   "role": "part",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single B1 Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t65_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Turtle Ninja - Heresy/Mk7-8 Assault Intercessors Addon 1, 9 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t65_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9305809080385375,
+    -0.09707974062617995,
+    0.35297848224932193,
+    3.969869039946638,
+    -0.36608519150784424,
+    -0.24852107170522356,
+    0.8967839516770942,
+    8.454715900706702,
+    0.0006629085997648792,
+    -0.9637496940360182,
+    -0.26680791734465487,
+    9.754620273319889,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t65_pad",
+   "role": "check",
+   "name": "TN Mk7-8 Assault - Mk7 Arm Single B1 Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t65_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  },
+  {
+   "id": "t66",
+   "role": "host",
+   "name": "Torso 2 for TN Mk10 Assault - Arm D1 R",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+   "pose": {
+    "place": true
+   },
+   "at": [
+    160.0,
+    0,
+    -960.0
+   ]
+  },
+  {
+   "id": "t66_spacer",
+   "role": "check",
+   "name": "TN Mk10 Assault - Arm D1 R Spacer",
+   "connector": {
+    "kind": "spacer",
+    "from": "arms",
+    "obj": "Springles Spacer"
+   },
+   "parent": "t66",
+   "on": "Shoulder R",
+   "pose": {
+    "at_pivot": true,
+    "shift_from": [
+     "Mar Fil - Tacticus/AssaultMarines-V2/Chests/MarFil Assault - Torso 2",
+     "Shoulder R"
+    ]
+   }
+  },
+  {
+   "id": "t66_arm",
+   "role": "check",
+   "name": "TN Mk10 Assault - Arm D1 R (locked)",
+   "rel": "Turtle Ninja - Tacticus/Mk10 Assault Intercessor + Jumppack Addon/Arms/TN Mk10 Assault - Arm D1 R",
+   "parent": "t66_spacer",
+   "on": "arm seat",
+   "pose": {
+    "fit": "Shoulder R"
+   }
+  },
+  {
+   "id": "t66_shell",
+   "role": "part",
+   "name": "TN Mk10 Assault - Arm D1 R Shell (Pad R)",
+   "connector": {
+    "kind": "guide",
+    "from": "pads",
+    "obj": "Pauldron adapter"
+   },
+   "parent": "t66_arm",
+   "joint": "Shell on the arm (Pad R)",
+   "pose": {
+    "at_pivot": true
+   },
+   "note": "new arm type (kit Turtle Ninja - Tacticus/Mk10 Assault Intercessor + Jumppack Addon, 32 arms not matched as the same shoulder): set the shell, then take the shoulder cut under it",
+   "write": {
+    "host": "t66_arm",
+    "socket": "Pad R",
+    "mirror": "Pad L",
+    "half": "socket"
+   },
+   "on": "Pad R",
+   "on_matrix": [
+    0.9295494768733497,
+    -0.09782237520407519,
+    0.35548210552561377,
+    3.4680501346225063,
+    -0.3686961954702505,
+    -0.24824754500847904,
+    0.8957894233712205,
+    12.77402452751922,
+    0.000619283110090343,
+    -0.9637450443220176,
+    -0.26682480073720544,
+    7.578553858393908,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "t66_pad",
+   "role": "check",
+   "name": "TN Mk10 Assault - Arm D1 R Shoulder Pad 1 (rides on the shell)",
+   "rel": "Mar Fil - Tacticus/AssaultMarines-V2/Shoulder Pads/MarFil Assault - Shoulder Pad 1",
+   "parent": "t66_shell",
+   "on": "crown",
+   "pose": {
+    "fit": "Pad R"
+   }
+  }
+ ]
+}

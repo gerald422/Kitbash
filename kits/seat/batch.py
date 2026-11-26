@@ -450,6 +450,10 @@ def write(A):
         half = w.get("half", "both")      # "socket": the part and its fit are known-good, so its move is the host's socket;
         o = objs[e["id"]]; h = entry(spec, w["host"]); hrel = h["rel"]   # "fit": the socket is, so its move is the fit
         S, F, con = joint_of(objs, e["id"], w["host"])
+        if w.get("on_written_socket"):       # its fit against the host's socket as written, whatever it rides on
+            hd0 = SC.load(lp(os.path.join(lib, hrel + SC.SUFFIX)))[0]                 # (Nov 26: a pauldron moved by its shell)
+            S = G.M4(next(s["matrix"] for s in hd0["sockets"] if s["type"] == w["socket"]))
+            F = np.linalg.inv(S) @ np.linalg.inv(own(objs[w["host"]])) @ own(o); con = []
         if half == "socket":
             if o.parent is not objs[w["host"]]: raise SystemExit("%s: a socket write needs it straight on %s" % (e["id"], w["host"]))
             S = np.linalg.inv(own(objs[w["host"]])) @ np.array(o.matrix_world)            # its pivot = the socket
