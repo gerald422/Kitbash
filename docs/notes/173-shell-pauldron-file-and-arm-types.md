@@ -60,6 +60,7 @@ the blender file. That should mean I can do a few and then ask you to apply the 
 - **Carrying a fix:** `batch.py apply` still carries to every piece of a kind in the file. Limiting it to one
   kit's collection is the next change, when he asks for a carry.
 
-The pauldron b and c files and the first arm-type file were never opened and went to the Recycle Bin. Still in the
-batches folder: the Nov 25-26 stage 4 files he looked at (Assault arm sockets and b, Pads by arm type, Every pauldron
-in the guide), replaced by these two and kept until he says.
+The pauldron b and c files and the first arm-type file were never opened and went to the Recycle Bin. The Nov 25-26
+stage 4 files he had looked at (Assault arm sockets and b, Pads by arm type, Every pauldron in the guide) followed on
+Nov 26 (Josh: "can the other files be cleared out if not being used"). In this file he moves the shell, not the
+spacer (the spacer stays locked in the shoulder joint).
