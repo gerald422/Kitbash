@@ -568,7 +568,7 @@ def write(A):
 
 
 def apply(A):
-    """apply BATCH.blend FROM_ID[,FROM_ID...] OUT.blend [--into OTHER.blend] [--skip ID,ID] [--kit 07,08]: Josh's change to piece FROM_ID (e.g. t1_legs), in the frame it sits on (its
+    """apply BATCH.blend FROM_ID[@KIT][,FROM_ID[@KIT]...] OUT.blend [--into OTHER.blend] [--skip ID,ID] [--kit 07,08]: Josh's change to piece FROM_ID (e.g. t1_legs), in the frame it sits on (its
     socket, so the same on every torso: they stand on the same sockets), put on every other piece of the same kind
     (same id suffix, reference column left alone). Josh's file is not touched: the result is saved as OUT, a new file,
     for him to check; read / write treat the applied moves like his own (notes 129).
@@ -584,28 +584,34 @@ def apply(A):
     by = load(src)
     def in_frame(o):                                 # the piece's pivot in the frame it sits on (the parent's frame)
         par = by[o["kb_parent"]]; return np.linalg.inv(own(par) @ G.M4(o["kb_on_frame"])) @ np.array(o.matrix_world)
-    Ds = {}
-    for fid in fids:
+    Ds = {}                                          # (id suffix, kit or None) -> (FROM_ID, change)
+    for fk in fids:                                  # FROM_ID@07 (Nov 26): that change only for the pieces of kit 07, so
+        fid, _, fk_kit = fk.partition("@")           # one run carries one fix per pack
         D = in_frame(by[fid])
         if delta:                                    # his move only: now in its frame . (as built in its frame)^-1
             o = by[fid]; on = own(by[o["kb_parent"]]) @ G.M4(o["kb_on_frame"])
             D = D @ np.linalg.inv(np.linalg.inv(on) @ G.M4(o["kb_seated"]))
-        Ds[fid.split("_", 1)[1]] = (fid, D)
-        print("%s: %.3f mm %.2f deg in its socket frame" % ((fid,) + tuple(G.off(Ds[fid.split("_", 1)[1]][1], np.eye(4)))))
+        Ds[(fid.split("_", 1)[1], fk_kit or None)] = (fid, D)
+        print("%s: %.3f mm %.2f deg in its socket frame" % ((fk,) + tuple(G.off(D, np.eye(4)))))
     if into: by = load(into)
     skip = set((opt(A, "--skip", "") or "").split(",")); done = []
     kits = [k for k in (opt(A, "--kit", "") or "").split(",") if k]   # Nov 26: only pieces in these collections (by kit,
     in_kit = lambda o: not kits or any(c.name.startswith(k) for c in o.users_collection for k in kits)   # e.g. "07")
+    def find(i, o):
+        s = i.split("_", 1)[1]
+        for (sx, k), v in Ds.items():
+            if sx == s and k and any(c.name.startswith(k) for c in o.users_collection): return v
+        return Ds.get((s, None))
     for i, o in by.items():
-        if "_" not in i or i.startswith("ref") or i in skip or i.split("_", 1)[1] not in Ds or not in_kit(o): continue
-        fid, D = Ds[i.split("_", 1)[1]]
-        if i == fid and not into: continue
+        if "_" not in i or i.startswith("ref") or i in skip or not in_kit(o) or find(i, o) is None: continue
+        fid, D = find(i, o)
+        if i in {v[0] for v in Ds.values()} and not into: continue
         par = by[o["kb_parent"]]; o.rotation_mode = 'QUATERNION'
         on = own(par) @ G.M4(o["kb_on_frame"])
         o.matrix_world = G.mat(on @ D @ np.linalg.inv(on) @ np.array(o.matrix_world) if delta else on @ D); o["kb_applied"] = "%s's change (%s)" % (fid, os.path.basename(src))
         done.append(i)
     bpy.context.view_layer.update()
-    worst = 0 if delta else max([sum(G.off(in_frame(by[i]), Ds[i.split("_", 1)[1]][1])) for i in done] or [0])
+    worst = 0 if delta else max([sum(G.off(in_frame(by[i]), find(i, by[i])[1])) for i in done] or [0])
     print("applied to %d: %s (worst %.5f mm+deg off)" % (len(done), " ".join(done), worst))
     bpy.ops.wm.save_as_mainfile(filepath=out); print("SAVED", out)
 
