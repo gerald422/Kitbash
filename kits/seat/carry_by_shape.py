@@ -1,6 +1,7 @@
 """Carry Josh's seat of one pauldron to the rest of its kit by the inner surface (Nov 26, stage 4 pauldrons).
 
-    BL kits/seat/carry_by_shape.py -- SRC.blend OUT.blend FROM_ID@KIT[,FROM_ID@KIT...] [--only ID,ID]
+    BL kits/seat/carry_by_shape.py -- SRC.blend OUT.blend FROM_ID@KIT[,FROM_ID@KIT...] [--only ID,ID] [--reset-shell ID]
+    BL kits/seat/carry_by_shape.py -- SRC.blend OUT.blend --origins   (only: every pauldron's origin back on its crown)
 
 Several FROM_IDs may share a KIT (Josh seats one per inner shape): each other pauldron takes the best of them.
   BL = blender --background --factory-startup --python
@@ -49,6 +50,14 @@ def inner(o):
     return np.concatenate([Ti.mean(1), Ti.reshape(-1, 3)]), tri_bvh(Ti), float(A[keep].sum() / A.sum())
 
 
+def rebake(o, Mn):
+    """put the object's origin (and axes) on Mn, the mesh left exactly where it is (Nov 27, Josh: carried pauldrons turned
+    about an origin swung off the crown, unlike the rest)"""
+    T = np.linalg.inv(Mn) @ np.array(o.matrix_world)
+    o.data.transform(G.mat(T)); o["kb_own_in_obj"] = G.flat16(T @ G.M4(o["kb_own_in_obj"]))
+    o.rotation_mode = 'QUATERNION'; o.matrix_world = G.mat(Mn)
+
+
 def main(A):
     src, out, froms = A[0], A[1], A[2].split(",")
     only = set((B.opt(A, "--only", "") or "").split(",")) - {""}
@@ -58,6 +67,14 @@ def main(A):
     def frame(o):                                    # the frame it sits on in the shell, the shell where it was built (the
         p = by[o["kb_parent"]]                       # arm's Pad R), so a shell he turned (p207, Nov 27) carries too
         return G.M4(p["kb_seated"]) @ G.M4(p["kb_own_in_obj"]) @ G.M4(o["kb_on_frame"])
+    if A[2] == "--origins":                          # only put every pauldron's origin back on its crown
+        n = 0
+        for i, o in by.items():
+            if i.endswith("_pad") and o.get("kb_parent") in by:
+                Mn = frame(o)
+                if np.abs(np.array(o.matrix_world) - Mn).max() > 1e-6: rebake(o, Mn); n += 1
+        bpy.context.view_layer.update(); print("origins put back on the crown: %d" % n, flush=True)
+        bpy.ops.wm.save_as_mainfile(filepath=out); print("SAVED", out, flush=True); return
     starts = [G.rot_to(np.array([0, 0, 1.0]), dv) @ G.rot((0, 0, 1), s) for dv in G.fib(40) for s in range(0, 360, 45)]
     W, flagged = [], []
     kits = {}                                        # kit -> his pauldrons there (several per pack: each other one takes
@@ -103,6 +120,7 @@ def main(A):
             rms = best[0]; X = best[1] if rms <= GOOD else Xo
             o.rotation_mode = 'QUATERNION'
             o.matrix_world = G.mat(frame(o) @ X @ np.linalg.inv(G.M4(o["kb_own_in_obj"])))
+            rebake(o, frame(o))                      # its origin back on the crown, as built
             if rms <= GOOD: o["kb_applied"] = "inner surface fit to %s (%s), %.3f mm" % (best[4], os.path.basename(src), rms)
             flag = []
             if rms > GOOD: flag.append("no match: left where it was")
