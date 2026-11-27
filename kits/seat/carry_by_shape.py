@@ -25,6 +25,7 @@ from mathutils.bvhtree import BVHTree
 import geom as G, batch as B
 
 GOOD, SURE, TIE_MM, TIE_DEG = 0.15, 0.05, 0.01, 10.0
+INSIDE = 0.025       # Nov 27: one way this close (e.g. Outrider IH 2 on BA 1 at 0.001 mm) = the same curve, one with more of it
 
 
 def tri_bvh(T): return BVHTree.FromPolygons([tuple(v) for v in T.reshape(-1, 3)], [(3 * k, 3 * k + 1, 3 * k + 2) for k in range(len(T))])
@@ -54,7 +55,9 @@ def main(A):
     if os.path.exists(out): raise SystemExit("%s exists: never overwritten" % out)
     bpy.ops.wm.open_mainfile(filepath=src, load_ui=False); bpy.context.view_layer.update()
     by = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}
-    frame = lambda o: B.own(by[o["kb_parent"]]) @ G.M4(o["kb_on_frame"])      # the frame it sits on in the shell (world)
+    def frame(o):                                    # the frame it sits on in the shell, the shell where it was built (the
+        p = by[o["kb_parent"]]                       # arm's Pad R), so a shell he turned (p207, Nov 27) carries too
+        return G.M4(p["kb_seated"]) @ G.M4(p["kb_own_in_obj"]) @ G.M4(o["kb_on_frame"])
     starts = [G.rot_to(np.array([0, 0, 1.0]), dv) @ G.rot((0, 0, 1), s) for dv in G.fib(40) for s in range(0, 360, 45)]
     W, flagged = [], []
     kits = {}                                        # kit -> his pauldrons there (several per pack: each other one takes
@@ -92,7 +95,8 @@ def main(A):
                     Q = Pt @ back[:3, :3].T + back[:3, 3]
                     d = np.array([(bj.find_nearest(Vector(q), 3.0)[3] or 9.0) for q in Q])
                     r2 = float(np.sqrt(np.mean(np.sort(d)[: int(len(d) * 0.85)] ** 2)))
-                    fits.append((max(r1, r2), np.linalg.inv(M), r1, r2, fid, jname))
+                    sc = min(r1, r2) if min(r1, r2) <= INSIDE else max(r1, r2)   # one inner surface inside the other
+                    fits.append((sc, np.linalg.inv(M), r1, r2, fid, jname))
                 if fits and min(f[0] for f in fits) < 0.03: break             # a sure match: no need to try his others
             fits.sort(key=lambda f: f[0]); best = fits[0]
             rival = next((f for f in fits[1:] if f[4] == best[4] and f[0] - best[0] < TIE_MM and G.ang(f[1], best[1]) > TIE_DEG), None)
@@ -108,6 +112,12 @@ def main(A):
             W.append("  %-9s %-46s inner %3.0f%%  %.3f mm on %-8s (his on theirs %.3f, theirs on his %.3f)  %s"
                      % (i, o.name[:46], 100 * sho, rms, best[4], best[2], best[3], "; ".join(flag) or "ok"))
             print(W[-1], flush=True)
+    for sid in (B.opt(A, "--reset-shell", "") or "").split(","):  # a shell he moved by accident: back where it was built,
+        if not sid: continue                         # its pauldron left where he put it (Nov 27, p207)
+        sh = by[sid]; kids = {c: c.matrix_world.copy() for c in sh.children}
+        sh.matrix_world = G.mat(G.M4(sh["kb_seated"])); bpy.context.view_layer.update()
+        for c, m in kids.items(): c.matrix_world = m
+        print("shell %s put back; %d piece(s) on it left in place" % (sid, len(kids)), flush=True)
     bpy.context.view_layer.update()
     print("flagged: %s" % (" ".join(flagged) or "none"), flush=True)
     bpy.ops.wm.save_as_mainfile(filepath=out); print("SAVED", out, flush=True)
