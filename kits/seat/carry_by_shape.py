@@ -33,9 +33,8 @@ def tri_bvh(T): return BVHTree.FromPolygons([tuple(v) for v in T.reshape(-1, 3)]
 def sub(P, n): return P[np.linspace(0, len(P) - 1, min(len(P), n)).astype(int)]
 
 
-def inner(o):
-    """the pauldron's inner surface in its own coordinates: (points, BVH of those triangles, share of the area)"""
-    Ki = np.linalg.inv(G.M4(o["kb_own_in_obj"])); T = G.tris(o) @ Ki[:3, :3].T + Ki[:3, 3]
+def inner_keep(T):
+    """indices of the inner-surface triangles of T (n,3,3): facing the dome's centre and seeing it (also mate_frame)"""
     C = T.mean(1); N = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]); A = np.linalg.norm(N, axis=1); N = N / np.maximum(A, 1e-12)[:, None]
     c, _r = G.sphere_fit(C); m = np.ones(len(C), bool)
     for _ in range(8):                               # faces looking at the dome's centre, refitted on those
@@ -46,7 +45,13 @@ def inner(o):
     for k in np.nonzero(m)[0]:                       # ... and seeing it: nothing of the pauldron in between
         d = c - C[k]; L = np.linalg.norm(d)
         if full.ray_cast(Vector(C[k] + N[k] * 0.02), Vector(d / L), L)[0] is None: keep.append(k)
-    Ti = T[np.array(keep, int)]
+    return np.array(keep, int)
+
+
+def inner(o):
+    """the pauldron's inner surface in its own coordinates: (points, BVH of those triangles, share of the area)"""
+    Ki = np.linalg.inv(G.M4(o["kb_own_in_obj"])); T = G.tris(o) @ Ki[:3, :3].T + Ki[:3, 3]
+    keep = inner_keep(T); Ti = T[keep]; A = np.linalg.norm(np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]), axis=1)
     return np.concatenate([Ti.mean(1), Ti.reshape(-1, 3)]), tri_bvh(Ti), float(A[keep].sum() / A.sum())
 
 
