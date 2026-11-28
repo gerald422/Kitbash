@@ -6,18 +6,18 @@
  "sockets": [],
  "fits": {
   "Pad R": [
-   0.018845,
-   0.997041,
-   0.074526,
-   38.154744,
-   -0.995401,
-   0.025712,
-   -0.092285,
-   -68.747146,
-   -0.093928,
-   -0.072444,
-   0.99294,
-   -17.406206,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
    0.0,
    0.0,
    0.0,
@@ -26,11 +26,37 @@
  },
  "notes": {
   "Pad": "Josh's pad 62 matched onto it (x1.10, match 0.180 mm), his Pad R fit carried across about 62's shell centre",
-  "Scale": "x1.03 on Nov 19 (Josh: Springles arms to about an outstretched Mar Fil Assault arm, and what fits on the arm with them); sockets and fits moved with it"
+  "Scale": "x1.03 on Nov 19 (Josh: Springles arms to about an outstretched Mar Fil Assault arm, and what fits on the arm with them); sockets and fits moved with it",
+  "Pad R": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "original": {
   "name": "mk3 blank",
   "folder": "mk3 pads",
   "path": "Springles\\shoulder pads\\mk3 pads\\mk3 blank.stl"
+ },
+ "exact": [
+  "Pad R"
+ ],
+ "origin": {
+  "from_file": [
+   -0.1165322,
+   0.775918408,
+   -0.619976508,
+   22.637061494,
+   -0.979405509,
+   -0.193404852,
+   -0.057960432,
+   -76.189052641,
+   -0.164879031,
+   0.600454151,
+   0.782476656,
+   4.42684914,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "joint": "Pad R",
+  "by": "pads_origin.py 2026-11-28"
  }
 }

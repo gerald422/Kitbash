@@ -5,18 +5,18 @@
  "sockets": [],
  "fits": {
   "Pad R": [
-   0.999999,
-   8e-05,
-   -0.001801,
-   -0.010955,
-   -8.2e-05,
    1.0,
-   -0.001556,
-   -0.005162,
-   0.0018,
-   0.001556,
-   0.999997,
-   -0.001878,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
    0.0,
    0.0,
    0.0,
@@ -30,28 +30,31 @@
   "path": "Mar Fil - Tacticus\\AssaultMarines-V2\\Shoulder Pads\\67-ShoulderPad-6.stl"
  },
  "notes": {
-  "Pad R": "cut pad inside (from the placed MarFil Assault - Shoulder Pad 1), sure (0.0015 mm, 100% on), write_joints Nov 20"
+  "Pad R": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "origin": {
   "from_file": [
-   -0.01353718,
-   -0.997155583,
-   0.074145051,
-   -0.337583,
-   0.995692878,
-   -0.020244779,
-   -0.090475641,
-   0.189542,
-   0.09171934,
-   0.072600914,
-   0.993134769,
-   -3.259939,
+   0.077505497,
+   -0.828015294,
+   -0.555322943,
+   -0.864067122,
+   0.9969907,
+   0.063496383,
+   0.04447193,
+   0.057891153,
+   -0.001562441,
+   -0.557098629,
+   0.830444866,
+   -3.312507222,
    0.0,
    0.0,
    0.0,
    1.0
   ],
   "joint": "Pad R",
-  "by": "origins.py Nov 15"
- }
+  "by": "pads_origin.py 2026-11-28"
+ },
+ "exact": [
+  "Pad R"
+ ]
 }

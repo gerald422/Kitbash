@@ -2,14 +2,59 @@
  "schemaVersion": 1,
  "part": "PAD_7",
  "sockets": [],
- "fits": {},
+ "fits": {
+  "Pad R": [
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
  "notes": {
-  "category": "filed without a fit (Nov 9): the pad-62 match doesn't hold for it; place it by eye"
+  "category": "filed without a fit (Nov 9): the pad-62 match doesn't hold for it; place it by eye",
+  "Pad R": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "original": {
   "name": "PAD_7",
   "folder": "BL-PAULDRONS-2",
   "path": "WarGame Exclusive\\BL-PAULDRONS-2\\PAD_7.stl"
  },
- "category": "Shoulder Pads"
+ "category": "Shoulder Pads",
+ "exact": [
+  "Pad R"
+ ],
+ "origin": {
+  "from_file": [
+   0.080412492,
+   -0.853123141,
+   -0.515475254,
+   15.309427027,
+   0.99347638,
+   0.110550953,
+   -0.027985175,
+   23.104117797,
+   0.080861081,
+   -0.509862132,
+   0.856447367,
+   -20.737784827,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "joint": "Pad R",
+  "by": "pads_origin.py 2026-11-28"
+ }
 }

@@ -5,18 +5,18 @@
  "sockets": [],
  "fits": {
   "Pad L": [
-   -0.949831,
-   -0.17038,
-   -0.262317,
-   -18.436676,
-   0.115512,
-   -0.970414,
-   0.212043,
-   16.041607,
-   -0.290678,
-   0.171106,
-   0.941399,
-   61.483928,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
    0.0,
    0.0,
    0.0,
@@ -24,12 +24,36 @@
   ]
  },
  "notes": {
-  "Pad L": "a left pad (it opens toward the model's right as exported): its own Pad L fit, the right-pad rule on its mirror image mirrored back (match 0.95); on a right arm it is mirrored",
-  "Pad L (Nov 8)": "moved with the arms' Pad sockets onto Josh's 62 convention (was set on the old 'dome' sockets; same look on BBoosty/CyberBrush arms)"
+  "Pad L": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "original": {
   "name": "Space Bug Hunters Shoulder Pad set 1 (4)",
   "folder": "Shoulder Pads",
   "path": "CyberBrush - Tacticus\\Space Bugs Hunters\\Space Bug Hunters Shoulder Pad\\Shoulder Pads\\Space Bug Hunters Shoulder Pad set 1 (4).stl"
+ },
+ "exact": [
+  "Pad L"
+ ],
+ "origin": {
+  "from_file": [
+   -0.518566519,
+   0.639406488,
+   0.567669014,
+   39.577131074,
+   -0.763055616,
+   -0.645628512,
+   0.030165404,
+   3.055542775,
+   0.385791256,
+   -0.41752026,
+   0.822704041,
+   55.142922444,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "joint": "Pad L",
+  "by": "pads_origin.py 2026-11-28"
  }
 }

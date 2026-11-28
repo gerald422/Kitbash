@@ -5,18 +5,18 @@
  "sockets": [],
  "fits": {
   "Pad R": [
-   -0.17038,
-   0.262317,
-   0.949831,
-   4.134248,
-   0.970414,
-   0.212043,
-   0.115512,
-   -36.159203,
-   -0.171106,
-   0.941399,
-   -0.290678,
-   -5.146726,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
    0.0,
    0.0,
    0.0,
@@ -24,14 +24,38 @@
   ]
  },
  "notes": {
-  "Pad R": "turned like IH_Shoulderpad_Sign (same pad shape, 0.11 mm), inner shell (r 3.32) centred where Josh's 62 sits on the heresy arm; lefts are mirrored",
-  "Pad R (Nov 8)": "moved with the arms' Pad sockets onto Josh's 62 convention (was set on the old 'dome' sockets; same look on BBoosty/CyberBrush arms)",
-  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh",
+  "Pad R": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "original": {
   "name": "IH_Shoulderpad_ALTBlank",
   "folder": "Shoulder Pads",
   "path": "BBoosty - Heresy\\IH_Shoulderpads\\Shoulder Pads\\IH_Shoulderpad_ALTBlank.stl"
  },
- "scale": 1.1
+ "scale": 1.1,
+ "exact": [
+  "Pad R"
+ ],
+ "origin": {
+  "from_file": [
+   -0.009549385,
+   -0.514992769,
+   0.857141328,
+   3.017762023,
+   0.92895422,
+   -0.321801337,
+   -0.182997149,
+   -29.87179722,
+   0.370071434,
+   0.794497544,
+   0.481477711,
+   -22.196964888,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "joint": "Pad R",
+  "by": "pads_origin.py 2026-11-28"
+ }
 }

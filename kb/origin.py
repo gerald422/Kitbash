@@ -105,12 +105,23 @@ def _moved(d, G, key, by):
     d["origin"] = {"from_file": _r(mul(G, was) if was else G), "joint": key, "by": by}
 
 
-def move(sc, bases, rel="", by="kb.origin"):
+def raw_move(G, scale):
+    """G (in the sidecar's scaled coordinates) as the move of the STL's own, unscaled, file: turn kept, shift / scale"""
+    k = float(scale or 1.0)
+    return list(G) if k == 1.0 else [x / k if i in (3, 7, 11) else x for i, x in enumerate(G)]
+
+
+def move(sc, bases, rel="", by="kb.origin", scaled=False):
     """(the sidecar after the move, G for the STL, what changed) or Skip. G is None when the file itself stays (its
-    joint is on the origin already) though a copy inside the sidecar moved; nothing to do at all raises Skip('done')."""
-    if set(sc) - TOP: raise Skip("has %s (not known to be safe to move)" % sorted(set(sc) - TOP))
+    joint is on the origin already) though a copy inside the sidecar moved; nothing to do at all raises Skip('done').
+    scaled=True (Nov 28, the pauldron origins): a part with a `scale` moves too. G is then in the sidecar's scaled
+    coordinates (as its fits and from_file); the STL itself moves by raw_move(G, scale). Copies inside with a scale of
+    their own are still left."""
+    if set(sc) - TOP - ({"scale"} if scaled else set()): raise Skip("has %s (not known to be safe to move)" % sorted(set(sc) - TOP))
     try:
-        if float(sc.get("scale") or 1.0) != 1.0: raise Skip("has a scale")
+        if float(sc.get("scale") or 1.0) != 1.0 and not scaled: raise Skip("has a scale")
+        if scaled and any(isinstance(v, dict) and isinstance(v.get("sidecar"), dict) and v["sidecar"].get("scale")
+                          for v in sc.get("variants") or []): raise Skip("a copy inside has its own scale")
     except (TypeError, ValueError): raise Skip("has a scale")
     out = with_joint_fit(json.loads(json.dumps(sc))); did = []
     for v in out.get("variants") or []:

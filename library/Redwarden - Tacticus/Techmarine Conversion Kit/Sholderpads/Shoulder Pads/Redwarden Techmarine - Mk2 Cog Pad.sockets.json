@@ -5,18 +5,18 @@
  "sockets": [],
  "fits": {
   "Pad R": [
-   -0.016475,
-   -0.998155,
-   0.058446,
-   -1.268794,
-   0.995071,
-   -0.022085,
-   -0.096677,
-   2.046343,
-   0.097789,
-   0.056565,
-   0.993598,
-   -22.331673,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
    0.0,
    0.0,
    0.0,
@@ -24,11 +24,37 @@
   ]
  },
  "notes": {
-  "Pad": "Josh's pad 62 matched onto it (x0.95, match 0.126 mm), his Pad R fit carried across about 62's shell centre"
+  "Pad": "Josh's pad 62 matched onto it (x0.95, match 0.126 mm), his Pad R fit carried across about 62's shell centre",
+  "Pad R": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "original": {
   "name": "Mk2 Cog Pad",
   "folder": "Sholderpads",
   "path": "Warhammer Techmarine Conversion Kit (1)\\Warhammer Techmarine Conversion Kit @STL_Printer\\Sholderpads\\Mk2 Cog Pad.stl"
+ },
+ "exact": [
+  "Pad R"
+ ],
+ "origin": {
+  "from_file": [
+   0.099708047,
+   -0.814932473,
+   -0.570914503,
+   9.799507616,
+   0.988857074,
+   0.144901685,
+   -0.03413485,
+   0.754539459,
+   0.110544071,
+   -0.561149326,
+   0.820299605,
+   -18.61254896,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "joint": "Pad R",
+  "by": "pads_origin.py 2026-11-28"
  }
 }

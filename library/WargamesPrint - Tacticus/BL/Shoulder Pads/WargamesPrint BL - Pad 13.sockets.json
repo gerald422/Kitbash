@@ -4,18 +4,18 @@
  "sockets": [],
  "fits": {
   "Pad R": [
-   0.005652,
-   -0.190641,
-   0.981643,
-   -40.676806,
-   -0.995742,
-   0.089253,
-   0.023067,
-   -35.465236,
-   -0.092012,
-   -0.977594,
-   -0.189325,
-   0.427484,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
    0.0,
    0.0,
    0.0,
@@ -23,12 +23,38 @@
   ]
  },
  "notes": {
-  "Pad": "Josh's pad 62 matched onto it (x0.97, match 0.243 mm), his Pad R fit carried across about 62's shell centre; pushed out 1.00 mm off the shoulder (thicker inside than 62; padlift.py: 1.09 mm into Arm 1A R after)"
+  "Pad": "Josh's pad 62 matched onto it (x0.97, match 0.243 mm), his Pad R fit carried across about 62's shell centre; pushed out 1.00 mm off the shoulder (thicker inside than 62; padlift.py: 1.09 mm into Arm 1A R after)",
+  "Pad R": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "original": {
   "name": "PAD_13",
   "folder": "BL-PAULDRONS-3",
   "path": "WarGame Exclusive\\BL-PAULDRONS-3\\PAD_13.stl"
  },
- "category": "Shoulder Pads"
+ "category": "Shoulder Pads",
+ "exact": [
+  "Pad R"
+ ],
+ "origin": {
+  "from_file": [
+   0.090185294,
+   -0.824405945,
+   -0.558767796,
+   28.632345909,
+   0.992273225,
+   0.12238186,
+   -0.020408979,
+   35.229376739,
+   0.085208325,
+   -0.552609734,
+   0.829072991,
+   -34.966059187,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "joint": "Pad R",
+  "by": "pads_origin.py 2026-11-28"
+ }
 }

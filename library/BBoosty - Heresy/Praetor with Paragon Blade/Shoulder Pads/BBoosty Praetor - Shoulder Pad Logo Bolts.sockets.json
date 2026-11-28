@@ -5,18 +5,18 @@
  "sockets": [],
  "fits": {
   "Pad R": [
-   -0.17038,
-   -0.949831,
-   0.262317,
-   -2.019269,
-   0.970414,
-   -0.115512,
-   0.212043,
-   19.912078,
-   -0.171106,
-   0.290678,
-   0.941399,
-   -51.222444,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   0.0,
    0.0,
    0.0,
    0.0,
@@ -24,14 +24,38 @@
   ]
  },
  "notes": {
-  "Pad R": "inner shell (r 2.94) centred where Josh's 62 sits on the heresy arm, turned square so it opens inward and down (match 1.00); lefts are mirrored",
-  "Pad R (Nov 8)": "moved with the arms' Pad sockets onto Josh's 62 convention (was set on the old 'dome' sockets; same look on BBoosty/CyberBrush arms)",
-  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh"
+  "Scale": "x1.1 on 2026-11-25 (heresy scale, Josh): mesh scaled on import; every socket's, fit's, offHand's and pivot's move scaled with it, so each joint keeps its place on the mesh",
+  "Pad R": "Josh's seat in '04 Stage 4 - Every pauldron on one arm (2026-11-27 c)' (every pauldron on Arm 2B R's shell, hand checked), 2026-11-28; origin moved onto the shell's crown (Arm 2B R's Pad R), so this fit is none"
  },
  "original": {
   "name": "ShoulderPad_Logo_Bolts",
   "folder": "Shoulder Pads",
   "path": "BBoosty - Heresy\\Praetor with Paragon Blade\\Shoulder Pads\\ShoulderPad_Logo_Bolts.stl"
  },
- "scale": 1.1
+ "scale": 1.1,
+ "exact": [
+  "Pad R"
+ ],
+ "origin": {
+  "from_file": [
+   0.052836401,
+   -0.780792282,
+   -0.62255259,
+   37.351274127,
+   0.986322785,
+   0.138273373,
+   -0.089709749,
+   28.909629465,
+   0.156127126,
+   -0.609297864,
+   0.777419085,
+   -21.816900871,
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "joint": "Pad R",
+  "by": "pads_origin.py 2026-11-28"
+ }
 }
