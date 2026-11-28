@@ -19,6 +19,7 @@ from mathutils.bvhtree import BVHTree
 import geom as G, batch as B, make_torso_batch as MT
 
 CUT, SAME, CAP = 2.5, 0.06, 7.0
+REACH, TOUCH, NPTS = 12.0, 1.0, 3200            # main2: the arm surface the shell covers, sampled 3200 points
 
 
 def tri_bvh(T): return BVHTree.FromPolygons([tuple(v) for v in T.reshape(-1, 3)], [(3 * k, 3 * k + 1, 3 * k + 2) for k in range(len(T))])
@@ -100,6 +101,91 @@ def main(A):
     json.dump(res, open(out, "w", encoding="utf-8"), indent=1)
     n_ok = sum(len(r["members"]) for r in res)
     print("ALL: %d of %d arms take a type's shell by shoulder shape (under %.2f mm); %d left" % (n_ok, n_ok + len(left), SAME, len(left)), flush=True)
+    if "--render" in A:
+        k = A.index("--render"); render(by, res, int(A[k + 1]), int(A[k + 2]), os.path.dirname(out))
+
+
+def dense(T, n, rng):
+    """n points spread evenly over the triangles T (by area), so a low-poly arm still gives a fine cut"""
+    A = np.linalg.norm(np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]), axis=1)
+    k = rng.choice(len(T), n, p=A / A.sum()); u, v = rng.random(n), rng.random(n); f = u + v > 1; u[f], v[f] = 1 - u[f], 1 - v[f]
+    return T[k, 0] + u[:, None] * (T[k, 1] - T[k, 0]) + v[:, None] * (T[k, 2] - T[k, 0])
+
+
+def covered(TA, Ts, PA):
+    """the arm's triangles the shell covers (Josh, Nov 28: a boolean of the arm with the placed shell): from each
+    triangle, out along the shell's +Z, the shell is hit within REACH mm, or the shell is within TOUCH mm"""
+    bs = tri_bvh(Ts); z = Vector(PA[:3, 2]); C = TA.mean(1); keep = np.zeros(len(TA), bool)
+    for k, c in enumerate(C):
+        v = Vector(c); hit = bs.ray_cast(v, z, REACH)[0] is not None or bs.ray_cast(v, -z, TOUCH)[0] is not None
+        keep[k] = hit or (bs.find_nearest(v, TOUCH)[0] is not None)
+    return TA[keep]
+
+
+def main2(A):
+    """every right arm onto the best of its maker's arm types by the arm surface under the shell (main2, Nov 28)"""
+    import collections
+    src, out = A[0], A[1]; lib = MT.LIB; rng = np.random.default_rng(7)
+    bpy.ops.wm.open_mainfile(filepath=src, load_ui=False); bpy.context.view_layer.update()
+    by = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}; S_sh = MT.sockets(MT.T2)
+    notarms = {l.split(" | ")[0].strip() for l in open(os.path.join(HERE, "not_arms.txt"), encoding="utf-8") if l.strip() and not l.startswith("#")}
+    arms = []
+    for p in sorted(glob.glob(os.path.join(lib, "*", "**", "*.sockets.json"), recursive=True)):
+        rel = os.path.relpath(p, lib).replace("\\", "/")[:-13]
+        if rel.startswith("_") or rel in notarms: continue
+        d = json.load(open(p, encoding="utf-8-sig"))
+        if d.get("category") == "Arms" and not d.get("noPad") and "Shoulder R" in (d.get("exact") or []): arms.append(rel)
+    types = []
+    shells = sorted((i for i in by if i.endswith("_shell")), key=lambda i: int(i[1:-6]))
+    sh0 = by[shells[0]]; Cr0 = G.M4(by[shells[0][:-6] + "_pad"]["kb_on_frame"]) if shells[0][:-6] + "_pad" in by else np.eye(4)
+    Vsh = own_tris(sh0)                                                         # the shell, in its own frame
+    def add(col, rel, TA, PA, Ts):
+        Tc = covered(TA, Ts, PA)
+        if len(Tc) < 20: print("type %s %s: the shell covers only %d triangles: left out" % (col, os.path.basename(rel), len(Tc))); return
+        P = dense(Tc, NPTS, rng)
+        types.append(dict(col=col, rel=rel, PA=PA, P=P, A=S_sh["Shoulder R"] @ G.M4(B.sidecar(lib, rel)["fits"]["Shoulder R"]), members=[]))
+        print("type %-5s %-52s cut: %d triangles under the shell, %d points" % (col, os.path.basename(rel)[:52], len(Tc), len(P)), flush=True)
+    # Arm 2B R: Josh's written Pad R (stage 1), the reference
+    sc = B.sidecar(lib, MT.ARM); PA = MT.sockets(MT.ARM)["Pad R"]; M = PA @ np.linalg.inv(Cr0)
+    add(shells[0][:-6], MT.ARM, B.stl_tris(lib, MT.ARM, sc), PA, Vsh @ M[:3, :3].T + M[:3, 3])
+    for i in shells:
+        t = i[:-6]
+        if t + "_arm" not in by or t not in by: continue
+        sh, arm = by[i], by[t + "_arm"]; rel = arm["kb_rel"]
+        if rel in notarms: continue
+        rider = by.get(t + "_pad"); crown = B.own(sh) @ (G.M4(rider["kb_on_frame"]) if rider else np.eye(4))
+        PA = np.linalg.inv(B.own(arm)) @ crown; M = np.linalg.inv(B.own(arm)) @ B.own(sh)
+        add(t, rel, own_tris(arm), PA, own_tris(sh) @ M[:3, :3].T + M[:3, 3])
+    trel = {ty["rel"] for ty in types}
+    turns = [np.eye(3)] + [G.rot(ax, a) for ax in ((1, 0, 0), (0, 1, 0), (0, 0, 1)) for a in (-25, 25)]
+    def fit(ty, bvh, A_B):
+        M0 = np.linalg.inv(A_B) @ ty["A"]; c = M0[:3, :3] @ ty["P"].mean(0) + M0[:3, 3]; Pc = ty["P"][::NPTS // 400]
+        co = []
+        for R in turns:
+            Rf = R @ M0[:3, :3]; co.append(G.icp(bvh, Pc, Rf, R @ (M0[:3, 3] - c) + c, iters=12, keep=0.85, lim=6.0))
+        R, t, _r = min(co, key=lambda f: f[2])
+        R, t, rms = G.icp(bvh, ty["P"][::2], R, t, iters=30, keep=0.9, lim=2.0)
+        Mf = np.eye(4); Mf[:3, :3], Mf[:3, 3] = R, t; return rms, Mf
+    rows = []
+    todo = [a for a in arms if a not in trel]
+    for n, b in enumerate(todo):
+        sc = B.sidecar(lib, b); bvh = tri_bvh(B.stl_tris(lib, b, sc)); A_B = S_sh["Shoulder R"] @ G.M4(sc["fits"]["Shoulder R"])
+        pool = [ty for ty in types if ty["rel"].split("/")[0] == b.split("/")[0]] or types
+        got = sorted(((fit(ty, bvh, A_B), ty) for ty in pool), key=lambda x: x[0][0])
+        (rms, Mf), ty = got[0]; second = got[1][0][0] if len(got) > 1 else None
+        ty["members"].append(dict(rel=b, rms=round(rms, 4), second=round(second, 4) if second is not None else None, pad=G.flat16(Mf @ ty["PA"]), A=G.flat16(A_B), tier="cut"))
+        rows.append((b, ty["rel"], rms))
+        if n % 25 == 0: print("  %d of %d arms" % (n, len(todo)), flush=True)
+    res = [dict(col=ty["col"], rel=ty["rel"], cut=len(ty["P"]), members=ty["members"]) for ty in types]
+    json.dump(res, open(out, "w", encoding="utf-8"), indent=1)
+    r = np.array([x[2] for x in rows])
+    print("\n%d arms, each onto the best of its maker's %d-type pool: rms median %.3f mm; under 0.03 %d, 0.03-0.06 %d, 0.06-0.10 %d, 0.10-0.20 %d, over 0.20 %d"
+          % (len(r), len(types), np.median(r), (r < .03).sum(), ((r >= .03) & (r < .06)).sum(), ((r >= .06) & (r < .1)).sum(), ((r >= .1) & (r < .2)).sum(), (r >= .2).sum()), flush=True)
+    for ty in types:
+        if ty["members"]: print("  %-5s %-50s takes %3d (rms %s)" % (ty["col"], os.path.basename(ty["rel"])[:50], len(ty["members"]),
+                                 " ".join("%.2f" % m["rms"] for m in sorted(ty["members"], key=lambda m: -m["rms"])[:4])), flush=True)
+    worst = sorted(rows, key=lambda x: -x[2])[:15]
+    print("worst:"); [print("  %.3f  %-55s on %s" % (w[2], os.path.basename(w[0])[:55], os.path.basename(w[1]))) for w in worst]
     if "--render" in A:
         k = A.index("--render"); render(by, res, int(A[k + 1]), int(A[k + 2]), os.path.dirname(out))
 
@@ -188,7 +274,7 @@ def render(by, res, N, seed, outdir):
         for o in (ao, po): bpy.data.objects.remove(o, do_unlink=True)
         tor.hide_render = True
         info.append("%s on %s (from %s; %s)" % (pr["name"], os.path.basename(m["rel"]), os.path.basename(r["rel"]),
-                    "same shoulder, fit %.3f mm" % m["rms"] if m.get("tier", "shape") == "shape" else "kit type's shell on the torso, slid %+.2f mm to touch" % m["lift"]))
+                    "same shoulder, fit %.3f mm" % m["rms"] if m.get("tier", "shape") in ("shape", "cut") else "kit type's shell on the torso, slid %+.2f mm to touch" % m["lift"]))
     ims = [bpy.data.images.load(p) for p in outs]
     px = [np.array(i.pixels[:]).reshape(i.size[1], i.size[0], 4) for i in ims]
     pairs = [np.concatenate(px[k:k + 2], 1) for k in range(0, len(px), 2)]
@@ -201,7 +287,7 @@ def render(by, res, N, seed, outdir):
 if __name__ == "__main__":
     A = sys.argv[sys.argv.index("--") + 1:]
     sys.stdout.reconfigure(encoding="utf-8")
-    try: fill(A) if A[0] == "fill" else main(A)
+    try: fill(A) if A[0] == "fill" else main2(A[1:]) if A[0] == "cut" else main(A)
     except SystemExit as e: print("STOPPED:", e, flush=True)
     except BaseException: import traceback; traceback.print_exc(); sys.stdout.flush(); os._exit(1)
     finally: sys.stdout.flush(); os._exit(0)
