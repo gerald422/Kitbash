@@ -56,7 +56,7 @@ def main(A):
         N /= np.maximum(np.linalg.norm(N, axis=1), 1e-12)[:, None]
         Ts = own_tris(sh); M = np.linalg.inv(B.own(arm)) @ B.own(sh); bs = tri_bvh(Ts @ M[:3, :3].T + M[:3, 3])
         c0, z0 = PA[:3, 3], PA[:3, 2]
-        near = np.array([(bs.find_nearest(Vector(c), CUT + 1)[3] or 99.0) for c in C]) <= CUT
+        near = np.array([G.near_d(bs, c, CUT + 1, 99.0) for c in C]) <= CUT
         for rad in (CAP, CAP * 1.3, CAP * 1.7):                               # the shoulder cap only (Nov 28): under the
             m = near & (np.linalg.norm(C - c0, axis=1) <= rad) & (N @ z0 > 0.2)  # crown, facing out at the shell
             if m.sum() >= 150: break
@@ -190,6 +190,138 @@ def main2(A):
         k = A.index("--render"); render(by, res, int(A[k + 1]), int(A[k + 2]), os.path.dirname(out))
 
 
+def why(A):
+    """why arms don't match (Nov 28, Josh: "I'd like to also understand which ones don't match and why"), then the
+    unmatched arms grouped by their own shoulder. For each arm and its best type (from the cut run): the share of the
+    type's cut that lands within 0.05 mm of the arm, and where the misses are: on the shoulder cap (near the shell's
+    axis) or out at the rim / upper arm. Mostly-landing cuts with misses at the edge = the cut reaches past the shared
+    shoulder (a tighter cut would match); misses all over = a different shoulder sculpt (it needs its own shell).
+    Grouping: each unmatched arm's surface under its carried shell, fitted onto the others of its maker from the
+    shells' frames lined up; under SAME both ways = the same shoulder."""
+    src, cj, out = A[1], A[2], A[3]; lib = MT.LIB; rng = np.random.default_rng(7)
+    res = json.load(open(cj, encoding="utf-8"))
+    bpy.ops.wm.open_mainfile(filepath=src, load_ui=False); bpy.context.view_layer.update()
+    by = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}
+    shells = sorted((i for i in by if i.endswith("_shell")), key=lambda i: int(i[1:-6]))
+    sh0 = by[shells[0]]; Cr0 = G.M4(by[shells[0][:-6] + "_pad"]["kb_on_frame"]) if shells[0][:-6] + "_pad" in by else np.eye(4)
+    Vsh = own_tris(sh0)                                                          # shell, own frame
+    Vsh_c = Vsh @ np.linalg.inv(Cr0)[:3, :3].T + np.linalg.inv(Cr0)[:3, 3]      # ... crown frame
+    def cut_of(rel, PA):                                                         # an arm's surface under a shell at PA
+        T = B.stl_tris(lib, rel, B.sidecar(lib, rel)); Tc = covered(T, Vsh_c @ PA[:3, :3].T + PA[:3, 3], PA)
+        return (dense(Tc, NPTS, rng) if len(Tc) >= 20 else None), T
+    rows, un = [], []
+    for ty in res:
+        rel = ty["rel"]
+        if rel == MT.ARM: PA = MT.sockets(MT.ARM)["Pad R"]
+        else:
+            t = ty["col"]; sh, arm = by[t + "_shell"], by[t + "_arm"]; rider = by.get(t + "_pad")
+            PA = np.linalg.inv(B.own(arm)) @ B.own(sh) @ (G.M4(rider["kb_on_frame"]) if rider else np.eye(4))
+        P, _T = cut_of(rel, PA)
+        if P is None: continue
+        rad = np.linalg.norm((P - PA[:3, 3]) - np.outer((P - PA[:3, 3]) @ PA[:3, 2], PA[:3, 2]), axis=1); rmax = np.percentile(rad, 95)
+        for m in ty["members"]:
+            Mf = G.M4(m["pad"]) @ np.linalg.inv(PA)
+            bvh = tri_bvh(B.stl_tris(lib, m["rel"], B.sidecar(lib, m["rel"])))
+            Q = P @ Mf[:3, :3].T + Mf[:3, 3]; d = np.array([G.near_d(bvh, q, 3.0, 3.0) for q in Q])
+            on = d < 0.05; miss = ~on
+            inner = float((miss & (rad < 0.5 * rmax)).sum() / max(miss.sum(), 1))
+            why_ = "same shoulder" if m["rms"] < SAME else ("cut reaches past the shared part (%.0f%% lands; misses at the edge)" % (100 * on.mean())
+                    if on.mean() >= 0.6 and inner < 0.35 else "a different shoulder (%.0f%% lands; misses %s)" % (100 * on.mean(), "on the cap" if inner >= 0.35 else "at the edge"))
+            rows.append(dict(rel=m["rel"], type=rel, rms=m["rms"], lands=round(float(on.mean()), 3), inner_miss=round(inner, 2), why=why_))
+            if m["rms"] >= SAME: un.append(dict(rel=m["rel"], pad=G.M4(m["pad"])))
+    # group the unmatched by their own shoulder
+    cuts = {}
+    for u in un:
+        P, T = cut_of(u["rel"], u["pad"]); cuts[u["rel"]] = (P, tri_bvh(T), u["pad"])
+    groups, left = [], [u["rel"] for u in un if cuts[u["rel"]][0] is not None]
+    while left:
+        a = left.pop(0); Pa, _ba, PAa = cuts[a]; g = [a]
+        for b in list(left):
+            if b.split("/")[0] != a.split("/")[0]: continue
+            Pb, bb, PAb = cuts[b]; M0 = PAb @ np.linalg.inv(PAa)
+            R, t, r1 = G.icp(bb, Pa[::4], M0[:3, :3], M0[:3, 3], iters=25, keep=0.85, lim=2.0)
+            if r1 < SAME: g.append(b); left.remove(b)
+        groups.append(g)
+    json.dump(dict(rows=rows, groups=groups), open(out, "w", encoding="utf-8"), indent=1)
+    import collections
+    c = collections.Counter(r["why"].split(" (")[0] for r in rows)
+    print("WHY: %s" % ", ".join("%d %s" % (v, k) for k, v in c.most_common()), flush=True)
+    print("GROUPS: %d unmatched arms make %d distinct shoulders (%d with more than one arm)" % (sum(len(g) for g in groups), len(groups), sum(1 for g in groups if len(g) > 1)), flush=True)
+    by_kit = collections.defaultdict(list)
+    for g in groups: by_kit[kit_of(g[0])].append(len(g))
+    for k, v in sorted(by_kit.items(), key=lambda kv: -sum(kv[1])): print("  %-70s %3d arms -> %2d shoulders %s" % (k[:70], sum(v), len(v), sorted(v, reverse=True)[:8]), flush=True)
+
+
+def type_cuts(by, rng, lib, S_sh, notarms=()):
+    """Josh's arm types (and 2B R): the arm surface under each placed shell, dense; Pad R in the arm's own frame"""
+    shells = sorted((i for i in by if i.endswith("_shell")), key=lambda i: int(i[1:-6]))
+    r0 = shells[0][:-6] + "_pad"; Cr0 = G.M4(by[r0]["kb_on_frame"]) if r0 in by else np.eye(4)
+    Vc = own_tris(by[shells[0]]); Ci = np.linalg.inv(Cr0); Vc = Vc @ Ci[:3, :3].T + Ci[:3, 3]      # the shell, crown frame
+    out = []
+    def add(col, rel, T, PA):
+        Tc = covered(T, Vc @ PA[:3, :3].T + PA[:3, 3], PA)
+        if len(Tc) < 20: return
+        out.append(dict(col=col, rel=rel, PA=PA, P=dense(Tc, NPTS, rng), T=T,
+                        A=S_sh["Shoulder R"] @ G.M4(B.sidecar(lib, rel)["fits"]["Shoulder R"])))
+    add("ref", MT.ARM, B.stl_tris(lib, MT.ARM, B.sidecar(lib, MT.ARM)), MT.sockets(MT.ARM)["Pad R"])
+    for i in shells:
+        t = i[:-6]
+        if t + "_arm" not in by: continue
+        sh, arm = by[i], by[t + "_arm"]; rel = arm["kb_rel"]
+        if rel in notarms or rel == MT.ARM: continue
+        rider = by.get(t + "_pad")
+        PA = np.linalg.inv(B.own(arm)) @ B.own(sh) @ (G.M4(rider["kb_on_frame"]) if rider else np.eye(4))
+        add(t, rel, B.stl_tris(lib, rel, B.sidecar(lib, rel)), PA)
+    return out
+
+
+GSTARTS = None
+def gfit(P, bvh, M0):
+    """a cut P (one arm's frame) onto another arm (bvh) from every turn (Nov 28: posed arms turn the shoulder far more
+    than +-40 deg): 48 turns about the cut's centre, placed where M0 puts it; robust (60% kept) coarse, the best three
+    refined (70% kept). Returns (share of the cut within 0.08 mm, rms of the kept, M)"""
+    global GSTARTS
+    if GSTARTS is None: GSTARTS = [G.rot_to(np.array([0, 0, 1.0]), d) @ G.rot((0, 0, 1), a) for d in G.fib(16) for a in (0, 120, 240)]
+    c = P.mean(0); c1 = M0[:3, :3] @ c + M0[:3, 3]; Pc = P[::max(1, len(P) // 150)]
+    co = []
+    for R0 in GSTARTS:
+        R = R0 @ M0[:3, :3]; co.append(G.icp(bvh, Pc, R, c1 - R @ c, iters=10, keep=0.6, lim=8.0))
+    best = None
+    for R, t, _r in sorted(co, key=lambda f: f[2])[:3]:
+        R, t, rms = G.icp(bvh, P[::max(1, len(P) // 1200)], R, t, iters=30, keep=0.7, lim=2.0)
+        Q = P @ R.T + t; d = np.array([G.near_d(bvh, q, 1.0, 1.0) for q in Q[::4]])
+        sh = float((d < 0.08).mean())
+        if best is None or sh > best[0]: M = np.eye(4); M[:3, :3], M[:3, 3] = R, t; best = (sh, rms, M)
+    return best
+
+
+def val(A):
+    """each of Josh's placed shells predicted from the others of its maker (never from itself), against his"""
+    src, out = A[1], A[2]; lib = MT.LIB; rng = np.random.default_rng(7)
+    bpy.ops.wm.open_mainfile(filepath=src, load_ui=False); bpy.context.view_layer.update()
+    by = {o["kb_id"]: o for o in bpy.data.objects if "kb_id" in o}; S_sh = MT.sockets(MT.T2)
+    types = type_cuts(by, rng, lib, S_sh)
+    print("%d types" % len(types), flush=True)
+    rows = []
+    for y in types:
+        bvh = tri_bvh(y["T"]); res = []
+        for x in types:
+            if x is y or x["rel"].split("/")[0] != y["rel"].split("/")[0]: continue
+            M0 = np.linalg.inv(y["A"]) @ x["A"]
+            sh, rms, M = gfit(x["P"], bvh, M0); Pp = M @ x["PA"]
+            res.append(dict(x=x["rel"], share=round(sh, 3), rms=round(rms, 4), mm=round(float(np.linalg.norm(Pp[:3, 3] - y["PA"][:3, 3])), 2),
+                            deg=round(G.ang(Pp, y["PA"]), 1)))
+        if not res: continue
+        b = max(res, key=lambda r: r["share"])
+        rows.append(dict(y=y["rel"], best=b, all=res))
+        print("%-52s from %-40s lands %3.0f%%  off %5.2f mm %5.1f deg   (of %d)" % (os.path.basename(y["rel"])[:52], os.path.basename(b["x"])[:40],
+              100 * b["share"], b["mm"], b["deg"], len(res)), flush=True)
+    json.dump(rows, open(out, "w", encoding="utf-8"), indent=1)
+    mm = np.array([r["best"]["mm"] for r in rows]); dg = np.array([r["best"]["deg"] for r in rows])
+    print("\nVAL: %d placed shells predicted from the best-landing other type: median %.2f mm %.1f deg; within 1 mm and 5 deg: %d; within 2 mm and 10 deg: %d"
+          % (len(rows), np.median(mm), np.median(dg), ((mm < 1) & (dg < 5)).sum(), ((mm < 2) & (dg < 10)).sum()), flush=True)
+
+
 def fill(A):
     """every right arm a Pad R (Josh, Nov 28: "This needs to get to a 100 percent success rate"): the same-shoulder
     carry where the shape matched (main); every other arm takes its kit's type (the one whose Shoulder R pose is
@@ -287,7 +419,7 @@ def render(by, res, N, seed, outdir):
 if __name__ == "__main__":
     A = sys.argv[sys.argv.index("--") + 1:]
     sys.stdout.reconfigure(encoding="utf-8")
-    try: fill(A) if A[0] == "fill" else main2(A[1:]) if A[0] == "cut" else main(A)
+    try: fill(A) if A[0] == "fill" else val(A) if A[0] == "val" else why(A) if A[0] == "why" else main2(A[1:]) if A[0] == "cut" else main(A)
     except SystemExit as e: print("STOPPED:", e, flush=True)
     except BaseException: import traceback; traceback.print_exc(); sys.stdout.flush(); os._exit(1)
     finally: sys.stdout.flush(); os._exit(0)

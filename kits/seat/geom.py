@@ -59,6 +59,12 @@ def tris(o):
     return verts_local(o)[i.reshape(-1, 3)]
 
 
+def near_d(b, q, lim, miss):
+    """distance from q to the BVH's surface; miss when nothing within lim (Nov 28: a point exactly ON the surface is
+    0.0, which `[3] or miss` counted as a miss)"""
+    r = b.find_nearest(Vector(q), lim); return miss if r[0] is None else r[3]
+
+
 def kabsch(A, B):
     ca, cb = A.mean(0), B.mean(0); H = (A - ca).T @ (B - cb); U, s, Vt = np.linalg.svd(H)
     d = np.sign(np.linalg.det(Vt.T @ U.T)); R = Vt.T @ np.diag([1, 1, d]) @ U.T; return R, cb - R @ ca
@@ -88,7 +94,7 @@ def icp(b, P, R, t, iters=30, keep=0.8, lim=3.0):
         kp = ok & (d <= np.quantile(d[ok], keep))
         dR, dt = kabsch(Q[kp], N[kp]); R, t = dR @ R, dR @ t + dt
     Q = P @ R.T + t
-    d = np.array([(b.find_nearest(Vector(q), lim)[3] or 9.0) for q in Q])
+    d = np.array([near_d(b, q, lim, 9.0) for q in Q])
     return R, t, float(np.sqrt(np.mean(np.sort(d)[: int(len(d) * keep)] ** 2)))
 
 
@@ -102,7 +108,7 @@ def icp_median(b, P, R, t, iters=25, keep=0.8, lim=2.5):
         ok = d < 9
         if ok.sum() < 0.3 * len(P): return R, t, 9.0, 0.0
         kp = ok & (d <= np.quantile(d[ok], keep)); dR, dt = kabsch(Q[kp], N[kp]); R, t = dR @ R, dR @ t + dt
-    Q = P @ R.T + t; d = np.array([(b.find_nearest(Vector(q), lim)[3] or 9.0) for q in Q]); ok = d < 9
+    Q = P @ R.T + t; d = np.array([near_d(b, q, lim, 9.0) for q in Q]); ok = d < 9
     return R, t, float(np.median(d[ok])) if ok.any() else 9.0, float(ok.mean())
 
 

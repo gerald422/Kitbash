@@ -115,7 +115,7 @@ def main(A):
                     M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t
                     back = np.linalg.inv(Xj) @ np.linalg.inv(M)                # their own -> his own: theirs onto his
                     Q = Pt @ back[:3, :3].T + back[:3, 3]
-                    d = np.array([(bj.find_nearest(Vector(q), 3.0)[3] or 9.0) for q in Q])
+                    d = np.array([G.near_d(bj, q, 3.0, 9.0) for q in Q])
                     r2 = float(np.sqrt(np.mean(np.sort(d)[: int(len(d) * 0.85)] ** 2)))
                     sc = min(r1, r2) if min(r1, r2) <= INSIDE else max(r1, r2)   # one inner surface inside the other
                     fits.append((sc, np.linalg.inv(M), r1, r2, fid, jname))
