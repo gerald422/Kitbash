@@ -25,25 +25,28 @@ from shell_to_group import tri_bvh, dense
 from kb import origin as OG
 
 SRC = "Mar Fil - Tacticus/AssaultMarines-V2/Arms/MarFil Assault - Arm 1A R"
-NP, TOL, LAND, AGREE_MM, AGREE_DEG = 3000, 0.05, 0.90, 0.5, 2.0
+NP, TOL, LAND, AGREE_MM, AGREE_DEG = 3000, 0.10, 0.90, 0.5, 2.0   # Nov 28: 0.05 too tight across arms -> 0.10
 STARTS = None
 
 
-def fit(P, bvh, M0):
-    """P onto the surface in bvh: 48 turns about P's centre, placed where M0 puts it; (share within TOL, M)"""
+def fit(P, bvh, M0, tol=None):
+    """P onto the surface in bvh: 48 turns about P's centre, placed where M0 puts it; (share within tol, M, rms, best
+    share of a solution turned more than 20 deg from it: how sure the turn is)"""
     global STARTS
+    tol = tol or TOL
     if STARTS is None: STARTS = [G.rot_to(np.array([0, 0, 1.0]), d) @ G.rot((0, 0, 1), a) for d in G.fib(16) for a in (0, 120, 240)]
     c = P.mean(0); c1 = M0[:3, :3] @ c + M0[:3, 3]; Pc = P[::max(1, len(P) // 200)]
     co = []
     for R0 in STARTS:
         R = R0 @ M0[:3, :3]; co.append(G.icp(bvh, Pc, R, c1 - R @ c, iters=12, keep=0.9, lim=8.0))
-    best = None
-    for R, t, _r in sorted(co, key=lambda f: f[2])[:4]:
+    sols = []
+    for R, t, _r in sorted(co, key=lambda f: f[2])[:6]:
         R, t, rms = G.icp(bvh, P, R, t, iters=40, keep=0.9, lim=2.0)
         Q = P @ R.T + t; d = np.array([G.near_d(bvh, q, 1.0, 1.0) for q in Q])
-        sh = float((d < TOL).mean())
-        if best is None or sh > best[0]: M = np.eye(4); M[:3, :3], M[:3, 3] = R, t; best = (sh, M, rms)
-    return best
+        M = np.eye(4); M[:3, :3], M[:3, 3] = R, t; sols.append((float((d < tol).mean()), M, rms))
+    sols.sort(key=lambda x: -x[0]); best = sols[0]
+    other = max([x[0] for x in sols[1:] if G.ang(x[1], best[1]) > 20] or [0.0])
+    return best[0], best[1], best[2], other
 
 
 def main(A):
@@ -60,33 +63,48 @@ def main(A):
         print("%s: %d of %d faces are the arm's surface (the rest are the cutter's faces: left out)" % (nm, on.sum(), len(T)), flush=True)
         cuts.append(dense(T[on], NP, rng))
     both = np.concatenate(cuts)
+    global TOL
+    TOL = float(B.opt(A, "--tol", TOL))
     S_sh = MT.sockets(MT.T2)
     def arm(rel):
         sc = B.sidecar(lib, rel); return tri_bvh(B.stl_tris(lib, rel, sc)), S_sh["Shoulder R"] @ G.M4(sc["fits"]["Shoulder R"])
     A_src = S_sh["Shoulder R"] @ G.M4(B.sidecar(lib, SRC)["fits"]["Shoulder R"])
+    PadR = MT.sockets(MT.ARM)["Pad R"]; A_2b = S_sh["Shoulder R"] @ G.M4(B.sidecar(lib, MT.ARM)["fits"]["Shoulder R"])
+    # my cut (Nov 28, Josh: "I'm also fine with you taking a cut"): Arm 2B R's whole surface under its shell at its
+    # written Pad R, rim and all, resampled by area; it carries Pad R straight (it is in 2B R's own frame)
+    from shell_to_group import covered
+    Tsh = np.load(os.path.join(outdir, "shell_crown_tris.npy")); Tsh = Tsh @ PadR[:3, :3].T + PadR[:3, 3]
+    mine = dense(covered(B.stl_tris(lib, MT.ARM, B.sidecar(lib, MT.ARM)), Tsh, PadR), NP, rng)
     def place(rel):
         bvh, A_x = arm(rel); M0 = np.linalg.inv(A_x) @ A_src
-        sb, Mb, rms = fit(both, bvh, M0)
-        s1, M1, _ = fit(cuts[0], bvh, Mb); s2, M2, _ = fit(cuts[1], bvh, Mb)          # each alone, from the pair's fit
+        sb, Mb, rms, oth = fit(both, bvh, M0)
+        s1, M1, _, _ = fit(cuts[0], bvh, Mb); s2, M2, _, _ = fit(cuts[1], bvh, Mb)          # each alone, from the pair's fit
         c = both.mean(0); p1, p2 = M1[:3, :3] @ c + M1[:3, 3], M2[:3, :3] @ c + M2[:3, 3]
         agree = (float(np.linalg.norm(p1 - p2)), G.ang(M1, M2))
-        return dict(rel=rel, share=sb, share1=s1, share2=s2, agree_mm=agree[0], agree_deg=agree[1], M=Mb, A=A_x,
-                    ok=sb >= LAND and agree[0] <= AGREE_MM and agree[1] <= AGREE_DEG)
+        sm, Mm, _, othm = fit(mine, bvh, np.linalg.inv(A_x) @ A_2b)
+        return dict(rel=rel, share=sb, other=oth, share1=s1, share2=s2, agree_mm=agree[0], agree_deg=agree[1], M=Mb, A=A_x,
+                    ok=sb >= LAND and agree[0] <= AGREE_MM and agree[1] <= AGREE_DEG, mine=sm, mine_other=othm, pad_mine=Mm @ PadR)
     ref = place(MT.ARM)
-    print("2B R (the shell's reference): %.0f%% of the cuts land (alone %.0f%% / %.0f%%), cuts agree %.2f mm %.1f deg"
-          % (100 * ref["share"], 100 * ref["share1"], 100 * ref["share2"], ref["agree_mm"], ref["agree_deg"]), flush=True)
-    PadR = MT.sockets(MT.ARM)["Pad R"]; K = np.linalg.inv(ref["M"]) @ PadR           # the shell in Arm 1A R's own frame
+    print("tolerance %.2f mm. 2B R (the shell's reference): your cuts %.0f%% land (best other turn %.0f%%), cuts agree %.2f mm %.1f deg; my cut %.0f%%"
+          % (TOL, 100 * ref["share"], 100 * ref["other"], ref["agree_mm"], ref["agree_deg"], 100 * ref["mine"]), flush=True)
+    K = np.linalg.inv(ref["M"]) @ PadR                                                   # the shell in Arm 1A R's own frame
     arms = []
     for p in sorted(glob.glob(os.path.join(lib, "Mar Fil - Tacticus", kit, "**", "*.sockets.json"), recursive=True)):
         rel = os.path.relpath(p, lib).replace("\\", "/")[:-13]; d = json.load(open(p, encoding="utf-8-sig"))
         if d.get("category") == "Arms" and "Shoulder R" in (d.get("exact") or []) and rel != MT.ARM: arms.append(rel)
-    pick = rnd.sample(arms, N)
+    josh = {k: G.M4(v) for k, v in json.load(open(os.path.join(outdir, "josh_padR.json"), encoding="utf-8")).items()}
+    truth = [a for a in arms if a in josh]
+    pick = rnd.sample([a for a in arms if a not in josh], N) + truth
     pads = [r for r in json.load(open(os.path.join(outdir, "pads_plan.json"), encoding="utf-8"))["rows"] if r["joint"] == "Pad R"]
-    pp = rnd.sample(pads, N); res = []
+    pp = rnd.sample(pads, len(pick)); res = []
     for rel in pick:
         r = place(rel); r["pad"] = r["M"] @ K; res.append(r)
-        print("%-40s %.0f%% land (cuts alone %.0f%% / %.0f%%), cuts agree %.2f mm %.1f deg -> %s" % (os.path.basename(rel), 100 * r["share"],
-              100 * r["share1"], 100 * r["share2"], r["agree_mm"], r["agree_deg"], "MATCH" if r["ok"] else "NOT SURE"), flush=True)
+        line = "%-36s yours %3.0f%% (other turn %3.0f%%, cuts agree %.2f mm %5.1f deg) | mine %3.0f%% (other turn %3.0f%%)" % (os.path.basename(rel)[:36],
+               100 * r["share"], 100 * r["other"], r["agree_mm"], r["agree_deg"], 100 * r["mine"], 100 * r["mine_other"])
+        if rel in josh:
+            J = josh[rel]; e1 = (np.linalg.norm(r["pad"][:3, 3] - J[:3, 3]), G.ang(r["pad"], J)); e2 = (np.linalg.norm(r["pad_mine"][:3, 3] - J[:3, 3]), G.ang(r["pad_mine"], J))
+            line += "  vs YOUR SHELL: yours %.2f mm %.1f deg, mine %.2f mm %.1f deg" % (e1 + e2)
+        print(line, flush=True)
     # render: Torso 2, the arm on it, a random pauldron on the arm's Pad R (its origin = the shell)
     import render as R
     for o in ob: o.hide_render = True
@@ -96,14 +114,14 @@ def main(A):
         a = B.make_mesh("ARM", B.stl_tris(lib, r["rel"], B.sidecar(lib, r["rel"])), np.eye(4)); sc.collection.objects.link(a)
         a.matrix_world = G.mat(r["A"]); a.color = (0.72, 0.72, 0.74, 1)
         psc = B.sidecar(lib, pr["rel"]); po = B.make_mesh("PAD", B.stl_tris(lib, pr["rel"], psc), np.eye(4)); sc.collection.objects.link(po)
-        po.matrix_world = G.mat(r["A"] @ r["pad"] @ G.M4(psc["fits"]["Pad R"])); po.color = (0.85, 0.55, 0.25, 1)
-        bpy.context.view_layer.update()
+        po.color = (0.85, 0.55, 0.25, 1)
         c = Vector(r["A"][:3, 3]) + Vector((2.0, 0, 3.0))
-        for view, d in (("front", Vector((0.35, -1, 0.15))), ("side", Vector((1, -0.25, 0.15)))):
-            d.normalize(); cam.data.ortho_scale = 30; cam.location = c + d * 200; cam.rotation_euler = (-d).to_track_quat('-Z', 'Y').to_euler()
-            p = os.path.join(outdir, "cs_%d_%s.png" % (k, view)); sc.render.filepath = p; bpy.ops.render.render(write_still=True); outs.append(p)
+        for which, pad in (("yours", r["pad"]), ("mine", r["pad_mine"])):
+            po.matrix_world = G.mat(r["A"] @ pad @ G.M4(psc["fits"]["Pad R"])); bpy.context.view_layer.update()
+            d = Vector((0.35, -1, 0.15)); d.normalize(); cam.data.ortho_scale = 30; cam.location = c + d * 200; cam.rotation_euler = (-d).to_track_quat('-Z', 'Y').to_euler()
+            p = os.path.join(outdir, "cs_%d_%s.png" % (k, which)); sc.render.filepath = p; bpy.ops.render.render(write_still=True); outs.append(p)
         for o in (a, po): bpy.data.objects.remove(o, do_unlink=True)
-        info.append("%s on %s (%.0f%% of the cuts land)" % (pr["name"], os.path.basename(r["rel"]), 100 * r["share"]))
+        info.append("%s on %s (left: your cuts %.0f%%; right: my cut %.0f%%)" % (pr["name"], os.path.basename(r["rel"]), 100 * r["share"], 100 * r["mine"]))
     ims = [bpy.data.images.load(p) for p in outs]
     px = [np.array(i.pixels[:]).reshape(i.size[1], i.size[0], 4) for i in ims]
     rows = [np.concatenate(px[k:k + 2], 1) for k in range(0, len(px), 2)]
